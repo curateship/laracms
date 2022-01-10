@@ -13,12 +13,12 @@ var purgecss = require('gulp-purgecss');
 
 // js file paths
 var utilJsPath = 'node_modules/codyhouse-framework/main/assets/js'; // util.js path
-var componentsJsPath = 'main/assets/js/components/*.js'; // component js files
-var scriptsJsPath = 'main/assets/js'; //folder for final scripts.js/scripts.min.js files
+var componentsJsPath = 'resourses/js/components/*.js'; // component js files
+var scriptsJsPath = 'public/assets/js'; //folder for final scripts.js/scripts.min.js files
 
 // css file paths
-var cssFolder = 'main/assets/css'; // folder for final style.css file
-var scssFilesPath = 'main/assets/css/**/*.scss'; // scss files to watch
+var cssFolder = 'public/assets/css'; // folder for final style.css file
+var scssFilesPath = 'resources/css/**/*.scss'; // scss files to watch
 
 function reload(done) {
   browserSync.reload();
@@ -59,7 +59,7 @@ gulp.task('scripts', function() {
 gulp.task('browserSync', gulp.series(function (done) {
   browserSync.init({
     server: {
-      baseDir: 'main'
+      baseDir: 'resources'
     },
     notify: false
   })
@@ -67,8 +67,8 @@ gulp.task('browserSync', gulp.series(function (done) {
 }));
 
 gulp.task('watch', gulp.series(['browserSync', 'sass', 'scripts'], function () {
-  gulp.watch('main/*.html', gulp.series(reload));
-  gulp.watch('main/assets/css/**/*.scss', gulp.series(['sass']));
+  gulp.watch('**/*.php', gulp.series(reload));
+  gulp.watch('resources/css/**/*.scss', gulp.series(['sass']));
   gulp.watch(componentsJsPath, gulp.series(['scripts']));
 }));
 
