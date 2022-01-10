@@ -13,7 +13,7 @@ var purgecss = require('gulp-purgecss');
 
 // js file paths
 var utilJsPath = 'node_modules/codyhouse-framework/main/assets/js'; // util.js path
-var componentsJsPath = 'resourses/js/components/*.js'; // component js files
+var componentsJsPath = 'resources/js/components/*.js'; // component js files
 var scriptsJsPath = 'public/assets/js'; //folder for final scripts.js/scripts.min.js files
 
 // css file paths
