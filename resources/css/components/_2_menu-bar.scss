@@ -1,0 +1,141 @@
+@use '../base' as *;
+@use '_1_menu.scss' as *;
+
+/* -------------------------------- 
+
+File#: _2_menu-bar
+Title: Menu Bar
+Descr: Application menu with a list of common actions that users can perform
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+:root {
+  --menu-bar-button-size: 2.5em; // size of the menu buttons
+  --menu-bar-icon-size: 1em; // size of the icons inside the buttons
+  --menu-bar-horizontal-gap: var(--space-xxs); // horizontal gap between buttons
+  --menu-bar-vertical-gap: 4px; // vertical gap between buttons and labels (tooltips)
+  --menu-bar-label-size: var(--text-xs); // label font size
+}
+
+.menu-bar {
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.menu-bar__item { // menu button
+  position: relative;
+  display: inline-block; // flex fallback
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--menu-bar-button-size);
+  width: var(--menu-bar-button-size);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color .2s;
+
+  &:not(:last-child) {
+    margin-right: var(--menu-bar-horizontal-gap);
+  }
+
+  &:hover,
+  &.menu-control--active {
+    background-color: alpha(var(--color-contrast-higher), 0.1);
+
+    > .menu-bar__icon {
+      color: var(--color-contrast-higher);
+    }
+
+    > .menu-bar__label { // show label
+      clip: auto;
+      clip-path: none;
+      height: auto;
+      width: auto;
+    }
+  }
+
+  &:focus {
+    outline: none;
+    background-color: alpha(var(--color-primary), 0.1);
+  }
+
+  &:active {
+    background-color: var(--color-contrast-low);
+  }
+
+  &:focus:active {
+    background-color: alpha(var(--color-primary), 0.2);
+  }
+}
+
+.menu-bar__item--trigger { // button used to show hidden actions - visibile only if menu = collapsed
+  display: none;
+}
+
+.menu-bar__icon {
+  display: block;
+  color: var(--color-contrast-high);
+  font-size: var(--menu-bar-icon-size); // set icon size
+  transition: color .2s;
+}
+
+.menu-bar__label { // label visible on :hover
+  // hide
+  position: absolute;
+  z-index: var(--z-index-popover, 5); 
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  // style
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(var(--menu-bar-vertical-gap));
+  padding: var(--space-xxs) var(--space-xs);
+  color: var(--color-bg);
+  background-color: alpha(var(--color-contrast-higher), 0.95);
+  border-radius: var(--radius-md);
+  font-size: var(--menu-bar-label-size);
+  @include fontSmooth;
+  pointer-events: none;
+  user-select: none;
+}
+
+.menu-bar--collapsed { // mobile layout style
+  .menu-bar__item--hide { // hide buttons 
+    display: none;
+  }
+
+  .menu-bar__item--trigger { // show submenu trigger
+    display: inline-block; // flex fallback
+    display: flex;
+  }
+}
+
+// detect when the menu needs to switch from the mobile layout to an expanded one - used in JS
+.js {
+  .menu-bar {
+    opacity: 0; // hide menu bar while it is initialized in JS
+
+    &::before {
+      display: none;
+      content: 'collapsed';
+    }
+  }
+
+  .menu-bar--loaded {
+    opacity: 1;
+  }
+
+  @each $breakpoint, $value in $breakpoints {
+    .menu-bar--expanded\@#{$breakpoint}::before {
+      @include breakpoint(#{$breakpoint}) {
+        content: 'expanded';
+      }
+    }
+  }
+}

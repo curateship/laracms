@@ -1,0 +1,51 @@
+@use '../base' as *;
+
+/* -------------------------------- 
+
+File#: _1_card-v2
+Title: Card v2
+Descr: Container of information used as teasers for further content, often displayed in a gallery of related items
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+.card-v2 {
+  position: relative;
+  overflow: hidden;
+
+  img {
+    display: block;
+    width: 100%;
+  }
+}
+
+.card-v2__caption {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: linear-gradient(alpha(var(--color-black), 0), alpha(var(--color-black), 1));
+  background-blend-mode: multiply;
+
+  color: var(--color-white);
+  text-shadow: 0 1px 1px rgba(#000, 0.35);
+  @include fontSmooth;
+}
+
+// --blurred-img
+.card-v2--blur-fx {
+  .card-v2__caption {
+    background: alpha(var(--color-black), 0.8);
+    backdrop-filter: blur(10px);
+  }
+}
+
+// --link
+a.card-v2 {
+  display: block;
+  text-decoration: none;
+  transition: box-shadow .2s;
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+  }
+}

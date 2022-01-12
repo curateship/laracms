@@ -1,0 +1,164 @@
+@use '../base' as *;
+
+/* -------------------------------- 
+
+File#: _1_side-navigation
+Title: Side Navigation
+Descr: Vertical side navigation template
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+:root {
+  // list items
+  --sidenav-list-item-height: 32px; // height of each list item (navigation links)
+  --sidenav-list-item-padding-x: 16px; // item horizontal padding
+
+  // icons
+  --sidenav-icon-size: 16px; // size of main link icons
+  --sidenav-icon-text-gap: 8px; // gap between main icon and text label
+
+  // sublist-control -> button (arrow - left of list items) controlling the visibility of sub lists
+  --sidenav-sublist-control-size: 20px; // button size
+  --sidenav-sublist-control-icon-size: 12px; // icon size
+  --sidenav-sublist-control-margin-right: 4px; // gap between sublist-control and main icon
+}
+
+.sidenav {}
+
+.sidenav__list .sidenav__list { // sublist
+  display: none; // hide sublist
+
+  .sidenav__link { // sublink
+    padding-left: calc(var(--sidenav-list-item-padding-x) + var(--sidenav-sublist-control-size) + var(--sidenav-sublist-control-margin-right) + var(--sidenav-icon-size) + var(--sidenav-icon-text-gap));
+  }
+}
+
+.sidenav__item {
+  position: relative;
+}
+
+.sidenav__item--expanded { // show sublist
+  .sidenav__list {
+    display: block;
+  }
+
+  .sidenav__sublist-control .icon {
+    transform: rotate(90deg);
+  }
+}
+
+.sidenav__link {
+  display: flex;
+  height: var(--sidenav-list-item-height);
+  align-items: center;
+  padding: 0 var(--sidenav-list-item-padding-x) 0 calc(var(--sidenav-list-item-padding-x) + var(--sidenav-sublist-control-size) + var(--sidenav-sublist-control-margin-right));
+  text-decoration: none;
+  color: var(--color-contrast-high);
+
+  transition: .2s;
+
+  &:hover {
+    background-color: alpha(var(--color-contrast-higher), 0.05);
+  }
+}
+
+.sidenav__link[aria-current="page"],
+.sidenav__link--current {
+  background-color: alpha(var(--color-primary), 0.1);
+  color: var(--color-primary);
+}
+
+.sidenav__icon { // main item icons
+  width: var(--sidenav-icon-size);
+  height: var(--sidenav-icon-size);
+  margin-right: var(--sidenav-icon-text-gap);
+}
+
+.sidenav__text { // link labels
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: var(--space-xxs);
+}
+
+.sidenav__counter {
+  display: inline-block;
+  background-color: alpha(var(--color-contrast-higher), 0.15);
+  color: var(--color-contrast-high);
+  font-size: var(--text-xs);
+  padding: var(--space-xxxxs) var(--space-xxxs);
+  border-radius: 50em;
+  margin-left: auto;
+}
+
+.sidenav__sublist-control { // button (arrow) controlling the visibility of sub items
+  display: block;
+  width: var(--sidenav-sublist-control-size);
+  height: var(--sidenav-sublist-control-size);
+  border-radius: 50%;
+  position: absolute;
+  left: var(--sidenav-list-item-padding-x);
+  top: calc((var(--sidenav-list-item-height) - var(--sidenav-sublist-control-size))/2);
+  transition: .2s;
+
+  .icon { // arrow icon
+    display: block;
+    width: var(--sidenav-sublist-control-icon-size);
+    height: var(--sidenav-sublist-control-icon-size);
+    margin: auto;
+    transition: transform .2s;
+  }
+
+  &:hover {
+    background-color: alpha(var(--color-contrast-higher), 0.15);
+  }
+}
+
+.sidenav__label {
+  padding-left: var(--sidenav-list-item-padding-x);
+}
+
+.sidenav__divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-contrast-lower);
+}
+
+// --basic -> no sublists
+.sidenav--basic {
+  .sidenav__link, .sidenav__label {
+    padding-left: var(--sidenav-list-item-padding-x);
+  }
+}
+
+// --minified
+.sidenav--minified {
+  --sidenav-list-item-height: auto;
+
+  .sidenav__list .sidenav__list {
+    display: none !important; // hide sublists
+  }
+
+  .sidenav__link, .sidenav__label {
+    padding-left: var(--sidenav-list-item-padding-x);
+  }
+
+  .sidenav__link {
+    flex-direction: column;
+    padding-top: var(--space-sm);
+    padding-bottom: var(--space-sm);
+  }
+
+  .sidenav__icon {
+    margin: 0 0 var(--sidenav-icon-text-gap);
+  }
+
+  .sidenav__text {
+    padding: 0; // reset
+  }
+
+  .sidenav__counter, .sidenav__sublist-control {
+    display: none; // hide counter and arrow icon
+  }
+}

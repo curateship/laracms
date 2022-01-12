@@ -1,0 +1,167 @@
+@use '../base' as *;
+@use '_1_custom-checkbox.scss' as *;
+@use '_1_menu.scss' as *;
+@use '_2_menu-bar.scss' as *;
+
+/* -------------------------------- 
+
+File#: _3_interactive-table
+Title: Interactive Table
+Descr: Table with the option of sorting data and selecting rows to perform specific actions
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+.int-table {
+  overflow: hidden;
+  border-bottom: 2px solid var(--color-contrast-lower);
+}
+
+.int-table__inner {
+  position: relative;
+  overflow: auto;
+  
+  &::-webkit-scrollbar { // custom scrollbar style
+    height: 8px;
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track { // progress bar
+    background-color: var(--color-contrast-lower);
+  }
+
+  &::-webkit-scrollbar-thumb { // handle
+    background-color: alpha(var(--color-contrast-higher), 0.9);
+    border-radius: 50em;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-contrast-higher);
+  }
+}
+
+.int-table__table {
+  width: 100%;
+}
+
+.int-table__header {
+  .int-table__cell {
+    background-color: var(--color-bg);
+    box-shadow: 0 2px 0 var(--color-contrast-lower);
+  }
+}
+
+.int-table__body {
+  .int-table__row {
+    border-bottom: 1px solid var(--color-contrast-lower);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .int-table__row--checked {
+    background-color: alpha(var(--color-primary), 0.1);
+    border-color: alpha(var(--color-primary), 0.25);
+  }
+}
+
+.int-table__cell { // standard cell
+  padding: var(--space-xs);
+}
+
+.int-table__cell--th { // header cell
+  font-weight: 600;
+}
+
+.int-table__cell--sort { // header cell with sorting option
+  user-select: none;
+
+  &:hover, &:focus-within {
+    background-color: alpha(var(--color-contrast-higher), 0.075);
+  }
+  
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.int-table__cell--focus {
+  background-color: alpha(var(--color-primary), 0.15);
+}
+
+.int-table__sort-icon { // sorting icon indicator
+  .arrow-up, .arrow-down {
+    fill: alpha(var(--color-contrast-higher), 0.3);
+  }
+}
+
+.int-table__cell--asc .int-table__sort-icon .arrow-up,
+.int-table__cell--desc .int-table__sort-icon .arrow-down {
+  fill: var(--color-contrast-higher);
+}
+
+.int-table__checkbox {
+  --custom-checkbox-size: 18px;
+  --custom-checkbox-marker-size: 16px;
+  display: block;
+  width: var(--custom-checkbox-size);
+  height: var(--custom-checkbox-size);
+}
+
+.int-table__menu-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+
+  .icon {
+    display: block;
+    width: 16px;
+    height: 16px;
+  }
+
+  &:hover,
+  &.menu-control--active {
+    background-color: alpha(var(--color-contrast-higher), 0.1);
+  }
+
+  &:active {
+    background-color: alpha(var(--color-contrast-higher), 0.075);
+  }
+}
+
+// --sticky-header
+.int-table--sticky-header {
+  position: relative;
+  z-index: 1;
+
+  .int-table__inner {
+    max-height: 480px;
+  }
+
+  .int-table__header {
+    .int-table__cell {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+  }
+}
+
+// actions
+.int-table-actions {
+  .menu-bar {
+    --menu-bar-button-size: 38px; // size of the menu buttons
+    --menu-bar-icon-size: 16px; // size of the icons inside the buttons
+    --menu-bar-horizontal-gap: var(--space-xxxxs); // horizontal gap between buttons
+    --menu-bar-vertical-gap: 4px; // vertical gap between buttons and labels (tooltips)
+    --menu-bar-label-size: var(--text-xs); // label font size
+  }
+
+  .menu-bar__icon {
+    color: alpha(var(--color-contrast-higher), 0.5);
+  }
+}
