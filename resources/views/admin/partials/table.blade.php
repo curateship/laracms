@@ -1,5 +1,5 @@
 <!-- Content Table Column -->
-<div class="col-10@md">
+<div class="col-12@md">
     <div class="card">
         <div class="int-table-actions padding-bottom-xxxs" data-table-controls="table-1">
 
