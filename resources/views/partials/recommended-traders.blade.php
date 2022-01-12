@@ -2,8 +2,8 @@
 <section class="team padding-y-md margin-bottom-lg">
     <div class="margin-bottom-lg">
       <div class="justify-between flex items-end justify-between@md">
-        <h2>Rocommended Arts</h2>
-        <a href="#0" class="btn btn--subtle btn--sm" role="text">View all</a>
+        <h2>Rocommended Articles</h2>
+        <a href="http://localhost:8000/post" class="btn btn--subtle btn--sm" role="text">View all</a>
       </div>
     </div>
 
