@@ -1,0 +1,121 @@
+@use '../base' as *;
+@use '_1_accordion.scss' as *;
+
+/* -------------------------------- 
+
+File#: _2_accordion-v2
+Title: Accordion v2
+Descr: Stacked, expandable content sections
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+:root {
+  // icon
+  --accordion-v2-icon-size: 20px;
+  --accordion-v2-icon-stroke-width: 2px;
+}
+
+.accordion-v2 {}
+
+.accordion-v2__item {
+  background-color: var(--color-bg-light);
+  box-shadow: var(--inner-glow-top), var(--shadow-sm);
+  border-radius: var(--radius-md);
+  transition: .3s;
+
+  &:hover {
+    box-shadow: var(--inner-glow-top), var(--shadow-md);
+  }
+}
+
+.accordion-v2__header { // button
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  cursor: pointer;
+
+  .icon {
+    --size: var(--accordion-v2-icon-size);
+
+    .icon__group {
+      stroke-width: var(--accordion-v2-icon-stroke-width);
+    }
+  }
+}
+
+.accordion-v2__icon-arrow {
+  .icon__group {
+    will-change: transform;
+    transform-origin: 50% 50%;
+
+    > * {
+      transform-origin: 50% 50%;
+      stroke-dasharray: 20;
+      transform: translateY(4px);
+    }
+
+    > *:first-child {
+      stroke-dashoffset: 10.15;
+    }
+
+    > *:last-child {
+      stroke-dashoffset: 10.15;
+    }
+  }
+}
+
+.accordion-v2__item--is-open > .accordion-v2__header {
+  > .accordion-v2__icon-arrow .icon__group { // animated arrow icon
+    transform: rotate(-90deg);
+
+    > *:first-child, *:last-child {
+      stroke-dashoffset: 0;
+      transform: translateY(0px);
+    }
+  }
+}
+
+.js {
+  .accordion-v2__panel {
+    display: none;
+    will-change: height;
+    transform: translateZ(0px);
+  }
+
+  .accordion-v2__item--is-open > .accordion-v2__panel {
+    display: block;
+  }
+}
+
+// animations
+.accordion-v2[data-animation="on"] {
+  .accordion-v2__item--is-open .accordion-v2__panel > * {
+    animation: accordion-v2-entry-animation .4s var(--ease-out);
+  }
+
+  .accordion-v2__icon-arrow {
+    .icon__group {
+      transition: transform .3s var(--ease-out);
+
+      > * {
+        transition: transform .3s, stroke-dashoffset .3s;
+        transition-timing-function: var(--ease-out);
+      }
+    }
+  }
+}
+
+@keyframes accordion-v2-entry-animation {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
