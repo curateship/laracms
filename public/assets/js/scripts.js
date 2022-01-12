@@ -440,6 +440,177 @@ function resetFocusTabsStyle() {
       }
     }
   }());
+// File#: _1_hiding-nav
+// Usage: codyhouse.co/license
+(function() {
+    var hidingNav = document.getElementsByClassName('js-hide-nav');
+    if(hidingNav.length > 0 && window.requestAnimationFrame) {
+      var mainNav = Array.prototype.filter.call(hidingNav, function(element) {
+        return Util.hasClass(element, 'js-hide-nav--main');
+      }),
+      subNav = Array.prototype.filter.call(hidingNav, function(element) {
+        return Util.hasClass(element, 'js-hide-nav--sub');
+      });
+      
+      var scrolling = false,
+        previousTop = window.scrollY,
+        currentTop = window.scrollY,
+        scrollDelta = 10,
+        scrollOffset = 150, // scrollY needs to be bigger than scrollOffset to hide navigation
+        headerHeight = 0; 
+  
+      var navIsFixed = false; // check if main navigation is fixed
+      if(mainNav.length > 0 && Util.hasClass(mainNav[0], 'hide-nav--fixed')) navIsFixed = true;
+  
+      // store button that triggers navigation on mobile
+      var triggerMobile = getTriggerMobileMenu();
+      var prevElement = createPrevElement();
+      var mainNavTop = 0;
+      // list of classes the hide-nav has when it is expanded -> do not hide if it has those classes
+      var navOpenClasses = hidingNav[0].getAttribute('data-nav-target-class'),
+        navOpenArrayClasses = [];
+      if(navOpenClasses) navOpenArrayClasses = navOpenClasses.split(' ');
+      getMainNavTop();
+      if(mainNavTop > 0) {
+        scrollOffset = scrollOffset + mainNavTop;
+      }
+      
+      // init navigation and listen to window scroll event
+      getHeaderHeight();
+      initSecondaryNav();
+      initFixedNav();
+      resetHideNav();
+      window.addEventListener('scroll', function(event){
+        if(scrolling) return;
+        scrolling = true;
+        window.requestAnimationFrame(resetHideNav);
+      });
+  
+      window.addEventListener('resize', function(event){
+        if(scrolling) return;
+        scrolling = true;
+        window.requestAnimationFrame(function(){
+          if(headerHeight > 0) {
+            getMainNavTop();
+            getHeaderHeight();
+            initSecondaryNav();
+            initFixedNav();
+          }
+          // reset both navigation
+          hideNavScrollUp();
+  
+          scrolling = false;
+        });
+      });
+  
+      function getHeaderHeight() {
+        headerHeight = mainNav[0].offsetHeight;
+      };
+  
+      function initSecondaryNav() { // if there's a secondary nav, set its top equal to the header height
+        if(subNav.length < 1 || mainNav.length < 1) return;
+        subNav[0].style.top = (headerHeight - 1)+'px';
+      };
+  
+      function initFixedNav() {
+        if(!navIsFixed || mainNav.length < 1) return;
+        mainNav[0].style.marginBottom = '-'+headerHeight+'px';
+      };
+  
+      function resetHideNav() { // check if navs need to be hidden/revealed
+        currentTop = window.scrollY;
+        if(currentTop - previousTop > scrollDelta && currentTop > scrollOffset) {
+          hideNavScrollDown();
+        } else if( previousTop - currentTop > scrollDelta || (previousTop - currentTop > 0 && currentTop < scrollOffset) ) {
+          hideNavScrollUp();
+        } else if( previousTop - currentTop > 0 && subNav.length > 0 && subNav[0].getBoundingClientRect().top > 0) {
+          setTranslate(subNav[0], '0%');
+        }
+        // if primary nav is fixed -> toggle bg class
+        if(navIsFixed) {
+          var scrollTop = window.scrollY || window.pageYOffset;
+          Util.toggleClass(mainNav[0], 'hide-nav--has-bg', (scrollTop > headerHeight + mainNavTop));
+        }
+        previousTop = currentTop;
+        scrolling = false;
+      };
+  
+      function hideNavScrollDown() {
+        // if there's a secondary nav -> it has to reach the top before hiding nav
+        if( subNav.length  > 0 && subNav[0].getBoundingClientRect().top > headerHeight) return;
+        // on mobile -> hide navigation only if dropdown is not open
+        if(triggerMobile && triggerMobile.getAttribute('aria-expanded') == "true") return;
+        // check if main nav has one of the following classes
+        if( mainNav.length > 0 && (!navOpenClasses || !checkNavExpanded())) {
+          setTranslate(mainNav[0], '-100%'); 
+          mainNav[0].addEventListener('transitionend', addOffCanvasClass);
+        }
+        if( subNav.length  > 0 ) setTranslate(subNav[0], '-'+headerHeight+'px');
+      };
+  
+      function hideNavScrollUp() {
+        if( mainNav.length > 0 ) {setTranslate(mainNav[0], '0%'); Util.removeClass(mainNav[0], 'hide-nav--off-canvas');mainNav[0].removeEventListener('transitionend', addOffCanvasClass);}
+        if( subNav.length  > 0 ) setTranslate(subNav[0], '0%');
+      };
+  
+      function addOffCanvasClass() {
+        mainNav[0].removeEventListener('transitionend', addOffCanvasClass);
+        Util.addClass(mainNav[0], 'hide-nav--off-canvas');
+      };
+  
+      function setTranslate(element, val) {
+        element.style.transform = 'translateY('+val+')';
+      };
+  
+      function getTriggerMobileMenu() {
+        // store trigger that toggle mobile navigation dropdown
+        var triggerMobileClass = hidingNav[0].getAttribute('data-mobile-trigger');
+        if(!triggerMobileClass) return false;
+        if(triggerMobileClass.indexOf('#') == 0) { // get trigger by ID
+          var trigger = document.getElementById(triggerMobileClass.replace('#', ''));
+          if(trigger) return trigger;
+        } else { // get trigger by class name
+          var trigger = hidingNav[0].getElementsByClassName(triggerMobileClass);
+          if(trigger.length > 0) return trigger[0];
+        }
+        
+        return false;
+      };
+  
+      function createPrevElement() {
+        // create element to be inserted right before the mainNav to get its top value
+        if( mainNav.length < 1) return false;
+        var newElement = document.createElement("div"); 
+        newElement.setAttribute('aria-hidden', 'true');
+        mainNav[0].parentElement.insertBefore(newElement, mainNav[0]);
+        var prevElement =  mainNav[0].previousElementSibling;
+        prevElement.style.opacity = '0';
+        return prevElement;
+      };
+  
+      function getMainNavTop() {
+        if(!prevElement) return;
+        mainNavTop = prevElement.getBoundingClientRect().top + window.scrollY;
+      };
+  
+      function checkNavExpanded() {
+        var navIsOpen = false;
+        for(var i = 0; i < navOpenArrayClasses.length; i++){
+          if(Util.hasClass(mainNav[0], navOpenArrayClasses[i].trim())) {
+            navIsOpen = true;
+            break;
+          }
+        }
+        return navIsOpen;
+      };
+      
+    } else {
+      // if window requestAnimationFrame is not supported -> add bg class to fixed header
+      var mainNav = document.getElementsByClassName('js-hide-nav--main');
+      if(mainNav.length < 1) return;
+      if(Util.hasClass(mainNav[0], 'hide-nav--fixed')) Util.addClass(mainNav[0], 'hide-nav--has-bg');
+    }
+  }());
 // File#: _1_menu
 // Usage: codyhouse.co/license
 (function() {
@@ -1251,6 +1422,131 @@ function resetFocusTabsStyle() {
       for( var i = 0; i < sideNavs.length; i++) {
         (function(i){initSideNav(sideNavs[i]);})(i);
       }
+    }
+  }());
+// File#: _1_sub-navigation
+// Usage: codyhouse.co/license
+(function() {
+    var SideNav = function(element) {
+      this.element = element;
+      this.control = this.element.getElementsByClassName('js-subnav__control');
+      this.navList = this.element.getElementsByClassName('js-subnav__wrapper');
+      this.closeBtn = this.element.getElementsByClassName('js-subnav__close-btn');
+      this.firstFocusable = getFirstFocusable(this);
+      this.showClass = 'subnav__wrapper--is-visible';
+      this.collapsedLayoutClass = 'subnav--collapsed';
+      initSideNav(this);
+    };
+  
+    function getFirstFocusable(sidenav) { // get first focusable element inside the subnav
+      if(sidenav.navList.length == 0) return;
+      var focusableEle = sidenav.navList[0].querySelectorAll('[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex]:not([tabindex="-1"]), [contenteditable], audio[controls], video[controls], summary'),
+          firstFocusable = false;
+      for(var i = 0; i < focusableEle.length; i++) {
+        if( focusableEle[i].offsetWidth || focusableEle[i].offsetHeight || focusableEle[i].getClientRects().length ) {
+          firstFocusable = focusableEle[i];
+          break;
+        }
+      }
+  
+      return firstFocusable;
+    };
+  
+    function initSideNav(sidenav) {
+      checkSideNavLayout(sidenav); // switch from --compressed to --expanded layout
+      initSideNavToggle(sidenav); // mobile behavior + layout update on resize
+    };
+  
+    function initSideNavToggle(sidenav) { 
+      // custom event emitted when window is resized
+      sidenav.element.addEventListener('update-sidenav', function(event){
+        checkSideNavLayout(sidenav);
+      });
+  
+      // mobile only
+      if(sidenav.control.length == 0 || sidenav.navList.length == 0) return;
+      sidenav.control[0].addEventListener('click', function(event){ // open sidenav
+        openSideNav(sidenav, event);
+      });
+      sidenav.element.addEventListener('click', function(event) { // close sidenav when clicking on close button/bg layer
+        if(event.target.closest('.js-subnav__close-btn') || Util.hasClass(event.target, 'js-subnav__wrapper')) {
+          closeSideNav(sidenav, event);
+        }
+      });
+    };
+  
+    function openSideNav(sidenav, event) { // open side nav - mobile only
+      event.preventDefault();
+      sidenav.selectedTrigger = event.target;
+      event.target.setAttribute('aria-expanded', 'true');
+      Util.addClass(sidenav.navList[0], sidenav.showClass);
+      sidenav.navList[0].addEventListener('transitionend', function cb(event){
+        sidenav.navList[0].removeEventListener('transitionend', cb);
+        sidenav.firstFocusable.focus();
+      });
+    };
+  
+    function closeSideNav(sidenav, event, bool) { // close side sidenav - mobile only
+      if( !Util.hasClass(sidenav.navList[0], sidenav.showClass) ) return;
+      if(event) event.preventDefault();
+      Util.removeClass(sidenav.navList[0], sidenav.showClass);
+      if(!sidenav.selectedTrigger) return;
+      sidenav.selectedTrigger.setAttribute('aria-expanded', 'false');
+      if(!bool) sidenav.selectedTrigger.focus();
+      sidenav.selectedTrigger = false; 
+    };
+  
+    function checkSideNavLayout(sidenav) { // switch from --compressed to --expanded layout
+      var layout = getComputedStyle(sidenav.element, ':before').getPropertyValue('content').replace(/\'|"/g, '');
+      if(layout != 'expanded' && layout != 'collapsed') return;
+      Util.toggleClass(sidenav.element, sidenav.collapsedLayoutClass, layout != 'expanded');
+    };
+    
+    var sideNav = document.getElementsByClassName('js-subnav'),
+      SideNavArray = [],
+      j = 0;
+    if( sideNav.length > 0) {
+      for(var i = 0; i < sideNav.length; i++) {
+        var beforeContent = getComputedStyle(sideNav[i], ':before').getPropertyValue('content');
+        if(beforeContent && beforeContent !='' && beforeContent !='none') {
+          j = j + 1;
+        }
+        (function(i){SideNavArray.push(new SideNav(sideNav[i]));})(i);
+      }
+  
+      if(j > 0) { // on resize - update sidenav layout
+        var resizingId = false,
+          customEvent = new CustomEvent('update-sidenav');
+        window.addEventListener('resize', function(event){
+          clearTimeout(resizingId);
+          resizingId = setTimeout(doneResizing, 300);
+        });
+  
+        function doneResizing() {
+          for( var i = 0; i < SideNavArray.length; i++) {
+            (function(i){SideNavArray[i].element.dispatchEvent(customEvent)})(i);
+          };
+        };
+  
+        (window.requestAnimationFrame) // init table layout
+          ? window.requestAnimationFrame(doneResizing)
+          : doneResizing();
+      }
+  
+      // listen for key events
+      window.addEventListener('keyup', function(event){
+        if( (event.keyCode && event.keyCode == 27) || (event.key && event.key.toLowerCase() == 'escape' )) {// listen for esc key - close navigation on mobile if open
+          for(var i = 0; i < SideNavArray.length; i++) {
+            (function(i){closeSideNav(SideNavArray[i], event);})(i);
+          };
+        }
+        if( (event.keyCode && event.keyCode == 9) || (event.key && event.key.toLowerCase() == 'tab' )) { // listen for tab key - close navigation on mobile if open when nav loses focus
+          if( document.activeElement.closest('.js-subnav__wrapper')) return;
+          for(var i = 0; i < SideNavArray.length; i++) {
+            (function(i){closeSideNav(SideNavArray[i], event, true);})(i);
+          };
+        }
+      });
     }
   }());
 // File#: _2_adv-custom-select

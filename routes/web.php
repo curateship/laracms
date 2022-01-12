@@ -28,3 +28,7 @@ Route::get('/profile', function () {
 Route::get('/post', function () {
     return view('pages.post');
 });
+
+Route::get('/admin/setting', function () {
+    return view('admin.pages.setting');
+});

@@ -1,6 +1,6 @@
 @extends('apps.master')
 @section('content')
-<div class="container max-width-lg padding-y-lg ">
+<div class="container max-width-lg padding-y-xl grid gap-md">
     <div class="col-12@md">
 
         <!-- Content Start -->
