@@ -9,11 +9,9 @@
 </head>
 <body>
   @include('partials.header')
-
   <div class="container max-width-sm padding-y-lg ">
     @yield('content')
   </div>
-
 <script src="assets/js/scripts.js"></script>
 </body>
 </html>
