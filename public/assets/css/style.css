@@ -18,7 +18,7 @@
 }
 
 .grid {
-  --grid-columns: 12;
+  --grid-columns: 15;
   display: flex;
   flex-wrap: wrap;
 }
@@ -14384,6 +14384,255 @@ Usage: codyhouse.co/license
 
 /* -------------------------------- 
 
+File#: _1_author
+Title: Author
+Descr: Author introduction card
+Usage: codyhouse.co/license
+
+-------------------------------- */
+:root {
+  --author-img-size: 4em;
+}
+
+.author {
+  display: grid;
+  grid-template-columns: var(--author-img-size) 1fr;
+  grid-gap: var(--space-sm);
+}
+
+.author__img-wrapper {
+  display: inline-block;
+  border-radius: 50%;
+  width: var(--author-img-size);
+  height: var(--author-img-size);
+  overflow: hidden;
+  transition: transform 0.3s var(--ease-out-back);
+}
+.author__img-wrapper:hover {
+  transform: scale(1.1);
+}
+.author__img-wrapper img {
+  display: block;
+  width: inherit;
+  height: inherit;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.author__content a {
+  color: inherit;
+}
+.author__content a:hover {
+  color: var(--color-primary);
+}
+
+.author--meta {
+  --author-img-size: 3em;
+  align-items: center;
+  grid-gap: var(--space-xs);
+}
+
+.author--minimal {
+  --author-img-size: 2.4em;
+  align-items: center;
+  grid-gap: var(--space-xxs);
+}
+
+.author--featured {
+  --author-img-size: 6em;
+  grid-template-columns: 1fr;
+  justify-content: center;
+  text-align: center;
+}
+.author--featured .author__img-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.author__social {
+  --size: 40px;
+  width: var(--size);
+  height: var(--size);
+  display: flex;
+  background-color: hsla(var(--color-contrast-higher-h), var(--color-contrast-higher-s), var(--color-contrast-higher-l), 0.1);
+  border-radius: 50%;
+  transition: 0.2s;
+}
+.author__social .icon {
+  --size: 16px;
+  display: block;
+  margin: auto;
+  color: var(--color-contrast-higher);
+  transition: color 0.2s;
+}
+.author__social:hover {
+  background-color: hsla(var(--color-contrast-higher-h), var(--color-contrast-higher-s), var(--color-contrast-higher-l), 0.075);
+}
+.author__social:hover .icon {
+  color: var(--color-primary);
+}
+
+/* -------------------------------- 
+
+File#: _1_avatar
+Title: Avatar
+Descr: A user profile image component
+Usage: codyhouse.co/license
+
+-------------------------------- */
+:root {
+  --avatar-sm: 1em;
+  --avatar-md: 2em;
+  --avatar-lg: 3em;
+}
+
+.avatar {
+  font-size: 2em;
+  position: relative;
+}
+
+.avatar__figure {
+  width: 1em;
+  height: 0;
+  padding-bottom: 1em;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.avatar__img, .avatar__placeholder {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 1em;
+  height: 1em;
+  border-radius: inherit;
+}
+
+.avatar__placeholder {
+  background-color: var(--color-contrast-low);
+  color: var(--color-bg);
+  fill: transparent;
+}
+
+.avatar--btn {
+  background-color: transparent;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  color: inherit;
+  line-height: inherit;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  cursor: pointer;
+}
+
+.avatar--sm {
+  font-size: var(--avatar-sm);
+}
+
+.avatar--md {
+  font-size: var(--avatar-md);
+}
+
+.avatar--lg {
+  font-size: var(--avatar-lg);
+}
+
+.avatar__status {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: inline-block;
+  width: 0.2em;
+  height: 0.2em;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--color-bg);
+  background-color: var(--color-contrast-medium);
+}
+
+.avatar__status--active {
+  background-color: var(--color-success);
+}
+
+.avatar__status--busy {
+  background-color: var(--color-error);
+}
+
+.avatar__initials, .avatar__users-counter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1em;
+  height: 1em;
+  border-radius: inherit;
+  background-color: var(--color-contrast-lower);
+  color: var(--color-contrast-higher);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar__initials {
+  text-align: center;
+}
+.avatar__initials span {
+  font-size: 0.5em;
+}
+
+.avatar__users-counter span {
+  font-size: 0.42em;
+}
+
+.avatar-group {
+  display: flex;
+}
+.avatar-group .avatar {
+  margin-left: -0.1em;
+}
+.avatar-group .avatar__figure {
+  box-shadow: 0 0 0 3px var(--color-bg);
+}
+
+/* -------------------------------- 
+
+File#: _1_card-v14
+Title: Card v14
+Descr: Container of information used as teaser for further content exploration
+Usage: codyhouse.co/license
+
+-------------------------------- */
+.card-v14 {
+  background-color: var(--color-bg-light);
+  box-shadow: var(--inner-glow), var(--shadow-sm);
+  border-radius: var(--radius-md);
+  color: inherit;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.card-v14:hover {
+  background-color: var(--color-bg-lighter);
+  box-shadow: var(--inner-glow), var(--shadow-md);
+}
+
+.card-v14__icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: hsla(var(--color-accent-h), var(--color-accent-s), var(--color-accent-l), 0.2);
+}
+
+.card-v14__icon {
+  --size: 24px;
+  color: var(--color-accent);
+}
+
+/* -------------------------------- 
+
 File#: _1_card-v2
 Title: Card v2
 Descr: Container of information used as teasers for further content, often displayed in a gallery of related items
@@ -14424,6 +14673,87 @@ a.card-v2 {
 }
 a.card-v2:hover {
   box-shadow: var(--shadow-md);
+}
+
+/* -------------------------------- 
+
+File#: _1_card
+Title: Card
+Descr: Container of information used as teaser for further content exploration
+Usage: codyhouse.co/license
+
+-------------------------------- */
+.card {
+  background-color: var(--color-bg-light);
+  box-shadow: var(--inner-glow), var(--shadow-sm);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.card__img img {
+  display: block;
+  width: 100%;
+}
+
+.card__content {
+  padding: var(--space-xs);
+}
+
+.card--is-link {
+  will-change: box-shadow;
+  transition: box-shadow 0.2s;
+}
+.card--is-link:hover {
+  box-shadow: var(--inner-glow), var(--shadow-md);
+}
+.card--is-link:hover .card__img::after {
+  opacity: 1;
+}
+.card--is-link .card__img {
+  position: relative;
+}
+.card--is-link .card__img::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: hsla(var(--color-black-h), var(--color-black-s), var(--color-black-l), 0.6);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.card__link {
+  text-decoration: none;
+  display: block;
+  color: inherit;
+}
+
+.card__link-icon {
+  position: absolute;
+  z-index: 1;
+  width: 64px;
+  height: 64px;
+  top: calc(50% - 32px);
+  left: calc(50% - 32px);
+  background-color: hsla(var(--color-white-h), var(--color-white-s), var(--color-white-l), 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.card__link-icon .icon {
+  display: block;
+  width: 32px;
+  height: 32px;
+  color: var(--color-black);
+}
+
+.card--is-link:hover .card__link-icon {
+  opacity: 1;
 }
 
 /* -------------------------------- 
@@ -14559,6 +14889,171 @@ Usage: codyhouse.co/license
 
 /* -------------------------------- 
 
+File#: _1_choice-tags
+Title: Choice tags
+Descr: Custom, "tag-looking" radio/checkbox buttons
+Usage: codyhouse.co/license
+
+-------------------------------- */
+:root {
+  --choice-tag-icon-size: 16px;
+}
+
+.choice-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: 50em;
+  box-shadow: 0 0 0 1px var(--color-contrast-lower);
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  transition: 0.2s;
+}
+.choice-tag:hover {
+  box-shadow: 0 0 0 1px hsl(var(--color-contrast-low-h), var(--color-contrast-low-s), calc(var(--color-contrast-low-l) * 0.85));
+}
+.choice-tag:active, .choice-tag:focus-within, .choice-tag.choice-tag--checked {
+  box-shadow: 0 0 0 2px var(--color-primary);
+}
+.choice-tag:active, .choice-tag:focus-within {
+  box-shadow: 0 0 0 2px var(--color-primary), 0 0 0 4px hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.2);
+}
+.choice-tag:focus-within:not(.choice-tag--checked) {
+  box-shadow: 0 0 0 1px var(--color-contrast-higher), 0 0 0 3px hsla(var(--color-contrast-higher-h), var(--color-contrast-higher-s), var(--color-contrast-higher-l), 0.2);
+}
+.choice-tag.choice-tag--checked {
+  background-color: hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.08);
+}
+
+.choice-tag__icon {
+  font-size: var(--choice-tag-icon-size);
+}
+
+.choice-tag__icon-group * {
+  transform-origin: 8px 8px;
+}
+
+.choice-tag--checkbox .choice-tag__icon {
+  color: var(--color-contrast-low);
+}
+.choice-tag--checkbox .choice-tag__icon-group {
+  stroke-width: 2px;
+}
+.choice-tag--checkbox .choice-tag__icon-group * {
+  stroke-dasharray: 16;
+}
+.choice-tag--checkbox .choice-tag__icon-group :nth-child(1),
+.choice-tag--checkbox .choice-tag__icon-group :nth-child(2) {
+  transition: transform 0.3s var(--ease-out-back), stroke-dashoffset 0.3s var(--ease-out-back);
+}
+.choice-tag--checkbox .choice-tag__icon-group :nth-child(1) {
+  stroke-dashoffset: 24;
+}
+.choice-tag--checkbox .choice-tag__icon-group :nth-child(2) {
+  stroke-dashoffset: 10;
+}
+.choice-tag--checkbox .choice-tag__icon-group :nth-child(3) {
+  transition: stroke-dashoffset 0.3s;
+  stroke-dashoffset: 0;
+}
+.choice-tag--checkbox input:checked + .choice-tag__icon {
+  color: var(--color-primary);
+}
+.choice-tag--checkbox input:checked + .choice-tag__icon .choice-tag__icon-group :nth-child(1) {
+  stroke-dashoffset: 23;
+  transform: translateX(-2px) translateY(4px) rotate(45deg);
+}
+.choice-tag--checkbox input:checked + .choice-tag__icon .choice-tag__icon-group :nth-child(2) {
+  stroke-dashoffset: 5;
+  transform: translateX(-2px) translateY(4px) rotate(-45deg);
+}
+.choice-tag--checkbox input:checked + .choice-tag__icon .choice-tag__icon-group :nth-child(3) {
+  transition: none;
+  stroke-dashoffset: 16;
+  opacity: 0;
+}
+
+.choice-tag--radio .choice-tag__icon {
+  color: var(--color-contrast-low);
+}
+.choice-tag--radio .choice-tag__icon-group :nth-child(1) {
+  fill: none;
+  stroke-width: 1px;
+}
+.choice-tag--radio .choice-tag__icon-group :nth-child(2) {
+  fill: var(--color-white);
+  transform: scale(0);
+  transition: transform 0.3s var(--ease-out-back);
+}
+.choice-tag--radio input:checked + .choice-tag__icon .choice-tag__icon-group :nth-child(1) {
+  stroke: var(--color-primary);
+  fill: var(--color-primary);
+}
+.choice-tag--radio input:checked + .choice-tag__icon .choice-tag__icon-group :nth-child(2) {
+  transform: scale(1);
+}
+
+/* -------------------------------- 
+
+File#: _1_counter
+Title: Counter
+Descr: A label displaying numeric values, often used to indicate unread notification
+Usage: codyhouse.co/license
+
+-------------------------------- */
+.counter {
+  font-size: var(--text-xs);
+  background-color: var(--color-contrast-lower);
+  padding: var(--space-xxxxs) var(--space-xxs);
+  border-radius: 50em;
+}
+
+.counter--primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.counter--critical {
+  background-color: var(--color-error);
+  color: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.counter--light {
+  background-color: hsla(var(--color-white-h), var(--color-white-s), var(--color-white-l), 0.9);
+  color: hsla(var(--color-black-h), var(--color-black-s), var(--color-black-l), 0.85);
+}
+
+.counter--dark {
+  background-color: hsla(var(--color-black-h), var(--color-black-s), var(--color-black-l), 0.8);
+  color: hsla(var(--color-white-h), var(--color-white-s), var(--color-white-l), 0.9);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.counter--docked {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+}
+
+.counter-container {
+  height: 48px;
+  width: 48px;
+  background-color: var(--color-contrast-lower);
+  border-radius: var(--radius-md);
+  position: relative;
+}
+
+/* -------------------------------- 
+
 File#: _1_custom-checkbox
 Title: Custom Checkbox
 Descr: Replace the native checkbox button with a custom element (e.g., an icon)
@@ -14680,6 +15175,51 @@ Usage: codyhouse.co/license
   color: inherit;
   position: relative;
   z-index: 1;
+}
+
+/* -------------------------------- 
+
+File#: _1_details
+Title: Details
+Descr: A button that toggles the visibility of additional information
+Usage: codyhouse.co/license
+
+-------------------------------- */
+.details__summary {
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.details__summary:hover {
+  color: var(--color-primary);
+}
+.details__summary:focus {
+  outline: 2px solid hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.2);
+  outline-offset: 4px;
+}
+.details__summary .icon {
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+
+.js .details__summary {
+  list-style: none;
+}
+.js .details__summary::-webkit-details-marker {
+  display: none;
+}
+.js .details__summary[aria-expanded=true] .icon {
+  transform: rotate(90deg);
+}
+.js .details__content[aria-hidden=true] {
+  display: none;
+}
+
+html:not(.js) .details__summary .icon {
+  display: none;
 }
 
 /* -------------------------------- 
@@ -15212,6 +15752,70 @@ Usage: codyhouse.co/license
 
 /* -------------------------------- 
 
+File#: _1_popover
+Title: Popover
+Descr: A pop-up box controlled by a trigger element
+Usage: codyhouse.co/license
+
+-------------------------------- */
+:root {
+  --popover-width: 250px;
+  --popover-control-gap: 4px;
+  --popover-viewport-gap: 20px;
+  --popover-transition-duration: 0.2s;
+}
+
+.popover {
+  position: fixed;
+  width: var(--popover-width);
+  z-index: var(--z-index-popover, 5);
+  margin-top: var(--popover-control-gap);
+  margin-bottom: var(--popover-control-gap);
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s var(--popover-transition-duration), opacity var(--popover-transition-duration);
+}
+
+.popover--is-visible {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s, opacity var(--popover-transition-duration);
+}
+
+/* -------------------------------- 
+
+File#: _1_read-more
+Title: Read More
+Descr: A truncated paragraph with the option of reading more content
+Usage: codyhouse.co/license
+
+-------------------------------- */
+.js .read-more {
+  opacity: 0;
+}
+.js .read-more--loaded {
+  opacity: 1;
+}
+
+.read-more__btn {
+  background-color: transparent;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  color: inherit;
+  line-height: inherit;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  cursor: pointer;
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+/* -------------------------------- 
+
 File#: _1_search-input
 Title: Search input
 Descr: Search input field with custom button
@@ -15446,6 +16050,284 @@ Usage: codyhouse.co/license
   padding: 0;
 }
 .sidenav--minified .sidenav__counter, .sidenav--minified .sidenav__sublist-control {
+  display: none;
+}
+
+/* -------------------------------- 
+
+File#: _2_adv-custom-select
+Title: Advanced Custom Select
+Descr: Custom select with advanced structure options
+Usage: codyhouse.co/license
+
+-------------------------------- */
+.adv-select-popover {
+  --space-unit: 1rem;
+  --text-unit: 1rem;
+  font-size: var(--text-unit);
+}
+.adv-select-popover.popover {
+  --popover-width: 250px;
+  --popover-control-gap: 4px;
+  --popover-viewport-gap: 20px;
+  --popover-transition-duration: 0.2s;
+}
+@media (min-width: 64rem) {
+  .adv-select-popover.popover {
+    --popover-width: 320px;
+  }
+}
+
+.adv-select-popover__optgroup:not(:first-of-type) {
+  padding-top: var(--space-xxs);
+}
+
+.adv-select-popover__optgroup:not(:last-of-type) {
+  border-bottom: 1px solid hsla(var(--color-contrast-higher-h), var(--color-contrast-higher-s), var(--color-contrast-higher-l), 0.1);
+  padding-bottom: var(--space-xxs);
+}
+
+.adv-select-popover__check {
+  display: none;
+}
+
+.adv-select-popover__option {
+  position: relative;
+  cursor: pointer;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: 0.2s;
+}
+.adv-select-popover__option:hover {
+  background-color: hsla(var(--color-contrast-higher-h), var(--color-contrast-higher-s), var(--color-contrast-higher-l), 0.075);
+}
+.adv-select-popover__option:focus {
+  outline: none;
+  background-color: hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.15);
+}
+.adv-select-popover__option[aria-selected=true] {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+.adv-select-popover__option[aria-selected=true] .adv-select-popover__check {
+  display: block;
+}
+.adv-select-popover__option[aria-selected=true]:focus {
+  box-shadow: inset 0 0 0 2px var(--color-primary-dark);
+}
+
+/* -------------------------------- 
+
+File#: _2_comments
+Title: Comments
+Descr: Threaded comments template
+Usage: codyhouse.co/license
+
+-------------------------------- */
+:root {
+  --comments-author-img-size: 2.6em;
+  --comments-author-content-gap: var(--space-xs);
+  --comments-gap: var(--space-md);
+}
+
+.comments__sorting-label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  pointer-events: none;
+}
+.comments__sorting-label + label {
+  color: var(--color-contrast-medium);
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.comments__sorting-label + label:hover {
+  color: var(--color-contrast-high);
+}
+.comments__sorting-label:checked + label {
+  color: var(--color-contrast-higher);
+  text-decoration: underline;
+}
+.comments__sorting-label:focus + label {
+  outline: 2px solid hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.2);
+  outline-offset: 2px;
+}
+
+.comments__comment:not(:last-child) {
+  margin-bottom: var(--comments-gap);
+}
+
+.comments__author-img {
+  display: block;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: var(--comments-author-content-gap);
+  transition: opacity 0.2s;
+}
+.comments__author-img img {
+  display: block;
+  width: var(--comments-author-img-size);
+  height: var(--comments-author-img-size);
+}
+.comments__author-img:hover {
+  opacity: 0.75;
+}
+
+.comments__author-name {
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--color-contrast-higher);
+}
+.comments__author-name:hover {
+  text-decoration: underline;
+}
+
+.comments__readmore-btn {
+  background-color: transparent;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  color: inherit;
+  line-height: inherit;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  color: var(--color-contrast-medium);
+}
+.comments__readmore-btn:hover {
+  cursor: pointer;
+  color: var(--color-contrast-higher);
+  text-decoration: underline;
+}
+
+.comments__vote-btn {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-contrast-medium);
+}
+.comments__vote-btn:hover {
+  color: var(--color-contrast-higher);
+  cursor: pointer;
+}
+
+.comments__vote-btn--pressed {
+  color: var(--color-accent);
+}
+.comments__vote-btn--pressed:hover {
+  color: var(--color-accent);
+}
+.comments__vote-btn--pressed .comments__vote-icon-wrapper .icon {
+  -webkit-animation: comments-vote-icon 0.3s;
+          animation: comments-vote-icon 0.3s;
+}
+.comments__vote-btn--pressed .comments__vote-icon-wrapper::before {
+  -webkit-animation: comments-vote-icon-circle 0.6s;
+          animation: comments-vote-icon-circle 0.6s;
+}
+
+.comments__vote-icon-wrapper {
+  position: relative;
+}
+.comments__vote-icon-wrapper .icon {
+  position: relative;
+  z-index: 2;
+  transition: transform 0.3s;
+}
+.comments__vote-icon-wrapper::before {
+  content: "";
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 1;
+  top: calc(50% - 1em);
+  left: calc(50% - 1em);
+  background-color: currentColor;
+  opacity: 1;
+  transform: scale(0);
+  pointer-events: none;
+}
+
+@-webkit-keyframes comments-vote-icon {
+  0%, 100% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(0.8);
+  }
+}
+
+@keyframes comments-vote-icon {
+  0%, 100% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(0.8);
+  }
+}
+@-webkit-keyframes comments-vote-icon-circle {
+  from {
+    opacity: 1;
+    transform: scale(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+@keyframes comments-vote-icon-circle {
+  from {
+    opacity: 1;
+    transform: scale(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+.comments__label-btn {
+  color: var(--color-contrast-medium);
+}
+.comments__label-btn:hover {
+  color: var(--color-contrast-higher);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.comments__time {
+  color: var(--color-contrast-medium);
+}
+
+.comments__inline-divider {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--color-contrast-low);
+}
+
+.comments__details {
+  margin-top: var(--space-sm);
+  margin-left: calc(var(--comments-author-img-size) + var(--comments-author-content-gap));
+  padding-left: var(--comments-author-content-gap);
+  border-left: 3px solid var(--color-contrast-lower);
+}
+.comments__details .details__content > ul {
+  margin-top: var(--space-sm);
+}
+
+.comments--no-profile-img {
+  --comments-author-img-size: 0;
+}
+.comments--no-profile-img .comments__author-img {
   display: none;
 }
 
@@ -15901,11 +16783,6 @@ Descr: Table with the option of sorting data and selecting rows to perform speci
 Usage: codyhouse.co/license
 
 -------------------------------- */
-.int-table {
-  overflow: hidden;
-  border-bottom: 2px solid var(--color-contrast-lower);
-}
-
 .int-table__inner {
   position: relative;
   overflow: auto;
@@ -15927,11 +16804,6 @@ Usage: codyhouse.co/license
 
 .int-table__table {
   width: 100%;
-}
-
-.int-table__header .int-table__cell {
-  background-color: var(--color-bg);
-  box-shadow: 0 2px 0 var(--color-contrast-lower);
 }
 
 .int-table__body .int-table__row {

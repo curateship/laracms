@@ -7,18 +7,7 @@
               <div class="controlbar--sticky flex justify-between">
                 <div class="margin-xxs">
                   <div class="inline-flex items-baseline">
-                    <h1 class="text-md color-contrast-high margin-x-xs" for="filterItems">Posts:</h1>
-                    <div class="select inline-block js-select" data-trigger-class="reset text-sm color-contrast-high h1 inline-flex items-center cursor-pointer js-tab-focus">
-                      <select name="filterItems" id="filterItems">
-                        <optgroup label="Post Status">
-                          <option value="" data-count="" selected>All Posts</option>
-                          <option value="draft" data-count="">Draft</option>
-                          <option value="pending" data-count="">Pending</option>
-                          <option value="deleted" data-count="">Trash</option>
-                        </optgroup>
-                      </select>
-                      <svg class="icon icon--xxxs margin-left-xxs" viewBox="0 0 8 8"><path d="M7.934,1.251A.5.5,0,0,0,7.5,1H.5a.5.5,0,0,0-.432.752l3.5,6a.5.5,0,0,0,.864,0l3.5-6A.5.5,0,0,0,7.934,1.251Z"/></svg>
-                    </div>
+                    <h1 class="text-md color-contrast-high margin-x-xs" for="filterItems">Posts</h1>
                   </div>
                 </div>
                 <!-- END Control Bar-->
@@ -27,7 +16,7 @@
                 <div class="flex flex-wrap items-center justify-between margin-right-xxs">
                   <div class="flex flex-wrap">
 
-                    <menu class="menu-bar is-hidden js-int-table-actions__items-selected js-menu-bar" id="btnDeleteMultiple">
+                    <menu class="menu-bar is-hidden js-int-table-actions__items-selected js-menu-bar margin-right-xs" id="btnDeleteMultiple">
                       <li class="menu-bar__item menu-bar__item--trigger js-menu-bar__trigger" role="menuitem" aria-label="More options">
                         <svg class="icon menu-bar__icon" width="20" height="20" viewBox="0 0 20 20">
                           <circle cx="8" cy="7.5" r="1.5" />

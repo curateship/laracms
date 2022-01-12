@@ -1,0 +1,42 @@
+@use '../base' as *;
+
+/* -------------------------------- 
+
+File#: _1_card-v14
+Title: Card v14
+Descr: Container of information used as teaser for further content exploration
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+.card-v14 {
+  background-color: var(--color-bg-light);
+  box-shadow: var(--inner-glow), var(--shadow-sm);
+  border-radius: var(--radius-md);
+
+  color: inherit;
+  text-decoration: none;
+
+  transition: .3s;
+
+  &:hover {
+    background-color: var(--color-bg-lighter);
+    box-shadow: var(--inner-glow), var(--shadow-md);
+  }
+}
+
+.card-v14__icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: alpha(var(--color-accent), 0.2);
+}
+
+.card-v14__icon {
+  --size: 24px;
+  color: var(--color-accent);
+}

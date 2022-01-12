@@ -336,6 +336,110 @@ function resetFocusTabsStyle() {
       };
     }
   }());
+// File#: _1_choice-tags
+// Usage: codyhouse.co/license
+(function() {
+    var ChoiceTags = function(element) {
+      this.element = element;
+      this.labels = this.element.getElementsByClassName('js-choice-tag');
+      this.inputs = getChoiceInput(this);
+      this.isRadio = this.inputs[0].type.toString() == 'radio';
+      this.checkedClass = 'choice-tag--checked';
+      initChoiceTags(this);
+      initChoiceTagEvent(this);
+    }
+  
+    function getChoiceInput(element) {
+      var inputs = [];
+      for(var i = 0; i < element.labels.length; i++) {
+        inputs.push(element.labels[i].getElementsByTagName('input')[0]);
+      }
+      return inputs;
+    };
+  
+    function initChoiceTags(element) {
+      // if tag is selected by default - add checkedClass to the label element
+      for(var i = 0; i < element.inputs.length; i++) {
+        Util.toggleClass(element.labels[i], element.checkedClass, element.inputs[i].checked);
+      }
+    };
+  
+    function initChoiceTagEvent(element) {
+      element.element.addEventListener('change', function(event) {
+        var inputIndex = Util.getIndexInArray(element.inputs, event.target);
+        if(inputIndex < 0) return;
+        Util.toggleClass(element.labels[inputIndex], element.checkedClass, event.target.checked);
+        if(element.isRadio && event.target.checked) resetRadioTags(element, inputIndex);
+      });
+    };
+  
+    function resetRadioTags(element, index) {
+      // when a radio input is checked - reset all the others
+      for(var i = 0; i < element.labels.length; i++) {
+        if(i != index) Util.removeClass(element.labels[i], element.checkedClass);
+      }
+    };
+  
+    //initialize the ChoiceTags objects
+    var choiceTags = document.getElementsByClassName('js-choice-tags');
+    if( choiceTags.length > 0 ) {
+      for( var i = 0; i < choiceTags.length; i++) {
+        (function(i){new ChoiceTags(choiceTags[i]);})(i);
+      }
+    };
+  }());
+// File#: _1_details
+// Usage: codyhouse.co/license
+(function() {
+    var Details = function(element, index) {
+      this.element = element;
+      this.summary = this.element.getElementsByClassName('js-details__summary')[0];
+      this.details = this.element.getElementsByClassName('js-details__content')[0];
+      this.htmlElSupported = 'open' in this.element;
+      this.initDetails(index);
+      this.initDetailsEvents();
+    };
+  
+    Details.prototype.initDetails = function(index) {
+      // init aria attributes 
+      Util.setAttributes(this.summary, {'aria-expanded': 'false', 'aria-controls': 'details--'+index, 'role': 'button'});
+      Util.setAttributes(this.details, {'aria-hidden': 'true', 'id': 'details--'+index});
+    };
+  
+    Details.prototype.initDetailsEvents = function() {
+      var self = this;
+      if( this.htmlElSupported ) { // browser supports the <details> element 
+        this.element.addEventListener('toggle', function(event){
+          var ariaValues = self.element.open ? ['true', 'false'] : ['false', 'true'];
+          // update aria attributes when details element status change (open/close)
+          self.updateAriaValues(ariaValues);
+        });
+      } else { //browser does not support <details>
+        this.summary.addEventListener('click', function(event){
+          event.preventDefault();
+          var isOpen = self.element.getAttribute('open'),
+            ariaValues = [];
+  
+          isOpen ? self.element.removeAttribute('open') : self.element.setAttribute('open', 'true');
+          ariaValues = isOpen ? ['false', 'true'] : ['true', 'false'];
+          self.updateAriaValues(ariaValues);
+        });
+      }
+    };
+  
+    Details.prototype.updateAriaValues = function(values) {
+      this.summary.setAttribute('aria-expanded', values[0]);
+      this.details.setAttribute('aria-hidden', values[1]);
+    };
+  
+    //initialize the Details objects
+    var detailsEl = document.getElementsByClassName('js-details');
+    if( detailsEl.length > 0 ) {
+      for( var i = 0; i < detailsEl.length; i++) {
+        (function(i){new Details(detailsEl[i], i);})(i);
+      }
+    }
+  }());
 // File#: _1_menu
 // Usage: codyhouse.co/license
 (function() {
@@ -729,6 +833,405 @@ function resetFocusTabsStyle() {
       });
     }
   }());
+// File#: _1_popover
+// Usage: codyhouse.co/license
+(function() {
+    var Popover = function(element) {
+      this.element = element;
+      this.elementId = this.element.getAttribute('id');
+      this.trigger = document.querySelectorAll('[aria-controls="'+this.elementId+'"]');
+      this.selectedTrigger = false;
+      this.popoverVisibleClass = 'popover--is-visible';
+      this.selectedTriggerClass = 'popover-control--active';
+      this.popoverIsOpen = false;
+      // focusable elements
+      this.firstFocusable = false;
+      this.lastFocusable = false;
+      // position target - position tooltip relative to a specified element
+      this.positionTarget = getPositionTarget(this);
+      // gap between element and viewport - if there's max-height 
+      this.viewportGap = parseInt(getComputedStyle(this.element).getPropertyValue('--popover-viewport-gap')) || 20;
+      initPopover(this);
+      initPopoverEvents(this);
+    };
+  
+    // public methods
+    Popover.prototype.togglePopover = function(bool, moveFocus) {
+      togglePopover(this, bool, moveFocus);
+    };
+  
+    Popover.prototype.checkPopoverClick = function(target) {
+      checkPopoverClick(this, target);
+    };
+  
+    Popover.prototype.checkPopoverFocus = function() {
+      checkPopoverFocus(this);
+    };
+  
+    // private methods
+    function getPositionTarget(popover) {
+      // position tooltip relative to a specified element - if provided
+      var positionTargetSelector = popover.element.getAttribute('data-position-target');
+      if(!positionTargetSelector) return false;
+      var positionTarget = document.querySelector(positionTargetSelector);
+      return positionTarget;
+    };
+  
+    function initPopover(popover) {
+      // init aria-labels
+      for(var i = 0; i < popover.trigger.length; i++) {
+        Util.setAttributes(popover.trigger[i], {'aria-expanded': 'false', 'aria-haspopup': 'true'});
+      }
+    };
+    
+    function initPopoverEvents(popover) {
+      for(var i = 0; i < popover.trigger.length; i++) {(function(i){
+        popover.trigger[i].addEventListener('click', function(event){
+          event.preventDefault();
+          // if the popover had been previously opened by another trigger element -> close it first and reopen in the right position
+          if(Util.hasClass(popover.element, popover.popoverVisibleClass) && popover.selectedTrigger !=  popover.trigger[i]) {
+            togglePopover(popover, false, false); // close menu
+          }
+          // toggle popover
+          popover.selectedTrigger = popover.trigger[i];
+          togglePopover(popover, !Util.hasClass(popover.element, popover.popoverVisibleClass), true);
+        });
+      })(i);}
+      
+      // trap focus
+      popover.element.addEventListener('keydown', function(event){
+        if( event.keyCode && event.keyCode == 9 || event.key && event.key == 'Tab' ) {
+          //trap focus inside popover
+          trapFocus(popover, event);
+        }
+      });
+  
+      // custom events -> open/close popover
+      popover.element.addEventListener('openPopover', function(event){
+        togglePopover(popover, true);
+      });
+  
+      popover.element.addEventListener('closePopover', function(event){
+        togglePopover(popover, false, event.detail);
+      });
+    };
+    
+    function togglePopover(popover, bool, moveFocus) {
+      // toggle popover visibility
+      Util.toggleClass(popover.element, popover.popoverVisibleClass, bool);
+      popover.popoverIsOpen = bool;
+      if(bool) {
+        popover.selectedTrigger.setAttribute('aria-expanded', 'true');
+        getFocusableElements(popover);
+        // move focus
+        focusPopover(popover);
+        popover.element.addEventListener("transitionend", function(event) {focusPopover(popover);}, {once: true});
+        // position the popover element
+        positionPopover(popover);
+        // add class to popover trigger
+        Util.addClass(popover.selectedTrigger, popover.selectedTriggerClass);
+      } else if(popover.selectedTrigger) {
+        popover.selectedTrigger.setAttribute('aria-expanded', 'false');
+        if(moveFocus) Util.moveFocus(popover.selectedTrigger);
+        // remove class from menu trigger
+        Util.removeClass(popover.selectedTrigger, popover.selectedTriggerClass);
+        popover.selectedTrigger = false;
+      }
+    };
+    
+    function focusPopover(popover) {
+      if(popover.firstFocusable) {
+        popover.firstFocusable.focus();
+      } else {
+        Util.moveFocus(popover.element);
+      }
+    };
+  
+    function positionPopover(popover) {
+      // reset popover position
+      resetPopoverStyle(popover);
+      var selectedTriggerPosition = (popover.positionTarget) ? popover.positionTarget.getBoundingClientRect() : popover.selectedTrigger.getBoundingClientRect();
+      
+      var menuOnTop = (window.innerHeight - selectedTriggerPosition.bottom) < selectedTriggerPosition.top;
+        
+      var left = selectedTriggerPosition.left,
+        right = (window.innerWidth - selectedTriggerPosition.right),
+        isRight = (window.innerWidth < selectedTriggerPosition.left + popover.element.offsetWidth);
+  
+      var horizontal = isRight ? 'right: '+right+'px;' : 'left: '+left+'px;',
+        vertical = menuOnTop
+          ? 'bottom: '+(window.innerHeight - selectedTriggerPosition.top)+'px;'
+          : 'top: '+selectedTriggerPosition.bottom+'px;';
+      // check right position is correct -> otherwise set left to 0
+      if( isRight && (right + popover.element.offsetWidth) > window.innerWidth) horizontal = 'left: '+ parseInt((window.innerWidth - popover.element.offsetWidth)/2)+'px;';
+      // check if popover needs a max-height (user will scroll inside the popover)
+      var maxHeight = menuOnTop ? selectedTriggerPosition.top - popover.viewportGap : window.innerHeight - selectedTriggerPosition.bottom - popover.viewportGap;
+  
+      var initialStyle = popover.element.getAttribute('style');
+      if(!initialStyle) initialStyle = '';
+      popover.element.setAttribute('style', initialStyle + horizontal + vertical +'max-height:'+Math.floor(maxHeight)+'px;');
+    };
+    
+    function resetPopoverStyle(popover) {
+      // remove popover inline style before appling new style
+      popover.element.style.maxHeight = '';
+      popover.element.style.top = '';
+      popover.element.style.bottom = '';
+      popover.element.style.left = '';
+      popover.element.style.right = '';
+    };
+  
+    function checkPopoverClick(popover, target) {
+      // close popover when clicking outside it
+      if(!popover.popoverIsOpen) return;
+      if(!popover.element.contains(target) && !target.closest('[aria-controls="'+popover.elementId+'"]')) togglePopover(popover, false);
+    };
+  
+    function checkPopoverFocus(popover) {
+      // on Esc key -> close popover if open and move focus (if focus was inside popover)
+      if(!popover.popoverIsOpen) return;
+      var popoverParent = document.activeElement.closest('.js-popover');
+      togglePopover(popover, false, popoverParent);
+    };
+    
+    function getFocusableElements(popover) {
+      //get all focusable elements inside the popover
+      var allFocusable = popover.element.querySelectorAll(focusableElString);
+      getFirstVisible(popover, allFocusable);
+      getLastVisible(popover, allFocusable);
+    };
+  
+    function getFirstVisible(popover, elements) {
+      //get first visible focusable element inside the popover
+      for(var i = 0; i < elements.length; i++) {
+        if( isVisible(elements[i]) ) {
+          popover.firstFocusable = elements[i];
+          break;
+        }
+      }
+    };
+  
+    function getLastVisible(popover, elements) {
+      //get last visible focusable element inside the popover
+      for(var i = elements.length - 1; i >= 0; i--) {
+        if( isVisible(elements[i]) ) {
+          popover.lastFocusable = elements[i];
+          break;
+        }
+      }
+    };
+  
+    function trapFocus(popover, event) {
+      if( popover.firstFocusable == document.activeElement && event.shiftKey) {
+        //on Shift+Tab -> focus last focusable element when focus moves out of popover
+        event.preventDefault();
+        popover.lastFocusable.focus();
+      }
+      if( popover.lastFocusable == document.activeElement && !event.shiftKey) {
+        //on Tab -> focus first focusable element when focus moves out of popover
+        event.preventDefault();
+        popover.firstFocusable.focus();
+      }
+    };
+    
+    function isVisible(element) {
+      // check if element is visible
+      return element.offsetWidth || element.offsetHeight || element.getClientRects().length;
+    };
+  
+    window.Popover = Popover;
+  
+    //initialize the Popover objects
+    var popovers = document.getElementsByClassName('js-popover');
+    // generic focusable elements string selector
+    var focusableElString = '[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex]:not([tabindex="-1"]), [contenteditable], audio[controls], video[controls], summary';
+    
+    if( popovers.length > 0 ) {
+      var popoversArray = [];
+      var scrollingContainers = [];
+      for( var i = 0; i < popovers.length; i++) {
+        (function(i){
+          popoversArray.push(new Popover(popovers[i]));
+          var scrollableElement = popovers[i].getAttribute('data-scrollable-element');
+          if(scrollableElement && !scrollingContainers.includes(scrollableElement)) scrollingContainers.push(scrollableElement);
+        })(i);
+      }
+  
+      // listen for key events
+      window.addEventListener('keyup', function(event){
+        if( event.keyCode && event.keyCode == 27 || event.key && event.key.toLowerCase() == 'escape' ) {
+          // close popover on 'Esc'
+          popoversArray.forEach(function(element){
+            element.checkPopoverFocus();
+          });
+        } 
+      });
+      // close popover when clicking outside it
+      window.addEventListener('click', function(event){
+        popoversArray.forEach(function(element){
+          element.checkPopoverClick(event.target);
+        });
+      });
+      // on resize -> close all popover elements
+      window.addEventListener('resize', function(event){
+        popoversArray.forEach(function(element){
+          element.togglePopover(false, false);
+        });
+      });
+      // on scroll -> close all popover elements
+      window.addEventListener('scroll', function(event){
+        popoversArray.forEach(function(element){
+          if(element.popoverIsOpen) element.togglePopover(false, false);
+        });
+      });
+      // take into account additinal scrollable containers
+      for(var j = 0; j < scrollingContainers.length; j++) {
+        var scrollingContainer = document.querySelector(scrollingContainers[j]);
+        if(scrollingContainer) {
+          scrollingContainer.addEventListener('scroll', function(event){
+            popoversArray.forEach(function(element){
+              if(element.popoverIsOpen) element.togglePopover(false, false);
+            });
+          });
+        }
+      }
+    }
+  }());
+// File#: _1_read-more
+// Usage: codyhouse.co/license
+(function() {
+    var ReadMore = function(element) {
+      this.element = element;
+      this.moreContent = this.element.getElementsByClassName('js-read-more__content');
+      this.count = this.element.getAttribute('data-characters') || 200;
+      this.counting = 0;
+      this.btnClasses = this.element.getAttribute('data-btn-class');
+      this.ellipsis = this.element.getAttribute('data-ellipsis') && this.element.getAttribute('data-ellipsis') == 'off' ? false : true;
+      this.btnShowLabel = 'Read more';
+      this.btnHideLabel = 'Read less';
+      this.toggleOff = this.element.getAttribute('data-toggle') && this.element.getAttribute('data-toggle') == 'off' ? false : true;
+      if( this.moreContent.length == 0 ) splitReadMore(this);
+      setBtnLabels(this);
+      initReadMore(this);
+    };
+  
+    function splitReadMore(readMore) { 
+      splitChildren(readMore.element, readMore); // iterate through children and hide content
+    };
+  
+    function splitChildren(parent, readMore) {
+      if(readMore.counting >= readMore.count) {
+        Util.addClass(parent, 'js-read-more__content');
+        return parent.outerHTML;
+      }
+      var children = parent.childNodes;
+      var content = '';
+      for(var i = 0; i < children.length; i++) {
+        if (children[i].nodeType == Node.TEXT_NODE) {
+          content = content + wrapText(children[i], readMore);
+        } else {
+          content = content + splitChildren(children[i], readMore);
+        }
+      }
+      parent.innerHTML = content;
+      return parent.outerHTML;
+    };
+  
+    function wrapText(element, readMore) {
+      var content = element.textContent;
+      if(content.replace(/\s/g,'').length == 0) return '';// check if content is empty
+      if(readMore.counting >= readMore.count) {
+        return '<span class="js-read-more__content">' + content + '</span>';
+      }
+      if(readMore.counting + content.length < readMore.count) {
+        readMore.counting = readMore.counting + content.length;
+        return content;
+      }
+      var firstContent = content.substr(0, readMore.count - readMore.counting);
+      firstContent = firstContent.substr(0, Math.min(firstContent.length, firstContent.lastIndexOf(" ")));
+      var secondContent = content.substr(firstContent.length, content.length);
+      readMore.counting = readMore.count;
+      return firstContent + '<span class="js-read-more__content">' + secondContent + '</span>';
+    };
+  
+    function setBtnLabels(readMore) { // set custom labels for read More/Less btns
+      var btnLabels = readMore.element.getAttribute('data-btn-labels');
+      if(btnLabels) {
+        var labelsArray = btnLabels.split(',');
+        readMore.btnShowLabel = labelsArray[0].trim();
+        readMore.btnHideLabel = labelsArray[1].trim();
+      }
+    };
+  
+    function initReadMore(readMore) { // add read more/read less buttons to the markup
+      readMore.moreContent = readMore.element.getElementsByClassName('js-read-more__content');
+      if( readMore.moreContent.length == 0 ) {
+        Util.addClass(readMore.element, 'read-more--loaded');
+        return;
+      }
+      var btnShow = ' <button class="js-read-more__btn '+readMore.btnClasses+'">'+readMore.btnShowLabel+'</button>';
+      var btnHide = ' <button class="js-read-more__btn is-hidden '+readMore.btnClasses+'">'+readMore.btnHideLabel+'</button>';
+      if(readMore.ellipsis) {
+        btnShow = '<span class="js-read-more__ellipsis" aria-hidden="true">...</span>'+ btnShow;
+      }
+  
+      readMore.moreContent[readMore.moreContent.length - 1].insertAdjacentHTML('afterend', btnHide);
+      readMore.moreContent[0].insertAdjacentHTML('afterend', btnShow);
+      resetAppearance(readMore);
+      initEvents(readMore);
+    };
+  
+    function resetAppearance(readMore) { // hide part of the content
+      for(var i = 0; i < readMore.moreContent.length; i++) Util.addClass(readMore.moreContent[i], 'is-hidden');
+      Util.addClass(readMore.element, 'read-more--loaded'); // show entire component
+    };
+  
+    function initEvents(readMore) { // listen to the click on the read more/less btn
+      readMore.btnToggle = readMore.element.getElementsByClassName('js-read-more__btn');
+      readMore.ellipsis = readMore.element.getElementsByClassName('js-read-more__ellipsis');
+  
+      readMore.btnToggle[0].addEventListener('click', function(event){
+        event.preventDefault();
+        updateVisibility(readMore, true);
+      });
+      readMore.btnToggle[1].addEventListener('click', function(event){
+        event.preventDefault();
+        updateVisibility(readMore, false);
+      });
+    };
+  
+    function updateVisibility(readMore, visibile) {
+      for(var i = 0; i < readMore.moreContent.length; i++) Util.toggleClass(readMore.moreContent[i], 'is-hidden', !visibile);
+      // reset btns appearance
+      Util.toggleClass(readMore.btnToggle[0], 'is-hidden', visibile);
+      Util.toggleClass(readMore.btnToggle[1], 'is-hidden', !visibile);
+      if(readMore.ellipsis.length > 0 ) Util.toggleClass(readMore.ellipsis[0], 'is-hidden', visibile);
+      if(!readMore.toggleOff) Util.addClass(readMore.btn, 'is-hidden');
+      // move focus
+      if(visibile) {
+        var targetTabIndex = readMore.moreContent[0].getAttribute('tabindex');
+        Util.moveFocus(readMore.moreContent[0]);
+        resetFocusTarget(readMore.moreContent[0], targetTabIndex);
+      } else {
+        Util.moveFocus(readMore.btnToggle[0]);
+      }
+    };
+  
+    function resetFocusTarget(target, tabindex) {
+      if( parseInt(target.getAttribute('tabindex')) < 0) {
+        target.style.outline = 'none';
+        !tabindex && target.removeAttribute('tabindex');
+      }
+    };
+  
+    //initialize the ReadMore objects
+    var readMore = document.getElementsByClassName('js-read-more');
+    if( readMore.length > 0 ) {
+      for( var i = 0; i < readMore.length; i++) {
+        (function(i){new ReadMore(readMore[i]);})(i);
+      }
+    };
+  }());
 // File#: _1_side-navigation
 // Usage: codyhouse.co/license
 (function() {
@@ -747,6 +1250,232 @@ function resetFocusTabsStyle() {
     if( sideNavs.length > 0 ) {
       for( var i = 0; i < sideNavs.length; i++) {
         (function(i){initSideNav(sideNavs[i]);})(i);
+      }
+    }
+  }());
+// File#: _2_adv-custom-select
+// Usage: codyhouse.co/license
+(function() {
+    var AdvSelect = function(element) {
+      this.element = element;
+      this.select = this.element.getElementsByTagName('select')[0];
+      this.optGroups = this.select.getElementsByTagName('optgroup');
+      this.options = this.select.getElementsByTagName('option');
+      this.optionData = getOptionsData(this);
+      this.selectId = this.select.getAttribute('id');
+      this.selectLabel = document.querySelector('[for='+this.selectId+']')
+      this.trigger = this.element.getElementsByClassName('js-adv-select__control')[0];
+      this.triggerLabel = this.trigger.getElementsByClassName('js-adv-select__value')[0];
+      this.dropdown = document.getElementById(this.trigger.getAttribute('aria-controls'));
+  
+      initAdvSelect(this); // init markup
+      initAdvSelectEvents(this); // init event listeners
+    };
+  
+    function getOptionsData(select) {
+      var obj = [],
+        dataset = select.options[0].dataset;
+  
+      function camelCaseToDash( myStr ) {
+        return myStr.replace( /([a-z])([A-Z])/g, '$1-$2' ).toLowerCase();
+      }
+      for (var prop in dataset) {
+        if (Object.prototype.hasOwnProperty.call(dataset, prop)) {
+          // obj[prop] = select.dataset[prop];
+          obj.push(camelCaseToDash(prop));
+        }
+      }
+      return obj;
+    };
+  
+    function initAdvSelect(select) {
+      // create custom structure
+      createAdvStructure(select);
+      // update trigger label
+      updateTriggerLabel(select);
+      // hide native select and show custom structure
+      Util.addClass(select.select, 'is-hidden');
+      Util.removeClass(select.trigger, 'is-hidden');
+      Util.removeClass(select.dropdown, 'is-hidden');
+    };
+  
+    function initAdvSelectEvents(select) {
+      if(select.selectLabel) {
+        // move focus to custom trigger when clicking on <select> label
+        select.selectLabel.addEventListener('click', function(){
+          select.trigger.focus();
+        });
+      }
+  
+      // option is selected in dropdown
+      select.dropdown.addEventListener('click', function(event){
+        triggerSelection(select, event.target);
+      });
+  
+      // keyboard navigation
+      select.dropdown.addEventListener('keydown', function(event){
+        if(event.keyCode && event.keyCode == 38 || event.key && event.key.toLowerCase() == 'arrowup') {
+          keyboardCustomSelect(select, 'prev', event);
+        } else if(event.keyCode && event.keyCode == 40 || event.key && event.key.toLowerCase() == 'arrowdown') {
+          keyboardCustomSelect(select, 'next', event);
+        } else if(event.keyCode && event.keyCode == 13 || event.key && event.key.toLowerCase() == 'enter') {
+          triggerSelection(select, document.activeElement);
+        }
+      });
+    };
+  
+    function createAdvStructure(select) {
+      // store optgroup and option structure
+      var optgroup = select.dropdown.querySelector('[role="group"]'),
+        option = select.dropdown.querySelector('[role="option"]'),
+        optgroupClone = false,
+        optgroupLabel = false,
+        optionClone = false;
+      if(optgroup) {
+        optgroupClone = optgroup.cloneNode();
+        optgroupLabel = document.getElementById(optgroupClone.getAttribute('describedby'));
+      }
+      if(option) optionClone = option.cloneNode(true);
+  
+      var dropdownCode = '';
+  
+      if(select.optGroups.length > 0) {
+        for(var i = 0; i < select.optGroups.length; i++) {
+          dropdownCode = dropdownCode + getOptGroupCode(select, select.optGroups[i], optgroupClone, optionClone, optgroupLabel, i);
+        }
+      } else {
+        for(var i = 0; i < select.options.length; i++) {
+          dropdownCode = dropdownCode + getOptionCode(select, select.options[i], optionClone);
+        }
+      }
+  
+      select.dropdown.innerHTML = dropdownCode;
+    };
+  
+    function getOptGroupCode(select, optGroup, optGroupClone, optionClone, optgroupLabel, index) {
+      if(!optGroupClone || !optionClone) return '';
+      var code = '';
+      var options = optGroup.getElementsByTagName('option');
+      for(var i = 0; i < options.length; i++) {
+        code = code + getOptionCode(select, options[i], optionClone);
+      }
+      if(optgroupLabel) {
+        var label = optgroupLabel.cloneNode(true);
+        var id = label.getAttribute('id') + '-'+index;
+        label.setAttribute('id', id);
+        optGroupClone.setAttribute('describedby', id);
+        code = label.outerHTML.replace('{optgroup-label}', optGroup.getAttribute('label')) + code;
+      } 
+      optGroupClone.innerHTML = code;
+      return optGroupClone.outerHTML;
+    };
+  
+    function getOptionCode(select, option, optionClone) {
+      optionClone.setAttribute('data-value', option.value);
+      if(option.selected) {
+        optionClone.setAttribute('aria-selected', 'true');
+        optionClone.setAttribute('tabindex', '0');
+      } else {
+        optionClone.removeAttribute('aria-selected');
+        optionClone.removeAttribute('tabindex');
+      }
+      var optionHtml = optionClone.outerHTML;
+      optionHtml = optionHtml.replace('{option-label}', option.text);
+      for(var i = 0; i < select.optionData.length; i++) {
+        optionHtml = optionHtml.replace('{'+select.optionData[i]+'}', option.getAttribute('data-'+select.optionData[i]));
+      }
+      return optionHtml;
+    };
+  
+    function updateTriggerLabel(select) {
+      // select.triggerLabel.textContent = select.options[select.select.selectedIndex].text;
+      select.triggerLabel.innerHTML = select.dropdown.querySelector('[aria-selected="true"]').innerHTML;
+    };
+  
+    function triggerSelection(select, target) {
+      var option = target.closest('[role="option"]');
+      if(!option) return;
+      selectOption(select, option);
+    };
+  
+    function selectOption(select, option) {
+      if(option.hasAttribute('aria-selected') && option.getAttribute('aria-selected') == 'true') {
+        // selecting the same option
+      } else { 
+        var selectedOption = select.dropdown.querySelector('[aria-selected="true"]');
+        if(selectedOption) {
+          selectedOption.removeAttribute('aria-selected');
+          selectedOption.removeAttribute('tabindex');
+        }
+        option.setAttribute('aria-selected', 'true');
+        option.setAttribute('tabindex', '0');
+        // new option has been selected -> update native <select> element and trigger label
+        updateNativeSelect(select, option.getAttribute('data-value'));
+        updateTriggerLabel(select);
+      }
+      // move focus back to trigger
+      setTimeout(function(){
+        select.trigger.click();
+      });
+    };
+  
+    function updateNativeSelect(select, selectedValue) {
+      var selectedOption = select.select.querySelector('[value="'+selectedValue+'"');
+      select.select.selectedIndex = Util.getIndexInArray(select.options, selectedOption);
+      select.select.dispatchEvent(new CustomEvent('change', {bubbles: true})); // trigger change event
+    };
+  
+    function keyboardCustomSelect(select, direction) {
+      var selectedOption = select.select.querySelector('[value="'+document.activeElement.getAttribute('data-value')+'"]');
+      if(!selectedOption) return;
+      var index = Util.getIndexInArray(select.options, selectedOption);
+      
+      index = direction == 'next' ? index + 1 : index - 1;
+      if(index < 0) return;
+      if(index >= select.options.length) return;
+      
+      var dropdownOption = select.dropdown.querySelector('[data-value="'+select.options[index].getAttribute('value')+'"]');
+      if(dropdownOption) Util.moveFocus(dropdownOption);
+    };
+  
+    //initialize the AdvSelect objects
+    var advSelect = document.getElementsByClassName('js-adv-select');
+    if( advSelect.length > 0 ) {
+      for( var i = 0; i < advSelect.length; i++) {
+        (function(i){new AdvSelect(advSelect[i]);})(i);
+      }
+    }
+  }());
+// File#: _2_comments
+// Usage: codyhouse.co/license
+(function() {
+    function initVote(element) {
+      var voteCounter = element.getElementsByClassName('js-comments__vote-label');
+      element.addEventListener('click', function(){
+        var pressed = element.getAttribute('aria-pressed') == 'true';
+        element.setAttribute('aria-pressed', !pressed);
+        Util.toggleClass(element, 'comments__vote-btn--pressed', !pressed);
+        resetCounter(voteCounter, pressed);
+        emitKeypressEvents(element, voteCounter, pressed);
+      });
+    };
+  
+    function resetCounter(voteCounter, pressed) { // update counter value (if present)
+      if(voteCounter.length == 0) return;
+      var count = parseInt(voteCounter[0].textContent);
+      voteCounter[0].textContent = pressed ? count - 1 : count + 1;
+    };
+  
+    function emitKeypressEvents(element, label, pressed) { // emit custom event when vote is updated
+      var count = (label.length == 0) ? false : parseInt(label[0].textContent);
+      var event = new CustomEvent('newVote', {detail: {count: count, upVote: !pressed}});
+      element.dispatchEvent(event);
+    };
+  
+    var voteCounting = document.getElementsByClassName('js-comments__vote-btn');
+    if( voteCounting.length > 0 ) {
+      for( var i = 0; i < voteCounting.length; i++) {
+        (function(i){initVote(voteCounting[i]);})(i);
       }
     }
   }());

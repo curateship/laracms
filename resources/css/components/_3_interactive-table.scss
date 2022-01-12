@@ -12,11 +12,6 @@ Usage: codyhouse.co/license
 
 -------------------------------- */
 
-.int-table {
-  overflow: hidden;
-  border-bottom: 2px solid var(--color-contrast-lower);
-}
-
 .int-table__inner {
   position: relative;
   overflow: auto;
@@ -42,13 +37,6 @@ Usage: codyhouse.co/license
 
 .int-table__table {
   width: 100%;
-}
-
-.int-table__header {
-  .int-table__cell {
-    background-color: var(--color-bg);
-    box-shadow: 0 2px 0 var(--color-contrast-lower);
-  }
 }
 
 .int-table__body {

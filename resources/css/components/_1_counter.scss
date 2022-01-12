@@ -1,0 +1,57 @@
+@use '../base' as *;
+
+/* -------------------------------- 
+
+File#: _1_counter
+Title: Counter
+Descr: A label displaying numeric values, often used to indicate unread notification
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+.counter {
+  font-size: var(--text-xs);
+  background-color: var(--color-contrast-lower);
+  padding: var(--space-xxxxs) var(--space-xxs);
+  border-radius: 50em;
+}
+
+.counter--primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  @include fontSmooth;
+}
+
+.counter--critical {
+  background-color: var(--color-error);
+  color: var(--color-white);
+  @include fontSmooth;
+}
+
+.counter--light {
+  background-color: alpha(var(--color-white), 0.9);
+  color: alpha(var(--color-black), 0.85);
+}
+
+.counter--dark {
+  background-color: alpha(var(--color-black), 0.8);
+  color: alpha(var(--color-white), 0.9);
+  @include fontSmooth;
+}
+
+// --docked
+.counter--docked {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+}
+
+// demo
+.counter-container {
+  height: 48px;
+  width: 48px;
+  background-color: var(--color-contrast-lower);
+  border-radius: var(--radius-md);
+  position: relative;
+}

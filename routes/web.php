@@ -20,3 +20,11 @@ Route::get('/', function () {
 Route::get('/admin', function () {
     return view('admin.index');
 });
+
+Route::get('/profile', function () {
+    return view('pages.profile');
+});
+
+Route::get('/post', function () {
+    return view('pages.post');
+});
