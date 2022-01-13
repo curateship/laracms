@@ -14,7 +14,7 @@
   <div class="mega-nav__icon-btns mega-nav__icon-btns--mobile padding-sm">
 
 <!-- 👇 User Dropdown -->
-<div class="icon margin-right-md">
+<div class="icon margin-right-md" aria-controls="modal-login">
   <svg class="icon" viewBox="0 0 20 20">
     <title>User Avatar</title>
     <g fill="currentColor">
@@ -116,7 +116,7 @@
 <!-- END -->
 
 <!-- Login Modal Start 👇-->
-<div class="modal modal--animate-scale flex flex-center bg-black bg-opacity-90% padding-md js-modal" id="modal-form2">
+<div class="modal modal--animate-scale flex flex-center bg-black bg-opacity-90% padding-md js-modal" id="modal-login">
   <div class="modal__content width-100% max-width-xs max-height-100% overflow-auto padding-md bg radius-md inner-glow shadow-md" role="alertdialog" aria-labelledby="modal-form-title" aria-describedby="modal-form-description">
 
     <div class="max-width-xs margin-x-auto">
@@ -159,7 +159,7 @@
 <!-- Login Modal END-->
 
 <!-- Signup Modal Start 👇-->
-<div class="modal modal--animate-scale flex flex-center bg-black bg-opacity-90% padding-md js-modal" id="modal-form">
+<div class="modal modal--animate-scale flex flex-center bg-black bg-opacity-90% padding-md js-modal" id="modal-signup">
   <div class="modal__content width-100% max-width-xs max-height-100% overflow-auto padding-md bg radius-md inner-glow shadow-md" role="alertdialog" aria-labelledby="modal-form-title" aria-describedby="modal-form-description">
     <div class="max-width-xs margin-x-auto">
 
