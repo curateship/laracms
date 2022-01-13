@@ -1,13 +1,17 @@
+<section class="hero hero--overlay-layer position-relative padding-y-xxl" style="background-image: url('/assets/img/intro-img-1.jpg')">
+  <div class="container max-width-adaptive-sm">
+    <div class="position-relative z-index-2 text-center">
+      <div class="text-sm opacity-60% margin-bottom-xxs">This is a Label</div>
 
-
-    <div class="testimonial__block-wrapper margin-bottom-lg">
-      <blockquote class="text-lg text-center line-height-md ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi atque doloremque beatae! Doloremque perspiciatis aliquid repellat quasi praesentium, minima nobis assumenda ex?</blockquote>
-
-      <svg class="icon icon--xxl color-contrast-higher opacity-10%" aria-hidden="true" viewBox="0 0 64 64"><polygon fill="currentColor" points="2 36 17 2 26 2 15 36 26 36 26 62 2 62 2 36"/><polygon fill="currentColor" points="38 36 53 2 62 2 51 36 62 36 62 62 38 62 38 36"/></svg>
+      <div class="text-component margin-bottom-sm">
+        <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam vero aliquam, natus quae architecto hic quod!</p>
+      </div>
+  
+      <div class="flex flex-wrap flex-center gap-sm">
+        <a href="#0" class="btn btn--primary">Download</a>
+        <a href="#0" class="color-inherit">Learn more</a>
+      </div>
     </div>
-    
-
-    <div class="text-center">
-      <p class="text-uppercase letter-spacing-md"><strong>Emily Ewiasdasdng</strong></p>
-      <p class="color-contrast-medium margin-top-xxxxs">Designer at CompanyX</p>
-    </div>
+  </div>
+</section>

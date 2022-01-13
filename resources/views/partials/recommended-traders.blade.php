@@ -7,8 +7,8 @@
       </div>
     </div>
 
-    <div class="grid gap-sm">
-      <div class="card-v2 radius-md col-3@md">
+    <div class="grid gap-md">
+      <a class="card-v2 radius-md col-3@md" href="http://localhost:8000/post">
         <figure>
           <img src="/assets/img/team-img-1.jpg" alt="Image description">
           <figcaption class="card-v2__caption padding-x-sm padding-top-md padding-bottom-sm text-center">
@@ -16,7 +16,7 @@
             <div class="margin-top-xxxs text-sm opacity-70%">Designer</div>
           </figcaption>
         </figure>
-      </div>
+      </a>
 
       <div class="card-v2 radius-md col-3@md">
         <figure>

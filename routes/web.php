@@ -32,3 +32,7 @@ Route::get('/post', function () {
 Route::get('/admin/setting', function () {
     return view('admin.pages.setting');
 });
+
+Route::get('/test', function () {
+    return view('pages.test');
+});

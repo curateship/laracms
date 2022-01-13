@@ -10,47 +10,69 @@
       </a>
 
 <!-- 👇 icon buttons --mobile -->
-<div class="mega-nav__icon-btns mega-nav__icon-btns--mobile">
-<div class="mega-nav__icon-btns mega-nav__icon-btns--mobile"></div>
+<div class="justify-between flex gap-xs"> 
+  <div class="mega-nav__icon-btns mega-nav__icon-btns--mobile padding-sm">
 
-<button class="reset mega-nav__icon-btn mega-nav__icon-btn--search js-tab-focus" aria-label="Toggle search" aria-controls="mega-nav-search">
-  <svg class="icon" viewBox="0 0 24 24">
-    <g class="icon__group" fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1">
-      <path d="M4.222 4.222l15.556 15.556" />
-      <path d="M19.778 4.222L4.222 19.778" />
-      <circle cx="9.5" cy="9.5" r="6.5" />
+<!-- 👇 User Dropdown -->
+<div class="icon margin-right-md">
+  <svg class="icon" viewBox="0 0 20 20">
+    <title>User Avatar</title>
+    <g fill="currentColor">
+      <circle cx="10" cy="4" r="3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle>
+      <path d="M10 11a8 8 0 0 0-7.562 5.383A2 2 0 0 0 4.347 19h11.306a2 2 0 0 0 1.909-2.617A8 8 0 0 0 10 11z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
     </g>
   </svg>
-</button>
-
-<button class="reset mega-nav__icon-btn mega-nav__icon-btn--search js-tab-focus" aria-label="Toggle search" aria-controls="mega-nav-search">
-  <svg class="icon" viewBox="0 0 24 24">
-    <g class="icon__group" fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1">
-      <path d="M4.222 4.222l15.556 15.556" />
-      <path d="M19.778 4.222L4.222 19.778" />
-      <circle cx="9.5" cy="9.5" r="6.5" />
-    </g>
-  </svg>
-</button>
-
-<button class="reset mega-nav__icon-btn mega-nav__icon-btn--search js-tab-focus" aria-label="Toggle search" aria-controls="mega-nav-search">
-  <svg class="icon" viewBox="0 0 24 24">
-    <g class="icon__group" fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1">
-      <path d="M4.222 4.222l15.556 15.556" />
-      <path d="M19.778 4.222L4.222 19.778" />
-      <circle cx="9.5" cy="9.5" r="6.5" />
-    </g>
-  </svg>
-</button>
 </div>
-<!-- END -->
+<!-- 👇 User Dropdown END -->
+
+<!-- 👇 Full Screen Search -->
+<div class="icon" aria-controls="modal-search">
+  <svg class="icon" viewBox="0 0 24 24">
+    <title>Toggle search</title>
+    <g stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" stroke="currentColor" fill="none" stroke-miterlimit="10">
+      <line x1="22" y1="22" x2="15.656" y2="15.656"></line>
+      <circle cx="10" cy="10" r="8"></circle>
+    </g>
+  </svg>
+</div>
+
+<div class="modal modal--search modal--animate-fade bg bg-opacity-90% flex flex-center padding-md backdrop-blur-10 js-modal" id="modal-search">
+  <div class="modal__content width-100% max-width-sm max-height-100% overflow-auto zindex-overlay" role="alertdialog" aria-labelledby="modal-search-title" aria-describedby="">
+    <form class="full-screen-search">
+      <label for="search-input-x" id="modal-search-title" class="sr-only">Search</label>
+      <input class="reset full-screen-search__input" type="search" name="search-input-x" id="search-input-x" placeholder="Search...">
+      <button class="reset full-screen-search__btn">
+        <svg class="icon" viewBox="0 0 24 24">
+          <title>Search</title>
+          <g stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" stroke="currentColor" fill="none" stroke-miterlimit="10">
+            <line x1="22" y1="22" x2="15.656" y2="15.656"></line>
+            <circle cx="10" cy="10" r="8"></circle>
+          </g>
+        </svg>
+      </button>
+    </form>
+  </div>
+
+  <button class="reset modal__close-btn modal__close-btn--outer  js-modal__close js-tab-focus">
+    <svg class="icon icon--sm" viewBox="0 0 24 24">
+      <title>Close modal window</title>
+      <g fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="3" x2="21" y2="21" />
+        <line x1="21" y1="3" x2="3" y2="21" />
+      </g>
+    </svg>
+  </button>
+</div>
+<!-- Full Screen Search END -->
+</div>
+    <button class="reset anim-menu-btn js-anim-menu-btn f-header__nav-control js-tab-focus" aria-label="Toggle menu">
+      <i class="anim-menu-btn__icon anim-menu-btn__icon--close" aria-hidden="true"></i>
+    </button>
+</div>
+</div>
+<!-- icon buttons --mobile END -->
 
 <!-- 👇 Navigation --Desktop -->
-      <button class="reset anim-menu-btn js-anim-menu-btn f-header__nav-control js-tab-focus" aria-label="Toggle menu">
-        <i class="anim-menu-btn__icon anim-menu-btn__icon--close" aria-hidden="true"></i>
-      </button>
-    </div>
-
     <div class="f-header__nav" role="navigation">
       <div class="f-header__nav-grid justify-between@md container max-width-lg">
         <div class="f-header__nav-logo-wrapper flex-grow flex-basis-0">
