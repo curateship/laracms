@@ -84,6 +84,9 @@ gulp.task('watch', gulp.series(['sass', 'scripts'], function () {
         });
     });
     gulp.watch('**/*.php', gulp.series(reload));
+    gulp.watch('assets/css/**/*.scss', gulp.series(['sass']));
+    gulp.watch("resources/views/**/*.php", gulp.series(reload));
+    gulp.watch("resources/views/**/*.html", gulp.series(reload));
     gulp.watch('resources/css/**/*.scss', gulp.series(['sass']));
     gulp.watch(componentsJsPath, gulp.series(['scripts']));
 }));

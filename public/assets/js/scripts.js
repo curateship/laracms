@@ -453,6 +453,44 @@ function resetFocusTabsStyle() {
       };
     }
   }());
+jQuery(document).ready(function($){
+	var is_firefox = navigator.userAgent.indexOf('Firefox') > -1;
+
+	//open team-member bio
+	$('#cd-team').find('ul a').on('click', function(event){
+		event.preventDefault();
+		var selected_member = $(this).data('type');
+		$('.cd-member-bio.'+selected_member+'').addClass('slide-in');
+		$('.cd-member-bio-close').addClass('is-visible');
+
+		// firefox transitions break when parent overflow is changed, so we need to wait for the end of the trasition to give the body an overflow hidden
+		if( is_firefox ) {
+			$('main').addClass('slide-out').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
+				$('body').addClass('overflow-hidden');
+			});
+		} else {
+			$('main').addClass('slide-out');
+			$('body').addClass('overflow-hidden');
+		}
+
+	});
+
+	//close team-member bio
+	$(document).on('click', '.cd-overlay, .cd-member-bio-close', function(event){
+		event.preventDefault();
+		$('.cd-member-bio').removeClass('slide-in');
+		$('.cd-member-bio-close').removeClass('is-visible');
+
+		if( is_firefox ) {
+			$('main').removeClass('slide-out').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
+				$('body').removeClass('overflow-hidden');
+			});
+		} else {
+			$('main').removeClass('slide-out');
+			$('body').removeClass('overflow-hidden');
+		}
+	});
+});
 // File#: _1_choice-tags
 // Usage: codyhouse.co/license
 (function() {
@@ -556,6 +594,416 @@ function resetFocusTabsStyle() {
         (function(i){new Details(detailsEl[i], i);})(i);
       }
     }
+  }());
+// File#: _1_diagonal-movement
+// Usage: codyhouse.co/license
+/*
+  Modified version of the jQuery-menu-aim plugin
+  https://github.com/kamens/jQuery-menu-aim
+  - Replaced jQuery with Vanilla JS
+  - Minor changes
+*/
+(function() {
+    var menuAim = function(opts) {
+      init(opts);
+    };
+  
+    window.menuAim = menuAim;
+  
+    function init(opts) {
+      var activeRow = null,
+        mouseLocs = [],
+        lastDelayLoc = null,
+        timeoutId = null,
+        options = Util.extend({
+          menu: '',
+          rows: false, //if false, get direct children - otherwise pass nodes list 
+          submenuSelector: "*",
+          submenuDirection: "right",
+          tolerance: 75,  // bigger = more forgivey when entering submenu
+          enter: function(){},
+          exit: function(){},
+          activate: function(){},
+          deactivate: function(){},
+          exitMenu: function(){}
+        }, opts),
+        menu = options.menu;
+  
+      var MOUSE_LOCS_TRACKED = 3,  // number of past mouse locations to track
+        DELAY = 300;  // ms delay when user appears to be entering submenu
+  
+      /**
+       * Keep track of the last few locations of the mouse.
+       */
+      var mouseMoveFallback = function(event) {
+        (!window.requestAnimationFrame) ? mousemoveDocument(event) : window.requestAnimationFrame(function(){mousemoveDocument(event);});
+      };
+  
+      var mousemoveDocument = function(e) {
+        mouseLocs.push({x: e.pageX, y: e.pageY});
+  
+        if (mouseLocs.length > MOUSE_LOCS_TRACKED) {
+          mouseLocs.shift();
+        }
+      };
+  
+      /**
+       * Cancel possible row activations when leaving the menu entirely
+       */
+      var mouseleaveMenu = function() {
+        if (timeoutId) {
+          clearTimeout(timeoutId);
+        }
+  
+        // If exitMenu is supplied and returns true, deactivate the
+        // currently active row on menu exit.
+        if (options.exitMenu(this)) {
+          if (activeRow) {
+            options.deactivate(activeRow);
+          }
+  
+          activeRow = null;
+        }
+      };
+  
+      /**
+       * Trigger a possible row activation whenever entering a new row.
+       */
+      var mouseenterRow = function() {
+        if (timeoutId) {
+          // Cancel any previous activation delays
+          clearTimeout(timeoutId);
+        }
+  
+        options.enter(this);
+        possiblyActivate(this);
+      },
+      mouseleaveRow = function() {
+        options.exit(this);
+      };
+  
+      /*
+       * Immediately activate a row if the user clicks on it.
+       */
+      var clickRow = function() {
+        activate(this);
+      };  
+  
+      /**
+       * Activate a menu row.
+       */
+      var activate = function(row) {
+        if (row == activeRow) {
+          return;
+        }
+  
+        if (activeRow) {
+          options.deactivate(activeRow);
+        }
+  
+        options.activate(row);
+        activeRow = row;
+      };
+  
+      /**
+       * Possibly activate a menu row. If mouse movement indicates that we
+       * shouldn't activate yet because user may be trying to enter
+       * a submenu's content, then delay and check again later.
+       */
+      var possiblyActivate = function(row) {
+        var delay = activationDelay();
+  
+        if (delay) {
+          timeoutId = setTimeout(function() {
+            possiblyActivate(row);
+          }, delay);
+        } else {
+          activate(row);
+        }
+      };
+  
+      /**
+       * Return the amount of time that should be used as a delay before the
+       * currently hovered row is activated.
+       *
+       * Returns 0 if the activation should happen immediately. Otherwise,
+       * returns the number of milliseconds that should be delayed before
+       * checking again to see if the row should be activated.
+       */
+      var activationDelay = function() {
+        if (!activeRow || !Util.is(activeRow, options.submenuSelector)) {
+          // If there is no other submenu row already active, then
+          // go ahead and activate immediately.
+          return 0;
+        }
+  
+        function getOffset(element) {
+          var rect = element.getBoundingClientRect();
+          return { top: rect.top + window.pageYOffset, left: rect.left + window.pageXOffset };
+        };
+  
+        var offset = getOffset(menu),
+            upperLeft = {
+                x: offset.left,
+                y: offset.top - options.tolerance
+            },
+            upperRight = {
+                x: offset.left + menu.offsetWidth,
+                y: upperLeft.y
+            },
+            lowerLeft = {
+                x: offset.left,
+                y: offset.top + menu.offsetHeight + options.tolerance
+            },
+            lowerRight = {
+                x: offset.left + menu.offsetWidth,
+                y: lowerLeft.y
+            },
+            loc = mouseLocs[mouseLocs.length - 1],
+            prevLoc = mouseLocs[0];
+  
+        if (!loc) {
+          return 0;
+        }
+  
+        if (!prevLoc) {
+          prevLoc = loc;
+        }
+  
+        if (prevLoc.x < offset.left || prevLoc.x > lowerRight.x || prevLoc.y < offset.top || prevLoc.y > lowerRight.y) {
+          // If the previous mouse location was outside of the entire
+          // menu's bounds, immediately activate.
+          return 0;
+        }
+  
+        if (lastDelayLoc && loc.x == lastDelayLoc.x && loc.y == lastDelayLoc.y) {
+          // If the mouse hasn't moved since the last time we checked
+          // for activation status, immediately activate.
+          return 0;
+        }
+  
+        // Detect if the user is moving towards the currently activated
+        // submenu.
+        //
+        // If the mouse is heading relatively clearly towards
+        // the submenu's content, we should wait and give the user more
+        // time before activating a new row. If the mouse is heading
+        // elsewhere, we can immediately activate a new row.
+        //
+        // We detect this by calculating the slope formed between the
+        // current mouse location and the upper/lower right points of
+        // the menu. We do the same for the previous mouse location.
+        // If the current mouse location's slopes are
+        // increasing/decreasing appropriately compared to the
+        // previous's, we know the user is moving toward the submenu.
+        //
+        // Note that since the y-axis increases as the cursor moves
+        // down the screen, we are looking for the slope between the
+        // cursor and the upper right corner to decrease over time, not
+        // increase (somewhat counterintuitively).
+        function slope(a, b) {
+          return (b.y - a.y) / (b.x - a.x);
+        };
+  
+        var decreasingCorner = upperRight,
+          increasingCorner = lowerRight;
+  
+        // Our expectations for decreasing or increasing slope values
+        // depends on which direction the submenu opens relative to the
+        // main menu. By default, if the menu opens on the right, we
+        // expect the slope between the cursor and the upper right
+        // corner to decrease over time, as explained above. If the
+        // submenu opens in a different direction, we change our slope
+        // expectations.
+        if (options.submenuDirection == "left") {
+          decreasingCorner = lowerLeft;
+          increasingCorner = upperLeft;
+        } else if (options.submenuDirection == "below") {
+          decreasingCorner = lowerRight;
+          increasingCorner = lowerLeft;
+        } else if (options.submenuDirection == "above") {
+          decreasingCorner = upperLeft;
+          increasingCorner = upperRight;
+        }
+  
+        var decreasingSlope = slope(loc, decreasingCorner),
+          increasingSlope = slope(loc, increasingCorner),
+          prevDecreasingSlope = slope(prevLoc, decreasingCorner),
+          prevIncreasingSlope = slope(prevLoc, increasingCorner);
+  
+        if (decreasingSlope < prevDecreasingSlope && increasingSlope > prevIncreasingSlope) {
+          // Mouse is moving from previous location towards the
+          // currently activated submenu. Delay before activating a
+          // new menu row, because user may be moving into submenu.
+          lastDelayLoc = loc;
+          return DELAY;
+        }
+  
+        lastDelayLoc = null;
+        return 0;
+      };
+  
+      var reset = function(triggerDeactivate) {
+        if (timeoutId) {
+          clearTimeout(timeoutId);
+        }
+  
+        if (activeRow && triggerDeactivate) {
+          options.deactivate(activeRow);
+        }
+  
+        activeRow = null;
+      };
+  
+      var destroyInstance = function() {
+        menu.removeEventListener('mouseleave', mouseleaveMenu);  
+        document.removeEventListener('mousemove', mouseMoveFallback);
+        if(rows.length > 0) {
+          for(var i = 0; i < rows.length; i++) {
+            rows[i].removeEventListener('mouseenter', mouseenterRow);  
+            rows[i].removeEventListener('mouseleave', mouseleaveRow);
+            rows[i].removeEventListener('click', clickRow);  
+          }
+        }
+        
+      };
+  
+      /**
+       * Hook up initial menu events
+       */
+      menu.addEventListener('mouseleave', mouseleaveMenu);  
+      var rows = (options.rows) ? options.rows : menu.children;
+      if(rows.length > 0) {
+        for(var i = 0; i < rows.length; i++) {(function(i){
+          rows[i].addEventListener('mouseenter', mouseenterRow);  
+          rows[i].addEventListener('mouseleave', mouseleaveRow);
+          rows[i].addEventListener('click', clickRow);  
+        })(i);}
+      }
+  
+      document.addEventListener('mousemove', mouseMoveFallback);
+  
+      /* Reset/destroy menu */
+      menu.addEventListener('reset', function(event){
+        reset(event.detail);
+      });
+      menu.addEventListener('destroy', destroyInstance);
+    };
+  }());
+  
+  
+// File#: _1_form-validator
+// Usage: codyhouse.co/license
+(function() {
+    var FormValidator = function(opts) {
+      this.options = Util.extend(FormValidator.defaults , opts);
+      this.element = this.options.element;
+      this.input = [];
+      this.textarea = [];
+      this.select = [];
+      this.errorFields = [];
+      this.errorFieldListeners = [];
+      initFormValidator(this);
+    };
+  
+    //public functions
+    FormValidator.prototype.validate = function(cb) {
+      validateForm(this);
+      if(cb) cb(this.errorFields);
+    };
+  
+    // private methods
+    function initFormValidator(formValidator) {
+      formValidator.input = formValidator.element.querySelectorAll('input');
+      formValidator.textarea = formValidator.element.querySelectorAll('textarea');
+      formValidator.select = formValidator.element.querySelectorAll('select');
+    };
+  
+    function validateForm(formValidator) {
+      // reset input with errors
+      formValidator.errorFields = []; 
+      // remove change/input events from fields with error
+      resetEventListeners(formValidator);
+      
+      // loop through fields and push to errorFields if there are errors
+      for(var i = 0; i < formValidator.input.length; i++) {
+        validateField(formValidator, formValidator.input[i]);
+      }
+  
+      for(var i = 0; i < formValidator.textarea.length; i++) {
+        validateField(formValidator, formValidator.textarea[i]);
+      }
+  
+      for(var i = 0; i < formValidator.select.length; i++) {
+        validateField(formValidator, formValidator.select[i]);
+      }
+  
+      // show errors if any was found
+      for(var i = 0; i < formValidator.errorFields.length; i++) {
+        showError(formValidator, formValidator.errorFields[i]);
+      }
+  
+      // move focus to first field with error
+      if(formValidator.errorFields.length > 0) formValidator.errorFields[0].focus();
+    };
+  
+    function validateField(formValidator, field) {
+      if(!field.checkValidity()) {
+        formValidator.errorFields.push(field);
+        return;
+      }
+      // check for custom functions
+      var customValidate = field.getAttribute('data-validate');
+      if(customValidate && formValidator.options.customValidate[customValidate]) {
+        formValidator.options.customValidate[customValidate](field, function(result) {
+          if(!result) formValidator.errorFields.push(field);
+        });
+      }
+    };
+  
+    function showError(formValidator, field) {
+      // add error classes
+      toggleErrorClasses(formValidator, field, true);
+  
+      // add event listener
+      var index = formValidator.errorFieldListeners.length;
+      formValidator.errorFieldListeners[index] = function() {
+        toggleErrorClasses(formValidator, field, false);
+        field.removeEventListener('change', formValidator.errorFieldListeners[index]);
+        field.removeEventListener('input', formValidator.errorFieldListeners[index]);
+      };
+      field.addEventListener('change', formValidator.errorFieldListeners[index]);
+      field.addEventListener('input', formValidator.errorFieldListeners[index]);
+    };
+  
+    function toggleErrorClasses(formValidator, field, bool) {
+      bool ? Util.addClass(field, formValidator.options.inputErrorClass) : Util.removeClass(field, formValidator.options.inputErrorClass);
+      if(formValidator.options.inputWrapperErrorClass) {
+        var wrapper = field.closest('.js-form-validate__input-wrapper');
+        if(wrapper) {
+          bool ? Util.addClass(wrapper, formValidator.options.inputWrapperErrorClass) : Util.removeClass(wrapper, formValidator.options.inputWrapperErrorClass);
+        }
+      }
+    };
+  
+    function resetEventListeners(formValidator) {
+      for(var i = 0; i < formValidator.errorFields.length; i++) {
+        toggleErrorClasses(formValidator, formValidator.errorFields[i], false);
+        formValidator.errorFields[i].removeEventListener('change', formValidator.errorFieldListeners[i]);
+        formValidator.errorFields[i].removeEventListener('input', formValidator.errorFieldListeners[i]);
+      }
+  
+      formValidator.errorFields = [];
+      formValidator.errorFieldListeners = [];
+    };
+    
+    FormValidator.defaults = {
+      element : '',
+      inputErrorClass : 'form-control--error',
+      inputWrapperErrorClass: 'form-validate__input-wrapper--error',
+      customValidate: {}
+    };
+    window.FormValidator = FormValidator;
   }());
 // File#: _1_hiding-nav
 // Usage: codyhouse.co/license
@@ -1765,6 +2213,155 @@ function resetFocusTabsStyle() {
       });
     }
   }());
+// File#: _1_switch-icon
+// Usage: codyhouse.co/license
+(function() {
+    var switchIcons = document.getElementsByClassName('js-switch-icon');
+    if( switchIcons.length > 0 ) {
+      for(var i = 0; i < switchIcons.length; i++) {(function(i){
+        if( !Util.hasClass(switchIcons[i], 'switch-icon--hover') ) initswitchIcons(switchIcons[i]);
+      })(i);}
+  
+      function initswitchIcons(btn) {
+        btn.addEventListener('click', function(event){	
+          event.preventDefault();
+          var status = !Util.hasClass(btn, 'switch-icon--state-b');
+          Util.toggleClass(btn, 'switch-icon--state-b', status);
+          // emit custom event
+          var event = new CustomEvent('switch-icon-clicked', {detail: status});
+          btn.dispatchEvent(event);
+        });
+      };
+    }
+  }());
+// File#: _1_tabs
+// Usage: codyhouse.co/license
+(function() {
+    var Tab = function(element) {
+      this.element = element;
+      this.tabList = this.element.getElementsByClassName('js-tabs__controls')[0];
+      this.listItems = this.tabList.getElementsByTagName('li');
+      this.triggers = this.tabList.getElementsByTagName('a');
+      this.panelsList = this.element.getElementsByClassName('js-tabs__panels')[0];
+      this.panels = Util.getChildrenByClassName(this.panelsList, 'js-tabs__panel');
+      this.hideClass = 'is-hidden';
+      this.customShowClass = this.element.getAttribute('data-show-panel-class') ? this.element.getAttribute('data-show-panel-class') : false;
+      this.layout = this.element.getAttribute('data-tabs-layout') ? this.element.getAttribute('data-tabs-layout') : 'horizontal';
+      // deep linking options
+      this.deepLinkOn = this.element.getAttribute('data-deep-link') == 'on';
+      // init tabs
+      this.initTab();
+    };
+  
+    Tab.prototype.initTab = function() {
+      //set initial aria attributes
+      this.tabList.setAttribute('role', 'tablist');
+      for( var i = 0; i < this.triggers.length; i++) {
+        var bool = (i == 0),
+          panelId = this.panels[i].getAttribute('id');
+        this.listItems[i].setAttribute('role', 'presentation');
+        Util.setAttributes(this.triggers[i], {'role': 'tab', 'aria-selected': bool, 'aria-controls': panelId, 'id': 'tab-'+panelId});
+        Util.addClass(this.triggers[i], 'js-tabs__trigger'); 
+        Util.setAttributes(this.panels[i], {'role': 'tabpanel', 'aria-labelledby': 'tab-'+panelId});
+        Util.toggleClass(this.panels[i], this.hideClass, !bool);
+  
+        if(!bool) this.triggers[i].setAttribute('tabindex', '-1'); 
+      }
+  
+      //listen for Tab events
+      this.initTabEvents();
+  
+      // check deep linking option
+      this.initDeepLink();
+    };
+  
+    Tab.prototype.initTabEvents = function() {
+      var self = this;
+      //click on a new tab -> select content
+      this.tabList.addEventListener('click', function(event) {
+        if( event.target.closest('.js-tabs__trigger') ) self.triggerTab(event.target.closest('.js-tabs__trigger'), event);
+      });
+      //arrow keys to navigate through tabs 
+      this.tabList.addEventListener('keydown', function(event) {
+        ;
+        if( !event.target.closest('.js-tabs__trigger') ) return;
+        if( tabNavigateNext(event, self.layout) ) {
+          event.preventDefault();
+          self.selectNewTab('next');
+        } else if( tabNavigatePrev(event, self.layout) ) {
+          event.preventDefault();
+          self.selectNewTab('prev');
+        }
+      });
+    };
+  
+    Tab.prototype.selectNewTab = function(direction) {
+      var selectedTab = this.tabList.querySelector('[aria-selected="true"]'),
+        index = Util.getIndexInArray(this.triggers, selectedTab);
+      index = (direction == 'next') ? index + 1 : index - 1;
+      //make sure index is in the correct interval 
+      //-> from last element go to first using the right arrow, from first element go to last using the left arrow
+      if(index < 0) index = this.listItems.length - 1;
+      if(index >= this.listItems.length) index = 0;	
+      this.triggerTab(this.triggers[index]);
+      this.triggers[index].focus();
+    };
+  
+    Tab.prototype.triggerTab = function(tabTrigger, event) {
+      var self = this;
+      event && event.preventDefault();	
+      var index = Util.getIndexInArray(this.triggers, tabTrigger);
+      //no need to do anything if tab was already selected
+      if(this.triggers[index].getAttribute('aria-selected') == 'true') return;
+      
+      for( var i = 0; i < this.triggers.length; i++) {
+        var bool = (i == index);
+        Util.toggleClass(this.panels[i], this.hideClass, !bool);
+        if(this.customShowClass) Util.toggleClass(this.panels[i], this.customShowClass, bool);
+        this.triggers[i].setAttribute('aria-selected', bool);
+        bool ? this.triggers[i].setAttribute('tabindex', '0') : this.triggers[i].setAttribute('tabindex', '-1');
+      }
+  
+      // update url if deepLink is on
+      if(this.deepLinkOn) {
+        history.replaceState(null, '', '#'+tabTrigger.getAttribute('aria-controls'));
+      }
+    };
+  
+    Tab.prototype.initDeepLink = function() {
+      if(!this.deepLinkOn) return;
+      var hash = window.location.hash.substr(1);
+      var self = this;
+      if(!hash || hash == '') return;
+      for(var i = 0; i < this.panels.length; i++) {
+        if(this.panels[i].getAttribute('id') == hash) {
+          this.triggerTab(this.triggers[i], false);
+          setTimeout(function(){self.panels[i].scrollIntoView(true);});
+          break;
+        }
+      };
+    };
+  
+    function tabNavigateNext(event, layout) {
+      if(layout == 'horizontal' && (event.keyCode && event.keyCode == 39 || event.key && event.key == 'ArrowRight')) {return true;}
+      else if(layout == 'vertical' && (event.keyCode && event.keyCode == 40 || event.key && event.key == 'ArrowDown')) {return true;}
+      else {return false;}
+    };
+  
+    function tabNavigatePrev(event, layout) {
+      if(layout == 'horizontal' && (event.keyCode && event.keyCode == 37 || event.key && event.key == 'ArrowLeft')) {return true;}
+      else if(layout == 'vertical' && (event.keyCode && event.keyCode == 38 || event.key && event.key == 'ArrowUp')) {return true;}
+      else {return false;}
+    };
+    
+    //initialize the Tab objects
+    var tabs = document.getElementsByClassName('js-tabs');
+    if( tabs.length > 0 ) {
+      for( var i = 0; i < tabs.length; i++) {
+        (function(i){new Tab(tabs[i]);})(i);
+      }
+    }
+  }());
 // File#: _2_adv-custom-select
 // Usage: codyhouse.co/license
 (function() {
@@ -1988,6 +2585,214 @@ function resetFocusTabsStyle() {
     if( voteCounting.length > 0 ) {
       for( var i = 0; i < voteCounting.length; i++) {
         (function(i){initVote(voteCounting[i]);})(i);
+      }
+    }
+  }());
+// File#: _2_dropdown
+// Usage: codyhouse.co/license
+(function() {
+    var Dropdown = function(element) {
+      this.element = element;
+      this.trigger = this.element.getElementsByClassName('js-dropdown__trigger')[0];
+      this.dropdown = this.element.getElementsByClassName('js-dropdown__menu')[0];
+      this.triggerFocus = false;
+      this.dropdownFocus = false;
+      this.hideInterval = false;
+      // sublevels
+      this.dropdownSubElements = this.element.getElementsByClassName('js-dropdown__sub-wrapper');
+      this.prevFocus = false; // store element that was in focus before focus changed
+      this.addDropdownEvents();
+    };
+    
+    Dropdown.prototype.addDropdownEvents = function(){
+      //place dropdown
+      var self = this;
+      this.placeElement();
+      this.element.addEventListener('placeDropdown', function(event){
+        self.placeElement();
+      });
+      // init dropdown
+      this.initElementEvents(this.trigger, this.triggerFocus); // this is used to trigger the primary dropdown
+      this.initElementEvents(this.dropdown, this.dropdownFocus); // this is used to trigger the primary dropdown
+      // init sublevels
+      this.initSublevels(); // if there are additional sublevels -> bind hover/focus events
+    };
+  
+    Dropdown.prototype.placeElement = function() {
+      // remove inline style first
+      this.dropdown.removeAttribute('style');
+      // check dropdown position
+      var triggerPosition = this.trigger.getBoundingClientRect(),
+        isRight = (window.innerWidth < triggerPosition.left + parseInt(getComputedStyle(this.dropdown).getPropertyValue('width')));
+  
+      var xPosition = isRight ? 'right: 0px; left: auto;' : 'left: 0px; right: auto;';
+      this.dropdown.setAttribute('style', xPosition);
+    };
+  
+    Dropdown.prototype.initElementEvents = function(element, bool) {
+      var self = this;
+      element.addEventListener('mouseenter', function(){
+        bool = true;
+        self.showDropdown();
+      });
+      element.addEventListener('focus', function(){
+        self.showDropdown();
+      });
+      element.addEventListener('mouseleave', function(){
+        bool = false;
+        self.hideDropdown();
+      });
+      element.addEventListener('focusout', function(){
+        self.hideDropdown();
+      });
+    };
+  
+    Dropdown.prototype.showDropdown = function(){
+      if(this.hideInterval) clearInterval(this.hideInterval);
+      // remove style attribute
+      this.dropdown.removeAttribute('style');
+      this.placeElement();
+      this.showLevel(this.dropdown, true);
+    };
+  
+    Dropdown.prototype.hideDropdown = function(){
+      var self = this;
+      if(this.hideInterval) clearInterval(this.hideInterval);
+      this.hideInterval = setTimeout(function(){
+        var dropDownFocus = document.activeElement.closest('.js-dropdown'),
+          inFocus = dropDownFocus && (dropDownFocus == self.element);
+        // if not in focus and not hover -> hide
+        if(!self.triggerFocus && !self.dropdownFocus && !inFocus) {
+          self.hideLevel(self.dropdown, true);
+          // make sure to hide sub/dropdown
+          self.hideSubLevels();
+          self.prevFocus = false;
+        }
+      }, 300);
+    };
+  
+    Dropdown.prototype.initSublevels = function(){
+      var self = this;
+      var dropdownMenu = this.element.getElementsByClassName('js-dropdown__menu');
+      for(var i = 0; i < dropdownMenu.length; i++) {
+        var listItems = dropdownMenu[i].children;
+        // bind hover
+        new menuAim({
+          menu: dropdownMenu[i],
+          activate: function(row) {
+              var subList = row.getElementsByClassName('js-dropdown__menu')[0];
+              if(!subList) return;
+              Util.addClass(row.querySelector('a'), 'dropdown__item--hover');
+              self.showLevel(subList);
+          },
+          deactivate: function(row) {
+              var subList = row.getElementsByClassName('dropdown__menu')[0];
+              if(!subList) return;
+              Util.removeClass(row.querySelector('a'), 'dropdown__item--hover');
+              self.hideLevel(subList);
+          },
+          submenuSelector: '.js-dropdown__sub-wrapper',
+        });
+      }
+      // store focus element before change in focus
+      this.element.addEventListener('keydown', function(event) { 
+        if( event.keyCode && event.keyCode == 9 || event.key && event.key == 'Tab' ) {
+          self.prevFocus = document.activeElement;
+        }
+      });
+      // make sure that sublevel are visible when their items are in focus
+      this.element.addEventListener('keyup', function(event) {
+        if( event.keyCode && event.keyCode == 9 || event.key && event.key == 'Tab' ) {
+          // focus has been moved -> make sure the proper classes are added to subnavigation
+          var focusElement = document.activeElement,
+            focusElementParent = focusElement.closest('.js-dropdown__menu'),
+            focusElementSibling = focusElement.nextElementSibling;
+  
+          // if item in focus is inside submenu -> make sure it is visible
+          if(focusElementParent && !Util.hasClass(focusElementParent, 'dropdown__menu--is-visible')) {
+            self.showLevel(focusElementParent);
+          }
+          // if item in focus triggers a submenu -> make sure it is visible
+          if(focusElementSibling && !Util.hasClass(focusElementSibling, 'dropdown__menu--is-visible')) {
+            self.showLevel(focusElementSibling);
+          }
+  
+          // check previous element in focus -> hide sublevel if required 
+          if( !self.prevFocus) return;
+          var prevFocusElementParent = self.prevFocus.closest('.js-dropdown__menu'),
+            prevFocusElementSibling = self.prevFocus.nextElementSibling;
+          
+          if( !prevFocusElementParent ) return;
+          
+          // element in focus and element prev in focus are siblings
+          if( focusElementParent && focusElementParent == prevFocusElementParent) {
+            if(prevFocusElementSibling) self.hideLevel(prevFocusElementSibling);
+            return;
+          }
+  
+          // element in focus is inside submenu triggered by element prev in focus
+          if( prevFocusElementSibling && focusElementParent && focusElementParent == prevFocusElementSibling) return;
+          
+          // shift tab -> element in focus triggers the submenu of the element prev in focus
+          if( focusElementSibling && prevFocusElementParent && focusElementSibling == prevFocusElementParent) return;
+          
+          var focusElementParentParent = focusElementParent.parentNode.closest('.js-dropdown__menu');
+          
+          // shift tab -> element in focus is inside the dropdown triggered by a siblings of the element prev in focus
+          if(focusElementParentParent && focusElementParentParent == prevFocusElementParent) {
+            if(prevFocusElementSibling) self.hideLevel(prevFocusElementSibling);
+            return;
+          }
+          
+          if(prevFocusElementParent && Util.hasClass(prevFocusElementParent, 'dropdown__menu--is-visible')) {
+            self.hideLevel(prevFocusElementParent);
+          }
+        }
+      });
+    };
+  
+    Dropdown.prototype.hideSubLevels = function(){
+      var visibleSubLevels = this.dropdown.getElementsByClassName('dropdown__menu--is-visible');
+      if(visibleSubLevels.length == 0) return;
+      while (visibleSubLevels[0]) {
+        this.hideLevel(visibleSubLevels[0]);
+         }
+         var hoveredItems = this.dropdown.getElementsByClassName('dropdown__item--hover');
+         while (hoveredItems[0]) {
+        Util.removeClass(hoveredItems[0], 'dropdown__item--hover');
+         }
+    };
+  
+    Dropdown.prototype.showLevel = function(level, bool){
+      if(bool == undefined) {
+        //check if the sublevel needs to be open to the left
+        Util.removeClass(level, 'dropdown__menu--left');
+        var boundingRect = level.getBoundingClientRect();
+        if(window.innerWidth - boundingRect.right < 5 && boundingRect.left + window.scrollX > 2*boundingRect.width) Util.addClass(level, 'dropdown__menu--left');
+      }
+      Util.addClass(level, 'dropdown__menu--is-visible');
+      Util.removeClass(level, 'dropdown__menu--is-hidden');
+    };
+  
+    Dropdown.prototype.hideLevel = function(level, bool){
+      if(!Util.hasClass(level, 'dropdown__menu--is-visible')) return;
+      Util.removeClass(level, 'dropdown__menu--is-visible');
+      Util.addClass(level, 'dropdown__menu--is-hidden');
+      
+      level.addEventListener('transitionend', function cb(event){
+        if(event.propertyName != 'opacity') return;
+        level.removeEventListener('transitionend', cb);
+        if(Util.hasClass(level, 'dropdown__menu--is-hidden')) Util.removeClass(level, 'dropdown__menu--is-hidden dropdown__menu--left');
+        if(bool && !Util.hasClass(level, 'dropdown__menu--is-visible')) level.setAttribute('style', 'width: 0px; overflow: hidden;');
+      });
+    };
+  
+    window.Dropdown = Dropdown;
+  
+    var dropdown = document.getElementsByClassName('js-dropdown');
+    if( dropdown.length > 0 ) { // init Dropdown objects
+      for( var i = 0; i < dropdown.length; i++) {
+        (function(i){new Dropdown(dropdown[i]);})(i);
       }
     }
   }());
