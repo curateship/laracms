@@ -6,9 +6,9 @@
       for(var i = 0; i < menuBtns.length; i++) {(function(i){
         initMenuBtn(menuBtns[i]);
       })(i);}
-  
+
       function initMenuBtn(btn) {
-        btn.addEventListener('click', function(event){	
+        btn.addEventListener('click', function(event){
           event.preventDefault();
           var status = !Util.hasClass(btn, 'anim-menu-btn--state-b');
           Util.toggleClass(btn, 'anim-menu-btn--state-b', status);

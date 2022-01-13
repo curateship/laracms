@@ -1,6 +1,6 @@
 @use '../base' as *;
 
-/* -------------------------------- 
+/* --------------------------------
 
 File#: _1_anim-menu-btn
 Title: Animated Menu Button
@@ -12,7 +12,7 @@ Usage: codyhouse.co/license
 :root {
   --anim-menu-btn-size: 48px;
   --anim-menu-btn-transition-duration: .2s;
-  
+
   // 🍔 icon
   --anim-menu-btn-icon-size: 32px;
   --anim-menu-btn-icon-stroke: 2px;
@@ -37,7 +37,7 @@ Usage: codyhouse.co/license
   background-image: linear-gradient(currentColor, currentColor);
   background-repeat: no-repeat;
   transform: scale(1);
-  
+
   &::before, &::after {
     content: '';
     position: absolute;
