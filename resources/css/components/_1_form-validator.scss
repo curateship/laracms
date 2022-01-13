@@ -1,0 +1,18 @@
+@use '../base' as *;
+
+/* -------------------------------- 
+
+File#: _1_form-validator
+Title: Form Validator
+Descr: A plugin to validate form fields
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+.form-validate__error-msg {
+  display: none; // hide error message by default
+
+  .form-validate__input-wrapper--error & {
+    display: block; // show error message
+  }
+}

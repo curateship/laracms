@@ -15370,6 +15370,81 @@ html:not(.js) .details__summary .icon {
 
 /* -------------------------------- 
 
+File#: _1_diagonal-movement
+Title: Diagonal Movement
+Descr: A JavaScript plugin that detects the direction of the mouse movement (diagonal vs vertical)
+Usage: codyhouse.co/license
+Based on the jQuery-menu-aim plugin https://github.com/kamens/jQuery-menu-aim
+
+⚠️ The style of this component is only for demo purpose. You don't need it to use the plugin.
+
+-------------------------------- */
+.d-movement {
+  max-width: 720px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: var(--space-xxs);
+}
+
+.d-movement__source {
+  display: grid;
+  grid-gap: var(--space-xxs);
+}
+
+.d-movement__item {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border-radius: 0.25em;
+}
+
+.d-movement__item--one {
+  color: var(--color-white);
+  background-color: var(--color-primary);
+}
+
+.d-movement__item--two {
+  color: var(--color-bg);
+  background-color: var(--color-contrast-higher);
+}
+
+.d-movement__item--three {
+  color: var(--color-white);
+  background-color: var(--color-accent);
+}
+
+.d-movement__sub-element {
+  background-color: var(--color-contrast-lower);
+  border-radius: 0.25em;
+  transition: background 0.2s;
+}
+
+.d-movement__arrow {
+  width: 0;
+  height: 0;
+  border: 12px solid transparent;
+  border-left-color: currentColor;
+}
+
+/* -------------------------------- 
+
+File#: _1_form-validator
+Title: Form Validator
+Descr: A plugin to validate form fields
+Usage: codyhouse.co/license
+
+-------------------------------- */
+.form-validate__error-msg {
+  display: none;
+}
+.form-validate__input-wrapper--error .form-validate__error-msg {
+  display: block;
+}
+
+/* -------------------------------- 
+
 File#: _1_search-input
 Title: Search input
 Descr: Search input field with custom button
@@ -16517,6 +16592,140 @@ Usage: codyhouse.co/license
 
 /* -------------------------------- 
 
+File#: _1_radios-checkboxes
+Title: Radios and Checkboxes
+Descr: Custom radio and checkbox buttons
+Usage: codyhouse.co/license
+
+-------------------------------- */
+:root {
+  --checkbox-radio-size: 18px;
+  --checkbox-radio-gap: var(--space-xxs);
+  --checkbox-radio-border-width: 1px;
+  --checkbox-radio-line-height: var(--body-line-height);
+  --radio-marker-size: 8px;
+  --checkbox-marker-size: 12px;
+  --checkbox-radius: 4px;
+}
+
+.radio,
+.checkbox {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  margin-top: calc((1em * var(--checkbox-radio-line-height) - var(--checkbox-radio-size)) / 2);
+  opacity: 0;
+  height: var(--checkbox-radio-size);
+  width: var(--checkbox-radio-size);
+  pointer-events: none;
+}
+
+.radio + label,
+.checkbox + label {
+  display: inline-block;
+  line-height: var(--checkbox-radio-line-height);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  cursor: pointer;
+  padding-left: calc(var(--checkbox-radio-size) + var(--checkbox-radio-gap));
+}
+
+.radio + label::before,
+.checkbox + label::before {
+  content: "";
+  box-sizing: border-box;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  top: -0.1em;
+  margin-left: calc(-1 * (var(--checkbox-radio-size) + var(--checkbox-radio-gap)));
+  flex-shrink: 0;
+  width: var(--checkbox-radio-size);
+  height: var(--checkbox-radio-size);
+  background-color: var(--color-bg);
+  border-width: var(--checkbox-radio-border-width);
+  border-color: hsla(var(--color-contrast-low-h), var(--color-contrast-low-s), var(--color-contrast-low-l), 0.65);
+  border-style: solid;
+  box-shadow: var(--shadow-xs);
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-right: var(--checkbox-radio-gap);
+  transition: transform 0.2s, border 0.2s;
+}
+
+.radio:not(:checked):not(:focus) + label:hover::before,
+.checkbox:not(:checked):not(:focus) + label:hover::before {
+  border-color: hsla(var(--color-contrast-low-h), var(--color-contrast-low-s), var(--color-contrast-low-l), 1);
+}
+
+.radio + label::before {
+  border-radius: 50%;
+}
+
+.checkbox + label::before {
+  border-radius: var(--checkbox-radius);
+}
+
+.radio:checked + label::before,
+.checkbox:checked + label::before {
+  background-color: var(--color-primary);
+  box-shadow: var(--shadow-xs);
+  border-color: var(--color-primary);
+  transition: transform 0.2s;
+}
+
+.radio:active + label::before,
+.checkbox:active + label::before {
+  transform: scale(0.8);
+  transition: transform 0.2s;
+}
+
+.radio:checked:active + label::before,
+.checkbox:checked:active + label::before {
+  transform: none;
+  transition: none;
+}
+
+.radio:checked + label::before {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cg class='nc-icon-wrapper' fill='%23ffffff'%3E%3Ccircle cx='8' cy='8' r='8' fill='%23ffffff'%3E%3C/circle%3E%3C/g%3E%3C/svg%3E");
+  background-size: var(--radio-marker-size);
+}
+
+.checkbox:checked + label::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpolyline points='1 6.5 4 9.5 11 2.5' fill='none' stroke='%23FFFFFF' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'/%3E%3C/svg%3E");
+  background-size: var(--checkbox-marker-size);
+}
+
+.radio:checked:active + label::before,
+.checkbox:checked:active + label::before,
+.radio:focus + label::before,
+.checkbox:focus + label::before {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.2);
+}
+
+.radio--bg + label, .checkbox--bg + label {
+  padding: var(--space-xxxxs) var(--space-xxxs);
+  padding-left: calc(var(--checkbox-radio-size) + var(--checkbox-radio-gap) + var(--space-xxxs));
+  border-radius: var(--radius-md);
+  transition: background 0.2s;
+}
+
+.radio--bg + label:hover, .checkbox--bg + label:hover {
+  background-color: hsla(var(--color-contrast-higher-h), var(--color-contrast-higher-s), var(--color-contrast-higher-l), 0.075);
+}
+
+.radio--bg:active + label,
+.checkbox--bg:active + label,
+.radio--bg:focus + label,
+.checkbox--bg:focus + label {
+  background-color: hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.1);
+}
+
+/* -------------------------------- 
+
 File#: _1_read-more
 Title: Read More
 Descr: A truncated paragraph with the option of reading more content
@@ -16692,6 +16901,223 @@ Usage: codyhouse.co/license
 -------------------------------- */
 html {
   scroll-behavior: smooth;
+}
+
+/* -------------------------------- 
+
+File#: _1_switch-icon
+Title: Switch Icon 
+Descr: An icon transition generator that works with any icons
+Usage: codyhouse.co/license
+
+-------------------------------- */
+.switch-icon {
+  position: relative;
+  padding: var(--space-xxs);
+}
+
+.switch-icon--disabled {
+  pointer-events: none;
+}
+
+.switch-icon__icon {
+  display: block;
+  fill: currentColor;
+  color: var(--color-contrast-higher);
+  font-size: 2em;
+  height: 1em;
+  width: 1em;
+  line-height: 1;
+  will-change: transform;
+}
+
+.switch-icon__icon--a {
+  opacity: 1;
+}
+
+.switch-icon__icon--b {
+  position: absolute;
+  top: calc(50% - 0.5em);
+  left: calc(50% - 0.5em);
+  opacity: 0;
+}
+
+.switch-icon--state-b .switch-icon__icon--a,
+.switch-icon--hover:hover .switch-icon__icon--a {
+  opacity: 0;
+}
+.switch-icon--state-b .switch-icon__icon--b,
+.switch-icon--hover:hover .switch-icon__icon--b {
+  opacity: 1;
+}
+
+.switch-icon--scale .switch-icon__icon {
+  transition: opacity 0s 0.2s, transform 0.4s;
+}
+.switch-icon--scale .switch-icon__icon--a {
+  transform: scale(1);
+}
+.switch-icon--scale .switch-icon__icon--b {
+  transform: scale(0.8);
+}
+
+.switch-icon--scale.switch-icon--state-b .switch-icon__icon--a,
+.switch-icon--scale.switch-icon--hover:hover .switch-icon__icon--a {
+  transform: scale(0.8);
+}
+.switch-icon--scale.switch-icon--state-b .switch-icon__icon--b,
+.switch-icon--scale.switch-icon--hover:hover .switch-icon__icon--b {
+  transform: scale(1);
+}
+
+.switch-icon--rotate .switch-icon__icon {
+  transition: opacity 0s 0.2s, transform 0.4s;
+}
+.switch-icon--rotate .switch-icon__icon--a {
+  transform: rotate(0);
+}
+.switch-icon--rotate .switch-icon__icon--b {
+  transform: rotate(90deg);
+}
+
+.switch-icon--rotate.switch-icon--state-b .switch-icon__icon--a,
+.switch-icon--rotate.switch-icon--hover:hover .switch-icon__icon--a {
+  transform: rotate(-90deg);
+}
+.switch-icon--rotate.switch-icon--state-b .switch-icon__icon--b,
+.switch-icon--rotate.switch-icon--hover:hover .switch-icon__icon--b {
+  transform: rotate(0);
+}
+
+.switch-icon--flip {
+  perspective: 10em;
+}
+.switch-icon--flip .switch-icon__icon {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transition: opacity 0s 0.2s, transform 0.4s var(--ease-out-back);
+}
+.switch-icon--flip .switch-icon__icon--a {
+  opacity: 1;
+  transform: rotateY(0deg);
+}
+.switch-icon--flip .switch-icon__icon--b {
+  opacity: 1;
+  transform: rotateY(-180deg);
+}
+
+.switch-icon--flip.switch-icon--state-b .switch-icon__icon--a,
+.switch-icon--flip.switch-icon--hover:hover .switch-icon__icon--a {
+  opacity: 1;
+  transform: rotateY(180deg);
+}
+.switch-icon--flip.switch-icon--state-b .switch-icon__icon--b,
+.switch-icon--flip.switch-icon--hover:hover .switch-icon__icon--b {
+  opacity: 1;
+  transform: rotateY(0deg);
+}
+
+.switch-icon--slide-up,
+.switch-icon--slide-down,
+.switch-icon--slide-right,
+.switch-icon--slide-left {
+  overflow: hidden;
+}
+.switch-icon--slide-up .switch-icon__icon,
+.switch-icon--slide-down .switch-icon__icon,
+.switch-icon--slide-right .switch-icon__icon,
+.switch-icon--slide-left .switch-icon__icon {
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.switch-icon--slide-up .switch-icon__icon--a {
+  transform: translateY(0);
+}
+.switch-icon--slide-up .switch-icon__icon--b {
+  transform: translateY(100%);
+}
+
+.switch-icon--slide-up.switch-icon--state-b .switch-icon__icon--a,
+.switch-icon--slide-up.switch-icon--hover:hover .switch-icon__icon--a {
+  transform: translateY(-100%);
+}
+.switch-icon--slide-up.switch-icon--state-b .switch-icon__icon--b,
+.switch-icon--slide-up.switch-icon--hover:hover .switch-icon__icon--b {
+  transform: translateY(0);
+}
+
+.switch-icon--slide-down .switch-icon__icon--a {
+  transform: translateY(0);
+}
+.switch-icon--slide-down .switch-icon__icon--b {
+  transform: translateY(-100%);
+}
+
+.switch-icon--slide-down.switch-icon--state-b .switch-icon__icon--a,
+.switch-icon--slide-down.switch-icon--hover:hover .switch-icon__icon--a {
+  transform: translateY(100%);
+}
+.switch-icon--slide-down.switch-icon--state-b .switch-icon__icon--b,
+.switch-icon--slide-down.switch-icon--hover:hover .switch-icon__icon--b {
+  transform: translateY(0);
+}
+
+.switch-icon--slide-right .switch-icon__icon--a {
+  transform: translateX(0);
+}
+.switch-icon--slide-right .switch-icon__icon--b {
+  transform: translateX(-100%);
+}
+
+.switch-icon--slide-right.switch-icon--state-b .switch-icon__icon--a,
+.switch-icon--slide-right.switch-icon--hover:hover .switch-icon__icon--a {
+  transform: translateX(100%);
+}
+.switch-icon--slide-right.switch-icon--state-b .switch-icon__icon--b,
+.switch-icon--slide-right.switch-icon--hover:hover .switch-icon__icon--b {
+  transform: translateX(0);
+}
+
+.switch-icon--slide-left .switch-icon__icon--a {
+  transform: translateX(0);
+}
+.switch-icon--slide-left .switch-icon__icon--b {
+  transform: translateX(100%);
+}
+
+.switch-icon--slide-left.switch-icon--state-b .switch-icon__icon--a,
+.switch-icon--slide-left.switch-icon--hover:hover .switch-icon__icon--a {
+  transform: translateX(-100%);
+}
+.switch-icon--slide-left.switch-icon--state-b .switch-icon__icon--b,
+.switch-icon--slide-left.switch-icon--hover:hover .switch-icon__icon--b {
+  transform: translateX(0);
+}
+
+/* -------------------------------- 
+
+File#: _1_tabs
+Title: Tabs
+Descr: A list of content sections (panels), accessible one at a time using control labels
+Usage: codyhouse.co/license
+
+-------------------------------- */
+.tabs__control {
+  text-decoration: none;
+  color: var(--color-contrast-medium);
+}
+.tabs__control:focus {
+  outline: 2px solid hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.2);
+  outline-offset: 2px;
+}
+.tabs__control:hover {
+  color: var(--color-contrast-high);
+}
+
+.js .tabs__control[aria-selected=true] {
+  color: var(--color-contrast-high);
+  text-decoration: underline;
 }
 
 /* -------------------------------- 
@@ -17076,6 +17502,201 @@ Usage: codyhouse.co/license
   display: none;
 }
 
+/* -------------------------------- 
+
+File#: _2_dropdown
+Title: Dropdown
+Descr: A hoverable link that toggles the visibility of a dropdown list
+Usage: codyhouse.co/license
+
+-------------------------------- */
+:root {
+  --dropdown-item-padding: var(--space-xxs) var(--space-sm);
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown__menu {
+  width: 200px;
+  border-radius: var(--radius-md);
+  padding: var(--space-xxxs) 0;
+  background-color: var(--color-bg-light);
+  box-shadow: var(--inner-glow), var(--shadow-sm);
+  z-index: var(--z-index-popover, 5);
+  position: absolute;
+  left: 0;
+  top: 100%;
+  --space-unit: 1rem;
+  --text-unit: 1rem;
+  font-size: var(--text-unit);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0s 0.2s;
+}
+
+@media (pointer: fine) {
+  .dropdown__wrapper:hover > .dropdown__menu,
+.dropdown__sub-wrapper:hover > .dropdown__menu {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.2s;
+  }
+
+  .dropdown__sub-wrapper:hover > .dropdown__menu {
+    left: 100%;
+  }
+}
+@media not all and (pointer: fine) {
+  .dropdown__trigger-icon {
+    display: none;
+  }
+}
+.dropdown__item {
+  display: block;
+  text-decoration: none;
+  color: var(--color-contrast-high);
+  padding: var(--dropdown-item-padding);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: 0.2s;
+}
+.dropdown__item:hover, .dropdown__item.dropdown__item--hover {
+  background-color: hsla(var(--color-contrast-higher-h), var(--color-contrast-higher-s), var(--color-contrast-higher-l), 0.075);
+}
+
+.dropdown__separator {
+  height: 1px;
+  background-color: var(--color-contrast-lower);
+  margin: var(--dropdown-item-padding);
+}
+
+.dropdown__sub-wrapper {
+  position: relative;
+}
+.dropdown__sub-wrapper > .dropdown__item {
+  position: relative;
+  padding-right: calc(var(--space-sm) + 12px);
+}
+.dropdown__sub-wrapper > .dropdown__item .icon {
+  position: absolute;
+  display: block;
+  width: 12px;
+  height: 12px;
+  right: var(--space-xxs);
+  top: calc(50% - 6px);
+}
+.dropdown__sub-wrapper > .dropdown__menu {
+  top: calc(var(--space-xxs) * -1);
+  box-shadow: var(--inner-glow), var(--shadow-md);
+}
+
+.js .dropdown__menu {
+  top: calc(100% + 4px);
+}
+.js .dropdown__sub-wrapper .dropdown__menu {
+  top: calc(var(--space-xxs) * -1);
+}
+@media (pointer: fine) {
+  .js .dropdown__menu--is-visible {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.2s;
+  }
+}
+.js .dropdown__menu--is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0s 0.2s;
+}
+.js .dropdown__sub-wrapper > .dropdown__menu--is-visible,
+.js .dropdown__sub-wrapper > .dropdown__menu--is-hidden {
+  left: 100%;
+}
+.js .dropdown__sub-wrapper > .dropdown__menu--is-visible.dropdown__menu--left,
+.js .dropdown__sub-wrapper > .dropdown__menu--is-hidden.dropdown__menu--left {
+  left: -100%;
+}
+
+/* -------------------------------- 
+
+File#: _2_full-screen-search
+Title: Full Screen Search
+Descr: A full-screen window w/ a search input element
+Usage: codyhouse.co/license
+
+-------------------------------- */
+:root {
+  --fs-search-btn-size: 1.5em;
+  --fs-search-border-bottom-width: 2px;
+}
+
+.full-screen-search {
+  position: relative;
+  font-size: var(--text-xl);
+  background-image: linear-gradient(transparent calc(100% - var(--fs-search-border-bottom-width) * 2), var(--color-contrast-low) calc(100% - var(--fs-search-border-bottom-width) * 2), var(--color-contrast-low) calc(100% - var(--fs-search-border-bottom-width)), transparent var(--fs-search-border-bottom-width));
+}
+
+.full-screen-search__input {
+  background: transparent;
+  width: 100%;
+  padding: var(--space-sm) var(--space-xs);
+  padding-right: calc(var(--space-xs) + var(--fs-search-btn-size));
+  background-image: linear-gradient(transparent calc(100% - var(--fs-search-border-bottom-width) * 2), var(--color-primary) calc(100% - var(--fs-search-border-bottom-width) * 2), var(--color-primary) calc(100% - var(--fs-search-border-bottom-width)), transparent var(--fs-search-border-bottom-width));
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+}
+.full-screen-search__input:focus {
+  outline: none;
+  background-size: 100% 100%;
+}
+
+.full-screen-search__input::-webkit-search-decoration,
+.full-screen-search__input::-webkit-search-cancel-button,
+.full-screen-search__input::-webkit-search-results-button,
+.full-screen-search__input::-webkit-search-results-decoration {
+  display: none;
+}
+
+.full-screen-search__btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: var(--space-xs);
+  height: var(--fs-search-btn-size);
+  width: var(--fs-search-btn-size);
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.full-screen-search__btn .icon {
+  display: block;
+  color: var(--color-white);
+  font-size: 20px;
+  transition: transform 0.2s;
+}
+.full-screen-search__btn:hover .icon {
+  transform: scale(1.1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .modal--search .full-screen-search__input {
+    transition: background-size 0.4s var(--ease-out);
+  }
+  .modal--search .full-screen-search__btn {
+    transform: translateY(-30%) scale(0.6);
+    opacity: 0;
+    transition: opacity 0.4s, transform 0.4s var(--ease-out);
+  }
+  .modal--search.modal--is-visible .full-screen-search__btn {
+    transform: translateY(-50%) scale(1);
+    opacity: 1;
+  }
+}
 /* -------------------------------- 
 
 File#: _2_menu-bar
