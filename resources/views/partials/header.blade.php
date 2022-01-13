@@ -10,7 +10,7 @@
       </a>
 
 <!-- 👇 icon buttons --mobile -->
-<div class="justify-between flex gap-xs"> 
+<div class="justify-between flex gap-xs">
   <div class="mega-nav__icon-btns mega-nav__icon-btns--mobile padding-sm">
 
 <!-- 👇 User Dropdown -->
@@ -108,7 +108,7 @@
 
         <ul class="f-header__list flex-grow flex-basis-0 justify-end@md">
           <li class="f-header__item"><a href="/admin" class="f-header__link">Login</a></li>
-          <li class="f-header__item"><a href="#0" class="f-header__btn btn btn--primary" aria-controls="modal-form">Sign up</a></li>
+          <li class="f-header__item"><a href="#0" class="f-header__btn btn btn--primary" aria-controls="modal-signup">Sign up</a></li>
         </ul>
       </div>
     </div>
@@ -177,7 +177,7 @@
         <span>Join using Twitter</span>
       </button>
     </div>
-    
+
     <div class="col-7@xs">
       <button class="btn btn--subtle width-100%">
         <svg aria-hidden="true" class="icon margin-right-xxxs" viewBox="0 0 16 16"><g><path d="M15.3,0H0.7C0.3,0,0,0.3,0,0.7v14.7C0,15.7,0.3,16,0.7,16H8v-5H6V8h2V6c0-2.1,1.2-3,3-3 c0.9,0,1.8,0,2,0v3h-1c-0.6,0-1,0.4-1,1v1h2.6L13,11h-2v5h4.3c0.4,0,0.7-0.3,0.7-0.7V0.7C16,0.3,15.7,0,15.3,0z"></path></g></svg>
@@ -208,7 +208,7 @@
   </div>
 
   <div class="margin-bottom-md">
-    <label class="form-label margin-bottom-xxxs" for="input-password">Password</label> 
+    <label class="form-label margin-bottom-xxxs" for="input-password">Password</label>
     <input class="form-control width-100%" type="password" name="input-password" id="input-password">
     <p class="text-xs color-contrast-medium margin-top-xxs">Minimum 6 characters</p>
   </div>

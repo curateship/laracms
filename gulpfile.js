@@ -44,7 +44,10 @@ gulp.task('sass', function() {
 });
 // This task is used to combine all js files in a single scripts.min.js.
 gulp.task('scripts', function() {
-    return gulp.src([utilJsPath+'/util.js', componentsJsPath])
+    return gulp.src([
+        "node_modules/jquery/dist/jquery.min.js",
+        utilJsPath+'/util.js',
+        componentsJsPath])
         .pipe(concat('scripts.js'))
         .pipe(gulp.dest(scriptsJsPath))
         .pipe(browserSync.reload({
