@@ -14620,6 +14620,151 @@ Usage: codyhouse.co/license
 
 /* -------------------------------- 
 
+File#: _1_auto-sized-grid
+Title: Auto Sized Grid
+Descr: A grid layout based on CSS Grid where the columns are automatically created according to a min-width value
+Usage: codyhouse.co/license
+
+-------------------------------- */
+/* #region (if CodyFrame >= 3 👇) */
+.grid-auto-xs, .grid-auto-sm, .grid-auto-md, .grid-auto-lg, .grid-auto-xl {
+  display: grid;
+  gap: var(--gap-y, 0px) var(--gap-x, 0px);
+  grid-template-columns: repeat(auto-fit, minmax(var(--col-min-width), 1fr));
+}
+
+.grid-auto-xs {
+  --col-min-width: 8rem;
+}
+
+.grid-auto-sm {
+  --col-min-width: 10rem;
+}
+
+.grid-auto-md {
+  --col-min-width: 15rem;
+}
+
+.grid-auto-lg {
+  --col-min-width: 20rem;
+}
+
+.grid-auto-xl {
+  --col-min-width: 25rem;
+}
+
+@media (min-width: 32rem) {
+  .grid-auto-xs\@xs {
+    --col-min-width: 8rem;
+  }
+
+  .grid-auto-sm\@xs {
+    --col-min-width: 10rem;
+  }
+
+  .grid-auto-md\@xs {
+    --col-min-width: 15rem;
+  }
+
+  .grid-auto-lg\@xs {
+    --col-min-width: 20rem;
+  }
+
+  .grid-auto-xl\@xs {
+    --col-min-width: 25rem;
+  }
+}
+@media (min-width: 48rem) {
+  .grid-auto-xs\@sm {
+    --col-min-width: 8rem;
+  }
+
+  .grid-auto-sm\@sm {
+    --col-min-width: 10rem;
+  }
+
+  .grid-auto-md\@sm {
+    --col-min-width: 15rem;
+  }
+
+  .grid-auto-lg\@sm {
+    --col-min-width: 20rem;
+  }
+
+  .grid-auto-xl\@sm {
+    --col-min-width: 25rem;
+  }
+}
+@media (min-width: 64rem) {
+  .grid-auto-xs\@md {
+    --col-min-width: 8rem;
+  }
+
+  .grid-auto-sm\@md {
+    --col-min-width: 10rem;
+  }
+
+  .grid-auto-md\@md {
+    --col-min-width: 15rem;
+  }
+
+  .grid-auto-lg\@md {
+    --col-min-width: 20rem;
+  }
+
+  .grid-auto-xl\@md {
+    --col-min-width: 25rem;
+  }
+}
+@media (min-width: 80rem) {
+  .grid-auto-xs\@lg {
+    --col-min-width: 8rem;
+  }
+
+  .grid-auto-sm\@lg {
+    --col-min-width: 10rem;
+  }
+
+  .grid-auto-md\@lg {
+    --col-min-width: 15rem;
+  }
+
+  .grid-auto-lg\@lg {
+    --col-min-width: 20rem;
+  }
+
+  .grid-auto-xl\@lg {
+    --col-min-width: 25rem;
+  }
+}
+@media (min-width: 90rem) {
+  .grid-auto-xs\@xl {
+    --col-min-width: 8rem;
+  }
+
+  .grid-auto-sm\@xl {
+    --col-min-width: 10rem;
+  }
+
+  .grid-auto-md\@xl {
+    --col-min-width: 15rem;
+  }
+
+  .grid-auto-lg\@xl {
+    --col-min-width: 20rem;
+  }
+
+  .grid-auto-xl\@xl {
+    --col-min-width: 25rem;
+  }
+}
+/* #endregion */
+/* #region (if 2.8.1 <= CodyFrame < 3 👇) */
+/* #endregion */
+/* #region (if CodyFrame < 2.8.1 👇) */
+/* #endregion */
+/* -------------------------------- 
+
 File#: _1_avatar
 Title: Avatar
 Descr: A user profile image component
