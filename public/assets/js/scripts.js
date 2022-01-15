@@ -318,44 +318,6 @@ Math.easeOutElastic = function (t, b, c, d) {
 function resetFocusTabsStyle() {
   window.dispatchEvent(new CustomEvent('initFocusTabs'));
 };
-jQuery(document).ready(function($){
-	var is_firefox = navigator.userAgent.indexOf('Firefox') > -1;
-
-	//open team-member bio
-	$('#cd-team').find('ul a').on('click', function(event){
-		event.preventDefault();
-		var selected_member = $(this).data('type');
-		$('.cd-member-bio.'+selected_member+'').addClass('slide-in');
-		$('.cd-member-bio-close').addClass('is-visible');
-
-		// firefox transitions break when parent overflow is changed, so we need to wait for the end of the trasition to give the body an overflow hidden
-		if( is_firefox ) {
-			$('main').addClass('slide-out').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
-				$('body').addClass('overflow-hidden');
-			});
-		} else {
-			$('main').addClass('slide-out');
-			$('body').addClass('overflow-hidden');
-		}
-
-	});
-
-	//close team-member bio
-	$(document).on('click', '.cd-overlay, .cd-member-bio-close', function(event){
-		event.preventDefault();
-		$('.cd-member-bio').removeClass('slide-in');
-		$('.cd-member-bio-close').removeClass('is-visible');
-
-		if( is_firefox ) {
-			$('main').removeClass('slide-out').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
-				$('body').removeClass('overflow-hidden');
-			});
-		} else {
-			$('main').removeClass('slide-out');
-			$('body').removeClass('overflow-hidden');
-		}
-	});
-});
 // File#: _1_accordion
 // Usage: codyhouse.co/license
 (function() {
@@ -1328,6 +1290,38 @@ jQuery(document).ready(function($){
       if(Util.hasClass(mainNav[0], 'hide-nav--fixed')) Util.addClass(mainNav[0], 'hide-nav--has-bg');
     }
   }());
+(function() {
+    $('.img-blend').each(function(){
+        const pattern = $(this).attr('data-blend-pattern').split(',')
+
+        console.log(pattern)
+
+        for(var i = 0 ; i < pattern.length ; i++){
+            if(parseInt(pattern[i]) !== 1){
+                continue
+            }
+
+            switch(i){
+                case 0:
+                    $(this).append('<div class="img-blend-top"></div>')
+                    break
+
+                case 1:
+                    $(this).append('<div class="img-blend-right"></div>')
+                    break
+
+                case 2:
+                    $(this).append('<div class="img-blend-bottom"></div>')
+                    break
+
+                case 3:
+                    $(this).append('<div class="img-blend-left"></div>')
+                    break
+            }
+        }
+    })
+}());
+
 // File#: _1_menu
 // Usage: codyhouse.co/license
 (function() {
