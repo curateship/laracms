@@ -5,8 +5,8 @@
 
         <!-- Content Start -->
         <div class="card">
-            <figure class="card__img">
-              <img src="/assets/img/card-img-1.jpg" alt="Card preview img">
+            <figure class="card__img img-blend-bottom">
+              <img class="" src="/assets/img/card-img-1.jpg" alt="Card preview img">
             </figure>
           <div class="padding-sm">
             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Qui ullam accusamus voluptate! Accusantium aperiam totam voluptatum at fugiat doloribus odit dolore fuga. Eum aliquam qui beatae recusandae, laborum explicabo nihil neque esse sequi cumque hic necessitatibus? Quam quaerat esse voluptatum.</p>
