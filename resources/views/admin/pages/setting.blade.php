@@ -1,6 +1,6 @@
 @extends('apps.master')
 @section('content')
-<div class="container max-width-lg padding-y-xl grid gap-md">
+<div class="container max-width-lg padding-y-xxl grid gap-md">
     <!-- Main Content Column-->
     <div class="col-12@md">
           <div class="background-bg shadow-md border radius-md padding-sm">
@@ -375,7 +375,7 @@
 
  <!-- Sidebar -->
  <div class="col-3@md">
-    <div class="background-bg shadow-md border radius-md position-fixed position-sticky top-0@xs">
+    <div class="background-bg shadow-md border radius-md position-fixed position-sticky top-0@xs card">
       <nav class="sidenav padding-y-sm js-sidenav">
          <div class="sidenav__label margin-bottom-xxxs">
              </div>

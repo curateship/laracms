@@ -7,56 +7,72 @@
       </div>
     </div>
 
-    <div class="grid gap-md">
-      <a class="card-v2 radius-md col-3@md" href="http://localhost:8000/post">
-        <figure>
-          <img src="/assets/img/team-img-1.jpg" alt="Image description">
-          <figcaption class="card-v2__caption padding-x-sm padding-top-md padding-bottom-sm text-center">
-            <div class="text-md text-base@md">James Powell</div>
-            <div class="margin-top-xxxs text-sm opacity-70%">Designer</div>
-          </figcaption>
-        </figure>
-      </a>
+    <ul class="grid-auto-md gap-md">
 
-      <div class="card-v2 radius-md col-3@md">
-        <figure>
-          <img src="/assets/img/team-img-2.jpg" alt="Image description">
-          <figcaption class="card-v2__caption padding-x-sm padding-top-md padding-bottom-sm text-center">
-            <div class="text-md text-base@md">Emily Ewing</div>
-            <div class="margin-top-xxxs text-sm opacity-70%">Developer</div>
-          </figcaption>
-        </figure>
-      </div>
+<li class="card-v2 radius-md">
+  <img class="block width-100%" src="/assets/img/team-img-1.jpg" alt="placeholder">
+  <figcaption class="card-v2__caption padding-x-sm padding-top-md padding-bottom-sm text-center">
+    <div class="text-md text-base@md">James Powell</div>
+    <div class="margin-top-xxxs text-sm opacity-70%">Designer</div>
+  </figcaption>
+  </figure>
+</li>
 
-      <div class="card-v2 radius-md col-3@md">
-        <figure>
-          <img src="/assets/img/team-img-3.jpg" alt="Image description">
-          <figcaption class="card-v2__caption padding-x-sm padding-top-md padding-bottom-sm text-center">
-            <div class="text-md text-base@md">Mathew Burford</div>
-            <div class="margin-top-xxxs text-sm opacity-70%">SVP of marketing</div>
-          </figcaption>
-        </figure>
-      </div>
+<li class="card-v2 radius-md">
+  <img class="block width-100%" src="/assets/img/team-img-1.jpg" alt="placeholder">
+  <figcaption class="card-v2__caption padding-x-sm padding-top-md padding-bottom-sm text-center">
+    <div class="text-md text-base@md">James Powell</div>
+    <div class="margin-top-xxxs text-sm opacity-70%">Designer</div>
+  </figcaption>
+  </figure>
+</li>
 
-      <div class="card-v2 radius-md col-3@md">
-        <figure>
-          <img src="/assets/img/team-img-4.jpg" alt="Image description">
-          <figcaption class="card-v2__caption padding-x-sm padding-top-md padding-bottom-sm text-center">
-            <div class="text-md text-base@md">Olivia Gribben</div>
-            <div class="margin-top-xxxs text-sm opacity-70%">CEO</div>
-          </figcaption>
-        </figure>
-      </div>
+<li class="card-v2 radius-md">
+  <img class="block width-100%" src="/assets/img/team-img-1.jpg" alt="placeholder">
+  <figcaption class="card-v2__caption padding-x-sm padding-top-md padding-bottom-sm text-center">
+    <div class="text-md text-base@md">James Powell</div>
+    <div class="margin-top-xxxs text-sm opacity-70%">Designer</div>
+  </figcaption>
+  </figure>
+</li>
 
-      <div class="card-v2 radius-md col-3@md">
-        <figure>
-          <img src="/assets/img/team-img-4.jpg" alt="Image description">
-          <figcaption class="card-v2__caption padding-x-sm padding-top-md padding-bottom-sm text-center">
-            <div class="text-md text-base@md">Olivia Gribben</div>
-            <div class="margin-top-xxxs text-sm opacity-70%">CEO</div>
-          </figcaption>
-        </figure>
-      </div>
-    </div>
+<li class="card-v2 radius-md">
+  <img class="block width-100%" src="/assets/img/team-img-1.jpg" alt="placeholder">
+  <figcaption class="card-v2__caption padding-x-sm padding-top-md padding-bottom-sm text-center">
+    <div class="text-md text-base@md">James Powell</div>
+    <div class="margin-top-xxxs text-sm opacity-70%">Designer</div>
+  </figcaption>
+  </figure>
+</li>
+
+<li class="card-v2 radius-md">
+  <img class="block width-100%" src="/assets/img/team-img-1.jpg" alt="placeholder">
+  <figcaption class="card-v2__caption padding-x-sm padding-top-md padding-bottom-sm text-center">
+    <div class="text-md text-base@md">James Powell</div>
+    <div class="margin-top-xxxs text-sm opacity-70%">Designer</div>
+  </figcaption>
+  </figure>
+</li>
+
+<li class="card-v2 radius-md">
+  <img class="block width-100%" src="/assets/img/team-img-1.jpg" alt="placeholder">
+  <figcaption class="card-v2__caption padding-x-sm padding-top-md padding-bottom-sm text-center">
+    <div class="text-md text-base@md">James Powell</div>
+    <div class="margin-top-xxxs text-sm opacity-70%">Designer</div>
+  </figcaption>
+  </figure>
+</li>
+
+<li class="card-v2 radius-md">
+  <img class="block width-100%" src="/assets/img/team-img-1.jpg" alt="placeholder">
+  <figcaption class="card-v2__caption padding-x-sm padding-top-md padding-bottom-sm text-center">
+    <div class="text-md text-base@md">James Powell</div>
+    <div class="margin-top-xxxs text-sm opacity-70%">Designer</div>
+  </figcaption>
+  </figure>
+</li>
+
+</ul>
+
 </section>
 <!-- END -->
