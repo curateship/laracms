@@ -5,7 +5,7 @@
 
         <!-- Content Start -->
         <div class="card">
-            <figure class="card__img img-blend-bottom">
+        <figure class="card__img img-blend" data-blend-pattern="0,0,1,0">
               <img class="" src="/assets/img/card-img-1.jpg" alt="Card preview img">
             </figure>
           <div class="padding-sm">

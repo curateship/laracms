@@ -1,55 +1,50 @@
-.img-blend-top{
+.img-blend{
     position: relative;
-
+}
+.img-blend-top{
     &:before {
         content: '';
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
-        background-image: linear-gradient(180deg, #454545 10px, transparent);
+        height: 20%;
+        background-image: linear-gradient(180deg, var(--color-bg-light) 40px, transparent);
     }
 }
 
 .img-blend-right{
-    position: relative;
-
     &:before {
         content: '';
         position: absolute;
         top: 0;
-        left: 0;
-        width: 100%;
+        right: 0;
+        width: 20%;
         height: 100%;
-        background-image: linear-gradient(270deg, #454545 10px, transparent);
+        background-image: linear-gradient(270deg, var(--color-bg-light) 20px, transparent);
     }
 }
 
 .img-blend-bottom{
-    position: relative;
-
     &:before {
-        content: '';
+        content: "";
         position: absolute;
-        top: 0;
+        bottom: 0;
         left: 0;
         width: 100%;
-        height: 100%;
-        background-image: linear-gradient(0deg, #454545 10px, transparent);
+        height: 60%;
+        background-image: linear-gradient(0deg, var(--color-bg-light) 15px, transparent);
     }
 }
 
 .img-blend-left{
-    position: relative;
-
     &:before {
         content: '';
         position: absolute;
         top: 0;
         left: 0;
-        width: 100%;
+        width: 20%;
         height: 100%;
-        background-image: linear-gradient(90deg, #454545 10px, transparent);
+        background-image: linear-gradient(90deg, var(--color-bg-light) 20px, transparent);
     }
 }
