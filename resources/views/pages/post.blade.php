@@ -23,7 +23,7 @@
 <!-- END Icon Sidebar-->
 
 <!-- Content Start -->
-<div class="col-10@md">
+<div class="col-11@md">
   <div class="card">
     <figure class="card__img img-blend" data-blend-pattern="0,0,1,0">
       <img class="" src="/assets/img/card-img-1.jpg" alt="Card preview img">

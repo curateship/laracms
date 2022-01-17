@@ -167,7 +167,7 @@
   <div class="text-component text-center margin-bottom-sm">
     <h1>Get started</h1>
     <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. <br>
-    Already have an account? <a href="#0">Login</a></p>
+    Already have an account? <a href="#0" class="btn btn--primary" aria-controls="modal-login">Login</a></p>
   </div>
 
   <div class="grid gap-xs">

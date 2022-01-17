@@ -13,7 +13,7 @@
 <div class="mega-nav__icon-btns mega-nav__icon-btns--mobile">
 <div class="mega-nav__icon-btns mega-nav__icon-btns--mobile"></div>
 
-<button class="reset mega-nav__icon-btn mega-nav__icon-btn--search js-tab-focus" aria-label="Toggle search" aria-controls="mega-nav-search">
+<button class="reset mega-nav__icon-btn mega-nav__icon-btn--search js-tab-focus" aria-label="Toggle search" aria-controls="modal-search">
   <svg class="icon" viewBox="0 0 24 24">
     <g class="icon__group" fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1">
       <path d="M4.222 4.222l15.556 15.556" />
@@ -94,7 +94,7 @@
   </li>
 
   <li class="menu-bar__item" role="menuitem">
-    <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 20 20">
+    <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 20 20" aria-controls="modal-search">
       <path d="M11.25 17.5c4.83 0 8.75-3.93 8.75-8.75s-3.93-8.75-8.75-8.75-8.75 3.93-8.75 8.75 3.93 8.75 8.75 8.75z m0-15c3.45 0 6.25 2.8 6.25 6.25s-2.8 6.25-6.25 6.25-6.25-2.8-6.25-6.25 2.8-6.25 6.25-6.25z"></path>
       <path d="M0.36 17.86l3-2.99a10.02 10.02 0 0 0 1.76 1.77l-2.98 3a1.25 1.25 0 0 1-1.78 0 1.25 1.25 0 0 1 0-1.78z"></path>
     </svg>
@@ -123,35 +123,22 @@
   </header>
 <!-- END -->
 
-<!-- Login Modal Start 👇-->
-<div class="modal modal--animate-scale flex flex-center bg-black bg-opacity-90% padding-md js-modal" id="modal-form2">
-  <div class="modal__content width-100% max-width-xs max-height-100% overflow-auto padding-md bg radius-md inner-glow shadow-md" role="alertdialog" aria-labelledby="modal-form-title" aria-describedby="modal-form-description">
-
-    <div class="max-width-xs margin-x-auto">
-      <div class="margin-bottom-xs">
-        <svg class="icon icon--xl" viewBox="0 0 64 64" aria-hidden="true"><path d="M54.053,33.3l-21-13a2,2,0,0,0-2.106,0l-21,13A2,2,0,0,0,9,35V58a2,2,0,0,0,2,2H53a2,2,0,0,0,2-2V35A2,2,0,0,0,54.053,33.3Z" fill="#212121"/><path d="M47,51H17V16a2,2,0,0,1,2-2H45a2,2,0,0,1,2,2Z" fill="#e3e3e3"/><path d="M40,23H24a1,1,0,0,1,0-2H40a1,1,0,0,1,0,2Z" fill="#aeaeae"/><path d="M40,30H24a1,1,0,0,1,0-2H40a1,1,0,0,1,0,2Z" fill="#aeaeae"/><path d="M33,37H24a1,1,0,0,1,0-2h9a1,1,0,0,1,0,2Z" fill="#aeaeae"/><path d="M55,35,32,45.867,9,35V58c0,.015,0,.029,0,.044a1.927,1.927,0,0,0,.027.26c.006.04.008.081.016.12l0,.016c0,.006.006.009.008.014A2,2,0,0,0,11,60H53a2,2,0,0,0,1.951-1.56A1.916,1.916,0,0,0,55,58.022c0-.008.006-.013.006-.022Z" fill="#949494"/><path d="M13,7.029a3,3,0,0,1-3-3,1,1,0,0,0-2,0,3,3,0,0,1-3,3,1,1,0,0,0,0,2,3,3,0,0,1,3,3,1,1,0,0,0,2,0,3,3,0,0,1,3-3,1,1,0,0,0,0-2Z" fill="#ffd764"/><circle cx="55" cy="14" r="3" fill="#ff7163"/></svg>
-      </div>
-
-      <div class="text-component margin-bottom-md">
-        <h3>LOGIN</h3>
-        <a href="#0" class="f-header__btn btn btn--primary" aria-controls="modal-form">Sign up</a>
-      </div>
-
-      <form class="grid gap-xxs">
-        <input class="form-control" aria-label="Email" type="email" placeholder="Email Address">
-        <button class="btn btn--primary">Subscribe</button>
-      </form>
-
-      <p class="text-sm bg-success bg-opacity-20% padding-xs radius-md margin-top-xs" role="alert"><strong>✔ Success!</strong> Welcome aboard, friend!</p>
-
-      <div class="margin-top-sm">
-        <p class="color-contrast-medium text-sm">No spam. Unsubscribe anytime.</p>
-      </div>
-    </div>
-
-    <div class="text-component">
-      <p class="text-xs color-contrast-medium">Lorem ipsum dolor sit, amet <a href="#0" class="color-contrast-high">consectetur adipisicing</a> elit. Nisi molestias hic voluptatibus.</p>
-    </div>
+<!-- Modal Search-->
+<div class="modal modal--search modal--animate-fade bg bg-opacity-90% flex flex-center padding-md backdrop-blur-10 js-modal" id="modal-search">
+  <div class="modal__content width-100% max-width-sm max-height-100% overflow-auto" role="alertdialog" aria-labelledby="modal-search-title" aria-describedby="">
+    <form class="full-screen-search">
+      <label for="search-input-x" id="modal-search-title" class="sr-only">Search</label>
+      <input class="reset full-screen-search__input" type="search" name="search-input-x" id="search-input-x" placeholder="Search...">
+      <button class="reset full-screen-search__btn">
+        <svg class="icon" viewBox="0 0 24 24">
+          <title>Search</title>
+          <g stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" stroke="currentColor" fill="none" stroke-miterlimit="10">
+            <line x1="22" y1="22" x2="15.656" y2="15.656"></line>
+            <circle cx="10" cy="10" r="8"></circle>
+          </g>
+        </svg>
+      </button>
+    </form>
   </div>
 
   <button class="reset modal__close-btn modal__close-btn--outer  js-modal__close js-tab-focus">
@@ -164,47 +151,5 @@
     </svg>
   </button>
 </div>
-<!-- Login Modal END-->
+<!-- Modal Search END -->
 
-<!-- Signup Modal Start 👇-->
-<div class="modal modal--animate-scale flex flex-center bg-black bg-opacity-90% padding-md js-modal" id="modal-form">
-  <div class="modal__content width-100% max-width-xs max-height-100% overflow-auto padding-md bg radius-md inner-glow shadow-md" role="alertdialog" aria-labelledby="modal-form-title" aria-describedby="modal-form-description">
-
-    <div class="max-width-xs margin-x-auto">
-      <div class="margin-bottom-xs">
-        <svg class="icon icon--xl" viewBox="0 0 64 64" aria-hidden="true"><path d="M54.053,33.3l-21-13a2,2,0,0,0-2.106,0l-21,13A2,2,0,0,0,9,35V58a2,2,0,0,0,2,2H53a2,2,0,0,0,2-2V35A2,2,0,0,0,54.053,33.3Z" fill="#212121"/><path d="M47,51H17V16a2,2,0,0,1,2-2H45a2,2,0,0,1,2,2Z" fill="#e3e3e3"/><path d="M40,23H24a1,1,0,0,1,0-2H40a1,1,0,0,1,0,2Z" fill="#aeaeae"/><path d="M40,30H24a1,1,0,0,1,0-2H40a1,1,0,0,1,0,2Z" fill="#aeaeae"/><path d="M33,37H24a1,1,0,0,1,0-2h9a1,1,0,0,1,0,2Z" fill="#aeaeae"/><path d="M55,35,32,45.867,9,35V58c0,.015,0,.029,0,.044a1.927,1.927,0,0,0,.027.26c.006.04.008.081.016.12l0,.016c0,.006.006.009.008.014A2,2,0,0,0,11,60H53a2,2,0,0,0,1.951-1.56A1.916,1.916,0,0,0,55,58.022c0-.008.006-.013.006-.022Z" fill="#949494"/><path d="M13,7.029a3,3,0,0,1-3-3,1,1,0,0,0-2,0,3,3,0,0,1-3,3,1,1,0,0,0,0,2,3,3,0,0,1,3,3,1,1,0,0,0,2,0,3,3,0,0,1,3-3,1,1,0,0,0,0-2Z" fill="#ffd764"/><circle cx="55" cy="14" r="3" fill="#ff7163"/></svg>
-      </div>
-
-      <div class="text-component margin-bottom-md">
-        <h3>Join our newsletter</h3>
-        <p>Get our monthly recap with the latest news, articles and resources.</p>
-      </div>
-
-      <form class="grid gap-xxs">
-        <input class="form-control" aria-label="Email" type="email" placeholder="Email Address">
-        <button class="btn btn--primary">Subscribe</button>
-      </form>
-
-      <p class="text-sm bg-success bg-opacity-20% padding-xs radius-md margin-top-xs" role="alert"><strong>✔ Success!</strong> Welcome aboard, friend!</p>
-
-      <div class="margin-top-sm">
-        <p class="color-contrast-medium text-sm">No spam. Unsubscribe anytime.</p>
-      </div>
-    </div>
-
-    <div class="text-component">
-      <p class="text-xs color-contrast-medium">Lorem ipsum dolor sit, amet <a href="#0" class="color-contrast-high">consectetur adipisicing</a> elit. Nisi molestias hic voluptatibus.</p>
-    </div>
-  </div>
-
-  <button class="reset modal__close-btn modal__close-btn--outer  js-modal__close js-tab-focus">
-    <svg class="icon icon--sm" viewBox="0 0 24 24">
-      <title>Close modal window</title>
-      <g fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="3" y1="3" x2="21" y2="21" />
-        <line x1="21" y1="3" x2="3" y2="21" />
-      </g>
-    </svg>
-  </button>
-</div>
-<!-- Signup Modal END-->
