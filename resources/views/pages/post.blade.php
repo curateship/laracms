@@ -37,16 +37,20 @@
 <!-- Content Control -->
 <div class="justify-between flex">
   <!-- Like Box -->
-  <menu class="menu-bar js-menu-bar padding-xxs">
-    <li class="menu-bar__item" role="menuitem">
-      <svg class="icon rate-cont__icon" viewBox="0 0 16 16" aria-hidden="true"><g stroke-width="1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="0.5" y="7.5" width="3" height="8"></rect><path d="M5.5,15.5h6.9a2,2,0,0,0,1.952-1.566l1.111-5A2,2,0,0,0,13.507,6.5H9.5v-4a2,2,0,0,0-2-2l-2,6"></path></g></svg>
-      <span class="menu-bar__label">Thumbs Up</span>
-    </li>
+  <menu class="menu-bar js-menu-bar padding-sm">
+    <button class="reset comments__vote-btn js-comments__vote-btn js-tab-focus padding-right-md margin-left-xs" data-label="Like this comment along with 5 other people" aria-pressed="false">
+      <span class="comments__vote-icon-wrapper">
+        <svg class="icon rate-cont__icon" viewBox="0 0 16 16" aria-hidden="true"><g stroke-width="1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="0.5" y="7.5" width="3" height="8"></rect><path d="M5.5,15.5h6.9a2,2,0,0,0,1.952-1.566l1.111-5A2,2,0,0,0,13.507,6.5H9.5v-4a2,2,0,0,0-2-2l-2,6"></path></g></svg>
+      </span>
+      <span class="margin-left-xxxs js-comments__vote-label" aria-hidden="true">0</span>
+    </button>
     
-    <li class="menu-bar__item" role="menuitem">
-      <svg class="icon rate-cont__icon" viewBox="0 0 16 16" aria-hidden="true"><g stroke-width="1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="0.5" y="0.5" width="3" height="8"></rect><path d="M5.5.5h6.9a2,2,0,0,1,1.952,1.566l1.111,5A2,2,0,0,1,13.507,9.5H9.5v4a2,2,0,0,1-2,2l-2-6"></path></g></svg>
-        <span class="menu-bar__label">Thumbs Down</span>
-    </li>
+    <button class="reset comments__vote-btn js-comments__vote-btn js-tab-focus" data-label="Like this comment along with 5 other people" aria-pressed="false">
+      <span class="comments__vote-icon-wrapper">
+          <svg class="icon rate-cont__icon" viewBox="0 0 16 16" aria-hidden="true"><g stroke-width="1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="0.5" y="0.5" width="3" height="8"></rect><path d="M5.5.5h6.9a2,2,0,0,1,1.952,1.566l1.111,5A2,2,0,0,1,13.507,9.5H9.5v4a2,2,0,0,1-2,2l-2-6"></path></g></svg>
+      </span>
+      <span class="margin-left-xxxs js-comments__vote-label" aria-hidden="true">0</span>
+    </button>
   </menu>
 <!-- END -->
 

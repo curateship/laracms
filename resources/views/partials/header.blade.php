@@ -107,7 +107,7 @@
         </ul>
 
         <ul class="f-header__list flex-grow flex-basis-0 justify-end@md">
-          <li class="f-header__item"><a href="/admin" class="f-header__link">Login</a></li>
+          <li class="f-header__item"><a href="/login" class="f-header__link">Login</a></li>
           <li class="f-header__item"><a href="#0" class="f-header__btn btn btn--primary" aria-controls="modal-signup">Sign up</a></li>
         </ul>
       </div>
