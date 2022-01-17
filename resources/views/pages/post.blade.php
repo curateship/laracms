@@ -1,62 +1,79 @@
 @extends('apps.master')
 @section('content')
+
 <div class="container max-width-lg padding-y-xl grid gap-md">
-    <div class="col-12@md">
+  <!-- Icon Sidebar -->
+  <div class="col-1@md display@md">
+    <div class="position-fixed position-sticky top-0@xs">
+      <li class="menu-bar__item" role="menuitem">
+        <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 12 12">
+        <path d="M10.121.293a1,1,0,0,0-1.414,0L1,8,0,12l4-1,7.707-7.707a1,1,0,0,0,0-1.414Z"></path>
+        </svg>
+        <span class="menu-bar__label">Edit</span>
+      </li>
 
-        <!-- Content Start -->
-        <div class="card">
-        <figure class="card__img img-blend" data-blend-pattern="0,0,1,0">
-              <img class="" src="/assets/img/card-img-1.jpg" alt="Card preview img">
-            </figure>
-          <div class="padding-sm">
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Qui ullam accusamus voluptate! Accusantium aperiam totam voluptatum at fugiat doloribus odit dolore fuga. Eum aliquam qui beatae recusandae, laborum explicabo nihil neque esse sequi cumque hic necessitatibus? Quam quaerat esse voluptatum.</p>
-          </div>
-        <div class="border-top"></div>
-        <!-- Content END -->
+      <li class="menu-bar__item" role="menuitem">
+        <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 12 12">
+        <path d="M10.121.293a1,1,0,0,0-1.414,0L1,8,0,12l4-1,7.707-7.707a1,1,0,0,0,0-1.414Z"></path>
+        </svg>
+        <span class="menu-bar__label">Edit</span>
+      </li>
+  </div>
+</div>
+<!-- END Icon Sidebar-->
 
-      <!-- Content Control -->
-      <div class="justify-between flex">
+<!-- Content Start -->
+<div class="col-10@md">
+  <div class="card">
+    <figure class="card__img img-blend" data-blend-pattern="0,0,1,0">
+      <img class="" src="/assets/img/card-img-1.jpg" alt="Card preview img">
+    </figure>
+  <div class="padding-sm">
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Qui ullam accusamus voluptate! Accusantium aperiam totam voluptatum at fugiat doloribus odit dolore fuga. Eum aliquam qui beatae recusandae, laborum explicabo nihil neque esse sequi cumque hic necessitatibus? Quam quaerat esse voluptatum.</p>
+  </div>
+<div class="border-top"></div>
+<!-- Content END -->
 
-      <!-- Like Box -->
-      <menu class="menu-bar js-menu-bar padding-xxs">
-      
-        <li class="menu-bar__item" role="menuitem">
-        <svg class="icon rate-cont__icon" viewBox="0 0 16 16" aria-hidden="true"><g stroke-width="1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="0.5" y="7.5" width="3" height="8"></rect><path d="M5.5,15.5h6.9a2,2,0,0,0,1.952-1.566l1.111-5A2,2,0,0,0,13.507,6.5H9.5v-4a2,2,0,0,0-2-2l-2,6"></path></g></svg>
-          <span class="menu-bar__label">Thumbs Up</span>
-        </li>
-      
-        <li class="menu-bar__item" role="menuitem">
-        <svg class="icon rate-cont__icon" viewBox="0 0 16 16" aria-hidden="true"><g stroke-width="1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="0.5" y="0.5" width="3" height="8"></rect><path d="M5.5.5h6.9a2,2,0,0,1,1.952,1.566l1.111,5A2,2,0,0,1,13.507,9.5H9.5v4a2,2,0,0,1-2,2l-2-6"></path></g></svg>
-          <span class="menu-bar__label">Thumbs Down</span>
-        </li>
-      
-      </menu>
-      <!-- END -->
+<!-- Content Control -->
+<div class="justify-between flex">
+  <!-- Like Box -->
+  <menu class="menu-bar js-menu-bar padding-xxs">
+    <li class="menu-bar__item" role="menuitem">
+      <svg class="icon rate-cont__icon" viewBox="0 0 16 16" aria-hidden="true"><g stroke-width="1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="0.5" y="7.5" width="3" height="8"></rect><path d="M5.5,15.5h6.9a2,2,0,0,0,1.952-1.566l1.111-5A2,2,0,0,0,13.507,6.5H9.5v-4a2,2,0,0,0-2-2l-2,6"></path></g></svg>
+      <span class="menu-bar__label">Thumbs Up</span>
+    </li>
+    
+    <li class="menu-bar__item" role="menuitem">
+      <svg class="icon rate-cont__icon" viewBox="0 0 16 16" aria-hidden="true"><g stroke-width="1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="0.5" y="0.5" width="3" height="8"></rect><path d="M5.5.5h6.9a2,2,0,0,1,1.952,1.566l1.111,5A2,2,0,0,1,13.507,9.5H9.5v4a2,2,0,0,1-2,2l-2-6"></path></g></svg>
+        <span class="menu-bar__label">Thumbs Down</span>
+    </li>
+  </menu>
+<!-- END -->
 
 
-      <!-- Control -->
-      <menu class="menu-bar menu-bar--expanded@md js-menu-bar padding-xxs">
-        <li class="menu-bar__item menu-bar__item--trigger js-menu-bar__trigger" role="menuitem" aria-label="More options">
-          <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 16 16">
-            <circle cx="8" cy="7.5" r="1.5" />
-            <circle cx="1.5" cy="7.5" r="1.5" />
-            <circle cx="14.5" cy="7.5" r="1.5" /></svg>
-        </li>
+<!-- Control -->
+  <menu class="menu-bar menu-bar--expanded@md js-menu-bar padding-xxs">
+    <li class="menu-bar__item menu-bar__item--trigger js-menu-bar__trigger" role="menuitem" aria-label="More options">
+       <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 16 16">
+        <circle cx="8" cy="7.5" r="1.5" />
+        <circle cx="1.5" cy="7.5" r="1.5" />
+        <circle cx="14.5" cy="7.5" r="1.5" /></svg>
+    </li>
       
-        <li class="menu-bar__item menu-bar__item--hide" role="menuitem">
-          <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 12 12">
-            <path d="M10.121.293a1,1,0,0,0-1.414,0L1,8,0,12l4-1,7.707-7.707a1,1,0,0,0,0-1.414Z"></path>
-          </svg>
-          <span class="menu-bar__label">Edit</span>
-        </li>
+    <li class="menu-bar__item menu-bar__item--hide" role="menuitem">
+      <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 12 12">
+      <path d="M10.121.293a1,1,0,0,0-1.414,0L1,8,0,12l4-1,7.707-7.707a1,1,0,0,0,0-1.414Z"></path>
+      </svg>
+      <span class="menu-bar__label">Edit</span>
+    </li>
       
-        <li class="menu-bar__item menu-bar__item--hide" role="menuitem">
-          <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 16 16">
-            <path d="M2,6v8c0,1.1,0.9,2,2,2h8c1.1,0,2-0.9,2-2V6H2z"></path>
-            <path d="M12,3V1c0-0.6-0.4-1-1-1H5C4.4,0,4,0.4,4,1v2H0v2h16V3H12z M10,3H6V2h4V3z"></path>
-          </svg>
-          <span class="menu-bar__label">Delete</span>
-        </li>
+    <li class="menu-bar__item menu-bar__item--hide" role="menuitem">
+      <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 16 16">
+      <path d="M2,6v8c0,1.1,0.9,2,2,2h8c1.1,0,2-0.9,2-2V6H2z"></path>
+      <path d="M12,3V1c0-0.6-0.4-1-1-1H5C4.4,0,4,0.4,4,1v2H0v2h16V3H12z M10,3H6V2h4V3z"></path>
+      </svg>
+      <span class="menu-bar__label">Delete</span>
+    </li>
       
         <li class="menu-bar__item menu-bar__item--hide" role="menuitem">
           <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 16 16">
@@ -387,7 +404,7 @@
 
     <!-- Sidebar -->
       <div class="col-3@md">
-        <a class="card-v14 padding-sm flex flex-column" href="#">
+        <a class="card-v14 padding-sm flex flex-column position-fixed position-sticky top-0@xs" href="#">
           
           <h3 class="text-md">Profile Card</h3>
 

@@ -85,9 +85,39 @@
         </ul>
 
         <ul class="f-header__list flex-grow flex-basis-0 justify-end@md">
-          <li class="f-header__item"><a href="/admin" class="f-header__link">Login</a></li>
-          <li class="f-header__item"><a href="#0" class="f-header__btn btn btn--primary" aria-controls="modal-form">Sign up</a></li>
+<!-- 👇 Navigation --Desktop -->
+<menu class="menu-bar menu-bar--expanded@md js-menu-bar">
+  <li class="menu-bar__item" role="menuitem">
+    <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 12 12">
+      <path d="M10.121.293a1,1,0,0,0-1.414,0L1,8,0,12l4-1,7.707-7.707a1,1,0,0,0,0-1.414Z"></path>
+    </svg>
+  </li>
+
+  <li class="menu-bar__item" role="menuitem">
+    <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 20 20">
+      <path d="M11.25 17.5c4.83 0 8.75-3.93 8.75-8.75s-3.93-8.75-8.75-8.75-8.75 3.93-8.75 8.75 3.93 8.75 8.75 8.75z m0-15c3.45 0 6.25 2.8 6.25 6.25s-2.8 6.25-6.25 6.25-6.25-2.8-6.25-6.25 2.8-6.25 6.25-6.25z"></path>
+      <path d="M0.36 17.86l3-2.99a10.02 10.02 0 0 0 1.76 1.77l-2.98 3a1.25 1.25 0 0 1-1.78 0 1.25 1.25 0 0 1 0-1.78z"></path>
+    </svg>
+  </li>
+
+  <li class="menu-bar__item" role="menuitem">
+    <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 60 60" aria-controls="popover-example">
+    <path d="M38,37H26A19.021,19.021,0,0,0,7,56a1,1,0,0,0,.594.914C7.97,57.081,16.961,61,32,61s24.03-3.919,24.406-4.086A1,1,0,0,0,57,56,19.021,19.021,0,0,0,38,37Z"></path>
+<path d="M32,32c8.013,0,14-8.412,14-15.933a14,14,0,1,0-28,0C18,23.588,23.987,32,32,32Z"></path>
+    </svg>
+
+    <div id="popover-example" class="popover bg-light padding-sm radius-md inner-glow shadow-md js-popover js-tab-focus" role="dialog">
+  <div class="text-component text-sm">
+    <h1 class="text-md">Popover</h1>
+    <p>The content of the popover is fully customizable. You can use it to create, for example, a menu or a notification popover.</p>
+  </div>
+</div>
+  </li>
+</menu>
+<!-- Navigation --Desktop END -->
         </ul>
+
+        
       </div>
     </div>
   </header>
