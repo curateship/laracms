@@ -1,13 +1,15 @@
 @extends('apps.master')
 @section('content')
-<div class="container max-width-xs margin-top-xxl card">
+<div class="container max-width-xs margin-top-xxl card padding-lg">
 <!-- Register Form Start 👇-->
-<form class="sign-up-form padding-lg">
-  <div class="text-component text-center margin-bottom-sm">
-    <h1>Get started</h1>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. <br>
-    Already have an account? <a href="#0">Login</a></p>
-  </div>
+<form action="{{ route('register') }}" method="POST">
+  @csrf
+    <form class="sign-up-form padding-lg">
+      <div class="text-component text-center margin-bottom-sm">
+        <h1>Get started</h1>
+          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. <br>
+            Already have an account? <a href="#0">Login</a></p>
+      </div>
 
   <div class="grid gap-xs">
     <div class="col-7@xs">
@@ -29,33 +31,44 @@
 
   <div class="margin-bottom-sm">
     <div class="grid gap-xs">
-      <div class="col-7@md">
-        <label class="form-label margin-bottom-xxxs" for="input-first-name">First name</label>
-        <input class="form-control width-100%" type="text" name="input-first-name" id="input-first-name">
-      </div>
+ 
+        @error('name')
+        <span class="form-control--error" role="alert">
+          <strong>{{ $message }}</strong>
+        </span>
+        @enderror
+        <input class="form-control width-100%" type="text" name="name" id="name" placeholder="Enter Name">
 
-      <div class="col-8@md">
-        <label class="form-label margin-bottom-xxxs" for="input-last-name">Last name</label>
-        <input class="form-control width-100%" type="text" name="input-last-name" id="input-last-name">
-      </div>
-    </div>
+
+  <div class="margin-bottom-sm">
+    @error('email')
+      <span class="form-control--error" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
+    @enderror
+    <input class="form-control width-100%" type="email" name="email" id="input-email" placeholder="email@myemail.com">
   </div>
 
   <div class="margin-bottom-sm">
-    <label class="form-label margin-bottom-xxxs" for="input-email">Email</label>
-    <input class="form-control width-100%" type="email" name="input-email" id="input-email" placeholder="email@myemail.com">
+    @error('password')
+      <span class="form-control--error" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
+    @enderror
+    <input class="form-control width-100%" type="password" name="password" id="input-password" placeholder="Input Password">
   </div>
 
   <div class="margin-bottom-md">
-    <label class="form-label margin-bottom-xxxs" for="input-password">Password</label> 
-    <input class="form-control width-100%" type="password" name="input-password" id="input-password">
+    @error('password')
+      <span class="form-control--error" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
+    @enderror
+    <input class="form-control width-100%" type="password" name="password_confirmation" id="input-password" placeholder="Enter Password Again">
     <p class="text-xs color-contrast-medium margin-top-xxs">Minimum 6 characters</p>
   </div>
 
-  <div class="margin-bottom-md">
-    <input class="checkbox" type="checkbox" id="check-newsletter">
-    <label for="check-newsletter">Send me updates about {productName}</label>
-  </div>
+  
 
   <div class="margin-bottom-sm">
     <button class="btn btn--primary btn--md width-100%">Join</button>
@@ -64,6 +77,7 @@
   <div class="text-center">
     <p class="text-xs color-contrast-medium">By joining, you agree to our <a href="#0">Terms</a> and <a href="#0">Privacy Policy</a>.</p>
   </div>
+</form>
 </form>
 <!-- Register Form END-->
 

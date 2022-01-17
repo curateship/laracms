@@ -2,6 +2,8 @@
 @section('content')
 <div class="container max-width-xs margin-top-xxl padding-lg card">
 <!-- Login Form Start 👇-->
+<form action="{{ route('login') }}" method="POST">
+@csrf
 <form class="login-form">
   <div class="text-component text-center margin-bottom-sm">
     <h1>Log in</h1>
@@ -27,26 +29,34 @@
   <p class="text-center margin-y-sm">or</p>
 
   <div class="margin-bottom-sm">
-    <label class="form-label margin-bottom-xxxs" for="input-email">Email</label>
-    <input class="form-control width-100%" type="email" name="input-email" id="input-email" placeholder="email@myemail.com">
+    @error('email')
+      <span class="form-control--error" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
+    @enderror
+    <input class="form-control width-100%" type="email" name="email" id="input-email" placeholder="email@myemail.com">
   </div>
 
   <div class="margin-bottom-sm">
+    @error('password')
+      <span class="form-control--error" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
+    @enderror
     <div class="flex justify-between margin-bottom-xxxs">
-      <label class="form-label" for="input-password">Password</label> 
-      <span class="text-sm"><a href="#0">Forgot?</a></span>
     </div>
-
-    <input class="form-control width-100%" type="password" name="input-password" id="input-password">
+    <input class="form-control width-100%" type="password" name="password" id="input-password" placeholder="Input Password">
+    <span class="text-sm"><a href="#0">Forgot Your Password?</a></span>
   </div>
 
-  <div class="margin-bottom-sm">
+  <div class="margin-bottom-sm margin-top-md">
     <button class="btn btn--primary btn--md width-100%">Login</button>
   </div>
 
   <div class="text-center">
     <p class="text-sm">Don't have an account? <a href="#0">Get started</a></p>
   </div>
+</form>
 </form>
 <!-- Login Form END-->
 
