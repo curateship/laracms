@@ -35,7 +35,7 @@
       </div>
 
       <div class="text-center">
-        <p class="text-sm">Don't have an account? <a href="#0">Get started</a></p>
+        <p class="text-sm">Don't have an account? <a href="/register">Get started</a></p>
       </div>
   </form>
 </form>
