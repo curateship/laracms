@@ -1321,7 +1321,6 @@ function resetFocusTabsStyle() {
         }
     })
 }());
-
 // File#: _1_menu
 // Usage: codyhouse.co/license
 (function() {

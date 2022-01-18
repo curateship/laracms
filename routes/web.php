@@ -36,3 +36,13 @@ Route::get('/admin/setting', function () {
 Route::get('/test', function () {
     return view('pages.test');
 });
+
+/*
+|--------------------------------------------------------------------------
+| Authentication Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/home', function () {
+    dd(\illuminate\Support\Facades\Auth::user());
+})->middleware('auth');

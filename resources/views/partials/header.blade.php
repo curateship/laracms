@@ -107,7 +107,7 @@
         </ul>
 
         <ul class="f-header__list flex-grow flex-basis-0 justify-end@md">
-          <li class="f-header__item"><a href="/admin" class="f-header__link">Login</a></li>
+          <li class="f-header__item"><a href="/login" class="f-header__link">Login</a></li>
           <li class="f-header__item"><a href="#0" class="f-header__btn btn btn--primary" aria-controls="modal-signup">Sign up</a></li>
         </ul>
       </div>
@@ -167,7 +167,7 @@
   <div class="text-component text-center margin-bottom-sm">
     <h1>Get started</h1>
     <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. <br>
-    Already have an account? <a href="#0">Login</a></p>
+    Already have an account? <a href="#0" class="btn btn--primary" aria-controls="modal-login">Login</a></p>
   </div>
 
   <div class="grid gap-xs">

@@ -23,7 +23,7 @@
                     </svg>
                     <span class="menu-bar__label">Add Post</span>
                   </li>
-                  <li class="menu-bar__item" role="menuitem" aria-controls="modal-search">
+                  <li class="menu-bar__item" role="menuitem" aria-controls="post-search">
                     <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 20 20">
                       <path d="M11.25 17.5c4.83 0 8.75-3.93 8.75-8.75s-3.93-8.75-8.75-8.75-8.75 3.93-8.75 8.75 3.93 8.75 8.75 8.75z m0-15c3.45 0 6.25 2.8 6.25 6.25s-2.8 6.25-6.25 6.25-6.25-2.8-6.25-6.25 2.8-6.25 6.25-6.25z"></path><path d="M0.36 17.86l3-2.99a10.02 10.02 0 0 0 1.76 1.77l-2.98 3a1.25 1.25 0 0 1-1.78 0 1.25 1.25 0 0 1 0-1.78z"></path>
                     </svg>
@@ -343,7 +343,7 @@
 <!-- Edit Modal END -->
 
 <!-- Modal Search-->
-<div class="modal modal--search modal--animate-fade bg bg-opacity-90% flex flex-center padding-md backdrop-blur-10 js-modal" id="modal-search">
+<div class="modal modal--search modal--animate-fade bg bg-opacity-90% flex flex-center padding-md backdrop-blur-10 js-modal" id="post-search">
   <div class="modal__content width-100% max-width-sm max-height-100% overflow-auto" role="alertdialog" aria-labelledby="modal-search-title" aria-describedby="">
     <form class="full-screen-search">
       <label for="search-input-x" id="modal-search-title" class="sr-only">Search</label>
