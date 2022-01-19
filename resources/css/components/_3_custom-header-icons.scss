@@ -1,0 +1,93 @@
+@use '../base' as *;
+@use '_2_dropdown.scss' as *;
+@use '_1_tabs.scss' as *;
+
+/* -------------------------------- 
+
+File#: _3_custom-header-icons
+Title: Custom header Icons
+Descr: Custom header Icons to be placed in any codyhouse headers
+Usage: For LaraCMS
+
+-------------------------------- */
+
+
+/* mobile buttons */
+.header__icon-btns {
+  display: flex;
+  align-items: center;
+}
+
+.header__icon-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  font-size: 22px; /* icon size */
+  color: var(--color-contrast-high); /* icon color */
+  cursor: pointer;
+  transition: .2s;
+
+  .icon {
+    display: block;
+  }
+
+  .icon__group {
+    stroke-width: 1px; /* icon stroke width */
+
+    > * {
+      transition: transform .3s var(--ease-in-out), stroke-dashoffset .3s, opacity .3s;
+    }
+  }
+}
+
+
+/* animated search button */
+.header__icon-btn--search {
+    .icon__group {
+      transform-origin: 12px 12px;
+      transform: rotate(0deg);
+      transition: transform .3s var(--ease-out);
+  
+      > *:nth-child(1) {
+        stroke-dashoffset: 34;
+        stroke-dasharray: 24;
+      }
+  
+      > *:nth-child(2) {
+        stroke-dashoffset: 24;
+        stroke-dasharray: 24;
+      }
+  
+      > *:nth-child(3) {
+        transform-origin: 9.5px 9.5px;
+        transform: rotate(45deg);
+        stroke-dashoffset: 84;
+        stroke-dasharray: 42;
+        opacity: 1;
+      }
+    }
+  
+    &.header__icon-btn--state-b {
+      .icon__group {
+        transform: rotate(-90deg);
+  
+        > *:nth-child(1) {
+          stroke-dashoffset: 48;
+        }
+  
+        > *:nth-child(2) {
+          stroke-dashoffset: 48;
+        }
+  
+        > *:nth-child(3) {
+          stroke-dashoffset: 42;
+          opacity: 0;
+        }
+      }
+    }
+  }
+
+
+

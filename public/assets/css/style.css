@@ -14226,6 +14226,43 @@ mark {
 }
 
 /*! purgecss start ignore */
+.img-blend {
+  position: relative;
+}
+
+.img-blend-top, .img-blend-right, .img-blend-bottom, .img-blend-left {
+  content: "";
+  position: absolute;
+}
+
+.img-blend-top {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 20%;
+}
+
+.img-blend-right {
+  top: 0;
+  right: 0;
+  width: 20%;
+  height: 100%;
+}
+
+.img-blend-bottom {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+}
+
+.img-blend-left {
+  top: 0;
+  left: 0;
+  width: 20%;
+  height: 100%;
+}
+
 /* -------------------------------- 
 
 File#: _1_accordion
@@ -16240,43 +16277,6 @@ Usage: codyhouse.co/license
 
 .hide-nav--has-bg {
   background-color: var(--color-bg);
-}
-
-.img-blend {
-  position: relative;
-}
-
-.img-blend-top, .img-blend-right, .img-blend-bottom, .img-blend-left {
-  content: "";
-  position: absolute;
-}
-
-.img-blend-top {
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 20%;
-}
-
-.img-blend-right {
-  top: 0;
-  right: 0;
-  width: 20%;
-  height: 100%;
-}
-
-.img-blend-bottom {
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 20%;
-}
-
-.img-blend-left {
-  top: 0;
-  left: 0;
-  width: 20%;
-  height: 100%;
 }
 
 /* -------------------------------- 
@@ -18365,6 +18365,79 @@ html:not(.js) .toc .toc__nav {
 }
 /* -------------------------------- 
 
+File#: _3_custom-header-icons
+Title: Custom header Icons
+Descr: Custom header Icons to be placed in any codyhouse headers
+Usage: For LaraCMS
+
+-------------------------------- */
+/* mobile buttons */
+.header__icon-btns {
+  display: flex;
+  align-items: center;
+}
+
+.header__icon-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  font-size: 22px;
+  /* icon size */
+  color: var(--color-contrast-high);
+  /* icon color */
+  cursor: pointer;
+  transition: 0.2s;
+}
+.header__icon-btn .icon {
+  display: block;
+}
+.header__icon-btn .icon__group {
+  stroke-width: 1px;
+  /* icon stroke width */
+}
+.header__icon-btn .icon__group > * {
+  transition: transform 0.3s var(--ease-in-out), stroke-dashoffset 0.3s, opacity 0.3s;
+}
+
+/* animated search button */
+.header__icon-btn--search .icon__group {
+  transform-origin: 12px 12px;
+  transform: rotate(0deg);
+  transition: transform 0.3s var(--ease-out);
+}
+.header__icon-btn--search .icon__group > *:nth-child(1) {
+  stroke-dashoffset: 34;
+  stroke-dasharray: 24;
+}
+.header__icon-btn--search .icon__group > *:nth-child(2) {
+  stroke-dashoffset: 24;
+  stroke-dasharray: 24;
+}
+.header__icon-btn--search .icon__group > *:nth-child(3) {
+  transform-origin: 9.5px 9.5px;
+  transform: rotate(45deg);
+  stroke-dashoffset: 84;
+  stroke-dasharray: 42;
+  opacity: 1;
+}
+.header__icon-btn--search.header__icon-btn--state-b .icon__group {
+  transform: rotate(-90deg);
+}
+.header__icon-btn--search.header__icon-btn--state-b .icon__group > *:nth-child(1) {
+  stroke-dashoffset: 48;
+}
+.header__icon-btn--search.header__icon-btn--state-b .icon__group > *:nth-child(2) {
+  stroke-dashoffset: 48;
+}
+.header__icon-btn--search.header__icon-btn--state-b .icon__group > *:nth-child(3) {
+  stroke-dashoffset: 42;
+  opacity: 0;
+}
+
+/* -------------------------------- 
+
 File#: _3_interactive-table
 Title: Interactive Table
 Descr: Table with the option of sorting data and selecting rows to perform specific actions
@@ -18490,4 +18563,331 @@ Usage: codyhouse.co/license
 }
 .int-table-actions .menu-bar__icon {
   color: hsla(var(--color-contrast-higher-h), var(--color-contrast-higher-s), var(--color-contrast-higher-l), 0.5);
+}
+
+/* -------------------------------- 
+
+File#: _3_main-header-v2
+Title: Main Header v2
+Descr: Accessible website navigation w/ sub navigations
+Usage: codyhouse.co/license
+
+-------------------------------- */
+:root {
+  --header-v2-height: 50px;
+}
+@media (min-width: 80rem) {
+  :root {
+    --header-v2-height: 70px;
+  }
+}
+
+.header-v2 {
+  width: 100%;
+}
+
+.header-v2, .header-v2__wrapper {
+  position: relative;
+  z-index: var(--z-index-header, 3);
+  height: var(--header-v2-height);
+}
+
+.header-v2__container {
+  display: flex;
+  position: relative;
+  height: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-v2__logo {
+  flex-shrink: 0;
+}
+.header-v2__logo a, .header-v2__logo svg {
+  display: block;
+}
+
+.header-v2__nav-control {
+  --anim-menu-btn-size: 40px;
+  --anim-menu-btn-icon-size: 24px;
+  --anim-menu-btn-icon-stroke: 2px;
+}
+
+.header-v2__nav {
+  top: var(--header-v2-height);
+  left: 0;
+  width: 100%;
+  padding: var(--space-sm);
+  background-color: var(--color-bg-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--inner-glow), var(--shadow-md);
+  z-index: var(--z-index-popover, 5);
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  -webkit-clip-path: inset(50%);
+          clip-path: inset(50%);
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+.header-v2__nav--is-visible {
+  clip: auto;
+  -webkit-clip-path: none;
+          clip-path: none;
+  height: auto;
+  max-height: calc(100vh - var(--header-v2-height) - var(--space-md));
+  overflow: auto;
+  -ms-scroll-chaining: none;
+      overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  visibility: visible;
+}
+
+.header-v2__nav-list--main:nth-child(2) {
+  border-top: 1px solid var(--color-contrast-lower);
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+}
+
+.header-v2__nav-item .btn {
+  width: 100%;
+  font-size: var(--text-md);
+  margin: var(--space-xxs) 0;
+}
+
+.header-v2__nav-item--main {
+  margin-bottom: var(--space-sm);
+}
+
+.header-v2__nav-item--label {
+  text-transform: uppercase;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: var(--color-contrast-medium);
+  padding: var(--space-xxs) 0;
+}
+
+.header-v2__nav-item--divider {
+  height: 1px;
+  background-color: var(--color-contrast-lower);
+  margin: var(--space-md) 0;
+}
+
+.header-v2__nav-item--search-btn {
+  display: none;
+}
+
+.header-v2__nav-dropdown-icon {
+  display: none;
+}
+
+.header-v2__nav-link {
+  display: flex;
+  align-items: center;
+  padding: var(--space-xs) 0;
+  text-decoration: none;
+  color: var(--color-contrast-high);
+}
+.header-v2__nav-link:hover, .header-v2__nav-link[aria-current] {
+  color: var(--color-contrast-higher);
+}
+
+.header-v2__nav-dropdown {
+  padding-left: var(--space-sm);
+}
+
+.header-v2__nav-list--title-desc .header-v2__nav-link {
+  display: flex;
+}
+.header-v2__nav-list--title-desc .header-v2__nav-link .header-v2__nav-icon {
+  margin-right: var(--space-xs);
+  flex-shrink: 0;
+}
+.header-v2__nav-list--title-desc .header-v2__nav-link strong {
+  display: block;
+}
+.header-v2__nav-list--title-desc .header-v2__nav-link small {
+  color: var(--color-contrast-medium);
+}
+.header-v2__nav-list--title-desc .header-v2__nav-link:hover small {
+  color: var(--color-contrast-high);
+}
+
+.header-v2__nav-col-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: var(--space-sm);
+}
+
+@media (min-width: 80rem) {
+  .header-v2[data-animation=on] .header-v2__wrapper--is-fixed {
+    position: fixed;
+    top: calc(-1 * var(--header-v2-height));
+    left: 0;
+    width: 100%;
+    background-color: var(--color-bg);
+    z-index: var(--z-index-fixed-element, 10);
+    transition: transform 0.2s;
+  }
+
+  .header-v2[data-animation=on] .header-v2__wrapper--slides-down {
+    transform: translateY(100%);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .header-v2__nav-control {
+    display: none;
+  }
+
+  .header-v2__logo {
+    margin-right: var(--space-sm);
+  }
+
+  .header-v2__nav {
+    position: static;
+    clip: auto;
+    -webkit-clip-path: none;
+            clip-path: none;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+    -ms-scroll-chaining: chained;
+        overscroll-behavior: auto;
+    visibility: visible;
+    padding: 0;
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .header-v2__nav-list--main {
+    display: flex;
+    align-items: center;
+  }
+
+  .header-v2__nav-item {
+    position: relative;
+  }
+  .header-v2__nav-item .btn {
+    width: auto;
+    font-size: 1.125rem;
+    margin: 0;
+  }
+
+  .header-v2__nav-item--main {
+    display: inline-block;
+    margin-bottom: 0;
+    margin-left: var(--space-md);
+  }
+  .header-v2__nav-item--main > .header-v2__nav-link {
+    padding: var(--space-xxs) 0;
+    font-size: 1.125rem;
+  }
+  .header-v2__nav-item--main.header-v2__nav-item--divider {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 0;
+    width: 1px;
+    height: 1em;
+  }
+
+  .header-v2__nav-list--main:last-child {
+    border-top: none;
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  .header-v2__nav-dropdown-icon {
+    display: block;
+  }
+
+  .header-v2__nav-item--search {
+    display: none;
+  }
+
+  .header-v2__nav-item--search-btn {
+    display: inline-block;
+  }
+  .header-v2__nav-item--search-btn button, .header-v2__nav-item--search-btn .icon {
+    display: block;
+  }
+  .header-v2__nav-item--search-btn button {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.2s;
+    cursor: pointer;
+  }
+  .header-v2__nav-item--search-btn button:hover {
+    opacity: 0.65;
+  }
+
+  .header-v2__nav-dropdown {
+    --space-unit: 1rem;
+    position: absolute;
+    top: 100%;
+    left: calc(50% - 100px);
+    z-index: var(--z-index-popover, 5);
+    width: 200px;
+    background-color: var(--color-bg-light);
+    border-radius: var(--radius-md);
+    box-shadow: var(--inner-glow), var(--shadow-md);
+    padding: var(--space-xxs) 0;
+    transition: opacity 0.2s, visibility 0.2s;
+    visibility: hidden;
+    opacity: 0;
+  }
+  .header-v2__nav-item--main > .header-v2__nav-dropdown {
+    --text-unit: 1rem;
+    font-size: var(--text-unit);
+  }
+  .header-v2__nav-dropdown .header-v2__nav-link, .header-v2__nav-dropdown .header-v2__nav-item--label {
+    padding-left: var(--space-xs);
+    padding-right: var(--space-xs);
+  }
+  .header-v2__nav-dropdown .header-v2__nav-link:hover,
+.header-v2__nav-dropdown .header-v2__nav-link--hover {
+    background-color: hsla(var(--color-contrast-higher-h), var(--color-contrast-higher-s), var(--color-contrast-higher-l), 0.075);
+  }
+  .header-v2__nav-dropdown .header-v2__nav-dropdown--nested {
+    left: 100%;
+    top: calc(var(--space-xs) * -1);
+  }
+  .header-v2__nav-dropdown .header-v2__nav-dropdown--nested-left {
+    left: auto;
+    right: 100%;
+  }
+  .header-v2__nav-dropdown .header-v2__nav-item--divider {
+    margin: var(--space-xs) 0;
+  }
+
+  .header-v2__nav-dropdown--sm {
+    width: 200px;
+    left: calc(50% - 100px);
+  }
+
+  .header-v2__nav-dropdown--md {
+    width: 300px;
+    left: calc(50% - 150px);
+  }
+
+  .header-v2__nav-dropdown--lg {
+    width: 480px;
+    left: calc(50% - 240px);
+  }
+
+  .header-v2__nav-list--title-desc .header-v2__nav-link {
+    padding: var(--space-xs) var(--space-sm);
+  }
+
+  .header-v2__nav-list--is-visible,
+.header-v2__nav-item--has-children:hover > .header-v2__nav-dropdown {
+    visibility: visible;
+    opacity: 1;
+  }
 }

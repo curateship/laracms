@@ -45,4 +45,4 @@ Route::get('/test', function () {
 
 Route::get('/home', function () {
     dd(\illuminate\Support\Facades\Auth::user());
-})->middleware('auth');
+})->middleware('auth', 'verified');

@@ -1,5 +1,5 @@
 <!-- Recommended Traders -->
-<section class="team padding-y-md margin-bottom-lg">
+<section class="margin-bottom-lg">
     <div class="margin-bottom-lg">
       <div class="justify-between flex items-end justify-between@md">
         <h2>Rocommended Articles</h2>
