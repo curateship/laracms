@@ -10,7 +10,7 @@
 
       <div class="flex flex-wrap flex-center gap-sm">
         <a href="#0" class="btn btn--primary">Download</a>
-        <a href="#0" class="color-inherit">Learn more</a>
+        <a href="#0" class="color-inherit link-subtle">Learn more</a>
       </div>
     </div>
   </div>

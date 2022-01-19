@@ -1,12 +1,27 @@
 <!-- Content Table Column -->
 <div class="card">
-  <div class="int-table-actions padding-bottom-xxxs" data-table-controls="table-1">
+  <div class="int-table-actions" data-table-controls="table-1">
 
     <!-- Control Bar -->
     <div class="controlbar--sticky flex justify-between">
-      <div class="margin-xs">
+      <div class="margin-sm">
         <div class="inline-flex items-baseline">
-          <h1 class="text-md color-contrast-high margin-x-xs" for="filterItems">Posts</h1>
+
+        <nav class="breadcrumbs text-sm padding-left-xs" aria-label="Breadcrumbs">
+  <ol class="flex flex-wrap gap-xxs">
+    <li class="breadcrumbs__item">
+      <a href="#0" class="color-inherit link-subtle">Home</a>
+      <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
+    </li>
+
+    <li class="breadcrumbs__item">
+      <a href="#0" class="color-inherit link-subtle">Post</a>
+      <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
+    </li>
+
+    <li class="breadcrumbs__item color-primary" aria-current="page">Published</li>
+  </ol>
+</nav>
         </div>
       </div>
       <!-- END Control Bar-->
@@ -50,7 +65,7 @@
 <div class="margin-top-auto border-top border-contrast-lower"></div><!-- Divider -->
 <div class="padding-sm">
   <div id="table-1" class="int-table text-sm js-int-table">
-    <div class="int-table__inner">
+    <div class="int-table__inner margin-bottom-xs">
       <table class="int-table__table" aria-label="Interactive table example">
         <thead class="js-int-table__header">
           <tr class="int-table__row">
@@ -60,33 +75,6 @@
                 <div class="custom-checkbox__control" aria-hidden="true"></div>
               </div>
             </td>
-  
-            <th class="int-table__cell int-table__cell--th int-table__cell--sort js-int-table__cell--sort">
-              <div class="flex items-center">
-                <span>ID</span>
-  
-                <svg class="icon icon--xxs margin-left-xxxs int-table__sort-icon" aria-hidden="true" viewBox="0 0 12 12">
-                  <polygon class="arrow-up" points="6 0 10 5 2 5 6 0" />
-                  <polygon class="arrow-down" points="6 12 2 7 10 7 6 12" /></svg>
-              </div>
-  
-              <ul class="sr-only js-int-table__sort-list">
-                <li>
-                  <input type="radio" name="sortingId" id="sortingIdNone" value="none" checked>
-                  <label for="sortingIdNone">No sorting</label>
-                </li>
-  
-                <li>
-                  <input type="radio" name="sortingId" id="sortingIdAsc" value="asc">
-                  <label for="sortingIdAsc">Sort in ascending order</label>
-                </li>
-  
-                <li>
-                  <input type="radio" name="sortingId" id="sortingIdDes" value="desc">
-                  <label for="sortingIdDes">Sort in descending order</label>
-                </li>
-              </ul>
-            </th>
   
             <th class="int-table__cell int-table__cell--th int-table__cell--sort js-int-table__cell--sort">
               <div class="flex items-center">
@@ -183,8 +171,15 @@
                 <div class="custom-checkbox__control" aria-hidden="true"></div>
               </div>
             </th>
-            <td class="int-table__cell">1</td>
-            <td class="int-table__cell" aria-controls="edit-modal"><a href="#0">Template Name 1</a></td>
+            <td class="int-table__cell flex">
+            <figure class="width-lg height-lg radius-50% flex-shrink-0 overflow-hidden margin-right-xs">
+              <img class="block width-100% height-100% object-cover" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
+            </figure>
+            <div class="line-height-xs">
+              <div class="margin-bottom-xxxxs"><a href="#0" class="link-subtle" aria-controls="edit-modal">Content Title Content Title Content Title</a></div>
+              <p class="color-contrast-medium"><a href="#0" class="text-sm link-subtle">james4523</a></p>       
+            </td>
+
             <td class="int-table__cell">Published</td>
             <td class="int-table__cell">01/01/2020</td>
             <td class="int-table__cell"><button class="btn btn--primary" aria-controls="preview-modal">Preview</button></td>
@@ -199,6 +194,38 @@
               </button>
             </td>
           </tr>
+
+          <tr class="int-table__row">
+            <th class="int-table__cell" scope="row">
+              <div class="custom-checkbox int-table__checkbox">
+                <input class="custom-checkbox__input js-int-table__select-row" type="checkbox" aria-label="Select this row" />
+                <div class="custom-checkbox__control" aria-hidden="true"></div>
+              </div>
+            </th>
+            <td class="int-table__cell flex">
+            <figure class="width-lg height-lg radius-50% flex-shrink-0 overflow-hidden margin-right-xs">
+              <img class="block width-100% height-100% object-cover" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
+            </figure>
+            <div class="line-height-xs">
+              <p class="margin-bottom-xxxxs"><a href="#0" class="link-subtle" aria-controls="edit-modal">Content Title Content Title Content Title</a></p>
+              <p class="color-contrast-medium"><a href="#0" class="text-sm link-subtle">james4523</a></p>     
+            </td>
+
+            <td class="int-table__cell">Published</td>
+            <td class="int-table__cell">01/01/2020</td>
+            <td class="int-table__cell"><button class="btn btn--primary" aria-controls="preview-modal">Preview</button></td>
+            <td class="int-table__cell">
+              <button class="reset int-table__menu-btn margin-left-auto">
+                <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 16 16" aria-controls="dialog">
+                  <g>
+                    <path d="M2,6v8c0,1.1,0.9,2,2,2h8c1.1,0,2-0.9,2-2V6H2z"></path>
+                    <path d="M12,3V1c0-0.6-0.4-1-1-1H5C4.4,0,4,0.4,4,1v2H0v2h16V3H12z M10,3H6V2h4V3z"></path>
+                  </g>
+               </svg>
+              </button>
+            </td>
+          </tr>
+
         </tbody>
       </table>
     </div>

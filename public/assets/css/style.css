@@ -14925,6 +14925,20 @@ Usage: codyhouse.co/license
 
 /* -------------------------------- 
 
+File#: _1_breadcrumbs
+Title: Breadcrumbs
+Descr: List of links to help the user move within website structure
+Usage: codyhouse.co/license
+
+-------------------------------- */
+.breadcrumbs__item {
+  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* -------------------------------- 
+
 File#: _1_card-v14
 Title: Card v14
 Descr: Container of information used as teaser for further content exploration
