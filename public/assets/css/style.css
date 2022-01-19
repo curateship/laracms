@@ -16809,6 +16809,71 @@ Usage: codyhouse.co/license
 
 /* -------------------------------- 
 
+File#: _1_pagination
+Title: Pagination 
+Descr: Component used to navigate through pages of related content
+Usage: codyhouse.co/license
+
+-------------------------------- */
+.pagination__list > li {
+  display: inline-block;
+}
+
+.pagination--split .pagination__list {
+  width: 100%;
+}
+.pagination--split .pagination__list > *:first-child {
+  margin-right: auto;
+}
+.pagination--split .pagination__list > *:last-child {
+  margin-left: auto;
+}
+
+.pagination__item {
+  display: inline-block;
+  display: inline-flex;
+  height: 100%;
+  align-items: center;
+  padding: var(--space-xs) calc(1.355 * var(--space-xs));
+  white-space: nowrap;
+  line-height: 1;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--color-contrast-high);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  will-change: transform;
+  transition: 0.2s;
+}
+.pagination__item:hover:not(.pagination__item--selected):not(.pagination__item--ellipsis) {
+  background-color: hsla(var(--color-contrast-higher-h), var(--color-contrast-higher-s), var(--color-contrast-higher-l), 0.1);
+}
+.pagination__item:active {
+  transform: translateY(2px);
+}
+
+.pagination__item--selected {
+  background-color: var(--color-contrast-higher);
+  color: var(--color-bg);
+  box-shadow: var(--shadow-sm);
+}
+
+.pagination__item--disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.pagination__jumper .form-control {
+  width: 3em;
+  margin-right: var(--space-xs);
+}
+.pagination__jumper em {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* -------------------------------- 
+
 File#: _1_popover
 Title: Popover
 Descr: A pop-up box controlled by a trigger element
