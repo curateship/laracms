@@ -31,7 +31,7 @@
   </div>
 
   <div class="text-center">
-    <p class="text-sm"><a href="/login">&larr; Back to login</a></p>
+    <p class="text-sm"><a href="{{ route('login') }}">&larr; Back to login</a></p>
   </div>
 </form>
 </form>

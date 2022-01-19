@@ -1,5 +1,5 @@
 <!-- 👇 Sidebar Wrapper-->
-<div class="card">
+<div class="card display@md">
     <div class="background-bg shadow-md border radius-md position-fixed position-sticky top-0@xs padding-bottom-sm">
       <nav class="sidenav js-sidenav">
          <div class="sidenav__label margin-bottom-xs">

@@ -27,7 +27,7 @@
         </span>
         @enderror
         <input class="form-control width-100%" type="password" name="password" id="input-password" placeholder="Input Password">
-        <span class="text-sm"><a href="#0">Forgot Your Password?</a></span>
+        <span class="text-sm"><a href="{{ route('login') }}" aria-controls="forgot-password-modal">Forgot Your Password?</a></span>
       </div>
 
       <div class="margin-bottom-sm margin-top-md">
@@ -43,4 +43,16 @@
 
 </div>
 <!-- Register Form Wrapper END-->
+
+@parent
+@if($errors->has('email') || $errors->has('password'))
+    <script>
+    $(function() {
+        $('modal-login').modal({
+            show: true
+        });
+    });
+    </script>
+@endif
+
 @endsection
