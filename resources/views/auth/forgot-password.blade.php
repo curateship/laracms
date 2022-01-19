@@ -23,8 +23,7 @@
           {{ $message }}
         </span>
         @enderror
-        <input class="form-control width-100%" type="password" name="email" id="password" placeholder="Input Email">
-        <span class="text-sm"><a href="#0">Forgot Your Password?</a></span>
+        <input class="form-control width-100%" name="email" id="password" placeholder="Input Email you registered with">
       </div>
 
   <div class="margin-bottom-sm">

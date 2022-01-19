@@ -10,7 +10,7 @@
     <form class="password-reset-form">
       <div class="text-component text-center margin-bottom-md">
         <h1>Reset Password</h1>
-          <p>Enter your Email below</p>
+          <p>Enter your new password below</p>
             @if(session('status'))
           <div class="alert alert--success">
             {{ session ('status') }}
