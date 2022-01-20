@@ -14225,6 +14225,44 @@ mark {
   box-shadow: inset 0px 0px 0px 1px hsla(var(--color-contrast-lower-h), var(--color-contrast-lower-s), var(--color-contrast-lower-l), 0), 0px 0px 0px 2px var(--color-error), var(--shadow-sm);
 }
 
+/* 👇 example: custom height utility classes */
+.height-30, .height-40, .height-550 {
+  height: var(--height);
+}
+.height-30.btn, .height-30.form-control, .height-40.btn, .height-40.form-control, .height-550.btn, .height-550.form-control {
+  padding-top: 30;
+  padding-bottom: 0;
+}
+
+.height-30 {
+  --height: 30px;
+}
+
+.height-40 {
+  --height: 40px;
+}
+
+.height-550 {
+  --height: 550px;
+}
+
+/* 👇 example: custom width utility classes */
+.width-40, .width-120 {
+  width: var(--width);
+}
+.width-40.btn, .width-120.btn {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.width-40 {
+  --width: 40px;
+}
+
+.width-120 {
+  --width: 120px;
+}
+
 /*! purgecss start ignore */
 .img-blend {
   position: relative;
@@ -15691,6 +15729,33 @@ Usage: codyhouse.co/license
 }
 .dialog[data-animation=on].dialog--sticky.dialog--is-visible .dialog__content {
   transform: translateY(0);
+}
+
+/* -------------------------------- 
+
+File#: _1_file-upload
+Title: File Upload
+Descr: Custom file input element used to select and upload a file
+Usage: codyhouse.co/license
+
+-------------------------------- */
+html:not(.js) .file-upload__label {
+  display: none;
+}
+
+.js .file-upload__input {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  -webkit-clip-path: inset(50%);
+          clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+}
+.js .file-upload__text--has-max-width {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* -------------------------------- 
@@ -18547,7 +18612,7 @@ Usage: codyhouse.co/license
 }
 
 .int-table__body .int-table__row {
-  border-bottom: 1px solid var(--color-contrast-lower);
+  border-bottom: 0px solid var(--color-contrast-lower);
 }
 .int-table__body .int-table__row:last-child {
   border-bottom: none;

@@ -2,7 +2,7 @@
 <div id="create-modal" class="modal modal--animate-translate-down flex flex-center bg-black bg-opacity-90% padding-md js-modal">
   <div class="modal__content width-100% max-width-sm max-height-100% overflow-auto bg radius-md inner-glow shadow-md flex flex-column" role="alertdialog" aria-labelledby="modal-title-4" aria-describedby="modal-description-4">
     <header class="bg-contrast-lower bg-opacity-50% padding-y-sm padding-x-md flex items-center justify-between flex-shrink-0">
-      <h1 id="modal-title-4" class="text-truncate text-md">Modal title</h1>
+      <h1 id="modal-title-4" class="text-truncate text-md">Add Post</h1>
 
       <button class="reset modal__close-btn modal__close-btn--inner js-modal__close js-tab-focus">
         <svg class="icon icon--xs" viewBox="0 0 16 16">
@@ -20,32 +20,18 @@
             <fieldset class="margin-bottom-md">
 
               <div class="margin-bottom-xs">
-                <label class="form-label margin-bottom-xxs" for="inputEmail">Email</label>
-                <input class="form-control width-100%" type="email" name="inputEmail" id="inputEmail" placeholder="email@myemail.com">
+                <input class="form-control width-100%" type="name" name="inputname" id="inputname" placeholder="Enter Your Title">
               </div>
       
               <div>
-                <label class="form-label margin-bottom-xxs" for="textarea">Textarea</label>
-                <textarea class="form-control width-100%" name="textarea" id="textarea"></textarea>
-                <p class="text-xs color-contrast-medium margin-top-xxs">Use helper text to provide additional information.</p>
+                <textarea class="form-control width-100% height-550" name="textarea" id="textarea" placeholder="Enter Discription"></textarea>
               </div>
-            </fieldset>
-          
-            <fieldset class="margin-bottom-md">
-              <legend class="form-legend">Checkboxes</legend>
-          
-              <div class="flex flex-wrap gap-md">
-                <div>
-                  <input class="checkbox" type="checkbox" id="checkbox1">
-                  <label for="checkbox1">Option 1</label>
-                </div>
-          
-                <div>
-                  <input class="checkbox" type="checkbox" id="checkbox2">
-                  <label for="checkbox2">Option 2</label>
-                </div>
+
+              <label class="form-label margin-bottom-xxs margin-top-md" for="lastName">Enter Tags</label>
+              <div class="margin-bottom-xs">
+                <input class="form-control width-100%" type="name" name="inputname" id="inputname" placeholder="Enter a tag">
               </div>
-              
+
             </fieldset>
           
           </form>
@@ -54,7 +40,8 @@
     <footer class="padding-y-sm padding-x-md bg inner-glow-top shadow-md flex-shrink-0">
       <div class="flex justify-end gap-xs">
         <button class="btn btn--subtle js-modal__close">Cancel</button>
-        <button class="btn btn--primary">Install</button>
+        <button class="btn btn--accent">Save</button>
+        <button class="btn btn--primary">Publish</button>
       </div>
     </footer>
   </div>

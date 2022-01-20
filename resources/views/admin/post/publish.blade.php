@@ -165,7 +165,6 @@
               </ul>
             </th>
   
-            <th class="int-table__cell int-table__cell--th text-left">Preview</th>
             <th class="int-table__cell int-table__cell--th text-right">Action</th>
           </tr>
         </thead>
@@ -183,23 +182,23 @@
             <figure class="width-lg height-lg radius-50% flex-shrink-0 overflow-hidden margin-right-xs">
               <img class="block width-100% height-100% object-cover" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
             </figure>
-            <div class="line-height-xs">
-              <div class="margin-bottom-xxxxs"><a href="#0" class="link-subtle" aria-controls="edit-modal">Content Title Content Title Content Title</a></div>
-              <p class="color-contrast-medium"><a href="#0" class="text-sm link-subtle">james4523</a></p>       
+            <div class="line-height-xs padding-top-xxxs">
+              <div class=""><a href="#0" class="link-subtle" aria-controls="edit-modal">Content Title Content Title Content Title</a></div>
+              <p class="color-contrast-medium"><a href="#0" class="text-sm link-subtle">james4523</a></p>   
+            </div>    
             </td>
 
             <td class="int-table__cell">Published</td>
             <td class="int-table__cell">01/01/2020</td>
-            <td class="int-table__cell"><button class="btn btn--primary" aria-controls="preview-modal">Preview</button></td>
             <td class="int-table__cell">
-              <button class="reset int-table__menu-btn margin-left-auto">
-                <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 16 16" aria-controls="dialog">
-                  <g>
-                    <path d="M2,6v8c0,1.1,0.9,2,2,2h8c1.1,0,2-0.9,2-2V6H2z"></path>
-                    <path d="M12,3V1c0-0.6-0.4-1-1-1H5C4.4,0,4,0.4,4,1v2H0v2h16V3H12z M10,3H6V2h4V3z"></path>
-                  </g>
-               </svg>
+            <button class="reset int-table__menu-btn margin-left-auto js-tab-focus" data-label="Edit row" aria-controls="menu-example">
+                <svg class="icon" viewBox="0 0 16 16">
+                  <circle cx="8" cy="7.5" r="1.5" />
+                  <circle cx="1.5" cy="7.5" r="1.5" />
+                  <circle cx="14.5" cy="7.5" r="1.5" />
+                </svg>
               </button>
+
             </td>
           </tr>
 
@@ -214,23 +213,58 @@
             <figure class="width-lg height-lg radius-50% flex-shrink-0 overflow-hidden margin-right-xs">
               <img class="block width-100% height-100% object-cover" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
             </figure>
-            <div class="line-height-xs">
-              <p class="margin-bottom-xxxxs"><a href="#0" class="link-subtle" aria-controls="edit-modal">Content Title Content Title Content Title</a></p>
-              <p class="color-contrast-medium"><a href="#0" class="text-sm link-subtle">james4523</a></p>     
+            <div class="line-height-xs padding-top-xxxs">
+              <p class=""><a href="#0" class="link-subtle" aria-controls="edit-modal">Content Title Content Title Content Title Content Title Content Title</a></p>
+              <p class="color-contrast-medium"><a href="#0" class="text-sm link-subtle">james4523</a></p> 
+            </div>    
             </td>
 
             <td class="int-table__cell">Published</td>
             <td class="int-table__cell">01/01/2020</td>
-            <td class="int-table__cell"><button class="btn btn--primary" aria-controls="preview-modal">Preview</button></td>
             <td class="int-table__cell">
-              <button class="reset int-table__menu-btn margin-left-auto">
-                <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 16 16" aria-controls="dialog">
-                  <g>
-                    <path d="M2,6v8c0,1.1,0.9,2,2,2h8c1.1,0,2-0.9,2-2V6H2z"></path>
-                    <path d="M12,3V1c0-0.6-0.4-1-1-1H5C4.4,0,4,0.4,4,1v2H0v2h16V3H12z M10,3H6V2h4V3z"></path>
-                  </g>
-               </svg>
+
+            <!-- Action Dropdown -->
+            <button class="reset int-table__menu-btn margin-left-auto js-tab-focus" data-label="Edit row" aria-controls="menu-example">
+                <svg class="icon" viewBox="0 0 16 16">
+                  <circle cx="8" cy="7.5" r="1.5" />
+                  <circle cx="1.5" cy="7.5" r="1.5" />
+                  <circle cx="14.5" cy="7.5" r="1.5" />
+                </svg>
               </button>
+
+              <menu id="menu-example" class="menu js-menu">
+              <li role="menuitem">
+                <span class="menu__content js-menu__content">
+                  <svg class="icon menu__icon" aria-hidden="true" viewBox="0 0 12 12">
+                    <path d="M10.121.293a1,1,0,0,0-1.414,0L1,8,0,12l4-1,7.707-7.707a1,1,0,0,0,0-1.414Z"></path>
+                  </svg>
+                  <span>Edit</span>
+                </span>
+              </li>
+
+              <li role="menuitem">
+                <span class="menu__content js-menu__content">
+                  <svg class="icon menu__icon" aria-hidden="true" viewBox="0 0 16 16">
+                    <path d="M15,4H1C0.4,4,0,4.4,0,5v10c0,0.6,0.4,1,1,1h14c0.6,0,1-0.4,1-1V5C16,4.4,15.6,4,15,4z M14,14H2V6h12V14z"></path>
+                    <rect x="2" width="12" height="2"></rect>
+                  </svg>
+                  <span>Preview</span>
+                </span>
+              </li>
+
+              <li role="menuitem">
+                <span class="menu__content js-menu__content">
+                  <svg class="icon menu__icon" aria-hidden="true" viewBox="0 0 12 12">
+                    <path d="M8.354,3.646a.5.5,0,0,0-.708,0L6,5.293,4.354,3.646a.5.5,0,0,0-.708.708L5.293,6,3.646,7.646a.5.5,0,0,0,.708.708L6,6.707,7.646,8.354a.5.5,0,1,0,.708-.708L6.707,6,8.354,4.354A.5.5,0,0,0,8.354,3.646Z"></path>
+                    <path d="M6,0a6,6,0,1,0,6,6A6.006,6.006,0,0,0,6,0ZM6,10a4,4,0,1,1,4-4A4,4,0,0,1,6,10Z"></path>
+                  </svg>
+                  <span>Delete</span>
+                </span>
+              </li>
+            </menu>
+            <!-- Action Dropdown END-->
+
+            </td>
             </td>
           </tr>
 

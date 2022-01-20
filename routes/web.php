@@ -41,6 +41,14 @@ Route::get('/admin/post/trash', function () {
     return view('admin.post.trash');
 });
 
+Route::get('/admin/post/add', function () {
+    return view('admin.post.add');
+});
+
+Route::get('/admin/post/trash', function () {
+    return view('admin.post.trash');
+});
+
 Route::get('/test', function () {
     return view('pages.test');
 });

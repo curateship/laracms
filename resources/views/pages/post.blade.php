@@ -4,7 +4,7 @@
 <div class="container max-width-lg padding-y-xl grid gap-md">
   <!-- Icon Sidebar -->
   <div class="col-1@md display@md">
-    <div class="position-fixed position-sticky top-0@xs">
+    <div class="position-fixed position-sticky top-0@xs margin-top-md">
       <li class="menu-bar__item" role="menuitem">
         <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 12 12">
         <path d="M10.121.293a1,1,0,0,0-1.414,0L1,8,0,12l4-1,7.707-7.707a1,1,0,0,0,0-1.414Z"></path>
@@ -408,10 +408,8 @@
 
     <!-- Sidebar -->
       <div class="col-3@md">
-        <a class="card-v14 padding-sm flex flex-column position-fixed position-sticky top-0@xs" href="#">
-          
+        <a class="card-v14 padding-sm flex flex-column position-fixed position-sticky top-sm@xs" href="#">
           <h3 class="text-md">Profile Card</h3>
-
           <p class="color-contrast-medium text-sm padding-y-sm">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia minus culpa commodi!</p>
           <div class="avatar-group">
             <div class="avatar">
