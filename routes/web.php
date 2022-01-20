@@ -33,6 +33,14 @@ Route::get('/admin/setting', function () {
     return view('admin.pages.setting');
 });
 
+Route::get('/admin/post', function () {
+    return view('admin.post.publish');
+});
+
+Route::get('/admin/post/trash', function () {
+    return view('admin.post.trash');
+});
+
 Route::get('/test', function () {
     return view('pages.test');
 });

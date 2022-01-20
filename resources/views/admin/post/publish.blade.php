@@ -1,4 +1,14 @@
-<!-- Content Table Column -->
+@extends('admin.apps.master')
+@section('content')
+  
+<!-- 👇 Content Body Wrapper-->
+<section class="margin-y-md">
+@include('admin.partials.modal')
+  <div class="container max-width-adaptive-lg">
+    <div class="grid gap-md justify-between">
+      <div class="col-12@md">
+
+      <!-- Content Table Column -->
 <div class="card">
   <div class="int-table-actions" data-table-controls="table-1">
 
@@ -7,21 +17,19 @@
       <div class="margin-sm">
         <div class="inline-flex items-baseline">
 
-        <nav class="breadcrumbs text-sm padding-left-xs" aria-label="Breadcrumbs">
-  <ol class="flex flex-wrap gap-xxs">
-    <li class="breadcrumbs__item">
-      <a href="#0" class="color-inherit link-subtle">Home</a>
-      <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
-    </li>
+          <!-- Bread Crumb -->
+          <nav class="breadcrumbs text-sm padding-left-xs" aria-label="Breadcrumbs">
+            <ol class="flex flex-wrap gap-xxs">
+              <li class="breadcrumbs__item">
+                <a href="/admin" class="color-inherit link-subtle">Home</a>
+                <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
+              </li>
 
-    <li class="breadcrumbs__item">
-      <a href="#0" class="color-inherit link-subtle">Post</a>
-      <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
-    </li>
+              <li class="breadcrumbs__item color-primary" aria-current="page">Post</li>
+            </ol>
+          </nav>
+          <!-- Bread Crumb END -->
 
-    <li class="breadcrumbs__item color-primary" aria-current="page">Published</li>
-  </ol>
-</nav>
         </div>
       </div>
       <!-- END Control Bar-->
@@ -283,3 +291,9 @@
 <!-- END Content Body Wrapper -->
 
 
+      </div>
+      <div class="col-3@md">@include('admin.partials.sidebar')</div>
+    </div>
+  </div>
+</section
+@endsection

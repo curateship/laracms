@@ -10,7 +10,7 @@
       </a>
 
 <!-- 👇 icon buttons --mobile -->
-<div class="justify-between flex gap-xs">
+<div class="justify-between flex gap-xs"> 
   <div class="mega-nav__icon-btns mega-nav__icon-btns--mobile padding-sm">
 
 <!-- 👇 User Dropdown -->
@@ -107,137 +107,10 @@
         </ul>
 
         <ul class="f-header__list flex-grow flex-basis-0 justify-end@md">
-          <li class="f-header__item"><a href="/login" class="f-header__link">Login</a></li>
-          <li class="f-header__item"><a href="#0" class="f-header__btn btn btn--primary" aria-controls="modal-signup">Sign up</a></li>
+          <li class="f-header__item"><a href="{{ route('login') }}" class="f-header__link" aria-controls="modal-login">Login</a></li>
+          <li class="f-header__item"><a href="{{ route('register') }}" class="f-header__btn btn btn--primary" aria-controls="modal-signup">Sign up</a></li>
         </ul>
       </div>
     </div>
   </header>
 <!-- END -->
-
-<!-- Login Modal Start 👇-->
-<div class="modal modal--animate-scale flex flex-center bg-black bg-opacity-90% padding-md js-modal" id="modal-login">
-  <div class="modal__content width-100% max-width-xs max-height-100% overflow-auto padding-md bg radius-md inner-glow shadow-md" role="alertdialog" aria-labelledby="modal-form-title" aria-describedby="modal-form-description">
-
-    <div class="max-width-xs margin-x-auto">
-      <div class="margin-bottom-xs">
-        <svg class="icon icon--xl" viewBox="0 0 64 64" aria-hidden="true"><path d="M54.053,33.3l-21-13a2,2,0,0,0-2.106,0l-21,13A2,2,0,0,0,9,35V58a2,2,0,0,0,2,2H53a2,2,0,0,0,2-2V35A2,2,0,0,0,54.053,33.3Z" fill="#212121"/><path d="M47,51H17V16a2,2,0,0,1,2-2H45a2,2,0,0,1,2,2Z" fill="#e3e3e3"/><path d="M40,23H24a1,1,0,0,1,0-2H40a1,1,0,0,1,0,2Z" fill="#aeaeae"/><path d="M40,30H24a1,1,0,0,1,0-2H40a1,1,0,0,1,0,2Z" fill="#aeaeae"/><path d="M33,37H24a1,1,0,0,1,0-2h9a1,1,0,0,1,0,2Z" fill="#aeaeae"/><path d="M55,35,32,45.867,9,35V58c0,.015,0,.029,0,.044a1.927,1.927,0,0,0,.027.26c.006.04.008.081.016.12l0,.016c0,.006.006.009.008.014A2,2,0,0,0,11,60H53a2,2,0,0,0,1.951-1.56A1.916,1.916,0,0,0,55,58.022c0-.008.006-.013.006-.022Z" fill="#949494"/><path d="M13,7.029a3,3,0,0,1-3-3,1,1,0,0,0-2,0,3,3,0,0,1-3,3,1,1,0,0,0,0,2,3,3,0,0,1,3,3,1,1,0,0,0,2,0,3,3,0,0,1,3-3,1,1,0,0,0,0-2Z" fill="#ffd764"/><circle cx="55" cy="14" r="3" fill="#ff7163"/></svg>
-      </div>
-
-      <div class="text-component margin-bottom-md">
-        <h3>LOGIN</h3>
-        <a href="#0" class="f-header__btn btn btn--primary" aria-controls="modal-form">Sign up</a>
-      </div>
-
-      <form class="grid gap-xxs">
-        <input class="form-control" aria-label="Email" type="email" placeholder="Email Address">
-        <button class="btn btn--primary">Subscribe</button>
-      </form>
-
-      <p class="text-sm bg-success bg-opacity-20% padding-xs radius-md margin-top-xs" role="alert"><strong>✔ Success!</strong> Welcome aboard, friend!</p>
-
-      <div class="margin-top-sm">
-        <p class="color-contrast-medium text-sm">No spam. Unsubscribe anytime.</p>
-      </div>
-    </div>
-
-    <div class="text-component">
-      <p class="text-xs color-contrast-medium">Lorem ipsum dolor sit, amet <a href="#0" class="color-contrast-high">consectetur adipisicing</a> elit. Nisi molestias hic voluptatibus.</p>
-    </div>
-  </div>
-
-  <button class="reset modal__close-btn modal__close-btn--outer  js-modal__close js-tab-focus">
-    <svg class="icon icon--sm" viewBox="0 0 24 24">
-      <title>Close modal window</title>
-      <g fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="3" y1="3" x2="21" y2="21" />
-        <line x1="21" y1="3" x2="3" y2="21" />
-      </g>
-    </svg>
-  </button>
-</div>
-<!-- Login Modal END-->
-
-<!-- Signup Modal Start 👇-->
-<div class="modal modal--animate-scale flex flex-center bg-black bg-opacity-90% padding-md js-modal" id="modal-signup">
-  <div class="modal__content width-100% max-width-xs max-height-100% overflow-auto padding-md bg radius-md inner-glow shadow-md" role="alertdialog" aria-labelledby="modal-form-title" aria-describedby="modal-form-description">
-    <div class="max-width-xs margin-x-auto">
-
-    <form class="sign-up-form">
-  <div class="text-component text-center margin-bottom-sm">
-    <h1>Get started</h1>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. <br>
-    Already have an account? <a href="#0" class="btn btn--primary" aria-controls="modal-login">Login</a></p>
-  </div>
-
-  <div class="grid gap-xs">
-    <div class="col-7@xs">
-      <button class="btn btn--subtle width-100%">
-        <svg aria-hidden="true" class="icon margin-right-xxxs" viewBox="0 0 16 16"><g><path d="M16,3c-0.6,0.3-1.2,0.4-1.9,0.5c0.7-0.4,1.2-1,1.4-1.8c-0.6,0.4-1.3,0.6-2.1,0.8c-0.6-0.6-1.5-1-2.4-1 C9.3,1.5,7.8,3,7.8,4.8c0,0.3,0,0.5,0.1,0.7C5.2,5.4,2.7,4.1,1.1,2.1c-0.3,0.5-0.4,1-0.4,1.7c0,1.1,0.6,2.1,1.5,2.7 c-0.5,0-1-0.2-1.5-0.4c0,0,0,0,0,0c0,1.6,1.1,2.9,2.6,3.2C3,9.4,2.7,9.4,2.4,9.4c-0.2,0-0.4,0-0.6-0.1c0.4,1.3,1.6,2.3,3.1,2.3 c-1.1,0.9-2.5,1.4-4.1,1.4c-0.3,0-0.5,0-0.8,0c1.5,0.9,3.2,1.5,5,1.5c6,0,9.3-5,9.3-9.3c0-0.1,0-0.3,0-0.4C15,4.3,15.6,3.7,16,3z"></path></g></svg>
-        <span>Join using Twitter</span>
-      </button>
-    </div>
-
-    <div class="col-7@xs">
-      <button class="btn btn--subtle width-100%">
-        <svg aria-hidden="true" class="icon margin-right-xxxs" viewBox="0 0 16 16"><g><path d="M15.3,0H0.7C0.3,0,0,0.3,0,0.7v14.7C0,15.7,0.3,16,0.7,16H8v-5H6V8h2V6c0-2.1,1.2-3,3-3 c0.9,0,1.8,0,2,0v3h-1c-0.6,0-1,0.4-1,1v1h2.6L13,11h-2v5h4.3c0.4,0,0.7-0.3,0.7-0.7V0.7C16,0.3,15.7,0,15.3,0z"></path></g></svg>
-        <span>Join using Facebook</span>
-      </button>
-    </div>
-  </div>
-
-  <p class="text-center margin-y-sm">or</p>
-
-  <div class="margin-bottom-sm">
-    <div class="grid gap-xs">
-      <div class="col-7@md">
-        <label class="form-label margin-bottom-xxxs" for="input-first-name">First name</label>
-        <input class="form-control width-100%" type="text" name="input-first-name" id="input-first-name">
-      </div>
-
-      <div class="col-7@md">
-        <label class="form-label margin-bottom-xxxs" for="input-last-name">Last name</label>
-        <input class="form-control width-100%" type="text" name="input-last-name" id="input-last-name">
-      </div>
-    </div>
-  </div>
-
-  <div class="margin-bottom-sm">
-    <label class="form-label margin-bottom-xxxs" for="input-email">Email</label>
-    <input class="form-control width-100%" type="email" name="input-email" id="input-email" placeholder="email@myemail.com">
-  </div>
-
-  <div class="margin-bottom-md">
-    <label class="form-label margin-bottom-xxxs" for="input-password">Password</label>
-    <input class="form-control width-100%" type="password" name="input-password" id="input-password">
-    <p class="text-xs color-contrast-medium margin-top-xxs">Minimum 6 characters</p>
-  </div>
-
-  <div class="margin-bottom-md">
-    <input class="checkbox" type="checkbox" id="check-newsletter">
-    <label for="check-newsletter">Send me updates about {productName}</label>
-  </div>
-
-  <div class="margin-bottom-sm">
-    <button class="btn btn--primary btn--md width-100%">Join</button>
-  </div>
-
-  <div class="text-center">
-    <p class="text-xs color-contrast-medium">By joining, you agree to our <a href="#0">Terms</a> and <a href="#0">Privacy Policy</a>.</p>
-  </div>
-</form>
-
-    </div>
-  </div>
-
-  <button class="reset modal__close-btn modal__close-btn--outer  js-modal__close js-tab-focus">
-    <svg class="icon icon--sm" viewBox="0 0 24 24">
-      <title>Close modal window</title>
-      <g fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="3" y1="3" x2="21" y2="21" />
-        <line x1="21" y1="3" x2="3" y2="21" />
-      </g>
-    </svg>
-  </button>
-</div>
-<!-- Signup Modal END-->
