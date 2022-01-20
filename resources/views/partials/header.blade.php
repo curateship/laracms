@@ -106,11 +106,23 @@
           <li class="f-header__item"><a href="#0" class="f-header__link">Contact</a></li>
         </ul>
 
+        @if (Route::has('login'))
         <ul class="f-header__list flex-grow flex-basis-0 justify-end@md">
+          
+          @auth
+          <li class="f-header__item"><a href="/admin" class="f-header__btn btn btn--subtle">Admin</a></li>
+          <li class="f-header__item"><a href="{{ route('logout') }}" class="f-header__btn btn btn--basic" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Log Out</a></li>
+
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none">
+            @csrf
+          </form>
+          @else
           <li class="f-header__item"><a href="{{ route('login') }}" class="f-header__link" aria-controls="modal-login">Login</a></li>
           <li class="f-header__item"><a href="{{ route('register') }}" class="f-header__btn btn btn--primary" aria-controls="modal-signup">Sign up</a></li>
-          <li class="f-header__item"><a href="/admin" class="f-header__btn btn btn--subtle">Admin</a></li>
+          @endif
+          
         </ul>
+        @endif
       </div>
     </div>
   </header>

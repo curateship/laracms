@@ -60,5 +60,5 @@ Route::get('/test', function () {
 */
 
 Route::get('/home', function () {
-    dd(\illuminate\Support\Facades\Auth::user());
+    return view('home');
 })->middleware('auth', 'verified');
