@@ -17054,6 +17054,13 @@ Usage: codyhouse.co/license
   background-color: hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.1);
 }
 
+.hero--overlay-layer {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  /* Full size on page */
+}
+
 /* -------------------------------- 
 
 File#: _1_read-more
