@@ -1,4 +1,4 @@
-<section class="hero hero--overlay-layer position-relative padding-y-xxl img-blend" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg" style="background-image: url('/assets/img/intro-img-1.jpg')">
+<section class="hero hero--overlay-layer position-relative padding-top-xxxl padding-bottom-lg img-blend" data-blend-pattern="1,0,1,0" data-blend-color="--color-bg" style="background-image: url('{{\App\Components\Images::randomBackground()}}')">
   <div class="container max-width-adaptive-sm">
     <div class="position-relative z-index-2 text-center">
       <div class="text-sm opacity-60% margin-bottom-xxs">This is a Label</div>
