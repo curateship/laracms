@@ -3,7 +3,7 @@
 @use '_1_modal-window.scss' as *;
 @use '_2_full-screen-search.scss' as *;
 
-/* -------------------------------- 
+/* --------------------------------
 
 File#: _3_main-header-v2
 Title: Main Header v2
@@ -30,7 +30,7 @@ Usage: codyhouse.co/license
 
 .header-v2, .header-v2__wrapper {
   position: relative;
-  z-index: var(--z-index-header, 3); 
+  z-index: var(--z-index-header, 3);
   height: var(--header-v2-height);
 }
 
@@ -65,8 +65,8 @@ Usage: codyhouse.co/license
   background-color: var(--color-bg-light);
   border-radius: var(--radius-md);
   box-shadow: var(--inner-glow), var(--shadow-md);
-  z-index: var(--z-index-popover, 5); 
-  
+  z-index: var(--z-index-popover, 5);
+
   // hide
   position: absolute;
   clip: rect(1px, 1px, 1px, 1px);
@@ -183,7 +183,7 @@ Usage: codyhouse.co/license
     left: 0;
     width: 100%;
     background-color: var(--color-bg);
-    z-index: var(--z-index-fixed-element, 10); 
+    z-index: var(--z-index-fixed-element, 10);
     transition: transform .2s;
   }
 
@@ -297,7 +297,7 @@ Usage: codyhouse.co/license
     position: absolute;
     top: 100%;
     left: calc(50% - 100px);
-    z-index: var(--z-index-popover, 5); 
+    z-index: var(--z-index-popover, 5);
     width: 200px;
     background-color: var(--color-bg-light);
     border-radius: var(--radius-md);

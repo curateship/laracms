@@ -2,7 +2,7 @@
 @use '_2_dropdown.scss' as *;
 @use '_1_tabs.scss' as *;
 
-/* -------------------------------- 
+/* --------------------------------
 
 File#: _3_custom-header-icons
 Title: Custom header Icons
@@ -42,52 +42,143 @@ Usage: For LaraCMS
   }
 }
 
-
-/* animated search button */
-.header__icon-btn--search {
+.header__icon-btn--search{
     .icon__group {
-      transform-origin: 12px 12px;
-      transform: rotate(0deg);
-      transition: transform .3s var(--ease-out);
-  
-      > *:nth-child(1) {
-        stroke-dashoffset: 34;
-        stroke-dasharray: 24;
-      }
-  
-      > *:nth-child(2) {
-        stroke-dashoffset: 24;
-        stroke-dasharray: 24;
-      }
-  
-      > *:nth-child(3) {
-        transform-origin: 9.5px 9.5px;
-        transform: rotate(45deg);
-        stroke-dashoffset: 84;
-        stroke-dasharray: 42;
-        opacity: 1;
-      }
-    }
-  
-    &.header__icon-btn--state-b {
-      .icon__group {
-        transform: rotate(-90deg);
-  
         > *:nth-child(1) {
-          stroke-dashoffset: 48;
+            stroke-dashoffset: 34;
+            stroke-dasharray: 24;
         }
-  
+
         > *:nth-child(2) {
-          stroke-dashoffset: 48;
+            stroke-dashoffset: 24;
+            stroke-dasharray: 24;
         }
-  
-        > *:nth-child(3) {
-          stroke-dashoffset: 42;
-          opacity: 0;
-        }
-      }
     }
-  }
+}
 
+// animated search button
+.anim-menu-btn--search {
+    font-size: 24px; // icon size;
 
+    .icon__group {
+        transform-origin: 12px 12px;
+        transform: rotate(0deg);
+        transition: transform 0.3s var(--ease-out);
 
+        > * {
+            transition: transform 0.3s var(--ease-in-out),
+            stroke-dashoffset 0.3s, opacity 0.3s;
+        }
+
+        > *:nth-child(1) {
+            stroke-dashoffset: 34;
+            stroke-dasharray: 24;
+        }
+
+        > *:nth-child(2) {
+            stroke-dashoffset: 24;
+            stroke-dasharray: 24;
+        }
+
+        > *:nth-child(3) {
+            transform-origin: 9.5px 9.5px;
+            transform: rotate(45deg);
+            stroke-dashoffset: 84;
+            stroke-dasharray: 42;
+            opacity: 1;
+        }
+    }
+
+    &.anim-menu-btn--state-b {
+        .icon__group {
+            transform: rotate(-90deg);
+
+            > *:nth-child(1) {
+                stroke-dashoffset: 48;
+            }
+
+            > *:nth-child(2) {
+                stroke-dashoffset: 48;
+            }
+
+            > *:nth-child(3) {
+                stroke-dashoffset: 42;
+                opacity: 0;
+            }
+        }
+    }
+}
+
+// animated avatar icon
+.anim-menu-btn--avatar {
+    .icon__group {
+        transform-origin: 12px 12px;
+        transform: rotate(0deg);
+        transition: transform 0.3s var(--ease-out);
+
+        > * {
+            transition: transform 0.3s var(--ease-in-out),
+            stroke-dashoffset 0.3s, opacity 0.3s;
+        }
+
+        > *:nth-child(5) {
+            stroke-dashoffset: 24;
+            stroke-dasharray: 24;
+        }
+
+        > *:nth-child(6) {
+            stroke-dashoffset: 24;
+            stroke-dasharray: 24;
+        }
+    }
+
+    &.anim-menu-btn--state-b {
+        .icon__group {
+            transform: rotate(-90deg);
+
+            > *:nth-child(1), > *:nth-child(2), > *:nth-child(3), > *:nth-child(4) {
+                opacity: 0;
+            }
+
+            > *:nth-child(5) {
+                stroke-dashoffset: 48;
+            }
+            > *:nth-child(6) {
+                stroke-dashoffset: 48;
+            }
+        }
+    }
+}
+
+.avatar-cross-fix{
+    display: inline-block;
+    color: inherit;
+    fill: var(--color-contrast-lower);
+    stroke: var(--color-contrast-lower);
+    height: 1em;
+    width: 1em;
+    line-height: 1;
+    flex-shrink: 0;
+    max-width: initial;
+}
+
+.anim-menu-btn--avatar{
+    .icon{
+        height: 22px;
+        width: 22px;
+    }
+}
+
+.cross-fix{
+    background-image: none;
+}
+
+.header-menu-box{
+    @include breakpoint(xs){
+        flex: 1;
+    }
+}
+
+.header-v2__nav-align-right {
+    justify-content: flex-end !important;
+}

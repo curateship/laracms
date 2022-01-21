@@ -14,53 +14,70 @@
       </div>
       <!-- LOGO End -->
 
-      <div class="flex">
-      <!-- 👇 icon buttons --Mobile -->
-        <li class="header__icon-btns margin-left-sm">
-            <div class="dropdown inline-block js-dropdown">
-              <div class="header__icon-btn dropdown__wrapper inline-block padding-x-sm">
-                <a href="#0" class="color-inherit flex height-100% width-100% flex-center dropdown__trigger js-dropdown__trigger">
-                  <svg class="icon" viewBox="0 0 24 24">
-                    <title>Go to account settings</title>
-                    <g class="icon__group" fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2">
-                      <circle cx="12" cy="6" r="4" />
-                      <path d="M12 13a8 8 0 00-8 8h16a8 8 0 00-8-8z" />
+      <div class="flex header-menu-box">
+        <!-- 👇 icon buttons --Mobile -->
+        <div class="header-v2__nav-control header__icon-btns margin-left-sm">
+            <!-- Mobile User menu -->
+            <button class="header-v2__nav-control reset anim-menu-btn anim-menu-btn--avatar js-anim-menu-btn" aria-label="Toggle icon" menu-target="user-menu">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
+                    <title>face-man</title>
+                    <g class="icon__group" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" transform="translate(0.5 0.5)" fill="white" stroke="white">
+                        <path fill="none" stroke-miterlimit="10"
+                              d="M1.051,10.933 C4.239,6.683,9.875,11.542,16,6c3,4.75,6.955,4.996,6.955,4.996"></path>
+                        <circle data-stroke="none" fill="currentColor" cx="7.5" cy="14.5" r="1.5" stroke-linejoin="miter"
+                                stroke-linecap="square" stroke="none"></circle>
+                        <circle data-stroke="none" fill="currentColor" cx="16.5" cy="14.5" r="1.5" stroke-linejoin="miter"
+                                stroke-linecap="square" stroke="none"></circle>
+                        <circle fill="none" stroke="currentColor" stroke-miterlimit="10" cx="12" cy="12" r="11"></circle>
+                        <path d="M4.222 4.222l15.556 15.556" />
+                        <path d="M19.778 4.222L4.222 19.778" />
                     </g>
-                  </svg>
-                </a>
-
-                <ul class="dropdown__menu js-dropdown__menu" aria-label="submenu">
-                  <li><a href="#0" class="dropdown__item">Profile</a></li>
-                  <li><a href="#0" class="dropdown__item">Notifications</a></li>
-                  <li><a href="#0" class="dropdown__item">Messages</a></li>
-                  <li class="dropdown__separator" role="separator"></li>
-                  <li><a href="#0" class="dropdown__item">Account Settings</a></li>
-                  <li><a href="#0" class="dropdown__item">Log out</a></li>
-                </ul>
-              </div>
-            </div>
-
-            <button class="reset header__icon-btn header__icon-btn--search js-tab-focus" aria-label="Toggle search" aria-controls="modal-search">
-              <svg class="icon" viewBox="0 0 24 24">
-                <g class="icon__group" fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2">
-                  <path d="M4.222 4.222l15.556 15.556" />
-                  <path d="M19.778 4.222L4.222 19.778" />
-                  <circle cx="9.5" cy="9.5" r="6.5" />
-                </g>
-              </svg>
+                </svg>
             </button>
-          </li>
-        <!-- icon buttons --Mobile END -->
 
-      <!-- 👇 Mobile Hamburger Menu -->
-      <button class="header-v2__nav-control reset anim-menu-btn js-anim-menu-btn js-tab-focus" aria-label="Toggle menu">
-        <i class="anim-menu-btn__icon anim-menu-btn__icon--close" aria-hidden="true"></i>
-      </button>
-      <!-- Mobile Hamburger Menu End -->
-      </div>
+            <nav id="user-menu" class="header-v2__nav header-v2__nav-dropdown">
+                <ul class="header-v2__nav-list">
+                    @include('partials.header-user-menu')
+                </ul>
+            </nav>
+            <!-- End mobile user menu -->
+
+            <!-- Mobile search -->
+            <button class="padding-top-xxxxs padding-left-xxxs header-v2__nav-control reset anim-menu-btn anim-menu-btn--search js-anim-menu-btn" aria-label="Toggle search" menu-target="search-menu">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <g class="icon__group" fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2">
+                        <path d="M4.222 4.222l15.556 15.556" />
+                        <path d="M19.778 4.222L4.222 19.778" />
+                        <circle cx="9.5" cy="9.5" r="6.5" />
+                    </g>
+                </svg>
+            </button>
+
+            <!-- Search Box -->
+            <div id="search-menu" class="header-v2__nav header-v2__nav-search">
+                <div class="">
+                    <form action="" method="GET">
+                        <input type="hidden" name="limit" value="">
+                        <input type="hidden" name="sort" value="">
+                        <input type="hidden" name="order" value="">
+                        <input class="form-control width-100%" type="text" name="q" value="" id="megasite-search" placeholder="Search something" aria-label="Search">
+                    </form>
+                    <div>
+                    </div>
+                </div>
+            </div>
+            <!-- End mobile search -->
+
+          <!-- 👇 Mobile Hamburger Menu -->
+          <button class="header-v2__nav-control reset anim-menu-btn js-anim-menu-btn" aria-label="Toggle menu" menu-target="main-menu">
+            <i class="anim-menu-btn__icon anim-menu-btn__icon--close" aria-hidden="true"></i>
+          </button>
+          <!-- Mobile Hamburger Menu End -->
+        </div>
+      <!-- icon buttons --Mobile END -->
 
       <!-- 👇 Navigation Menu -->
-      <nav class="header-v2__nav" role="navigation">
+      <nav id="main-menu" class="header-v2__nav" role="navigation">
         <ul class="header-v2__nav-list header-v2__nav-list--main">
 
           <li class="header-v2__nav-item header-v2__nav-item--main header-v2__nav-item--has-children">
@@ -117,78 +134,71 @@
 
           <li class="header-v2__nav-item header-v2__nav-item--main"><a href="#0" class="header-v2__nav-link">Pricing</a></li>
         </ul>
+      </nav>
         <!-- Navigation Menu End -->
 
         <!-- 👇 icon buttons --desktop -->
-        <li class="header__icon-btns header__icon-btns--desktop margin-left-sm display@md">
+        <div class="header-v2__nav header__icon-btns header-v2__nav-align-right header__icon-btns--desktop margin-left-sm">
             <div class="dropdown inline-block js-dropdown">
-              <div class="header__icon-btn dropdown__wrapper inline-block padding-x-sm">
-                <a href="#0" class="color-inherit flex height-100% width-100% flex-center dropdown__trigger js-dropdown__trigger">
-                  <svg class="icon" viewBox="0 0 24 24">
-                    <title>Go to account settings</title>
-                    <g class="icon__group" fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2">
-                      <circle cx="12" cy="6" r="4" />
-                      <path d="M12 13a8 8 0 00-8 8h16a8 8 0 00-8-8z" />
-                    </g>
-                  </svg>
-                </a>
+                <div class="header__icon-btn dropdown__wrapper inline-block padding-x-sm">
+                    <a href="#0" class="color-inherit flex height-100% width-100% flex-center dropdown__trigger js-dropdown__trigger">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <g class="icon__group" fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2">
+                                <circle cx="12" cy="6" r="4" />
+                                <path d="M12 13a8 8 0 00-8 8h16a8 8 0 00-8-8z" />
+                            </g>
+                        </svg>
+                    </a>
 
-                <ul class="dropdown__menu js-dropdown__menu" aria-label="submenu">
-                  <li><a href="#0" class="dropdown__item">Profile</a></li>
-                  <li><a href="#0" class="dropdown__item">Notifications</a></li>
-                  <li><a href="#0" class="dropdown__item">Messages</a></li>
-                  <li class="dropdown__separator" role="separator"></li>
-                  <li><a href="#0" class="dropdown__item">Account Settings</a></li>
-                  <li><a href="#0" class="dropdown__item">Log out</a></li>
-                </ul>
-              </div>
+                    <ul class="dropdown__menu js-dropdown__menu" aria-label="submenu">
+                        @include('partials.header-user-menu')
+                    </ul>
+                </div>
             </div>
 
             <button class="reset header__icon-btn header__icon-btn--search js-tab-focus" aria-label="Toggle search" aria-controls="modal-search">
-              <svg class="icon" viewBox="0 0 24 24">
-                <g class="icon__group" fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2">
-                  <path d="M4.222 4.222l15.556 15.556" />
-                  <path d="M19.778 4.222L4.222 19.778" />
-                  <circle cx="9.5" cy="9.5" r="6.5" />
-                </g>
-              </svg>
+                <svg class="icon" viewBox="0 0 24 24">
+                    <g class="icon__group" fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2">
+                        <path d="M4.222 4.222l15.556 15.556" />
+                        <path d="M19.778 4.222L4.222 19.778" />
+                        <circle cx="9.5" cy="9.5" r="6.5" />
+                    </g>
+                </svg>
             </button>
-          </li>
-          <!-- 👇 icon buttons --desktop END -->
-
-          <!-- 👇 Search Modal --desktop -->
-          <div class="modal modal--search modal--animate-fade bg bg-opacity-90% flex flex-center padding-md backdrop-blur-10 js-modal" id="modal-search">
-            <div class="modal__content width-100% max-width-sm max-height-100% overflow-auto" role="alertdialog" aria-labelledby="modal-search-title" aria-describedby="">
-              <form class="full-screen-search">
-                <label for="search-input-x" id="modal-search-title" class="sr-only">Search</label>
-                <input class="reset full-screen-search__input" type="search" name="search-input-x" id="search-input-x" placeholder="Search...">
-                  <button class="reset full-screen-search__btn">
-                    <svg class="icon" viewBox="0 0 24 24">
-                      <title>Search</title>
-                      <g stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" stroke="currentColor" fill="none" stroke-miterlimit="10">
-                      <line x1="22" y1="22" x2="15.656" y2="15.656"></line>
-                      <circle cx="10" cy="10" r="8"></circle>
-                      </g>
-                      </svg>
-                  </button>
-              </form>
-          </div>
-
-          <button class="reset modal__close-btn modal__close-btn--outer  js-modal__close js-tab-focus">
-            <svg class="icon icon--sm" viewBox="0 0 24 24">
-              <title>Close modal window</title>
-              <g fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="3" y1="3" x2="21" y2="21" />
-              <line x1="21" y1="3" x2="3" y2="21" />
-              </g>
-            </svg>
-            </button>
-          </div>
-          <!-- Search Modal --desktop End -->
-
-        </ul><!-- List End -->
-      </nav><!-- Navigation End -->
+        </div>
+        <!-- 👇 icon buttons --desktop END -->
+      </div>
     </div>
   </div>
+
+    <!-- 👇 Search Modal --desktop -->
+    <div class="modal modal--search modal--animate-fade bg bg-opacity-90% flex flex-center padding-md backdrop-blur-10 js-modal" id="modal-search">
+        <div class="modal__content width-100% max-width-sm max-height-100% overflow-auto" role="alertdialog" aria-labelledby="modal-search-title" aria-describedby="">
+            <form class="full-screen-search">
+                <label for="search-input-x" id="modal-search-title" class="sr-only">Search</label>
+                <input class="reset full-screen-search__input" type="search" name="search-input-x" id="search-input-x" placeholder="Search...">
+                <button class="reset full-screen-search__btn">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <title>Search</title>
+                        <g stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" stroke="currentColor" fill="none" stroke-miterlimit="10">
+                            <line x1="22" y1="22" x2="15.656" y2="15.656"></line>
+                            <circle cx="10" cy="10" r="8"></circle>
+                        </g>
+                    </svg>
+                </button>
+            </form>
+        </div>
+
+        <button class="reset modal__close-btn modal__close-btn--outer  js-modal__close js-tab-focus">
+            <svg class="icon icon--sm" viewBox="0 0 24 24">
+                <title>Close modal window</title>
+                <g fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="3" x2="21" y2="21" />
+                    <line x1="21" y1="3" x2="3" y2="21" />
+                </g>
+            </svg>
+        </button>
+    </div>
+    <!-- Search Modal --desktop End -->
 </header>
 
