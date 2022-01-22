@@ -169,16 +169,27 @@ Usage: For LaraCMS
     }
 }
 
+.desktop-user-avatar{
+    height: 22px;
+    width: 22px;
+    max-width: 22px;
+}
+
 .cross-fix{
     background-image: none;
 }
 
 .header-menu-box{
-    @include breakpoint(xs){
+    @include breakpoint(md){
         flex: 1;
     }
 }
 
 .header-v2__nav-align-right {
     justify-content: flex-end !important;
+}
+
+.author--minimal-mobile {
+    --author-img-size: 1.1em;
+    align-items: center;
 }

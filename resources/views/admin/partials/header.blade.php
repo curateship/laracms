@@ -18,6 +18,24 @@
         <!-- 👇 icon buttons --Mobile -->
         <div class="header-v2__nav-control header__icon-btns margin-left-sm">
             <!-- Mobile User menu -->
+            <!-- With avatar -->
+            <button class="header-v2__nav-control reset anim-menu-btn js-anim-menu-btn switch-icon switch-icon--rotate js-switch-icon js-tab-focus" aria-label="Toggle icon" menu-target="user-menu">
+                <div class="mega-nav__icon-btn dropdown__wrapper inline-block author author--minimal-mobile switch-icon__icon switch-icon__icon--a">
+                    <div class="author__img-wrapper author--minimal-mobile dropdown__trigger">
+                        <img src="assets/img/avatar.png" alt="Logged in user avatar">
+                    </div>
+                </div>
+                <svg class="avatar-cross-fix switch-icon__icon switch-icon__icon--b" viewBox="0 0 20 20">
+                    <g fill="none" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" stroke-width="1">
+                        <line x1="15" y1="5" x2="5" y2="15" stroke="currentColor"></line>
+                        <line x1="15" y1="15" x2="5" y2="5" stroke="currentColor"></line>
+                    </g>
+                </svg>
+            </button>
+            <!-- End with avatar -->
+
+            <!-- Without avatar -->
+            <!--
             <button class="header-v2__nav-control reset anim-menu-btn anim-menu-btn--avatar js-anim-menu-btn" aria-label="Toggle icon" menu-target="user-menu">
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
                     <title>face-man</title>
@@ -34,6 +52,8 @@
                     </g>
                 </svg>
             </button>
+            -->
+            <!-- End without avatar -->
 
             <nav id="user-menu" class="header-v2__nav header-v2__nav-dropdown">
                 <ul class="header-v2__nav-list">
@@ -142,12 +162,20 @@
             <div class="dropdown inline-block js-dropdown">
                 <div class="header__icon-btn dropdown__wrapper inline-block padding-x-sm">
                     <a href="#0" class="color-inherit flex height-100% width-100% flex-center dropdown__trigger js-dropdown__trigger">
+                        <!-- With avatar -->
+                        <img class="desktop-user-avatar" src="assets/img/avatar.png" alt="Logged in user avatar">
+                        <!-- End with avatar -->
+
+                        <!-- Without avatar -->
+                        <!--
                         <svg class="icon" viewBox="0 0 24 24">
                             <g class="icon__group" fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2">
                                 <circle cx="12" cy="6" r="4" />
                                 <path d="M12 13a8 8 0 00-8 8h16a8 8 0 00-8-8z" />
                             </g>
                         </svg>
+                        -->
+                        <!-- End without avatar -->
                     </a>
 
                     <ul class="dropdown__menu js-dropdown__menu" aria-label="submenu">

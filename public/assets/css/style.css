@@ -18582,11 +18582,17 @@ Usage: For LaraCMS
   width: 22px;
 }
 
+.desktop-user-avatar {
+  height: 22px;
+  width: 22px;
+  max-width: 22px;
+}
+
 .cross-fix {
   background-image: none;
 }
 
-@media (min-width: 32rem) {
+@media (min-width: 64rem) {
   .header-menu-box {
     flex: 1;
   }
@@ -18594,6 +18600,11 @@ Usage: For LaraCMS
 
 .header-v2__nav-align-right {
   justify-content: flex-end !important;
+}
+
+.author--minimal-mobile {
+  --author-img-size: 1.1em;
+  align-items: center;
 }
 
 /* -------------------------------- 
