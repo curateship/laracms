@@ -1,7 +1,7 @@
 @extends('apps.master')
 @section('content')
 <div class="container max-width-lg padding-y-xl grid gap-md">
-  
+
     <!-- Author Box -->
         <!-- Author Picture -->
         <div class="author author--featured padding-bottom-sm">
@@ -12,7 +12,7 @@
           <p class="color-contrast-medium text-sm">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia minus culpa commodi!</p>
         </div>
         <!-- END -->
-    </div>  
+    </div>
     <!-- END -->
 
 <!-- New Arts-->
