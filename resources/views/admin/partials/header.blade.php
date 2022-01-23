@@ -178,7 +178,7 @@
                         <!-- End without avatar -->
                     </a>
 
-                    <ul class="dropdown__menu js-dropdown__menu" aria-label="submenu">
+                    <ul id="user-desktop-menu" class="dropdown__menu js-dropdown__menu" aria-label="submenu">
                         @include('partials.header-user-menu')
                     </ul>
                 </div>
