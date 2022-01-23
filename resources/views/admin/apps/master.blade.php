@@ -8,7 +8,7 @@
   <title>Traders</title>
 </head>
 <body data-theme="dark">
-  @include('admin.partials.header')
+  @include('partials.header2')
     @yield('content')
   @include('admin.partials.footer')
 <script src="{{ asset('assets/js/scripts.js') }}"></script>

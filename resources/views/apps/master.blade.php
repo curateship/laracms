@@ -9,7 +9,7 @@
   <title>{{ config ('app.name', 'LaraCMS') }}</title>
 </head>
 <body data-theme="dark">
-  @include('partials.header')
+  @include('partials.header2')
     @yield('content')
   @include('partials.footer')
 <script src="{{ asset('assets/js/scripts.js') }}"></script>

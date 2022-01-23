@@ -18514,7 +18514,7 @@ html:not(.js) .toc .toc__nav {
     content: "static";
   }
 }
-/* -------------------------------- 
+/* --------------------------------
 
 File#: _3_custom-header-icons
 Title: Custom header Icons
@@ -18552,12 +18552,6 @@ Usage: For LaraCMS
   transition: transform 0.3s var(--ease-in-out), stroke-dashoffset 0.3s, opacity 0.3s;
 }
 
-/* animated search button */
-.header__icon-btn--search .icon__group {
-  transform-origin: 12px 12px;
-  transform: rotate(0deg);
-  transition: transform 0.3s var(--ease-out);
-}
 .header__icon-btn--search .icon__group > *:nth-child(1) {
   stroke-dashoffset: 34;
   stroke-dasharray: 24;
@@ -18566,25 +18560,116 @@ Usage: For LaraCMS
   stroke-dashoffset: 24;
   stroke-dasharray: 24;
 }
-.header__icon-btn--search .icon__group > *:nth-child(3) {
+
+.anim-menu-btn--search {
+  font-size: 24px;
+}
+.anim-menu-btn--search .icon__group {
+  transform-origin: 12px 12px;
+  transform: rotate(0deg);
+  transition: transform 0.3s var(--ease-out);
+}
+.anim-menu-btn--search .icon__group > * {
+  transition: transform 0.3s var(--ease-in-out), stroke-dashoffset 0.3s, opacity 0.3s;
+}
+.anim-menu-btn--search .icon__group > *:nth-child(1) {
+  stroke-dashoffset: 34;
+  stroke-dasharray: 24;
+}
+.anim-menu-btn--search .icon__group > *:nth-child(2) {
+  stroke-dashoffset: 24;
+  stroke-dasharray: 24;
+}
+.anim-menu-btn--search .icon__group > *:nth-child(3) {
   transform-origin: 9.5px 9.5px;
   transform: rotate(45deg);
   stroke-dashoffset: 84;
   stroke-dasharray: 42;
   opacity: 1;
 }
-.header__icon-btn--search.header__icon-btn--state-b .icon__group {
+.anim-menu-btn--search.anim-menu-btn--state-b .icon__group {
   transform: rotate(-90deg);
 }
-.header__icon-btn--search.header__icon-btn--state-b .icon__group > *:nth-child(1) {
+.anim-menu-btn--search.anim-menu-btn--state-b .icon__group > *:nth-child(1) {
   stroke-dashoffset: 48;
 }
-.header__icon-btn--search.header__icon-btn--state-b .icon__group > *:nth-child(2) {
+.anim-menu-btn--search.anim-menu-btn--state-b .icon__group > *:nth-child(2) {
   stroke-dashoffset: 48;
 }
-.header__icon-btn--search.header__icon-btn--state-b .icon__group > *:nth-child(3) {
+.anim-menu-btn--search.anim-menu-btn--state-b .icon__group > *:nth-child(3) {
   stroke-dashoffset: 42;
   opacity: 0;
+}
+
+.anim-menu-btn--avatar .icon__group {
+  transform-origin: 12px 12px;
+  transform: rotate(0deg);
+  transition: transform 0.3s var(--ease-out);
+}
+.anim-menu-btn--avatar .icon__group > * {
+  transition: transform 0.3s var(--ease-in-out), stroke-dashoffset 0.3s, opacity 0.3s;
+}
+.anim-menu-btn--avatar .icon__group > *:nth-child(5) {
+  stroke-dashoffset: 24;
+  stroke-dasharray: 24;
+}
+.anim-menu-btn--avatar .icon__group > *:nth-child(6) {
+  stroke-dashoffset: 24;
+  stroke-dasharray: 24;
+}
+.anim-menu-btn--avatar.anim-menu-btn--state-b .icon__group {
+  transform: rotate(-90deg);
+}
+.anim-menu-btn--avatar.anim-menu-btn--state-b .icon__group > *:nth-child(1), .anim-menu-btn--avatar.anim-menu-btn--state-b .icon__group > *:nth-child(2), .anim-menu-btn--avatar.anim-menu-btn--state-b .icon__group > *:nth-child(3), .anim-menu-btn--avatar.anim-menu-btn--state-b .icon__group > *:nth-child(4) {
+  opacity: 0;
+}
+.anim-menu-btn--avatar.anim-menu-btn--state-b .icon__group > *:nth-child(5) {
+  stroke-dashoffset: 48;
+}
+.anim-menu-btn--avatar.anim-menu-btn--state-b .icon__group > *:nth-child(6) {
+  stroke-dashoffset: 48;
+}
+
+.avatar-cross-fix {
+  display: inline-block;
+  color: inherit;
+  fill: var(--color-contrast-lower);
+  stroke: var(--color-contrast-lower);
+  height: 1em;
+  width: 1em;
+  line-height: 1;
+  flex-shrink: 0;
+  max-width: initial;
+}
+
+.anim-menu-btn--avatar .icon {
+  height: 22px;
+  width: 22px;
+}
+
+.desktop-user-avatar {
+  height: 32px;
+  width: 52px;
+  max-width: 32px;
+}
+
+.cross-fix {
+  background-image: none;
+}
+
+@media (min-width: 80rem) {
+  .header-menu-box {
+    flex: 1;
+  }
+}
+
+.header-v2__nav-align-right {
+  justify-content: flex-end !important;
+}
+
+.author--minimal-mobile {
+  --author-img-size: .8em;
+  align-items: center;
 }
 
 /* -------------------------------- 
