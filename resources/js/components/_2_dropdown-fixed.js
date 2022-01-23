@@ -40,8 +40,8 @@
       var left = 'left: 0px; right: auto;';
 
       if(this.dropdown.getAttribute('id') === 'user-desktop-menu'){
-          right = 'left: auto;';
-          left = 'right: auto;';
+          right = 'right: auto; left: auto;';
+          left = 'left: auto; right: auto;';
       }
 
       var xPosition = isRight ? right : left;
