@@ -96,6 +96,7 @@
     for(var i = 0; i < dropdownMenu.length; i++) {
       var listItems = dropdownMenu[i].children;
       // bind hover
+        /*
       new menuAim({
         menu: dropdownMenu[i],
         activate: function(row) {
@@ -112,6 +113,7 @@
         },
         submenuSelector: '.js-dropdown__sub-wrapper',
       });
+         */
     }
     // store focus element before change in focus
     this.element.addEventListener('keydown', function(event) {

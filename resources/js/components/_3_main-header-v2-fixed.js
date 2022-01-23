@@ -57,6 +57,7 @@
         for(var i = 0; i < dropdownMenu.length; i++) {
             var listItems = dropdownMenu[i].children;
             // bind hover
+            /*
             new menuAim({
                 menu: dropdownMenu[i],
                 activate: function(row) {
@@ -76,6 +77,7 @@
                 },
                 submenuSelector: '.header-v2__nav-item--has-children',
             });
+             */
         }
         // store focus element before change in focus
         list.element.addEventListener('keydown', function(event) {
@@ -235,6 +237,7 @@
         if(mainList.length > 0) {
             for( var i = 0; i < mainList.length; i++) {
                 (function(i){
+                    /*
                     new menuAim({ // use diagonal movement detection for main submenu
                         menu: mainList[i],
                         activate: function(row) {
@@ -255,6 +258,7 @@
                         submenuSelector: '.header-v2__nav-item--has-children',
                         submenuDirection: 'below'
                     });
+                     */
 
                     // take care of focus event for main submenu
                     var subMenu = mainList[i].getElementsByClassName('header-v2__nav-item--main');
