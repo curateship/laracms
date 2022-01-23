@@ -14602,6 +14602,36 @@ Usage: For LaraCMS
   height: 100%;
 }
 
+.corner-shadow {
+  position: relative;
+  background-color: white;
+  overflow: hidden;
+}
+
+.corner-shadow .corner {
+  position: absolute;
+  border-radius: 50%;
+  width: 2px;
+  height: 2px;
+  box-shadow: 0 0 60px 60px black;
+}
+
+.corner.top {
+  top: -2px;
+}
+
+.corner.left {
+  left: -2px;
+}
+
+.corner.right {
+  right: -2px;
+}
+
+.corner.bottom {
+  bottom: -2px;
+}
+
 .hero--overlay-layer {
   background-repeat: no-repeat;
   background-position: center;
