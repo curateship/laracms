@@ -18622,7 +18622,7 @@ Usage: For LaraCMS
   background-image: none;
 }
 
-@media (min-width: 64rem) {
+@media (min-width: 80rem) {
   .header-menu-box {
     flex: 1;
   }

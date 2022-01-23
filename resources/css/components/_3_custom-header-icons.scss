@@ -180,7 +180,7 @@ Usage: For LaraCMS
 }
 
 .header-menu-box{
-    @include breakpoint(md){
+    @include breakpoint(lg){
         flex: 1;
     }
 }
