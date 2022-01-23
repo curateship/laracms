@@ -2804,8 +2804,8 @@ function resetFocusTabsStyle() {
       var left = 'left: 0px; right: auto;';
 
       if(this.dropdown.getAttribute('id') === 'user-desktop-menu'){
-          right = 'right: 20px; left: auto;';
-          left = 'left: 20px; right: auto;';
+          right = 'left: auto;';
+          left = 'right: auto;';
       }
 
       var xPosition = isRight ? right : left;
