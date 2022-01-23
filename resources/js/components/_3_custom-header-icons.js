@@ -5,7 +5,7 @@
         if(target === 'search-menu' && $('#' + target).hasClass('header-v2__nav--is-visible')){
             setTimeout(function(){
                 $('input#megasite-search').focus()
-            }, 10)
+            }, 50)
         }
     })
 }());
