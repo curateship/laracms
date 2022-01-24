@@ -3,7 +3,7 @@
     <div class="margin-bottom-lg">
       <div class="justify-between flex items-end justify-between@md">
         <h2>Rocommended Articles</h2>
-        <a href="http://localhost:8000/post" class="btn btn--subtle btn--sm" role="text">View all</a>
+        <a href="http://localhost:8000/post" class="btn btn--subtle btn--sm radius-full" role="text">View all</a>
       </div>
     </div>
 

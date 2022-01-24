@@ -1,10 +1,10 @@
-@extends('admin.apps.master')
+@extends('apps.master')
 @section('content')
   
 <!-- 👇 Content Body Wrapper-->
 <section class="margin-y-xl">
 @include('admin.partials.modal')
-  <div class="container max-width-adaptive-lg padding-top-sm">
+  <div class="container max-width-adaptive-lg">
     <div class="grid gap-md justify-between">
       <div class="col-12@md">
 

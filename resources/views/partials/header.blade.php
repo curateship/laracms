@@ -38,6 +38,27 @@
             </button>
             <!-- End with avatar -->
 
+            <!-- Without With avatar -->
+            <!--
+            <button class="header-v2__nav-control reset anim-menu-btn anim-menu-btn--avatar js-anim-menu-btn" aria-label="Toggle icon" menu-target="user-menu">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
+                    <title>face-man</title>
+                    <g class="icon__group" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" transform="translate(0.5 0.5)" fill="white" stroke="white">
+                        <path fill="none" stroke-miterlimit="10"
+                              d="M1.051,10.933 C4.239,6.683,9.875,11.542,16,6c3,4.75,6.955,4.996,6.955,4.996"></path>
+                        <circle data-stroke="none" fill="currentColor" cx="7.5" cy="14.5" r="1.5" stroke-linejoin="miter"
+                                stroke-linecap="square" stroke="none"></circle>
+                        <circle data-stroke="none" fill="currentColor" cx="16.5" cy="14.5" r="1.5" stroke-linejoin="miter"
+                                stroke-linecap="square" stroke="none"></circle>
+                        <circle fill="none" stroke="currentColor" stroke-miterlimit="10" cx="12" cy="12" r="11"></circle>
+                        <path d="M4.222 4.222l15.556 15.556" />
+                        <path d="M19.778 4.222L4.222 19.778" />
+                    </g>
+                </svg>
+            </button>
+            -->
+            <!-- Without With avatar END -->
+
             <!-- Avatar Mobile Dropdown -->
             <nav id="user-menu" class="header-v2__nav header-v2__nav-dropdown">
                 <ul class="header-v2__nav-list">
@@ -46,7 +67,7 @@
                  <li><a href="#0" class="dropdown__item">Messages</a></li>
                  <li class="dropdown__separator" role="separator"></li>
                  <li><a href="#0" class="dropdown__item">Account Settings</a></li>
-                 <li><a href="#0" class="dropdown__item">Log out</a></li>
+                 <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="dropdown__item">Log Out</a></li>
                 </ul>
             </nav>
             <!-- Avatar Mobile Dropdown END-->
@@ -101,69 +122,68 @@
           <button class="header-v2__nav-control reset anim-menu-btn js-anim-menu-btn" aria-label="Toggle menu" menu-target="main-menu">
             <i class="anim-menu-btn__icon anim-menu-btn__icon--close" aria-hidden="true"></i>
           </button>
-          <!-- Mobile Hamburger Menu End -->
         </div>
-      <!-- icon buttons --Mobile END -->
+        <!-- icon buttons --Mobile END -->
 
-      <!-- 👇 Navigation Menu -->
-      <nav id="main-menu" class="header-v2__nav" role="navigation">
-        <ul class="header-v2__nav-list header-v2__nav-list--main">
+        <!-- 👇 Navigation Menu -->
+        <nav id="main-menu" class="header-v2__nav" role="navigation">
+          <ul class="header-v2__nav-list header-v2__nav-list--main">
 
-          <li class="header-v2__nav-item header-v2__nav-item--main header-v2__nav-item--has-children">
-            <a href="#0" class="header-v2__nav-link">
-              <span>Product</span>
-              <svg class="header-v2__nav-dropdown-icon icon margin-left-xxxs" aria-hidden="true" viewBox="0 0 16 16">
-                <polyline fill="none" stroke-width="1" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="3.5,6.5 8,11 12.5,6.5 "></polyline>
-              </svg>
-            </a>
+            <li class="header-v2__nav-item header-v2__nav-item--main header-v2__nav-item--has-children">
+              <a href="#0" class="header-v2__nav-link">
+                <span>Product</span>
+                <svg class="header-v2__nav-dropdown-icon icon margin-left-xxxs" aria-hidden="true" viewBox="0 0 16 16">
+                  <polyline fill="none" stroke-width="1" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="3.5,6.5 8,11 12.5,6.5 "></polyline>
+                </svg>
+              </a>
 
-            <div class="header-v2__nav-dropdown header-v2__nav-dropdown--md">
-              <ul class="header-v2__nav-list header-v2__nav-list--title-desc">
-                <li class="header-v2__nav-item">
-                  <a href="#0" class="header-v2__nav-link">
-                    <svg class="header-v2__nav-icon" aria-hidden="true" width="32" height="32" viewBox="0 0 32 32">
-                      <circle fill="var(--color-accent)" opacity="0.2" cx="16" cy="16" r="16" />
-                      <circle cx="11.5" cy="10.5" r="3.5" fill="var(--color-accent)" />
-                      <path d="M22,12,4.729,27.352a15.982,15.982,0,0,0,26.24-5.742Z" fill="var(--color-accent)" />
-                    </svg>
+              <div class="header-v2__nav-dropdown header-v2__nav-dropdown--md">
+                <ul class="header-v2__nav-list header-v2__nav-list--title-desc">
+                  <li class="header-v2__nav-item">
+                    <a href="#0" class="header-v2__nav-link">
+                      <svg class="header-v2__nav-icon" aria-hidden="true" width="32" height="32" viewBox="0 0 32 32">
+                        <circle fill="var(--color-accent)" opacity="0.2" cx="16" cy="16" r="16" />
+                        <circle cx="11.5" cy="10.5" r="3.5" fill="var(--color-accent)" />
+                        <path d="M22,12,4.729,27.352a15.982,15.982,0,0,0,26.24-5.742Z" fill="var(--color-accent)" />
+                      </svg>
 
-                    <div>
-                      <strong>Sub nav item</strong>
-                      <small>Lorem ipsum dolor sit amet.</small>
-                    </div>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </li>
+                      <div>
+                        <strong>Sub nav item</strong>
+                        <small>Lorem ipsum dolor sit amet.</small>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
 
-          <li class="header-v2__nav-item header-v2__nav-item--main header-v2__nav-item--has-children">
-            <a href="#0" class="header-v2__nav-link">
-              <span>About</span>
-              <svg class="header-v2__nav-dropdown-icon icon margin-left-xxxs" aria-hidden="true" viewBox="0 0 16 16">
-                <polyline fill="none" stroke-width="1" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="3.5,6.5 8,11 12.5,6.5 "></polyline>
-              </svg>
-            </a>
+            <li class="header-v2__nav-item header-v2__nav-item--main header-v2__nav-item--has-children">
+              <a href="#0" class="header-v2__nav-link">
+                <span>About</span>
+                <svg class="header-v2__nav-dropdown-icon icon margin-left-xxxs" aria-hidden="true" viewBox="0 0 16 16">
+                  <polyline fill="none" stroke-width="1" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="3.5,6.5 8,11 12.5,6.5 "></polyline>
+                </svg>
+              </a>
 
-            <div class="header-v2__nav-dropdown header-v2__nav-dropdown--md">
-              <ul class="header-v2__nav-list header-v2__nav-list--title-desc">
+              <div class="header-v2__nav-dropdown header-v2__nav-dropdown--md">
+                <ul class="header-v2__nav-list header-v2__nav-list--title-desc">
 
-                <li class="header-v2__nav-item">
-                  <a href="#0" class="header-v2__nav-link">
-                    <div>
-                      <strong>Sub nav item</strong>
-                      <small>Lorem ipsum dolor sit amet consectetur adipisicing elit.</small>
-                    </div>
-                  </a>
-                </li>
+                  <li class="header-v2__nav-item">
+                    <a href="#0" class="header-v2__nav-link">
+                      <div>
+                        <strong>Sub nav item</strong>
+                        <small>Lorem ipsum dolor sit amet consectetur adipisicing elit.</small>
+                      </div>
+                    </a>
+                  </li>
 
-              </ul>
-            </div>
-          </li>
+                </ul>
+              </div>
+            </li>
 
-          <li class="header-v2__nav-item header-v2__nav-item--main"><a href="#0" class="header-v2__nav-link">Pricing</a></li>
-        </ul>
-      </nav>
+            <li class="header-v2__nav-item header-v2__nav-item--main"><a href="#0" class="header-v2__nav-link">Pricing</a></li>
+          </ul>
+        </nav>
         <!-- Navigation Menu End -->
 
         <!-- 👇 icon buttons --desktop -->
@@ -178,17 +198,19 @@
         </div>
         <!-- Search --desktop END -->
 
+        <!-- 👇 User Avatar and Authentication --desktop -->
         @if (Route::has('login'))
         <ul class="f-header__list flex-grow flex-basis-0 justify-end@md">
           @auth
           <div class="dropdown inline-block js-dropdown">
            <li class="header__icon-btn dropdown__wrapper inline-block margin-right-sm">
+             
+              <!-- 👇 With avatar -->
                <a href="#0" class="color-inherit flex height-100% width-100% flex-center dropdown__trigger js-dropdown__trigger">
-                  <!-- With avatar -->
                   <img class="desktop-user-avatar" src="{{ asset('assets/img/avatar.png') }}" alt="Logged in user avatar">
-                  <!-- End with avatar -->
                </a>
 
+               <!-- avatar Dropdown -->
                <ul id="user-desktop-menu" class="dropdown__menu js-dropdown__menu" aria-label="submenu">
                  <li><a href="#0" class="dropdown__item">Profile</a></li>
                  <li><a href="#0" class="dropdown__item">Notifications</a></li>
@@ -196,21 +218,22 @@
                  <li class="dropdown__separator" role="separator"></li>
                  <li><a href="#0" class="dropdown__item">Account Settings</a></li>
                  <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="dropdown__item">Log Out</a></li>
+                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none">
+                    @csrf
+                 </form>
                </ul>
-             </div>
-          </li>
+            </li>
+           </div>
+           <!-- With avatar END-->
+
           <li class="f-header__item"><a href="/admin" class="f-header__btn btn btn--subtle radius-full">Admin</a></li>
-          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none">
-            @csrf
-          </form>
-          
           @else
           <li class="f-header__item"><a href="{{ route('login') }}" class="f-header__link" aria-controls="modal-login">Login</a></li>
           <li class="f-header__item"><a href="{{ route('register') }}" class="f-header__btn btn btn--primary" aria-controls="modal-signup">Sign up</a></li>
           @endif
-          
         </ul>
         @endif
+          <!-- 👇 User Avatar and Authentication --desktop END -->
         
         </div>
         <!-- 👇 icon buttons --desktop END -->
