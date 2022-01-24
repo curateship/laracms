@@ -16,8 +16,10 @@
 
       <div class="flex header-menu-box gap-md">
         <!-- 👇 icon buttons --Mobile -->
+        @if (Route::has('login'))
         <div class="header-v2__nav-control header__icon-btns">
             <!-- Mobile User menu -->
+            @auth
             <!-- With avatar -->
             <button class="header-v2__nav-control reset anim-menu-btn js-anim-menu-btn switch-icon switch-icon--rotate js-switch-icon js-tab-focus" aria-label="Toggle icon" menu-target="user-menu">
                 <div class="mega-nav__icon-btn dropdown__wrapper inline-block author author--minimal-mobile switch-icon__icon switch-icon__icon--a">
@@ -32,12 +34,23 @@
                     </g>
                 </svg>
             </button>
-            
             <!-- End with avatar -->
 
-            <!-- Without avatar -->
-            <!--
-            <button class="header-v2__nav-control reset anim-menu-btn anim-menu-btn--avatar js-anim-menu-btn" aria-label="Toggle icon" menu-target="user-menu">
+            <!-- Avatar Mobile Dropdown -->
+            <nav id="user-menu" class="header-v2__nav header-v2__nav-dropdown">
+                <ul class="header-v2__nav-list">
+                 <li><a href="#0" class="dropdown__item">Profile</a></li>
+                 <li><a href="#0" class="dropdown__item">Notifications</a></li>
+                 <li><a href="#0" class="dropdown__item">Messages</a></li>
+                 <li class="dropdown__separator" role="separator"></li>
+                 <li><a href="#0" class="dropdown__item">Account Settings</a></li>
+                 <li><a href="#0" class="dropdown__item">Log out</a></li>
+                </ul>
+            </nav>
+            <!-- Avatar Mobile Dropdown END-->
+            <!-- mobile user menu END-->
+            @else
+            <button class="header-v2__nav-control reset anim-menu-btn anim-menu-btn--avatar" aria-label="Toggle icon" aria-controls="modal-login">
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
                     <title>face-man</title>
                     <g class="icon__group" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" transform="translate(0.5 0.5)" fill="white" stroke="white">
@@ -53,16 +66,9 @@
                     </g>
                 </svg>
             </button>
-            -->
-            <!-- End without avatar -->
+            @endif
 
-            <nav id="user-menu" class="header-v2__nav header-v2__nav-dropdown">
-                <ul class="header-v2__nav-list">
-                    @include('partials.header-user-menu')
-                </ul>
-            </nav>
-            <!-- End mobile user menu -->
-
+            @endif
             <!-- Mobile search -->
             <button class="padding-top-xxxxs padding-left-xxxs header-v2__nav-control reset anim-menu-btn anim-menu-btn--search js-anim-menu-btn" aria-label="Toggle search" menu-target="search-menu">
                 <svg class="icon" viewBox="0 0 24 24">
@@ -162,43 +168,58 @@
         <div class="header-v2__nav header__icon-btns header-v2__nav-align-right header__icon-btns--desktop margin-left-sm">
 
         <div class="search-input search-input--icon-right margin-right-lg">
-  <input class="search-input__input form-control radius-full padding-left-sm" type="search" name="search-input" id="search-input" placeholder="Search..." aria-label="Search">
-  <button class="search-input__btn">
-    <svg class="icon" viewBox="0 0 20 20"><title>Submit</title><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="8" cy="8" r="6"/><line x1="12.242" y1="12.242" x2="18" y2="18"/></g></svg>
-  </button>
-</div>
-            <div class="dropdown inline-block js-dropdown">
-                <div class="header__icon-btn dropdown__wrapper inline-block">
-                    <a href="#0" class="color-inherit flex height-100% width-100% flex-center dropdown__trigger js-dropdown__trigger">
-                        <!-- With avatar -->
-                        <img class="desktop-user-avatar" src="assets/img/avatar.png" alt="Logged in user avatar">
-                        <!-- End with avatar -->
+          <input class="search-input__input form-control radius-full padding-left-sm" type="search" name="search-input" id="search-input" placeholder="Search..." aria-label="Search">
+          <button class="search-input__btn">
+            <svg class="icon" viewBox="0 0 20 20"><title>Submit</title><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="8" cy="8" r="6"/><line x1="12.242" y1="12.242" x2="18" y2="18"/></g></svg>
+          </button>
+        </div>
+        
+        @if (Route::has('login'))
+        <ul class="f-header__list flex-grow flex-basis-0 justify-end@md">
+          @auth
+          <div class="dropdown inline-block js-dropdown">
+           <li class="header__icon-btn dropdown__wrapper inline-block margin-right-sm">
+               <a href="#0" class="color-inherit flex height-100% width-100% flex-center dropdown__trigger js-dropdown__trigger">
+                  <!-- With avatar -->
+                  <img class="desktop-user-avatar" src="assets/img/avatar.png" alt="Logged in user avatar">
+                  <!-- End with avatar -->
 
-                        <!-- Without avatar -->
-                        <!--
-                        <svg class="icon" viewBox="0 0 24 24">
-                            <g class="icon__group" fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2">
-                                <circle cx="12" cy="6" r="4" />
-                                <path d="M12 13a8 8 0 00-8 8h16a8 8 0 00-8-8z" />
-                            </g>
-                        </svg>
-                        -->
-                        <!-- End without avatar -->
-                    </a>
+                  <!-- Without avatar -->
+                  <!--
+                  <svg class="icon" viewBox="0 0 24 24">
+                      <g class="icon__group" fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2">
+                          <circle cx="12" cy="6" r="4" />
+                          <path d="M12 13a8 8 0 00-8 8h16a8 8 0 00-8-8z" />
+                      </g>
+                  </svg>
+                  -->
+                     <!-- End without avatar -->
+               </a>
 
-                    <ul id="user-desktop-menu" class="dropdown__menu js-dropdown__menu" aria-label="submenu">
-                      <li><a href="#0" class="dropdown__item">Profile</a></li>
-                      <li><a href="#0" class="dropdown__item">Notifications</a></li>
-                      <li><a href="#0" class="dropdown__item">Messages</a></li>
-                      <li class="dropdown__separator" role="separator"></li>
-                      <li><a href="#0" class="dropdown__item">Account Settings</a></li>
-                      <li><a href="#0" class="dropdown__item">Log out</a></li>
-                    </ul>
-                </div>
-            </div>
+               <ul id="user-desktop-menu" class="dropdown__menu js-dropdown__menu" aria-label="submenu">
+                 <li><a href="#0" class="dropdown__item">Profile</a></li>
+                 <li><a href="#0" class="dropdown__item">Notifications</a></li>
+                 <li><a href="#0" class="dropdown__item">Messages</a></li>
+                 <li class="dropdown__separator" role="separator"></li>
+                 <li><a href="#0" class="dropdown__item">Account Settings</a></li>
+                 <li><a href="#0" class="dropdown__item">Log out</a></li>
+               </ul>
+             </div>
+          </li>
+          <li class="f-header__item"><a href="/admin" class="f-header__btn btn btn--subtle">Admin</a></li>
+          <li class="f-header__item"><a href="{{ route('logout') }}" class="f-header__btn btn btn--basic" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Log Out</a></li>
 
-            <div class="f-header__item margin-left-sm"><a href="/admin" class="f-header__btn btn btn--subtle radius-full">Admin</a></div>
-            
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none">
+            @csrf
+          </form>
+          @else
+          <li class="f-header__item"><a href="{{ route('login') }}" class="f-header__link" aria-controls="modal-login">Login</a></li>
+          <li class="f-header__item"><a href="{{ route('register') }}" class="f-header__btn btn btn--primary" aria-controls="modal-signup">Sign up</a></li>
+          @endif
+          
+        </ul>
+        @endif
+        
         </div>
         <!-- 👇 icon buttons --desktop END -->
       </div>
