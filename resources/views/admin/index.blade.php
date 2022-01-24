@@ -211,7 +211,7 @@
               <img class="block width-100% height-100% object-cover" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
             </figure>
             <div class="line-height-xs padding-top-xxxs">
-              <p class=""><a href="#0" class="link-subtle" aria-controls="edit-modal">Content Title Content Title Content Title Content Title</a></p>
+              <p class=""><a href="http://localhost:3000/admin/post/add" class="link-subtle">Content Title Content Title Content Title Content Title</a></p>
               <p class="color-contrast-medium"><a href="#0" class="text-sm link-subtle">james4523</a></p> 
             </div>    
             </td>

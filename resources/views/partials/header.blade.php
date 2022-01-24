@@ -19,8 +19,10 @@
         @if (Route::has('login'))
         <div class="header-v2__nav-control header__icon-btns">
             <!-- Mobile User menu -->
-            @auth
+
+          
             <!-- With avatar -->
+            @auth
             <button class="header-v2__nav-control reset anim-menu-btn js-anim-menu-btn switch-icon switch-icon--rotate js-switch-icon js-tab-focus" aria-label="Toggle icon" menu-target="user-menu">
                 <div class="mega-nav__icon-btn dropdown__wrapper inline-block author author--minimal-mobile switch-icon__icon switch-icon__icon--a">
                     <div class="author__img-wrapper author--minimal-mobile dropdown__trigger">
@@ -165,15 +167,17 @@
         <!-- Navigation Menu End -->
 
         <!-- 👇 icon buttons --desktop -->
-        <div class="header-v2__nav header__icon-btns header-v2__nav-align-right header__icon-btns--desktop margin-left-sm">
+        <div class="header-v2__nav header__icon-btns header-v2__nav-align-right header__icon-btns--desktop">
 
-        <div class="search-input search-input--icon-right margin-right-lg">
+        <!-- 👇 Search --desktop -->
+        <div class="search-input search-input--icon-right margin-right-sm">
           <input class="search-input__input form-control radius-full padding-left-sm" type="search" name="search-input" id="search-input" placeholder="Search..." aria-label="Search">
           <button class="search-input__btn">
             <svg class="icon" viewBox="0 0 20 20"><title>Submit</title><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="8" cy="8" r="6"/><line x1="12.242" y1="12.242" x2="18" y2="18"/></g></svg>
           </button>
         </div>
-        
+        <!-- Search --desktop END -->
+
         @if (Route::has('login'))
         <ul class="f-header__list flex-grow flex-basis-0 justify-end@md">
           @auth
@@ -181,19 +185,8 @@
            <li class="header__icon-btn dropdown__wrapper inline-block margin-right-sm">
                <a href="#0" class="color-inherit flex height-100% width-100% flex-center dropdown__trigger js-dropdown__trigger">
                   <!-- With avatar -->
-                  <img class="desktop-user-avatar" src="assets/img/avatar.png" alt="Logged in user avatar">
+                  <img class="desktop-user-avatar" src="{{ asset('assets/img/avatar.png') }}" alt="Logged in user avatar">
                   <!-- End with avatar -->
-
-                  <!-- Without avatar -->
-                  <!--
-                  <svg class="icon" viewBox="0 0 24 24">
-                      <g class="icon__group" fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2">
-                          <circle cx="12" cy="6" r="4" />
-                          <path d="M12 13a8 8 0 00-8 8h16a8 8 0 00-8-8z" />
-                      </g>
-                  </svg>
-                  -->
-                     <!-- End without avatar -->
                </a>
 
                <ul id="user-desktop-menu" class="dropdown__menu js-dropdown__menu" aria-label="submenu">
@@ -202,16 +195,15 @@
                  <li><a href="#0" class="dropdown__item">Messages</a></li>
                  <li class="dropdown__separator" role="separator"></li>
                  <li><a href="#0" class="dropdown__item">Account Settings</a></li>
-                 <li><a href="#0" class="dropdown__item">Log out</a></li>
+                 <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="dropdown__item">Log Out</a></li>
                </ul>
              </div>
           </li>
-          <li class="f-header__item"><a href="/admin" class="f-header__btn btn btn--subtle">Admin</a></li>
-          <li class="f-header__item"><a href="{{ route('logout') }}" class="f-header__btn btn btn--basic" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Log Out</a></li>
-
+          <li class="f-header__item"><a href="/admin" class="f-header__btn btn btn--subtle radius-full">Admin</a></li>
           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none">
             @csrf
           </form>
+          
           @else
           <li class="f-header__item"><a href="{{ route('login') }}" class="f-header__link" aria-controls="modal-login">Login</a></li>
           <li class="f-header__item"><a href="{{ route('register') }}" class="f-header__btn btn btn--primary" aria-controls="modal-signup">Sign up</a></li>
