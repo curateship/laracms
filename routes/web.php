@@ -34,7 +34,7 @@ Route::get('/admin/setting', function () {
 });
 
 Route::get('/admin/post', function () {
-    return view('admin.post.publish');
+    return view('admin.post.index');
 });
 
 Route::get('/admin/post/trash', function () {

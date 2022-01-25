@@ -17366,6 +17366,83 @@ Usage: codyhouse.co/license
 
 /* -------------------------------- 
 
+File#: _1_radio-switch
+Title: Radio Switch
+Descr: Custom radio toggle
+Usage: codyhouse.co/license
+
+-------------------------------- */
+:root {
+  --radio-switch-width: 100px;
+  --radio-switch-height: 40px;
+  --radio-switch-padding: 3px;
+  --radio-switch-radius: 50em;
+  --radio-switch-animation-duration: 0.3s;
+}
+
+.radio-switch {
+  position: relative;
+  display: inline-block;
+  display: inline-flex;
+  padding: var(--radio-switch-padding);
+  border-radius: calc(var(--radio-switch-radius) * 1.4);
+  background-color: var(--color-bg-darker);
+}
+.radio-switch:focus-within, .radio-switch:active {
+  box-shadow: 0 0 0 2px hsla(var(--color-contrast-higher-h), var(--color-contrast-higher-s), var(--color-contrast-higher-l), 0.15);
+}
+
+.radio-switch__item {
+  position: relative;
+  display: inline-block;
+  height: calc(var(--radio-switch-height) - 2 * var(--radio-switch-padding));
+  width: calc(var(--radio-switch-width) * 0.5 - var(--radio-switch-padding));
+}
+
+.radio-switch__label {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radio-switch-radius);
+  cursor: pointer;
+  font-size: var(--text-sm);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  transition: all var(--radio-switch-animation-duration);
+}
+.radio-switch__input:checked ~ .radio-switch__label {
+  color: var(--color-white);
+}
+.radio-switch__input:focus ~ .radio-switch__label {
+  background-color: hsl(var(--color-primary-h), var(--color-primary-s), calc(var(--color-primary-l) * 0.6));
+}
+.radio-switch__label :not(*):focus-within, .radio-switch__input:focus ~ .radio-switch__label {
+  background-color: transparent;
+}
+
+.radio-switch__marker {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: -100%;
+  border-radius: var(--radio-switch-radius);
+  background-color: var(--color-primary);
+  height: calc(var(--radio-switch-height) - 2 * var(--radio-switch-padding));
+  width: calc(var(--radio-switch-width) * 0.5 - var(--radio-switch-padding));
+  box-shadow: var(--shadow-md);
+  transition: transform var(--radio-switch-animation-duration);
+}
+.radio-switch__input:checked ~ .radio-switch__marker {
+  transform: translateX(100%);
+}
+
+/* -------------------------------- 
+
 File#: _1_radios-checkboxes
 Title: Radios and Checkboxes
 Descr: Custom radio and checkbox buttons
