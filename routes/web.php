@@ -49,6 +49,10 @@ Route::get('/admin/post/trash', function () {
     return view('admin.post.trash');
 });
 
+Route::get('/admin/user/', function () {
+    return view('admin.user.index');
+});
+
 Route::get('/test', function () {
     return view('pages.test');
 });

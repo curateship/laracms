@@ -64,7 +64,7 @@
               </li>
 
                 <li class="sidenav__item">
-                    <a href="#0" class="sidenav__link">
+                    <a href="/admin/user" class="sidenav__link">
                     <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16"><g><path d="M12.25,8.231C11.163,9.323,9.659,10,8,10S4.837,9.323,3.75,8.231C1.5,9.646,0,12.145,0,15v1h16 v-1C16,12.145,14.5,9.646,12.25,8.231z"></path><circle cx="8" cy="4" r="4"></circle></g></svg>
                         <span class="sidenav__text text-sm@md">User</span>
                         <span class="sidenav__counter">12 <i class="sr-only">notifications</i></span>
