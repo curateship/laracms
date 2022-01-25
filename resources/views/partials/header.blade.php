@@ -68,8 +68,9 @@
                  <li class="dropdown__separator" role="separator"></li>
                  <li><a href="#0" class="dropdown__item">Account Settings</a></li>
                  <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="dropdown__item">Log Out</a></li>
+                </ul>
 
-                 <ul class="radio-switch margin-left-xs margin-top-xs">
+                <ul class="radio-switch margin-left-xs margin-top-xs">
                   <li class="radio-switch__item">
                     <input class="radio-switch__input sr-only" type="radio" name="radio-switch-name" id="radio-1" checked>
                     <label class="radio-switch__label" for="radio-1"><svg class="icon icon--xs" viewBox="0 0 16 16">
@@ -89,7 +90,6 @@
                   </li>
                 </ul>
                </ul>
-                </ul>
             </nav>
             <!-- Avatar Mobile Dropdown END-->
             <!-- mobile user menu END-->
@@ -263,7 +263,7 @@
                   </li>
                 </ul>
                </ul>
-
+               
             </li>
            </div>
            <!-- With avatar END-->

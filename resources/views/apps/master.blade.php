@@ -15,7 +15,7 @@
   <!-- Back to Top END -->
 </head>
 
-<body data-theme="dark">
+<body data-theme="light">
   @include('partials.header')
   <div class="padding-top-sm">
     @yield('content')
