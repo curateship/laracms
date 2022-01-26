@@ -1,13 +1,13 @@
 <!doctype html>
-<html lang="en">
-  
+<html lang="en" class="js">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
   <title>{{ config ('app.name', 'LaraCMS') }}</title>
-  
+
   <!-- 👇 Back to Top -->
   <a class="back-to-top js-back-to-top" href="#" data-offset="100" data-duration="300">
     <svg class="icon" viewBox="0 0 20 20"><polyline points="2 13 10 5 18 13" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>

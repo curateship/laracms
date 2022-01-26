@@ -38,25 +38,25 @@
               <div class="margin-bottom-sm">
                 <input class="form-control width-100%" type="passwords" name="passwords" id="inputname" placeholder="Confirm Passwords">
               </div>
-      
+
               <div>
                 <textarea class="form-control width-100% height-250 margin-bottom-sm" name="textarea" id="textarea" placeholder="Enter Bio"></textarea>
               </div>
 
-              <div class="file-upload inline-block">
+              <div class="file-upload inline-block js">
                 <label for="upload2" class="file-upload__label btn btn--primary">
                   <span class="flex items-center">
                     <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><path  stroke-linecap="square" stroke-linejoin="miter" d="M2 16v6h20v-6"></path><path stroke-linejoin="miter" stroke-linecap="butt" d="M12 17V2"></path><path stroke-linecap="square" stroke-linejoin="miter" d="M18 8l-6-6-6 6"></path></g></svg>
-                    
+
                     <span class="margin-left-xxs file-upload__text file-upload__text--has-max-width">Upload</span>
                   </span>
-                </label> 
-              
+                </label>
+
                 <input type="file" class="file-upload__input" name="upload2" id="upload2" multiple>
               </div>
 
             </fieldset>
-          
+
           </form>
         </div>
 
@@ -112,7 +112,7 @@
               <div class="margin-bottom-sm">
                 <input class="form-control width-100%" type="passwords" name="passwords" id="inputname" placeholder="Confirm Passwords">
               </div>
-      
+
               <div>
                 <textarea class="form-control width-100% height-250 margin-bottom-sm" name="textarea" id="textarea" placeholder="Enter Bio"></textarea>
               </div>
@@ -123,13 +123,17 @@
                 </a>
               </div>
 
-              <div class="file-upload inline-block">
-  <label for="upload1" class="file-upload__label btn btn--subtle">
-    <span class="file-upload__text file-upload__text--has-max-width">Upload a file3232323</span>
-  </label>
-  
-  <input type="file" class="file-upload__input" name="upload1" id="upload1">
-</div>
+                <div class="file-upload inline-block">
+                    <label for="upload2" class="file-upload__label btn btn--primary">
+                      <span class="flex items-center">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><path  stroke-linecap="square" stroke-linejoin="miter" d="M2 16v6h20v-6"></path><path stroke-linejoin="miter" stroke-linecap="butt" d="M12 17V2"></path><path stroke-linecap="square" stroke-linejoin="miter" d="M18 8l-6-6-6 6"></path></g></svg>
+
+                        <span class="margin-left-xxs file-upload__text file-upload__text--has-max-width">Upload</span>
+                      </span>
+                    </label>
+
+                    <input type="file" class="file-upload__input" name="upload2" id="upload2" multiple>
+                </div>
 
             </fieldset>
           </form>
