@@ -1,5 +1,3 @@
-<!-- Table-->
-<div class="margin-top-auto border-top border-contrast-lower"></div><!-- Divider -->
 <div class="padding-sm">
   <div id="table-1" class="int-table text-sm js-int-table">
     <div class="int-table__inner margin-bottom-xs">
@@ -225,4 +223,3 @@
     </div>
   </div>
 </div>
-<!-- END Table-->

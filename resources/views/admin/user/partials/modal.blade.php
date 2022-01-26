@@ -75,8 +75,7 @@
     <footer class="padding-y-sm padding-x-md bg inner-glow-top shadow-md flex-shrink-0">
       <div class="flex justify-end gap-xs">
         <button class="btn btn--subtle js-modal__close">Cancel</button>
-        <button class="btn btn--accent">Save</button>
-        <button class="btn btn--primary">Publish</button>
+        <button class="btn btn--primary">Create</button>
       </div>
     </footer>
   </div>
@@ -169,6 +168,7 @@
 
     <footer class="padding-y-sm padding-x-md bg inner-glow-top shadow-md flex-shrink-0">
       <div class="flex justify-end gap-xs">
+        <button class="btn btn--subtle js-modal__close">Cancel</button>
         <button class="btn btn--primary">Save</button>
       </div>
     </footer>
