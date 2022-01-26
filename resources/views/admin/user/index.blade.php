@@ -104,7 +104,13 @@
                 </li>
               </ul>
             </th>
-  
+
+            <th class="int-table__cell int-table__cell--th text-left">Cover</th>
+
+            <th class="int-table__cell int-table__cell--th text-left">Posts</th>
+            <th class="int-table__cell int-table__cell--th text-left">Cmnt</th>
+
+
             <th class="int-table__cell int-table__cell--th int-table__cell--sort js-int-table__cell--sort">
               <div class="flex items-center">
                 <span>Role</span>
@@ -178,11 +184,18 @@
               <img class="block width-100% height-100% object-cover" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
             </figure>
             <div class="line-height-xs padding-top-xxxs">
-              <div class=""><a href="#0" class="link-subtle" aria-controls="edit-modal">James Pham</a></div>
+              <div class=""><a href="#0" class="link-subtle" aria-controls="edit-modal">James Pham Patrick Flour</a></div>
               <p class="color-contrast-medium"><a href="#0" class="text-sm link-subtle">james4523</a></p>   
             </div>    
             </td>
 
+            <td class="int-table__cell">
+            <figure class="width-xxl height-lg radius-lg flex-shrink-0 overflow-hidden margin-right-xs">
+              <img class="block width-100% height-100% object-cover opacity-40%" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
+            </figure>
+            </td>
+            <td class="int-table__cell">321</td>
+            <td class="int-table__cell">21</td>
             <td class="int-table__cell">Admin</td>
             <td class="int-table__cell">01/01/2020</td>
             <td class="int-table__cell">
@@ -216,6 +229,13 @@
             </div>    
             </td>
 
+            <td class="int-table__cell">
+            <figure class="width-xxl height-lg radius-lg flex-shrink-0 overflow-hidden margin-right-xs">
+              <img class="block width-100% height-100% object-cover opacity-40%" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
+            </figure>
+            </td>
+            <td class="int-table__cell">24</td>
+            <td class="int-table__cell">324</td>
             <td class="int-table__cell">Editor</td>
             <td class="int-table__cell">01/01/2020</td>
             
@@ -235,7 +255,7 @@
                   <svg class="icon menu__icon" aria-hidden="true" viewBox="0 0 12 12">
                     <path d="M10.121.293a1,1,0,0,0-1.414,0L1,8,0,12l4-1,7.707-7.707a1,1,0,0,0,0-1.414Z"></path>
                   </svg>
-                  <span>Edit</span>
+                  <span>Suspend</span>
                 </span>
               </li>
 

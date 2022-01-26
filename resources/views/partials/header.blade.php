@@ -64,9 +64,9 @@
                 <ul class="header-v2__nav-list">
                  <li><a href="#0" class="dropdown__item">Profile</a></li>
                  <li><a href="#0" class="dropdown__item">Notifications</a></li>
-                 <li><a href="#0" class="dropdown__item">Messages</a></li>
-                 <li class="dropdown__separator" role="separator"></li>
-                 <li><a href="#0" class="dropdown__item">Account Settings</a></li>
+                 <li><a href="#0" class="dropdown__item margin-bottom-sm">Messages</a></li>
+                 <div class="border-top border-contrast-lower"></div><!-- Divider -->
+                 <li><a href="#0" class="dropdown__item margin-top-xs">Account Settings</a></li>
                  <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="dropdown__item">Log Out</a></li>
                 </ul>
 
@@ -235,9 +235,9 @@
                <ul id="user-desktop-menu" class="dropdown__menu js-dropdown__menu" aria-label="submenu">
                  <li><a href="#0" class="dropdown__item">Profile</a></li>
                  <li><a href="#0" class="dropdown__item">Notifications</a></li>
-                 <li><a href="#0" class="dropdown__item">Messages</a></li>
-                 <li class="dropdown__separator" role="separator"></li>
-                 <li><a href="#0" class="dropdown__item">Account Settings</a></li>
+                 <li><a href="#0" class="dropdown__item margin-bottom-xs">Messages</a></li>
+                 <div class="border-top border-contrast-lower"></div><!-- Divider -->
+                 <li><a href="#0" class="dropdown__item margin-top-xxxs">Account Settings</a></li>
                  <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="dropdown__item">Log Out</a></li>
                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none">
                     @csrf
