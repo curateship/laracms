@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use \Admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,10 +50,6 @@ Route::get('/admin/post/trash', function () {
     return view('admin.post.trash');
 });
 
-Route::get('/admin/user/', function () {
-    return view('admin.user.index');
-});
-
 Route::get('/test', function () {
     return view('pages.test');
 });
@@ -66,3 +63,9 @@ Route::get('/test', function () {
 Route::get('/home', function () {
     return view('home');
 })->middleware('auth', 'verified');
+
+
+// Admin Routes
+Route::prefix('admin')->name('admin.')->group(function (){
+	Route::resource('/users', UserController::class);
+});

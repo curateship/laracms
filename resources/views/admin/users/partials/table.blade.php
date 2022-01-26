@@ -105,6 +105,7 @@
         <tbody class="int-table__body js-int-table__body">
 
           <!-- Content Row -->
+          @foreach($users as $user)
           <tr class="int-table__row">
             <th class="int-table__cell" scope="row">
               <div class="custom-checkbox int-table__checkbox">
@@ -117,48 +118,8 @@
               <img class="block width-100% height-100% object-cover" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
             </figure>
             <div class="line-height-xs padding-top-xxxs">
-              <div class=""><a href="#0" class="link-subtle" aria-controls="edit-modal">James Pham Patrick Flour</a></div>
-              <p class="color-contrast-medium"><a href="#0" class="text-sm link-subtle">james4523</a></p>   
-            </div>    
-            </td>
-
-            <td class="int-table__cell">
-            <figure class="width-xxl height-lg radius-lg flex-shrink-0 overflow-hidden margin-right-xs">
-              <img class="block width-100% height-100% object-cover opacity-40%" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
-            </figure>
-            </td>
-            <td class="int-table__cell">321</td>
-            <td class="int-table__cell">21</td>
-            <td class="int-table__cell">Admin</td>
-            <td class="int-table__cell">01/01/2020</td>
-            <td class="int-table__cell">
-            <button class="reset int-table__menu-btn margin-left-auto js-tab-focus" data-label="Edit row" aria-controls="menu-example">
-                <svg class="icon" viewBox="0 0 16 16">
-                  <circle cx="8" cy="7.5" r="1.5" />
-                  <circle cx="1.5" cy="7.5" r="1.5" />
-                  <circle cx="14.5" cy="7.5" r="1.5" />
-                </svg>
-              </button>
-
-            </td>
-          </tr>
-          <!-- Content Row END -->
-
-          <!-- Content Row -->
-          <tr class="int-table__row">
-            <th class="int-table__cell" scope="row">
-              <div class="custom-checkbox int-table__checkbox">
-                <input class="custom-checkbox__input js-int-table__select-row" type="checkbox" aria-label="Select this row" />
-                <div class="custom-checkbox__control" aria-hidden="true"></div>
-              </div>
-            </th>
-            <td class="int-table__cell flex">
-            <figure class="width-lg height-lg radius-50% flex-shrink-0 overflow-hidden margin-right-xs">
-              <img class="block width-100% height-100% object-cover" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
-            </figure>
-            <div class="line-height-xs padding-top-xxxs">
-              <p class=""><a href="http://localhost:3000/admin/post/add" class="link-subtle">Nick Smith</a></p>
-              <p class="color-contrast-medium"><a href="#0" class="text-sm link-subtle">james4523</a></p> 
+              <p class=""><a href="{{ route ('admin.users.edit', $user->id) }}" class="link-subtle" aria-controls="edit-modal">{{ $user->name }}</a></p>
+              <p class="color-contrast-medium"><a href="#0" class="text-sm link-subtle">{{ $user->email }}</a></p> 
             </div>    
             </td>
 
@@ -185,20 +146,21 @@
               <menu id="menu-example" class="menu js-menu">
               <li role="menuitem">
                 <span class="menu__content js-menu__content">
+                  <a href="{{ route('admin.users.edit', $user->id) }}" class="link-subtle">
                   <svg class="icon menu__icon" aria-hidden="true" viewBox="0 0 12 12">
                     <path d="M10.121.293a1,1,0,0,0-1.414,0L1,8,0,12l4-1,7.707-7.707a1,1,0,0,0,0-1.414Z"></path>
                   </svg>
-                  <span>Suspend</span>
+                  <span>Edit</span>
+                </a>
                 </span>
               </li>
 
               <li role="menuitem">
                 <span class="menu__content js-menu__content">
-                  <svg class="icon menu__icon" aria-hidden="true" viewBox="0 0 16 16">
-                    <path d="M15,4H1C0.4,4,0,4.4,0,5v10c0,0.6,0.4,1,1,1h14c0.6,0,1-0.4,1-1V5C16,4.4,15.6,4,15,4z M14,14H2V6h12V14z"></path>
-                    <rect x="2" width="12" height="2"></rect>
+                  <svg class="icon menu__icon" aria-hidden="true" viewBox="0 0 12 12">
+                    <path d="M10.121.293a1,1,0,0,0-1.414,0L1,8,0,12l4-1,7.707-7.707a1,1,0,0,0,0-1.414Z"></path>
                   </svg>
-                  <span>Preview</span>
+                  <span>Suspend</span>
                 </span>
               </li>
 
@@ -213,10 +175,11 @@
               </li>
             </menu>
             <!-- Action Dropdown END-->
-
+         
             </td>
             </td>
           </tr>
+          @endforeach
 
         </tbody>
       </table>
