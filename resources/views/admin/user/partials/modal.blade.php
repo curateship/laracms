@@ -43,12 +43,24 @@
                 <textarea class="form-control width-100% height-250 margin-bottom-sm" name="textarea" id="textarea" placeholder="Enter Bio"></textarea>
               </div>
 
-              <div class="file-upload inline-block js">
-                <label for="upload2" class="file-upload__label btn btn--primary">
+              <div class="file-upload inline-block js margin-right-xxxs">
+                <label for="upload2" class="file-upload__label btn">
                   <span class="flex items-center">
                     <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><path  stroke-linecap="square" stroke-linejoin="miter" d="M2 16v6h20v-6"></path><path stroke-linejoin="miter" stroke-linecap="butt" d="M12 17V2"></path><path stroke-linecap="square" stroke-linejoin="miter" d="M18 8l-6-6-6 6"></path></g></svg>
 
-                    <span class="margin-left-xxs file-upload__text file-upload__text--has-max-width">Upload</span>
+                    <span class="margin-left-xxs file-upload__text file-upload__text--has-max-width">Upload Avatar</span>
+                  </span>
+                </label>
+
+                <input type="file" class="file-upload__input" name="upload2" id="upload2" multiple>
+              </div>
+
+              <div class="file-upload inline-block js">
+                <label for="upload2" class="file-upload__label btn">
+                  <span class="flex items-center">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><path  stroke-linecap="square" stroke-linejoin="miter" d="M2 16v6h20v-6"></path><path stroke-linejoin="miter" stroke-linecap="butt" d="M12 17V2"></path><path stroke-linecap="square" stroke-linejoin="miter" d="M18 8l-6-6-6 6"></path></g></svg>
+
+                    <span class="margin-left-xxs file-upload__text file-upload__text--has-max-width">Upload Cover</span>
                   </span>
                 </label>
 
@@ -117,23 +129,39 @@
                 <textarea class="form-control width-100% height-250 margin-bottom-sm" name="textarea" id="textarea" placeholder="Enter Bio"></textarea>
               </div>
 
-              <div class="author ">
-                <a href="#0" class="author__img-wrapper">
+              <!-- Avatar Upload -->
+              <div class="flex">
+                <a class="width-xl height-xl radius-full flex-shrink-0 overflow-hidden margin-right-xs">
                   <img src="/assets/img/author-img-1.jpg" alt="Author picture">
                 </a>
+              <div class="file-upload margin-top-xs">
+                <label for="upload2" class="file-upload__label btn">
+                  <span class="flex items-center">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><path  stroke-linecap="square" stroke-linejoin="miter" d="M2 16v6h20v-6"></path><path stroke-linejoin="miter" stroke-linecap="butt" d="M12 17V2"></path><path stroke-linecap="square" stroke-linejoin="miter" d="M18 8l-6-6-6 6"></path></g></svg>
+                    <span class="margin-left-xxs file-upload__text file-upload__text--has-max-width">Upload Avatar</span>
+                  </span>
+                </label> 
+                <input type="file" class="file-upload__input" name="upload2" id="upload2" multiple>
               </div>
+            </div>
+            <!-- Avatar Upload END -->
 
-                <div class="file-upload inline-block">
-                    <label for="upload2" class="file-upload__label btn btn--primary">
-                      <span class="flex items-center">
-                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><path  stroke-linecap="square" stroke-linejoin="miter" d="M2 16v6h20v-6"></path><path stroke-linejoin="miter" stroke-linecap="butt" d="M12 17V2"></path><path stroke-linecap="square" stroke-linejoin="miter" d="M18 8l-6-6-6 6"></path></g></svg>
-
-                        <span class="margin-left-xxs file-upload__text file-upload__text--has-max-width">Upload</span>
-                      </span>
-                    </label>
-
-                    <input type="file" class="file-upload__input" name="upload2" id="upload2" multiple>
-                </div>
+            <!-- Cover Upload -->
+            <div class="flex margin-top-sm">
+            <figure class="width-xxxl height-xl radius-lg flex-shrink-0 overflow-hidden margin-right-xs">
+              <img class="block width-100% height-100% object-cover" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
+            </figure>
+              <div class="file-upload margin-top-xs">
+                <label for="upload2" class="file-upload__label btn">
+                  <span class="flex items-center">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><path  stroke-linecap="square" stroke-linejoin="miter" d="M2 16v6h20v-6"></path><path stroke-linejoin="miter" stroke-linecap="butt" d="M12 17V2"></path><path stroke-linecap="square" stroke-linejoin="miter" d="M18 8l-6-6-6 6"></path></g></svg>
+                    <span class="margin-left-xxs file-upload__text file-upload__text--has-max-width">Upload Cover</span>
+                  </span>
+                </label> 
+                <input type="file" class="file-upload__input" name="upload2" id="upload2" multiple>
+              </div>
+            </div>
+            <!-- Cover Upload END -->
 
             </fieldset>
           </form>

@@ -1,3 +1,5 @@
+<!-- Table-->
+<div class="margin-top-auto border-top border-contrast-lower"></div><!-- Divider -->
 <div class="padding-sm">
   <div id="table-1" class="int-table text-sm js-int-table">
     <div class="int-table__inner margin-bottom-xs">
@@ -37,10 +39,16 @@
                 </li>
               </ul>
             </th>
-  
+
+            <th class="int-table__cell int-table__cell--th text-left">Cover</th>
+
+            <th class="int-table__cell int-table__cell--th text-left">Posts</th>
+            <th class="int-table__cell int-table__cell--th text-left">Cmnt</th>
+
+
             <th class="int-table__cell int-table__cell--th int-table__cell--sort js-int-table__cell--sort">
               <div class="flex items-center">
-                <span>Status</span>
+                <span>Role</span>
   
                 <svg class="icon icon--xxs margin-left-xxxs int-table__sort-icon" aria-hidden="true" viewBox="0 0 12 12">
                   <polygon class="arrow-up" points="6 0 10 5 2 5 6 0" />
@@ -111,12 +119,19 @@
               <img class="block width-100% height-100% object-cover" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
             </figure>
             <div class="line-height-xs padding-top-xxxs">
-              <div class=""><a href="#0" class="link-subtle" aria-controls="edit-modal">Content Title Content Title Content Title</a></div>
+              <div class=""><a href="#0" class="link-subtle" aria-controls="edit-modal">James Pham Patrick Flour</a></div>
               <p class="color-contrast-medium"><a href="#0" class="text-sm link-subtle">james4523</a></p>   
             </div>    
             </td>
 
-            <td class="int-table__cell">Published</td>
+            <td class="int-table__cell">
+            <figure class="width-xxl height-lg radius-lg flex-shrink-0 overflow-hidden margin-right-xs">
+              <img class="block width-100% height-100% object-cover opacity-40%" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
+            </figure>
+            </td>
+            <td class="int-table__cell">321</td>
+            <td class="int-table__cell">21</td>
+            <td class="int-table__cell">Admin</td>
             <td class="int-table__cell">01/01/2020</td>
             <td class="int-table__cell">
             <button class="reset int-table__menu-btn margin-left-auto js-tab-focus" data-label="Edit row" aria-controls="menu-example">
@@ -144,12 +159,19 @@
               <img class="block width-100% height-100% object-cover" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
             </figure>
             <div class="line-height-xs padding-top-xxxs">
-              <p class=""><a href="http://localhost:3000/admin/post/add" class="link-subtle">Content Title Content Title Content Title Content Title</a></p>
+              <p class=""><a href="http://localhost:3000/admin/post/add" class="link-subtle">Nick Smith</a></p>
               <p class="color-contrast-medium"><a href="#0" class="text-sm link-subtle">james4523</a></p> 
             </div>    
             </td>
 
-            <td class="int-table__cell">Published</td>
+            <td class="int-table__cell">
+            <figure class="width-xxl height-lg radius-lg flex-shrink-0 overflow-hidden margin-right-xs">
+              <img class="block width-100% height-100% object-cover opacity-40%" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
+            </figure>
+            </td>
+            <td class="int-table__cell">24</td>
+            <td class="int-table__cell">324</td>
+            <td class="int-table__cell">Editor</td>
             <td class="int-table__cell">01/01/2020</td>
             
             <!-- Action Dropdown -->
@@ -168,7 +190,7 @@
                   <svg class="icon menu__icon" aria-hidden="true" viewBox="0 0 12 12">
                     <path d="M10.121.293a1,1,0,0,0-1.414,0L1,8,0,12l4-1,7.707-7.707a1,1,0,0,0,0-1.414Z"></path>
                   </svg>
-                  <span>Edit</span>
+                  <span>Suspend</span>
                 </span>
               </li>
 
@@ -203,3 +225,4 @@
     </div>
   </div>
 </div>
+<!-- END Table-->

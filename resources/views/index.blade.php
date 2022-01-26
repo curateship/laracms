@@ -1,11 +1,25 @@
 @extends('apps.master')
-
 @section('content')
 @include('auth.modals')
 @include('partials.hero')
 <div class="container max-width-lg">
-  @include('partials.recommended-traders')
+
+  <!-- 👇 Recommended -->
+  <div class="justify-between flex items-end justify-between@md margin-bottom-lg">
+    <h2>Rocommended Articles</h2>
+    <a href="http://localhost:8000/post" class="btn btn--subtle btn--sm radius-full" role="text">View all</a>
+  </div>
+  @include('partials.recommended')
+  <!-- Recommended END -->
+
+  <!-- 👇 Recommended -->
+  <div class="justify-between flex items-end justify-between@md">
+    <h2>Rocommended Tags</h2>
+    <a href="http://localhost:8000/post" class="btn btn--subtle btn--sm radius-full" role="text">View all</a>
+  </div>
   @include('partials.recommended-tags')
+    <!-- Recommended END -->
+
 </div>
 
 <!-- 👇 Back to Top -->

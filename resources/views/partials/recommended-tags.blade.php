@@ -1,12 +1,4 @@
-<!-- Recommended Tags -->
 <section class="team padding-y-md">
-    <div class="margin-bottom-lg">
-      <div class="justify-between flex items-end justify-between@md">
-        <h2>Rocommended Tags</h2>
-        <a href="#0" class="btn btn--subtle btn--sm" role="text">View all</a>
-      </div>
-    </div>
-
     <div class="margin-bottom-md">
       <ul class="flex flex-wrap gap-xxs">
         <li>
@@ -39,4 +31,3 @@
       </ul>
     </div>
 </section>
-<!-- END -->
