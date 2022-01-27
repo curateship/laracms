@@ -20,6 +20,14 @@
   @include('partials.recommended-tags')
     <!-- Recommended END -->
 
+    <!-- 👇 Recommended -->
+  <div class="justify-between flex items-end justify-between@md margin-bottom-lg">
+    <h2>Rocommended Users</h2>
+    <a href="http://localhost:8000/post" class="btn btn--subtle btn--sm radius-full" role="text">View all</a>
+  </div>
+  @include('partials.recommended-users')
+    <!-- Recommended END -->
+
 </div>
 
 <!-- 👇 Back to Top -->
