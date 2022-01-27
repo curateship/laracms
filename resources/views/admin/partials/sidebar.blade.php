@@ -1,5 +1,5 @@
 <!-- 👇 Sidebar Wrapper-->
-<div class="card display@md position-fixed position-sticky top-xs@xs">
+<div class="card display@md position-fixed position-sticky top-sm@xs">
     <div class="background-bg shadow-md border radius-md padding-bottom-sm">
       <nav class="sidenav js-sidenav">
          <div class="sidenav__label margin-bottom-xs">
@@ -7,7 +7,7 @@
                 <ul class="sidenav__list">
 
                   <li class="sidenav__item">
-                    <a href="#0" class="sidenav__link" aria-current="page">
+                    <a href="#0" class="sidenav__link">
                       <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16"><g><path d="M6,0H1C0.4,0,0,0.4,0,1v5c0,0.6,0.4,1,1,1h5c0.6,0,1-0.4,1-1V1C7,0.4,6.6,0,6,0z M5,5H2V2h3V5z"></path><path d="M15,0h-5C9.4,0,9,0.4,9,1v5c0,0.6,0.4,1,1,1h5c0.6,0,1-0.4,1-1V1C16,0.4,15.6,0,15,0z M14,5h-3V2h3V5z"></path><path d="M6,9H1c-0.6,0-1,0.4-1,1v5c0,0.6,0.4,1,1,1h5c0.6,0,1-0.4,1-1v-5C7,9.4,6.6,9,6,9z M5,14H2v-3h3V14z"></path><path d="M15,9h-5c-0.6,0-1,0.4-1,1v5c0,0.6,0.4,1,1,1h5c0.6,0,1-0.4,1-1v-5C16,9.4,15.6,9,15,9z M14,14h-3v-3h3V14z"></path></g></svg>
                         <span class="sidenav__text text-sm@md">Dashboard</span>
                     </a>
@@ -64,8 +64,8 @@
               </li>
 
                 <li class="sidenav__item">
-                    <a href="{{ route('admin.users.index') }}" class="sidenav__link">
-                    <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16"><g><path d="M12.25,8.231C11.163,9.323,9.659,10,8,10S4.837,9.323,3.75,8.231C1.5,9.646,0,12.145,0,15v1h16 v-1C16,12.145,14.5,9.646,12.25,8.231z"></path><circle cx="8" cy="4" r="4"></circle></g></svg>
+                    <a href="{{ route('admin.users.index') }}" class="sidenav__link"{{ (url('/admin/users') == url()->full()) ? 'aria-current=page' : '' }}>
+                    <svg class="icon sidenav__icon" aria-hidden="false" viewBox="0 0 16 16" aria-current="page"><g><path d="M12.25,8.231C11.163,9.323,9.659,10,8,10S4.837,9.323,3.75,8.231C1.5,9.646,0,12.145,0,15v1h16 v-1C16,12.145,14.5,9.646,12.25,8.231z"></path><circle cx="8" cy="4" r="4"></circle></g></svg>
                         <span class="sidenav__text text-sm@md">User</span>
                         <span class="sidenav__counter">12 <i class="sr-only">notifications</i></span>
                     </a>
