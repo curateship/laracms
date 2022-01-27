@@ -10,27 +10,27 @@
                 <div class="custom-checkbox__control" aria-hidden="true"></div>
               </div>
             </td>
-  
+
             <th class="int-table__cell int-table__cell--th int-table__cell--sort js-int-table__cell--sort">
               <div class="flex items-center">
                 <span>Name</span>
-  
+
                 <svg class="icon icon--xxs margin-left-xxxs int-table__sort-icon" aria-hidden="true" viewBox="0 0 12 12">
                   <polygon class="arrow-up" points="6 0 10 5 2 5 6 0" />
                   <polygon class="arrow-down" points="6 12 2 7 10 7 6 12" /></svg>
               </div>
-  
+
               <ul class="sr-only js-int-table__sort-list">
                 <li>
                   <input type="radio" name="sortingName" id="sortingNameNone" value="none" checked>
                   <label for="sortingNameNone">No sorting</label>
                 </li>
-  
+
                 <li>
                   <input type="radio" name="sortingName" id="sortingNameAsc" value="asc">
                   <label for="sortingNameAsc">Sort in ascending order</label>
                 </li>
-  
+
                 <li>
                   <input type="radio" name="sortingName" id="sortingNameDes" value="desc">
                   <label for="sortingNameDes">Sort in descending order</label>
@@ -47,61 +47,61 @@
             <th class="int-table__cell int-table__cell--th int-table__cell--sort js-int-table__cell--sort">
               <div class="flex items-center">
                 <span>Role</span>
-  
+
                 <svg class="icon icon--xxs margin-left-xxxs int-table__sort-icon" aria-hidden="true" viewBox="0 0 12 12">
                   <polygon class="arrow-up" points="6 0 10 5 2 5 6 0" />
                   <polygon class="arrow-down" points="6 12 2 7 10 7 6 12" /></svg>
               </div>
-  
+
               <ul class="sr-only js-int-table__sort-list">
                 <li>
                   <input type="radio" name="sortingEmail" id="sortingEmailNone" value="none" checked>
                   <label for="sortingEmailNone">No sorting</label>
                 </li>
-  
+
                 <li>
                   <input type="radio" name="sortingEmail" id="sortingEmailAsc" value="asc">
                   <label for="sortingEmailAsc">Sort in ascending order</label>
                 </li>
-  
+
                 <li>
                   <input type="radio" name="sortingEmail" id="sortingEmailDes" value="desc">
                   <label for="sortingEmailDes">Sort in descending order</label>
                 </li>
               </ul>
             </th>
-  
+
             <th class="int-table__cell int-table__cell--th int-table__cell--sort js-int-table__cell--sort" data-date-format="dd-mm-yyyy">
               <div class="flex items-center">
                 <span>Date</span>
-  
+
                 <svg class="icon icon--xxs margin-left-xxxs int-table__sort-icon" aria-hidden="true" viewBox="0 0 12 12">
                   <polygon class="arrow-up" points="6 0 10 5 2 5 6 0" />
                   <polygon class="arrow-down" points="6 12 2 7 10 7 6 12" /></svg>
               </div>
-  
+
               <ul class="sr-only js-int-table__sort-list">
                 <li>
                   <input type="radio" name="sortingDate" id="sortingDateNone" value="none" checked>
                   <label for="sortingDateNone">No sorting</label>
                 </li>
-  
+
                 <li>
                   <input type="radio" name="sortingDate" id="sortingDateAsc" value="asc">
                   <label for="sortingDateAsc">Sort in ascending order</label>
                 </li>
-  
+
                 <li>
                   <input type="radio" name="sortingDate" id="sortingDateDes" value="desc">
                   <label for="sortingDateDes">Sort in descending order</label>
                 </li>
               </ul>
             </th>
-  
+
             <th class="int-table__cell int-table__cell--th text-right">Action</th>
           </tr>
         </thead>
-  
+
         <tbody class="int-table__body js-int-table__body">
 
           <!-- Content Row -->
@@ -119,8 +119,8 @@
             </figure>
             <div class="line-height-xs padding-top-xxxs">
               <p class=""><a href="{{ route ('admin.users.edit', $user->id) }}" class="link-subtle" aria-controls="edit-modal">{{ $user->name }}</a></p>
-              <p class="color-contrast-medium"><a href="#0" class="text-sm link-subtle">{{ $user->email }}</a></p> 
-            </div>    
+              <p class="color-contrast-medium"><a href="#0" class="text-sm link-subtle">{{ $user->email }}</a></p>
+            </div>
             </td>
 
             <td class="int-table__cell">
@@ -132,10 +132,10 @@
             <td class="int-table__cell">324</td>
             <td class="int-table__cell">Editor</td>
             <td class="int-table__cell">01/01/2020</td>
-            
+
             <!-- Action Dropdown -->
             <td class="int-table__cell">
-            <button class="reset int-table__menu-btn margin-left-auto js-tab-focus" data-label="Edit row" aria-controls="menu-example">
+            <button class="reset int-table__menu-btn margin-left-auto js-tab-focus" data-label="Edit row" aria-controls="menu-example-{{$user->id}}">
                 <svg class="icon" viewBox="0 0 16 16">
                   <circle cx="8" cy="7.5" r="1.5" />
                   <circle cx="1.5" cy="7.5" r="1.5" />
@@ -143,7 +143,7 @@
                 </svg>
               </button>
 
-              <menu id="menu-example" class="menu js-menu">
+              <menu id="menu-example-{{$user->id}}" class="menu js-menu">
               <li role="menuitem">
                 <span class="menu__content js-menu__content">
                   <a href="{{ route('admin.users.edit', $user->id) }}" class="link-subtle">
@@ -175,8 +175,7 @@
               </li>
             </menu>
             <!-- Action Dropdown END-->
-         
-            </td>
+
             </td>
           </tr>
           @endforeach
