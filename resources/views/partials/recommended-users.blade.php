@@ -2,7 +2,7 @@
     <ul class="grid-auto-md gap-md">
 
       <li class="card">
-        <div class="bg-light radius-md">
+        <div class="bg-light">
           <figure class="card__img img-blend" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light" style="background-image: url('/assets/img/article-v3-img-1.jpg')">
             <img class="radius-md" src="/assets/img/article-v3-img-1.jpg" alt="Card preview img">
           </figure>
@@ -10,12 +10,12 @@
           <div class="card__content">
           <div class="flex">
 
-          <figure class="width-lg height-lg radius-50% flex-shrink-0 overflow-hidden margin-right-xs margin-bottom-sm margin-left-xs@xs">
+          <figure class="width-lg height-lg radius-50% flex-shrink-0 overflow-hidden margin-right-xs margin-bottom-sm margin-left-xs">
               <img class="block width-100% height-100% object-cover" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
             </figure>
 
             <div class="">
-              <a href="#0" class="color-inherit link-subtle text-sm">Olivia Newton</a>
+              <a href="#0" class="color-inherit link-plain text-sm">Olivia Newton</a>
               <p class="text-xs color-contrast-low">@Ovliad22</p>
             </div>
             </div>

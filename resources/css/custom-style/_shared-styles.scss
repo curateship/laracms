@@ -72,6 +72,16 @@
   }
 }
 
+.link-plain {
+  text-decoration: none;
+
+  &:hover {
+    color: var(--color-primary-light);
+    cursor: pointer;
+    text-decoration: none;
+  }
+}
+
 // --------------------------------
 
 // (END) Global editor code

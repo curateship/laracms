@@ -14032,14 +14032,25 @@ html:not(.js) .no-js\:is-hidden {
   color: var(--color-primary);
 }
 
+.link-plain {
+  text-decoration: none;
+}
+.link-plain:hover {
+  color: var(--color-primary-light);
+  cursor: pointer;
+  text-decoration: none;
+}
+
 :root {
-  --font-primary: Inter, system-ui, sans-serif;
-  --text-base-size: 1em;
+  --font-primary: "Roboto Slab", serif;
+  --font-secondary: "Inter", sans-serif;
+  --text-base-size: 1rem;
   --text-scale-ratio: 1.2;
   --body-line-height: 1.4;
   --heading-line-height: 1.2;
   --font-primary-capital-letter: 1;
-  --text-unit: 1em;
+  --font-secondary-capital-letter: 1;
+  --text-unit: var(--text-base-size);
 }
 
 :root, * {
@@ -14055,49 +14066,25 @@ html:not(.js) .no-js\:is-hidden {
 
 @media (min-width: 64rem) {
   :root {
-    --text-base-size: 1.25em;
+    --text-base-size: 1.25rem;
     --text-scale-ratio: 1.25;
   }
 }
 body {
   font-family: var(--font-primary);
-  --body-font-weight: 500;
 }
 
 h1, h2, h3, h4 {
   font-family: var(--font-primary);
-  --heading-font-weight: 400;
+  --heading-font-weight: 700;
 }
 
 .font-primary {
   font-family: var(--font-primary);
 }
 
-mark {
-  background-color: hsla(var(--color-accent-h), var(--color-accent-s), var(--color-accent-l), 0.2);
-  color: inherit;
-}
-
-.text-component {
-  --line-height-multiplier: 1;
-  --text-space-y-multiplier: 1;
-}
-.text-component blockquote {
-  padding-left: 1em;
-  border-left: 4px solid var(--color-contrast-lower);
-}
-.text-component hr {
-  background: var(--color-contrast-lower);
-  height: 1px;
-}
-.text-component figcaption {
-  font-size: var(--text-sm);
-  color: var(--color-contrast-low);
-}
-
-.article {
-  --body-line-height: 1.58;
-  --text-space-y-multiplier: 1.2;
+.font-secondary {
+  font-family: var(--font-secondary);
 }
 
 :root {
