@@ -3,14 +3,23 @@
 
       <li class="card">
         <div class="bg-light radius-md">
-          <figure class="card__img img-blend" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light" style="background-image: url('/assets/img/article-v3-img-1.jpg')">
+          <figure class="card__img img-blend corner-shadow" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light" data-blend-height="50%">
+              <div class="corner top right corner-bg-darker"></div>
+              <button class="reset int-table__menu-btn js-tab-focus card-menu-button" data-label="Edit row" aria-controls="menu-example">
+                  <svg class="icon" viewBox="0 0 16 16">
+                      <circle cx="8" cy="7.5" r="1.5" />
+                      <circle cx="1.5" cy="7.5" r="1.5" />
+                      <circle cx="14.5" cy="7.5" r="1.5" />
+                  </svg>
+              </button>
+
             <img class="radius-md" src="/assets/img/article-v3-img-1.jpg" alt="Card preview img">
           </figure>
 
           <div class="card__content">
           <div class="flex">
 
-          <figure class="width-lg height-lg radius-50% flex-shrink-0 overflow-hidden margin-right-xs margin-bottom-sm margin-left-xs@xs">
+          <figure class="width-lg height-lg radius-50% flex-shrink-0 overflow-hidden margin-right-xs margin-bottom-sm margin-left-xs@xs shadow-md">
               <img class="block width-100% height-100% object-cover" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
             </figure>
 
@@ -24,13 +33,7 @@
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, suscipit.</p>
             </div>
 
-            <button class="reset int-table__menu-btn margin-left-auto js-tab-focus" data-label="Edit row" aria-controls="menu-example">
-                <svg class="icon" viewBox="0 0 16 16">
-                  <circle cx="8" cy="7.5" r="1.5" />
-                  <circle cx="1.5" cy="7.5" r="1.5" />
-                  <circle cx="14.5" cy="7.5" r="1.5" />
-                </svg>
-              </button>
+
 
           </div>
 
@@ -79,7 +82,7 @@
 
       <li class="">
         <div class="bg-light radius-md">
-          <figure class="card__img img-blend" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light">
+          <figure class="card__img img-blend" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light" data-blend-height="50px">
             <img class="radius-md" src="/assets/img/member-bio-img-1.jpg" alt="Card preview img">
           </figure>
 

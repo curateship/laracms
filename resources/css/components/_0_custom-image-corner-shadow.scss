@@ -9,7 +9,28 @@
     width: 2px;
     height: 2px;
     box-shadow: 0 0 60px 60px black;
+
+    &.corner-bg-darker{
+        box-shadow: 0 0 60px 60px var(--color-bg-darker);
+    }
+
+    &.corner-bg-dark{
+        box-shadow: 0 0 60px 60px var(--color-bg-dark);
+    }
+
+    &.corner-bg{
+        box-shadow: 0 0 60px 60px var(--color-bg);
+    }
+
+    &.corner-bg-light{
+        box-shadow: 0 0 60px 60px var(--color-bg-light);
+    }
+
+    &.corner-bg-lighter{
+        box-shadow: 0 0 60px 60px var(--color-bg-lighter);
+    }
 }
+
 .corner.top {
     top: -2px;
 }
