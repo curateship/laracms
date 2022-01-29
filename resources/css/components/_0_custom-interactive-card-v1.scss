@@ -2,5 +2,18 @@
     position: absolute;
     right: 3px;
     top: 3px;
+    z-index: 2;
+}
+
+.card-user{
+    padding-bottom: 80px;
+    height: 220px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.card-user-content{
+    position: absolute;
+    padding-top: var(--space-md) !important;
     z-index: 1;
 }
