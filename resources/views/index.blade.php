@@ -6,7 +6,7 @@
 
   <!-- 👇 Recommended -->
   <div class="justify-between flex items-end justify-between@md margin-bottom-lg">
-    <h4>Rocommended Articles</h4>
+    <h4>Rocommended</h4>
     <a href="http://localhost:8000/post" class="btn btn--subtle btn--sm radius-full" role="text">View all</a>
   </div>
   @include('partials.recommended')
