@@ -1,356 +1,82 @@
 <section class="margin-bottom-lg">
     <ul class="grid-auto-md gap-md">
 
-      <li class="card">
-        <div class="bg-light radius-md">
-          <figure class="card__img img-blend corner-shadow" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light" data-blend-height="50%">
-              <div class="corner top right corner-bg-darker"></div>
-              <button class="reset int-table__menu-btn js-tab-focus card-menu-button" data-label="Edit row" aria-controls="menu-example">
-                  <svg class="icon" viewBox="0 0 16 16">
-                      <circle cx="8" cy="7.5" r="1.5" />
-                      <circle cx="1.5" cy="7.5" r="1.5" />
-                      <circle cx="14.5" cy="7.5" r="1.5" />
-                  </svg>
-              </button>
-            <img class="radius-md" src="/assets/img/article-v3-img-1.jpg" alt="Card preview img">
-          </figure>
+    @for($i = 1 ; $i <= 5 ; $i++)
+        <li class="card">
+            <div class="bg-light radius-md">
+                <figure class="card__img img-blend card-user corner-shadow" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light" data-blend-height="50%" style="background-image: url('/assets/img/article-v3-img-1.jpg')">
+                    <div class="corner top right corner-bg-darker"></div>
+                    <button class="reset int-table__menu-btn js-tab-focus card-menu-button" data-label="Edit row" aria-controls="menu-example">
+                        <svg class="icon" viewBox="0 0 16 16">
+                            <circle cx="8" cy="7.5" r="1.5" />
+                            <circle cx="1.5" cy="7.5" r="1.5" />
+                            <circle cx="14.5" cy="7.5" r="1.5" />
+                        </svg>
+                    </button>
 
-          <div class="card__content">
-          <div class="flex">
+                    <div class="card__content card-user-content">
+                        <div class="flex">
+                            <figure class="width-lg height-lg radius-50% flex-shrink-0 overflow-hidden margin-right-xs margin-bottom-sm margin-left-xs@xs shadow-md">
+                                <img class="block width-100% height-100% object-cover" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
+                            </figure>
+                            <div class="">
+                                <a href="#0" class="color-inherit link-plain text-sm">Olivia Newton</a>
+                                <p class="text-xs color-inherit">@Ovliad22</p>
+                            </div>
+                        </div>
 
-            <figure class="width-lg height-lg radius-50% flex-shrink-0 overflow-hidden margin-right-xs margin-bottom-sm margin-left-xs@xs shadow-md">
-              <img class="block width-100% height-100% object-cover" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
-            </figure>
+                        <div class="text-component text-sm color-inherit padding-bottom-xs">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, suscipit.</p>
+                        </div>
+                    </div>
+                    <!--
+                    <img class="radius-md" src="/assets/img/article-v3-img-1.jpg" alt="Card preview img">
+                    -->
+                </figure>
 
-            <div class="">
-              <a href="#0" class="color-inherit link-plain text-sm">Olivia Newton</a>
-              <p class="text-xs color-contrast-low">@Ovliad22</p>
+                <footer class="card-v10__footer">
+                    <ul class="card-v10__social-list">
+                        <li class="card-v10__social-item">
+                            <button class="reset card-v10__social-btn js-tab-focus" aria-label="Like this content along with 120 other people">
+                                <svg class="icon" viewBox="0 0 12 12">
+                                    <g>
+                                        <path d="M11.045,2.011a3.345,3.345,0,0,0-4.792,0c-.075.075-.15.225-.225.3-.075-.074-.15-.224-.225-.3a3.345,3.345,0,0,0-4.792,0,3.345,3.345,0,0,0,0,4.792l5.017,4.718L11.045,6.8A3.484,3.484,0,0,0,11.045,2.011Z"></path>
+                                    </g>
+                                </svg>
+
+                                <span>120</span>
+                            </button>
+                        </li>
+
+                        <li class="card-v10__social-item">
+                            <button class="reset card-v10__social-btn js-tab-focus" aria-label="Comment">
+                                <svg class="icon" viewBox="0 0 12 12">
+                                    <g>
+                                        <path d="M6,0C2.691,0,0,2.362,0,5.267s2.691,5.266,6,5.266a6.8,6.8,0,0,0,1.036-.079l2.725,1.485A.505.505,0,0,0,10,12a.5.5,0,0,0,.5-.5V8.711A4.893,4.893,0,0,0,12,5.267C12,2.362,9.309,0,6,0Z"></path>
+                                    </g>
+                                </svg>
+
+                                <span>32</span>
+                            </button>
+                        </li>
+
+                        <li class="card-v10__social-item">
+                            <button class="reset card-v10__social-btn js-tab-focus" aria-label="Comment">
+                                <svg class="icon" viewBox="0 0 12 12">
+                                    <g>
+                                        <path d="M6,0C2.691,0,0,2.362,0,5.267s2.691,5.266,6,5.266a6.8,6.8,0,0,0,1.036-.079l2.725,1.485A.505.505,0,0,0,10,12a.5.5,0,0,0,.5-.5V8.711A4.893,4.893,0,0,0,12,5.267C12,2.362,9.309,0,6,0Z"></path>
+                                    </g>
+                                </svg>
+
+                                <span>32</span>
+                            </button>
+                        </li>
+
+                    </ul>
+                </footer>
             </div>
-            </div>
-
-            <div class="text-component text-sm color-contrast-medium padding-bottom-xs">
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, suscipit.</p>
-            </div>
-
-
-
-          </div>
-
-          <footer class="card-v10__footer">
-        <ul class="card-v10__social-list">
-          <li class="card-v10__social-item">
-            <button class="reset card-v10__social-btn js-tab-focus" aria-label="Like this content along with 120 other people">
-              <svg class="icon" viewBox="0 0 12 12">
-                <g>
-                  <path d="M11.045,2.011a3.345,3.345,0,0,0-4.792,0c-.075.075-.15.225-.225.3-.075-.074-.15-.224-.225-.3a3.345,3.345,0,0,0-4.792,0,3.345,3.345,0,0,0,0,4.792l5.017,4.718L11.045,6.8A3.484,3.484,0,0,0,11.045,2.011Z"></path>
-                </g>
-              </svg>
-
-              <span>120</span>
-            </button>
-          </li>
-
-          <li class="card-v10__social-item">
-            <button class="reset card-v10__social-btn js-tab-focus" aria-label="Comment">
-              <svg class="icon" viewBox="0 0 12 12">
-                <g>
-                  <path d="M6,0C2.691,0,0,2.362,0,5.267s2.691,5.266,6,5.266a6.8,6.8,0,0,0,1.036-.079l2.725,1.485A.505.505,0,0,0,10,12a.5.5,0,0,0,.5-.5V8.711A4.893,4.893,0,0,0,12,5.267C12,2.362,9.309,0,6,0Z"></path>
-                </g>
-              </svg>
-
-              <span>32</span>
-            </button>
-          </li>
-
-          <li class="card-v10__social-item">
-            <button class="reset card-v10__social-btn js-tab-focus" aria-label="Comment">
-              <svg class="icon" viewBox="0 0 12 12">
-                <g>
-                  <path d="M6,0C2.691,0,0,2.362,0,5.267s2.691,5.266,6,5.266a6.8,6.8,0,0,0,1.036-.079l2.725,1.485A.505.505,0,0,0,10,12a.5.5,0,0,0,.5-.5V8.711A4.893,4.893,0,0,0,12,5.267C12,2.362,9.309,0,6,0Z"></path>
-                </g>
-              </svg>
-
-              <span>32</span>
-            </button>
-          </li>
-
-        </ul>
-      </footer>
-        </div>
-      </li>
-
-      <li class="">
-        <div class="bg-light radius-md">
-          <figure class="card__img img-blend" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light" data-blend-height="50px">
-            <img class="radius-md" src="/assets/img/member-bio-img-1.jpg" alt="Card preview img">
-          </figure>
-
-          <div class="card__content">
-          <div class="flex">
-
-          <figure class="width-lg height-lg radius-50% flex-shrink-0 overflow-hidden margin-right-xs margin-bottom-sm margin-left-xs@xs">
-              <img class="block width-100% height-100% object-cover" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
-            </figure>
-
-            <div class="">
-              <a href="#0" class="color-inherit link-subtle text-sm">Olivia Newton</a>
-              <p class="text-xs color-contrast-low">@Ovliad22</p>
-            </div>
-            </div>
-
-            <div class="text-component text-sm color-contrast-medium padding-bottom-xs">
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, suscipit.</p>
-            </div>
-
-          </div>
-
-          <footer class="card-v10__footer">
-        <ul class="card-v10__social-list">
-          <li class="card-v10__social-item">
-            <button class="reset card-v10__social-btn js-tab-focus" aria-label="Like this content along with 120 other people">
-              <svg class="icon" viewBox="0 0 12 12">
-                <g>
-                  <path d="M11.045,2.011a3.345,3.345,0,0,0-4.792,0c-.075.075-.15.225-.225.3-.075-.074-.15-.224-.225-.3a3.345,3.345,0,0,0-4.792,0,3.345,3.345,0,0,0,0,4.792l5.017,4.718L11.045,6.8A3.484,3.484,0,0,0,11.045,2.011Z"></path>
-                </g>
-              </svg>
-
-              <span>120</span>
-            </button>
-          </li>
-
-          <li class="card-v10__social-item">
-            <button class="reset card-v10__social-btn js-tab-focus" aria-label="Comment">
-              <svg class="icon" viewBox="0 0 12 12">
-                <g>
-                  <path d="M6,0C2.691,0,0,2.362,0,5.267s2.691,5.266,6,5.266a6.8,6.8,0,0,0,1.036-.079l2.725,1.485A.505.505,0,0,0,10,12a.5.5,0,0,0,.5-.5V8.711A4.893,4.893,0,0,0,12,5.267C12,2.362,9.309,0,6,0Z"></path>
-                </g>
-              </svg>
-
-              <span>32</span>
-            </button>
-          </li>
-
-          <li class="card-v10__social-item">
-            <button class="reset card-v10__social-btn js-tab-focus" aria-label="Comment">
-              <svg class="icon" viewBox="0 0 12 12">
-                <g>
-                  <path d="M6,0C2.691,0,0,2.362,0,5.267s2.691,5.266,6,5.266a6.8,6.8,0,0,0,1.036-.079l2.725,1.485A.505.505,0,0,0,10,12a.5.5,0,0,0,.5-.5V8.711A4.893,4.893,0,0,0,12,5.267C12,2.362,9.309,0,6,0Z"></path>
-                </g>
-              </svg>
-
-              <span>32</span>
-            </button>
-          </li>
-
-        </ul>
-      </footer>
-        </div>
-      </li>
-
-      <li class="">
-        <div class="bg-light radius-md">
-          <figure class="card__img img-blend" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light">
-            <img class="radius-md" src="/assets/img/feature-v9-img-2.jpg" alt="Card preview img">
-          </figure>
-
-          <div class="card__content">
-          <div class="flex">
-
-          <figure class="width-lg height-lg radius-50% flex-shrink-0 overflow-hidden margin-right-xs margin-bottom-sm margin-left-xs@xs">
-              <img class="block width-100% height-100% object-cover" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
-            </figure>
-
-            <div class="">
-              <a href="#0" class="color-inherit link-subtle text-sm">Olivia Newton</a>
-              <p class="text-xs color-contrast-low">@Ovliad22</p>
-            </div>
-            </div>
-
-            <div class="text-component text-sm color-contrast-medium padding-bottom-xs">
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, suscipit.</p>
-            </div>
-
-          </div>
-
-          <footer class="card-v10__footer">
-        <ul class="card-v10__social-list">
-          <li class="card-v10__social-item">
-            <button class="reset card-v10__social-btn js-tab-focus" aria-label="Like this content along with 120 other people">
-              <svg class="icon" viewBox="0 0 12 12">
-                <g>
-                  <path d="M11.045,2.011a3.345,3.345,0,0,0-4.792,0c-.075.075-.15.225-.225.3-.075-.074-.15-.224-.225-.3a3.345,3.345,0,0,0-4.792,0,3.345,3.345,0,0,0,0,4.792l5.017,4.718L11.045,6.8A3.484,3.484,0,0,0,11.045,2.011Z"></path>
-                </g>
-              </svg>
-
-              <span>120</span>
-            </button>
-          </li>
-
-          <li class="card-v10__social-item">
-            <button class="reset card-v10__social-btn js-tab-focus" aria-label="Comment">
-              <svg class="icon" viewBox="0 0 12 12">
-                <g>
-                  <path d="M6,0C2.691,0,0,2.362,0,5.267s2.691,5.266,6,5.266a6.8,6.8,0,0,0,1.036-.079l2.725,1.485A.505.505,0,0,0,10,12a.5.5,0,0,0,.5-.5V8.711A4.893,4.893,0,0,0,12,5.267C12,2.362,9.309,0,6,0Z"></path>
-                </g>
-              </svg>
-
-              <span>32</span>
-            </button>
-          </li>
-
-          <li class="card-v10__social-item">
-            <button class="reset card-v10__social-btn js-tab-focus" aria-label="Comment">
-              <svg class="icon" viewBox="0 0 12 12">
-                <g>
-                  <path d="M6,0C2.691,0,0,2.362,0,5.267s2.691,5.266,6,5.266a6.8,6.8,0,0,0,1.036-.079l2.725,1.485A.505.505,0,0,0,10,12a.5.5,0,0,0,.5-.5V8.711A4.893,4.893,0,0,0,12,5.267C12,2.362,9.309,0,6,0Z"></path>
-                </g>
-              </svg>
-
-              <span>32</span>
-            </button>
-          </li>
-
-        </ul>
-      </footer>
-        </div>
-      </li>
-
-      <li class="">
-        <div class="bg-light radius-md">
-          <figure class="card__img img-blend" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light">
-            <img class="radius-md" src="/assets/img/article-v3-img-1.jpg" alt="Card preview img">
-          </figure>
-
-          <div class="card__content">
-          <div class="flex">
-
-          <figure class="width-lg height-lg radius-50% flex-shrink-0 overflow-hidden margin-right-xs margin-bottom-sm margin-left-xs@xs">
-              <img class="block width-100% height-100% object-cover" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
-            </figure>
-
-            <div class="">
-              <a href="#0" class="color-inherit link-subtle text-sm">Olivia Newton</a>
-              <p class="text-xs color-contrast-low">@Ovliad22</p>
-            </div>
-            </div>
-
-            <div class="text-component text-sm color-contrast-medium padding-bottom-xs">
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, suscipit.</p>
-            </div>
-
-          </div>
-
-          <footer class="card-v10__footer">
-        <ul class="card-v10__social-list">
-          <li class="card-v10__social-item">
-            <button class="reset card-v10__social-btn js-tab-focus" aria-label="Like this content along with 120 other people">
-              <svg class="icon" viewBox="0 0 12 12">
-                <g>
-                  <path d="M11.045,2.011a3.345,3.345,0,0,0-4.792,0c-.075.075-.15.225-.225.3-.075-.074-.15-.224-.225-.3a3.345,3.345,0,0,0-4.792,0,3.345,3.345,0,0,0,0,4.792l5.017,4.718L11.045,6.8A3.484,3.484,0,0,0,11.045,2.011Z"></path>
-                </g>
-              </svg>
-
-              <span>120</span>
-            </button>
-          </li>
-
-          <li class="card-v10__social-item">
-            <button class="reset card-v10__social-btn js-tab-focus" aria-label="Comment">
-              <svg class="icon" viewBox="0 0 12 12">
-                <g>
-                  <path d="M6,0C2.691,0,0,2.362,0,5.267s2.691,5.266,6,5.266a6.8,6.8,0,0,0,1.036-.079l2.725,1.485A.505.505,0,0,0,10,12a.5.5,0,0,0,.5-.5V8.711A4.893,4.893,0,0,0,12,5.267C12,2.362,9.309,0,6,0Z"></path>
-                </g>
-              </svg>
-
-              <span>32</span>
-            </button>
-          </li>
-
-          <li class="card-v10__social-item">
-            <button class="reset card-v10__social-btn js-tab-focus" aria-label="Comment">
-              <svg class="icon" viewBox="0 0 12 12">
-                <g>
-                  <path d="M6,0C2.691,0,0,2.362,0,5.267s2.691,5.266,6,5.266a6.8,6.8,0,0,0,1.036-.079l2.725,1.485A.505.505,0,0,0,10,12a.5.5,0,0,0,.5-.5V8.711A4.893,4.893,0,0,0,12,5.267C12,2.362,9.309,0,6,0Z"></path>
-                </g>
-              </svg>
-
-              <span>32</span>
-            </button>
-          </li>
-
-        </ul>
-      </footer>
-        </div>
-      </li>
-
-      <li class="">
-        <div class="bg-light radius-md">
-          <figure class="card__img img-blend" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light">
-            <img class="radius-md" src="/assets/img/article-v3-img-1.jpg" alt="Card preview img">
-          </figure>
-
-          <div class="card__content">
-          <div class="flex">
-
-          <figure class="width-lg height-lg radius-50% flex-shrink-0 overflow-hidden margin-right-xs margin-bottom-sm margin-left-xs@xs">
-              <img class="block width-100% height-100% object-cover" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
-            </figure>
-
-            <div class="">
-              <a href="#0" class="color-inherit link-subtle text-sm">Olivia Newton</a>
-              <p class="text-xs color-contrast-low">@Ovliad22</p>
-            </div>
-            </div>
-
-            <div class="text-component text-sm color-contrast-medium padding-bottom-xs">
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, suscipit.</p>
-            </div>
-
-          </div>
-
-          <footer class="card-v10__footer">
-        <ul class="card-v10__social-list">
-          <li class="card-v10__social-item">
-            <button class="reset card-v10__social-btn js-tab-focus" aria-label="Like this content along with 120 other people">
-              <svg class="icon" viewBox="0 0 12 12">
-                <g>
-                  <path d="M11.045,2.011a3.345,3.345,0,0,0-4.792,0c-.075.075-.15.225-.225.3-.075-.074-.15-.224-.225-.3a3.345,3.345,0,0,0-4.792,0,3.345,3.345,0,0,0,0,4.792l5.017,4.718L11.045,6.8A3.484,3.484,0,0,0,11.045,2.011Z"></path>
-                </g>
-              </svg>
-
-              <span>120</span>
-            </button>
-          </li>
-
-          <li class="card-v10__social-item">
-            <button class="reset card-v10__social-btn js-tab-focus" aria-label="Comment">
-              <svg class="icon" viewBox="0 0 12 12">
-                <g>
-                  <path d="M6,0C2.691,0,0,2.362,0,5.267s2.691,5.266,6,5.266a6.8,6.8,0,0,0,1.036-.079l2.725,1.485A.505.505,0,0,0,10,12a.5.5,0,0,0,.5-.5V8.711A4.893,4.893,0,0,0,12,5.267C12,2.362,9.309,0,6,0Z"></path>
-                </g>
-              </svg>
-
-              <span>32</span>
-            </button>
-          </li>
-
-          <li class="card-v10__social-item">
-            <button class="reset card-v10__social-btn js-tab-focus" aria-label="Comment">
-              <svg class="icon" viewBox="0 0 12 12">
-                <g>
-                  <path d="M6,0C2.691,0,0,2.362,0,5.267s2.691,5.266,6,5.266a6.8,6.8,0,0,0,1.036-.079l2.725,1.485A.505.505,0,0,0,10,12a.5.5,0,0,0,.5-.5V8.711A4.893,4.893,0,0,0,12,5.267C12,2.362,9.309,0,6,0Z"></path>
-                </g>
-              </svg>
-
-              <span>32</span>
-            </button>
-          </li>
-
-        </ul>
-      </footer>
-        </div>
-      </li>
-
+        </li>
+    @endfor
     </ul>
 </section>
 
