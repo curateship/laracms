@@ -5,26 +5,23 @@
 <div class="container max-width-xs margin-top-xxl padding-lg card">
 
 <!-- Login Form Start 👇-->
-  <form action="/user/confirm-password" method="POST">@csrf
-    <form class="login-form">
+  <form action="{{ url('/two-factor-challenge') }}" method="POST">
+      @csrf
       <div class="text-component text-center margin-bottom-sm">
-        <h1>Confirm Your Password</h1>
+        <h1>2fa login</h1>
       </div>
 
       <div class="margin-bottom-sm">
-        @error('password')
-        <span class="form-control--error" role="alert">
-          {{ $message }}
-        </span>
-        @enderror
-        <input class="form-control width-100%" type="password" name="password" id="input-password" placeholder="Input Password">
+          @if(session('status'))
+              <div class="alert alert-success" role="alert">{{session('status')}}</div>
+          @endif
       </div>
+
+      <input type="text" name="code" class="form-control width-100%">
 
       <div class="margin-bottom-sm margin-top-md">
-        <button class="btn btn--primary btn--md width-100%">Enable</button>
+        <button class="btn btn--primary btn--md width-100%">Login</button>
       </div>
-
-  </form>
 </form>
 <!-- Login Form END-->
 
