@@ -8,10 +8,11 @@
 
 :root {
   // font family
-  --font-primary: Inter, system-ui, sans-serif;
+  --font-primary: 'Roboto Slab', serif;
+  --font-secondary: 'Inter', sans-serif;
 
   // font size
-  --text-base-size: 1em; // body font-size
+  --text-base-size: 1rem; // body font-size
   --text-scale-ratio: 1.2; // multiplier used to generate the type scale values 👇
   
   // line-height
@@ -20,9 +21,10 @@
   
   // capital letters - used in combo with the lhCrop mixin
   --font-primary-capital-letter: 1;
+  --font-secondary-capital-letter: 1;
 
-  // unit - don't modify unless you want to change the typography unit (e.g., from Em to Rem units)
-  --text-unit: 1em; // if not Em units → --text-unit: var(--text-base-size);
+  // unit - don't modify unless you want to change the typography unit (e.g., from Rem to Em units)
+  --text-unit: var(--text-base-size); // if Em units → --text-unit: 1em;
 }
 
 :root, * {
@@ -40,59 +42,20 @@
 
 @include breakpoint(md) {
   :root {
-    --text-base-size: 1.25em;
+    --text-base-size: 1.25rem;
     --text-scale-ratio: 1.25;
   }
 }
 
 body {
   font-family: var(--font-primary);
-  --body-font-weight: 500;
 }
 
 h1, h2, h3, h4 {
   font-family: var(--font-primary);
-  --heading-font-weight: 400;
+  --heading-font-weight: 700;
 }
 
 // font family
 .font-primary { font-family: var(--font-primary); }
-
-// --------------------------------
-
-// (END) Global editor code
-
-// --------------------------------
-
-// link style
-a, .link {}
-
-mark {
-  background-color: alpha(var(--color-accent), 0.2);
-  color: inherit;
-}
-
-.text-component {
-  --line-height-multiplier: 1;
-  --text-space-y-multiplier: 1;
-
-  blockquote {
-    padding-left: 1em;
-    border-left: 4px solid var(--color-contrast-lower);
-  }
-
-  hr {
-    background: var(--color-contrast-lower);
-    height: 1px;
-  }
-
-  figcaption {
-    font-size: var(--text-sm);
-    color: var(--color-contrast-low);
-  }
-}
-
-.article { // e.g., blog posts
-  --body-line-height: 1.58; // set body line-height
-  --text-space-y-multiplier: 1.2; // control vertical spacing
-}
+.font-secondary { font-family: var(--font-secondary); }
