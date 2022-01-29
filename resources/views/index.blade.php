@@ -6,7 +6,7 @@
 
   <!-- 👇 Recommended -->
   <div class="justify-between flex items-end justify-between@md margin-bottom-lg">
-    <h2>Rocommended Articles</h2>
+    <h4>Rocommended</h4>
     <a href="http://localhost:8000/post" class="btn btn--subtle btn--sm radius-full" role="text">View all</a>
   </div>
   @include('partials.recommended')
@@ -14,7 +14,7 @@
 
   <!-- 👇 Recommended -->
   <div class="justify-between flex items-end justify-between@md">
-    <h2>Rocommended Tags</h2>
+    <h4>Rocommended Tags</h4>
     <a href="http://localhost:8000/post" class="btn btn--subtle btn--sm radius-full" role="text">View all</a>
   </div>
   @include('partials.recommended-tags')
@@ -22,7 +22,7 @@
 
     <!-- 👇 Recommended -->
   <div class="justify-between flex items-end justify-between@md margin-bottom-lg">
-    <h2>Rocommended Users</h2>
+    <h4>Rocommended Artist</h4>
     <a href="http://localhost:8000/post" class="btn btn--subtle btn--sm radius-full" role="text">View all</a>
   </div>
   @include('partials.recommended-users')

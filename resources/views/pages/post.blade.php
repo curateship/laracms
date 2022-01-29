@@ -41,19 +41,19 @@
 <!-- Content Start -->
 <div class="col-11@md">
   <div class="card">
-    <figure class="card__img img-blend" data-blend-pattern="0,0,1,0">
-      <img class="" src="/assets/img/card-img-1.jpg" alt="Card preview img">
+    <figure class="card__img">
+      <img class="" src="/assets/img/article-v4-img-1.jpg" alt="Card preview img">
     </figure>
-  <div class="padding-sm">
+  <div class="padding-md">
     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Qui ullam accusamus voluptate! Accusantium aperiam totam voluptatum at fugiat doloribus odit dolore fuga. Eum aliquam qui beatae recusandae, laborum explicabo nihil neque esse sequi cumque hic necessitatibus? Quam quaerat esse voluptatum.</p>
   </div>
 <div class="border-top"></div>
 <!-- Content END -->
 
 <!-- Content Control -->
-<div class="justify-between flex">
+<div class="justify-between flex padding-xs padding-x-md">
   <!-- Like Box -->
-  <menu class="menu-bar js-menu-bar padding-sm">
+  <menu class="menu-bar js-menu-bar">
     <button class="reset comments__vote-btn js-comments__vote-btn js-tab-focus padding-right-md margin-left-xs" data-label="Like this comment along with 5 other people" aria-pressed="false">
       <span class="comments__vote-icon-wrapper">
         <svg class="icon rate-cont__icon" viewBox="0 0 16 16" aria-hidden="true"><g stroke-width="1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="0.5" y="7.5" width="3" height="8"></rect><path d="M5.5,15.5h6.9a2,2,0,0,0,1.952-1.566l1.111-5A2,2,0,0,0,13.507,6.5H9.5v-4a2,2,0,0,0-2-2l-2,6"></path></g></svg>
@@ -72,7 +72,7 @@
 
 
 <!-- Control -->
-  <menu class="menu-bar menu-bar--expanded@md js-menu-bar padding-xxs">
+  <menu class="menu-bar menu-bar--expanded@md js-menu-bar">
     <li class="menu-bar__item menu-bar__item--trigger js-menu-bar__trigger" role="menuitem" aria-label="More options">
        <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 16 16">
         <circle cx="8" cy="7.5" r="1.5" />
@@ -114,7 +114,7 @@
       </div>
       <!-- END Content Control -->
 
-      <div class="border-top"></div>
+      <div class="border-top padding-x-sm padding-top-sm">
 
       <!-- Userbox -->
       <div class="justify-between flex padding-sm">
@@ -180,6 +180,7 @@
         </ul>
       </div>
     </div>
+  </div>
       <!-- END Tags-->
       <!-- END Content Box -->
 
