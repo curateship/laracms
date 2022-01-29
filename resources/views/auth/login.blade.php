@@ -5,8 +5,8 @@
 <div class="container max-width-xs margin-top-xxl padding-lg card">
 
 <!-- Login Form Start 👇-->
-  <form action="{{ route('login') }}" method="POST">@csrf
-    <form class="login-form">
+  <form action="{{ route('login') }}" method="POST" class="login-form">
+      @csrf
       <div class="text-component text-center margin-bottom-sm">
         <h1>Log in</h1>
       </div>
@@ -37,7 +37,6 @@
       <div class="text-center">
         <p class="text-sm">Don't have an account? <a href="/register">Get started</a></p>
       </div>
-  </form>
 </form>
 <!-- Login Form END-->
 

@@ -1,6 +1,6 @@
 @extends('apps.master')
 @section('content')
-  
+
 <!-- 👇 Content Body Wrapper-->
 <section class="margin-y-xl">
 @include('admin.partials.modal')
@@ -26,7 +26,7 @@
             </form>
         @endif
 
-        @if(session('status') == 'two-factor-authenication-enabled')
+        @if(session('status') == 'two-factor-authentication-enabled')
           <p> You have now enabled 2fa, please scan the following QR code into your phone authenticator application.</p>
           {!! auth()->user()->twoFactorQrCodeSvg() !!}
           <p>Please store these recovery codes in a secure location</p>

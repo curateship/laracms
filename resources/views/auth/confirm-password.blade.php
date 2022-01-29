@@ -5,7 +5,7 @@
 <div class="container max-width-xs margin-top-xxl padding-lg card">
 
 <!-- Login Form Start 👇-->
-  <form action="/user/confirm-password" method="POST">@csrf
+  <form action="{{url('user/confirm-password')}}" method="POST">@csrf
     <form class="login-form">
       <div class="text-component text-center margin-bottom-sm">
         <h1>Confirm Your Password</h1>
