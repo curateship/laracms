@@ -9,13 +9,13 @@
 
 .card-body, .card-user{
     height: 200px;
+}
+
+.card-text{
+    font-size: var(--text-sm);
 
     @include max-breakpoint(md){
-        height: 150px;
-    }
-
-    @include max-breakpoint(sm){
-        height: 150px;
+        font-size: var(--text-md);
     }
 }
 
@@ -23,16 +23,8 @@
     padding-bottom: 80px;
 }
 
-.card-body{
-    position: absolute;
-    top: 0;
+.card__img{
     background: var(--color-bg-light);
-
-    .img-blend-bottom{
-        @include breakpoint(xl){
-            bottom: 50px;
-        }
-    }
 }
 
 .card-user-content{
