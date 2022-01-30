@@ -5,6 +5,7 @@
 .img-blend-top, .img-blend-right, .img-blend-bottom, .img-blend-left{
     content: '';
     position: absolute;
+    z-index: 1;
 }
 
 .img-blend-top{

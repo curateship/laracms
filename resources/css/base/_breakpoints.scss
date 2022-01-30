@@ -15,3 +15,11 @@ $breakpoints: (
     @media (min-width: map-get($map: $breakpoints, $key: $breakpoint)) { @content; }
   }
 }
+
+@mixin max-breakpoint($breakpoint, $logic: false) {
+    @if( $logic ) {
+        @media #{$logic} and (max-width: map-get($map: $breakpoints, $key: $breakpoint)) { @content; }
+    } @else {
+        @media (max-width: map-get($map: $breakpoints, $key: $breakpoint)) { @content; }
+    }
+}

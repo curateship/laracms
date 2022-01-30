@@ -1,21 +1,53 @@
+@use '../base' as *;
+
 .card-menu-button{
     position: absolute;
     right: 3px;
     top: 3px;
-    z-index: 2;
+    z-index: 3;
+}
+
+.card-body, .card-user{
+    height: 200px;
+
+    @include max-breakpoint(md){
+        height: 150px;
+    }
+
+    @include max-breakpoint(sm){
+        height: 150px;
+    }
 }
 
 .card-user{
     padding-bottom: 80px;
-    height: 300px;
-    background-repeat: no-repeat;
-    background-size: cover;
+}
+
+.card-body{
+    position: absolute;
+    top: 0;
+    background: var(--color-bg-light);
+
+    .img-blend-bottom{
+        @include breakpoint(xl){
+            bottom: 50px;
+        }
+    }
 }
 
 .card-user-content{
     position: absolute;
     padding-top: var(--space-md) !important;
-    z-index: 1;
+    z-index: 2;
+}
+
+li.card{
+    position: relative;
+}
+
+.card-author {
+    z-index: 15;
+    margin-top:-30px;
 }
 
 .card-author {

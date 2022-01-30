@@ -9,6 +9,7 @@
     width: 2px;
     height: 2px;
     box-shadow: 0 0 60px 60px black;
+    z-index: 1;
 
     &.corner-bg-darker{
         box-shadow: 0 0 60px 60px var(--color-bg-darker);
