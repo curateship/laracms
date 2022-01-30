@@ -1,6 +1,5 @@
 <section class="margin-bottom-lg">
     <ul class="grid-auto-md gap-md">
-
         @for($i = 1 ; $i <= 5 ; $i++)
             <li class="card">
                 <div class="bg-light radius-md">
