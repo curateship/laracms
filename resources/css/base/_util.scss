@@ -497,7 +497,7 @@
 .line-height-xs {
   --heading-line-height: 1;
   --body-line-height: 1.1;
-  
+
   &:not(.text-component) {
     line-height: 1.1;
   }
@@ -665,12 +665,12 @@
 .width-xxxxs { width: var(--size-xxxxs, 0.25rem); }
 .width-xxxs  { width: var(--size-xxxs, 0.5rem); }
 .width-xxs   { width: var(--size-xxs, 0.75rem); }
-.width-xs    { width: var(--size-xs, 1rem); } 
+.width-xs    { width: var(--size-xs, 1rem); }
 .width-sm    { width: var(--size-sm, 1.5rem); }
-.width-md    { width: var(--size-md, 2rem); } 
-.width-lg    { width: var(--size-lg, 3rem); } 
-.width-xl    { width: var(--size-xl, 4rem); } 
-.width-xxl   { width: var(--size-xxl, 6rem); } 
+.width-md    { width: var(--size-md, 2rem); }
+.width-lg    { width: var(--size-lg, 3rem); }
+.width-xl    { width: var(--size-xl, 4rem); }
+.width-xxl   { width: var(--size-xxl, 6rem); }
 .width-xxxl  { width: var(--size-xxxl, 8rem); }
 .width-xxxxl { width: var(--size-xxxxl, 16rem); }
 .width-0     { width: 0; }
@@ -795,7 +795,7 @@ $breakpointsNr: length($breakpoints);
   } @else {
     $classList : '';
     @each $subBreakpoint, $subValue in $breakpoints {
-      $j: index($breakpoints, $subBreakpoint $subValue); 
+      $j: index($breakpoints, $subBreakpoint $subValue);
       @if $j == $i {
         $classList: '.max-width-adaptive-#{$subBreakpoint}';
       } @else if $j > $i {
@@ -804,7 +804,7 @@ $breakpointsNr: length($breakpoints);
     }
     @if $i < $breakpointsNr {
       $classList: $classList+', .max-width-adaptive';
-    } 
+    }
     @include breakpoint(#{$breakpoint}) {
       #{$classList} {
         max-width: map-get($map: $breakpoints, $key: #{$breakpoint});
@@ -840,7 +840,7 @@ $breakpointsNr: length($breakpoints);
   --inner-glow-top: inset 0 1px 0.5px hsla(0, 0%, 100%, 0.075);
 }
 
-.inner-glow, .inner-glow-top { 
+.inner-glow, .inner-glow-top {
   position: relative;
 
   &::after {
@@ -1014,7 +1014,7 @@ $breakpointsNr: length($breakpoints);
 
 // --------------------------------
 
-[class^="border-"], [class*=" border-"] { 
+[class^="border-"], [class*=" border-"] {
   --border-o: 1;
 }
 
@@ -1322,37 +1322,37 @@ $breakpointsNr: length($breakpoints);
     .flex-row\@#{$breakpoint} { flex-direction: row; }
     .flex-row-reverse\@#{$breakpoint} { flex-direction: row-reverse; }
     .flex-center\@#{$breakpoint} { justify-content: center; align-items: center; }
-    
+
     .flex-grow\@#{$breakpoint} { flex-grow: 1; }
     .flex-grow-0\@#{$breakpoint} { flex-grow: 0; }
     .flex-shrink\@#{$breakpoint} { flex-shrink: 1; }
     .flex-shrink-0\@#{$breakpoint} { flex-shrink: 0; }
     .flex-basis-0\@#{$breakpoint} { flex-basis: 0; }
-  
+
     // justify-content
     .justify-start\@#{$breakpoint} { justify-content: flex-start; }
     .justify-end\@#{$breakpoint} { justify-content: flex-end; }
     .justify-center\@#{$breakpoint} { justify-content: center; }
     .justify-between\@#{$breakpoint} { justify-content: space-between; }
-  
+
     // align-items
     .items-center\@#{$breakpoint} { align-items: center; }
     .items-start\@#{$breakpoint} { align-items: flex-start; }
     .items-end\@#{$breakpoint} { align-items: flex-end; }
     .items-baseline\@#{$breakpoint} { align-items: baseline; }
-  
+
     // order
     .order-1\@#{$breakpoint}  { order: 1; }
     .order-2\@#{$breakpoint}  { order: 2; }
     .order-3\@#{$breakpoint}  { order: 3; }
-  
+
     // display
     .block\@#{$breakpoint} { display: block; }
     .inline-block\@#{$breakpoint} { display: inline-block; }
     .inline\@#{$breakpoint} { display: inline; }
     .contents\@#{$breakpoint} { display: contents; }
     .hide\@#{$breakpoint} { display: none !important; }
-  
+
     // margin
     .margin-xxxxs\@#{$breakpoint} { margin: var(--space-xxxxs); }
     .margin-xxxs\@#{$breakpoint}  { margin: var(--space-xxxs); }
@@ -1367,7 +1367,7 @@ $breakpointsNr: length($breakpoints);
     .margin-xxxxl\@#{$breakpoint} { margin: var(--space-xxxxl); }
     .margin-auto\@#{$breakpoint}  { margin: auto; }
     .margin-0\@#{$breakpoint}     { margin: 0; }
-  
+
     .margin-top-xxxxs\@#{$breakpoint} { margin-top: var(--space-xxxxs); }
     .margin-top-xxxs\@#{$breakpoint}  { margin-top: var(--space-xxxs); }
     .margin-top-xxs\@#{$breakpoint}   { margin-top: var(--space-xxs); }
@@ -1381,7 +1381,7 @@ $breakpointsNr: length($breakpoints);
     .margin-top-xxxxl\@#{$breakpoint} { margin-top: var(--space-xxxxl); }
     .margin-top-auto\@#{$breakpoint}  { margin-top: auto; }
     .margin-top-0\@#{$breakpoint}     { margin-top: 0; }
-  
+
     .margin-bottom-xxxxs\@#{$breakpoint} { margin-bottom: var(--space-xxxxs); }
     .margin-bottom-xxxs\@#{$breakpoint}  { margin-bottom: var(--space-xxxs); }
     .margin-bottom-xxs\@#{$breakpoint}   { margin-bottom: var(--space-xxs); }
@@ -1395,7 +1395,7 @@ $breakpointsNr: length($breakpoints);
     .margin-bottom-xxxxl\@#{$breakpoint} { margin-bottom: var(--space-xxxxl); }
     .margin-bottom-auto\@#{$breakpoint}  { margin-bottom: auto; }
     .margin-bottom-0\@#{$breakpoint}     { margin-bottom: 0; }
-  
+
     .margin-right-xxxxs\@#{$breakpoint} { margin-right: var(--space-xxxxs); }
     .margin-right-xxxs\@#{$breakpoint}  { margin-right: var(--space-xxxs); }
     .margin-right-xxs\@#{$breakpoint}   { margin-right: var(--space-xxs); }
@@ -1423,7 +1423,7 @@ $breakpointsNr: length($breakpoints);
     .margin-left-xxxxl\@#{$breakpoint} { margin-left: var(--space-xxxxl); }
     .margin-left-auto\@#{$breakpoint}  { margin-left: auto; }
     .margin-left-0\@#{$breakpoint}     { margin-left: 0; }
-  
+
     .margin-x-xxxxs\@#{$breakpoint} { margin-left: var(--space-xxxxs); margin-right: var(--space-xxxxs); }
     .margin-x-xxxs\@#{$breakpoint}  { margin-left: var(--space-xxxs); margin-right: var(--space-xxxs); }
     .margin-x-xxs\@#{$breakpoint}   { margin-left: var(--space-xxs); margin-right: var(--space-xxs); }
@@ -1437,7 +1437,7 @@ $breakpointsNr: length($breakpoints);
     .margin-x-xxxxl\@#{$breakpoint} { margin-left: var(--space-xxxxl); margin-right: var(--space-xxxxl); }
     .margin-x-auto\@#{$breakpoint}  { margin-left: auto; margin-right: auto; }
     .margin-x-0\@#{$breakpoint}     { margin-left: 0; margin-right: 0; }
-  
+
     .margin-y-xxxxs\@#{$breakpoint} { margin-top: var(--space-xxxxs); margin-bottom: var(--space-xxxxs); }
     .margin-y-xxxs\@#{$breakpoint}  { margin-top: var(--space-xxxs); margin-bottom: var(--space-xxxs); }
     .margin-y-xxs\@#{$breakpoint}   { margin-top: var(--space-xxs); margin-bottom: var(--space-xxs); }
@@ -1451,7 +1451,7 @@ $breakpointsNr: length($breakpoints);
     .margin-y-xxxxl\@#{$breakpoint} { margin-top: var(--space-xxxxl); margin-bottom: var(--space-xxxxl); }
     .margin-y-auto\@#{$breakpoint}  { margin-top: auto; margin-bottom: auto; }
     .margin-y-0\@#{$breakpoint}     { margin-top: 0; margin-bottom: 0; }
-  
+
     // padding
     .padding-xxxxs\@#{$breakpoint} { padding: var(--space-xxxxs); }
     .padding-xxxs\@#{$breakpoint}  { padding: var(--space-xxxs); }
@@ -1466,7 +1466,7 @@ $breakpointsNr: length($breakpoints);
     .padding-xxxxl\@#{$breakpoint} { padding: var(--space-xxxxl); }
     .padding-0\@#{$breakpoint}     { padding: 0; }
     .padding-component\@#{$breakpoint} { padding: var(--component-padding); }
-  
+
     .padding-top-xxxxs\@#{$breakpoint} { padding-top: var(--space-xxxxs); }
     .padding-top-xxxs\@#{$breakpoint}  { padding-top: var(--space-xxxs); }
     .padding-top-xxs\@#{$breakpoint}   { padding-top: var(--space-xxs); }
@@ -1480,7 +1480,7 @@ $breakpointsNr: length($breakpoints);
     .padding-top-xxxxl\@#{$breakpoint} { padding-top: var(--space-xxxxl); }
     .padding-top-0\@#{$breakpoint}     { padding-top: 0; }
     .padding-top-component\@#{$breakpoint} { padding-top: var(--component-padding); }
-  
+
     .padding-bottom-xxxxs\@#{$breakpoint} { padding-bottom: var(--space-xxxxs); }
     .padding-bottom-xxxs\@#{$breakpoint}  { padding-bottom: var(--space-xxxs); }
     .padding-bottom-xxs\@#{$breakpoint}   { padding-bottom: var(--space-xxs); }
@@ -1508,7 +1508,7 @@ $breakpointsNr: length($breakpoints);
     .padding-right-xxxxl\@#{$breakpoint} { padding-right: var(--space-xxxxl); }
     .padding-right-0\@#{$breakpoint}     { padding-right: 0; }
     .padding-right-component\@#{$breakpoint} { padding-right: var(--component-padding); }
-  
+
     .padding-left-xxxxs\@#{$breakpoint} { padding-left: var(--space-xxxxs); }
     .padding-left-xxxs\@#{$breakpoint}  { padding-left: var(--space-xxxs); }
     .padding-left-xxs\@#{$breakpoint}   { padding-left: var(--space-xxs); }
@@ -1550,13 +1550,13 @@ $breakpointsNr: length($breakpoints);
     .padding-y-xxxxl\@#{$breakpoint} { padding-top: var(--space-xxxxl); padding-bottom: var(--space-xxxxl); }
     .padding-y-0\@#{$breakpoint}     { padding-top: 0; padding-bottom: 0; }
     .padding-y-component\@#{$breakpoint} { padding-top: var(--component-padding); padding-bottom: var(--component-padding); }
-  
+
     // text-align
     .text-center\@#{$breakpoint} { text-align: center; }
     .text-left\@#{$breakpoint}   { text-align: left; }
     .text-right\@#{$breakpoint}  { text-align: right; }
     .text-justify\@#{$breakpoint}  { text-align: justify; }
-  
+
     // font-size
     .text-xs\@#{$breakpoint}   { font-size: var(--text-xs, 0.6875rem); }
     .text-sm\@#{$breakpoint}   { font-size: var(--text-sm, 0.75rem); }
@@ -1572,12 +1572,12 @@ $breakpointsNr: length($breakpoints);
     .width-xxxxs\@#{$breakpoint} { width: var(--size-xxxxs, 0.25rem); }
     .width-xxxs\@#{$breakpoint}  { width: var(--size-xxxs, 0.5rem); }
     .width-xxs\@#{$breakpoint}   { width: var(--size-xxs, 0.75rem); }
-    .width-xs\@#{$breakpoint}    { width: var(--size-xs, 1rem); } 
+    .width-xs\@#{$breakpoint}    { width: var(--size-xs, 1rem); }
     .width-sm\@#{$breakpoint}    { width: var(--size-sm, 1.5rem); }
-    .width-md\@#{$breakpoint}    { width: var(--size-md, 2rem); } 
-    .width-lg\@#{$breakpoint}    { width: var(--size-lg, 3rem); } 
-    .width-xl\@#{$breakpoint}    { width: var(--size-xl, 4rem); } 
-    .width-xxl\@#{$breakpoint}   { width: var(--size-xxl, 6rem); } 
+    .width-md\@#{$breakpoint}    { width: var(--size-md, 2rem); }
+    .width-lg\@#{$breakpoint}    { width: var(--size-lg, 3rem); }
+    .width-xl\@#{$breakpoint}    { width: var(--size-xl, 4rem); }
+    .width-xxl\@#{$breakpoint}   { width: var(--size-xxl, 6rem); }
     .width-xxxl\@#{$breakpoint}  { width: var(--size-xxxl, 8rem); }
     .width-xxxxl\@#{$breakpoint} { width: var(--size-xxxxl, 16rem); }
     .width-0\@#{$breakpoint}     { width: 0; }

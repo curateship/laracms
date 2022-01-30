@@ -4,7 +4,7 @@
     @for($i = 1 ; $i <= 5 ; $i++)
         <li class="card">
             <div class="bg-light radius-md">
-                <figure class="card__img img-blend card-user corner-shadow" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light" data-blend-height="50%" style="background-image: url('/assets/img/article-v3-img-1.jpg')">
+                <figure class="card__img card-user corner-shadow">
                     <div class="corner top right corner-bg-darker"></div>
                     <button class="reset int-table__menu-btn js-tab-focus card-menu-button" data-label="Edit row" aria-controls="menu-example">
                         <svg class="icon" viewBox="0 0 16 16">
@@ -29,9 +29,9 @@
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, suscipit.</p>
                         </div>
                     </div>
-                    <!--
-                    <img class="radius-md" src="/assets/img/article-v3-img-1.jpg" alt="Card preview img">
-                    -->
+                    <div class="card-body img-blend" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light" data-blend-height="50%">
+                        <img class="radius-md" src="/assets/img/article-v3-img-1.jpg" alt="Card preview img">
+                    </div>
                 </figure>
 
                 <footer class="card-v10__footer">

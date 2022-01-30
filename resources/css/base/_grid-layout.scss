@@ -63,7 +63,7 @@ $grid-columns: 15 !default;
       --offset: var(--gap-x);
       --gap-modifier: 0;
       --offset-modifier: 1;
-    
+
       > * {
         margin-left: var(--offset);
       }

@@ -82,7 +82,7 @@ u {
   p, blockquote, ul li, ol li {
     line-height: calc(var(--body-line-height) * var(--line-height-multiplier, 1));
   }
-  
+
   ul, ol, p, blockquote, .text-component__block {
     margin-bottom: calc(var(--space-unit) * 0.9375 * var(--text-space-y-multiplier, 1));
   }
@@ -113,7 +113,7 @@ u {
     text-align: center;
     margin-top: calc(var(--space-unit) * 0.5);
   }
-  
+
   em {
     font-style: italic;
   }
@@ -141,7 +141,7 @@ u {
 }
 
 @include breakpoint(sm) {
-  .text-component__block--left, 
+  .text-component__block--left,
   .text-component__block--right {
     width: 45%;
 
