@@ -7,34 +7,24 @@
     z-index: 3;
 }
 
-.card-body, .card-user{
-    height: 200px;
-}
-
-.card-text{
-    font-size: var(--text-sm);
-
-    @include max-breakpoint(md){
-        font-size: var(--text-md);
-    }
-}
-
-.card-user{
-    padding-bottom: 80px;
-}
-
 .card__img{
     background: var(--color-bg-light);
 }
 
 .card-user-content{
-    position: absolute;
+    position: inherit;
     padding-top: var(--space-md) !important;
     z-index: 2;
+
+    .card-text{
+        position: inherit;
+        z-index: 2;
+    }
 }
 
-li.card{
-    position: relative;
+.card-body{
+    position: absolute;
+    top: 0;
 }
 
 .card-author {
@@ -45,4 +35,8 @@ li.card{
 .card-author {
     z-index: 15;
     margin-top:-30px;
+}
+
+.card{
+    height: fit-content;
 }
