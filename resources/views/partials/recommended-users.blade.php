@@ -13,7 +13,7 @@
                             </svg>
                         </button>
 
-                        <div class="card__content card-user-content">
+                        <div class="card__content card-user-content img-blend" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light" data-blend-height="50%">
                             <div class="flex">
                                 <figure class="width-lg height-lg radius-50% flex-shrink-0 overflow-hidden margin-right-xs margin-bottom-sm margin-left-xs@xs shadow-md">
                                     <img class="block width-100% height-100% object-cover" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
@@ -25,7 +25,17 @@
                             </div>
 
                             <div class="text-component card-text color-inherit padding-bottom-xs">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, suscipit.</p>
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, suscipit.
+                                    @if($i == 2)
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, suscipit.
+                                    @endif
+
+                                    @if($i == 4)
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, suscipit.
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, suscipit.
+                                    @endif
+                                </p>
                             </div>
                         </div>
                         <div class="card-body">
