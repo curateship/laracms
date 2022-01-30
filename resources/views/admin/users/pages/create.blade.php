@@ -33,7 +33,7 @@
           <div class="padding-md">
           <form action="{{ route('admin.users.store') }}" method="POST">@csrf
             <form class="sign-up-form">
-              
+
               <div class="text-component text-center margin-bottom-sm">
               </div>
 
@@ -70,13 +70,13 @@
                   <div class="col-2@md">
                     <div class="form-label">Choose Roles</div>
                   </div>
-            
+
                   <div class="col-12@md">
                     <ul class="flex flex-wrap gap-md">
                       @foreach($roles as $role)
                       <li>
-                        <input class="checkbox" type="checkbox" id="checkbox1" name="roles[]" value="{{ $role->id }}" id="{{ $role->name }}">
-                        <label for="checkbox1" for="{{ $role->name }}">{{ $role->name }}</label>
+                        <input class="checkbox" type="checkbox" value="{{ $role->id }}" id="{{ $role->name }}">
+                        <label for="{{ $role->name }}">{{ $role->name }}</label>
                       </li>
                       @endforeach
                     </ul>
@@ -92,7 +92,7 @@
             </form>
           </form>
           </div>
-          <!-- Register Form Content END -->          
+          <!-- Register Form Content END -->
           <!-- Table END -->
 
         </div><!-- END Col-12 Card -->
