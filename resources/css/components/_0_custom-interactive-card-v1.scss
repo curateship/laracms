@@ -23,16 +23,8 @@
     padding-bottom: 80px;
 }
 
-.card-body{
-    position: absolute;
-    top: 0;
+.card__img{
     background: var(--color-bg-light);
-
-    .img-blend-bottom{
-        @include breakpoint(xl){
-            bottom: 50px;
-        }
-    }
 }
 
 .card-user-content{

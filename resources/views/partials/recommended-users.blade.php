@@ -28,8 +28,8 @@
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, suscipit.</p>
                             </div>
                         </div>
-                        <div class="card-body img-blend" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light" data-blend-height="50%">
-                            <img class="radius-md" src="/assets/img/article-v3-img-1.jpg" alt="Card preview img">
+                        <div class="card-body" style="background-image: url('/assets/img/article-v3-img-1.jpg');">
+                            <div class="img-blend" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light" data-blend-height="50%" style="height: inherit;"></div>
                         </div>
                     </figure>
 
