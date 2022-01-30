@@ -25,7 +25,7 @@
     <h4>Rocommended Artist</h4>
     <a href="http://localhost:8000/post" class="btn btn--subtle btn--sm radius-full" role="text">View all</a>
   </div>
-  @include('partials.recommended-users')
+  @include('partials.recommended-users-v2')
     <!-- Recommended END -->
 
 </div>

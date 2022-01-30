@@ -24,7 +24,7 @@
                                 </div>
                             </div>
 
-                            <div class="text-component card-text color-inherit padding-bottom-xs">
+                            <div class="text-component card-text color-inherit padding-bottom-xs text-xs">
                                 <p>
                                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, suscipit.
                                     @if($i == 2)

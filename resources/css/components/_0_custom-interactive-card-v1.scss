@@ -11,10 +11,14 @@
     background: var(--color-bg-light);
 }
 
+.card-cover-img {
+    margin: 1px;
+}
+
 .card-user-content{
     position: inherit;
     padding-top: var(--space-md) !important;
-    z-index: 2;
+    z-index: 3;
 
     .card-text{
         position: inherit;
@@ -28,12 +32,7 @@
 }
 
 .card-author {
-    z-index: 15;
-    margin-top:-30px;
-}
-
-.card-author {
-    z-index: 15;
+    z-index: 2;
     margin-top:-30px;
 }
 
