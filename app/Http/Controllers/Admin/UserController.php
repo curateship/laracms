@@ -37,7 +37,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = User::create($request->except(['_token', 'roles']));
+        $user->roles()->sync($request->roles);
+        return redirect(route('admin.users.index'));
     }
 
     /**
