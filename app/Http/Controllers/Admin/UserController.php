@@ -37,6 +37,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $request->session()->flash('success', 'You have created the user');
         $user = User::create($request->except(['_token', 'roles']));
 
         $roles = [];
@@ -90,6 +91,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->update($request->except(['_token', 'roles']));
         $user->roles()->sync($request->roles);
+        $request->session()->flash('success', 'You have edited the user');
 
         return redirect(route('admin.users.index'));
     }
@@ -100,9 +102,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
         User::destroy($id);
+        $request->session()->flash('success', 'You have deleted the user');
         return redirect(route('admin.users.index'));
     }
 }

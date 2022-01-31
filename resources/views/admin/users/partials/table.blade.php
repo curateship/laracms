@@ -8,7 +8,7 @@
               <div class="custom-checkbox int-table__checkbox">
                 <input class="custom-checkbox__input js-int-table__select-all" type="checkbox" aria-label="Select all rows" />
                 <div class="custom-checkbox__control" aria-hidden="true"></div>
-              </div>
+              </div>  
             </td>
 
             <th class="int-table__cell int-table__cell--th int-table__cell--sort js-int-table__cell--sort">
@@ -119,7 +119,7 @@
             </figure>
             <div class="line-height-xs padding-top-xxxs">
               <p class=""><a href="{{ route ('admin.users.edit', $user->id) }}" class="link-subtle" aria-controls="edit-modal">{{ $user->name }}</a></p>
-              <p class="color-contrast-medium"><a href="#0" class="text-sm link-subtle">{{ $user->email }}</a></p>
+              <p class="color-contrast-medium"><span class="text-sm">{{ $user->email }}</span></p>
             </div>
             </td>
 
@@ -149,8 +149,7 @@
                   <a class="link-subtle" href="{{ route('admin.users.edit', $user->id) }}">
                   <svg class="icon menu__icon" aria-hidden="true" viewBox="0 0 12 12">
                     <path d="M10.121.293a1,1,0,0,0-1.414,0L1,8,0,12l4-1,7.707-7.707a1,1,0,0,0,0-1.414Z"></path>
-                  </svg>
-                  <span>Edit</span>
+                  </svg>Edit
                 </a>
                 </span>
               </li>
