@@ -42,16 +42,4 @@
 
 </div>
 <!-- Register Form Wrapper END-->
-
-@parent
-@if($errors->has('email') || $errors->has('password'))
-    <script>
-    $(function() {
-        $('modal-login').modal({
-            show: true
-        });
-    });
-    </script>
-@endif
-
 @endsection
