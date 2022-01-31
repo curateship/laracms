@@ -171,15 +171,15 @@
                     <path d="M6,0a6,6,0,1,0,6,6A6.006,6.006,0,0,0,6,0ZM6,10a4,4,0,1,1,4-4A4,4,0,0,1,6,10Z"></path>
                   </svg>
 
-                  <span type="menu__content js-menu__content" 
+                  <span type="menu__content js-menu__content"
                     onclick="event.preventDefault();
                     document.getElementById('delete-user-form-{{ $user->id }}').submit()">
                     Delete
                   </span>
 
-                  <form id="delete-user-form-{{ $user->id }}" action="{{ route('admin.users.destroy', $user->id) }}" method"POST" style="display: none"
-                    @csrf
-                    @method("DELETE")
+                  <form id="delete-user-form-{{ $user->id }}" action="{{ route('admin.users.destroy', $user->id) }}" method="POST" style="display: none">
+                      @csrf
+                      @method('DELETE')
                   </form>
 
               </li>
