@@ -75,7 +75,7 @@
                     <ul class="flex flex-wrap gap-md">
                       @foreach($roles as $role)
                       <li>
-                        <input class="checkbox" type="checkbox" value="{{ $role->id }}" id="{{ $role->name }}">
+                        <input class="checkbox" name="roles[]" type="checkbox" value="{{ $role->id }}" id="{{ $role->name }}">
                         <label for="{{ $role->name }}">{{ $role->name }}</label>
                       </li>
                       @endforeach
