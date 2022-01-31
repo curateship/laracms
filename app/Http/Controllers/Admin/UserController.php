@@ -38,7 +38,17 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $user = User::create($request->except(['_token', 'roles']));
-        $user->roles()->sync($request->roles);
+
+        $roles = [];
+        foreach($request->roles as $role_id){
+            $roles[] = [
+                'role_id' => $role_id
+            ];
+        }
+        if(count($roles) > 0){
+            $user->roles()->sync($roles);
+        }
+
         return redirect(route('admin.users.index'));
     }
 
