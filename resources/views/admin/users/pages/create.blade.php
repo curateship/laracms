@@ -34,7 +34,7 @@
           <form action="{{ route('admin.users.store') }}" method="POST">@csrf
             <form class="sign-up-form">
 
-              <div class="text-component text-center margin-bottom-sm">
+              <div class="text-component text-center">
               </div>
 
               <div class="padding-bottom-sm">
@@ -66,7 +66,7 @@
 
               <!-- Assign Roles 👇-->
               <div>
-                <div class="grid gap-xxs items-center@md padding-y-md">
+                <div class="grid gap-xxs items-center@md padding-y-xs">
                   <div class="col-2@md">
                     <div class="form-label">Choose Roles</div>
                   </div>
@@ -85,7 +85,7 @@
               </div>
               <!-- Assign Roles END -->
 
-              <div class="margin-bottom-sm">
+              <div class="margin-y-sm">
                 <button class="btn btn--primary btn--md width-15%">Create</button>
               </div>
 

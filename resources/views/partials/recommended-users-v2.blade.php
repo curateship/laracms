@@ -1,7 +1,7 @@
 <section class="margin-bottom-lg">
     <ul class="grid-auto-md gap-md">
 
-    @for($i = 1 ; $i <= 5 ; $i++)
+    @for($i = 1 ; $i <= 10 ; $i++)
     <li class="card">
         <div class="bg-light">
           <figure class="card__img img-blend corner-shadow" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light" data-blend-height="50%">
@@ -19,7 +19,7 @@
           <div class="card__content card-author">
           <div class="flex">
 
-            <figure class="width-lg height-lg radius-50% flex-shrink-0 overflow-hidden margin-right-xs margin-bottom-sm margin-left-xs@xs shadow-md card-author">
+            <figure class="width-lg height-lg radius-50% flex-shrink-0 overflow-hidden margin-right-xs margin-bottom-sm margin-left-xs@xs shadow-lg card-author">
               <img class="block width-100% height-100% object-cover" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
             </figure>
 

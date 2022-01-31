@@ -3,12 +3,12 @@
     <div class="position-relative z-index-2 text-center">
 
       <div class="text-component margin-bottom-sm">
-        <h1>Discover the world’s top designers & creatives creatives</h1><br>
-        <p>Dribbble is the leading destination to find & showcase creative work and home to the world's best design professionals.</p>
+        <h1>Hi there. I'm Tyler. I write about Minimalism, Travel & Being a Digital Nomad</h1><br>
+        <p>Oh, I also write about how to make money, dealing with life while you're traveling too! Oh, I also write about how to make money, dealing with life while you're traveling too!</p>
       </div>
 
       <div class="flex flex-wrap flex-center gap-sm">
-        <a href="#0" class="btn btn--primary">Sign up</a>
+        <a href="#0" class="btn btn--primary">Learn More</a>
         <a href="#0" class="color-inherit link-subtle">Login</a>
       </div>
       
