@@ -95,20 +95,14 @@
             <!-- mobile user menu END-->
             @else
             <button class="header-v2__nav-control reset anim-menu-btn anim-menu-btn--avatar" aria-label="Toggle icon" aria-controls="modal-login">
-                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
-                    <title>face-man</title>
-                    <g class="icon__group" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" transform="translate(0.5 0.5)" fill="white" stroke="white">
-                        <path fill="none" stroke-miterlimit="10"
-                              d="M1.051,10.933 C4.239,6.683,9.875,11.542,16,6c3,4.75,6.955,4.996,6.955,4.996"></path>
-                        <circle data-stroke="none" fill="currentColor" cx="7.5" cy="14.5" r="1.5" stroke-linejoin="miter"
-                                stroke-linecap="square" stroke="none"></circle>
-                        <circle data-stroke="none" fill="currentColor" cx="16.5" cy="14.5" r="1.5" stroke-linejoin="miter"
-                                stroke-linecap="square" stroke="none"></circle>
-                        <circle fill="none" stroke="currentColor" stroke-miterlimit="10" cx="12" cy="12" r="11"></circle>
-                        <path d="M4.222 4.222l15.556 15.556" />
-                        <path d="M19.778 4.222L4.222 19.778" />
-                    </g>
-                </svg>
+            <svg class="icon" viewBox="0 0 23 23">
+          <title>Go to account settings</title>
+          <g class="icon__group" fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2">
+            <circle cx="12" cy="6" r="4" />
+            <path d="M12 13a8 8 0 00-8 8h16a8 8 0 00-8-8z" />
+          </g>
+        </svg>
+            </svg>
             </button>
             @endif
 
