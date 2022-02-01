@@ -118,7 +118,7 @@
               <img class="block width-100% height-100% object-cover" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
             </figure>
             <div class="line-height-xs padding-top-xxxs">
-              <p class=""><a href="{{ route ('admin.users.edit', $user->id) }}" class="link-subtle" aria-controls="edit-modal">{{ $user->name }}</a></p>
+              <p class=""><a href="{{ route ('admin.users.edit', $user->id) }}" class="link-subtle">{{ $user->name }}</a></p>
               <p class="color-contrast-medium"><span class="text-sm">{{ $user->email }}</span></p>
             </div>
             </td>
