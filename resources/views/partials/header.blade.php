@@ -261,8 +261,9 @@
             </li>
            </div>
            <!-- With avatar END-->
-
+          @can('is-admin')
           <li class="f-header__item"><a href="/admin" class="f-header__btn btn btn--subtle radius-full">Admin</a></li>
+          @endcan
           @else
           <li class="f-header__item"><a href="{{ route('login') }}" class="f-header__link" aria-controls="modal-login">Login</a></li>
           <li class="f-header__item"><a href="{{ route('register') }}" class="f-header__btn btn btn--primary" aria-controls="modal-signup">Sign up</a></li>
