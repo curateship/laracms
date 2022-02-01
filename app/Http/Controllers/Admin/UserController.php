@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -14,9 +15,15 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.users.index', ['users' => User::paginate(10)]);
+        if($request->has('sortBy') && $request->input('sortBy') !== 'role'){
+            $users = User::orderBy($request->input('sortBy'), $request->input('sortDesc'));
+        }   else{
+            $users = User::orderBy('id', 'ASC');
+        }
+
+        return view('admin.users.index', ['users' => $users->paginate(5)]);
     }
 
     /**

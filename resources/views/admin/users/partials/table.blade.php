@@ -11,7 +11,16 @@
               </div>
             </td>
 
-            <th class="int-table__cell int-table__cell--th int-table__cell--sort js-int-table__cell--sort">
+            <th class="int-table__cell int-table__cell--th int-table__cell--sort js-int-table__cell--sort
+                @if(request()->get('sortBy') === 'name')
+                    @if(request()->get('sortDesc') === 'desc')
+                        int-table__cell--desc
+                    @endif
+                    @if(request()->get('sortDesc') === 'asc')
+                        int-table__cell--asc
+                    @endif
+                @endif
+                " data-sort-col="name">
               <div class="flex items-center">
                 <span>Name</span>
 
@@ -44,7 +53,16 @@
             <th class="int-table__cell int-table__cell--th text-left">Cmnt</th>
 
 
-            <th class="int-table__cell int-table__cell--th int-table__cell--sort js-int-table__cell--sort">
+            <th class="int-table__cell int-table__cell--th int-table__cell--sort js-int-table__cell--sort
+                @if(request()->get('sortBy') === 'role')
+                    @if(request()->get('sortDesc') === 'desc')
+                        int-table__cell--desc
+                    @endif
+                    @if(request()->get('sortDesc') === 'asc')
+                        int-table__cell--asc
+                    @endif
+                @endif
+                " data-sort-col="role">
               <div class="flex items-center">
                 <span>Role</span>
 
@@ -71,7 +89,16 @@
               </ul>
             </th>
 
-            <th class="int-table__cell int-table__cell--th int-table__cell--sort js-int-table__cell--sort" data-date-format="dd-mm-yyyy">
+            <th class="int-table__cell int-table__cell--th int-table__cell--sort js-int-table__cell--sort
+                @if(request()->get('sortBy') === 'created_at')
+                    @if(request()->get('sortDesc') === 'desc')
+                        int-table__cell--desc
+                    @endif
+                    @if(request()->get('sortDesc') === 'asc')
+                        int-table__cell--asc
+                    @endif
+                @endif
+                " data-date-format="dd-mm-yyyy" data-sort-col="created_at">
               <div class="flex items-center">
                 <span>Date</span>
 
@@ -131,7 +158,7 @@
             <td class="int-table__cell">24</td>
             <td class="int-table__cell">324</td>
             <td class="int-table__cell">Editor</td>
-            <td class="int-table__cell">01/01/2020</td>
+            <td class="int-table__cell">{{date('d/m/Y', strtotime($user->created_at))}}</td>
 
             <!-- Action Dropdown -->
             <td class="int-table__cell">
@@ -170,6 +197,7 @@
                     <path d="M8.354,3.646a.5.5,0,0,0-.708,0L6,5.293,4.354,3.646a.5.5,0,0,0-.708.708L5.293,6,3.646,7.646a.5.5,0,0,0,.708.708L6,6.707,7.646,8.354a.5.5,0,1,0,.708-.708L6.707,6,8.354,4.354A.5.5,0,0,0,8.354,3.646Z"></path>
                     <path d="M6,0a6,6,0,1,0,6,6A6.006,6.006,0,0,0,6,0ZM6,10a4,4,0,1,1,4-4A4,4,0,0,1,6,10Z"></path>
                   </svg>
+                </span>
 
                   <span type="menu__content js-menu__content"
                     onclick="event.preventDefault();
@@ -181,7 +209,6 @@
                       @csrf
                       @method('DELETE')
                   </form>
-
               </li>
             </menu>
             <!-- Action Dropdown END-->
