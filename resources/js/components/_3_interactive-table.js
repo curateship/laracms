@@ -9,7 +9,7 @@
       this.sortingRows = this.element.getElementsByClassName('js-int-table__sort-row');
       initIntTable(this);
     };
-  
+
     function initIntTable(table) {
       // check if table has actions
       initIntTableActions(table);
@@ -39,7 +39,7 @@
             sortColumns(table, selectedCol);
           }
         });
-  
+
         // change cell style when in focus
         table.header.addEventListener('focusin', function(event){
           var closestCell = document.activeElement.closest('.js-int-table__cell--sort');
@@ -52,7 +52,7 @@
         });
       }
     };
-  
+
     function initIntTableActions(table) {
       // check if table has actions and store them
       var tableId = table.element.getAttribute('id');
@@ -62,7 +62,7 @@
       table.actionsSelection = tableActions.getElementsByClassName('js-int-table-actions__items-selected');
       table.actionsNoSelection = tableActions.getElementsByClassName('js-int-table-actions__no-items-selected');
     };
-  
+
     function initIntTableSelection(table, select) { // checkboxes for rows selection
       table.selectAll = select[0];
       table.selectRow = table.element.getElementsByClassName('js-int-table__select-row');
@@ -70,7 +70,7 @@
       table.selectAll.addEventListener('click', function(event){ // we cannot use the 'change' event as on IE/Edge the change from "indeterminate" to either "checked" or "unchecked"  does not trigger that event
         toggleRowSelection(table);
       });
-      // select/deselect single row - reset all row selector 
+      // select/deselect single row - reset all row selector
       table.body.addEventListener('change', function(event){
         if(!event.target.closest('.js-int-table__select-row')) return;
         toggleAllSelection(table);
@@ -78,7 +78,7 @@
       // toggle actions
       toggleActions(table, table.element.getElementsByClassName('int-table__row--checked').length > 0);
     };
-  
+
     function toggleRowSelection(table) { // 'Select All Rows' checkbox has been selected/deselected
       var status = table.selectAll.checked;
       for(var i = 0; i < table.selectRow.length; i++) {
@@ -87,7 +87,7 @@
       }
       toggleActions(table, status);
     };
-  
+
     function toggleAllSelection(table) { // Single row has been selected/deselected
       var allChecked = true,
         oneChecked = false;
@@ -105,22 +105,22 @@
       }
       toggleActions(table, oneChecked);
     };
-  
-    function setDataRowOrder(table) { // add a data-order to rows element - will be used when resetting the sorting 
+
+    function setDataRowOrder(table) { // add a data-order to rows element - will be used when resetting the sorting
       var rowsArray = table.body.getElementsByTagName('tr');
       for(var i = 0; i < rowsArray.length; i++) {
         rowsArray[i].setAttribute('data-order', i);
       }
     };
-  
+
     function sortColumns(table, selectedCol, customOrder) {
       // determine sorting order (asc/desc/reset)
       var order = customOrder || getSortingOrder(selectedCol),
         colIndex = Util.getIndexInArray(table.headerCols, selectedCol);
       // sort table
-      sortTableContent(table, order, colIndex, selectedCol);
-      
-      // reset appearance of the th column that was previously sorted (if any) 
+      //sortTableContent(table, order, colIndex, selectedCol);
+
+      // reset appearance of the th column that was previously sorted (if any)
       for(var i = 0; i < table.headerCols.length; i++) {
         Util.removeClass(table.headerCols[i], 'int-table__cell--asc int-table__cell--desc');
       }
@@ -130,13 +130,13 @@
       // reset checkbox selection
       if(!customOrder) selectedCol.querySelector('input[value="'+order+'"]').checked = true;
     };
-  
+
     function getSortingOrder(selectedCol) { // determine sorting order
       if( Util.hasClass(selectedCol, 'int-table__cell--asc') ) return 'desc';
       if( Util.hasClass(selectedCol, 'int-table__cell--desc') ) return 'none';
       return 'asc';
     };
-  
+
     function sortTableContent(table, order, index, selctedCol) { // determine the new order of the rows
       var rowsArray = table.body.getElementsByTagName('tr'),
         switching = true,
@@ -147,7 +147,7 @@
         for (i = 0; i < rowsArray.length - 1; i++) {
           var contentOne = (order == 'none') ? rowsArray[i].getAttribute('data-order') : rowsArray[i].children[index].textContent.trim(),
             contentTwo = (order == 'none') ? rowsArray[i+1].getAttribute('data-order') : rowsArray[i+1].children[index].textContent.trim();
-  
+
           shouldSwitch = compareValues(contentOne, contentTwo, order, selctedCol);
           if(shouldSwitch) {
             table.body.insertBefore(rowsArray[i+1], rowsArray[i]);
@@ -157,7 +157,7 @@
         }
       }
     };
-  
+
     function compareValues(val1, val2, order, selctedCol) {
       var compare,
         dateComparison = selctedCol.getAttribute('data-date-format');
@@ -166,22 +166,22 @@
       } else if( !isNaN(val1) && !isNaN(val2) ) { // comparing numbers
         compare =  (order == 'asc' || order == 'none') ? Number(val1) > Number(val2) : Number(val2) > Number(val1);
       } else { // comparing strings
-        compare =  (order == 'asc' || order == 'none') 
+        compare =  (order == 'asc' || order == 'none')
           ? val2.toString().localeCompare(val1) < 0
           : val1.toString().localeCompare(val2) < 0;
       }
       return compare;
     };
-  
+
     function parseCustomDate(date, format) {
-      var parts = date.match(/(\d+)/g), 
+      var parts = date.match(/(\d+)/g),
         i = 0, fmt = {};
       // extract date-part indexes from the format
       format.replace(/(yyyy|dd|mm)/g, function(part) { fmt[part] = i++; });
-  
+
       return new Date(parts[fmt['yyyy']], parts[fmt['mm']]-1, parts[fmt['dd']]);
     };
-  
+
     function toggleActions(table, selection) {
       if(table.actionsSelection && table.actionsSelection.length > 0) {
         Util.toggleClass(table.actionsSelection[0], 'is-hidden', !selection);
@@ -190,7 +190,7 @@
         Util.toggleClass(table.actionsNoSelection[0], 'is-hidden', selection);
       }
     };
-  
+
     //initialize the IntTable objects
     var intTable = document.getElementsByClassName('js-int-table');
     if( intTable.length > 0 ) {
