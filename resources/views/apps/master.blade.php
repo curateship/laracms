@@ -28,13 +28,13 @@
   @include('partials.footer')
 <script src="{{ asset('assets/js/scripts.js') }}"></script>
 
-@if(Route::currentRouteName() !== 'login' && ($errors->has('email') || $errors->has('password')))
+@if($errors->has('email') || $errors->has('password'))
   <script>
       // Create the event;
       let event = new Event('openModal');
 
       // Dispatch it to exist CodyHouse modal;
-      document.getElementById('modal-login').dispatchEvent(event);
+      document.getElementById('{{old('target')}}').dispatchEvent(event);
   </script>
 @endif
 
