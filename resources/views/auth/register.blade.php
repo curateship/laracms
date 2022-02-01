@@ -6,7 +6,7 @@
 <!-- Register Form Content 👇-->
 <form action="{{ route('register') }}" method="POST">@csrf
   <form class="sign-up-form padding-lg">
-    
+
     <div class="text-component text-center margin-bottom-sm">
       <h1>Get started</h1>
         <p>Already have an account? <a href="/login">Login</a></p>
@@ -46,7 +46,7 @@
       </span>
       @enderror
       <input class="form-control width-100%" type="password" name="password_confirmation" id="input-password" placeholder="Enter Password Again">
-      <p class="text-xs color-contrast-medium margin-top-xxs">Minimum 6 characters</p>
+      <p class="text-xs color-contrast-medium margin-top-xxs">Minimum 8 characters</p>
     </div>
 
     <div class="margin-bottom-sm">
