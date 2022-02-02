@@ -1,44 +1,66 @@
 (function() {
-    $(document).on('click', '.int-table__cell--sort', function(e){
+    $(document).on('click', '.pagination__item', function(e){
         e.preventDefault()
 
-        const sortBy = $(this).attr('data-sort-col')
+        let url = $(this).attr('href')
+        const page = url.split('?')[1]
+        let selectedCol
+
+        if($('.int-table__cell--desc').length > 0){
+            selectedCol = $('.int-table__cell--desc')
+        }
+
+        if($('.int-table__cell--asc').length > 0){
+            selectedCol = $('.int-table__cell--asc')
+        }
+
+        if(selectedCol !== undefined){
+            url = tableUrl(selectedCol, true).replace('*', page)
+        }
+
+        window.location.href = url
+    })
+
+    $(document).on('click', '.int-table__cell--sort', function(){
+        window.location.href = tableUrl($(this), false)
+    })
+
+    function tableUrl(sortOwner, replacePage){
+        const sortBy = sortOwner.attr('data-sort-col')
         let sortDesc = false
 
-        if($(this).hasClass('int-table__cell--desc')){
+        if(sortOwner.hasClass('int-table__cell--desc')){
             sortDesc = 'desc'
         }
 
-        if($(this).hasClass('int-table__cell--asc')){
+        if(sortOwner.hasClass('int-table__cell--asc')){
             sortDesc = 'asc'
         }
 
         const url = window.location.href
         const urlArray = url.split('?')
-        let resultUrl
+        let paramsResult = []
 
-        if(urlArray[1] === undefined){
-            resultUrl = urlArray[0]
-        }   else{
+        if(urlArray[1] !== undefined){
             const paramsArray = urlArray[1].split('&')
-            let paramsResult = []
-
 
             paramsArray.forEach(function(item){
-                if(item.indexOf('page') !== -1){
+                if(item.indexOf('page') !== -1 && !replacePage){
                     paramsResult.push(item)
                     return false
                 }
             })
 
-            if(sortDesc !== false){
-                paramsResult.push('sortBy=' + sortBy)
-                paramsResult.push('sortDesc=' + sortDesc)
+            if(replacePage){
+                paramsResult.push('*')
             }
-
-            resultUrl = urlArray[0] + '?' + paramsResult.join('&')
         }
 
-        window.location.href = resultUrl
-    })
+        if(sortDesc !== false){
+            paramsResult.push('sortBy=' + sortBy)
+            paramsResult.push('sortDesc=' + sortDesc)
+        }
+
+        return urlArray[0] + (paramsResult.length > 0 ? '?' + paramsResult.join('&') : '')
+    }
 }());
