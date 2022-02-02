@@ -11,6 +11,7 @@ Use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Post;
 use App\Models\Comment;
+use App\Models\Image;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -59,6 +60,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function comments()
     {
         return $this->hasMany(comment::class);
+    }
+
+    public function image()
+    {
+	    return $this->morphOne(Image::class, 'imageable');
     }
 
     /**
