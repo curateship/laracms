@@ -34,11 +34,11 @@
                   <span class="sidenav__text text-sm@md">Posts</span>
                   <span class="sidenav__counter">12 <i class="sr-only">notifications</i></span>
                 </a>
-        
+
                 <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
                   <svg class="icon" viewBox="0 0 12 12"><polygon points="4 3 8 6 4 9 4 3"/></svg>
                 </button>
-        
+
                 <ul class="sidenav__list">
                   <li class="sidenav__item">
                     <a href="#0" class="sidenav__link">
@@ -62,9 +62,8 @@
 
                 </ul>
               </li>
-
                 <li class="sidenav__item">
-                    <a href="{{ route('admin.users.index') }}" class="sidenav__link"{{ (url('/admin/users') == url()->full()) ? 'aria-current=page' : '' }}>
+                    <a href="{{ route('admin.users.index') }}" class="sidenav__link" {{ strpos(url()->full(), '/admin/users') !== false ? 'aria-current=page' : '' }}>
                     <svg class="icon sidenav__icon" aria-hidden="false" viewBox="0 0 16 16" aria-current="page"><g><path d="M12.25,8.231C11.163,9.323,9.659,10,8,10S4.837,9.323,3.75,8.231C1.5,9.646,0,12.145,0,15v1h16 v-1C16,12.145,14.5,9.646,12.25,8.231z"></path><circle cx="8" cy="4" r="4"></circle></g></svg>
                         <span class="sidenav__text text-sm@md">Users</span>
                         <span class="sidenav__counter">12 <i class="sr-only">notifications</i></span>
@@ -146,11 +145,11 @@
             </ul>
 
             <div class="sidenav__divider margin-y-xs" role="presentation"></div>
-        
+
             <div class="sidenav__label margin-bottom-xxxs">
               <span class="text-sm color-contrast-medium text-xs@md">Other</span>
             </div>
-        
+
             <ul class="sidenav__list">
               <li class="sidenav__item">
                 <a href="http://localhost:3000/admin/setting" class="sidenav__link">
