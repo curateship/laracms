@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
@@ -17,6 +17,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index(Request $request)
     {
         if($request->has('sortBy') && $request->input('sortBy') !== 'role'){
@@ -25,7 +26,16 @@ class UserController extends Controller
             $users = User::orderBy('id', 'ASC');
         }
 
-        return view('admin.users.index', ['users' => $users->paginate(5)]);
+        if(Gate::denies('logged-in')){
+            dd('no access allowed');
+        }
+
+        if(Gate::allows('is-admin')){
+            return view('admin.users.index', ['users' => User::paginate(10)]);
+        }
+
+        dd('You need to be Admin');
+
     }
 
     /**
