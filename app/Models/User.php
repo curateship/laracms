@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 Use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Post;
+use App\Models\Comment;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -53,6 +54,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function roles()
     {
         return $this->belongsToMany('App\Models\Role');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(comment::class);
     }
 
     /**
