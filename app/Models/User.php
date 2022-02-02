@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 Use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Post;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
