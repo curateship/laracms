@@ -8,7 +8,7 @@
               <div class="custom-checkbox int-table__checkbox">
                 <input class="custom-checkbox__input js-int-table__select-all" type="checkbox" aria-label="Select all rows" />
                 <div class="custom-checkbox__control" aria-hidden="true"></div>
-              </div>  
+              </div>
             </td>
 
             <th class="int-table__cell int-table__cell--th int-table__cell--sort js-int-table__cell--sort
@@ -196,14 +196,10 @@
                     <path d="M8.354,3.646a.5.5,0,0,0-.708,0L6,5.293,4.354,3.646a.5.5,0,0,0-.708.708L5.293,6,3.646,7.646a.5.5,0,0,0,.708.708L6,6.707,7.646,8.354a.5.5,0,1,0,.708-.708L6.707,6,8.354,4.354A.5.5,0,0,0,8.354,3.646Z"></path>
                     <path d="M6,0a6,6,0,1,0,6,6A6.006,6.006,0,0,0,6,0ZM6,10a4,4,0,1,1,4-4A4,4,0,0,1,6,10Z"></path>
                   </svg>
+                    <span onclick="event.preventDefault();
+                        document.getElementById('delete-user-form-{{ $user->id }}').submit()"
+                    >Delete</span>
                 </span>
-
-                  <span type="menu__content js-menu__content"
-                    onclick="event.preventDefault();
-                    document.getElementById('delete-user-form-{{ $user->id }}').submit()">
-                    Delete
-                  </span>
-
                   <form id="delete-user-form-{{ $user->id }}" action="{{ route('admin.users.destroy', $user->id) }}" method="POST" style="display: none">
                       @csrf
                       @method('DELETE')
