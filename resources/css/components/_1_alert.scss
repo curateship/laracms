@@ -1,0 +1,70 @@
+@use '../base' as *;
+
+/* -------------------------------- 
+
+File#: _1_alert
+Title: Alert
+Descr: Feedback message
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+.alert {
+  background-color: alpha(var(--color-primary), 0.2);
+  color: var(--color-contrast-higher);
+
+  // hide element
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+}
+
+.alert__icon {
+  color: var(--color-primary);
+}
+
+.alert__close-btn {
+  display: inline-block;
+  flex-shrink: 0;
+  transition: .2s;
+
+  .icon {
+    display: block;
+  }
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+// themes
+.alert--success {
+  background-color: alpha(var(--color-success), 0.2);
+
+  .alert__icon {
+    color: var(--color-success);
+  }
+}
+
+.alert--error {
+  background-color: alpha(var(--color-error), 0.2);
+
+  .alert__icon {
+    color: var(--color-error);
+  }
+}
+
+.alert--warning {
+  background-color: alpha(var(--color-warning), 0.2);
+
+  .alert__icon {
+    color: var(--color-warning);
+  }
+}
+
+// toggle visibility
+.alert--is-visible {
+  position: static;
+  clip: auto;
+  clip-path: none;
+}

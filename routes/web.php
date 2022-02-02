@@ -18,10 +18,6 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/admin', function () {
-    return view('admin.index');
-});
-
 Route::get('/profile', function () {
     return view('pages.profile');
 });
@@ -60,12 +56,17 @@ Route::get('/test', function () {
 |--------------------------------------------------------------------------
 */
 
+// User Dashboard Routes
 Route::get('/home', function () {
     return view('home');
 })->middleware('auth', 'verified');
 
 
 // Admin Routes
-Route::prefix('admin')->name('admin.')->group(function (){
+Route::get('/admin', function () {
+    return view('admin.index');
+})->middleware(['auth', 'auth.isAdmin', 'verified']);
+
+Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->group(function (){
 	Route::resource('/users', UserController::class);
 });
