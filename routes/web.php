@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use \Admin\UserController;
+use App\Http\Controllers\Frontend\HomeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +16,37 @@ use \Admin\UserController;
 |
 */
 
+/*
+|--------------------------------------------------------------------------
+| Front-End Routes
+|--------------------------------------------------------------------------
+*/
+
 Route::get('/', function () {
     return view('index');
 });
+
+route::get('/home', [HomeController::class, 'index'])->name('home');
+
+/*
+|--------------------------------------------------------------------------
+| // Admin Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/admin', function () {
+    return view('admin.index');
+})->middleware(['auth', 'auth.isAdmin', 'verified']);
+
+Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->group(function (){
+	Route::resource('/users', UserController::class);
+});
+
+/*
+|--------------------------------------------------------------------------
+| OLD
+|--------------------------------------------------------------------------
+*/
 
 Route::get('/profile', function () {
     return view('pages.profile');
@@ -50,23 +80,3 @@ Route::get('/test', function () {
     return view('pages.test');
 });
 
-/*
-|--------------------------------------------------------------------------
-| Authentication Routes
-|--------------------------------------------------------------------------
-*/
-
-// User Dashboard Routes
-Route::get('/home', function () {
-    return view('home');
-})->middleware('auth', 'verified');
-
-
-// Admin Routes
-Route::get('/admin', function () {
-    return view('admin.index');
-})->middleware(['auth', 'auth.isAdmin', 'verified']);
-
-Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->group(function (){
-	Route::resource('/users', UserController::class);
-});
