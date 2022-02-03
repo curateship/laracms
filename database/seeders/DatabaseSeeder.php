@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,5 +19,29 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(RoleSeeder::class);
         $this->call(RoleUserSeeder::class);
+
+        \App\Models\Tag::truncate();
+
+        // Same as above except without separate seed file
+        $users = App\Models\User::factory(10)->create();
+        foreach ($users as $user) {
+            $user->image()->save( \App\Models\Image::factory()->make() );
+        }
+
+        \App\Models\Category::factory(10)->create();
+        $posts = \App\Models\Post::factory(10)->create();
+        \App\Models\Post::factory(10)->create();
+        \App\Models\Comment::factory(20)->create();
+        \App\Models\Tag::factory(50)->create();
+
+        foreach($posts as $post)
+        {
+            $tags_ids = [];
+            $tags_ids[] = \App\Models\Tag::all()->random()->id;
+            $tags_ids[] = \App\Models\Tag::all()->random()->id;
+            $tags_ids[] = \App\Models\Tag::all()->random()->id;
+
+            $post->tags()->sync( $tags_ids );
+        }
     }
 }
