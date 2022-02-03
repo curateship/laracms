@@ -7,12 +7,20 @@
   <div class="container max-width-adaptive-lg padding-top-sm">
     <div class="grid gap-md justify-between">
       <div class="col-12@md">
-        @include('partials.recommended')
+
+        <!-- 👇 Recent Post -->
+          <div class="justify-between flex items-end justify-between@md margin-bottom-lg">
+            <h4>Recent Post</h4>
+            <a href="http://localhost:8000/post" class="btn btn--subtle btn--sm radius-full" role="text">View all</a>
+          </div>
+          @include('partials.recent-post')
+          <!-- Recent Post END -->
+
       </div><!-- Col-12 END -->
 
       <!-- Sidebar -->
       <div class="col-3@md">
-        @include('admin.partials.sidebar')
+        @include('partials.sidebar')
       </div>
       <!-- Sidebar END -->
 

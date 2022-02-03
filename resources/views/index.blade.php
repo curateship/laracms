@@ -9,7 +9,7 @@
     <h4>Rocommended</h4>
     <a href="http://localhost:8000/post" class="btn btn--subtle btn--sm radius-full" role="text">View all</a>
   </div>
-  @include('partials.recommended')
+  
   <!-- Recommended END -->
 
   <!-- 👇 Recommended -->
