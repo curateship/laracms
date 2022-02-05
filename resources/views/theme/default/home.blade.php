@@ -1,4 +1,4 @@
-@extends('theme.layouts.app')
+@extends('theme.default.layouts.app')
 @section('content')
 
 <!-- 👇 Content Body Wrapper-->
@@ -19,7 +19,7 @@
 
       <!-- Sidebar -->
       <div class="col-3@md">
-        @include('partials.sidebar')
+        @include('theme.default.partials.sidebar')
       </div>
       <!-- Sidebar END -->
 

@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use \Admin\UserController;
 use App\Http\Controllers\Frontend\HomeController;
-
+use App\Http\Controllers\Frontend\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +27,9 @@ Route::get('/', function () {
 });
 
 route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::get('/post/{post:slug}', [PostController::class, 'show'])->name('post.show');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -52,16 +55,8 @@ Route::get('/profile', function () {
     return view('pages.profile');
 });
 
-Route::get('/post', function () {
-    return view('pages.post');
-});
-
 Route::get('/admin/setting', function () {
     return view('admin.pages.setting');
-});
-
-Route::get('/admin/post', function () {
-    return view('admin.post.index');
 });
 
 Route::get('/admin/post/trash', function () {
@@ -74,9 +69,5 @@ Route::get('/admin/post/add', function () {
 
 Route::get('/admin/post/trash', function () {
     return view('admin.post.trash');
-});
-
-Route::get('/test', function () {
-    return view('pages.test');
 });
 
