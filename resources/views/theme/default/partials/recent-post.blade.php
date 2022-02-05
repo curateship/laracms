@@ -13,14 +13,14 @@
                       <circle cx="14.5" cy="7.5" r="1.5" />
                   </svg>
               </button>
-              <a href="#0"><img class="radius-md" src="/assets/img/article-v3-img-1.jpg" alt="Card preview img"></a>
+              <a href="{{ route('post.show', $recent_post) }}"><img class="radius-md" src="/assets/img/article-v3-img-1.jpg" alt="Card preview img"></a>
           </figure>
 
           <div class="card__content recent-post-card">
           <div class="flex">
 
             <div class="recent-post-card padding-xxxs">
-              <p href="{{ route('post.show', $posts) }}" class="color-contrast-high link-subtle text-sm">{{ \Str::limit( $recent_post->title, 40) }}</p>
+              <p href="{{ route('post.show', $recent_post) }}" class="color-contrast-high link-subtle text-sm">{{ \Str::limit( $recent_post->title, 40) }}</p>
               <p class="text-xs color-contrast-low padding-top-xxs">{{ \Str::limit( $recent_post->excerpt, 40) }}</p>
               <p class="text-xs color-contrast-low padding-top-sm">{{ $recent_post->created_at->diffforhumans() }} <br> {{ $recent_post->author->name }}</p>
             </div>

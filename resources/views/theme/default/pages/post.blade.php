@@ -45,7 +45,7 @@
       <img class="" src="/assets/img/article-v4-img-1.jpg" alt="Card preview img">
     </figure>
   <div class="padding-md">
-  <h2 class="padding-bottom-md">{{ \Str::limit( $post->excerpt, 40) }}</h2>
+  <h2 class="padding-bottom-md">{{ $post->excerpt }}</h2>
   <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Qui ullam accusamus voluptate! Accusantium aperiam totam voluptatum at fugiat doloribus odit dolore fuga. Eum aliquam qui beatae recusandae, laborum explicabo nihil neque esse sequi cumque hic necessitatibus? Quam quaerat esse voluptatum.</p>
 </div>
 

@@ -11,13 +11,10 @@ class PostController extends Controller
     public function show(Post $post) {
 
         $recent_posts = Post::latest()->take(5)->get();
-        $categories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
 
         return view('/theme.default.pages.post', [
             'post' => $post,
             'recent_posts' => $recent_posts,
-            'categories' => $categories,
-            'tags' => $tags
         ]);
     }
 }
