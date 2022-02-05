@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
 
