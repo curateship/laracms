@@ -26,7 +26,7 @@ Route::get('/', function () {
     return view('index');
 });
 
-route::get('/home', [HomeController::class, 'index'])->name('home');
+route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(['auth', 'verified']);
 Route::get('/post/{post:slug}', [PostController::class, 'show'])->name('post.show');
 
 
