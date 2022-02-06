@@ -42,7 +42,7 @@
 <div class="col-11@md">
   <div class="card">
     <figure class="card__img">
-      <img class="" src="/assets/img/article-v4-img-1.jpg" alt="Card preview img">
+      <img class="" src="{{ asset('storage/' . $post->image->path. '')  }}" alt="Card preview img">
     </figure>
   <div class="padding-md">
   <h2 class="padding-bottom-md">{{ $post->excerpt }}</h2>

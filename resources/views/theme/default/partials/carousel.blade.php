@@ -5,27 +5,27 @@
     <div class="carousel__wrapper position-relative">
       <ol class="carousel__list">
         <li class="carousel__item">
-          <img class="block width-100%" src="../../assets/img/grid-switch-img-1.jpg" alt="Image Description">
+          <img class="block width-100% radius-lg" src="../../assets/img/grid-switch-img-1.jpg" alt="Image Description">
         </li>
 
         <li class="carousel__item">
-          <img class="block width-100%" src="../../assets/img/grid-switch-img-2.jpg" alt="Image Description">
+          <img class="block width-100% radius-lg" src="../../assets/img/grid-switch-img-2.jpg" alt="Image Description">
         </li>
 
         <li class="carousel__item">
-          <img class="block width-100%" src="../../assets/img/grid-switch-img-3.jpg" alt="Image Description">
+          <img class="block width-100% radius-lg" src="../../assets/img/grid-switch-img-3.jpg" alt="Image Description">
         </li>
 
         <li class="carousel__item">
-          <img class="block width-100%" src="../../assets/img/grid-switch-img-1.jpg" alt="Image Description">
+          <img class="block width-100% radius-lg" src="../../assets/img/grid-switch-img-1.jpg" alt="Image Description">
         </li>
 
         <li class="carousel__item">
-          <img class="block width-100%" src="../../assets/img/grid-switch-img-1.jpg" alt="Image Description">
+          <img class="block width-100% radius-lg" src="../../assets/img/grid-switch-img-1.jpg" alt="Image Description">
         </li>
 
         <li class="carousel__item">
-          <img class="block width-100%" src="../../assets/img/grid-switch-img-1.jpg" alt="Image Description">
+          <img class="block width-100% radius-lg" src="../../assets/img/grid-switch-img-1.jpg" alt="Image Description">
         </li>
 
         <li class="carousel__item">

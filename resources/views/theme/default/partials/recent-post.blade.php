@@ -13,7 +13,7 @@
                       <circle cx="14.5" cy="7.5" r="1.5" />
                   </svg>
               </button>
-              <a href="{{ route('post.show', $recent_post) }}"><img class="radius-md" src="/assets/img/article-v3-img-1.jpg" alt="Card preview img"></a>
+              <a href="{{ route('post.show', $recent_post) }}"><img class="radius-md" src="{{ asset('storage/' . $recent_post->image->path. '')  }}" alt="Card preview img"></a>
           </figure>
 
           <div class="card__content recent-post-card">
