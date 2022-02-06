@@ -1,0 +1,23 @@
+@use '../base' as *;
+
+/* -------------------------------- 
+
+File#: _1_swipe-content
+Title: Swipe Content
+Descr: A Vanilla JavaScript plugin to detect touch interactions
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+.swipe-content { // demo
+  height: 280px;
+  width: 280px;
+  background-color: var(--color-contrast-low);
+  border-radius: var(--radius-md);
+  cursor: default;
+  transition: background 0.2s;
+
+  &:active {
+    background-color: var(--color-contrast-medium);
+  }
+}

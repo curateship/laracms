@@ -7,6 +7,10 @@
     <div class="grid gap-md justify-between">
       <div class="col-12@md">
 
+      <div class="padding-bottom-lg">
+          @include('theme.default.partials.carousel')
+          </div>
+
         <!-- 👇 Recent Post -->
           <div class="justify-between flex items-end justify-between@md margin-bottom-md">
             <h3>Recent Post</h3>
