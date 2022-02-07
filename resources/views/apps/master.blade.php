@@ -20,7 +20,7 @@
   <!-- Back to Top END -->
 </head>
 
-<body data-theme="light">
+<body data-theme="@guest()'light'@else{{auth()->user()->theme ?? 'light'}}@endguest" >
   @include('partials.header')
   <div class="padding-top-sm">
     @yield('content')

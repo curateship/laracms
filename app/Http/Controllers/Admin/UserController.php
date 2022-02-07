@@ -7,6 +7,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
@@ -127,5 +128,11 @@ class UserController extends Controller
         User::destroy($id);
         $request->session()->flash('success', 'You have deleted the user');
         return redirect(route('admin.users.index'));
+    }
+
+    public function saveTheme(Request $request){
+        $user = User::find(Auth::id());
+        $user->theme = $request->input('theme');
+        $user->save();
     }
 }
