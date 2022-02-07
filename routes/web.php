@@ -15,6 +15,7 @@ use App\Http\Controllers\Frontend\PostController;
 route::get('/', [IndexController::class, 'index'])->name('index');
 route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(['auth', 'verified']);
 Route::get('/post/{post:slug}', [PostController::class, 'show'])->name('post.show');
+Route::post('post/{post:slug}', [PostController::class, 'addComment'])->name('post.add_comment');
 
 /*
 |--------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-@extends('admin.apps.master')
+@extends('admin.layouts.app')
 @section('content')
 @include('admin.users.partials.modal')
 

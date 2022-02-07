@@ -82,6 +82,16 @@
   }
 }
 
+.post-image {
+  height: 300px;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.post-title {
+  margin-top: -50px;
+  z-index: 15; 
+}
 // --------------------------------
 
 // (END) Global editor code

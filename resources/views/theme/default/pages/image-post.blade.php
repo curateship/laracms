@@ -41,13 +41,11 @@
 <!-- Content Start -->
 <div class="col-11@md">
   <div class="card">
-    
-    <figure class="card__img img-blend corner-shadow" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light" data-blend-height="80%">
-        <img class="radius-md post-image" src="{{ asset('storage/' . $post->image->path. '')  }}" alt="Card preview img">
+    <figure class="card__img">
+      <img class="" src="{{ asset('storage/' . $post->image->path. '')  }}" alt="Card preview img">
     </figure>
-
   <div class="padding-md">
-  <h2 class="padding-bottom-md post-title">{{ $post->excerpt }}</h2>
+  <h2 class="padding-bottom-md">{{ $post->excerpt }}</h2>
   <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Qui ullam accusamus voluptate! Accusantium aperiam totam voluptatum at fugiat doloribus odit dolore fuga. Eum aliquam qui beatae recusandae, laborum explicabo nihil neque esse sequi cumque hic necessitatibus? Quam quaerat esse voluptatum.</p>
 </div>
 
@@ -73,7 +71,7 @@
         <div class="margin-bottom-lg">
           <div class="flex gap-sm flex-column flex-row@md justify-between items-center@md">
             <div>
-              <h1 class="text-md">Comments ({{ count($post->comments) }})</h1>
+              <h1 class="text-md">Comments</h1>
             </div>
           
             <form aria-label="Choose sorting option">
@@ -93,17 +91,18 @@
         </div>
       
         <ul class="margin-bottom-lg">
-        @foreach($post->comments as $comment)
           <li class="comments__comment">
             <div class="flex items-start">
               <a href="#0" class="comments__author-img">
-                <img src="{{ $comment->user->image ? asset('storage/' . $comment->user->image->path. '') : 'https://images.assetsdelivery.com/compings_v2/salamatik/salamatik1801/salamatik180100019.jpg'  }}" alt="Author picture">
+                <img src="/assets/img/chips-img-1.jpg" alt="Author picture">
               </a>
         
               <div class="comments__content margin-top-xxxs">
                 <div class="text-component text-sm text-space-y-xs line-height-sm read-more js-read-more" data-characters="150" data-btn-class="comments__readmore-btn js-tab-focus">
-                  <p><a href="#0" class="comments__author-name" rel="author">{{ $comment->user->name }}</a></p>
-                  <p>{{ $comment->the_comment }}</p>
+                  <p><a href="#0" class="comments__author-name" rel="author">Olivia Gribben</a></p>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, accusantium consequatur. Perspiciatis!</p>
+      
+                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit sit sed cupiditate vel, sapiente aspernatur, reiciendis repellat ad delectus quia ea ipsam minima in dignissimos commodi velit nemo voluptatibus quisquam.</p>
                 </div>
         
                 <div class="margin-top-xs text-sm">
@@ -122,7 +121,42 @@
           
                     <span class="comments__inline-divider" aria-hidden="true"></span>
         
-                    <time class="comments__time" aria-label="1 hour ago">{{ $comment->created_at->diffForHumans() }}</time>
+                    <time class="comments__time" aria-label="1 hour ago">1h</time>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+      
+          <li class="comments__comment">
+            <div class="flex items-start">
+              <a href="#0" class="comments__author-img">
+                <img src="/assets/img/chips-img-2.jpg" alt="Author picture">
+              </a>
+        
+              <div class="comments__content margin-top-xxxs">
+                <div class="text-component text-sm text-space-y-xs line-height-sm read-more js-read-more" data-characters="150" data-btn-class="comments__readmore-btn js-tab-focus">
+                  <p><a href="#0" class="comments__author-name" rel="author">Olivia Gribben</a></p>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, accusantium consequatur. Perspiciatis!</p>
+                </div>
+        
+                <div class="margin-top-xs text-sm">
+                  <div class="flex gap-xxs items-center">
+                    <button class="reset comments__vote-btn js-comments__vote-btn js-tab-focus" data-label="Like this comment along with 5 other people" aria-pressed="false">
+                      <span class="comments__vote-icon-wrapper">
+                        <svg class="icon block" viewBox="0 0 12 12" aria-hidden="true"><path d="M11.045,2.011a3.345,3.345,0,0,0-4.792,0c-.075.075-.15.225-.225.3-.075-.074-.15-.224-.225-.3a3.345,3.345,0,0,0-4.792,0,3.345,3.345,0,0,0,0,4.792l5.017,4.718L11.045,6.8A3.484,3.484,0,0,0,11.045,2.011Z"></path></svg>
+                      </span>
+      
+                      <span class="margin-left-xxxs js-comments__vote-label" aria-hidden="true">5</span>
+                    </button>
+          
+                    <span class="comments__inline-divider" aria-hidden="true"></span>
+          
+                    <button class="reset comments__label-btn js-tab-focus">Reply</button>
+          
+                    <span class="comments__inline-divider" aria-hidden="true"></span>
+        
+                    <time class="comments__time" aria-label="1 hour ago">1h</time>
                   </div>
                 </div>
               </div>
@@ -146,7 +180,7 @@
                 
                       <div class="comments__content margin-top-xxxs">
                         <div class="text-component text-sm text-space-y-xs line-height-sm read-more js-read-more" data-characters="150" data-btn-class="comments__readmore-btn js-tab-focus">
-                          <p><a href="#0" class="comments__author-name" rel="author">Olivia 43434 Gribben</a></p>
+                          <p><a href="#0" class="comments__author-name" rel="author">Olivia Gribben</a></p>
                           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, accusantium consequatur. Perspiciatis!</p>
                         </div>
                 
@@ -211,25 +245,57 @@
               </div>
             </details>
           </li>
-          @endforeach
+      
+          <li class="comments__comment">
+            <div class="flex items-start">
+              <a href="#0" class="comments__author-img">
+                <img src="/assets/img/chips-img-3.jpg" alt="Author picture">
+              </a>
+        
+              <div class="comments__content margin-top-xxxs">
+                <div class="text-component text-sm text-space-y-xs line-height-sm read-more js-read-more" data-characters="150" data-btn-class="comments__readmore-btn js-tab-focus">
+                  <p><a href="#0" class="comments__author-name" rel="author">Olivia Gribben</a></p>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, accusantium consequatur. Perspiciatis!</p>
+                </div>
+        
+                <div class="margin-top-xs text-sm">
+                  <div class="flex gap-xxs items-center">
+                    <button class="reset comments__vote-btn js-comments__vote-btn js-tab-focus" data-label="Like this comment along with 5 other people" aria-pressed="false">
+                      <span class="comments__vote-icon-wrapper">
+                        <svg class="icon block" viewBox="0 0 12 12" aria-hidden="true"><path d="M11.045,2.011a3.345,3.345,0,0,0-4.792,0c-.075.075-.15.225-.225.3-.075-.074-.15-.224-.225-.3a3.345,3.345,0,0,0-4.792,0,3.345,3.345,0,0,0,0,4.792l5.017,4.718L11.045,6.8A3.484,3.484,0,0,0,11.045,2.011Z"></path></svg>
+                      </span>
+      
+                      <span class="margin-left-xxxs js-comments__vote-label" aria-hidden="true">5</span>
+                    </button>
+          
+                    <span class="comments__inline-divider" aria-hidden="true"></span>
+          
+                    <button class="reset comments__label-btn js-tab-focus">Reply</button>
+          
+                    <span class="comments__inline-divider" aria-hidden="true"></span>
+        
+                    <time class="comments__time" aria-label="1 hour ago">1h</time>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
         </ul>
       
-        @auth
-        <form method="POST" action="{{ route('post.add_comment', $post) }}">@csrf
+        <form>
           <fieldset>
             <legend class="form-legend">Add a new comment</legend>
       
             <div class="margin-bottom-xs">
               <label class="sr-only" for="commentNewContent">Your comment</label>
-              <textarea class="form-control width-100%" name="the_comment" id="the_comment"></textarea>
+              <textarea class="form-control width-100%" name="commentNewContent" id="commentNewContent"></textarea>
             </div>
       
             <div>
-              <button class="btn btn--primary" input-type>Post comment</button>
+              <button class="btn btn--primary">Post comment</button>
             </div>
           </fieldset>
         </form>
-        @endauth
       </section>
       <!-- END -->       
           </div>
