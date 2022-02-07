@@ -7,14 +7,14 @@
     <div class="grid gap-md justify-between">
       <div class="col-12@md">
 
-      <div class="padding-bottom-lg">
-          @include('theme.default.partials.carousel')
-          </div>
-
         <!-- 👇 Recent Post -->
           <div class="justify-between flex items-end justify-between@md margin-bottom-md">
             <h3>Recent Post</h3>
-            <a href="http://localhost:8000/post" class="btn btn--subtle btn--sm radius-full" role="text">View all</a>
+            <div class="justify-between flex items-end justify-between@md">
+            <a href="http://localhost:8000/post" class="btn btn--primary btn--sm radius-full margin-right-xs" role="text">My Feed</a> 
+            <a href="http://localhost:8000/post" class="btn btn--subtle btn--sm radius-full margin-right-xs" role="text">Popular</a> 
+            <a href="http://localhost:8000/post" class="btn btn--subtle btn--sm radius-full" role="text">New</a> 
+            </div>
           </div>
           @include('theme.default.partials.recent-post')
           <!-- Recent Post END -->

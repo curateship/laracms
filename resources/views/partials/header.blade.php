@@ -261,6 +261,7 @@
             </li>
            </div>
            <!-- With avatar END-->
+           <li class="f-header__item"><a href="/home" class="f-header__btn btn btn--subtle radius-full">Dashboard</a></li>
           @can('is-admin')
           <li class="f-header__item"><a href="/admin" class="f-header__btn btn btn--subtle radius-full">Admin</a></li>
           @endcan

@@ -142,6 +142,89 @@
                 </ul>
                 </li>
 
+                <li class="sidenav__item">
+                    <a href="#0" class="sidenav__link">
+                    <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16">
+                      <g ><path d="M15.707,7.207,8.5,0H3V2H6.914l7.5,7.5a2.012,2.012,0,0,1,.187.227l1.106-1.106A1,1,0,0,0,15.707,7.207Z"></path> <path d="M13.707,10.207,6.5,3H1V8.5l7.207,7.207a1,1,0,0,0,1.414,0l4.086-4.086A1,1,0,0,0,13.707,10.207ZM4,7A1,1,0,1,1,5,6,1,1,0,0,1,4,7Z"></path>
+                      </g>
+                    </svg>
+                        <span class="sidenav__text text-sm@md">Tags</span>
+                        <span class="sidenav__counter">12 <i class="sr-only">notifications</i></span>
+                    </a>
+                      <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
+                        <svg class="icon" viewBox="0 0 12 12"><polygon points="4 3 8 6 4 9 4 3"/></svg>
+                      </button>
+                <ul class="sidenav__list">
+                  <li class="sidenav__item">
+                    <a href="#0" class="sidenav__link">
+                      <span class="sidenav__text text-sm@md">Add New</span>
+                    </a>
+                  </li>
+                  <li class="sidenav__item">
+                    <a href="#0" class="sidenav__link">
+                      <span class="sidenav__text text-sm@md">Admins</span>
+                    </a>
+                  </li>
+                  <li class="sidenav__item">
+                    <a href="#0" class="sidenav__link">
+                      <span class="sidenav__text text-sm@md">Editors</span>
+                    </a>
+                  </li>
+                  <li class="sidenav__item">
+                    <a href="#0" class="sidenav__link">
+                      <span class="sidenav__text text-sm@md">Registered</span>
+                    </a>
+                  </li>
+                  <li class="sidenav__item">
+                    <a href="#0" class="sidenav__link">
+                      <span class="sidenav__text text-sm@md">Trash</span>
+                    </a>
+                  </li>
+                </ul>
+                </li>
+
+                <li class="sidenav__item">
+                    <a href="#0" class="sidenav__link">
+                    <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16">
+                      <g >
+                        <path d="M15,4H1A1,1,0,0,0,.02,5.2l2,10A1,1,0,0,0,3,16H13a1,1,0,0,0,.98-.8l2-10A1,1,0,0,0,15,4Z"></path><path d="M3,2H13a1,1,0,0,0,0-2H3A1,1,0,0,0,3,2Z"></path>
+                      </g>
+                    </svg>
+                        <span class="sidenav__text text-sm@md">Categories</span>
+                        <span class="sidenav__counter">12 <i class="sr-only">notifications</i></span>
+                    </a>
+                      <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
+                        <svg class="icon" viewBox="0 0 12 12"><polygon points="4 3 8 6 4 9 4 3"/></svg>
+                      </button>
+                <ul class="sidenav__list">
+                  <li class="sidenav__item">
+                    <a href="#0" class="sidenav__link">
+                      <span class="sidenav__text text-sm@md">Add New</span>
+                    </a>
+                  </li>
+                  <li class="sidenav__item">
+                    <a href="#0" class="sidenav__link">
+                      <span class="sidenav__text text-sm@md">Admins</span>
+                    </a>
+                  </li>
+                  <li class="sidenav__item">
+                    <a href="#0" class="sidenav__link">
+                      <span class="sidenav__text text-sm@md">Editors</span>
+                    </a>
+                  </li>
+                  <li class="sidenav__item">
+                    <a href="#0" class="sidenav__link">
+                      <span class="sidenav__text text-sm@md">Registered</span>
+                    </a>
+                  </li>
+                  <li class="sidenav__item">
+                    <a href="#0" class="sidenav__link">
+                      <span class="sidenav__text text-sm@md">Trash</span>
+                    </a>
+                  </li>
+                </ul>
+                </li>
+
             </ul>
 
             <div class="sidenav__divider margin-y-xs" role="presentation"></div>

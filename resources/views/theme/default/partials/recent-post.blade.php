@@ -4,7 +4,7 @@
     @foreach($recent_posts as $recent_post)
     <li class="card">
         <div class="bg-light">
-          <figure class="card__img img-blend corner-shadow" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light" data-blend-height="10%">
+          <figure class="card__img img-blend corner-shadow" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light" data-blend-height="5%">
               <div class="corner top right corner-bg-darker"></div>
               <button class="reset int-table__menu-btn js-tab-focus card-menu-button" data-label="Edit row" aria-controls="menu-example">
                   <svg class="icon" viewBox="0 0 16 16">
@@ -13,7 +13,7 @@
                       <circle cx="14.5" cy="7.5" r="1.5" />
                   </svg>
               </button>
-              <a href="{{ route('post.show', $recent_post) }}"><img class="radius-md" src="{{ asset('storage/' . $recent_post->image->path. '')  }}" alt="Card preview img"></a>
+              <a href="{{ route('post.show', $recent_post) }}"><img class="radius-md" src="{{ asset('storage/' . $recent_post->image->path. '')  }}" alt="Card preview img" style="width: 400px; height: 250px; object-fit: cover;"></a>
           </figure>
 
           <div class="card__content recent-post-card">
@@ -21,7 +21,7 @@
 
             <div class="recent-post-card padding-xxxs">
               <p href="{{ route('post.show', $recent_post) }}" class="color-contrast-high link-subtle text-sm">{{ \Str::limit( $recent_post->title, 40) }}</p>
-              <p class="text-xs color-contrast-low padding-top-xxs">{{ \Str::limit( $recent_post->excerpt, 40) }}</p>
+              <p class="text-xs color-contrast-low padding-top-xxs">{{ \Str::limit( $recent_post->excerpt, 20) }}</p>
               <p class="text-xs color-contrast-low padding-top-sm">{{ $recent_post->created_at->diffforhumans() }} <br> {{ $recent_post->author->name }}</p>
             </div>
             </div>

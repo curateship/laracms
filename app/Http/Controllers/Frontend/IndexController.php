@@ -18,7 +18,7 @@ class IndexController extends Controller
     {
         $posts = Post::latest()->withCount('comments')->paginate(10);
         $recent_posts = Post::withCount('comments')->get();
-        $recent_posts = Post::latest()->take(8)->get();
+        $recent_posts = Post::latest()->take(10)->get();
         $categories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(5)->get();
 
         return view('/theme.default.index', [
