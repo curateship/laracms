@@ -11,37 +11,27 @@
       <h1>Contact Us</h1>
     </div>
 
-    <div class="padding-bottom-sm">
-      @error('name')
-      <span class="form-control--error" role="alert">
-      <strong>{{ $message }}</strong>
-      </span>
-      @enderror
-      <input class="form-control width-100%" type="text" name="name" id="name" placeholder="Enter Name">
+    <div class="grid gap-xs">
+    <div class="padding-bottom-sm col-7@md">
+      <x-form.input value='{{ old("first_name") }}' name="first_name" placeholder="Your First Name"/>
+    </div>
+
+    <div class="padding-bottom-sm col-8@md">
+    <x-form.input value='{{ old("last_name") }}' name="last_name" placeholder="Your Last Name"/>
+    </div>
     </div>
 
     <div class="margin-bottom-sm">
-      @error('email')
-      <span class="form-control--error" role="alert">
-      <strong>{{ $message }}</strong>
-      </span>
-      @enderror
-      <input class="form-control width-100%" type="email" name="email" id="input-email" placeholder="email@myemail.com">
+    <x-form.input value='{{ old("email") }}' type="email" name="email" placeholder="Your Email"/>
     </div>
 
     <div class="padding-bottom-sm">
-      @error('name')
-      <span class="form-control--error" role="alert">
-      <strong>{{ $message }}</strong>
-      </span>
-      @enderror
-      <input class="form-control width-100%" type="text" name="subject" id="subject" placeholder="Enter your subject">
+    <x-form.input required="false" type="name" name="subject" placeholder="Your Subject"/>
     </div>
 
     <div class="form-validate__input-wrapper js-form-validate__input-wrapper">
-      <textarea class="form-control width-100%" name="textarea" id="textarea" minlength="20" required placeholder="Enter Your Messages"></textarea>
-      <div role="alert" class="form-validate__error-msg bg-error bg-opacity-20% padding-x-xs padding-y-xxs radius-md text-xs color-contrast-higher margin-top-xxs"><p>Must be at least 10 characters.</div>
-      <p class="text-xs color-contrast-medium margin-top-xxs">At least 10 characters.</p>
+
+    <x-form.text-area name="message" placeholder="Enter Your Messages"/>
     </div>
 
 

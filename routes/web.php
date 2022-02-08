@@ -35,7 +35,6 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
 	Route::resource('/users', UserController::class);
 });
 
-
 Route::post('users/saveTheme', [UserController::class, 'saveTheme'])->middleware(['auth']);
 /*
 |--------------------------------------------------------------------------
