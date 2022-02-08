@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use \Admin\UserController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\PostController;
@@ -35,6 +35,8 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
 	Route::resource('/users', UserController::class);
 });
 
+
+Route::post('users/saveTheme', [UserController::class, 'saveTheme'])->middleware(['auth']);
 /*
 |--------------------------------------------------------------------------
 | OLD

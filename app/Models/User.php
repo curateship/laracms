@@ -13,6 +13,9 @@ use App\Models\Post;
 use App\Models\Comment;
 use App\Models\Image;
 
+/**
+ * @method static find(int|string|null $id)
+ */
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, TwoFactorAuthenticatable;
@@ -46,6 +49,9 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    /**
+     * @var mixed
+     */
 
     public function setPasswordAttribute($password)
     {
