@@ -18,7 +18,7 @@
           <!-- END Control Bar-->
 
           <!-- Table -->
-          <div class="margin-top-auto border-top border-contrast-lower"></div><!-- Divider -->
+          <div class="margin-top-auto border-top border-contrast-lower border-opacity-30%"></div><!-- Divider -->
           @include('admin.users.partials.table')<!-- Table-->
           <div class="margin-top-auto border-top border-contrast-lower"></div><!-- Divider -->
           {{ $users->links('admin.users.partials.pagination', ['users' => $users]) }}

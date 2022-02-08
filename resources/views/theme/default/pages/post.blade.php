@@ -221,7 +221,7 @@
       
             <div class="margin-bottom-xs">
               <label class="sr-only" for="commentNewContent">Your comment</label>
-              <textarea class="form-control width-100%" name="the_comment" id="the_comment" minlength="10" required></textarea>
+              <textarea class="form-control width-100%" name="the_comment" id="the_comment" minlength="10" rows="3" required></textarea>
             </div>
       
             <div>

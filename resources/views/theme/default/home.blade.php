@@ -8,7 +8,7 @@
       <div class="col-12@md">
 
         <!-- 👇 Recent Post -->
-          <div class="justify-between flex items-end justify-between@md margin-bottom-md">
+          <div class="justify-between flex items-end justify-between@md margin-bottom-md hide@md">
             <h3>Recent Post</h3>
             <div class="justify-between flex items-end justify-between@md">
             <a href="http://localhost:8000/post" class="btn btn--primary btn--sm radius-full margin-right-xs" role="text">My Feed</a> 
@@ -23,6 +23,7 @@
 
       <!-- Sidebar -->
       <div class="col-3@md">
+      @include('theme.default.partials.sidebar-filter')
         @include('theme.default.partials.sidebar')
       </div>
       <!-- Sidebar END -->

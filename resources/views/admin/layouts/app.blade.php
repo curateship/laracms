@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Roboto+Slab&display=swap" rel="stylesheet">
   <title>Traders</title>
 </head>
-<body data-theme="dark">
+<body data-theme="@guest(){{config('app.default_theme')}}@else{{auth()->user()->theme ?? config('app.default_theme')}}@endguest">
   @include('partials.header')
   <div class="padding-top-sm">
     @include('admin.partials.alerts')
