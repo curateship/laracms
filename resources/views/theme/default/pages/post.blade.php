@@ -42,7 +42,7 @@
 <div class="col-11@md">
   <div class="card">
     
-    <figure class="card__img img-blend corner-shadow" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light" data-blend-height="80%">
+    <figure class="card__img img-blend corner-shadow opacity-40%" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light" data-blend-height="100%">
         <img class="radius-md post-image" src="{{ asset('storage/' . $post->image->path. '')  }}" alt="Card preview img">
     </figure>
 
@@ -102,8 +102,8 @@
         
               <div class="comments__content margin-top-xxxs">
                 <div class="text-component text-sm text-space-y-xs line-height-sm read-more js-read-more" data-characters="150" data-btn-class="comments__readmore-btn js-tab-focus">
-                  <p><a href="#0" class="comments__author-name" rel="author">{{ $comment->user->name }}</a></p>
-                  <p>{{ $comment->the_comment }}</p>
+                  <p><a href="#0" class="color-contrast-high text-sm link-subtle" rel="author">{{ $comment->user->name }}</a></p>
+                  <p class="color-contrast-medium">{{ $comment->the_comment }}</p>
                 </div>
         
                 <div class="margin-top-xs text-sm">
@@ -221,7 +221,7 @@
       
             <div class="margin-bottom-xs">
               <label class="sr-only" for="commentNewContent">Your comment</label>
-              <textarea class="form-control width-100%" name="the_comment" id="the_comment"></textarea>
+              <textarea class="form-control width-100%" name="the_comment" id="the_comment" minlength="10" required></textarea>
             </div>
       
             <div>
@@ -230,6 +230,10 @@
           </fieldset>
         </form>
         @endauth
+
+        @guest
+					<p class=""><a href="{{ route('login') }}">Login </a> OR <a href="{{ route('register') }}">Register</a> to write comments</p>
+				@endguest	
       </section>
       <!-- END -->       
           </div>

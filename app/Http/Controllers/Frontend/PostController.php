@@ -21,7 +21,7 @@ class PostController extends Controller
     public function addComment(Post $post)
     {
         $attributes = request()->validate([
-            'the_comment' => 'required|min:10|max:300'
+            'the_comment' => 'required|min:10|max:1000'
         ]);
 
         $attributes['user_id'] = auth()->id();

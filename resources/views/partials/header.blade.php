@@ -196,7 +196,7 @@
               </div>
             </li>
 
-            <li class="header-v2__nav-item header-v2__nav-item--main"><a href="#0" class="header-v2__nav-link">Pricing</a></li>
+            <li class="header-v2__nav-item header-v2__nav-item--main"><a href="/contact" class="header-v2__nav-link">Contact</a></li>
           </ul>
         </nav>
         <!-- Navigation Menu End -->

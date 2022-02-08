@@ -5,6 +5,7 @@ use \Admin\UserController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\PostController;
+use App\Http\Controllers\Frontend\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,9 @@ route::get('/', [IndexController::class, 'index'])->name('index');
 route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(['auth', 'verified']);
 Route::get('/post/{post:slug}', [PostController::class, 'show'])->name('post.show');
 Route::post('post/{post:slug}', [PostController::class, 'addComment'])->name('post.add_comment');
+
+Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 /*
 |--------------------------------------------------------------------------
