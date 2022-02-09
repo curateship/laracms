@@ -92,4 +92,8 @@ class User extends Authenticatable implements MustVerifyEmail
         {
         return null !== $this->roles()->whereIn('name', $role)->first();
         }
+
+    public function theme(){
+        return $this->theme ?? config('app.default_theme');
+    }
 }
