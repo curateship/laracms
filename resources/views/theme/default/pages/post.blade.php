@@ -97,7 +97,7 @@
           <li class="comments__comment">
             <div class="flex items-start">
               <a href="#0" class="comments__author-img">
-                <img src="{{ $comment->user->image ? asset('storage/' . $comment->user->image->path. '') : 'https://images.assetsdelivery.com/compings_v2/salamatik/salamatik1801/salamatik180100019.jpg'  }}" alt="Author picture">
+                <img class="block width-100% height-100% object-cover" src="{{ $comment->user->image ? asset('storage/' . $comment->user->image->path. '') : 'https://images.assetsdelivery.com/compings_v2/salamatik/salamatik1801/salamatik180100019.jpg'  }}" alt="Author picture">
               </a>
         
               <div class="comments__content margin-top-xxxs">

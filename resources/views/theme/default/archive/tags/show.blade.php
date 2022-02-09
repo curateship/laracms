@@ -1,4 +1,5 @@
 @extends('theme.default.layouts.app')
+@section('title', $tag->name . ' Tag | MyBlog')
 @section('content')
 
 <!-- 👇 Content Body Wrapper-->
