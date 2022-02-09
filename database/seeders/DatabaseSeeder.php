@@ -16,6 +16,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        // Disable foreign key constraints for users and enable it again.
+        Schema::disableForeignKeyConstraints();
+
+        \App\Models\User::truncate();
+        \App\Models\Role::truncate();
+        \App\Models\Category::truncate();
+        \App\Models\Post::truncate();
+        \App\Models\Tag::truncate();
+        \App\Models\Comment::truncate();
+        \App\Models\Image::truncate();
+        
+        Schema::enableForeignKeyConstraints();
+
         // \App\Models\User::factory(10)->create();
         $this->call(UserSeeder::class);
         $this->call(RoleSeeder::class);
@@ -29,7 +42,6 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\Category::factory(10)->create();
         $posts = \App\Models\Post::factory(10)->create();
-        \App\Models\Post::factory(10)->create();
         \App\Models\Comment::factory(10)->create();
         \App\Models\Tag::factory(10)->create();
 

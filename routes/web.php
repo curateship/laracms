@@ -6,6 +6,8 @@ use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\PostController;
 use App\Http\Controllers\Frontend\ContactController;
+use App\Http\Controllers\Frontend\CategoryController;
+use App\Http\Controllers\Frontend\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +22,12 @@ Route::post('post/{post:slug}', [PostController::class, 'addComment'])->name('po
 
 Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('theme.default.archive.categories.show');
+Route::get('/categories', [CategoryController::class, 'index'])->name('theme.default.archive.categories.index');
+
+Route::get('/tags/{tag:name}', [TagController::class, 'show'])->name('theme.default.archive.tags.show');
+
 
 /*
 |--------------------------------------------------------------------------

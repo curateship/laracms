@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Role;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
@@ -20,11 +21,13 @@ class HomeController extends Controller
         $recent_posts = Post::withCount('comments')->get();
         $recent_posts = Post::latest()->take(8)->get();
         $categories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(5)->get();
+        $tags = Tag::latest()->take(10)->withCount('posts')->get();
 
         return view('/theme.default.home', [
         'posts' => $posts,
         'recent_posts' => $recent_posts,
-        'categories' => $categories
+        'categories' => $categories,
+        'tags' => $tags,
         ]);  
     }  
 }

@@ -7,7 +7,7 @@
   <ul class="sidenav__list">
       @foreach($categories as $category)
     <li class="sidenav__item">
-      <a href="http://localhost:3000/admin/setting" class="sidenav__link">
+      <a href="{{ route('theme.default.archive.categories.show', $category) }}" class="sidenav__link">
         <span class="sidenav__text text-sm@md">{{ $category->name }}</span>
         <span class="sidenav__counter">{{ $category->posts_count }}<i class="sr-only">notifications</i></span>
       </a>
