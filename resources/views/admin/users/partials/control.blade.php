@@ -19,15 +19,33 @@
        </li>
      </menu>
 
-     <menu class="menu-bar is-hidden js-int-table-actions__items-selected js-menu-bar">
+     <menu class="menu-bar is-hidden js-int-table-actions__items-selected js-menu-bar delete-selected-users">
        <li class="menu-bar__item" role="menuitem">
          <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 16 16">
            <g><path d="M2,6v8c0,1.1,0.9,2,2,2h8c1.1,0,2-0.9,2-2V6H2z"></path><path d="M12,3V1c0-0.6-0.4-1-1-1H5C4.4,0,4,0.4,4,1v2H0v2h16V3H12z M10,3H6V2h4V3z"></path></g>
          </svg>
-         <span class="counter counter--critical counter--docked">4 <i class="sr-only">Notifications</i></span>
+         <span class="counter counter--critical counter--docked delete-counter">0 <i class="sr-only">Notifications</i></span>
          <span class="menu-bar__label">Delete</span>
        </li>
      </menu>
 
   </div>
+</div>
+
+<div id="delete-user-dialog" class="dialog dialog--sticky js-dialog" data-animation="on">
+    <div class="dialog__content max-width-xxs" role="alertdialog" aria-labelledby="dialog-sticky-title" aria-describedby="dialog-sticky-description">
+        <div class="text-component">
+            <h4 id="dialog-sticky-title">Are you sure what you want to delete selected user(-s)?</h4>
+            <p id="dialog-sticky-description">This action cannot be undone and remove users with their posts.</p>
+        </div>
+
+        <footer class="margin-top-md">
+            <div class="flex justify-end gap-xs flex-wrap">
+                <button class="btn btn--subtle js-dialog__close">Cancel</button>
+                <button id="accept-delete" class="btn btn--accent">Delete</button>
+            </div>
+        </footer>
+
+        <input type="hidden" id="delete-users-list">
+    </div>
 </div>

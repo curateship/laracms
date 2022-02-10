@@ -6,7 +6,7 @@
           <tr class="int-table__row">
             <td class="int-table__cell">
               <div class="custom-checkbox int-table__checkbox">
-                <input class="custom-checkbox__input js-int-table__select-all" type="checkbox" aria-label="Select all rows" />
+                <input class="custom-checkbox__input js-int-table__select-all user-list-checkbox-all" type="checkbox" aria-label="Select all rows" />
                 <div class="custom-checkbox__control" aria-hidden="true"></div>
               </div>
             </td>
@@ -136,7 +136,7 @@
           <tr class="int-table__row">
             <th class="int-table__cell" scope="row">
               <div class="custom-checkbox int-table__checkbox">
-                <input class="custom-checkbox__input js-int-table__select-row" type="checkbox" aria-label="Select this row" />
+                <input class="custom-checkbox__input user-list-checkbox js-int-table__select-row" type="checkbox" data-user-id="{{$user->id}}" aria-label="Select this row" />
                 <div class="custom-checkbox__control" aria-hidden="true"></div>
               </div>
             </th>
@@ -196,14 +196,8 @@
                     <path d="M8.354,3.646a.5.5,0,0,0-.708,0L6,5.293,4.354,3.646a.5.5,0,0,0-.708.708L5.293,6,3.646,7.646a.5.5,0,0,0,.708.708L6,6.707,7.646,8.354a.5.5,0,1,0,.708-.708L6.707,6,8.354,4.354A.5.5,0,0,0,8.354,3.646Z"></path>
                     <path d="M6,0a6,6,0,1,0,6,6A6.006,6.006,0,0,0,6,0ZM6,10a4,4,0,1,1,4-4A4,4,0,0,1,6,10Z"></path>
                   </svg>
-                    <span onclick="event.preventDefault();
-                        document.getElementById('delete-user-form-{{ $user->id }}').submit()"
-                    >Delete</span>
+                    <span class="delete-user-context-menu" data-user-id="{{ $user->id }}">Delete</span>
                 </span>
-                  <form id="delete-user-form-{{ $user->id }}" action="{{ route('admin.users.destroy', $user->id) }}" method="POST" style="display: none">
-                      @csrf
-                      @method('DELETE')
-                  </form>
               </li>
             </menu>
             <!-- Action Dropdown END-->
