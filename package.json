@@ -24,6 +24,7 @@
     "sass-embedded": "^1.0.0-beta.3"
   },
   "dependencies": {
+    "@editorjs/editorjs": "^2.23.2",
     "jquery": "^3.6.0"
   }
 }

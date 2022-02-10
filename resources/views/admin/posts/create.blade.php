@@ -73,15 +73,19 @@
 <!-- Table-->
 <div class="margin-top-auto border-top border-contrast-lower"></div><!-- Divider -->
 <div class="padding-md">
-<form>
+<form action="" method='POST'>@csrf
   <fieldset class="margin-bottom-md">
 
     <div class="margin-bottom-sm">
-      <input class="form-control width-100%" type="name" name="inputname" id="inputname" placeholder="Enter Your Title">
+      <input class="form-control width-100%" type="name" name="title" id="inputtitle" placeholder="Enter Your Title" required>
     </div>
 
+    @error('title')
+    <p>{{ $message }}</p>
+    @enderror
+
     <div>
-      <textarea class="margin-bottom-sm form-control width-100% height-550" name="textarea" id="textarea" placeholder="Enter Discription"></textarea>
+      <textarea class="margin-bottom-sm form-control width-100%" name="textarea" id="textarea" placeholder="Enter Discription" rows="12"></textarea>
     </div>
 
     <!-- Select Category Dropdown Autocomplete -->
@@ -89,19 +93,16 @@
 
       <!-- select -->
       <select class="js-select-auto__select">
-        <optgroup label="Select Category">
-          <option>Select option</option>
-          <option value="0">Harry Potter</option>
-          <option value="1">Hermione Granger</option>
-          <option value="2">Ron Weasley</option>
-          <option value="3">Ginny Weasley</option>
-          <option value="4">George Weasley</option>
+        <optgroup>
+          @foreach($categories as $key => $category)
+          <option value="{{ $key }}">{{ $category }}</option>
+          @endforeach
         </optgroup>
       </select>
 
       <!-- input -->
       <div class="select-auto__input-wrapper">
-        <input class="form-control js-autocomplete__input js-select-auto__input" type="text" name="autocomplete-input-id" id="autocomplete-input-id" placeholder="e.g., Weasley" autocomplete="off">
+        <input class="form-control js-autocomplete__input js-select-auto__input" type="text" name="autocomplete-input-id" id="autocomplete-input-id" placeholder="Select a Category" autocomplete="off">
 
         <div class="select-auto__input-icon-wrapper">
           <!-- arrow icon -->
@@ -141,13 +142,10 @@
     <!-- Select Category Dropdown Autocomplete END -->
 
     <div class="margin-bottom-sm">
-      <input class="form-control width-100%" type="name" name="inputname" id="inputname" placeholder="Enter Post Excerpt">
-    </div>
-
-    <div class="margin-bottom-sm">
       <input class="form-control width-100%" type="name" name="inputname" id="inputname" placeholder="Enter Post Slug">
     </div>
 
+    <!-- Image Upload -->
     <div class="file-upload inline-block margin-bottom-sm">
     <label for="upload2" class="file-upload__label btn btn--primary">
       <span class="flex items-center">
@@ -159,10 +157,7 @@
   
     <input type="file" class="file-upload__input" name="upload2" id="upload2" multiple>
   </div>
-
-    <div class="margin-bottom-xs">
-      <input class="form-control width-100%" type="name" name="inputname" id="inputname" placeholder="Enter a tag">
-    </div>
+  <!-- Image Upload END -->
 
   </fieldset>
 

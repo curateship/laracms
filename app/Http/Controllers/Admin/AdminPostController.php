@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
 use App\Models\Category;
+use App\Models\Post;
+use App\Models\Image;
 
 class AdminPostController extends Controller
 {
@@ -22,15 +25,9 @@ class AdminPostController extends Controller
 
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
