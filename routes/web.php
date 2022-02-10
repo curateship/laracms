@@ -58,7 +58,7 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
 Route::resource('/users', UserController::class); });
 
 // Admin Posts Controllers
-Route::resource('admin.posts', AdminPostController::class);
+Route::resource('admin/posts', AdminPostController::class);
 
 
 /*

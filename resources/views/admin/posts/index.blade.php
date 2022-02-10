@@ -1,4 +1,4 @@
-@extends('apps.master')
+@extends('admin.layouts.app')
 @section('content')
   
 <!-- 👇 Content Body Wrapper-->

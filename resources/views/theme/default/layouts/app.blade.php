@@ -28,6 +28,7 @@
   @include('theme.default.partials.footer')
 <script src="{{ asset('assets/js/scripts.js') }}"></script>
 
+<!-- Script to fix Modal overlap -->
 @if($errors->has('email') || $errors->has('password'))
   <script>
       // Create the event;
