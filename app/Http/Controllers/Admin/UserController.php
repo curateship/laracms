@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
+use App\Models\Post;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
 
     public function index(Request $request)
@@ -42,7 +43,7 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function create()
     {
@@ -53,7 +54,7 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
     public function store(StoreUserRequest $request)
     {
@@ -89,7 +90,7 @@ class UserController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit($id)
     {
@@ -105,7 +106,7 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, $id)
     {
@@ -120,14 +121,38 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param string $ids
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|void
      */
-    public function destroy($id, Request $request)
+    public function destroy(string $ids, Request $request)
     {
-        User::destroy($id);
-        $request->session()->flash('success', 'You have deleted the user');
-        return redirect(route('admin.users.index'));
+        $ids = explode(',', $ids);
+
+        foreach($ids as $id){
+            // Getting all user posts;
+            $posts = Post::where('user_id', $id)
+                ->get();
+
+            foreach($posts as $post){
+                // Remove post tags;
+                DB::table('post_tag')
+                    ->where('post_id', $post->id)
+                    ->delete();
+
+                // Remove user post;
+                $post->delete();
+            }
+
+            // And then - remove the user;
+            User::destroy($id);
+        }
+
+        if(count($ids) > 1){
+            $request->session()->flash('success', 'You have deleted all selected user and their posts');
+        }   else{
+            $request->session()->flash('success', 'You have deleted the user and his posts');
+        }
     }
 
     public function saveTheme(Request $request){
