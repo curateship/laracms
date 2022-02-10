@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\AdminPostController;
+
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\PostController;
@@ -42,6 +44,8 @@ Route::get('/admin', function () {
 Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->group(function (){
 	Route::resource('/users', UserController::class);
 });
+
+Route::resource('admin.posts', AdminPostController::class);
 
 Route::post('users/saveTheme', [UserController::class, 'saveTheme'])->middleware(['auth']);
 /*

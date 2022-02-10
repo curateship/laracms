@@ -1,7 +1,7 @@
 @extends('theme.default.layouts.app')
 @section('content')
 @include('auth.modals')
-@include('partials.hero')
+@include('theme.default.partials.hero')
 <div class="container max-width-lg">
 
   <!-- 👇 Recommended -->
@@ -9,7 +9,7 @@
     <h4>Rocommended</h4>
     <a href="http://localhost:8000/post" class="btn btn--subtle btn--sm radius-full" role="text">View all</a>
   </div>
-  @include('theme.default.partials.recent-post-index')
+  @include('theme.default.posts.partials.recent-post-index')
   <!-- Recommended END -->
 
   <!-- 👇 Recommended -->

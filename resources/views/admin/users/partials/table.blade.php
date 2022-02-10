@@ -142,7 +142,7 @@
             </th>
             <td class="int-table__cell flex">
             <figure class="width-lg height-lg radius-50% flex-shrink-0 overflow-hidden margin-right-xs">
-              <img class="block width-100% height-100% object-cover" src="{{ $user->image ? asset('storage/' . $user->image->path. '') : 'https://images.assetsdelivery.com/compings_v2/salamatik/salamatik1801/salamatik180100019.jpg'  }}" alt="Author picture">
+              <a href="{{ route ('admin.users.edit', $user->id) }}"><img class="block width-100% height-100% object-cover" src="{{ $user->image ? asset('storage/' . $user->image->path. '') : 'https://images.assetsdelivery.com/compings_v2/salamatik/salamatik1801/salamatik180100019.jpg'  }}" alt="Author picture"></a>
             </figure>
             <div class="line-height-xs padding-top-xxxs">
               <p class=""><a href="{{ route ('admin.users.edit', $user->id) }}" class="link-subtle">{{ $user->name }}</a></p>

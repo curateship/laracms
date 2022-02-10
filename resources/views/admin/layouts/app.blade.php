@@ -11,11 +11,11 @@
   <title>Traders</title>
 </head>
 <body data-theme="@guest(){{config('app.default_theme')}}@else{{auth()->user()->theme ?? config('app.default_theme')}}@endguest">
-  @include('partials.header')
+  @include('theme.default.partials.header')
   <div class="padding-top-sm">
     @include('admin.partials.alerts')
     @yield('content')
-  </div>  @include('partials.footer')
+  </div>  @include('theme.default.partials.footer')
 <script src="{{ asset('assets/js/scripts.js') }}"></script>
 </body>
 </html>

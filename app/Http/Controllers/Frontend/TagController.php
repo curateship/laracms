@@ -21,7 +21,7 @@ class TagController extends Controller
         $categories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
         $tags = Tag::latest()->take(50)->get();
 
-        return view('theme.default.archive.tags.show', [
+        return view('theme.default.tags.show', [
             'tag' => $tag,
             'posts' => $tag->posts()->paginate(10),
             'recent_posts' => $recent_posts,

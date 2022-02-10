@@ -26,7 +26,7 @@
             <button class="header-v2__nav-control reset anim-menu-btn js-anim-menu-btn switch-icon switch-icon--rotate js-switch-icon js-tab-focus" aria-label="Toggle icon" menu-target="user-menu">
                 <div class="mega-nav__icon-btn dropdown__wrapper inline-block author author--minimal-mobile switch-icon__icon switch-icon__icon--a">
                     <div class="author__img-wrapper author--minimal-mobile dropdown__trigger">
-                        <img src="assets/img/avatar.png" alt="Logged in user avatar">
+                        <img src="{{ 'https://images.assetsdelivery.com/compings_v2/salamatik/salamatik1801/salamatik180100019.jpg'  }}" alt="Logged in user avatar">
                     </div>
                 </div>
                 <svg class="avatar-cross-fix switch-icon__icon switch-icon__icon--b" viewBox="0 0 20 20">
