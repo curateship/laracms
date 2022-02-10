@@ -40,31 +40,31 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
 
         Fortify::registerView(function() {
-            return view('auth.register');
+            return view('theme.default.auth.register');
         });
 
         Fortify::loginView(function() {
-            return view('auth.login');
+            return view('theme.default.auth.login');
         });
 
         Fortify::RequestPasswordResetLinkView(function() {
-            return view('auth.forgot-password');
+            return view('theme.default.auth.forgot-password');
         });
 
         Fortify::resetPasswordView(function ($request) {
-            return view('auth.reset-password', ['request' => $request]);
+            return view('theme.default.auth.reset-password', ['request' => $request]);
         });
 
         Fortify::verifyEmailView(function () {
-            return view('auth.verify-email');
+            return view('theme.default.auth.verify-email');
         });
 
         Fortify::confirmPasswordView(function () {
-            return view('auth.confirm-password');
+            return view('theme.default.auth.confirm-password');
         });
 
         Fortify::twoFactorChallengeView(function () {
-            return view('auth.two-factor-challenge');
+            return view('theme.default.auth.two-factor-challenge');
         });
 
         RateLimiter::for('login', function (Request $request) {

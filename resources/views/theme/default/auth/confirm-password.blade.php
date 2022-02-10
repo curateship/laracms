@@ -1,4 +1,4 @@
-@extends('apps.master')
+@extends('theme.default.layouts.app')
 @section('content')
 
 <!-- Register Form Wrapper Start 👇-->

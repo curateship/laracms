@@ -1,9 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
+// Admin Controllers
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminPostController;
 
+// Front-End Controllers
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\PostController;
@@ -17,17 +20,23 @@ use App\Http\Controllers\Frontend\TagController;
 |--------------------------------------------------------------------------
 */
 
+// Index/Dashboard Controllers
 route::get('/', [IndexController::class, 'index'])->name('index');
 route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(['auth', 'verified']);
+
+// Post Controllers
 Route::get('/post/{post:slug}', [PostController::class, 'show'])->name('post.show');
 Route::post('post/{post:slug}', [PostController::class, 'addComment'])->name('post.add_comment');
 
+// Contact Controllers
 Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
+// Catetories Controllers
 Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('theme.default.archive.categories.show');
 Route::get('/categories', [CategoryController::class, 'index'])->name('theme.default.archive.categories.index');
 
+// Tags Controllers
 Route::get('/tags/{tag:name}', [TagController::class, 'show'])->name('theme.default.archive.tags.show');
 
 
@@ -37,17 +46,21 @@ Route::get('/tags/{tag:name}', [TagController::class, 'show'])->name('theme.defa
 |--------------------------------------------------------------------------
 */
 
+// Admin Index Controllers
 Route::get('/admin', function () {
-    return view('admin.index');
+    return view('admin.dashboard.index');
 })->middleware(['auth', 'auth.isAdmin', 'verified']);
 
-Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->group(function (){
-	Route::resource('/users', UserController::class);
-});
 
+// Admin Users Controllers
+Route::post('users/saveTheme', [UserController::class, 'saveTheme'])->middleware(['auth']);
+Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->group(function (){
+Route::resource('/users', UserController::class); });
+
+// Admin Posts Controllers
 Route::resource('admin.posts', AdminPostController::class);
 
-Route::post('users/saveTheme', [UserController::class, 'saveTheme'])->middleware(['auth']);
+
 /*
 |--------------------------------------------------------------------------
 | OLD
