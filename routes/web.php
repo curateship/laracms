@@ -55,7 +55,7 @@ Route::get('/admin', function () {
 // Admin Users Controllers
 Route::post('users/saveTheme', [UserController::class, 'saveTheme'])->middleware(['auth']);
 Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->group(function (){
-    Route::resource('/users', UserController::class); 
+    Route::resource('/users', UserController::class);
 });
 
 // Admin Posts Controllers

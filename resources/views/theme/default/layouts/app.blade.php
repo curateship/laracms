@@ -35,7 +35,12 @@
       let event = new Event('openModal');
 
       // Dispatch it to exist CodyHouse modal;
+      @if(old('target') != '')
       document.getElementById('{{old('target')}}').dispatchEvent(event);
+          @else
+          document.getElementById('modal-forgot-password').dispatchEvent(event);
+          @endif
+
   </script>
 @endif
 

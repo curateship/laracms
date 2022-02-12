@@ -149,7 +149,8 @@
   <div class="modal__content width-100% max-width-xs max-height-100% overflow-auto padding-md bg radius-md inner-glow shadow-md" role="alertdialog" aria-labelledby="modal-form-title" aria-describedby="modal-form-description">
 
   <!-- Forgot Password Form Start 👇-->
-<form action="{{ route('password.request') }}" class="password-reset-form" method="POST">@csrf
+<form action="{{ route('password.request') }}" class="password-reset-form" method="POST">
+    @csrf
   <div class="text-component text-center margin-bottom-md">
     <h1>Forgot your password?</h1>
     <p>Enter your Email below</p>
@@ -161,12 +162,15 @@
   </div>
 
   <div class="margin-bottom-sm">
-        @error('email')
-        <span class="form-control--error" role="alert">
+      @if(old('target') == '')
+          @error('email')
+          <span class="form-control--error" role="alert">
           {{ $message }}
         </span>
-        @enderror
-        <input class="form-control width-100%" name="email" id="password" placeholder="Input Email you registered with">
+          @enderror
+      @endif
+
+        <input class="form-control width-100%" name="email" placeholder="Input Email you registered with">
       </div>
 
   <div class="margin-bottom-sm">
