@@ -9,6 +9,11 @@
 
       <div class="text-component text-center margin-bottom-sm">
         <h1>Log in</h1>
+
+        <div class="text-center">
+        <p>Don't have an account? <a href="{{ route('register') }}" aria-controls="modal-signup">Get started</a></p>
+      </div>
+
       </div>
 
       <div class="margin-bottom-sm">
@@ -36,10 +41,6 @@
 
       <div class="margin-bottom-sm margin-top-md">
         <button class="btn btn--primary btn--md width-100%">Login</button>
-      </div>
-
-      <div class="text-center">
-        <p class="text-sm">Don't have an account? <a href="{{ route('register') }}" aria-controls="modal-signup">Get started</a></p>
       </div>
 
 </form>

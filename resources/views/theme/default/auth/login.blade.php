@@ -9,6 +9,11 @@
       @csrf
       <div class="text-component text-center margin-bottom-sm">
         <h1>Log in</h1>
+
+        <div class="text-center">
+        <p>Don't have an account? <a href="/register">Get started</a></p>
+      </div>
+
       </div>
 
       <div class="margin-bottom-sm">
@@ -27,16 +32,13 @@
         </span>
         @enderror
         <input class="form-control width-100%" type="password" name="password" id="input-password" placeholder="Input Password">
-        <span class="text-sm"><a href="{{ route('login') }}" aria-controls="forgot-password-modal">Forgot Your Password?</a></span>
+        <span class="text-sm"><a href="{{ route('password.request') }}">Forgot Your Password?</a></span>
       </div>
 
       <div class="margin-bottom-sm margin-top-md">
         <button class="btn btn--primary btn--md width-100%">Login</button>
       </div>
 
-      <div class="text-center">
-        <p class="text-sm">Don't have an account? <a href="/register">Get started</a></p>
-      </div>
 </form>
 <!-- Login Form END-->
 
