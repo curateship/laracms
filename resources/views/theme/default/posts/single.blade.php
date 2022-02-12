@@ -42,13 +42,17 @@
 <div class="col-11@md">
   <div class="card">
     
-    <figure class="card__img img-blend corner-shadow opacity-40%" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light" data-blend-height="100%">
+    <figure class="card__img img-blend opacity-20%" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light" data-blend-height="100%">
         <img class="radius-md post-image" src="{{ asset('storage/' . $post->image->path. '')  }}" alt="Card preview img">
     </figure>
 
-  <div class="padding-md">
-  <h2 class="padding-bottom-md post-title">{{ $post->excerpt }}</h2>
-  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Qui ullam accusamus voluptate! Accusantium aperiam totam voluptatum at fugiat doloribus odit dolore fuga. Eum aliquam qui beatae recusandae, laborum explicabo nihil neque esse sequi cumque hic necessitatibus? Quam quaerat esse voluptatum.</p>
+  <div class="post-content padding-md">
+    <div class="flex">
+      <div class="post-content">
+        <h1 href="#0" class="">{{ $post->title }}</h1>
+        <p class="margin-top-md">{{ $post->body }} </p>
+      </div>
+  </div>
 </div>
 
 <div class="t-article-v3__divider" aria-hidden="true"><span></span></div>
