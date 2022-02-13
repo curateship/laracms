@@ -8,14 +8,20 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Image;
+use App\Models\User;
+use App\Models\Role;
 
 class AdminPostController extends Controller
 {
+    // Index
     public function index()
     {
-        return view('admin.posts.index');
+        return view('admin.posts.index', [
+            'posts' => Post::with('category')->orderBy('id', 'DESC')->get(),
+        ]);
     }
 
+    // Create
     public function create()
     {
         return view('admin.posts.create', [
@@ -23,6 +29,7 @@ class AdminPostController extends Controller
         ]);
     }
 
+    // Store
     public function store(Request $request)
     {
         dd($request->all());
@@ -33,35 +40,23 @@ class AdminPostController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    // Edit
+    public function edit(Post $post)
     {
-        //
+        
+        return view('admin.posts.pages.edit', [
+            'post' => $post,
+            'categories' => Category::pluck('name', 'id')
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Update
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Destroy
     public function destroy($id)
     {
         //

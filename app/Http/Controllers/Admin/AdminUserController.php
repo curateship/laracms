@@ -2,24 +2,24 @@
 
 namespace App\Http\Controllers\Admin;
 
+// Others
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
-use App\Models\Post;
-use App\Models\User;
-use App\Models\Role;
 use Illuminate\Http\Request;
+
+// Supports
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
-class UserController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
-     */
+// Models
+use App\Models\Post;
+use App\Models\User;
+use App\Models\Role;
 
+class AdminUserController extends Controller
+{
+    // Index
     public function index(Request $request)
     {
         if($request->has('sortBy') && $request->input('sortBy') !== 'role'){
@@ -40,22 +40,13 @@ class UserController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
-     */
+    // Create
     public function create()
     {
         return view('admin.users.pages.create', ['roles' => Role::all()]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
-     */
+    // Store
     public function store(StoreUserRequest $request)
     {
         $validedData = $request->validated();
@@ -75,23 +66,7 @@ class UserController extends Controller
         return redirect(route('admin.users.index'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
-     */
+    // Edit
     public function edit($id)
     {
         return view('admin.users.pages.edit',
@@ -101,13 +76,7 @@ class UserController extends Controller
             ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
-     */
+    // Update
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
@@ -118,13 +87,7 @@ class UserController extends Controller
         return redirect(route('admin.users.index'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param string $ids
-     * @param Request $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|void
-     */
+    // Request
     public function destroy(string $ids, Request $request)
     {
         $ids = explode(',', $ids);
@@ -155,6 +118,7 @@ class UserController extends Controller
         }
     }
 
+    // Theme Switcher
     public function saveTheme(Request $request){
         $user = User::find(Auth::id());
         $user->theme = $request->input('theme');

@@ -6,7 +6,7 @@ use App\Models\Role;
 use App\Http\Requests\StoreRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
 
-class RoleController extends Controller
+class AdminRoleController extends Controller
 {
     /**
      * Display a listing of the resource.

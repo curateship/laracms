@@ -33,11 +33,13 @@
     <div class="flex flex-wrap items-center justify-between margin-right-sm">
       <div class="flex flex-wrap">
         <menu class="menu-bar js-int-table-actions__no-items-selected js-menu-bar">
-          <li class="menu-bar__item" role="menuitem" aria-controls="create-modal">
+        <li class="menu-bar__item"><a href="/admin/posts/create" role="menuitem">
             <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 20 20">
                <path d="M18.85 4.39l-3.32-3.32a0.83 0.83 0 0 0-1.18 0l-11.62 11.62a0.84 0.84 0 0 0-0.2 0.33l-1.66 4.98a0.83 0.83 0 0 0 0.79 1.09 0.84 0.84 0 0 0 0.26-0.04l4.98-1.66a0.84 0.84 0 0 0 0.33-0.2l11.62-11.62a0.83 0.83 0 0 0 0-1.18z m-6.54 1.08l1.17-1.18 2.15 2.15-1.18 1.17z"></path>
             </svg>
+            </a>
             <span class="menu-bar__label">Add Post</span>
+
           </li>
 
           <li class="menu-bar__item" role="menuitem" aria-controls="post-search">
@@ -64,7 +66,7 @@
 <!-- END Control Bar-->
 
 <!-- Table-->
-<div class="margin-top-auto border-top border-contrast-lower"></div><!-- Divider -->
+<div class="margin-top-auto border-top border-contrast-lower opacity opacity-40%"></div><!-- Divider -->
 <div class="padding-sm">
   <div id="table-1" class="int-table text-sm js-int-table">
     <div class="int-table__inner margin-bottom-xs">
@@ -166,6 +168,7 @@
         <tbody class="int-table__body js-int-table__body">
 
           <!-- Content Row -->
+          @foreach($posts as $post)
           <tr class="int-table__row">
             <th class="int-table__cell" scope="row">
               <div class="custom-checkbox int-table__checkbox">
@@ -174,17 +177,17 @@
               </div>
             </th>
             <td class="int-table__cell flex">
-            <figure class="width-lg height-lg radius-50% flex-shrink-0 overflow-hidden margin-right-xs">
-              <img class="block width-100% height-100% object-cover" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
+            <figure class="width-xl height-lg radius-lg flex-shrink-0 overflow-hidden margin-right-xs">
+              <img class="block width-100% height-100% object-cover" src="{{ asset('storage/' . $post->image->path. '')  }}" alt="Author picture">
             </figure>
             <div class="line-height-xs padding-top-xxxs">
-              <div class=""><a href="#0" class="link-subtle" aria-controls="edit-modal">Content Title Content Title Content Title</a></div>
-              <p class="color-contrast-medium"><a href="#0" class="text-sm link-subtle">james4523</a></p>   
+              <div class=""><a href="" class="link-subtle">{{ $post->title }}</a></div>
+              <p class="color-contrast-medium"><a href="#0" class="text-xs link-subtle">By: {{ $post->author->name }}</a></p>   
             </div>    
             </td>
 
             <td class="int-table__cell">Published</td>
-            <td class="int-table__cell">01/01/2020</td>
+            <td class="int-table__cell">{{ $post->created_at->diffForHumans() }}</td>
             <td class="int-table__cell">
             <button class="reset int-table__menu-btn margin-left-auto js-tab-focus" data-label="Edit row" aria-controls="menu-example">
                 <svg class="icon" viewBox="0 0 16 16">
@@ -196,39 +199,11 @@
 
             </td>
           </tr>
+          @endforeach
           <!-- Content Row END -->
 
-          <!-- Content Row -->
-          <tr class="int-table__row">
-            <th class="int-table__cell" scope="row">
-              <div class="custom-checkbox int-table__checkbox">
-                <input class="custom-checkbox__input js-int-table__select-row" type="checkbox" aria-label="Select this row" />
-                <div class="custom-checkbox__control" aria-hidden="true"></div>
-              </div>
-            </th>
-            <td class="int-table__cell flex">
-            <figure class="width-lg height-lg radius-50% flex-shrink-0 overflow-hidden margin-right-xs">
-              <img class="block width-100% height-100% object-cover" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
-            </figure>
-            <div class="line-height-xs padding-top-xxxs">
-              <p class=""><a href="http://localhost:3000/admin/post/add" class="link-subtle">Content Title Content Title Content Title Content Title</a></p>
-              <p class="color-contrast-medium"><a href="#0" class="text-sm link-subtle">james4523</a></p> 
-            </div>    
-            </td>
-
-            <td class="int-table__cell">Published</td>
-            <td class="int-table__cell">01/01/2020</td>
-            
             <!-- Action Dropdown -->
             <td class="int-table__cell">
-            <button class="reset int-table__menu-btn margin-left-auto js-tab-focus" data-label="Edit row" aria-controls="menu-example">
-                <svg class="icon" viewBox="0 0 16 16">
-                  <circle cx="8" cy="7.5" r="1.5" />
-                  <circle cx="1.5" cy="7.5" r="1.5" />
-                  <circle cx="14.5" cy="7.5" r="1.5" />
-                </svg>
-              </button>
-
               <menu id="menu-example" class="menu js-menu">
               <li role="menuitem">
                 <span class="menu__content js-menu__content">
@@ -259,11 +234,9 @@
                 </span>
               </li>
             </menu>
-            <!-- Action Dropdown END-->
-
-            </td>
-            </td>
-          </tr>
+          </td>
+          <!-- Action Dropdown END-->
+        </tr>
 
         </tbody>
       </table>
@@ -273,7 +246,7 @@
 <!-- END Table-->
 
 <!-- Pagination Start-->
-    <div class="margin-top-auto border-top border-contrast-lower"></div><!-- Divider -->
+    <div class="margin-top-auto border-top border-contrast-lower opacity-40%"></div><!-- Divider -->
     <nav class="pagination text-sm" aria-label="Pagination">
       <ol class="pagination__list flex flex-wrap gap-xs justify-center padding-sm">
         <li>

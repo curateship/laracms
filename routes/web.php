@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 // Admin Controllers
-use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Admin\AdminRoleController;
 use App\Http\Controllers\Admin\AdminPostController;
 
 // Front-End Controllers
@@ -53,9 +54,9 @@ Route::get('/admin', function () {
 
 
 // Admin Users Controllers
-Route::post('users/saveTheme', [UserController::class, 'saveTheme'])->middleware(['auth']);
+Route::post('users/saveTheme', [AdminUserController::class, 'saveTheme'])->middleware(['auth']);
 Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->group(function (){
-    Route::resource('/users', UserController::class); 
+    Route::resource('/users', AdminUserController::class); 
 });
 
 // Admin Posts Controllers
