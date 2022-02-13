@@ -29,7 +29,7 @@
                 </li>
 
                 <li class="sidenav__item">
-                <a href="/admin/posts" class="sidenav__link">
+                <a href="{{ route('admin.posts.index') }}" class="sidenav__link" {{ strpos(url()->full(), '/admin/posts') !== false ? 'aria-current=page' : '' }}>
                   <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16"><g><path d="M14,7H2v7c0,0.6,0.4,1,1,1h10c0.6,0,1-0.4,1-1V7z"></path><rect y="1" width="16" height="4"></rect></g></svg>
                   <span class="sidenav__text text-sm@md">Posts</span>
                   <span class="sidenav__counter">12 <i class="sr-only">notifications</i></span>

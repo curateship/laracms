@@ -87,7 +87,7 @@ class AdminUserController extends Controller
         return redirect(route('admin.users.index'));
     }
 
-    // Request
+    // Destroy
     public function destroy(string $ids, Request $request)
     {
         $ids = explode(',', $ids);

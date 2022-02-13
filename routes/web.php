@@ -54,13 +54,16 @@ Route::get('/admin', function () {
 
 
 // Admin Users Controllers
-Route::post('users/saveTheme', [AdminUserController::class, 'saveTheme'])->middleware(['auth']);
+Route::post('users/saveTheme', [AdminUserController::class, 'saveTheme'])->middleware(['auth']); // Theme Switcher
 Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->group(function (){
     Route::resource('/users', AdminUserController::class); 
 });
 
 // Admin Posts Controllers
-Route::resource('admin/posts', AdminPostController::class);
+Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->group(function (){
+    Route::resource('/posts', AdminPostController::class); 
+});
+
 
 
 /*
