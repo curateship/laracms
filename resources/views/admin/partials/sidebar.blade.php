@@ -225,6 +225,54 @@
                 </ul>
                 </li>
 
+                <li class="sidenav__item">
+                    <a href="#0" class="sidenav__link">
+                    <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16">
+                      <g >
+                      <path d="M2.64 2.31h10.56v-0.99a0.33 0.33 0 0 0-0.33-0.33h-9.9a0.33 0.33 0 0 0-0.33 0.33z"></path><path d="M14.52 2.97h-13.2a0.66 0.66 0 0 0-0.66 0.66v10.56a0.66 0.66 0 0 0 0.66 0.66h13.2a0.66 0.66 0 0 0 0.66-0.66v-10.56a0.66 0.66 0 0 0-0.66-0.66z m-9.24 2.31a0.99 0.99 0 1 1-0.99 0.99 0.99 0.99 0 0 1 0.99-0.99z m7.88 6.77a0.33 0.33 0 0 1-0.29 0.16h-9.57a0.33 0.33 0 0 1-0.26-0.53l1.98-2.64a0.33 0.33 0 0 1 0.24-0.13 0.32 0.32 0 0 1 0.25 0.1l1.71 1.71 2.75-3.66a0.33 0.33 0 0 1 0.55 0.03l2.64 4.63a0.33 0.33 0 0 1 0 0.33z"></path>
+                      </g>
+                    </svg>
+                        <span class="sidenav__text text-sm@md">Galleries</span>
+                        <span class="sidenav__counter">3 <i class="sr-only">notifications</i></span>
+                    </a>
+                      <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
+                        <svg class="icon" viewBox="0 0 12 12"><polygon points="4 3 8 6 4 9 4 3"/></svg>
+                      </button>
+                <ul class="sidenav__list">
+                  <li class="sidenav__item">
+                    <a href="#0" class="sidenav__link">
+                      <span class="sidenav__text text-sm@md">Add New</span>
+                    </a>
+                  </li>
+                </ul>
+                </li>
+
+                <li class="sidenav__item">
+                    <a href="#0" class="sidenav__link">
+                    <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16">
+                      <g >
+                      <path d="M14,0H2C0.9,0,0,0.9,0,2v12c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2V2C16,0.9,15.1,0,14,0z M4,2h2v4H4V2z M6,11.7V14H4v-2.3c-0.6-0.3-1-1-1-1.7c0-1.1,0.9-2,2-2s2,0.9,2,2C7,10.7,6.6,11.4,6,11.7z M12,14h-2v-4h2V14z M11,8 C9.9,8,9,7.1,9,6c0-0.7,0.4-1.4,1-1.7V2h2v2.3c0.6,0.3,1,1,1,1.7C13,7.1,12.1,8,11,8z"></path>
+                      </g>
+                    </svg>
+                        <span class="sidenav__text text-sm@md">Tools</span>
+                    </a>
+                      <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
+                        <svg class="icon" viewBox="0 0 12 12"><polygon points="4 3 8 6 4 9 4 3"/></svg>
+                      </button>
+                <ul class="sidenav__list">
+                  <li class="sidenav__item">
+                    <a href="#0" class="sidenav__link">
+                      <span class="sidenav__text text-sm@md">Scrapers</span>
+                    </a>
+                  </li>
+                  <li class="sidenav__item">
+                    <a href="#0" class="sidenav__link">
+                      <span class="sidenav__text text-sm@md">Tag Titles</span>
+                    </a>
+                  </li>
+                </ul>
+                </li>
+
             </ul>
 
             <div class="sidenav__divider margin-y-xs" role="presentation"></div>

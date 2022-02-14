@@ -8,16 +8,13 @@
               <a href="{{ route('post.show', $recent_post) }}"><img class="radius-md object-cover height-xxxxl" src="{{ asset('storage/' . $recent_post->image->path. '')  }}" alt="Card preview img"></a>
           </figure>
 
-          <div class="card__content recent-post-card">
-          <div class="flex">
+         
 
-            <div class="recent-post-card padding-xxxs">
-              <p href="{{ route('post.show', $recent_post) }}" class="color-contrast-high link-subtle text-sm">{{ \Str::limit( $recent_post->title, 40) }}</p>
-              <p class="text-xs color-contrast-low padding-top-xxs">{{ \Str::limit( $recent_post->excerpt, 20) }}</p>
+          <div class="card__content recent-post-card line-height-1 margin-xxs">
+              <a href="{{ route('post.show', $recent_post) }}" class="link-subtle text-sm">{{ \Str::limit( $recent_post->title, 40) }}</a>
               <p class="text-xs color-contrast-low padding-top-sm">{{ $recent_post->created_at->diffforhumans() }} <br> {{ $recent_post->author->name }}</p>
             </div>
-            </div>
-            </div>
+          
 
             <footer class="card-v10__footer">
                  <ul class="card-v10__social-list">
