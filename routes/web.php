@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 // Admin Controllers
+use App\Http\Controllers\Admin\AdminIndexController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AdminRoleController;
 use App\Http\Controllers\Admin\AdminPostController;
@@ -47,15 +48,11 @@ Route::get('/tags/{tag:name}', [TagController::class, 'show'])->name('theme.defa
 |--------------------------------------------------------------------------
 */
 
-// Admin Index Controllers
-Route::get('/admin', function () {
-    return view('admin.dashboard.index');
-})->middleware(['auth', 'auth.isAdmin', 'verified']);
-
 
 // Admin Controllers
 Route::post('users/saveTheme', [AdminUserController::class, 'saveTheme'])->middleware(['auth']); // Theme Switcher
 Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->group(function (){
+    Route::resource('/', AdminIndexController::class); // Index Route
     Route::resource('/users', AdminUserController::class); // User Route
     Route::resource('/posts', AdminPostController::class); // Post Route
 });

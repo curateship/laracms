@@ -47,10 +47,8 @@
               </ul>
             </th>
 
-            <th class="int-table__cell int-table__cell--th text-left">Cover</th>
-
             <th class="int-table__cell int-table__cell--th text-left">Posts</th>
-            <th class="int-table__cell int-table__cell--th text-left">Cmnt</th>
+            <th class="int-table__cell int-table__cell--th text-left">Comments</th>
 
 
             <th class="int-table__cell int-table__cell--th int-table__cell--sort js-int-table__cell--sort
@@ -140,7 +138,10 @@
                 <div class="custom-checkbox__control" aria-hidden="true"></div>
               </div>
             </th>
-            <td class="int-table__cell flex">
+
+ 
+
+            <td class="int-table__cell flex bg-color-black">
             <figure class="width-lg height-lg radius-50% flex-shrink-0 overflow-hidden margin-right-xs">
               <a href="{{ route ('admin.users.edit', $user->id) }}"><img class="block width-100% height-100% object-cover" src="{{ $user->image ? asset('storage/' . $user->image->path. '') : 'https://images.assetsdelivery.com/compings_v2/salamatik/salamatik1801/salamatik180100019.jpg'  }}" alt="Author picture"></a>
             </figure>
@@ -150,11 +151,6 @@
             </div>
             </td>
 
-            <td class="int-table__cell">
-            <figure class="width-xxl height-lg radius-lg flex-shrink-0 overflow-hidden margin-right-xs">
-              <img class="block width-100% height-100% object-cover opacity-40%" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
-            </figure>
-            </td>
             <td class="int-table__cell">24</td>
             <td class="int-table__cell">324</td>
             <td class="int-table__cell">Editor</td>
