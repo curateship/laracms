@@ -98,9 +98,7 @@
         </thead>
   
         <tbody class="int-table__body js-int-table__body">
-
-          <!-- Content Row -->
-          @foreach($posts as $post)
+  
           <tr class="int-table__row">
             <th class="int-table__cell" scope="row">
               <div class="custom-checkbox int-table__checkbox">
@@ -109,17 +107,17 @@
               </div>
             </th>
             <td class="int-table__cell flex">
-            <figure class="width-xl height-lg radius-lg flex-shrink-0 overflow-hidden margin-right-xs">
-              <img class="block width-100% height-100% object-cover" src="{{ asset('storage/' . $post->image->path. '')  }}" alt="Post Picture">
+            <figure class="width-lg height-lg radius-50% flex-shrink-0 overflow-hidden margin-right-xs">
+              <img class="block width-100% height-100% object-cover" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
             </figure>
-            <div class="line-height-xs padding-top-xxxs padding-left-xxs">
-              <div class=""><a href="{{ route ('admin.posts.edit', $post->id) }}" class="link-subtle">{{ $post->title }}</a></div>
-              <p class="color-contrast-medium"><a href="#0" class="text-xs link-subtle">By: {{ $post->author->name }}</a></p>   
+            <div class="line-height-xs padding-top-xxxs">
+              <div class=""><a href="#0" class="link-subtle" aria-controls="edit-modal">Content Title Content Title Content Title</a></div>
+              <p class="color-contrast-medium"><a href="#0" class="text-sm link-subtle">james4523</a></p>   
             </div>    
             </td>
 
             <td class="int-table__cell">Published</td>
-            <td class="int-table__cell">{{ $post->created_at->diffForHumans() }}</td>
+            <td class="int-table__cell">01/01/2020</td>
             <td class="int-table__cell">
             <button class="reset int-table__menu-btn margin-left-auto js-tab-focus" data-label="Edit row" aria-controls="menu-example">
                 <svg class="icon" viewBox="0 0 16 16">
@@ -131,11 +129,37 @@
 
             </td>
           </tr>
-          @endforeach
-          <!-- Content Row END -->
+
+          <tr class="int-table__row">
+            <th class="int-table__cell" scope="row">
+              <div class="custom-checkbox int-table__checkbox">
+                <input class="custom-checkbox__input js-int-table__select-row" type="checkbox" aria-label="Select this row" />
+                <div class="custom-checkbox__control" aria-hidden="true"></div>
+              </div>
+            </th>
+            <td class="int-table__cell flex">
+            <figure class="width-lg height-lg radius-50% flex-shrink-0 overflow-hidden margin-right-xs">
+              <img class="block width-100% height-100% object-cover" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
+            </figure>
+            <div class="line-height-xs padding-top-xxxs">
+              <p class=""><a href="#0" class="link-subtle" aria-controls="edit-modal">Content Title Content Title Content Title Content Title Content Title</a></p>
+              <p class="color-contrast-medium"><a href="#0" class="text-sm link-subtle">james4523</a></p> 
+            </div>    
+            </td>
+
+            <td class="int-table__cell">Published</td>
+            <td class="int-table__cell">01/01/2020</td>
+            <td class="int-table__cell">
 
             <!-- Action Dropdown -->
-            <td class="int-table__cell">
+            <button class="reset int-table__menu-btn margin-left-auto js-tab-focus" data-label="Edit row" aria-controls="menu-example">
+                <svg class="icon" viewBox="0 0 16 16">
+                  <circle cx="8" cy="7.5" r="1.5" />
+                  <circle cx="1.5" cy="7.5" r="1.5" />
+                  <circle cx="14.5" cy="7.5" r="1.5" />
+                </svg>
+              </button>
+
               <menu id="menu-example" class="menu js-menu">
               <li role="menuitem">
                 <span class="menu__content js-menu__content">
@@ -166,9 +190,11 @@
                 </span>
               </li>
             </menu>
-          </td>
-          <!-- Action Dropdown END-->
-        </tr>
+            <!-- Action Dropdown END-->
+
+            </td>
+            </td>
+          </tr>
 
         </tbody>
       </table>

@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\AdminIndexController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AdminRoleController;
 use App\Http\Controllers\Admin\AdminPostController;
+use App\Http\Controllers\Admin\AdminCategoryController;
+use App\Http\Controllers\Admin\AdminTagController;
 
 // Front-End Controllers
 use App\Http\Controllers\Frontend\IndexController;
@@ -55,32 +57,7 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
     Route::resource('/', AdminIndexController::class); // Index Route
     Route::resource('/users', AdminUserController::class); // User Route
     Route::resource('/posts', AdminPostController::class); // Post Route
+    Route::resource('/categories', AdminCategoryController::class); // Category Route
 });
 
-
-/*
-|--------------------------------------------------------------------------
-| OLD
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/profile', function () {
-    return view('pages.profile');
-});
-
-Route::get('/admin/setting', function () {
-    return view('admin.pages.setting');
-});
-
-Route::get('/admin/post/trash', function () {
-    return view('admin.post.trash');
-});
-
-Route::get('/admin/post/add', function () {
-    return view('admin.post.add');
-});
-
-Route::get('/admin/post/trash', function () {
-    return view('admin.post.trash');
-});
 

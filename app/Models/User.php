@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Post;
 use App\Models\Comment;
 use App\Models\Image;
+use App\Models\Category;
 
 /**
  * @method static find(int|string|null $id)
