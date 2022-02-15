@@ -25,7 +25,7 @@ class AdminUserController extends Controller
         if($request->has('sortBy') && $request->input('sortBy') !== 'role'){
             $users = User::orderBy($request->input('sortBy'), $request->input('sortDesc'));
         }   else{
-            $users = User::orderBy('id', 'ASC');
+            $users = User::orderBy('created_at', 'DESC');
         }
 
         if(Gate::denies('logged-in')){

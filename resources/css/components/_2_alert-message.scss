@@ -1,0 +1,35 @@
+@use '../base' as *;
+@use '_1_modal-window.scss' as *;
+@use '_1_input-icon.scss' as *;
+
+/* -------------------------------- 
+
+File#: _2_alert-message
+Title: Alert Message
+Descr: An alert message displayed in a modal window
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+.alert-msg {
+  --modal-transition-duration: .2s;
+}
+
+.alert-msg__close-btn {
+  display: inline-flex;
+  align-items: center;
+
+  background-color: alpha(var(--color-contrast-higher), 0.9);
+  backdrop-filter: blur(10px);
+  padding: var(--space-xxs) var(--space-sm);
+
+  color: var(--color-bg);
+  line-height: 1;
+  @include fontSmooth;
+
+  transition: .2s;
+
+  &:hover {
+    background-color: alpha(var(--color-contrast-higher), 1);
+  }
+}

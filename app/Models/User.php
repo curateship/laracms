@@ -97,4 +97,9 @@ class User extends Authenticatable implements MustVerifyEmail
     public function theme(){
         return $this->theme ?? config('app.default_theme');
     }
+
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
 }

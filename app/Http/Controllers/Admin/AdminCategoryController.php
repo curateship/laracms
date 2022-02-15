@@ -10,6 +10,7 @@ use Illuminate\Validation\Rule;
 // Models
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Category;
 
 class AdminCategoryController extends Controller
 {
@@ -22,6 +23,7 @@ class AdminCategoryController extends Controller
     public function index()
     {
         return view('admin.categories.index', [
+            'categories' => Category::with('user')->orderBy('id', 'DESC')->paginate(10)
         ]);
     }
 
@@ -37,7 +39,7 @@ class AdminCategoryController extends Controller
         $validated = $request->validate($this->rules);
         $validated['user_id'] = auth()->id();
         Category::create($validated);
-        return redirect()->route('admin.categories.create')->with('success', 'Category has been Created.');
+        return redirect()->route('admin.categories.create')->with('success', 'Category has been created.');
     }
 
     // Show
@@ -62,7 +64,7 @@ class AdminCategoryController extends Controller
         $this->rules['slug'] = ['required', Rule::unique('categories')->ignore($category)];
         $validated = $request->validate($this->rules);
         $category->update($validated);
-        return redirect()->route('admin.categories.edit', $category)->with('success', 'Category has been Updated.');
+        return redirect()->route('admin.categories.edit', $category)->with('success', 'Category has been updated.');
     }
 
     // Destroy
@@ -73,6 +75,6 @@ class AdminCategoryController extends Controller
             abort(404);
         $category->posts()->update(['category_id' => $default_category_id]);
         $category->delete();
-        return redirect()->route('admin.categories.index')->with('success', 'Category has been Deleted.');
+        return redirect()->route('admin.categories.index')->with('success', 'Category has been deleted.');
     }
 }

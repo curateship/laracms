@@ -1,3 +1,4 @@
+@include('admin.users.partials.script-js')
 <div class="padding-sm">
   <div id="table-1" class="int-table text-sm js-int-table">
     <div class="int-table__inner margin-bottom-xs">
@@ -154,7 +155,7 @@
             <td class="int-table__cell">24</td>
             <td class="int-table__cell">324</td>
             <td class="int-table__cell">Editor</td>
-            <td class="int-table__cell">{{date('d/m/Y', strtotime($user->created_at))}}</td>
+            <td class="int-table__cell">{{ $user->created_at->diffForHumans() }}</td>
 
             <!-- Action Dropdown -->
             <td class="int-table__cell">

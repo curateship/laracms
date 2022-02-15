@@ -19,7 +19,7 @@ class AdminPostController extends Controller
     public function index()
     {
         return view('admin.posts.index', [
-            'posts' => Post::with('category')->orderBy('id', 'DESC')->get(),
+            'posts' => Post::with('category')->orderBy('id', 'DESC')->paginate(10),
         ]);
     }
 

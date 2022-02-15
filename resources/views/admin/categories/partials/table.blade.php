@@ -98,7 +98,7 @@
         </thead>
   
         <tbody class="int-table__body js-int-table__body">
-  
+          @foreach($categories as $category)
           <tr class="int-table__row">
             <th class="int-table__cell" scope="row">
               <div class="custom-checkbox int-table__checkbox">
@@ -111,13 +111,13 @@
               <img class="block width-100% height-100% object-cover" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
             </figure>
             <div class="line-height-xs padding-top-xxxs">
-              <div class=""><a href="#0" class="link-subtle" aria-controls="edit-modal">Content Title Content Title Content Title</a></div>
+              <div class=""><a href="{{ route('admin.categories.edit', $category) }}" class="link-subtle">{{ $category->name }}</a></div>
               <p class="color-contrast-medium"><a href="#0" class="text-sm link-subtle">james4523</a></p>   
             </div>    
             </td>
 
             <td class="int-table__cell">Published</td>
-            <td class="int-table__cell">01/01/2020</td>
+            <td class="int-table__cell">{{ $category->created_at->diffForHumans() }}</td>
             <td class="int-table__cell">
             <button class="reset int-table__menu-btn margin-left-auto js-tab-focus" data-label="Edit row" aria-controls="menu-example">
                 <svg class="icon" viewBox="0 0 16 16">
@@ -129,7 +129,7 @@
 
             </td>
           </tr>
-
+          @endforeach
           <tr class="int-table__row">
             <th class="int-table__cell" scope="row">
               <div class="custom-checkbox int-table__checkbox">
