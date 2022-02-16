@@ -136,7 +136,7 @@
                 </li>
 
                 <li class="sidenav__item">
-                    <a href="#0" class="sidenav__link">
+                <a href="{{ route('admin.comments.index') }}" class="sidenav__link" {{ strpos(url()->full(), '/admin/comments') !== false ? 'aria-current=page' : '' }}>
                     <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16">
                       <g ><path d="M14.75 4.25h-1.5v4.75a1.5 1.5 0 0 1-1.5 1.5h-4.47l-2 1.75h4.64l3.43 2.45a0.25 0.25 0 0 0 0.15 0.05 0.25 0.25 0 0 0 0.11-0.03 0.25 0.25 0 0 0 0.14-0.22v-2.25h1a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1z"></path>
                         <path d="M11.75 1h-10.5a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h1.5v3.25a0.25 0.25 0 0 0 0.15 0.23 0.25 0.25 0 0 0 0.1 0.02 0.25 0.25 0 0 0 0.16-0.06l3.93-3.44h4.66a1 1 0 0 0 1-1v-7a1 1 0 0 0-1-1z"></path>
@@ -148,31 +148,13 @@
                         <svg class="icon" viewBox="0 0 12 12"><polygon points="4 3 8 6 4 9 4 3"/></svg>
                       </button>
                 <ul class="sidenav__list">
+                  
                   <li class="sidenav__item">
                     <a href="#0" class="sidenav__link">
                       <span class="sidenav__text text-sm@md">Add New</span>
                     </a>
                   </li>
-                  <li class="sidenav__item">
-                    <a href="#0" class="sidenav__link">
-                      <span class="sidenav__text text-sm@md">Admins</span>
-                    </a>
-                  </li>
-                  <li class="sidenav__item">
-                    <a href="#0" class="sidenav__link">
-                      <span class="sidenav__text text-sm@md">Editors</span>
-                    </a>
-                  </li>
-                  <li class="sidenav__item">
-                    <a href="#0" class="sidenav__link">
-                      <span class="sidenav__text text-sm@md">Registered</span>
-                    </a>
-                  </li>
-                  <li class="sidenav__item">
-                    <a href="#0" class="sidenav__link">
-                      <span class="sidenav__text text-sm@md">Trash</span>
-                    </a>
-                  </li>
+                
                 </ul>
                 </li>
 

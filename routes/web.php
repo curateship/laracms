@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AdminRoleController;
 use App\Http\Controllers\Admin\AdminPostController;
 use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminTagController;
+use App\Http\Controllers\Admin\AdminCommentController;
 
 // Front-End Controllers
 use App\Http\Controllers\Frontend\IndexController;
@@ -58,6 +59,7 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
     Route::resource('/users', AdminUserController::class); // User Route
     Route::resource('/posts', AdminPostController::class); // Post Route
     Route::resource('/categories', AdminCategoryController::class); // Category Route
+    Route::resource('/comments', AdminCommentController::class); // Comment Route
 });
 
 

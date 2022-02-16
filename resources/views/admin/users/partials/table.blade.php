@@ -166,13 +166,13 @@
                 </svg>
               </button>
 
-              <menu id="menu-example-{{$user->id}}" class="menu js-menu">
+              <menu id="menu-example-{{$user->id}}" class="menu js-menu" target="_blank">
               <li role="menuitem">
                 <span class="menu__content js-menu__content">
                   <a class="link-subtle" href="{{ route('admin.users.edit', $user->id) }}">
                   <svg class="icon menu__icon" aria-hidden="true" viewBox="0 0 12 12">
                     <path d="M10.121.293a1,1,0,0,0-1.414,0L1,8,0,12l4-1,7.707-7.707a1,1,0,0,0,0-1.414Z"></path>
-                  </svg>Edit
+                  </svg>View
                 </a>
                 </span>
               </li>
