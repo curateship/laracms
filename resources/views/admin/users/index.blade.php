@@ -1,8 +1,6 @@
 @extends('admin.layouts.app')
 @section('content')
 @include('admin.users.partials.modal')
-@include('admin.users.partials.script-js')
-
 <section class="margin-y-xl">
   <div class="container max-width-adaptive-lg">
     <div class="grid gap-md justify-between">

@@ -284,7 +284,7 @@
             <div class="sidenav__divider margin-y-xs" role="presentation"></div>
 
             <div class="sidenav__label margin-bottom-xxxs">
-              <span class="text-sm color-contrast-medium text-xs@md">Other</span>
+              <span class="text-sm color-contrast-medium text-xs@md">Administrations</span>
             </div>
 
             <ul class="sidenav__list">

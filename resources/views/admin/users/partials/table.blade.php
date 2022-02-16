@@ -1,4 +1,3 @@
-@include('admin.users.partials.script-js')
 <div class="padding-sm">
   <div id="table-1" class="int-table text-sm js-int-table">
     <div class="int-table__inner margin-bottom-xs">
