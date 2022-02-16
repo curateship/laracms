@@ -1,6 +1,5 @@
 @extends('admin.layouts.app')
 @section('content')
-@include('admin.partials.modal')
 
 <section class="margin-y-xl">
   <div class="container max-width-adaptive-lg">

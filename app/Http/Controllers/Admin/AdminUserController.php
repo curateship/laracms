@@ -43,7 +43,7 @@ class AdminUserController extends Controller
     // Create
     public function create()
     {
-        return view('admin.users.pages.create', ['roles' => Role::all()]);
+        return view('admin.users.create', ['roles' => Role::all()]);
     }
 
     // Store
@@ -69,7 +69,7 @@ class AdminUserController extends Controller
     // Edit
     public function edit($id)
     {
-        return view('admin.users.pages.edit',
+        return view('admin.users.edit',
          [
              'roles' => Role::all(),
              'user' => User::find($id)
