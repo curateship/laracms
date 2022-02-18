@@ -56,27 +56,14 @@ Route::get('/tags/{tag:name}', [TagController::class, 'show'])->name('theme.defa
 
 // Admin Controllers
 Route::post('users/saveTheme', [AdminUserController::class, 'saveTheme'])->middleware(['auth']); // Theme Switcher
+
 Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->group(function (){
-    Route::resource('/users', AdminRoleController::class);
-});
-
-// Admin Posts Controllers
-Route::resource('admin/posts', AdminPostController::class);
-
-
-/*
-|--------------------------------------------------------------------------
-| OLD
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/profile', function () {
-    //return view('pages.profile');
     Route::resource('/', AdminIndexController::class); // Index Route
     Route::resource('/users', AdminUserController::class); // User Route
     Route::resource('/posts', AdminPostController::class); // Post Route
     Route::resource('/categories', AdminCategoryController::class); // Category Route
     Route::resource('/comments', AdminCommentController::class); // Comment Route
 });
+
 
 
