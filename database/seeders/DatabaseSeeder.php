@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
         }
 
         \App\Models\Category::factory(10)->create();
-        $posts = \App\Models\Post::factory(10)->create();
+        $posts = \App\Models\Post::factory(20)->create();
         \App\Models\Comment::factory(10)->create();
         \App\Models\Tag::factory(10)->create();
 

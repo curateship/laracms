@@ -20,5 +20,6 @@
     @yield('content')
   </div>  @include('theme.default.partials.footer')
 <script src="{{ asset('assets/js/scripts.js') }}"></script>
+  @stack('custom-scripts')
 </body>
 </html>

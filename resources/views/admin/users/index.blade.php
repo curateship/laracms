@@ -1,4 +1,9 @@
 @extends('admin.layouts.app')
+
+@push('custom-scripts')
+  @include('admin.users.script-js')
+@endpush
+
 @section('content')
 <section class="margin-y-xl">
   <div class="container max-width-adaptive-lg">
@@ -344,7 +349,7 @@
 
       <!-- Sidebar -->
       <div class="col-3@md">
-        <x-admin.sidebar/>
+        @include('admin.partials.sidebar')
       </div>
       <!-- Sidebar END -->
 
