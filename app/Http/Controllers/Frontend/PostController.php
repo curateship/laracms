@@ -3,36 +3,55 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use FFMpeg\Coordinate\Dimension;
-use FFMpeg\FFMpeg;
-use FFMpeg\FFProbe;
-use FFMpeg\Format\Video\Ogg;
-use FFMpeg\Format\Video\WebM;
-use FFMpeg\Format\Video\WMV;
-use FFMpeg\Format\Video\WMV3;
-use FFMpeg\Format\Video\X264;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\Category;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
-use Lakshmaji\Thumbnail\Thumbnail;
 
 class PostController extends Controller
 {
     public function store(Request $request){
-
         $title = strip_tags($request->input('title'));
 
         // Generate slug
         $slug = Str::slug($title, '-');
+        $post_with_same_slug = Post::where('slug', $slug)->first();
 
-        dump($slug);
-        dd($request->all());
+        if ($post_with_same_slug) {
+            $duplicated_slugs = Post::select('slug')->where('slug', 'like', $slug . '%')->orderBy('slug', 'desc')->get();
+            $slug = Post::getNewSlug($slug, $duplicated_slugs);
+        }
+
+        $category = Category::where('name', $request->input('category'))
+            ->first();
+
+        $original = ( $request->has('original') && !empty($request->input('original')) ) ? $request->input('original') : NULL;
+        $original = str_replace(url('/storage'.config('images.posts_storage_path')), '', $original);
+
+        $thumbnail = ( $request->has('thumbnail') && !empty($request->input('thumbnail')) ) ? $request->input('thumbnail') : NULL;
+        $thumbnail = str_replace(url('/storage'.config('images.posts_storage_path')), '', $thumbnail);
+
+        $medium = ( $request->has('medium') && !empty($request->input('medium')) )  ? $request->input('medium') : NULL;
+        $medium = str_replace(url('/storage'.config('images.posts_storage_path')), '', $medium);
+
+        $post = new Post();
+        $post->title = $title;
+        $post->slug = $slug;
+        $post->body = $request->input('description');
+        $post->user_id = Auth::id();
+        $post->category_id = $category->id;
+        $post->original = $original;
+        $post->thumbnail = $thumbnail;
+        $post->medium = $medium;
+        $post->save();
+
+        return redirect('/post/'.$post->slug);
     }
 
     public function show(Post $post) {
@@ -58,6 +77,7 @@ class PostController extends Controller
     }
 
     public function upload(Request $request){
+        $path = '/public'.config('images.posts_storage_path');
         $mime_type = $request->file('file')->getMimeType();
         $media_path = storage_path() . "/app";
         $media = [
@@ -65,14 +85,14 @@ class PostController extends Controller
         ];
 
         foreach($media as $key => $type){
-            File::ensureDirectoryExists($media_path . '/public/posts/'.$type);
+            File::ensureDirectoryExists($media_path . $path.'/'.$type);
             $media[$type] = config("images.$type");
             unset($media[$key]);
         }
         unset($media['original']);
 
         // Save original media file in file system;
-        $original = request()->file('file')->store("public/posts/original");
+        $original = request()->file('file')->store($path."/original");
 
         $thumbnail_medium_name = Str::random(27) . '.' . Arr::last(explode('.', $original));
 
@@ -87,7 +107,7 @@ class PostController extends Controller
 
                 $thumbnail_medium = $thumbnail_medium->deconstructImages();
 
-                $thumbnail_medium->writeImages($media_path . "/public/posts/$type_name/" . $thumbnail_medium_name, true);
+                $thumbnail_medium->writeImages($media_path . "$path/$type_name/" . $thumbnail_medium_name, true);
             }   else{
                 /* Other Image types */
                 $thumbnail_medium = Image::make(request()->file('file'));
@@ -96,10 +116,10 @@ class PostController extends Controller
                 });
 
 
-                $thumbnail_medium->save($media_path . "/public/posts/$type_name/" . $thumbnail_medium_name);
+                $thumbnail_medium->save($media_path . "$path/$type_name/" . $thumbnail_medium_name);
             }
 
-            $media[$type_name]['path'] = $media_path . "/public/posts/$type_name/" . $thumbnail_medium_name;
+            $media[$type_name]['path'] = $media_path . "$path/$type_name/" . $thumbnail_medium_name;
         }
 
         foreach($media as $key => $item){

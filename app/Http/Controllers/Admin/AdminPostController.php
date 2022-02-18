@@ -45,7 +45,7 @@ class AdminPostController extends Controller
     // Edit
     public function edit(Post $post)
     {
-        
+
         return view('admin.posts.edit', [
             'post' => $post,
             'categories' => Category::pluck('name', 'id')

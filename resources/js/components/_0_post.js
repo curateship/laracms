@@ -35,4 +35,39 @@
         });
     }
     $(document).on('change', '#upload-file', uploadMedia);
+
+    const editBlock = $('#js-editor-description')
+    let readOnly = false
+    let data = {}
+
+    if(editBlock.attr('data-read-only') === 'true'){
+        readOnly = true
+        data = JSON.parse($('#description-json-data').val())
+    }
+
+    let editor = new EditorJS({
+        holder: 'js-editor-description',
+        placeholder: 'Tell your story...',
+        autofocus: true,
+        readOnly,
+        data
+    });
+
+
+    $(document).on('submit', '#new-post-form', function(e){
+        e.preventDefault()
+
+        const target = $($('#js-editor-description').attr('data-target-input'))
+
+        editor.save().then((outputData) => {
+            console.log(outputData);
+            target.val(JSON.stringify(outputData))
+        }).catch((error) => {
+            console.log('Saving failed: ', error)
+        });
+
+        setTimeout(function(){
+            $('#new-post-form')[0].submit();
+        }, 200)
+    });
 }());

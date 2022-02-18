@@ -1,0 +1,30 @@
+#js-editor-description[data-read-only="true"]{
+    .ce-block__content,
+    .ce-toolbar__content {
+        max-width: unset;
+    }
+
+    .codex-editor__redactor{
+        padding-bottom: 0 !important;
+    }
+}
+
+#js-editor-description:not([data-read-only="true"]){
+    .ce-block__content,
+    .ce-toolbar__content {
+        max-width: unset;
+        margin-left: 50px;
+    }
+
+    .ce-toolbar__actions{
+        margin-top: 4px;
+    }
+
+    .codex-editor{
+        svg{
+            use{
+                fill: var(--color-contrast-low) !important;
+            }
+        }
+    }
+}
