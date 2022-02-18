@@ -30,14 +30,16 @@ route::get('/', [IndexController::class, 'index'])->name('index');
 route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(['auth', 'verified']);
 
 // Post Controllers
+Route::post('/post/upload', [PostController::class, 'upload'])->name('post.upload')->middleware(['auth', 'verified']);
+Route::post('/post/store', [PostController::class, 'store'])->name('post.store')->middleware(['auth', 'verified']);
 Route::get('/post/{post:slug}', [PostController::class, 'show'])->name('post.show');
-Route::post('post/{post:slug}', [PostController::class, 'addComment'])->name('post.add_comment');
+Route::post('/post/{post:slug}', [PostController::class, 'addComment'])->name('post.add_comment');
 
 // Contact Controllers
 Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
-// Catetories Controllers
+// Categories Controllers
 Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('theme.default.archive.categories.show');
 Route::get('/categories', [CategoryController::class, 'index'])->name('theme.default.archive.categories.index');
 
@@ -54,6 +56,7 @@ Route::get('/tags/{tag:name}', [TagController::class, 'show'])->name('theme.defa
 
 // Admin Controllers
 Route::post('users/saveTheme', [AdminUserController::class, 'saveTheme'])->middleware(['auth']); // Theme Switcher
+
 Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->group(function (){
     Route::resource('/', AdminIndexController::class); // Index Route
     Route::resource('/users', AdminUserController::class); // User Route
@@ -61,5 +64,6 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
     Route::resource('/categories', AdminCategoryController::class); // Category Route
     Route::resource('/comments', AdminCommentController::class); // Comment Route
 });
+
 
 

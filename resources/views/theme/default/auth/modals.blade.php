@@ -162,12 +162,15 @@
   </div>
 
   <div class="margin-bottom-sm">
-        @error('email')
-        <span class="form-control--error" role="alert">
+      @if(old('target') == '')
+          @error('email')
+          <span class="form-control--error" role="alert">
           {{ $message }}
         </span>
-        @enderror
-        <input class="form-control width-100%" name="email" id="password" placeholder="Input Email you registered with">
+          @enderror
+      @endif
+
+        <input class="form-control width-100%" name="email" placeholder="Input Email you registered with">
       </div>
 
   <div class="margin-bottom-sm">

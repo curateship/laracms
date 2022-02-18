@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @section('content')
-  
+
 <!-- 👇 Content Body Wrapper-->
 <section class="margin-y-xl">
 @include('admin.partials.modal')
@@ -10,7 +10,7 @@
 
         <!-- Content Table Column -->
         <div class="card" data-table-controls="table-1">
-          
+
         <!-- Control Bar -->
         <div class="controlbar--sticky flex justify-between">
             <div class="inline-flex items-baseline">
@@ -73,11 +73,12 @@
 <!-- Table-->
 <div class="margin-top-auto border-top border-contrast-lower"></div><!-- Divider -->
 <div class="padding-md">
-<form action="" method='POST'>@csrf
+<form method="POST" action="{{ route('post.store') }}" id="new-post-form">
+    @csrf
   <fieldset class="margin-bottom-md">
 
     <div class="margin-bottom-sm">
-      <input class="form-control width-100%" type="name" name="title" id="inputtitle" placeholder="Enter Your Title" required>
+      <input class="form-control width-100%" type="text" name="title" placeholder="Enter Your Title" required>
     </div>
 
     @error('title')
@@ -85,7 +86,9 @@
     @enderror
 
     <div>
-      <textarea class="margin-bottom-sm form-control width-100%" name="textarea" id="textarea" placeholder="Enter Discription" rows="12"></textarea>
+      <!--<textarea class="margin-bottom-sm form-control width-100%" name="description" id="" placeholder="Enter Description" rows="12"></textarea>-->
+        <div id="js-editor-description" data-target-input="#description" class="site-editor margin-bottom-sm form-control width-100%"></div>
+        <input type="hidden" name="description" id="description" required/>
     </div>
 
     <!-- Select Category Dropdown Autocomplete -->
@@ -102,7 +105,7 @@
 
       <!-- input -->
       <div class="select-auto__input-wrapper">
-        <input class="form-control js-autocomplete__input js-select-auto__input" type="text" name="autocomplete-input-id" id="autocomplete-input-id" placeholder="Select a Category" autocomplete="off">
+        <input class="form-control js-autocomplete__input js-select-auto__input" type="text" name="category" placeholder="Select a Category" autocomplete="off" required>
 
         <div class="select-auto__input-icon-wrapper">
           <!-- arrow icon -->
@@ -141,29 +144,34 @@
     </div>
     <!-- Select Category Dropdown Autocomplete END -->
 
-    <div class="margin-bottom-sm">
-      <input class="form-control width-100%" type="name" name="inputname" id="inputname" placeholder="Enter Post Slug">
-    </div>
-
     <!-- Image Upload -->
     <div class="file-upload inline-block margin-bottom-sm">
-    <label for="upload2" class="file-upload__label btn btn--primary">
+    <label for="upload-file" class="file-upload__label btn btn--primary">
       <span class="flex items-center">
         <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><path  stroke-linecap="square" stroke-linejoin="miter" d="M2 16v6h20v-6"></path><path stroke-linejoin="miter" stroke-linecap="butt" d="M12 17V2"></path><path stroke-linecap="square" stroke-linejoin="miter" d="M18 8l-6-6-6 6"></path></g></svg>
-        
+
         <span class="margin-left-xxs file-upload__text file-upload__text--has-max-width">Upload Image</span>
       </span>
-    </label> 
-  
-    <input type="file" class="file-upload__input" name="upload2" id="upload2" multiple>
+    </label>
+
+    <input type="hidden" name="original" value=""/>
+    <input type="hidden" name="thumbnail" value=""/>
+    <input type="hidden" name="medium" value=""/>
+
+    <input type="file" class="file-upload__input" name="media" id="upload-file" accept="image/jpeg, image/jpg, image/png, image/gif" required>
+
+
+    <br>
+    <img alt="thumbnail" id="upload-thumbnail" class="margin-top-md" src="" style="display: none;">
+
   </div>
   <!-- Image Upload END -->
 
   </fieldset>
 
   <div class="flex justify-end gap-xs">
-        <button class="btn btn--subtle js-modal__close">Cancel</button>
-        <button class="btn btn--accent">Save</button>
+        <!--<button class="btn btn--subtle js-modal__close">Cancel</button>-->
+        <!--<button class="btn btn--accent">Save</button>-->
         <button class="btn btn--primary">Publish</button>
       </div>
    </form>
