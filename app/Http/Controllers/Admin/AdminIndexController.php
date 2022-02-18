@@ -13,22 +13,20 @@ use App\Models\Image;
 use App\Models\User;
 use App\Models\Role;
 
-class AdminPostController extends Controller
+class AdminIndexController extends Controller
 {
     // Index
     public function index()
     {
         return view('admin.posts.index', [
-            'posts' => Post::with('category')->orderBy('id', 'DESC')->paginate(10),
+            'posts' => Post::with('category')->orderBy('id', 'DESC')->get(),
         ]);
     }
 
     // Create
     public function create()
     {
-        return view('admin.posts.create', [
-        'categories' => Category::pluck('name', 'id')
-        ]);
+       
     }
 
     // Store
@@ -46,7 +44,7 @@ class AdminPostController extends Controller
     public function edit(Post $post)
     {
         
-        return view('admin.posts.edit', [
+        return view('admin.posts.pages.edit', [
             'post' => $post,
             'categories' => Category::pluck('name', 'id')
         ]);

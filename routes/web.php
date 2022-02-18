@@ -3,8 +3,13 @@
 use Illuminate\Support\Facades\Route;
 
 // Admin Controllers
-use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\AdminIndexController;
+use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Admin\AdminRoleController;
 use App\Http\Controllers\Admin\AdminPostController;
+use App\Http\Controllers\Admin\AdminCategoryController;
+use App\Http\Controllers\Admin\AdminTagController;
+use App\Http\Controllers\Admin\AdminCommentController;
 
 // Front-End Controllers
 use App\Http\Controllers\Frontend\IndexController;
@@ -34,7 +39,7 @@ Route::post('/post/{post:slug}', [PostController::class, 'addComment'])->name('p
 Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
-// Catetories Controllers
+// Categories Controllers
 Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('theme.default.archive.categories.show');
 Route::get('/categories', [CategoryController::class, 'index'])->name('theme.default.archive.categories.index');
 
@@ -48,16 +53,11 @@ Route::get('/tags/{tag:name}', [TagController::class, 'show'])->name('theme.defa
 |--------------------------------------------------------------------------
 */
 
-// Admin Index Controllers
-Route::get('/admin', function () {
-    return view('admin.dashboard.index');
-})->middleware(['auth', 'auth.isAdmin', 'verified']);
 
-
-// Admin Users Controllers
-Route::post('users/saveTheme', [UserController::class, 'saveTheme'])->middleware(['auth']);
+// Admin Controllers
+Route::post('users/saveTheme', [AdminUserController::class, 'saveTheme'])->middleware(['auth']); // Theme Switcher
 Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->group(function (){
-    Route::resource('/users', UserController::class);
+    Route::resource('/users', AdminRoleController::class);
 });
 
 // Admin Posts Controllers
@@ -71,22 +71,12 @@ Route::resource('admin/posts', AdminPostController::class);
 */
 
 Route::get('/profile', function () {
-    return view('pages.profile');
+    //return view('pages.profile');
+    Route::resource('/', AdminIndexController::class); // Index Route
+    Route::resource('/users', AdminUserController::class); // User Route
+    Route::resource('/posts', AdminPostController::class); // Post Route
+    Route::resource('/categories', AdminCategoryController::class); // Category Route
+    Route::resource('/comments', AdminCommentController::class); // Comment Route
 });
 
-Route::get('/admin/setting', function () {
-    return view('admin.pages.setting');
-});
-
-Route::get('/admin/post/trash', function () {
-    return view('admin.post.trash');
-});
-
-Route::get('/admin/post/add', function () {
-    return view('admin.post.add');
-});
-
-Route::get('/admin/post/trash', function () {
-    return view('admin.post.trash');
-});
 

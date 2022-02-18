@@ -72,6 +72,17 @@
   }
 }
 
+.secondary-link-subtle {
+  color: var(--color-contrast-medium);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: var(--color-primary-light);
+  }
+}
+
 .link-plain {
   text-decoration: none;
 
@@ -82,16 +93,6 @@
   }
 }
 
-.post-image {
-  height: 300px;
-  object-fit: cover;
-  z-index: 1;
-}
-
-.post-title {
-  margin-top: -50px;
-  z-index: 15; 
-}
 // --------------------------------
 
 // (END) Global editor code

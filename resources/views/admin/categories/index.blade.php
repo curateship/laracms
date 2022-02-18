@@ -1,14 +1,14 @@
 @extends('admin.layouts.app')
 @section('content')
-
+@include('admin.partials.modal')
 <section class="margin-y-xl">
   <div class="container max-width-adaptive-lg">
     <div class="grid gap-md justify-between">
       <div class="col-12@md"><!-- 👇 Col 12 -->
         <div class="card" data-table-controls="table-1"><!-- Content Table Column -->
 
-<!-- Control Bar -->
-<div class="controlbar--sticky flex justify-between">
+          <!-- Control Bar -->
+          <div class="controlbar--sticky flex justify-between">
             <div class="inline-flex items-baseline">
             <nav class="breadcrumbs text-based padding-left-sm padding-sm" aria-label="Breadcrumbs">
               <ol class="flex flex-wrap gap-xxs">
@@ -16,7 +16,7 @@
                   <a href="/admin" class="color-inherit link-subtle">Home</a>
                   <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
                 </li>
-                <li class="breadcrumbs__item color-contrast-high" aria-current="page">Posts</li>
+                <li class="breadcrumbs__item color-contrast-high" aria-current="page">Categories</li>
               </ol>
             </nav>
               </div>
@@ -25,12 +25,12 @@
               <div class="flex flex-wrap items-center justify-between margin-right-sm">
                     <div class="flex flex-wrap">
                       <menu class="menu-bar js-int-table-actions__no-items-selected js-menu-bar">
-                      <li class="menu-bar__item"><a href="/admin/posts/create" role="menuitem">
+                      <li class="menu-bar__item"><a href="/admin/categories/create" role="menuitem">
                           <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 20 20">
                             <path d="M18.85 4.39l-3.32-3.32a0.83 0.83 0 0 0-1.18 0l-11.62 11.62a0.84 0.84 0 0 0-0.2 0.33l-1.66 4.98a0.83 0.83 0 0 0 0.79 1.09 0.84 0.84 0 0 0 0.26-0.04l4.98-1.66a0.84 0.84 0 0 0 0.33-0.2l11.62-11.62a0.83 0.83 0 0 0 0-1.18z m-6.54 1.08l1.17-1.18 2.15 2.15-1.18 1.17z"></path>
                           </svg>
                           </a>
-                          <span class="menu-bar__label">Add Post</span>
+                          <span class="menu-bar__label">Add Category</span>
 
                         </li>
 
@@ -38,7 +38,7 @@
                           <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 20 20">
                             <path d="M11.25 17.5c4.83 0 8.75-3.93 8.75-8.75s-3.93-8.75-8.75-8.75-8.75 3.93-8.75 8.75 3.93 8.75 8.75 8.75z m0-15c3.45 0 6.25 2.8 6.25 6.25s-2.8 6.25-6.25 6.25-6.25-2.8-6.25-6.25 2.8-6.25 6.25-6.25z"></path><path d="M0.36 17.86l3-2.99a10.02 10.02 0 0 0 1.76 1.77l-2.98 3a1.25 1.25 0 0 1-1.78 0 1.25 1.25 0 0 1 0-1.78z"></path>
                           </svg>
-                          <span class="menu-bar__label">Search Posts</span>
+                          <span class="menu-bar__label">Search Category</span>
                         </li>
                       </menu>
 
@@ -58,9 +58,7 @@
           </div>
           <!-- END Control Bar-->
 
-          <!-- Table -->
           <div class="margin-top-auto border-top border-contrast-lower border-opacity-30%"></div><!-- Divider -->
- 
           <!-- Table-->
           <div class="padding-sm">
             <div id="table-1" class="int-table text-sm js-int-table">
@@ -161,9 +159,7 @@
                   </thead>
             
                   <tbody class="int-table__body js-int-table__body">
-
-                    <!-- Content Row -->
-                    @foreach($posts as $post)
+                    @foreach($categories as $category)
                     <tr class="int-table__row">
                       <th class="int-table__cell" scope="row">
                         <div class="custom-checkbox int-table__checkbox">
@@ -172,17 +168,17 @@
                         </div>
                       </th>
                       <td class="int-table__cell flex">
-                      <figure class="width-xl height-lg radius-lg flex-shrink-0 overflow-hidden margin-right-xs">
-                        <img class="block width-100% height-100% object-cover" src="{{ asset('storage/' . $post->image->path. '')  }}" alt="Post Picture">
+                      <figure class="width-lg height-lg radius-50% flex-shrink-0 overflow-hidden margin-right-xs">
+                        <img class="block width-100% height-100% object-cover" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
                       </figure>
-                      <div class="line-height-xs padding-top-xxxs padding-left-xxs">
-                        <div class=""><a href="{{ route ('admin.posts.edit', $post->id) }}" class="link-subtle">{{ $post->title }}</a></div>
-                        <p class="color-contrast-medium"><a href="#0" class="text-xs link-subtle">By: {{ $post->author->name }}</a></p>   
+                      <div class="line-height-xs padding-top-xxxs">
+                        <div class=""><a href="{{ route('admin.categories.edit', $category) }}" class="link-subtle">{{ $category->name }}</a></div>
+                        <p class="color-contrast-medium"><a href="#0" class="text-sm link-subtle">james4523</a></p>   
                       </div>    
                       </td>
 
                       <td class="int-table__cell">Published</td>
-                      <td class="int-table__cell">{{ $post->created_at->diffForHumans() }}</td>
+                      <td class="int-table__cell">{{ $category->created_at->diffForHumans() }}</td>
                       <td class="int-table__cell">
                       <button class="reset int-table__menu-btn margin-left-auto js-tab-focus" data-label="Edit row" aria-controls="menu-example">
                           <svg class="icon" viewBox="0 0 16 16">
@@ -195,10 +191,7 @@
                       </td>
                     </tr>
                     @endforeach
-                    <!-- Content Row END -->
-
                       <!-- Action Dropdown -->
-                      <td class="int-table__cell">
                         <menu id="menu-example" class="menu js-menu">
                         <li role="menuitem">
                           <span class="menu__content js-menu__content">
@@ -229,9 +222,11 @@
                           </span>
                         </li>
                       </menu>
-                    </td>
-                    <!-- Action Dropdown END-->
-                  </tr>
+                      <!-- Action Dropdown END-->
+
+                      </td>
+                      </td>
+                    </tr>
 
                   </tbody>
                 </table>

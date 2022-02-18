@@ -3,12 +3,17 @@
   <div class="modal__content width-100% max-width-xs max-height-100% overflow-auto padding-md bg radius-md inner-glow shadow-md" role="alertdialog" aria-labelledby="modal-form-title" aria-describedby="modal-form-description">
 
   <!-- Login Form Start 👇-->
-  <form action="{{ route('login') }}" class="modal-login" method="POST">
+  <form action="{{ route('login') }}" class="modal-login padding-md" method="POST">
       @csrf
       <input type="hidden" name="target" value="modal-login">
 
       <div class="text-component text-center margin-bottom-sm">
         <h1>Log in</h1>
+
+        <div class="text-center">
+        <p>Don't have an account? <a href="{{ route('register') }}" aria-controls="modal-signup">Get started</a></p>
+      </div>
+
       </div>
 
       <div class="margin-bottom-sm">
@@ -38,10 +43,6 @@
         <button class="btn btn--primary btn--md width-100%">Login</button>
       </div>
 
-      <div class="text-center">
-        <p class="text-sm">Don't have an account? <a href="{{ route('register') }}" aria-controls="modal-signup">Get started</a></p>
-      </div>
-
 </form>
 
 <button class="reset modal__close-btn modal__close-btn--outer  js-modal__close js-tab-focus">
@@ -65,7 +66,7 @@
     <div class="max-width-xs margin-x-auto">
 
     <!-- Register Form Content 👇-->
-<form action="{{ route('register') }}" class="sign-up-form padding-lg" method="POST">
+<form action="{{ route('register') }}" class="sign-up-form padding-md" method="POST">
     @csrf
     <input type="hidden" name="target" value="modal-signup">
 
@@ -149,7 +150,7 @@
   <div class="modal__content width-100% max-width-xs max-height-100% overflow-auto padding-md bg radius-md inner-glow shadow-md" role="alertdialog" aria-labelledby="modal-form-title" aria-describedby="modal-form-description">
 
   <!-- Forgot Password Form Start 👇-->
-<form action="{{ route('password.request') }}" class="password-reset-form" method="POST">
+<form action="{{ route('password.request') }}" class="password-reset-form padding-md" method="POST">
     @csrf
   <div class="text-component text-center margin-bottom-md">
     <h1>Forgot your password?</h1>

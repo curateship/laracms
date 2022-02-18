@@ -1,0 +1,51 @@
+@use '../base' as *;
+
+/* -------------------------------- 
+
+File#: _1_input-icon
+Title: Input Icon
+Descr: Icon within form control
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+.form-control-wrapper {
+  --input-icon-size: 1em; // icon size
+  --input-icon-text-gap: var(--space-xxs); // gap between icon and text
+  
+  position: relative;
+
+  .form-control {
+    width: 100%;
+    height: 100%;
+  }
+
+  .icon {
+    display: block;
+    position: absolute;
+    width: var(--input-icon-size);
+    height: var(--input-icon-size);
+    top: calc(50% - var(--input-icon-size)/2);
+    pointer-events: none;
+  }
+}
+
+.form-control-wrapper--icon-left {
+  .icon {
+    left: var(--form-control-padding-x);
+  }
+
+  .form-control {
+    padding-left: calc(var(--form-control-padding-x) + var(--input-icon-size) + var(--input-icon-text-gap));
+  }
+}
+
+.form-control-wrapper--icon-right {
+  .icon {
+    right: var(--form-control-padding-x);
+  }
+
+  .form-control {
+    padding-right: calc(var(--form-control-padding-x) + var(--input-icon-size) + var(--input-icon-text-gap));
+  }
+}

@@ -63,7 +63,7 @@
               <li class="sidenav__item">
                 <a href="http://localhost:3000/admin/setting" class="sidenav__link">
                   <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16">
-                  <g ><path d="M1.33 0h13.3q1.33 0 1.33 1.33v2.66q0 1.33-1.33 1.33h-13.3q-1.33 0-1.33-1.33v-2.66q0-1.33 1.33-1.33z"></path><path d="M0 7.98h15.96v2.66h-15.96z"></path><path fill="#efefef" d="M0 13.3h9.31v2.66h-9.31z"></path>
+                  <g ><path d="M1.33 0h13.3q1.33 0 1.33 1.33v2.66q0 1.33-1.33 1.33h-13.3q-1.33 0-1.33-1.33v-2.66q0-1.33 1.33-1.33z"></path><path d="M0 7.98h15.96v2.66h-15.96z"></path><path d="M0 13.3h9.31v2.66h-9.31z"></path>
                   </g>
                 </svg>
                   <span class="sidenav__text text-sm@md">My Feeds</span>
