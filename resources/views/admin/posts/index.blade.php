@@ -42,18 +42,35 @@
                         </li>
                       </menu>
 
-                      <menu class="menu-bar is-hidden js-int-table-actions__items-selected js-menu-bar">
+                      <menu class="menu-bar is-hidden js-int-table-actions__items-selected js-menu-bar delete-selected-posts">
                         <li class="menu-bar__item" role="menuitem">
                           <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 16 16">
                             <g><path d="M2,6v8c0,1.1,0.9,2,2,2h8c1.1,0,2-0.9,2-2V6H2z"></path><path d="M12,3V1c0-0.6-0.4-1-1-1H5C4.4,0,4,0.4,4,1v2H0v2h16V3H12z M10,3H6V2h4V3z"></path></g>
                           </svg>
-                          <span class="counter counter--critical counter--docked">4 <i class="sr-only">Notifications</i></span>
+                          <span class="counter counter--critical counter--docked delete-counter">0 <i class="sr-only">Notifications</i></span>
                           <span class="menu-bar__label">Delete</span>
                         </li>
                       </menu>
 
                     </div>
                   </div>
+
+                <div id="delete-post-dialog" class="dialog dialog--sticky js-dialog" data-animation="on">
+                    <div class="dialog__content max-width-xxs" role="alertdialog" aria-labelledby="dialog-sticky-title" aria-describedby="dialog-sticky-description">
+                        <div class="text-component">
+                            <h4 id="dialog-sticky-title">Are you sure what you want to delete selected post(-s)?</h4>
+                        </div>
+
+                        <footer class="margin-top-md">
+                            <div class="flex justify-end gap-xs flex-wrap">
+                                <button class="btn btn--subtle js-dialog__close">Cancel</button>
+                                <button id="accept-delete-posts" class="btn btn--accent">Delete</button>
+                            </div>
+                        </footer>
+
+                        <input type="hidden" id="delete-posts-list">
+                    </div>
+                </div>
 
           </div>
           <!-- END Control Bar-->
@@ -70,14 +87,23 @@
                     <tr class="int-table__row">
                       <td class="int-table__cell">
                         <div class="custom-checkbox int-table__checkbox">
-                          <input class="custom-checkbox__input js-int-table__select-all" type="checkbox" aria-label="Select all rows" />
+                          <input class="custom-checkbox__input js-int-table__select-all posts-list-checkbox-all" type="checkbox" aria-label="Select all rows" />
                           <div class="custom-checkbox__control" aria-hidden="true"></div>
                         </div>
                       </td>
 
-                      <th class="int-table__cell int-table__cell--th int-table__cell--sort js-int-table__cell--sort">
+                      <th class="int-table__cell int-table__cell--th int-table__cell--sort js-int-table__cell--sort
+                      @if(request()->get('sortBy') === 'title')
+                        @if(request()->get('sortDesc') === 'desc')
+                          int-table__cell--desc
+                        @endif
+                        @if(request()->get('sortDesc') === 'asc')
+                          int-table__cell--asc
+                        @endif
+                      @endif
+                        " data-sort-col="title">
                         <div class="flex items-center">
-                          <span>Name</span>
+                          <span>Title</span>
 
                           <svg class="icon icon--xxs margin-left-xxxs int-table__sort-icon" aria-hidden="true" viewBox="0 0 12 12">
                             <polygon class="arrow-up" points="6 0 10 5 2 5 6 0" />
@@ -102,13 +128,9 @@
                         </ul>
                       </th>
 
-                      <th class="int-table__cell int-table__cell--th int-table__cell--sort js-int-table__cell--sort">
+                      <th class="int-table__cell int-table__cell--th">
                         <div class="flex items-center">
                           <span>Status</span>
-
-                          <svg class="icon icon--xxs margin-left-xxxs int-table__sort-icon" aria-hidden="true" viewBox="0 0 12 12">
-                            <polygon class="arrow-up" points="6 0 10 5 2 5 6 0" />
-                            <polygon class="arrow-down" points="6 12 2 7 10 7 6 12" /></svg>
                         </div>
 
                         <ul class="sr-only js-int-table__sort-list">
@@ -129,7 +151,16 @@
                         </ul>
                       </th>
 
-                      <th class="int-table__cell int-table__cell--th int-table__cell--sort js-int-table__cell--sort" data-date-format="dd-mm-yyyy">
+                      <th class="int-table__cell int-table__cell--th int-table__cell--sort js-int-table__cell--sort
+                       @if(request()->get('sortBy') === 'created_at')
+                      @if(request()->get('sortDesc') === 'desc')
+                          int-table__cell--desc
+                        @endif
+                      @if(request()->get('sortDesc') === 'asc')
+                          int-table__cell--asc
+                        @endif
+                      @endif
+                          " data-sort-col="created_at" data-date-format="dd-mm-yyyy">
                         <div class="flex items-center">
                           <span>Date</span>
 
@@ -167,7 +198,7 @@
                     <tr class="int-table__row">
                       <th class="int-table__cell" scope="row">
                         <div class="custom-checkbox int-table__checkbox">
-                          <input class="custom-checkbox__input js-int-table__select-row" type="checkbox" aria-label="Select this row" />
+                          <input class="custom-checkbox__input js-int-table__select-row post-list-checkbox" data-post-id="{{$post->id}}" type="checkbox" aria-label="Select this row" />
                           <div class="custom-checkbox__control" aria-hidden="true"></div>
                         </div>
                       </th>
@@ -191,25 +222,18 @@
                             <circle cx="14.5" cy="7.5" r="1.5" />
                           </svg>
                         </button>
-
-                      </td>
-                    </tr>
-                    @endforeach
-                    <!-- Content Row END -->
-
-                      <!-- Action Dropdown -->
-                      <td class="int-table__cell">
-                        <menu id="menu-example" class="menu js-menu">
-                        <li role="menuitem">
+                          <!-- Action Dropdown -->
+                          <menu id="menu-example" class="menu js-menu">
+                              <li role="menuitem">
                           <span class="menu__content js-menu__content">
                             <svg class="icon menu__icon" aria-hidden="true" viewBox="0 0 12 12">
                               <path d="M10.121.293a1,1,0,0,0-1.414,0L1,8,0,12l4-1,7.707-7.707a1,1,0,0,0,0-1.414Z"></path>
                             </svg>
                             <span>Edit</span>
                           </span>
-                        </li>
+                              </li>
 
-                        <li role="menuitem">
+                              <li role="menuitem">
                           <span class="menu__content js-menu__content">
                             <svg class="icon menu__icon" aria-hidden="true" viewBox="0 0 16 16">
                               <path d="M15,4H1C0.4,4,0,4.4,0,5v10c0,0.6,0.4,1,1,1h14c0.6,0,1-0.4,1-1V5C16,4.4,15.6,4,15,4z M14,14H2V6h12V14z"></path>
@@ -217,21 +241,23 @@
                             </svg>
                             <span>Preview</span>
                           </span>
-                        </li>
+                              </li>
 
-                        <li role="menuitem">
+                              <li role="menuitem">
                           <span class="menu__content js-menu__content">
                             <svg class="icon menu__icon" aria-hidden="true" viewBox="0 0 12 12">
                               <path d="M8.354,3.646a.5.5,0,0,0-.708,0L6,5.293,4.354,3.646a.5.5,0,0,0-.708.708L5.293,6,3.646,7.646a.5.5,0,0,0,.708.708L6,6.707,7.646,8.354a.5.5,0,1,0,.708-.708L6.707,6,8.354,4.354A.5.5,0,0,0,8.354,3.646Z"></path>
                               <path d="M6,0a6,6,0,1,0,6,6A6.006,6.006,0,0,0,6,0ZM6,10a4,4,0,1,1,4-4A4,4,0,0,1,6,10Z"></path>
                             </svg>
-                            <span>Delete</span>
+                            <span class="delete-post-context-menu" data-post-id="{{ $post->id }}">Delete</span>
                           </span>
-                        </li>
-                      </menu>
-                    </td>
-                    <!-- Action Dropdown END-->
-                  </tr>
+                              </li>
+                          </menu>
+                          <!-- Action Dropdown END-->
+                      </td>
+                    </tr>
+                    @endforeach
+                    <!-- Content Row END -->
 
                   </tbody>
                 </table>
@@ -239,6 +265,54 @@
             </div>
           </div>
           <!-- END Table-->
+            <!-- Pagination -->
+            <div class="margin-top-auto border-top border-contrast-lower"></div><!-- Divider -->
+            <nav class="pagination text-sm" aria-label="Pagination">
+                <ol class="pagination__list flex flex-wrap gap-xs justify-center padding-sm">
+                    <li>
+                        <a href="{{ $posts->url($posts->currentPage()-1) }}" class="pagination__item {{ ($posts->currentPage() == 1) ? ' pagination__item--disabled' : '' }}" aria-label="Go to previous page">
+                            <svg class="icon icon--xs margin-right-xxxs flip-x" viewBox="0 0 16 16"><polyline points="6 2 12 8 6 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+                            <span>Prev</span>
+                        </a>
+                    </li>
+
+                    @if($posts->currentPage() > 3)
+                        <li class="display@sm">
+                            <a href="{{ $posts->url(1) }}" class="pagination__item {{ ($posts->currentPage() == 1) ? ' pagination__item--selected' : '' }}" aria-label="Go to page 1">1</a>
+                        </li>
+                    @endif
+                    @if($posts->currentPage() > 4)
+                        <li class="display@sm" aria-hidden="true">
+                            <span class="pagination__item pagination__item--ellipsis">...</span>
+                        </li>
+                    @endif
+                    @foreach(range(1, $posts->lastPage()) as $i)
+                        @if($i >= $posts->currentPage() - 2 && $i <= $posts->currentPage() + 2)
+                            <li class="display@sm">
+                                <a href="{{ $posts->url($i) }}" class="pagination__item {{ ($posts->currentPage() == $i) ? ' pagination__item--selected' : '' }}" aria-label="Go to page {{ $i }}">{{ $i }}</a>
+                            </li>
+                        @endif
+                    @endforeach
+                    @if($posts->currentPage() < $posts->lastPage() - 3)
+                        <li class="display@sm" aria-hidden="true">
+                            <span class="pagination__item pagination__item--ellipsis">...</span>
+                        </li>
+                    @endif
+                    @if($posts->currentPage() < $posts->lastPage() - 2)
+                        <li class="display@sm">
+                            <a href="{{ $posts->url($posts->lastPage()) }}" class="pagination__item {{ ($posts->currentPage() == $posts->lastPage()) ? ' pagination__item--selected' : '' }}" aria-label="Go to page {{ $posts->lastPage() }}">{{ $posts->lastPage() }}</a>
+                        </li>
+                    @endif
+
+                    <li>
+                        <a href="{{ $posts->url($posts->currentPage()+1) }}" class="pagination__item {{ ($posts->currentPage() == $posts->lastPage()) ? ' pagination__item--disabled' : '' }}" aria-label="Go to next page">
+                            <span>Next</span>
+                            <svg class="icon icon--xs margin-left-xxxs" viewBox="0 0 16 16"><polyline points="6 2 12 8 6 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+                        </a>
+                    </li>
+                </ol>
+            </nav>
+            <!-- Pagination END-->
 
         </div><!-- END Col-12 Card -->
       </div><!-- Col-12 END -->
