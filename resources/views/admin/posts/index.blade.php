@@ -1,6 +1,10 @@
 @extends('admin.layouts.app')
-@section('content')
 
+@push('custom-scripts')
+    @include('admin.posts.script-js')
+@endpush
+
+@section('content')
 <section class="margin-y-xl">
   <div class="container max-width-adaptive-lg">
     <div class="grid gap-md justify-between">

@@ -1,3 +1,5 @@
+@auth
+<script>
 (function() {
     function getSelectedList(){
         let selectedUsers = []
@@ -61,3 +63,5 @@
         deletePostsArray($('#delete-posts-list').val().split(','))
     })
 }());
+</script>
+@endauth
