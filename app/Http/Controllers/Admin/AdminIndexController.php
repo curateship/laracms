@@ -18,7 +18,7 @@ class AdminIndexController extends Controller
     // Index
     public function index()
     {
-        return view('admin.posts.index', [
+        return view('admin.dashboard.index', [
             'posts' => Post::with('category')->orderBy('id', 'DESC')->get(),
         ]);
     }
