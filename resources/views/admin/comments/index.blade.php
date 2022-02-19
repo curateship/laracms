@@ -172,15 +172,14 @@
                         <img class="block width-100% height-100% object-cover" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
                       </figure>
                       <div class="line-height-xs padding-top-xxxs">
-                        <div class=""><a href="#0" class="link-subtle" aria-controls="edit-modal">{{ \Str::limit($comment->user->name, 6) }}</a></div>
-                        <p class="color-contrast-medium"><a href="#0" class="text-xs link-subtle">james4523</a></p>   
+                        <div class=""><a href="#0" class="link-subtle">{{ \Str::limit($comment->user->name, 10) }}</a></div>
                       </div>    
                       </td>
 
                       <td class="int-table__cell">
-                      <div class=""><a href="{{ route('admin.comments.edit', $comment) }}" class="link-subtle">{{ \Str::limit($comment->the_comment, 120) }}</a></div>
+                      <div class=""><a href="{{ route('admin.comments.edit', $comment) }}" class="link-subtle">{{ \Str::limit($comment->the_comment, 140) }}</a></div>
                       </td>
-                      <td class="int-table__cell text-xs">{{ $comment->created_at->diffForHumans() }}</td>
+                      <td class="int-table__cell color-contrast-low">{{ $comment->created_at->diffForHumans() }}</td>
                       <td class="int-table__cell">
                       <button class="reset int-table__menu-btn margin-left-auto js-tab-focus" data-label="Edit row" aria-controls="menu-example">
                           <svg class="icon" viewBox="0 0 16 16">
@@ -236,7 +235,7 @@
 
       <!-- Sidebar -->
       <div class="col-3@md">
-        <x-admin.sidebar/>
+        @include('admin.partials.sidebar')
       </div>
       <!-- Sidebar END -->
 

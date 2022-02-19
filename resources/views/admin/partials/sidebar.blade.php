@@ -32,7 +32,6 @@
                 <a href="{{ route('admin.posts.index') }}" class="sidenav__link" {{ strpos(url()->full(), '/admin/posts') !== false ? 'aria-current=page' : '' }}>
                   <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16"><g><path d="M14,7H2v7c0,0.6,0.4,1,1,1h10c0.6,0,1-0.4,1-1V7z"></path><rect y="1" width="16" height="4"></rect></g></svg>
                   <span class="sidenav__text text-sm@md">Posts</span>
-                  <span class="sidenav__counter">12 <i class="sr-only">notifications</i></span>
                 </a>
 
                 <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
@@ -62,11 +61,47 @@
 
                 </ul>
               </li>
+
+              <li class="sidenav__item">
+                <a href="" class="sidenav__link">
+                  <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16"><g>
+                  <path d="M15,4H1A.945.945,0,0,0,0,5V15a.945.945,0,0,0,1,1H15a.945.945,0,0,0,1-1V5A.945.945,0,0,0,15,4ZM6,13V7l5,3Z"></path><path d="M3,0H13a1,1,0,0,1,1,1V2a0,0,0,0,1,0,0H2A0,0,0,0,1,2,2V1A1,1,0,0,1,3,0Z"></path>
+                  </svg>
+                  <span class="sidenav__text text-sm@md">Videos</span>
+                </a>
+
+                <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
+                  <svg class="icon" viewBox="0 0 12 12"><polygon points="4 3 8 6 4 9 4 3"/></svg>
+                </button>
+
+                <ul class="sidenav__list">
+                  <li class="sidenav__item">
+                    <a href="/admin/posts/create" class="sidenav__link">
+                      <span class="sidenav__text text-sm@md">Add new</span>
+                    </a>
+                  </li>
+
+                  <li class="sidenav__item">
+                    <a href="#0" class="sidenav__link">
+                      <span class="sidenav__text text-sm@md">Draft</span>
+                      <span class="sidenav__counter">4 <i class="sr-only">notifications</i></span>
+                    </a>
+                  </li>
+
+                  <li class="sidenav__item">
+                    <a href="/admin/post/trash" class="sidenav__link">
+                      <span class="sidenav__text text-sm@md">Trash</span>
+                      <span class="sidenav__counter">3 <i class="sr-only">notifications</i></span>
+                    </a>
+                  </li>
+
+                </ul>
+              </li>
+
                 <li class="sidenav__item">
                     <a href="{{ route('admin.users.index') }}" class="sidenav__link" {{ strpos(url()->full(), '/admin/users') !== false ? 'aria-current=page' : '' }}>
                     <svg class="icon sidenav__icon" aria-hidden="false" viewBox="0 0 16 16" aria-current="page"><g><path d="M12.25,8.231C11.163,9.323,9.659,10,8,10S4.837,9.323,3.75,8.231C1.5,9.646,0,12.145,0,15v1h16 v-1C16,12.145,14.5,9.646,12.25,8.231z"></path><circle cx="8" cy="4" r="4"></circle></g></svg>
                         <span class="sidenav__text text-sm@md">Users</span>
-                        <span class="sidenav__counter">12 <i class="sr-only">notifications</i></span>
                     </a>
                       <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
                         <svg class="icon" viewBox="0 0 12 12"><polygon points="4 3 8 6 4 9 4 3"/></svg>
@@ -101,44 +136,25 @@
                 </li>
 
                 <li class="sidenav__item">
-                    <a href="#0" class="sidenav__link">
+                <a href="{{ route('admin.comments.index') }}" class="sidenav__link" {{ strpos(url()->full(), '/admin/comments') !== false ? 'aria-current=page' : '' }}>
                     <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16">
                       <g ><path d="M14.75 4.25h-1.5v4.75a1.5 1.5 0 0 1-1.5 1.5h-4.47l-2 1.75h4.64l3.43 2.45a0.25 0.25 0 0 0 0.15 0.05 0.25 0.25 0 0 0 0.11-0.03 0.25 0.25 0 0 0 0.14-0.22v-2.25h1a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1z"></path>
                         <path d="M11.75 1h-10.5a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h1.5v3.25a0.25 0.25 0 0 0 0.15 0.23 0.25 0.25 0 0 0 0.1 0.02 0.25 0.25 0 0 0 0.16-0.06l3.93-3.44h4.66a1 1 0 0 0 1-1v-7a1 1 0 0 0-1-1z"></path>
                       </g>
                     </svg>
                         <span class="sidenav__text text-sm@md">Comments</span>
-                        <span class="sidenav__counter">12 <i class="sr-only">notifications</i></span>
                     </a>
                       <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
                         <svg class="icon" viewBox="0 0 12 12"><polygon points="4 3 8 6 4 9 4 3"/></svg>
                       </button>
                 <ul class="sidenav__list">
+                  
                   <li class="sidenav__item">
                     <a href="#0" class="sidenav__link">
                       <span class="sidenav__text text-sm@md">Add New</span>
                     </a>
                   </li>
-                  <li class="sidenav__item">
-                    <a href="#0" class="sidenav__link">
-                      <span class="sidenav__text text-sm@md">Admins</span>
-                    </a>
-                  </li>
-                  <li class="sidenav__item">
-                    <a href="#0" class="sidenav__link">
-                      <span class="sidenav__text text-sm@md">Editors</span>
-                    </a>
-                  </li>
-                  <li class="sidenav__item">
-                    <a href="#0" class="sidenav__link">
-                      <span class="sidenav__text text-sm@md">Registered</span>
-                    </a>
-                  </li>
-                  <li class="sidenav__item">
-                    <a href="#0" class="sidenav__link">
-                      <span class="sidenav__text text-sm@md">Trash</span>
-                    </a>
-                  </li>
+                
                 </ul>
                 </li>
 
@@ -149,7 +165,6 @@
                       </g>
                     </svg>
                         <span class="sidenav__text text-sm@md">Tags</span>
-                        <span class="sidenav__counter">12 <i class="sr-only">notifications</i></span>
                     </a>
                       <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
                         <svg class="icon" viewBox="0 0 12 12"><polygon points="4 3 8 6 4 9 4 3"/></svg>
@@ -184,14 +199,13 @@
                 </li>
 
                 <li class="sidenav__item">
-                    <a href="#0" class="sidenav__link">
+                  <a href="{{ route('admin.categories.index') }}" class="sidenav__link" {{ strpos(url()->full(), '/admin/categories') !== false ? 'aria-current=page' : '' }}>
                     <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16">
                       <g >
                         <path d="M15,4H1A1,1,0,0,0,.02,5.2l2,10A1,1,0,0,0,3,16H13a1,1,0,0,0,.98-.8l2-10A1,1,0,0,0,15,4Z"></path><path d="M3,2H13a1,1,0,0,0,0-2H3A1,1,0,0,0,3,2Z"></path>
                       </g>
                     </svg>
                         <span class="sidenav__text text-sm@md">Categories</span>
-                        <span class="sidenav__counter">12 <i class="sr-only">notifications</i></span>
                     </a>
                       <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
                         <svg class="icon" viewBox="0 0 12 12"><polygon points="4 3 8 6 4 9 4 3"/></svg>
@@ -233,6 +247,36 @@
                       </g>
                     </svg>
                         <span class="sidenav__text text-sm@md">Galleries</span>
+                    </a>
+                      <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
+                        <svg class="icon" viewBox="0 0 12 12"><polygon points="4 3 8 6 4 9 4 3"/></svg>
+                      </button>
+                <ul class="sidenav__list">
+                  <li class="sidenav__item">
+                    <a href="#0" class="sidenav__link">
+                      <span class="sidenav__text text-sm@md">Add New</span>
+                    </a>
+                  </li>
+                </ul>
+                </li>
+
+            </ul>
+
+            <div class="sidenav__divider margin-y-xs" role="presentation"></div>
+
+            <div class="sidenav__label margin-bottom-xxxs">
+              <span class="text-sm color-contrast-medium text-xs@md">Administrations</span>
+            </div>
+
+            <ul class="sidenav__list">
+
+            <li class="sidenav__item">
+                    <a href="#0" class="sidenav__link">
+                    <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16">
+                      <g >
+                      <path d="M14,1H2A2,2,0,0,0,0,3v.4L8,7.9l8-4.4V3A2,2,0,0,0,14,1Z"></path><path d="M7.5,9.9,0,5.7V13a2,2,0,0,0,2,2H14a2,2,0,0,0,2-2V5.7L8.5,9.9A1.243,1.243,0,0,1,7.5,9.9Z"></path>                      </g>
+                    </svg>
+                        <span class="sidenav__text text-sm@md">Email</span>
                         <span class="sidenav__counter">3 <i class="sr-only">notifications</i></span>
                     </a>
                       <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
@@ -247,7 +291,7 @@
                 </ul>
                 </li>
 
-                <li class="sidenav__item">
+            <li class="sidenav__item">
                     <a href="#0" class="sidenav__link">
                     <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16">
                       <g >
@@ -273,15 +317,6 @@
                 </ul>
                 </li>
 
-            </ul>
-
-            <div class="sidenav__divider margin-y-xs" role="presentation"></div>
-
-            <div class="sidenav__label margin-bottom-xxxs">
-              <span class="text-sm color-contrast-medium text-xs@md">Other</span>
-            </div>
-
-            <ul class="sidenav__list">
               <li class="sidenav__item">
                 <a href="http://localhost:3000/admin/setting" class="sidenav__link">
                   <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16"><g><circle cx="6" cy="8" r="2"></circle><path d="M10,2H6C2.7,2,0,4.7,0,8s2.7,6,6,6h4c3.3,0,6-2.7,6-6S13.3,2,10,2z M10,12H6c-2.2,0-4-1.8-4-4s1.8-4,4-4h4 c2.2,0,4,1.8,4,4S12.2,12,10,12z"></path></g></svg>
