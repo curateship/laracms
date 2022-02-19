@@ -1,3 +1,20 @@
+.codex-editor svg {
+    fill: var(--color-contrast-low) !important;
+    vertical-align: middle;
+    max-height: 100%;
+}
+
+.ce-block--selected{
+    .ce-block__content{
+        background-color: transparent;
+    }
+}
+
+.ce-inline-toolbar, .ce-settings{
+    background-color: var(--color-bg);
+    border-color: var(--color-bg-dark);
+}
+
 #js-editor-description[data-read-only="true"]{
     .ce-block__content,
     .ce-toolbar__content {
@@ -10,10 +27,54 @@
 }
 
 #js-editor-description:not([data-read-only="true"]){
+    /* This is style for correction original Edits.js editor "height" style */
+    .codex-editor__redactor{
+        padding-bottom: 200px !important;
+    }
+
     .ce-block__content,
     .ce-toolbar__content {
-        max-width: unset;
-        margin-left: 50px;
+        max-width: 100%;
+        width: 100%;
+    }
+    .ce-toolbox {
+        margin-right: 30px;
+    }
+    .ce-toolbar__plus {
+        left: -5px;
+    }
+    .ce-toolbar__actions {
+        right: 5px;
+    }
+
+    @media (max-width:650px) {
+        .ce-toolbar__content {
+            right: 0 !important;
+            position: absolute !important;
+            width: auto !important;
+        }
+
+        .ce-toolbar--opened{
+            background: transparent;
+            border: none;
+            box-shadow: none;
+        }
+
+        .ce-toolbar__actions{
+            margin-top: -40px !important;
+        }
+
+        .ce-toolbar__content{
+            position: relative;
+        }
+
+        .ce-toolbox{
+            opacity: 0;
+        }
+    }
+
+    .fl-align-center {
+        align-items: center;
     }
 
     .ce-toolbar__actions{
