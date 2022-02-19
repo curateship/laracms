@@ -1,4 +1,6 @@
 (function() {
+    let editor
+
     // Ajax Upload Process
     function validateMediaUpload(formData, jqForm, options) {
         console.log('validate form before upload');
@@ -37,22 +39,23 @@
     $(document).on('change', '#upload-file', uploadMedia);
 
     const editBlock = $('#js-editor-description')
-    let readOnly = false
-    let data = {}
+    if(editBlock.length > 0){
+        let readOnly = false
+        let data = {}
 
-    if(editBlock.attr('data-read-only') === 'true'){
-        readOnly = true
-        data = JSON.parse($('#description-json-data').val())
+        if(editBlock.attr('data-read-only') === 'true'){
+            readOnly = true
+            data = JSON.parse($('#description-json-data').val())
+        }
+
+        editor = new EditorJS({
+            holder: 'js-editor-description',
+            placeholder: 'Tell your story...',
+            autofocus: true,
+            readOnly,
+            data
+        });
     }
-
-    let editor = new EditorJS({
-        holder: 'js-editor-description',
-        placeholder: 'Tell your story...',
-        autofocus: true,
-        readOnly,
-        data
-    });
-
 
     $(document).on('submit', '#new-post-form', function(e){
         e.preventDefault()
