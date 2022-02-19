@@ -26,6 +26,7 @@
     @yield('content')
   </div>
   @include('theme.default.partials.footer')
+  @stack('custom-scripts')
 <script src="{{ asset('assets/js/scripts.js') }}"></script>
 
 <!-- Script to fix Modal overlap -->
