@@ -53,9 +53,8 @@
   <div class="post-content padding-md">
     <div class="flex">
       <div class="post-content">
-        <h1 href="#0" class="">{{ $post->title }}</h1>
-        <p class="margin-top-md" id="js-editor-description" data-read-only="true"></p>
-        <input type="hidden" id="description-json-data" value="{{$post->body}}">
+        <h1>{{ $post->title }}</h1>
+        <div class="margin-top-md">{!! $post->body() !!}</div>
       </div>
   </div>
 </div>

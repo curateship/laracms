@@ -2,13 +2,10 @@
 
 namespace App\Models;
 
+use EditorJS\EditorJSException;
+use SaperX\LaravelEditorjsHtml\EditorJSHtml;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
-use App\Models\Category;
-use App\Models\Tag;
-use App\Models\Comment;
-use App\Models\Image;
 
 /**
  * @property mixed|string $title
@@ -68,5 +65,14 @@ class Post extends Model
       else $max_number++;
 
       return $slug . '-' . $max_number;
+  }
+
+    /**
+     * @throws EditorJSException
+     */
+    public function body(): string
+    {
+      $convertToHtml = new EditorJSHtml($this->body);
+      return html_entity_decode($convertToHtml->render());
   }
 }
