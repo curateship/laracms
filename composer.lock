@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b446102b446374148f12f8a7f768f4bb",
+    "content-hash": "70532f1b8f65a2170d6e31e16947d4b4",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -175,6 +175,52 @@
                 }
             ],
             "time": "2021-08-15T20:50:18+00:00"
+        },
+        {
+            "name": "codex-team/editor.js",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/editor-js/editorjs-php.git",
+                "reference": "c6a96e80635d9991083e5d5876dd875f6b4a89fd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/editor-js/editorjs-php/zipball/c6a96e80635d9991083e5d5876dd875f6b4a89fd",
+                "reference": "c6a96e80635d9991083e5d5876dd875f6b4a89fd",
+                "shasum": ""
+            },
+            "require": {
+                "ezyang/htmlpurifier": "^4.8",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.13",
+                "phpunit/phpunit": "5.4.*"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "EditorJS\\": "EditorJS"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "CodeX Team",
+                    "email": "team@ifmo.su"
+                }
+            ],
+            "description": "PHP backend implementation for the Editor.js",
+            "support": {
+                "issues": "https://github.com/editor-js/editorjs-php/issues",
+                "source": "https://github.com/editor-js/editorjs-php/tree/master"
+            },
+            "time": "2020-10-28T15:39:02+00:00"
         },
         {
             "name": "dasprid/enum",
@@ -940,6 +986,57 @@
                 }
             ],
             "time": "2020-12-29T14:50:06+00:00"
+        },
+        {
+            "name": "ezyang/htmlpurifier",
+            "version": "v4.14.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ezyang/htmlpurifier.git",
+                "reference": "12ab42bd6e742c70c0a52f7b82477fcd44e64b75"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/12ab42bd6e742c70c0a52f7b82477fcd44e64b75",
+                "reference": "12ab42bd6e742c70c0a52f7b82477fcd44e64b75",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "HTMLPurifier": "library/"
+                },
+                "files": [
+                    "library/HTMLPurifier.composer.php"
+                ],
+                "exclude-from-classmap": [
+                    "/library/HTMLPurifier/Language/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Edward Z. Yang",
+                    "email": "admin@htmlpurifier.org",
+                    "homepage": "http://ezyang.com"
+                }
+            ],
+            "description": "Standards compliant HTML filter written in PHP",
+            "homepage": "http://htmlpurifier.org/",
+            "keywords": [
+                "html"
+            ],
+            "support": {
+                "issues": "https://github.com/ezyang/htmlpurifier/issues",
+                "source": "https://github.com/ezyang/htmlpurifier/tree/v4.14.0"
+            },
+            "time": "2021-12-25T01:21:49+00:00"
         },
         {
             "name": "fruitcake/laravel-cors",
@@ -3610,6 +3707,67 @@
                 }
             ],
             "time": "2021-09-25T23:10:38+00:00"
+        },
+        {
+            "name": "saperx/laravel-editorjs-html",
+            "version": "1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dev-saperx/laravel-editorjs-html.git",
+                "reference": "4959e2975bd42eb87ca5a89b2ca8ba386a36429c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dev-saperx/laravel-editorjs-html/zipball/4959e2975bd42eb87ca5a89b2ca8ba386a36429c",
+                "reference": "4959e2975bd42eb87ca5a89b2ca8ba386a36429c",
+                "shasum": ""
+            },
+            "require": {
+                "codex-team/editor.js": "dev-master",
+                "illuminate/support": "^6|^7|^8",
+                "php": "^7.3|^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "SaperX\\LaravelEditorjsHtml\\EditorJSHtmlProvider"
+                    ],
+                    "aliases": {
+                        "EditorJSHtml": "SaperX\\LaravelEditorjsHtml\\Facades\\EditorJSHtml"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SaperX\\LaravelEditorjsHtml\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Muntadher",
+                    "email": "dev@ankitech.co"
+                },
+                {
+                    "name": "Willian de Souza",
+                    "email": "willian.souza@saperx.com.br"
+                }
+            ],
+            "description": "Convert object editorjs to html view",
+            "keywords": [
+                "convert",
+                "editorjs",
+                "html",
+                "laravel"
+            ],
+            "support": {
+                "source": "https://github.com/dev-saperx/laravel-editorjs-html/tree/1.2"
+            },
+            "time": "2022-01-24T13:54:32+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

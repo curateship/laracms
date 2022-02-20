@@ -1,6 +1,10 @@
 @extends('admin.layouts.app')
-@section('content')
 
+@push('custom-scripts')
+    @include('admin.posts.script-editor-js')
+@endpush
+
+@section('content')
 <!-- 👇 Content Body Wrapper-->
 <section class="margin-y-xl">
 @include('admin.partials.modal')
