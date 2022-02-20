@@ -38,7 +38,6 @@ class DatabaseSeeder extends Seeder
             $tags_ids[] = \App\Models\Tag::all()->random()->id;
             $tags_ids[] = \App\Models\Tag::all()->random()->id;
             $tags_ids[] = \App\Models\Tag::all()->random()->id;
-            //$post->image()->save( \App\Models\Image::factory()->make() );
             $post->tags()->sync( $tags_ids );
 
         }
