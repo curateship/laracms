@@ -26,8 +26,8 @@
     @yield('content')
   </div>
   @include('theme.default.partials.footer')
-  @stack('custom-scripts')
 <script src="{{ asset('assets/js/scripts.js') }}"></script>
+  @stack('custom-scripts')
 
 <!-- Script to fix Modal overlap -->
 @if($errors->has('email') || $errors->has('password'))
