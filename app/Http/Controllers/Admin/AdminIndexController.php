@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 // Models
 use App\Models\Category;
 use App\Models\Post;
-use App\Models\Image;
 use App\Models\User;
 use App\Models\Role;
 
@@ -26,7 +25,7 @@ class AdminIndexController extends Controller
     // Create
     public function create()
     {
-       
+
     }
 
     // Store
@@ -43,7 +42,7 @@ class AdminIndexController extends Controller
     // Edit
     public function edit(Post $post)
     {
-        
+
         return view('admin.posts.pages.edit', [
             'post' => $post,
             'categories' => Category::pluck('name', 'id')

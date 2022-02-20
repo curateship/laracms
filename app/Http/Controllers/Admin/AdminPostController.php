@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 // Models
 use App\Models\Category;
 use App\Models\Post;
-use App\Models\Image;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Support\Arr;
