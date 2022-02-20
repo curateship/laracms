@@ -2,6 +2,12 @@ b{
     font-weight: bold;
 }
 
+.enlil-article{
+    p{
+        padding: 0.4em 0;
+    }
+}
+
 .codex-editor svg {
     fill: var(--color-contrast-low) !important;
     vertical-align: middle;
