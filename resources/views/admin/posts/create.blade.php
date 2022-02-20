@@ -2,6 +2,7 @@
 
 @push('custom-scripts')
     @include('admin.posts.script-editor-js')
+    @include('admin.posts.script-js')
 @endpush
 
 @section('content')
