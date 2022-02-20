@@ -8,6 +8,11 @@ b{
     }
 }
 
+.ce-paragraph[data-placeholder]:empty::before {
+    color: hsla(var(--color-contrast-low-h), var(--color-contrast-low-s), var(--color-contrast-low-l), var(--color-o, 1)) !important;
+}
+
+
 .codex-editor svg {
     fill: var(--color-contrast-low) !important;
     vertical-align: middle;
