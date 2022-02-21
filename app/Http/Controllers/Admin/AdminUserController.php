@@ -104,9 +104,9 @@ class AdminUserController extends Controller
         }
 
         if(count($ids) > 1){
-            $request->session()->flash('success', 'You have deleted all selected user and their posts');
+            $request->session()->flash('success', 'You have deleted all selected users');
         }   else{
-            $request->session()->flash('success', 'You have deleted the user and his posts');
+            $request->session()->flash('success', 'You have deleted the user');
         }
     }
 

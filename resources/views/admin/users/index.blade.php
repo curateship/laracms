@@ -65,7 +65,7 @@
                   <div class="dialog__content max-width-xxs" role="alertdialog" aria-labelledby="dialog-sticky-title" aria-describedby="dialog-sticky-description">
                       <div class="text-component">
                           <h4 id="dialog-sticky-title">Are you sure what you want to delete selected user(-s)?</h4>
-                          <p id="dialog-sticky-description">This action cannot be undone and remove users with their posts.</p>
+                          <p id="dialog-sticky-description">This action cannot be undone.</p>
                       </div>
 
                       <footer class="margin-top-md">
