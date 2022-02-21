@@ -212,7 +212,7 @@
                         <img class="block width-100% height-100% object-cover" src="{{ url('/storage').config('images.posts_storage_path').$post->medium  }}" alt="Post Picture">
                       </figure>
                       <div class="line-height-xs padding-top-xxxs padding-left-xxs">
-                        <div class=""><a href="{{ route ('admin.posts.edit', $post->id) }}" class="link-subtle">{{ $post->title }}</a></div>
+                        <div class=""><a href="{{ route ('post.edit', $post->slug) }}" class="link-subtle">{{ $post->title }}</a></div>
                         <p class="color-contrast-medium"><a href="#0" class="text-xs link-subtle">By: {{ $post->author->name }}</a></p>
                       </div>
                       </td>

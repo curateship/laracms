@@ -51,6 +51,10 @@
             data = JSON.parse($('#description-json-data').val())
         }
 
+        if(editBlock.attr('data-post-body') !== undefined && editBlock.attr('data-post-body') !== null){
+            data = JSON.parse(editBlock.attr('data-post-body'))
+        }
+
         editor = new EditorJS({
             holder: 'js-editor-description',
             placeholder: 'Tell your story...',
