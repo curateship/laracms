@@ -49,19 +49,19 @@ class AdminPostController extends Controller
     }
 
     // Edit
-    public function edit(Post $post)
+    public function edit($post_slug)
     {
+        $post = Post::where('slug', $post_slug)
+            ->first();
+
+        if($post == null){
+            return abort(404);
+        }
 
         return view('admin.posts.edit', [
             'post' => $post,
             'categories' => Category::pluck('name', 'id')
         ]);
-    }
-
-    // Update
-    public function update(Request $request, $id)
-    {
-        //
     }
 
     // Destroy
@@ -143,6 +143,7 @@ class AdminPostController extends Controller
         return $media;
     }
 
+    // Store or update;
     public function store(Request $request){
         $title = strip_tags($request->input('title'));
 
@@ -167,7 +168,12 @@ class AdminPostController extends Controller
         $medium = ( $request->has('medium') && !empty($request->input('medium')) )  ? $request->input('medium') : NULL;
         $medium = str_replace(url('/storage'.config('images.posts_storage_path')), '', $medium);
 
-        $post = new Post();
+        if($request->has('postId')){
+            $post = Post::find($request->input('postId'));
+        }   else{
+            $post = new Post();
+        }
+
         $post->title = $title;
         $post->slug = $slug;
         $post->body = $request->input('description');
@@ -178,6 +184,11 @@ class AdminPostController extends Controller
         $post->medium = $medium;
         $post->save();
 
-        return redirect('/post/'.$post->slug);
+        if($request->has('postId')){
+            return redirect('/post/edit/'.$post->slug);
+        }   else{
+            return redirect('/post/'.$post->slug);
+        }
+
     }
 }

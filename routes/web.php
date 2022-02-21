@@ -32,6 +32,7 @@ route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(
 // Post Controllers
 Route::post('/post/upload', [AdminPostController::class, 'upload'])->name('post.upload')->middleware(['auth', 'verified']);
 Route::post('/post/store', [AdminPostController::class, 'store'])->name('post.store')->middleware(['auth', 'verified']);
+Route::get('/post/edit/{post:slug}', [AdminPostController::class, 'edit'])->name('post.edit')->middleware(['auth', 'verified']);
 Route::get('/post/{post:slug}', [PostController::class, 'show'])->name('post.show');
 Route::post('/post/{post:slug}', [PostController::class, 'addComment'])->name('post.add_comment');
 
