@@ -95,17 +95,9 @@ class AdminUserController extends Controller
         foreach($ids as $id){
             // Getting all user posts;
             $posts = Post::where('user_id', $id)
-                ->get();
-
-            foreach($posts as $post){
-                // Remove post tags;
-                DB::table('post_tag')
-                    ->where('post_id', $post->id)
-                    ->delete();
-
-                // Remove user post;
-                $post->delete();
-            }
+                ->update([
+                    'user_id' => null
+                ]);
 
             // And then - remove the user;
             User::destroy($id);
