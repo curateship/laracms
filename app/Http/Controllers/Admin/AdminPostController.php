@@ -172,12 +172,12 @@ class AdminPostController extends Controller
             $post = Post::find($request->input('postId'));
         }   else{
             $post = new Post();
+            $post->user_id = Auth::id();
         }
 
         $post->title = $title;
         $post->slug = $slug;
         $post->body = $request->input('description');
-        $post->user_id = Auth::id();
         $post->category_id = $category->id;
         $post->original = $original;
         $post->thumbnail = $thumbnail;
