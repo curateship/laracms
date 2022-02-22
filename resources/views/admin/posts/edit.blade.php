@@ -148,7 +148,7 @@
         <input type="hidden" name="thumbnail" value="{{$post->thumbnail}}"/>
         <input type="hidden" name="medium" value="{{$post->medium}}"/>
 
-    <input type="file" class="file-upload__input" name="media" id="upload-file" accept="image/jpeg, image/jpg, image/png, image/gif" required>
+    <input type="file" class="file-upload__input" name="media" id="upload-file" accept="image/jpeg, image/jpg, image/png, image/gif">
 
 
     <br>
