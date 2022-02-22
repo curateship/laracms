@@ -14,7 +14,7 @@ b{
 
 
 .codex-editor svg {
-    fill: var(--color-contrast-low) !important;
+    fill: var(--color-contrast-high) !important;
     vertical-align: middle;
     max-height: 100%;
 }
@@ -27,22 +27,22 @@ b{
 
 .ce-inline-toolbar, .ce-settings{
     background-color: var(--color-bg);
-    border-color: var(--color-bg-dark);
+    border-color: var(--color-contrast-lower);
 }
 
 .ce-toolbar__plus--active, .ce-toolbar__plus:hover {
     border-color: var(--color-bg);
-    background-color: var(--color-bg-dark);
+    background-color: var(--color-contrast-lower);
 }
 
 .ce-toolbar__settings-btn--active, .ce-toolbar__settings-btn:hover {
     border-color: var(--color-bg);
-    background-color: var(--color-bg-dark);
+    background-color: var(--color-contrast-lower);
 }
 
 .ce-toolbox__button:hover{
     background-color: var(--color-bg);
-    border-color: var(--color-bg-dark);
+    border-color: var(--color-contrast-lower);
 }
 
 #js-editor-description[data-read-only="true"]{
@@ -55,11 +55,11 @@ b{
 #js-editor-description:not([data-read-only="true"]){
     /* This is style for correction original Edits.js editor "height" style */
     .codex-editor__redactor{
-        padding-bottom: 200px !important;
+        padding-bottom: 270px !important;
     }
 
     .codex-editor__loader{
-        padding-bottom: 248px !important;
+        padding: 0px !important;
     }
 
     .ce-block__content,
@@ -85,7 +85,7 @@ b{
 
         .ce-toolbar--opened{
             border-color: var(--color-bg);
-            background-color: var(--color-bg-dark);
+            background-color: var(--color-bg-light);
             box-shadow: none;
             margin-top: -3px;
         }
@@ -112,7 +112,7 @@ b{
     .codex-editor{
         svg{
             use{
-                fill: var(--color-contrast-low) !important;
+                fill: var(--color-contrast-high) !important;
             }
         }
     }
