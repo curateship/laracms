@@ -219,25 +219,19 @@
 
                       <td class="int-table__cell">Published</td>
                       <td class="int-table__cell">{{ $post->created_at->diffForHumans() }}</td>
+
+                      <!-- Action Dropdown -->
                       <td class="int-table__cell">
-                      <button class="reset int-table__menu-btn margin-left-auto js-tab-focus" data-label="Edit row" aria-controls="menu-example">
+                      <button class="reset int-table__menu-btn margin-left-auto js-tab-focus" data-label="Edit row" aria-controls="menu-example-{{$post->id}}">
                           <svg class="icon" viewBox="0 0 16 16">
                             <circle cx="8" cy="7.5" r="1.5" />
                             <circle cx="1.5" cy="7.5" r="1.5" />
                             <circle cx="14.5" cy="7.5" r="1.5" />
                           </svg>
                         </button>
-                          <!-- Action Dropdown -->
-                          <menu id="menu-example" class="menu js-menu">
-                              <li role="menuitem">
-                          <span class="menu__content js-menu__content">
-                            <svg class="icon menu__icon" aria-hidden="true" viewBox="0 0 12 12">
-                              <path d="M10.121.293a1,1,0,0,0-1.414,0L1,8,0,12l4-1,7.707-7.707a1,1,0,0,0,0-1.414Z"></path>
-                            </svg>
-                            <span>Edit</span>
-                          </span>
-                              </li>
-
+                          
+                          <menu id="menu-example-{{$post->id}}" class="menu js-menu">
+                        
                               <li role="menuitem">
                           <span class="menu__content js-menu__content">
                             <svg class="icon menu__icon" aria-hidden="true" viewBox="0 0 16 16">
