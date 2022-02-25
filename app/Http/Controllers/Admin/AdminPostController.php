@@ -152,8 +152,11 @@ class AdminPostController extends Controller
         $post_with_same_slug = Post::where('slug', $slug)->first();
 
         if ($post_with_same_slug) {
-            $duplicated_slugs = Post::select('slug')->where('slug', 'like', $slug . '%')->orderBy('slug', 'desc')->get();
-            $slug = Post::getNewSlug($slug, $duplicated_slugs);
+            // Ignore, if we have same post with this slug;
+            if($request->has('postId') && $request->input('postId') != $post_with_same_slug->id){
+                $duplicated_slugs = Post::select('slug')->where('slug', 'like', $slug . '%')->orderBy('slug', 'desc')->get();
+                $slug = Post::getNewSlug($slug, $duplicated_slugs);
+            }
         }
 
         $category = Category::where('name', $request->input('category'))
@@ -170,6 +173,11 @@ class AdminPostController extends Controller
 
         if($request->has('postId')){
             $post = Post::find($request->input('postId'));
+
+            // Removing old tags links;
+            DB::table('post_tag')
+                ->where('post_id', $post->id)
+                ->delete();
         }   else{
             $post = new Post();
             $post->user_id = Auth::id();
@@ -183,6 +191,33 @@ class AdminPostController extends Controller
         $post->thumbnail = $thumbnail;
         $post->medium = $medium;
         $post->save();
+
+        // Tags;
+        foreach ($request->input('tags') as $tag_input) {
+            if(is_numeric($tag_input)){
+                $tag = Tag::where('id', $tag_input)
+                    ->first();
+            }   else{
+                $tag = Tag::where('name', $tag_input)
+                    ->first();
+            }
+
+            // If tag doesn't exist yet, create it;
+            if ($tag == null) {
+                $tag = new Tag;
+                $tag->name = $tag_input;
+                $tag->save();
+            }
+
+            // Insert post_tag;
+            DB::table('post_tag')
+                ->insert([
+                    'post_id' => $post->id,
+                    'tag_id' => $tag->id,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ]);
+        }
 
         if($request->has('postId')){
             return redirect('/post/edit/'.$post->slug);

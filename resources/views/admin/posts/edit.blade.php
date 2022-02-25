@@ -134,6 +134,18 @@
     </div>
     <!-- Select Category Dropdown Autocomplete END -->
 
+      <!-- Tags -->
+      <div class="margin-bottom-sm tags-container">
+          <label>
+              <select name="tags[]" id="tags_pills" class="site-tag-pills form-control" multiple style="display: none" data-placeholder="Select a Tags">
+                  @foreach($post->tags() as $tag)
+                      <option value="{{$tag->id}}" selected>{{$tag->name}}</option>
+                  @endforeach()
+              </select>
+          </label>
+      </div>
+      <!-- Tags END -->
+
     <!-- Image Upload -->
     <div class="file-upload inline-block margin-bottom-sm">
     <label for="upload-file" class="file-upload__label btn btn--primary">
