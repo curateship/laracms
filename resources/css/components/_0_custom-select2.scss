@@ -3,6 +3,11 @@
     position: relative;
 }
 
+.no-tags{
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
 /* Changed */
 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
     font-size: 22px;
