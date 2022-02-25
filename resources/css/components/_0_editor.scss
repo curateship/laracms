@@ -1,11 +1,43 @@
+.image-tool--withBackground .image-tool__image {
+    background: transparent !important;
+}
+
+.image-tool__caption, .embed-tool__caption{
+    display: none;
+}
+
 b{
     font-weight: bold;
 }
+
 
 .enlil-article{
     p{
         padding: 0.7em 0;
     }
+}
+
+.cdx-notify{
+    display: none;
+}
+
+.cdx-button{
+    background-color: var(--color-bg) !important;
+    border-color: var(--color-contrast-lower) !important;
+}
+
+.ce-conversion-toolbar{
+    background-color: var(--color-bg) !important;
+    border-color: var(--color-contrast-lower) !important;
+}
+
+.ce-inline-toolbar__dropdown .icon--toggler-down{
+    margin-top: 7px;
+}
+
+.ce-inline-toolbar__dropdown:hover{
+    background-color: var(--color-bg-light) !important;
+    border-color: var(--color-contrast-lower);
 }
 
 .ce-paragraph[data-placeholder]:empty::before {

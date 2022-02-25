@@ -13,7 +13,7 @@
                 <a href="{{ $items->url(1) }}" class="pagination__item {{ ($items->currentPage() == 1) ? ' pagination__item--selected' : '' }}" aria-label="Go to page 1">1</a>
             </li>
         @endif
-        @if($comments->currentPage() > 4)
+        @if($posts->currentPage() > 4)
             <li class="display@sm" aria-hidden="true">
                 <span class="pagination__item pagination__item--ellipsis">...</span>
             </li>

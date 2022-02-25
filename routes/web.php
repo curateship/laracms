@@ -30,7 +30,7 @@ route::get('/', [IndexController::class, 'index'])->name('index');
 route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(['auth', 'verified']);
 
 // Post Controllers
-Route::post('/post/upload', [AdminPostController::class, 'upload'])->name('post.upload')->middleware(['auth', 'verified']);
+Route::post('/post/upload/{type}', [AdminPostController::class, 'upload'])->name('post.upload')->middleware(['auth', 'verified']);
 Route::post('/post/store', [AdminPostController::class, 'store'])->name('post.store')->middleware(['auth', 'verified']);
 Route::get('/post/edit/{post:slug}', [AdminPostController::class, 'edit'])->name('post.edit')->middleware(['auth', 'verified']);
 Route::get('/post/{post:slug}', [PostController::class, 'show'])->name('post.show');

@@ -19,11 +19,11 @@
         e.preventDefault()
 
         let formData = new FormData()
-        formData.append('file', $('#upload-file')[0].files[0])
+        formData.append('image', $('#upload-file')[0].files[0])
         formData.append('_token', $('meta[name="csrf-token"]').attr('content'))
 
         $.ajax({
-            url : '/post/upload',
+            url : '/post/upload/main',
             type : 'POST',
             data : formData,
             processData: false,  // tell jQuery not to process the data
@@ -59,6 +59,30 @@
             holder: 'js-editor-description',
             placeholder: 'Tell your story...',
             autofocus: true,
+            tools: {
+                header: Header,
+                embed: {
+                    class: Embed,
+                    inlineToolbar: true,
+                    config: {
+                        services: {
+                            youtube: true,
+                            coub: true
+                        }
+                    }
+                },
+                image: {
+                    class: window.ImageTool,
+                    config: {
+                        additionalRequestHeaders: {
+                            "X-CSRF-TOKEN": '{{csrf_token()}}'
+                        },
+                        endpoints: {
+                            byFile: '/post/upload/editor',
+                        }
+                    }
+                },
+            },
             readOnly,
             data
         });
