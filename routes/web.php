@@ -45,14 +45,14 @@ Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->
 Route::get('/categories', [CategoryController::class, 'index'])->name('theme.default.archive.categories.index');
 
 // Tags Controllers
+Route::get('/tags/search', [TagController::class, 'search'])->name('tags.search');
 Route::get('/tags/{tag:name}', [TagController::class, 'show'])->name('theme.default.archive.tags.show');
 
-
-/*
-|--------------------------------------------------------------------------
-| // Admin Routes
-|--------------------------------------------------------------------------
-*/
+    /*
+    |--------------------------------------------------------------------------
+    | // Admin Routes
+    |--------------------------------------------------------------------------
+    */
 
 
 // Admin Controllers

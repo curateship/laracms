@@ -143,6 +143,93 @@
     $(document).on('click', '#accept-delete-posts', function(){
         deletePostsArray($('#delete-posts-list').val().split(','))
     })
+
+    /* Tags */
+
+    $('.site-tag-pills').each(function(){
+        $(this).attr('data-post-id', 123)
+        select2ForTags(this);
+    });
+
+    function select2ForTags(selector){
+        const postId = $(selector).attr('data-post-id')
+        const placeholder = $(selector).attr('data-placeholder')
+
+        $(selector).select2({
+            ajax: {
+                url: '{{route('tags.search')}}',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        search: params.term,
+                        postId: postId
+                    }
+                }
+            },
+            placeholder: placeholder,
+            tags: true,
+            tokenSeparators: [","],
+            matcher: matchCustom,
+            minimumInputLength: 2
+        }).on('select2:opening', function(e){
+            var $searchfield = $(selector).parent().find('.select2-search__field');
+
+            if ($searchfield.val() == '')
+                return false;
+            else
+                return true;
+        }).on('select2:open', function(e){
+            // $('.select2-container--open .select2-dropdown--below').css('display','none');
+        }).on('select2:select', function(e) {
+            validateCustomSelect(selector);
+        }).on('select2:unselect', function(e) {
+            validateCustomSelect(selector);
+        });
+    }
+
+    function matchCustom(params, data) {
+        // If there are no search terms, return null to prevent show all tags
+        if ($.trim(params.term) === '') {
+            return null;
+        }
+
+        // Do not display the item if there is no 'text' property
+        if (typeof data.text === 'undefined') {
+            return null;
+        }
+
+        // `params.term` should be the term that is used for searching
+        // `data.text` is the text that is displayed for the data object
+        if (data.text.toLowerCase().indexOf(params.term) > -1) {
+            var modifiedData = $.extend({}, data, true);
+
+            // You can return modified objects from here
+            // This includes matching the `children` how you want in nested data sets
+            return modifiedData;
+        }
+
+        // Return `null` if the term should not be displayed
+        return null;
+    }
+
+    function validateCustomSelect(selector) {
+        if ($(selector).parents('.post-tag-wrp').length > 0) {
+            $form = $(selector).parents('form')[0];
+            validatePostTagFields($form);
+
+        } else {
+            if ($(selector).prop('required')) { // only when set as required field
+                if ($(selector).select2('data').length == 0) {
+                    $(selector).addClass('form-control--error');
+                    $(selector).siblings('.select2').find('.select2-selection').addClass('form-control--error');
+
+                } else {
+                    $(selector).removeClass('form-control--error');
+                    $(selector).siblings('.select2').find('.select2-selection').removeClass('form-control--error');
+                }
+            }
+        }
+    }
 }());
 </script>
 @endauth
