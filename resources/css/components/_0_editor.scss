@@ -21,6 +21,11 @@ b{
     display: none;
 }
 
+.ce-inline-tool:hover {
+    background-color: var(--color-bg-light) !important;
+    border-color: var(--color-contrast-lower);
+}
+
 .cdx-button{
     background-color: var(--color-bg) !important;
     border-color: var(--color-contrast-lower) !important;
@@ -33,6 +38,10 @@ b{
 
 .ce-inline-toolbar__dropdown .icon--toggler-down{
     margin-top: 7px;
+}
+
+.ce-inline-toolbar__dropdown{
+    padding: 0 1px 0 10px !important;
 }
 
 .ce-inline-toolbar__dropdown:hover{
