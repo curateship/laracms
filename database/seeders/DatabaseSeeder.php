@@ -2,7 +2,12 @@
 
 namespace Database\Seeders;
 
-use App;
+use App\Models\Category;
+use App\Models\Comment;
+use App\Models\Post;
+use App\Models\Role;
+use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
 
@@ -11,35 +16,21 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-        // Disable foreign key constraints for users and enable it again.
         Schema::disableForeignKeyConstraints();
-
-        \App\Models\User::truncate();
-        \App\Models\Role::truncate();
-        \App\Models\Category::truncate();
-        \App\Models\Post::truncate();
-        \App\Models\Tag::truncate();
-        \App\Models\Comment::truncate();
+        User::truncate();
+        Role::truncate();
+        Category::truncate();
+        Post::truncate();
+        Comment::truncate();
+        Tag::truncate();
 
         Schema::enableForeignKeyConstraints();
-
-        // \App\Models\User::factory(10)->create();
         $this->call(RoleSeeder::class);
         $this->call(RoleUserSeeder::class);
-
-        \App\Models\Category::factory(10)->create();
-        $posts = \App\Models\Post::factory(20)->create();
-        \App\Models\Comment::factory(10)->create();
-        \App\Models\Tag::factory(10)->create();
-
-        foreach($posts as $post)
-        {
-            $tags_ids = [];
-            $tags_ids[] = \App\Models\Tag::all()->random()->id;
-            $tags_ids[] = \App\Models\Tag::all()->random()->id;
-            $tags_ids[] = \App\Models\Tag::all()->random()->id;
-            $post->tags()->sync( $tags_ids );
-
-        }
+        Category::factory(10)->create();
+        Post::factory(20)->create();
+        Comment::factory(10)->create();
+        Tag::factory(10)->create();
+        $this->call(PostTagsSeeder::class);
     }
 }

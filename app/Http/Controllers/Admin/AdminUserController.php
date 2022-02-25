@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 // Others
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
 // Supports
@@ -93,8 +94,14 @@ class AdminUserController extends Controller
         $ids = explode(',', $ids);
 
         foreach($ids as $id){
-            // Getting all user posts;
-            $posts = Post::where('user_id', $id)
+            // Updating all user posts;
+            Post::where('user_id', $id)
+                ->update([
+                    'user_id' => null
+                ]);
+
+            // Updating all user comments;
+            Comment::where('user_id', $id)
                 ->update([
                     'user_id' => null
                 ]);
