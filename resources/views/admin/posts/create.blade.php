@@ -2,6 +2,9 @@
 
 @push('custom-scripts')
     @include('admin.posts.script-editor-js')
+    @include('admin.posts.script-editor-js-image')
+    @include('admin.posts.script-editor-js-header')
+    @include('admin.posts.script-editor-js-embed')
     @include('admin.posts.script-js')
 @endpush
 
@@ -156,7 +159,7 @@
     <input type="hidden" name="thumbnail" value=""/>
     <input type="hidden" name="medium" value=""/>
 
-    <input type="file" class="file-upload__input" name="media" id="upload-file" accept="image/jpeg, image/jpg, image/png, image/gif" required>
+    <input type="file" class="file-upload__input" name="image" id="upload-file" accept="image/jpeg, image/jpg, image/png, image/gif" required>
 
 
     <br>

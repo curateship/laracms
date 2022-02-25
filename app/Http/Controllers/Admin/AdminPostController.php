@@ -91,9 +91,9 @@ class AdminPostController extends Controller
         }
     }
 
-    public function upload(Request $request){
+    public function upload($upload_type, Request $request){
         $path = '/public'.config('images.posts_storage_path');
-        $mime_type = $request->file('file')->getMimeType();
+        $mime_type = $request->file('image')->getMimeType();
         $media_path = storage_path() . "/app";
         $media = [
             'original', 'medium', 'thumbnail'
@@ -107,10 +107,10 @@ class AdminPostController extends Controller
         unset($media['original']);
 
         // Save original media file in file system;
-        $original = request()->file('file')->store($path."/original");
-
+        $original = request()->file('image')->getClientOriginalName();
         $thumbnail_medium_name = Str::random(27) . '.' . Arr::last(explode('.', $original));
 
+        $original = request()->file('image')->storeAs($path."/original", $thumbnail_medium_name);
         foreach($media as $type_name => $type){
             if ($mime_type == 'image/gif') {
                 /* GIF */
@@ -125,7 +125,7 @@ class AdminPostController extends Controller
                 $thumbnail_medium->writeImages($media_path . "$path/$type_name/" . $thumbnail_medium_name, true);
             }   else{
                 /* Other Image types */
-                $thumbnail_medium = \Intervention\Image\Facades\Image::make(request()->file('file'));
+                $thumbnail_medium = \Intervention\Image\Facades\Image::make(request()->file('image'));
                 $thumbnail_medium->resize($type['width'], $type['height'], function($constraint){
                     $constraint->aspectRatio();
                 });
@@ -145,7 +145,18 @@ class AdminPostController extends Controller
 
         $media['original']['path'] = url('/').Storage::url($original);
 
-        return $media;
+        if($upload_type == 'main'){
+            return $media;
+        }
+
+        if($upload_type == 'editor'){
+            return [
+                'success' => 1,
+                'file' => [
+                    'url' => $media['medium']['path']
+                ]
+            ];
+        }
     }
 
     // Store or update;

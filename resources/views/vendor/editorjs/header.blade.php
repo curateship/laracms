@@ -2,11 +2,8 @@
     if (property_exists($block, 'level')) {
         $level = $block->{'level'};
     }
-    if ($block->alignment == 'center') {
-        $centerClass = 'text-center';
-    } else {
-        $centerClass = '';
-    }
+
+    $centerClass = '';
 
     switch ($level) {
         case '1':
