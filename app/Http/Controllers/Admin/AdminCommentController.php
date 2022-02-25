@@ -17,13 +17,17 @@ class AdminCommentController extends Controller
     ];
 
     // Index
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.comments.index', [
-            'comments' => Comment::latest()->paginate(50)
-        ]);
+        if($request->has('sortBy') && $request->input('sortBy') !== 'role'){
+            $comments = Comment::orderBy($request->input('sortBy'), $request->input('sortDesc'));
+        }   else{
+            $comments = Comment::orderBy('created_at', 'DESC');
+        }
+
+        return view('admin.comments.index', ['comments' => $comments->paginate(10)]);
     }
-    
+
     // Create
     public function create()
     {
@@ -58,11 +62,21 @@ class AdminCommentController extends Controller
         $comment->update($validated);
         return redirect()->route('admin.comments.edit', $comment)->with('success', 'Comment has been updated.');
     }
-    
+
     // Destroy
-    public function destroy(Comment $comment)
+    public function destroy(string $ids, Request $request)
     {
-        $comment->delete();
-        return redirect()->route('admin.comments.index')->with('success', 'Comment has been deleted.');
+        $ids = explode(',', $ids);
+
+        foreach($ids as $id){
+            // And then - remove the comment;
+            Comment::destroy($id);
+        }
+
+        if(count($ids) > 1){
+            $request->session()->flash('success', 'You have deleted all selected comments');
+        }   else{
+            $request->session()->flash('success', 'You have deleted the comment');
+        }
     }
 }
