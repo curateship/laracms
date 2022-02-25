@@ -193,30 +193,32 @@ class AdminPostController extends Controller
         $post->save();
 
         // Tags;
-        foreach ($request->input('tags') as $tag_input) {
-            if(is_numeric($tag_input)){
-                $tag = Tag::where('id', $tag_input)
-                    ->first();
-            }   else{
-                $tag = Tag::where('name', $tag_input)
-                    ->first();
-            }
+        if($request->has('tags')){
+            foreach ($request->input('tags') as $tag_input) {
+                if(is_numeric($tag_input)){
+                    $tag = Tag::where('id', $tag_input)
+                        ->first();
+                }   else{
+                    $tag = Tag::where('name', $tag_input)
+                        ->first();
+                }
 
-            // If tag doesn't exist yet, create it;
-            if ($tag == null) {
-                $tag = new Tag;
-                $tag->name = $tag_input;
-                $tag->save();
-            }
+                // If tag doesn't exist yet, create it;
+                if ($tag == null) {
+                    $tag = new Tag;
+                    $tag->name = $tag_input;
+                    $tag->save();
+                }
 
-            // Insert post_tag;
-            DB::table('post_tag')
-                ->insert([
-                    'post_id' => $post->id,
-                    'tag_id' => $tag->id,
-                    'created_at' => date('Y-m-d H:i:s'),
-                    'updated_at' => date('Y-m-d H:i:s'),
-                ]);
+                // Insert post_tag;
+                DB::table('post_tag')
+                    ->insert([
+                        'post_id' => $post->id,
+                        'tag_id' => $tag->id,
+                        'created_at' => date('Y-m-d H:i:s'),
+                        'updated_at' => date('Y-m-d H:i:s'),
+                    ]);
+            }
         }
 
         if($request->has('postId')){

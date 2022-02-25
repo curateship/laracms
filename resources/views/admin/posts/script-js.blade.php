@@ -76,6 +76,20 @@
             console.log('Saving failed: ', error)
         });
 
+        const tagsCount = $('.select2-selection__choice').length
+
+        if(tagsCount === 0){
+            const searchField = $('.select2-search__field')
+            searchField.addClass('no-tags')
+            setTimeout(function(){
+                searchField.removeClass('no-tags')
+            }, 700)
+
+            $('.select2.select2-container').addClass('select2-container--focus')
+
+            return
+        }
+
         setTimeout(function(){
             $('#new-post-form')[0].submit();
         }, 200)

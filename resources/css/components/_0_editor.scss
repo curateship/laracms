@@ -55,11 +55,12 @@ b{
 #js-editor-description:not([data-read-only="true"]){
     /* This is style for correction original Edits.js editor "height" style */
     .codex-editor__redactor{
-        padding-bottom: 270px !important;
+        padding-bottom: 100px !important;
     }
 
+    /* .codex-editor__redactor padding + 48px */
     .codex-editor__loader{
-        padding: 0px !important;
+        height: 148px !important;
     }
 
     .ce-block__content,
