@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 // Others
 use App\Http\Controllers\Controller;
+use App\Models\Comment;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
@@ -73,6 +74,10 @@ class AdminPostController extends Controller
             // Remove tags links;
             DB::table('post_tag')
                 ->where('post_id', $id)
+                ->delete();
+
+            // Remove all comments;
+            Comment::where('post_id', $id)
                 ->delete();
 
             // And then - remove the post;
