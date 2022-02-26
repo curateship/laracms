@@ -35,9 +35,13 @@ class Post extends Model
 	    return $this->belongsTo(User::class);
     }
 
-    public function tags()
+    public function tags($category_id = null)
     {
-	    return $this->belongsToMany(Tag::class)->get();
+        if($category_id == null){
+            return $this->belongsToMany(Tag::class)->get();
+        }   else{
+            return $this->belongsToMany(Tag::class)->where('category_id', $category_id)->get();
+        }
     }
 
     public function comments()
