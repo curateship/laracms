@@ -3,6 +3,12 @@
 .image-tool--withBackground .image-tool__image {
     background: transparent !important;
 }
+.ce-inline-tool--active{
+    svg, use{
+        fill: var(--color-primary) !important;
+    }
+}
+
 
 .site-tag-pills{
     display: none;
@@ -117,10 +123,14 @@ b{
 }
 
 
-.codex-editor svg {
-    fill: var(--color-contrast-high) !important;
-    vertical-align: middle;
-    max-height: 100%;
+.ce-inline-tool:not(.ce-inline-tool--active) {
+    svg{
+        vertical-align: middle;
+        max-height: 100%;
+        use{
+            fill: var(--color-contrast-high) !important;
+        }
+    }
 }
 
 .ce-block--selected{
@@ -212,13 +222,5 @@ b{
     .ce-toolbar__actions{
         right: 5px;
         margin-top: 4px;
-    }
-
-    .codex-editor{
-        svg{
-            use{
-                fill: var(--color-contrast-high) !important;
-            }
-        }
     }
 }
