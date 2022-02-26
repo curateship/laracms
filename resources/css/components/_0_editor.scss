@@ -16,12 +16,12 @@
     iframe{
         height: auto !important;
 
-        @include breakpoint(sm) {
+        @include breakpoint(xs) {
             height: 400px !important;
         }
 
         @include breakpoint(xl) {
-            height: 600px !important;
+            height: 480px !important;
         }
     }
 }
