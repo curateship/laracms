@@ -12,6 +12,11 @@
     width: 100%;
 }
 
+.cdx-block::selection {
+    background: #04499c;
+    color: white;
+}
+
 .article-enlil-editor-embed{
     iframe{
         height: auto !important;
