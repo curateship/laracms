@@ -4,6 +4,10 @@
     background: transparent !important;
 }
 
+.site-tag-pills{
+    display: none;
+}
+
 .image-tool__caption, .embed-tool__caption{
     display: none;
 }
@@ -12,21 +16,39 @@
     width: 100%;
 }
 
+.ce-block__content{
+    h1::selection, h2::selection, h3::selection, h4::selection, h5::selection, h6::selection{
+        background: var(--color-contrast-lower) !important;
+        color: var(--color-contrast-high) !important;
+    }
+}
+
 .cdx-block{
     span,
     b::selection, b[style*="background-color"],
     i::selection, i[style*="background-color"]{
-        background: #04499c !important;
-        color: white !important;
+        background: var(--color-contrast-lower) !important;
+        color: var(--color-contrast-high) !important;
     }
 }
 
 .cdx-block::selection {
-    background: #04499c;
-    color: white;
+    background: var(--color-contrast-lower);
+    color: var(--color-contrast-high);
 }
 
 .ce-inline-tool-input.ce-inline-tool-input--showed{
+    background-color: var(--color-bg) !important;
+    border-color: var(--color-contrast-lower) !important;
+    color: white !important;
+}
+
+.ce-conversion-tool--focused{
+    background-color: var(--color-bg-light) !important;
+    border-color: var(--color-contrast-lower);
+}
+
+.ce-conversion-tool__icon{
     background-color: var(--color-bg) !important;
     border-color: var(--color-contrast-lower) !important;
     color: white !important;
