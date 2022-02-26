@@ -123,7 +123,7 @@ b{
 }
 
 
-.ce-inline-tool:not(.ce-inline-tool--active) {
+.ce-inline-tool:not(.ce-inline-tool--active), .ce-toolbar__settings-btn, .ce-toolbar__plus, .ce-settings__button{
     svg{
         vertical-align: middle;
         max-height: 100%;
@@ -152,6 +152,11 @@ b{
 .ce-toolbar__settings-btn--active, .ce-toolbar__settings-btn:hover {
     border-color: var(--color-bg);
     background-color: var(--color-contrast-lower);
+}
+
+.ce-settings__button:hover{
+    border-color: var(--color-bg);
+    background-color: var(--color-bg-light);
 }
 
 .ce-toolbox__button:hover{
