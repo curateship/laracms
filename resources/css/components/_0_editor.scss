@@ -12,9 +12,24 @@
     width: 100%;
 }
 
+.cdx-block{
+    span,
+    b::selection, b[style*="background-color"],
+    i::selection, i[style*="background-color"]{
+        background: #04499c !important;
+        color: white !important;
+    }
+}
+
 .cdx-block::selection {
     background: #04499c;
     color: white;
+}
+
+.ce-inline-tool-input.ce-inline-tool-input--showed{
+    background-color: var(--color-bg) !important;
+    border-color: var(--color-contrast-lower) !important;
+    color: white !important;
 }
 
 .article-enlil-editor-embed{
