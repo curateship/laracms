@@ -1,5 +1,11 @@
 @use '../base' as *;
 
+.ce-inline-toolbar__dropdown-content{
+    svg{
+        max-width: 12px;
+    }
+}
+
 .image-tool--withBackground .image-tool__image {
     background: transparent !important;
 }
