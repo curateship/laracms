@@ -16,14 +16,14 @@
     span,
     b::selection, b[style*="background-color"],
     i::selection, i[style*="background-color"]{
-        background: #04499c !important;
-        color: white !important;
+        background: var(--color-contrast-lower) !important;
+        color: var(--color-contrast-lower) !important;
     }
 }
 
 .cdx-block::selection {
-    background: #04499c;
-    color: white;
+    background: var(--color-contrast-lower);
+    color: var(--color-contrast-lower);
 }
 
 .ce-inline-tool-input.ce-inline-tool-input--showed{
