@@ -17,13 +17,13 @@
     b::selection, b[style*="background-color"],
     i::selection, i[style*="background-color"]{
         background: var(--color-contrast-lower) !important;
-        color: var(--color-contrast-lower) !important;
+        color: var(--color-contrast-high) !important;
     }
 }
 
 .cdx-block::selection {
     background: var(--color-contrast-lower);
-    color: var(--color-contrast-lower);
+    color: var(--color-contrast-high);
 }
 
 .ce-inline-tool-input.ce-inline-tool-input--showed{
