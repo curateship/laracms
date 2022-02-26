@@ -9,6 +9,24 @@
 .image-tool--withBackground .image-tool__image {
     background: transparent !important;
 }
+
+.cdx-settings-button{
+    svg, use{
+        fill: var(--color-contrast-high) !important;
+    }
+}
+
+.cdx-settings-button:hover{
+    background: var(--color-contrast-lower) !important;
+    color: var(--color-contrast-high) !important;
+}
+
+.cdx-settings-button.cdx-settings-button--active{
+    svg, use{
+        fill: var(--color-primary) !important;
+    }
+}
+
 .ce-inline-tool--active{
     svg, use{
         fill: var(--color-primary) !important;
@@ -163,6 +181,12 @@ b{
 .ce-settings__button:hover{
     border-color: var(--color-bg);
     background-color: var(--color-bg-light);
+}
+
+.ce-toolbox__button{
+    background-color: var(--color-bg) !important;
+    border-color: var(--color-contrast-lower) !important;
+    color: var(--color-contrast-medium);
 }
 
 .ce-toolbox__button:hover{
