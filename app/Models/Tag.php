@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property float|int|mixed|string $name
+ * @property mixed $category_id
  */
 class Tag extends Model
 {

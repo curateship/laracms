@@ -2,10 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\TagsCategories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class TagFactory extends Factory
+class TagsCategoriesFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -15,8 +14,7 @@ class TagFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word(),
-            'category_id' => TagsCategories::all()->random()->id
+            'name' => $this->faker->unique()->word()
         ];
     }
 }

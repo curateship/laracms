@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use EditorJS\EditorJSException;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 use SaperX\LaravelEditorjsHtml\EditorJSHtml;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -33,9 +35,13 @@ class Post extends Model
 	    return $this->belongsTo(User::class);
     }
 
-    public function tags()
+    public function tags($category_id = null)
     {
-	    return $this->belongsToMany(Tag::class)->get();
+        if($category_id == null){
+            return $this->belongsToMany(Tag::class)->get();
+        }   else{
+            return $this->belongsToMany(Tag::class)->where('category_id', $category_id)->get();
+        }
     }
 
     public function comments()
@@ -74,5 +80,33 @@ class Post extends Model
     {
       $convertToHtml = new EditorJSHtml($this->body);
       return html_entity_decode($convertToHtml->render());
+  }
+
+  public function removePostImages($type){
+      $path = '/public'.config('images.posts_storage_path');
+
+        switch($type){
+            // Main;
+            case 'main':
+                Storage::delete($path.$this->original['original']);
+                Storage::delete($path.$this->medium);
+                Storage::delete($path.$this->thumbnail);
+                break;
+
+            // In body images;
+            case 'body':
+                $body_array = json_decode($this->body, true);
+                foreach($body_array['blocks'] as $block){
+                    if($block['type'] == 'image'){
+                        $url_array = explode('/', $block['data']['file']['url']);
+                        $file_name = Arr::last($url_array);
+
+                        Storage::delete($path.'/original/'.$file_name);
+                        Storage::delete($path.'/medium/'.$file_name);
+                        Storage::delete($path.'/thumbnail/'.$file_name);
+                    }
+                }
+                break;
+        }
   }
 }

@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use App\Models\Tag;
+use App\Models\TagsCategories;
 use Illuminate\Http\Request;
 
 // Models
@@ -40,7 +41,7 @@ class AdminPostController extends Controller
     public function create()
     {
         return view('admin.posts.create', [
-        'categories' => Category::pluck('name', 'id')
+            'categories' => Category::pluck('name', 'id')
         ]);
     }
 
@@ -79,6 +80,11 @@ class AdminPostController extends Controller
             // Remove all comments;
             Comment::where('post_id', $id)
                 ->delete();
+
+            // Remove post images;
+            $post = Post::find($id);
+            $post->removePostImages('main');
+            $post->removePostImages('body');
 
             // And then - remove the post;
             Post::destroy($id);
@@ -157,6 +163,8 @@ class AdminPostController extends Controller
                 ]
             ];
         }
+
+         return null;
     }
 
     // Store or update;
@@ -169,7 +177,7 @@ class AdminPostController extends Controller
 
         if ($post_with_same_slug) {
             // Ignore, if we have same post with this slug;
-            if($request->has('postId') && $request->input('postId') != $post_with_same_slug->id){
+            if(!$request->has('postId') || ($request->has('postId') && $request->input('postId') != $post_with_same_slug->id)){
                 $duplicated_slugs = Post::select('slug')->where('slug', 'like', $slug . '%')->orderBy('slug', 'desc')->get();
                 $slug = Post::getNewSlug($slug, $duplicated_slugs);
             }
@@ -190,10 +198,46 @@ class AdminPostController extends Controller
         if($request->has('postId')){
             $post = Post::find($request->input('postId'));
 
-            // Removing old tags links;
-            DB::table('post_tag')
-                ->where('post_id', $post->id)
-                ->delete();
+            // If user was attached new image - we must remove old file;
+            if($post->original != $original){
+                $post->removePostImages('main');
+            }
+
+            // If body was update;
+            if($post->body != $request->input('description')){
+                $path = '/public'.config('images.posts_storage_path');
+
+                // Get current body images;
+                $current_images = [];
+
+                $body_array = json_decode($post->body, true);
+                foreach($body_array['blocks'] as $block){
+                    if($block['type'] == 'image'){
+                        $url_array = explode('/', $block['data']['file']['url']);
+                        $current_images[] = Arr::last($url_array);
+                    }
+                }
+
+                // New body images;
+                $new_images = [];
+                $body_array = json_decode($request->input('description'), true);
+                foreach($body_array['blocks'] as $block){
+                    if($block['type'] == 'image'){
+                        $url_array = explode('/', $block['data']['file']['url']);
+                        $new_images[] = Arr::last($url_array);
+                    }
+                }
+
+                // If we do not have old image in new list - delete this file;
+                foreach($current_images as $image){
+                    if(!in_array($image, $new_images)){
+                        Storage::delete($path.'/original/'.$image);
+                        Storage::delete($path.'/medium/'.$image);
+                        Storage::delete($path.'/thumbnail/'.$image);
+                    }
+                }
+            }
+
         }   else{
             $post = new Post();
             $post->user_id = Auth::id();
@@ -209,31 +253,42 @@ class AdminPostController extends Controller
         $post->save();
 
         // Tags;
-        if($request->has('tags')){
-            foreach ($request->input('tags') as $tag_input) {
-                if(is_numeric($tag_input)){
-                    $tag = Tag::where('id', $tag_input)
-                        ->first();
-                }   else{
-                    $tag = Tag::where('name', $tag_input)
-                        ->first();
-                }
+        // Removing old tags links;
+        DB::table('post_tag')
+            ->where('post_id', $post->id)
+            ->delete();
 
-                // If tag doesn't exist yet, create it;
-                if ($tag == null) {
-                    $tag = new Tag;
-                    $tag->name = $tag_input;
-                    $tag->save();
-                }
+        foreach (TagsCategories::all() as $tag_category) {
+            if (request()->has('tag_category_' . $tag_category->id)) {
 
-                // Insert post_tag;
-                DB::table('post_tag')
-                    ->insert([
-                        'post_id' => $post->id,
-                        'tag_id' => $tag->id,
-                        'created_at' => date('Y-m-d H:i:s'),
-                        'updated_at' => date('Y-m-d H:i:s'),
-                    ]);
+                $tags_input = request('tag_category_' . $tag_category->id);
+
+                foreach ($tags_input as $tag_input) {
+                    if(is_numeric($tag_input)){
+                        $tag = Tag::where('id', $tag_input)
+                            ->first();
+                    }   else{
+                        $tag = Tag::where('name', $tag_input)
+                            ->first();
+                    }
+
+                    // If tag doesn't exist yet, create it;
+                    if ($tag == null) {
+                        $tag = new Tag;
+                        $tag->name = $tag_input;
+                        $tag->category_id = $tag_category->id;
+                        $tag->save();
+                    }
+
+                    // Insert post_tag;
+                    DB::table('post_tag')
+                        ->insert([
+                            'post_id' => $post->id,
+                            'tag_id' => $tag->id,
+                            'created_at' => date('Y-m-d H:i:s'),
+                            'updated_at' => date('Y-m-d H:i:s'),
+                        ]);
+                }
             }
         }
 

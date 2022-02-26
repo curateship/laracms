@@ -137,11 +137,21 @@
     <!-- Select Category Dropdown Autocomplete END -->
 
       <!-- Tags -->
+      @foreach(\App\Models\TagsCategories::all() as $key=> $tag_category)
+          <div class="grid margin-bottom-sm">
+              <label class="form-label margin-bottom-xxxs" for="tag_category_{{ $tag_category->id }}">
+                  Add {{ $tag_category->name }}
+              </label>
+              <select name="tag_category_{{ $tag_category->id }}[]" id="tag_category_{{ $tag_category->id }}" class="site-tag-pills" data-id="{{ $tag_category->id }}" data-placeholder="Select a Tags for {{ $tag_category->name }}" multiple></select>
+          </div>
+      @endforeach
+      <!--
       <div class="margin-bottom-sm tags-container">
           <label>
               <select name="tags[]" id="tags_pills" class="site-tag-pills form-control" multiple style="display: none" data-placeholder="Select a Tags"></select>
           </label>
       </div>
+      -->
       <!-- Tags END -->
 
 
