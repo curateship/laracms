@@ -80,6 +80,11 @@ class AdminPostController extends Controller
             Comment::where('post_id', $id)
                 ->delete();
 
+            // Remove post images;
+            $post = Post::find($id);
+            $post->removePostImages('main');
+            $post->removePostImages('body');
+
             // And then - remove the post;
             Post::destroy($id);
         }
@@ -190,10 +195,46 @@ class AdminPostController extends Controller
         if($request->has('postId')){
             $post = Post::find($request->input('postId'));
 
-            // Removing old tags links;
-            DB::table('post_tag')
-                ->where('post_id', $post->id)
-                ->delete();
+            // If user was attached new image - we must remove old file;
+            if($post->original != $original){
+                $post->removePostImages('main');
+            }
+
+            // If body was update;
+            if($post->body != $request->input('description')){
+                $path = '/public'.config('images.posts_storage_path');
+
+                // Get current body images;
+                $current_images = [];
+
+                $body_array = json_decode($post->body, true);
+                foreach($body_array['blocks'] as $block){
+                    if($block['type'] == 'image'){
+                        $url_array = explode('/', $block['data']['file']['url']);
+                        $current_images[] = Arr::last($url_array);
+                    }
+                }
+
+                // New body images;
+                $new_images = [];
+                $body_array = json_decode($request->input('description'), true);
+                foreach($body_array['blocks'] as $block){
+                    if($block['type'] == 'image'){
+                        $url_array = explode('/', $block['data']['file']['url']);
+                        $new_images[] = Arr::last($url_array);
+                    }
+                }
+
+                // If we do not have old image in new list - delete this file;
+                foreach($current_images as $image){
+                    if(!in_array($image, $new_images)){
+                        Storage::delete($path.'/original/'.$image);
+                        Storage::delete($path.'/medium/'.$image);
+                        Storage::delete($path.'/thumbnail/'.$image);
+                    }
+                }
+            }
+
         }   else{
             $post = new Post();
             $post->user_id = Auth::id();
@@ -210,6 +251,11 @@ class AdminPostController extends Controller
 
         // Tags;
         if($request->has('tags')){
+            // Removing old tags links;
+            DB::table('post_tag')
+                ->where('post_id', $post->id)
+                ->delete();
+
             foreach ($request->input('tags') as $tag_input) {
                 if(is_numeric($tag_input)){
                     $tag = Tag::where('id', $tag_input)
