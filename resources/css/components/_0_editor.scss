@@ -1,3 +1,5 @@
+@use '../base' as *;
+
 .image-tool--withBackground .image-tool__image {
     background: transparent !important;
 }
@@ -8,6 +10,20 @@
 
 .post-content{
     width: 100%;
+}
+
+.article-enlil-editor-embed{
+    iframe{
+        height: auto !important;
+
+        @include breakpoint(sm) {
+            height: 400px !important;
+        }
+
+        @include breakpoint(xl) {
+            height: 600px !important;
+        }
+    }
 }
 
 b{
