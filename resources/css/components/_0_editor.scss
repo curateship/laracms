@@ -25,6 +25,7 @@
 
 .cdx-block{
     span,
+    a::selection,
     b::selection, b[style*="background-color"],
     i::selection, i[style*="background-color"]{
         background: var(--color-contrast-lower) !important;
