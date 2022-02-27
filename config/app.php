@@ -179,6 +179,7 @@ return [
         App\Providers\FortifyServiceProvider::class,
 
         Intervention\Image\ImageServiceProvider::class,
+        Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
     ],
 
     /*
