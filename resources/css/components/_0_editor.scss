@@ -6,6 +6,10 @@
     }
 }
 
+.ce-inline-toolbar__dropdown {
+    border-color: var(--color-contrast-lower);
+}
+
 .image-tool--withBackground .image-tool__image {
     background: transparent !important;
 }
@@ -71,7 +75,7 @@
 .ce-inline-tool-input.ce-inline-tool-input--showed{
     background-color: var(--color-bg) !important;
     border-color: var(--color-contrast-lower) !important;
-    color: white !important;
+    color: var(--color-contrast-lower) !important;
 }
 
 .ce-conversion-tool--focused{
@@ -82,7 +86,7 @@
 .ce-conversion-tool__icon{
     background-color: var(--color-bg) !important;
     border-color: var(--color-contrast-lower) !important;
-    color: white !important;
+    color: var(--color-contrast-lowest) !important;
 }
 
 .article-enlil-editor-embed{
