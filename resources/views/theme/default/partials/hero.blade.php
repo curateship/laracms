@@ -3,8 +3,8 @@
     <div class="position-relative z-index-2 text-center">
 
       <div class="text-component margin-bottom-sm">
-        <h1>Hi there. I'm Tyler. I write about Minimalism, Travel & Being a Digital Nomad</h1><br>
-        <p>Oh, I also write about how to make money, dealing with life while you're traveling too! Oh, I also write about how to make money, dealing with life while you're traveling too!</p>
+        <h1>Discover the world’s top designers & creatives</h1><br>
+        <p>Nostalgia isn’t a requirement, though: Gran Turismo 7 is the most welcoming GT ever, with dozens of hours of curated races and tasks designed to induct a new generation of players into the classic GT experience</p>
       </div>
 
       <div class="flex flex-wrap flex-center gap-sm">
