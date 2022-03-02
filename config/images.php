@@ -3,11 +3,11 @@
 return [
     'posts_storage_path' => '/posts',
     'thumbnail' => [
-        'width' => 320,
-        'height' => 240
+        'width' => 420,
+        'height' => 340
     ],
     'medium' => [
-        'width' => 640,
-        'height' => 480
+        'width' => 840,
+        'height' => 680
     ],
 ];

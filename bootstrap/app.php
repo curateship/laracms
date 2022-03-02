@@ -41,12 +41,6 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
-$app = new Laravel\Lumen\Application(
-    dirname(__DIR__)
-);
-
-// ...
-
 $app->register(Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class);
 
 // ...

@@ -6,6 +6,10 @@
     }
 }
 
+.codex-editor svg {
+    fill: var(--color-contrast-high) !important;
+}
+
 .ce-inline-toolbar__dropdown {
     border-color: var(--color-contrast-lower);
 }

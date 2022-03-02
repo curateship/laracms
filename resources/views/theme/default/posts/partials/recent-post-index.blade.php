@@ -5,7 +5,7 @@
     <li class="card">
         <div class="bg-light">
           <figure class="card__img img-blend" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light" data-blend-height="30%">
-              <a href="{{ route('post.show', $recent_post) }}"><img class="radius-md object-cover height-xxxxl" src="{{ url('/storage').config('images.posts_storage_path').$recent_post->medium  }}" alt="Card preview img">
+              <a href="{{ route('post.show', $recent_post) }}"><img class="radius-md object-cover height-xxxxl" src="{{ url('/storage').config('images.posts_storage_path').$recent_post->thumbnail  }}" alt="Card preview img">
               </a>
           </figure>
 
