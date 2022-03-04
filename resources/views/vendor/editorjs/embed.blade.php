@@ -1,4 +1,4 @@
-<div class="article-enlil-editor-embed">
+<div class="article-enlil-editor-embed padding-y-md">
     <iframe src="{{$block->embed}}" style="width:100%; height: 600px" scrolling="no"
             frameborder="no"></iframe>
     @if (!empty($block->caption))
