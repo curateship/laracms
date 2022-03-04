@@ -20,6 +20,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+        Illuminate\Foundation\Providers\ArtisanServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -42,6 +43,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Lavary\Menu\ServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -112,6 +114,7 @@ return [
         // or
         'SEO' => Artesaos\SEOTools\Facades\SEOTools::class,
         // ...
+        'Menu' => Lavary\Menu\Facade::class,
     ],
 
 ];

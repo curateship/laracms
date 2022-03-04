@@ -3,16 +3,7 @@
   <div class="container max-width-lg">
     <nav class="footer-v4__nav">
       <ul class="footer-v4__nav-list">
-        <li class="footer-v4__nav-item"><a href="#0">Pricing</a></li>
-        <li class="footer-v4__nav-item"><a href="#0">Teams</a></li>
-        <li class="footer-v4__nav-item"><a href="#0">Updates</a></li>
-        <li class="footer-v4__nav-item"><a href="#0">Features</a></li>
-        <li class="footer-v4__nav-item"><a href="#0">Integrations</a></li>
-        <li class="footer-v4__nav-item"><a href="#0">Support</a></li>
-        <li class="footer-v4__nav-item"><a href="#0">Documentation</a></li>
-        <li class="footer-v4__nav-item"><a href="#0">Company</a></li>
-        <li class="footer-v4__nav-item"><a href="#0">Customers</a></li>
-        <li class="footer-v4__nav-item"><a href="#0">Our story</a></li>
+          {!! Menu::get('footer')->asUl() !!}
       </ul>
     </nav>
 
