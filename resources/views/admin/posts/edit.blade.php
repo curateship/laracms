@@ -6,6 +6,7 @@
     @include('admin.posts.script-editor-js-header')
     @include('admin.posts.script-editor-js-embed')
     @include('admin.posts.script-js')
+    @include('admin.posts.select2')
 @endpush
 
 @section('content')

@@ -1,3 +1,4 @@
+<script>
 /*!
  * Select2 4.0.13
  * https://select2.github.io
@@ -6121,3 +6122,4 @@ S2.define('jquery.select2',[
   // Return the Select2 instance for anyone who is importing it.
   return select2;
 }));
+</script>
