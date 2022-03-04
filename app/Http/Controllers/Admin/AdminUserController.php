@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Artesaos\SEOTools\Facades\SEOTools;
+use Artesaos\SEOTools\Facades\SEOMeta;
 
 // Supports
 use Illuminate\Support\Facades\Auth;
@@ -23,6 +25,7 @@ class AdminUserController extends Controller
     // Index
     public function index(Request $request)
     {
+        SEOMeta::setTitle('Admin Users');
         if($request->has('sortBy') && $request->input('sortBy') !== 'role'){
             $users = User::orderBy($request->input('sortBy'), $request->input('sortDesc'));
         }   else{

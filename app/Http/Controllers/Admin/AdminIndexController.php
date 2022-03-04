@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 // Others
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Artesaos\SEOTools\Facades\SEOTools;
+use Artesaos\SEOTools\Facades\SEOMeta;
 
 // Models
 use App\Models\Category;
@@ -17,6 +19,7 @@ class AdminIndexController extends Controller
     // Index
     public function index()
     {
+        SEOMeta::setTitle('Admin');
         return view('admin.dashboard.index', [
             'posts' => Post::with('category')->orderBy('id', 'DESC')->get(),
         ]);

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 // Others
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Artesaos\SEOTools\Facades\SEOTools;
+use Artesaos\SEOTools\Facades\SEOMeta;
 
 // Models
 use App\Models\Category;
@@ -28,6 +30,7 @@ class AdminPostController extends Controller
     // Index
     public function index(Request $request)
     {
+        SEOMeta::setTitle('Admin Posts');
         if($request->has('sortBy') && $request->input('sortBy') !== 'role'){
             $posts = Post::orderBy($request->input('sortBy'), $request->input('sortDesc'));
         }   else{
