@@ -1,4 +1,4 @@
-@extends('theme.default.layouts.app')
+@extends('themes.default.layouts.app')
 @section('content')
 
 <div class="container max-width-lg padding-y-xl grid gap-md">

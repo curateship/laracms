@@ -1,6 +1,6 @@
-@extends('theme.default.layouts.app')
+@extends('themes.default.layouts.app')
 @section('content')
-@include('theme.default.auth.modals')
+@include('themes.default.auth.modals')
 @include('components.layouts.partials.hero')
 <div class="container max-width-lg">
 

@@ -1,4 +1,4 @@
-@extends('theme.default.layouts.app')
+@extends('themes.default.layouts.app')
 @section('content')
 
 <!-- 👇 Content Body Wrapper-->

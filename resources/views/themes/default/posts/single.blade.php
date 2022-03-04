@@ -1,4 +1,4 @@
-@extends('theme.default.layouts.app')
+@extends('themes.default.layouts.app')
 
 @push('custom-scripts')
     @include('admin.posts.script-editor-js')

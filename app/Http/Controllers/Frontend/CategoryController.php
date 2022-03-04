@@ -12,7 +12,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        return view('theme.default.categories.index', [
+        return view('themes.default.categories.index', [
             'categories' => Category::withCount('posts')->paginate(100)
         ]);
     }
@@ -24,7 +24,7 @@ class CategoryController extends Controller
         $categories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(5)->get();
         $tags = Tag::latest()->take(10)->get();
 
-        return view('theme.default.categories.show', [
+        return view('themes.default.categories.show', [
             'category' => $category,
             'posts' => $category->posts()->paginate(10),
             'recent_posts' => $recent_posts,

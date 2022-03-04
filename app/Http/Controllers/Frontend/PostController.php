@@ -11,7 +11,7 @@ class PostController extends Controller
 
         $recent_posts = Post::latest()->take(5)->get();
 
-        return view('/theme.default.posts.single', [
+        return view('/themes.default.posts.single', [
             'post' => $post,
             'recent_posts' => $recent_posts,
         ]);
