@@ -1,0 +1,269 @@
+@use '../base' as *;
+
+.ce-inline-toolbar__dropdown-content{
+    svg{
+        max-width: 12px;
+    }
+}
+
+.codex-editor svg {
+    fill: var(--color-contrast-high) !important;
+}
+
+.ce-inline-toolbar__dropdown {
+    border-color: var(--color-contrast-lower);
+}
+
+.image-tool--withBackground .image-tool__image {
+    background: transparent !important;
+}
+
+.cdx-settings-button{
+    svg, use{
+        fill: var(--color-contrast-high) !important;
+    }
+}
+
+.cdx-settings-button:hover{
+    background: var(--color-contrast-lower) !important;
+    color: var(--color-contrast-high) !important;
+}
+
+.cdx-settings-button.cdx-settings-button--active{
+    svg, use{
+        fill: var(--color-primary) !important;
+    }
+}
+
+.ce-inline-tool--active{
+    svg, use{
+        fill: var(--color-primary) !important;
+    }
+}
+
+
+.site-tag-pills{
+    display: none;
+}
+
+.image-tool__caption, .embed-tool__caption{
+    display: none;
+}
+
+.post-content{
+    width: 100%;
+}
+
+.ce-block__content{
+    h1::selection, h2::selection, h3::selection, h4::selection, h5::selection, h6::selection{
+        background: var(--color-contrast-lower) !important;
+        color: var(--color-contrast-high) !important;
+    }
+}
+
+.cdx-block{
+    span,
+    a::selection,
+    b::selection, b[style*="background-color"],
+    i::selection, i[style*="background-color"]{
+        background: var(--color-contrast-lower) !important;
+        color: var(--color-contrast-high) !important;
+    }
+}
+
+.cdx-block::selection {
+    background: var(--color-contrast-lower);
+    color: var(--color-contrast-high);
+}
+
+.ce-inline-tool-input.ce-inline-tool-input--showed{
+    background-color: var(--color-bg) !important;
+    border-color: var(--color-contrast-lower) !important;
+    color: var(--color-contrast-lower) !important;
+}
+
+.ce-conversion-tool--focused{
+    background-color: var(--color-bg-light) !important;
+    border-color: var(--color-contrast-lower);
+}
+
+.ce-conversion-tool__icon{
+    background-color: var(--color-bg) !important;
+    border-color: var(--color-contrast-lower) !important;
+    color: var(--color-contrast-lowest) !important;
+}
+
+.article-enlil-editor-embed{
+    iframe{
+        height: auto !important;
+
+        @include breakpoint(xs) {
+            height: 400px !important;
+        }
+
+        @include breakpoint(xl) {
+            height: 480px !important;
+        }
+    }
+}
+
+b{
+    font-weight: bold;
+}
+
+
+.enlil-article{
+    p{
+        padding: 0.7em 0;
+    }
+}
+
+.cdx-notify{
+    display: none;
+}
+
+.ce-inline-tool:hover {
+    background-color: var(--color-bg-light) !important;
+    border-color: var(--color-contrast-lower);
+}
+
+.cdx-button{
+    background-color: var(--color-bg) !important;
+    border-color: var(--color-contrast-lower) !important;
+}
+
+.ce-conversion-toolbar{
+    background-color: var(--color-bg) !important;
+    border-color: var(--color-contrast-lower) !important;
+}
+
+.ce-inline-toolbar__dropdown .icon--toggler-down{
+    margin-top: 7px;
+}
+
+.ce-inline-toolbar__dropdown{
+    padding: 0 1px 0 10px !important;
+}
+
+.ce-inline-toolbar__dropdown:hover{
+    background-color: var(--color-bg-light) !important;
+    border-color: var(--color-contrast-lower);
+}
+
+.ce-paragraph[data-placeholder]:empty::before {
+    color: hsla(var(--color-contrast-low-h), var(--color-contrast-low-s), var(--color-contrast-low-l), var(--color-o, 1)) !important;
+}
+
+
+.ce-inline-tool:not(.ce-inline-tool--active), .ce-toolbar__settings-btn, .ce-toolbar__plus, .ce-settings__button{
+    svg{
+        vertical-align: middle;
+        max-height: 100%;
+        use{
+            fill: var(--color-contrast-high) !important;
+        }
+    }
+}
+
+.ce-block--selected{
+    .ce-block__content{
+        background-color: transparent;
+    }
+}
+
+.ce-inline-toolbar, .ce-settings{
+    background-color: var(--color-bg);
+    border-color: var(--color-contrast-lower);
+}
+
+.ce-toolbar__plus--active, .ce-toolbar__plus:hover {
+    border-color: var(--color-bg);
+    background-color: var(--color-contrast-lower);
+}
+
+.ce-toolbar__settings-btn--active, .ce-toolbar__settings-btn:hover {
+    border-color: var(--color-bg);
+    background-color: var(--color-contrast-lower);
+}
+
+.ce-settings__button:hover{
+    border-color: var(--color-bg);
+    background-color: var(--color-bg-light);
+}
+
+.ce-toolbox__button{
+    background-color: var(--color-bg) !important;
+    border-color: var(--color-contrast-lower) !important;
+    color: var(--color-contrast-medium);
+}
+
+.ce-toolbox__button:hover{
+    background-color: var(--color-bg);
+    border-color: var(--color-contrast-lower);
+}
+
+#js-editor-description[data-read-only="true"]{
+    .ce-block__content,
+    .ce-toolbar__content {
+        max-width: unset;
+    }
+}
+
+#js-editor-description:not([data-read-only="true"]){
+    /* This is style for correction original Edits.js editor "height" style */
+    .codex-editor__redactor{
+        padding-bottom: 100px !important;
+    }
+
+    /* .codex-editor__redactor padding + 48px */
+    .codex-editor__loader{
+        height: 148px !important;
+    }
+
+    .ce-block__content,
+    .ce-toolbar__content {
+        max-width: 100%;
+        width: 100%;
+    }
+    .ce-toolbox {
+        margin-top: 5px;
+        margin-bottom: -5px;
+        margin-left: -5px;
+        background: transparent !important;
+    }
+    .ce-toolbar__plus {
+        left: -5px;
+    }
+
+    @media (max-width:650px) {
+        .ce-toolbar__content {
+            right: 0 !important;
+            width: auto !important;
+        }
+
+        .ce-toolbar--opened{
+            border-color: var(--color-bg);
+            background-color: var(--color-bg-light);
+            box-shadow: none;
+            margin-top: -3px;
+        }
+
+        .ce-toolbar__content{
+            position: relative;
+            margin-top: -8px;
+        }
+
+        .ce-toolbar__actions{
+            right: auto !important;
+        }
+    }
+
+    .fl-align-center {
+        align-items: center;
+    }
+
+    .ce-toolbar__actions{
+        right: 5px;
+        margin-top: 4px;
+    }
+}

@@ -7,10 +7,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+Use Laravel\Fortify\TwoFactorAuthenticatable;
+use Illuminate\Support\Facades\Hash;
+use App\Models\Post;
+use App\Models\Comment;
+use App\Models\Category;
 
-class User extends Authenticatable
+/**
+ * @method static find(int|string|null $id)
+ */
+class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, TwoFactorAuthenticatable;
 
     /**
      * The attributes that are mass assignable.
@@ -41,4 +49,51 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    /**
+     * @var mixed
+     */
+
+    public function setPasswordAttribute($password)
+    {
+	    $this->attributes['password'] = Hash::make($password);
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany('App\Models\Role');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(comment::class);
+    }
+
+    /**
+     * Check if the user has a role
+     * @param string $role
+     * @return bool
+     */
+    public function hasAnyRole(string $role)
+        {
+        return null !== $this->roles()->where('name', $role)->first();
+        }
+
+    /**
+     * Check if the user has a role
+     * @param string $role
+     * @return bool
+     */
+    public function hasAnyRoles(array $role)
+        {
+        return null !== $this->roles()->whereIn('name', $role)->first();
+        }
+
+    public function theme(){
+        return $this->theme ?? config('app.default_theme');
+    }
+
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
 }

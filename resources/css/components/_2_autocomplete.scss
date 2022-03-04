@@ -1,0 +1,94 @@
+@use '../base' as *;
+@use '_1_circle-loader.scss' as *;
+
+/* -------------------------------- 
+
+File#: _2_autocomplete
+Title: Autocomplete
+Descr: Autocomplete plugin for input elements
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+:root {
+  --autocomplete-dropdown-vertical-gap: 4px; // gap between input and results list
+  --autocomplete-dropdown-max-height: 150px;
+  --autocomplete-dropdown-scrollbar-width: 6px; // custom scrollbar width - webkit browsers
+}
+
+.autocomplete {}
+
+.autocomplete__loader { // loader visible while searching
+  // CSS variables inherited from the circle-loader component
+  --circle-loader-v1-size: 1em; 
+  --circle-loader-v1-stroke-width: 2px;
+}
+
+.autocomplete:not(.autocomplete--searching) .autocomplete__loader {
+  // .autocomplete--searching is used to show the loader element - added in JS
+  display: none;
+} 
+
+// results dropdown 
+.autocomplete__results {
+  position: absolute;
+  z-index: var(--z-index-popover, 5); 
+  width: 100%;
+  left: 0;
+  top: calc(100% + var(--autocomplete-dropdown-vertical-gap));
+  transform: translateY(4px); // slide in animation
+  background-color: var(--color-bg-light);
+  box-shadow: var(--inner-glow), var(--shadow-md);
+  border-radius: var(--radius-md);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s, visibility 0s .3s, transform .3s var(--ease-in);
+  overflow: hidden;
+
+  .autocomplete--results-visible & {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity .3s, transform .3s var(--ease-out);
+    transform: translateY(0);
+  }
+}
+
+.autocomplete__list {
+  max-height: var(--autocomplete-dropdown-max-height);
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+
+  // custom scrollbar
+  &::-webkit-scrollbar { // scrollbar width
+    width: var(--autocomplete-dropdown-scrollbar-width);
+  }
+
+  &::-webkit-scrollbar-track { // progress bar
+    background-color: alpha(var(--color-contrast-higher), 0.08);
+    border-radius: 0;
+  }
+
+  &::-webkit-scrollbar-thumb { // handle
+    background-color: alpha(var(--color-contrast-higher), 0.12);
+    border-radius: 0;
+
+    &:hover {
+      background-color: alpha(var(--color-contrast-higher), 0.2);
+    }
+  }
+}
+
+// single result item
+.autocomplete__item {
+  cursor: pointer;
+  transition: .2s;
+
+  &:hover {
+    background-color: alpha(var(--color-contrast-higher), 0.075);
+  }
+
+  &:focus {
+    outline: none;
+    background-color: alpha(var(--color-primary), 0.15);
+  }
+}

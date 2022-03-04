@@ -1,0 +1,214 @@
+@use '../base' as *;
+@use '_1_read-more.scss' as *;
+@use '_1_details.scss' as *;
+
+/* -------------------------------- 
+
+File#: _2_comments
+Title: Comments
+Descr: Threaded comments template
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+:root {
+  --comments-author-img-size: 2.6em; // author image size
+  --comments-author-content-gap: var(--space-xs); // gep between author image and content
+  --comments-gap: var(--space-md); // gap among comments
+}
+
+.comments {}
+
+.comments__sorting-label { // sort by popular/newest buttons
+  // hide input
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  pointer-events: none;
+
+  & + label {
+    color: var(--color-contrast-medium);
+    cursor: pointer;
+    user-select: none;
+  
+    &:hover {
+      color: var(--color-contrast-high);
+    }
+  }
+
+  &:checked + label {
+    color: var(--color-contrast-higher);
+    text-decoration: underline;
+  }
+
+  &:focus + label {
+    outline: 2px solid alpha(var(--color-primary), 0.2);
+    outline-offset: 2px;
+  }
+}
+
+.comments__comment:not(:last-child) {
+  margin-bottom: var(--comments-gap); // vertical spacing
+}
+
+.comments__author-img {
+  display: block;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: var(--comments-author-content-gap);
+  transition: opacity .2s;
+
+  img {
+    display: block;
+    width: var(--comments-author-img-size);
+    height: var(--comments-author-img-size);
+  }
+
+  &:hover {
+    opacity: 0.75;
+  }
+}
+
+.comments__author-name {
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--color-contrast-higher);
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.comments__readmore-btn { // read more button
+  @include reset;
+  color: var(--color-contrast-medium);
+
+  &:hover {
+    cursor: pointer;
+    color: var(--color-contrast-higher);
+    text-decoration: underline;
+  }
+}
+
+.comments__vote-btn {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-contrast-medium);
+
+  &:hover {
+    color: var(--color-contrast-higher);
+    cursor: pointer;
+  }
+}
+
+.comments__vote-btn--pressed {
+  color: var(--color-accent);
+
+  &:hover {
+    color: var(--color-accent);
+  }
+
+  .comments__vote-icon-wrapper {
+    .icon {
+      animation: comments-vote-icon .3s;
+    }
+
+    &::before {
+      animation: comments-vote-icon-circle .6s;
+    }
+  }
+}
+
+.comments__vote-icon-wrapper {
+  position: relative;
+
+  .icon {
+    position: relative;
+    z-index: 2;
+    transition: transform .3s;
+  }
+
+  &::before { // animated circle
+    content: '';
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    position: absolute;
+    z-index: 1;
+    top: calc(50% - 1em);
+    left: calc(50% - 1em);
+    background-color: currentColor;
+    opacity: 1;
+    transform: scale(0);
+    pointer-events: none;
+  }
+}
+
+@keyframes comments-vote-icon {
+  0%, 100% {
+    transform: scale(1);
+  }
+
+  30% {
+    transform: scale(0.8);
+  }
+}
+
+@keyframes comments-vote-icon-circle {
+  from {
+    opacity: 1;
+    transform: scale(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+.comments__label-btn {
+  color: var(--color-contrast-medium);
+
+  &:hover {
+    color: var(--color-contrast-higher);
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
+.comments__time {
+  color: var(--color-contrast-medium);
+}
+
+.comments__inline-divider {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--color-contrast-low);
+}
+
+.comments__details { // nested comments
+  margin-top: var(--space-sm);
+  margin-left: calc(var(--comments-author-img-size) + var(--comments-author-content-gap));
+  padding-left: var(--comments-author-content-gap);
+  border-left: 3px solid var(--color-contrast-lower);
+
+  .details__content > ul {
+    margin-top: var(--space-sm);
+  }
+}
+
+// --no-profile-img
+.comments--no-profile-img {
+  --comments-author-img-size: 0; // author image size
+
+  .comments__author-img {
+    display: none;
+  }
+}

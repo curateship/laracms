@@ -19,3 +19,30 @@
 //     }
 //   }
 // }
+
+/* 👇 example: custom height utility classes */
+.height-30, .height-40, .height-550 {
+    height: var(--height);
+  
+    &.btn, &.form-control {
+      padding-top: 30;
+      padding-bottom: 0;
+    }
+  }
+  
+  .height-30 { --height: 30px; }
+  .height-40 { --height: 40px; }
+  .height-550 { --height: 550px; }
+  
+  /* 👇 example: custom width utility classes */
+  .width-40, .width-120 {
+    width: var(--width);
+  
+    &.btn {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+  
+  .width-40  { --width: 40px; }
+  .width-120 { --width: 120px; }

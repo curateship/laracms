@@ -1,0 +1,59 @@
+@use '../base' as *;
+
+/* -------------------------------- 
+
+File#: _1_diagonal-movement
+Title: Diagonal Movement
+Descr: A JavaScript plugin that detects the direction of the mouse movement (diagonal vs vertical)
+Usage: codyhouse.co/license
+Based on the jQuery-menu-aim plugin https://github.com/kamens/jQuery-menu-aim
+
+⚠️ The style of this component is only for demo purpose. You don't need it to use the plugin.
+
+-------------------------------- */
+
+.d-movement {
+  max-width: 720px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: var(--space-xxs);
+}
+
+.d-movement__source {
+  display: grid;
+  grid-gap: var(--space-xxs);
+}
+
+.d-movement__item {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border-radius: 0.25em;
+}
+
+.d-movement__item--one {
+  color: var(--color-white);
+  background-color: var(--color-primary);
+}
+
+.d-movement__item--two {
+  color: var(--color-bg);
+  background-color: var(--color-contrast-higher);
+}
+
+.d-movement__item--three {
+  color: var(--color-white);
+  background-color: var(--color-accent);
+}
+
+.d-movement__sub-element {
+  background-color: var(--color-contrast-lower);
+  border-radius: 0.25em;
+  transition: background 0.2s;
+}
+
+.d-movement__arrow {
+  @include triangle(right, 12px, currentColor);
+}

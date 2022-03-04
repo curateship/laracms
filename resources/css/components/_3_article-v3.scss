@@ -1,0 +1,59 @@
+@use '../base' as *;
+@use '_1_author.scss' as *;
+@use '_1_social-sharing.scss' as *;
+@use '_2_sticky-sharebar.scss' as *;
+@use '_1_list.scss' as *;
+
+/* -------------------------------- 
+
+File#: _3_article-v3
+Title: Article v3
+Descr: Article template
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+.t-article-v3__hero {
+  background-color: var(--color-contrast-lower);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  padding: var(--space-xxl) 0;
+  clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - 2em), 0% 100%);
+}
+
+.t-article-v3__intro-text {
+  padding: var(--space-md);
+  color: var(--color-bg);
+  background-color: alpha(var(--color-contrast-higher), 0.75);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius-lg);
+  @include fontSmooth;
+
+  p {
+    opacity: 0.75;
+  }
+}
+
+.t-article-v3__divider {
+  display: flex;
+  align-items: center;
+
+  span {
+    display: block;
+    margin: 0 var(--space-xs);
+    height: 10px;
+    width: 10px;
+    transform: rotate(45deg);
+    background-color: var(--color-contrast-low);
+  }
+
+  &::before, &::after {
+    content: '';
+    display: block;
+    height: 1px;
+    width: auto;
+    flex-grow: 1;
+    background-color: var(--color-contrast-lower);
+  }
+}

@@ -19,7 +19,7 @@
 
 // --------------------------------
 
-$grid-columns: 12 !default;
+$grid-columns: 15 !default;
 
 .grid, .flex, .inline-flex {
   --gap: 0px;
@@ -35,7 +35,7 @@ $grid-columns: 12 !default;
 }
 
 .grid {
-  --grid-columns: 12;
+  --grid-columns: 15;
   display: flex;
   flex-wrap: wrap;
 
@@ -63,7 +63,7 @@ $grid-columns: 12 !default;
       --offset: var(--gap-x);
       --gap-modifier: 0;
       --offset-modifier: 1;
-    
+
       > * {
         margin-left: var(--offset);
       }

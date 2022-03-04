@@ -1,0 +1,188 @@
+@use '../base' as *;
+
+/* -------------------------------- 
+
+File#: _2_carousel
+Title: Carousel
+Descr: Display and cycle through a collection of items
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+:root {
+  --carousel-grid-gap: var(--space-xs);
+  --carousel-item-auto-size: 260px; // min-width value -> used in JS to auto update the carousel items width
+  --carousel-transition-duration: 0.5s;
+}
+
+.carousel {
+  position: relative;
+}
+
+.carousel__list {
+  display: flex;
+  flex-wrap: nowrap;
+  will-change: transform;
+  margin-left: -30px;
+}
+
+.carousel__item {
+  flex-shrink: 0;
+  width: var(--carousel-item-auto-size); 
+  margin-right: 30px;
+  margin-bottom: var(--carousel-grid-gap);
+}
+
+.js {
+  .carousel__list--animating {
+    transition-property: transform;
+    transition-duration: var(--carousel-transition-duration);
+    transition-timing-function: var(--ease-out);
+  }
+
+  .carousel__item { // hide items while the carousel is initialized in JS
+    opacity: 0;
+    margin-bottom: 0;
+  }
+
+  .carousel--loaded .carousel__item { // reveal items
+    opacity: 1;
+  }
+
+  .carousel:not(.carousel--is-dragging) .carousel__list:not(.carousel__list--animating) .carousel__item[tabindex="-1"] > * {
+    visibility: hidden; // hide content of off-canvas items so that they are not focusable 
+  }
+
+  .carousel[data-drag="on"] .carousel__item { // if drag = enabled
+    user-select: none;
+
+    img {
+      pointer-events: none;
+    }
+  }
+}
+
+.carousel__control {
+  --size: 40px;
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  background-color: var(--color-bg-light);
+  border-radius: 50%;
+  box-shadow: var(--inner-glow), var(--shadow-sm);
+  z-index: 1;
+  transition: .2s;
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &:hover {
+    background-color: var(--color-bg-lighter);
+    box-shadow: var(--inner-glow), var(--shadow-md);
+  }
+
+  &[disabled] {
+    pointer-events: none;
+    opacity: 0.5;
+    box-shadow: none;
+  }
+
+  .icon {
+    --size: 20px;
+    display: block;
+    margin: auto;
+  }
+}
+ 
+// carousel dots navigation
+.carousel__navigation { // created in JS
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 10px); // = button size 👇
+  gap: var(--space-xs); // gap among dots
+  justify-content: center;
+  align-items: center;
+  margin-top: var(--space-sm);
+}
+
+.carousel__nav-item {
+  display: inline-block; // grid fallback
+  margin: 0 var(--space-xxxs);
+
+  @supports (grid-area: auto) {
+    margin: 0;
+  }
+
+  button { // dot
+    display: block;
+    position: relative;
+    font-size: 10px; // ⚠️ button size
+    height: 1em;
+    width: 1em;
+    border-radius: 50%;
+    background-color: var(--color-contrast-high);
+    opacity: 0.4;
+    cursor: pointer;
+    transition: background .3s;
+
+    &::before { // focus circle
+      content: '';
+      position: absolute;
+      top: calc(50% - 0.5em);
+      left: calc(50% - 0.5em);
+      font-size: 16px; // focus circle size
+      height: 1em;
+      width: 1em;
+      border-radius: inherit;
+      border: 1px solid var(--color-contrast-high);
+      opacity: 0;
+      transform: scale(0);
+      transition: 3s;
+    }
+    
+    &:focus {
+      outline: none;
+      
+      &::before {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  }
+}
+
+.carousel__nav-item--selected button {
+  opacity: 1;
+}
+
+// --pagination
+.carousel__navigation--pagination {
+  grid-template-columns: repeat(auto-fit, 24px);
+
+  .carousel__nav-item button {
+    width: 24px;
+    height: 24px;
+    color: var(--color-bg);
+    font-size: 12px;
+    line-height: 24px;
+    border-radius: var(--radius-md);
+    text-align: center;
+
+    &:focus {
+      outline: 1px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+  }
+}
+
+html:not(.js) .carousel__list {
+  overflow: auto;
+}
+
+.carousel--hide-controls {
+  .carousel__navigation, .carousel__control {
+    display: none;
+  }
+}

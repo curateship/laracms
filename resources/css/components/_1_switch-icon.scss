@@ -1,0 +1,238 @@
+@use '../base' as *;
+
+/* -------------------------------- 
+
+File#: _1_switch-icon
+Title: Switch Icon 
+Descr: An icon transition generator that works with any icons
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+.switch-icon { // button
+  position: relative;
+  padding: var(--space-xxs);
+}
+
+.switch-icon--disabled { // optional - use in JS to temporary disable click event
+  pointer-events: none;
+}
+
+.switch-icon__icon { // icon
+  display: block;
+  fill: currentColor;
+  color: var(--color-contrast-higher); // icon color
+  font-size: 2em; // icon size
+  height: 1em;
+  width: 1em;
+  line-height: 1;
+  will-change: transform;
+}
+
+.switch-icon__icon--a {
+  opacity: 1;
+}
+
+.switch-icon__icon--b {
+  position: absolute;
+  top: calc(50% - 0.5em);
+  left: calc(50% - 0.5em);
+  opacity: 0;
+}
+
+.switch-icon--state-b, 
+.switch-icon--hover:hover {
+  .switch-icon__icon--a {
+    opacity: 0;
+  }
+
+  .switch-icon__icon--b {
+    opacity: 1;
+  }
+}
+
+// --scale
+.switch-icon--scale {
+  .switch-icon__icon {
+    transition: opacity 0s 0.2s, transform 0.4s;
+  }
+
+  .switch-icon__icon--a {
+    transform: scale(1);
+  }
+
+  .switch-icon__icon--b {
+    transform: scale(0.8);
+  }
+}
+
+.switch-icon--scale.switch-icon--state-b,
+.switch-icon--scale.switch-icon--hover:hover {
+  .switch-icon__icon--a {
+    transform: scale(0.8);
+  }
+
+  .switch-icon__icon--b {
+    transform: scale(1);
+  }
+}
+
+// --rotate
+.switch-icon--rotate {
+  .switch-icon__icon {
+    transition: opacity 0s 0.2s, transform 0.4s;
+  }
+
+  .switch-icon__icon--a {
+    transform: rotate(0);
+  }
+
+  .switch-icon__icon--b {
+    transform: rotate(90deg);
+  }
+}
+
+.switch-icon--rotate.switch-icon--state-b,
+.switch-icon--rotate.switch-icon--hover:hover {
+  .switch-icon__icon--a {
+    transform: rotate(-90deg);
+  }
+
+  .switch-icon__icon--b {
+    transform: rotate(0);
+  }
+}
+
+// --flip
+.switch-icon--flip {
+  perspective: 10em;
+
+  .switch-icon__icon {
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    transition: opacity 0s 0.2s, transform 0.4s var(--ease-out-back);
+  }
+  
+  .switch-icon__icon--a {
+    opacity: 1;
+    transform: rotateY(0deg);
+  }
+
+  .switch-icon__icon--b {
+    opacity: 1;
+    transform: rotateY(-180deg);
+  }
+}
+
+.switch-icon--flip.switch-icon--state-b,
+.switch-icon--flip.switch-icon--hover:hover {
+  .switch-icon__icon--a {
+    opacity: 1;
+    transform: rotateY(180deg);
+  }
+
+  .switch-icon__icon--b {
+    opacity: 1;
+    transform: rotateY(0deg);
+  }
+}
+
+// slide effects
+.switch-icon--slide-up,
+.switch-icon--slide-down,
+.switch-icon--slide-right,
+.switch-icon--slide-left {
+  overflow: hidden;
+  
+  .switch-icon__icon {
+    transition: opacity 0.3s, transform 0.3s;
+  }
+}
+
+// slide-up
+.switch-icon--slide-up {
+  .switch-icon__icon--a {
+    transform: translateY(0);
+  }
+
+  .switch-icon__icon--b {
+    transform: translateY(100%);
+  }
+}
+
+.switch-icon--slide-up.switch-icon--state-b,
+.switch-icon--slide-up.switch-icon--hover:hover {
+  .switch-icon__icon--a {
+    transform: translateY(-100%);
+  }
+
+  .switch-icon__icon--b {
+    transform: translateY(0);
+  }
+}
+
+// slide-down
+.switch-icon--slide-down {
+  .switch-icon__icon--a {
+    transform: translateY(0);
+  }
+
+  .switch-icon__icon--b {
+    transform: translateY(-100%);
+  }
+}
+
+.switch-icon--slide-down.switch-icon--state-b,
+.switch-icon--slide-down.switch-icon--hover:hover {
+  .switch-icon__icon--a {
+    transform: translateY(100%);
+  }
+
+  .switch-icon__icon--b {
+    transform: translateY(0);
+  }
+}
+
+// slide-right
+.switch-icon--slide-right {
+  .switch-icon__icon--a {
+    transform: translateX(0);
+  }
+
+  .switch-icon__icon--b {
+    transform: translateX(-100%);
+  }
+}
+
+.switch-icon--slide-right.switch-icon--state-b,
+.switch-icon--slide-right.switch-icon--hover:hover {
+  .switch-icon__icon--a {
+    transform: translateX(100%);
+  }
+
+  .switch-icon__icon--b {
+    transform: translateX(0);
+  }
+}
+
+// slide-left
+.switch-icon--slide-left {
+  .switch-icon__icon--a {
+    transform: translateX(0);
+  }
+
+  .switch-icon__icon--b {
+    transform: translateX(100%);
+  }
+}
+
+.switch-icon--slide-left.switch-icon--state-b,
+.switch-icon--slide-left.switch-icon--hover:hover {
+  .switch-icon__icon--a {
+    transform: translateX(-100%);
+  }
+
+  .switch-icon__icon--b {
+    transform: translateX(0);
+  }
+}

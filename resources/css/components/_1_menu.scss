@@ -1,0 +1,85 @@
+@use '../base' as *;
+
+/* -------------------------------- 
+
+File#: _1_menu
+Title: Menu
+Descr: Application menu that provides access to a set of functionalities
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+.menu {
+  --menu-vertical-gap: 4px; // vertical gap between the Menu element and its control
+  --menu-item-padding: var(--space-xxxs) var(--space-xs);
+  list-style: none;
+  width: 220px;
+  position: fixed; // top/left position set in JS
+  background-color: var(--color-bg-light);
+  box-shadow: var(--inner-glow), var(--shadow-md);
+  padding: var(--space-xxs) 0;
+  border-radius: var(--radius-md);
+  z-index: var(--z-index-popover, 5); 
+  user-select: none;
+  margin-top: var(--menu-vertical-gap);
+  margin-bottom: var(--menu-vertical-gap);
+  overflow: auto;
+
+  // use rem units
+  @include spaceUnit(1rem);
+  @include textUnit(1rem);
+
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s .2s, opacity .2s;
+}
+
+.menu--is-visible {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s, opacity .2s;
+}
+
+.menu--overlay {
+  z-index: var(--z-index-overlay, 15); 
+}
+
+.menu__content {
+  display: block; // fallback
+  display: flex;
+  align-items: center;
+  text-decoration: none; // reset link style
+  padding: var(--menu-item-padding);
+  color: var(--color-contrast-high);
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: .2s;
+
+  &:hover {
+    background-color: alpha(var(--color-contrast-higher), 0.075);
+  }
+
+  &:focus {
+    outline: none;
+    background-color: alpha(var(--color-primary), 0.15);
+  }
+}
+
+.menu__label {
+  padding: var(--menu-item-padding);
+  font-size: var(--text-sm);
+  color: var(--color-contrast-medium);
+}
+
+.menu__separator {
+  height: 1px;
+  background-color: var(--color-contrast-lower);
+  margin: var(--menu-item-padding);
+}
+
+.menu__icon {
+  color: alpha(var(--color-contrast-higher), 0.5);
+  margin-right: var(--space-xxs);
+}

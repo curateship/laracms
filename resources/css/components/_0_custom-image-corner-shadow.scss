@@ -1,0 +1,46 @@
+.corner-shadow {
+    position: relative;
+    background-color: white;
+    overflow: hidden;
+}
+.corner-shadow .corner {
+    position: absolute;
+    border-radius: 50%;
+    width: 2px;
+    height: 2px;
+    box-shadow: 0 0 60px 60px black;
+    z-index: 1;
+
+    &.corner-bg-darker{
+        box-shadow: 0 0 60px 60px var(--color-bg-darker);
+    }
+
+    &.corner-bg-dark{
+        box-shadow: 0 0 60px 60px var(--color-bg-dark);
+    }
+
+    &.corner-bg{
+        box-shadow: 0 0 60px 60px var(--color-bg);
+    }
+
+    &.corner-bg-light{
+        box-shadow: 0 0 60px 60px var(--color-bg-light);
+    }
+
+    &.corner-bg-lighter{
+        box-shadow: 0 0 60px 60px var(--color-bg-lighter);
+    }
+}
+
+.corner.top {
+    top: -2px;
+}
+.corner.left {
+    left: -2px;
+}
+.corner.right {
+    right: -2px;
+}
+.corner.bottom {
+    bottom: -2px;
+}

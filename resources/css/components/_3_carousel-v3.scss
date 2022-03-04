@@ -1,0 +1,51 @@
+@use '../base' as *;
+@use '_2_carousel.scss' as *;
+
+/* -------------------------------- 
+
+File#: _3_carousel-v3
+Title: Carousel v3
+Descr: Display a collection of items and navigate through them
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+.carousel-v3 { // custom properties inherited from Carousel
+  --carousel-grid-gap: var(--space-sm); // distance among items
+  --carousel-item-auto-size: 260px; // item min-width
+  --carousel-transition-duration: 0.5s; // animation duration
+}
+
+// carousel arrow navigation
+.carousel-v3__control {
+  --size: 40px;
+  height: var(--size);
+  width: var(--size);
+  background-color: alpha(var(--color-black), 0.7);
+  backdrop-filter: blur(10px);
+  pointer-events: auto;
+  cursor: pointer;
+  // align icon
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: .2s;
+
+  &:hover {
+    background-color: alpha(var(--color-black), 0.9);
+  }
+
+  &[disabled] {
+    display: none;
+  }
+
+  &:active {
+    transform: translateY(2px);
+  }
+
+  .icon {
+    --size: 20px;
+    display: block;
+    color: var(--color-white);
+  }
+}

@@ -1,0 +1,37 @@
+.img-blend{
+    position: relative;
+}
+
+.img-blend-top, .img-blend-right, .img-blend-bottom, .img-blend-left{
+    content: '';
+    position: absolute;
+    z-index: 1;
+}
+
+.img-blend-top{
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+}
+
+.img-blend-right{
+    top: 0;
+    right: 0;
+    width: 20%;
+    height: 100%;
+}
+
+.img-blend-bottom{
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.img-blend-left{
+    top: 0;
+    left: 0;
+    width: 20%;
+    height: 100%;
+}

@@ -1,0 +1,258 @@
+@use '../base' as *;
+@use '_1_smooth-scrolling.scss' as *;
+
+/* -------------------------------- 
+
+File#: _2_table-of-contents
+Title: Table of Contents
+Descr: A navigation with a list of links to the main sections of the page 
+Usage: codyhouse.co/license
+
+-------------------------------- */
+:root {
+  --toc-border-width: 1px; /* static version only */
+}
+
+/* #region (style affecting collapsed + static versions) 👇 */
+.toc {
+  @include spaceUnit(1rem); /* use rem units for spacing */
+}
+
+.toc__list {
+  position: relative;
+
+  .toc__list .toc__link {
+    padding-left: calc(var(--space-sm) * 2); /* offset sub nav */
+  }
+}
+
+.toc__link,
+.toc__label {
+  padding: var(--space-xxxs) var(--space-sm);
+}
+
+.toc__link {
+  position: relative;
+  color: var(--color-contrast-medium);
+  text-decoration: none;
+
+  &::before { /* left mark */
+    content: '';
+    width: var(--toc-border-width);
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  &:hover {
+    color: var(--color-contrast-high);
+  }
+}
+
+.toc__link--selected {
+  color: var(--color-primary);
+
+  &:hover {
+    color: var(--color-primary);
+  }
+}
+
+.toc__label { /* label style */
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: var(--text-sm);
+}
+
+.toc__control { /* control button */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.toc__control-text { /* text inside control button */
+  position: relative;
+
+  > * {
+    display: inline-block;
+    transition: opacity .4s, transform .4s var(--ease-out);
+  }
+
+  > *:last-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+  }
+}
+
+.toc__icon-arrow { /* arrow icon  */
+  .icon__group {
+    will-change: transform;
+    transform-origin: 8px 8px;
+    transition: transform .3s var(--ease-out);
+
+    > * {
+      transform-origin: 8px 8px;
+      stroke-dasharray: 17;
+      transform: translateY(3px);
+      transition: transform .3s, stroke-dashoffset .3s;
+      transition-timing-function: var(--ease-out);
+    }
+
+    > *:first-child {
+      stroke-dashoffset: 10;
+    }
+
+    > *:last-child {
+      stroke-dashoffset: 10;
+    }
+  }
+}
+
+.toc-content__target {
+  scroll-margin-top: var(--space-xxxxs);
+}
+/* #endregion */
+
+/* #region (collapsed version only - mobile 👇) */
+.toc:not(.toc--static) {
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-light);
+  box-shadow: var(--inner-glow), var(--shadow-sm);
+  transition: .3s;
+
+  &:hover {
+    box-shadow: var(--inner-glow), var(--shadow-md);
+  }
+
+  .toc__nav { /* navigation */
+    display: none;
+    margin: var(--space-xxs) 0;
+  }
+
+  .toc__list {
+    padding-bottom: var(--space-xs);
+  }
+
+  .toc__label {
+    display: none;
+  }
+
+  .toc__link {
+    display: flex;
+  }
+
+  &.toc--expanded {
+    .toc__control-text {
+      > *:first-child {
+        transform: translateY(10px);
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      > *:last-child {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+    }
+
+    .toc__nav {
+      display: block;
+      animation: toc-entry-animation .4s var(--ease-out);
+    }
+
+    .toc__icon-arrow .icon__group { /* animate arrow icon */
+      transform: rotate(-90deg);
+  
+      > *:first-child, *:last-child {
+        stroke-dashoffset: 0;
+        transform: translateY(0px);
+      }
+    }
+  }
+}
+/* #endregion */
+
+/* #region (static version only - desktop 👇) */
+.toc--static {
+  box-shadow: inset var(--toc-border-width) 0 0 var(--color-contrast-lower); /* left border */
+
+  &[class*="position-sticky"] {
+    top: var(--space-md); /* used if position = sticky */
+    max-height: calc(100vh - var(--space-md) * 2); /* set max height */
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .toc__label {
+    font-size: var(--text-xs);
+  }
+
+  .toc__link {
+    display: inline-flex;
+    font-size: var(--text-sm);
+  }
+
+  .toc__link--selected::before {
+    background-color: var(--color-primary);
+  }
+
+  .toc__control { /* control - static version only */
+    display: none;
+  }
+}
+
+.toc-content--toc-static {
+  *:target {
+    animation: toc-target 2s; /* highlight section on target */
+  }
+}
+/* #endregion */
+
+@keyframes toc-target {
+  0%, 50% {
+    outline: 2px solid alpha(var(--color-primary), 0.5);
+  }
+
+  100% {
+    outline: 2px solid alpha(var(--color-primary), 0);
+  }
+}
+
+@keyframes toc-entry-animation {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+/* no-js support */
+html:not(.js) .toc {
+  .toc__nav {
+    display: block;
+  }
+}
+
+/* used in JS - detect when the TOC needs to switch from a collapsed to a static version */
+[class*="toc--static"]::before {
+  display: none;
+  content: 'collapsed';
+}
+
+@each $breakpoint, $value in $breakpoints {
+  @include breakpoint(#{$breakpoint}) {
+    .toc--static\@#{$breakpoint}::before {
+      content: 'static';
+    }
+  }
+}

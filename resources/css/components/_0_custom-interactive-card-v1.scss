@@ -1,0 +1,46 @@
+@use '../base' as *;
+
+.card-menu-button{
+    position: absolute;
+    right: 3px;
+    top: 3px;
+    z-index: 1;
+}
+
+.card__img{
+    background: var(--color-bg-light);
+}
+
+.card-cover-img {
+    margin: 1px;
+}
+
+.card-user-content{
+    position: inherit;
+    padding-top: var(--space-md) !important;
+    z-index: 3;
+
+    .card-text{
+        position: inherit;
+        z-index: 2;
+    }
+}
+
+.card-body{
+    position: absolute;
+    top: 0;
+}
+
+.card-author {
+    z-index: 2;
+    margin-top:-30px;
+}
+
+.recent-post-card {
+    z-index: 2;
+    margin-top:-10px;
+}
+
+.card{
+    height: fit-content;
+}

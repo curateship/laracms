@@ -1,0 +1,75 @@
+@use '../base' as *;
+@use '_1_popover.scss' as *;
+
+/* -------------------------------- 
+
+File#: _2_adv-custom-select
+Title: Advanced Custom Select
+Descr: Custom select with advanced structure options
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+.adv-select {}
+.adv-select__control {}
+
+.adv-select-popover {
+  // use rem units
+  @include spaceUnit(1rem);
+  @include textUnit(1rem);
+
+  &.popover { // popover component - dependency
+    --popover-width: 250px;
+    --popover-control-gap: 4px; // ⚠️ use px units - vertical gap between the popover and its control
+    --popover-viewport-gap: 20px; // ⚠️ use px units - vertical gap between the popover and the viewport - visible if popover height > viewport height
+    --popover-transition-duration: 0.2s;
+
+    @include breakpoint(md) {
+      --popover-width: 320px;
+    }
+  }
+}
+
+.adv-select-popover__optgroup:not(:first-of-type) { // custom <optgroup>
+  padding-top: var(--space-xxs);
+}
+
+.adv-select-popover__optgroup:not(:last-of-type) {
+  border-bottom: 1px solid alpha(var(--color-contrast-higher), 0.1);
+  padding-bottom: var(--space-xxs);
+}
+
+.adv-select-popover__check {
+  display: none;
+}
+
+.adv-select-popover__label {}
+
+.adv-select-popover__option {
+  position: relative;
+  cursor: pointer;
+  @include fontSmooth;
+  transition: .2s;
+
+  &:hover {
+    background-color: alpha(var(--color-contrast-higher), 0.075);
+  }
+
+  &:focus {
+    outline: none;
+    background-color: alpha(var(--color-primary), 0.15);
+  }
+
+  &[aria-selected=true] { // selected option
+    background-color: var(--color-primary);
+    color: var(--color-white);
+
+    .adv-select-popover__check {
+      display: block;
+    }
+
+    &:focus {
+      box-shadow: inset 0 0 0 2px var(--color-primary-dark);
+    }
+  }
+}

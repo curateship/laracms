@@ -1,0 +1,138 @@
+@use '../base' as *;
+
+/* -------------------------------- 
+
+File#: _2_dropdown
+Title: Dropdown
+Descr: A hoverable link that toggles the visibility of a dropdown list
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+:root {
+  --dropdown-item-padding: var(--space-xxs) var(--space-sm);
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown__menu {
+  width: 200px;
+  border-radius: var(--radius-md);
+  padding: var(--space-xxxs) 0;
+  background-color: var(--color-bg-light);
+  box-shadow: var(--inner-glow), var(--shadow-sm);
+  z-index: var(--z-index-popover, 5); 
+  position: absolute;
+  left: 0;
+  top: 100%;
+
+  // use rem units
+  @include spaceUnit(1rem);
+  @include textUnit(1rem);
+
+  // hide
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .2s, visibility 0s .2s;
+}
+
+@media (pointer: fine) { // user has pointing device (e.g., mouse)
+  .dropdown__wrapper:hover > .dropdown__menu,
+  .dropdown__sub-wrapper:hover > .dropdown__menu {
+    // show dropdown menu
+    opacity: 1;
+    visibility: visible;
+    transition: opacity .2s;
+  }
+
+  .dropdown__sub-wrapper:hover > .dropdown__menu {
+    left: 100%;
+  }
+}
+
+@media not all and (pointer: fine) { // user hasn't pointing device
+  .dropdown__trigger-icon {
+    display: none;
+  }
+}
+
+.dropdown__item {
+  display: block;
+  text-decoration: none;
+  color: var(--color-contrast-high);
+  padding: var(--dropdown-item-padding);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: .2s;
+
+  &:hover, &.dropdown__item--hover {
+    background-color: alpha(var(--color-contrast-higher), 0.075);
+  }
+}
+
+.dropdown__separator { // h line divider
+  height: 1px;
+  background-color: var(--color-contrast-lower);
+  margin: var(--dropdown-item-padding);
+}
+
+.dropdown__sub-wrapper {
+  position: relative;
+
+  > .dropdown__item { // item w/ right arrow
+    position: relative;
+    padding-right: calc(var(--space-sm) + 12px);
+
+    .icon { // right arrow
+      position: absolute;
+      display: block;
+      width: 12px;
+      height: 12px;
+      right: var(--space-xxs);
+      top: calc(50% - 6px);
+    }
+  }
+
+  > .dropdown__menu { // sub menu
+    top: calc(var(--space-xxs) * -1);
+    box-shadow: var(--inner-glow), var(--shadow-md);
+  }
+}
+
+.js { // add animations if JS = enabled
+  .dropdown__menu {
+    top: calc(100% + 4px); // add a 4px margin between trigger and dropdown
+  }
+
+  .dropdown__sub-wrapper {
+    .dropdown__menu {
+      top: calc(var(--space-xxs) * -1);
+    }
+  }
+
+  @media (pointer: fine) {
+    .dropdown__menu--is-visible {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity .2s;
+    }
+  }
+
+  .dropdown__menu--is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .2s, visibility 0s .2s;
+  }
+
+  .dropdown__sub-wrapper > .dropdown__menu--is-visible, 
+  .dropdown__sub-wrapper > .dropdown__menu--is-hidden {
+    left: 100%;
+
+    &.dropdown__menu--left {
+      left: -100%;
+    }
+  }
+}

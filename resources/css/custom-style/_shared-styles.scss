@@ -68,7 +68,28 @@
   transition: all 0.2s ease;
 
   &:hover {
-    color: var(--color-primary);
+    color: var(--color-primary-light);
+  }
+}
+
+.secondary-link-subtle {
+  color: var(--color-contrast-medium);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: var(--color-primary-light);
+  }
+}
+
+.link-plain {
+  text-decoration: none;
+
+  &:hover {
+    color: var(--color-primary-light);
+    cursor: pointer;
+    text-decoration: none;
   }
 }
 
