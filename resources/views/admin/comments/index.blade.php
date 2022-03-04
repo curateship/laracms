@@ -278,7 +278,7 @@
             </div>
           </div>
             <!-- Pagination -->
-            @include('components.pagination', ['items' => $comments])
+            @include('components.layouts.partials.pagination', ['items' => $comments])
             <!-- Pagination END-->
           <!-- END Table-->
 

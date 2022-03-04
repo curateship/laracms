@@ -264,7 +264,7 @@
             </div>
           </div>
           <!-- END Table-->
-        @include('components.pagination', ['items' => $posts])
+        @include('components.layouts.partials.pagination', ['items' => $posts])
             <!-- Pagination END-->
 
         </div><!-- END Col-12 Card -->
@@ -272,7 +272,7 @@
 
       <!-- Sidebar -->
       <div class="col-3@md">
-        <x-admin.sidebar/>
+        @include('admin.partials.sidebar')
       </div>
       <!-- Sidebar END -->
 

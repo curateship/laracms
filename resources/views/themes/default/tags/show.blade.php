@@ -70,7 +70,7 @@
 
       <!-- Sidebar -->
       <div class="col-3@md">
-      @include('theme.default.partials.sidebar-filter')
+      @include('themes.default.partials.sidebar-filter')
       </div>
       <!-- Sidebar END -->
 

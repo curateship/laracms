@@ -295,7 +295,7 @@
           </div>
 
           <!-- Pagination -->
-        @include('components.pagination', ['items' => $users])
+        @include('components.layouts.partials.pagination', ['items' => $users])
           <!-- Pagination END-->
           <!-- Table END -->
 

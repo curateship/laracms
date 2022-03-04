@@ -4,7 +4,7 @@
       <nav class="sidenav js-sidenav">
          <div class="sidenav__label margin-bottom-xs">
              </div>
-              <x-blog.side-categories :categories="$categories"/>
+              <x-categories.side-categories :categories="$categories"/>
           </nav>
     </div>
  </div>

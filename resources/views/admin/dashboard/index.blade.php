@@ -25,7 +25,7 @@
 
       <!-- Sidebar -->
       <div class="col-3@md">
-      <x-admin.sidebar/>
+        @include('admin.partials.sidebar')
       </div>
       <!-- Sidebar END -->
 

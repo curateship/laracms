@@ -247,6 +247,7 @@
                       </g>
                     </svg>
                         <span class="sidenav__text text-sm@md">Galleries</span>
+                        <span class="sidenav__counter">3 <i class="sr-only">notifications</i></span>
                     </a>
                       <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
                         <svg class="icon" viewBox="0 0 12 12"><polygon points="4 3 8 6 4 9 4 3"/></svg>
