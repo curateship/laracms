@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers\Frontend;
 
+// Others
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
+// Models
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\Tag;
+
+// Supports
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 

@@ -4,9 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 // Others
 use App\Http\Controllers\Controller;
-use App\Models\Comment;
-use App\Models\Tag;
-use App\Models\TagsCategories;
 use Illuminate\Http\Request;
 
 // Models
@@ -14,6 +11,11 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Comment;
+use App\Models\Tag;
+use App\Models\TagsCategories;
+
+// Support
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -43,11 +45,6 @@ class AdminPostController extends Controller
         return view('admin.posts.create', [
             'categories' => Category::pluck('name', 'id')
         ]);
-    }
-
-    public function show($id)
-    {
-        //
     }
 
     // Edit
@@ -97,6 +94,7 @@ class AdminPostController extends Controller
         }
     }
 
+    // Upload
     public function upload($upload_type, Request $request){
         $path = '/public'.config('images.posts_storage_path');
         $mime_type = $request->file('image')->getMimeType();
