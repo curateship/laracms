@@ -24,7 +24,7 @@ class AdminCommentController extends Controller
         if($request->has('sortBy') && $request->input('sortBy') !== 'role'){
             $comments = Comment::orderBy($request->input('sortBy'), $request->input('sortDesc'));
         }   else{
-            $comments = Comment::orderBy('created_at', 'DESC');
+            $comments = Comment::orderBy('created_at', 'DESC')->with('user');
         }
 
         return view('admin.comments.index', ['comments' => $comments->paginate(10)]);
