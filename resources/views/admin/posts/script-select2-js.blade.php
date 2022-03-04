@@ -1,3 +1,4 @@
+@auth
 <script>
 /*!
  * Select2 4.0.13
@@ -6123,3 +6124,4 @@ S2.define('jquery.select2',[
   return select2;
 }));
 </script>
+@endauth

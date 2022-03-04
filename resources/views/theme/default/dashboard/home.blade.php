@@ -16,15 +16,15 @@
             <a href="http://localhost:8000/post" class="btn btn--subtle btn--sm radius-full" role="text">New</a> 
             </div>
           </div>
-          @include('theme.default.posts.partials.recent-post')
+          @include('components.posts.recentposts')
           <!-- Recent Post END -->
 
       </div><!-- Col-12 END -->
 
       <!-- Sidebar -->
       <div class="col-3@md">
-      @include('theme.default.partials.sidebar-filter')
-        @include('theme.default.partials.sidebar')
+      @include('components.layouts.sidebars.sidebar-filter')
+        @include('components.layouts.sidebars.sidebar')
       </div>
       <!-- Sidebar END -->
 

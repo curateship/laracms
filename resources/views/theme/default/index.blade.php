@@ -1,7 +1,7 @@
 @extends('theme.default.layouts.app')
 @section('content')
 @include('theme.default.auth.modals')
-@include('theme.default.partials.hero')
+@include('components.layouts.partials.hero')
 <div class="container max-width-lg">
 
   <!-- 👇 Recommended -->
@@ -9,7 +9,7 @@
     <h4>Rocommended</h4>
     <a href="http://localhost:8000/post" class="btn btn--subtle btn--sm radius-full" role="text">View all</a>
   </div>
-  @include('theme.default.posts.partials.recent-post-index')
+  @include('components.posts.recentposts')
   <!-- Recommended END -->
 
   <!-- 👇 Recommended -->
@@ -17,7 +17,7 @@
     <h4>Rocommended Tags</h4>
     <a href="http://localhost:8000/post" class="btn btn--subtle btn--sm radius-full" role="text">View all</a>
   </div>
-  @include('theme.default.tags.partials.recommended-tags')
+  @include('components.tags.recommended-tags')
     <!-- Recommended END -->
 
     <!-- 👇 Recommended -->
@@ -25,7 +25,7 @@
     <h4>Rocommended Artist</h4>
     <a href="http://localhost:8000/post" class="btn btn--subtle btn--sm radius-full" role="text">View all</a>
   </div>
-  @include('theme.default.users.partials.recommended-users-v2')
+  @include('components.users.recommended-users-v2')
     <!-- Recommended END -->
 
 </div>

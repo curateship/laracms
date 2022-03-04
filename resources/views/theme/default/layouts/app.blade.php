@@ -21,11 +21,11 @@
 </head>
 
 <body data-theme="@guest(){{config('app.default_theme')}}@else{{auth()->user()->theme()}}@endguest">
-  @include('theme.default.partials.header')
+  @include('components.layouts.headers.header')
   <div class="padding-top-sm">
     @yield('content')
   </div>
-  @include('theme.default.partials.footer')
+  @include('components.layouts.footers.footer')
 <script src="{{ asset('assets/js/scripts.js') }}"></script>
   @stack('custom-scripts')
 

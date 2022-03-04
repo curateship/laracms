@@ -4,16 +4,17 @@
     @foreach($recent_posts as $recent_post)
     <li class="card">
         <div class="bg-light">
-          <figure class="card__img img-blend" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light" data-blend-height="45%">
-              <a href="{{ route('post.show', $recent_post) }}"><img class="radius-md object-cover height-xxxxl" src="{{ asset('storage/' . $recent_post->image->path. '')  }}" alt="Card preview img"></a>
+          <figure class="card__img img-blend" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light" data-blend-height="30%">
+              <a href="{{ route('post.show', $recent_post) }}"><img class="radius-md object-cover height-xxxxl" src="{{ url('/storage').config('images.posts_storage_path').$recent_post->thumbnail  }}" alt="Card preview img">
+              </a>
           </figure>
 
           <div class="card__content recent-post-card line-height-1 margin-xxs">
               <a href="{{ route('post.show', $recent_post) }}" class="link-subtle text-sm">{{ \Str::limit( $recent_post->title, 40) }}</a>
               <p class="text-xs color-contrast-low padding-top-sm">{{ $recent_post->created_at->diffforhumans() }} <br></p>
-              <a href="{{ route('post.show', $recent_post) }}" class="secondary-link-subtle text-xs">{{ $recent_post->author->name }}</a>
+              <a href="{{ route('post.show', $recent_post) }}" class="secondary-link-subtle text-xs">{!! $recent_post->author != null ? $recent_post->author->name : '<span style="font-weight: bold;color:red;">Deleted User</span>' !!}</a>
             </div>
-            
+
             <footer class="card-v10__footer">
                  <ul class="card-v10__social-list">
                      <li class="card-v10__social-item">
