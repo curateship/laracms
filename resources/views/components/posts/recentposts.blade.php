@@ -1,5 +1,5 @@
 <section class="margin-bottom-lg">
-    <ul class="grid-auto-md gap-md">
+    <ul class="grid-auto-xs grid-auto-sm@sm grid-auto-md@md gap-md">
 
     @foreach($recent_posts as $recent_post)
     <li class="card">
