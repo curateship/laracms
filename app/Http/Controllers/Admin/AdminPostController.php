@@ -34,7 +34,7 @@ class AdminPostController extends Controller
         if($request->has('sortBy') && $request->input('sortBy') !== 'role'){
             $posts = Post::orderBy($request->input('sortBy'), $request->input('sortDesc'));
         }   else{
-            $posts = Post::orderBy('created_at', 'DESC');
+            $posts = Post::orderBy('created_at', 'DESC')->with('author');
         }
 
         return view('admin.posts.index', [

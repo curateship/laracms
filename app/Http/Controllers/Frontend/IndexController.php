@@ -18,7 +18,7 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $recent_posts = Post::latest()->withCount('comments')->paginate(10);
+        $recent_posts = Post::latest()->withCount('comments')->with('author')->paginate(10);
         return view('/themes.default.index', [
         'recent_posts' => $recent_posts,
         ]);  
