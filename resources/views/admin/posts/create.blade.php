@@ -5,6 +5,7 @@
     @include('admin.posts.script-editor-js-image')
     @include('admin.posts.script-editor-js-header')
     @include('admin.posts.script-editor-js-embed')
+    @include('admin.posts.script-editor-js-list')
     @include('admin.posts.script-js')
     @include('admin.posts.script-select2-js')
 @endpush
