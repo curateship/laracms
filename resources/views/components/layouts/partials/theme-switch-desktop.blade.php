@@ -1,4 +1,4 @@
-<ul class="radio-switch margin-left-xs margin-top-xs">
+<ul class="radio-switch margin-left-xs margin-top-xs margin-bottom-xs">
    <li class="radio-switch__item">
      <input class="radio-switch__input sr-only themeSwitch" type="radio" name="radio-desktop-switch" data-theme="light" id="radio-1" {{auth()->user()->theme() == 'light' ? 'checked' : ''}}>
      <label class="radio-switch__label" for="radio-1"><svg class="icon icon--xs" viewBox="0 0 16 16">
