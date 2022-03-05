@@ -62,34 +62,13 @@
             <!-- Avatar Mobile Dropdown -->
             <nav id="user-menu" class="header-v2__nav header-v2__nav-dropdown">
                 <ul class="header-v2__nav-list">
-                 <li><a href="#0" class="dropdown__item">Profile</a></li>
-                 <li><a href="#0" class="dropdown__item">Notifications</a></li>
-                 <li><a href="#0" class="dropdown__item margin-bottom-sm">Messages</a></li>
+                    {!! Menu::get('user-dropdown')->asUl() !!}
                  <div class="border-top border-contrast-lower"></div><!-- Divider -->
                  <li><a href="#0" class="dropdown__item margin-top-xs">Account Settings</a></li>
                  <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="dropdown__item">Log Out</a></li>
                 </ul>
-
-                <ul class="radio-switch margin-left-xs margin-top-xs">
-                  <li class="radio-switch__item">
-                    <input class="radio-switch__input sr-only themeSwitch" type="radio" name="radio-mobile-switch" data-theme="light" id="radio-3" {{auth()->user()->theme() == 'light' ? 'checked' : ''}}>
-                    <label class="radio-switch__label" for="radio-3"><svg class="icon icon--xs" viewBox="0 0 16 16">
-                        <title>Enable light mode</title>
-                        <path d="M7 0h2v2H7zM12.88 1.637l1.414 1.415-1.415 1.413-1.414-1.414zM14 7h2v2h-2zM12.95 14.433l-1.415-1.414 1.414-1.414 1.415 1.413zM7 14h2v2H7zM2.98 14.363L1.566 12.95l1.415-1.414 1.414 1.415zM0 7h2v2H0zM3.05 1.707L4.465 3.12 3.05 4.535 1.636 3.121z" />
-                        <path d="M8 4C5.8 4 4 5.8 4 8s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4z" />
-                      </svg></label>
-                  </li>
-
-                  <li class="radio-switch__item">
-                    <input class="radio-switch__input sr-only themeSwitch" type="radio" name="radio-mobile-switch" data-theme="dark" id="radio-4" {{auth()->user()->theme() == 'dark' ? 'checked' : ''}}>
-                    <label class="radio-switch__label" for="radio-4"><svg class="icon icon--xs" viewBox="0 0 16 16">
-                        <title>Enable dark mode</title>
-                        <path d="M6,0C2.5,0.9,0,4.1,0,7.9C0,12.4,3.6,16,8.1,16c3.8,0,6.9-2.5,7.9-6C9.9,11.7,4.3,6.1,6,0z"></path>
-                      </svg></label>
-                    <div aria-hidden="true" class="radio-switch__marker"></div>
-                  </li>
-                </ul>
-               </ul>
+                 <!-- Theme Switch -->
+                @include('components.layouts.partials.theme-switch')
             </nav>
             <!-- Avatar Mobile Dropdown END-->
             <!-- mobile user menu END-->
@@ -147,34 +126,6 @@
 
             <li class="header-v2__nav-item header-v2__nav-item--main header-v2__nav-item--has-children">
               <a href="#0" class="header-v2__nav-link">
-                <span>Product</span>
-                <svg class="header-v2__nav-dropdown-icon icon margin-left-xxxs" aria-hidden="true" viewBox="0 0 16 16">
-                  <polyline fill="none" stroke-width="1" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="3.5,6.5 8,11 12.5,6.5 "></polyline>
-                </svg>
-              </a>
-
-              <div class="header-v2__nav-dropdown header-v2__nav-dropdown--md">
-                <ul class="header-v2__nav-list header-v2__nav-list--title-desc">
-                  <li class="header-v2__nav-item">
-                    <a href="#0" class="header-v2__nav-link">
-                      <svg class="header-v2__nav-icon" aria-hidden="true" width="32" height="32" viewBox="0 0 32 32">
-                        <circle fill="var(--color-accent)" opacity="0.2" cx="16" cy="16" r="16" />
-                        <circle cx="11.5" cy="10.5" r="3.5" fill="var(--color-accent)" />
-                        <path d="M22,12,4.729,27.352a15.982,15.982,0,0,0,26.24-5.742Z" fill="var(--color-accent)" />
-                      </svg>
-
-                      <div>
-                        <strong>Sub nav item</strong>
-                        <small>Lorem ipsum dolor sit amet.</small>
-                      </div>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-
-            <li class="header-v2__nav-item header-v2__nav-item--main header-v2__nav-item--has-children">
-              <a href="#0" class="header-v2__nav-link">
                 <span>About</span>
                 <svg class="header-v2__nav-dropdown-icon icon margin-left-xxxs" aria-hidden="true" viewBox="0 0 16 16">
                   <polyline fill="none" stroke-width="1" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="3.5,6.5 8,11 12.5,6.5 "></polyline>
@@ -188,7 +139,14 @@
                     <a href="#0" class="header-v2__nav-link">
                       <div>
                         <strong>Sub nav item</strong>
-                        <small>Lorem ipsum dolor sit amet consectetur adipisicing elit.</small>
+                      </div>
+                    </a>
+                  </li>
+
+                  <li class="header-v2__nav-item">
+                    <a href="#0" class="header-v2__nav-link">
+                      <div>
+                        <strong>Sub nav item</strong>
                       </div>
                     </a>
                   </li>
@@ -197,7 +155,8 @@
               </div>
             </li>
 
-            <li class="header-v2__nav-item header-v2__nav-item--main"><a href="{{ route('contact.create') }}" class="header-v2__nav-link">Contact</a></li>
+            {!! Menu::get('header')->asUl() !!}
+
           </ul>
         </nav>
         <!-- Navigation Menu End -->
@@ -228,37 +187,16 @@
 
                <!-- avatar Dropdown -->
                <ul id="user-desktop-menu" class="dropdown__menu js-dropdown__menu" aria-label="submenu">
-                 <li><a href="#0" class="dropdown__item">Profile</a></li>
-                 <li><a href="#0" class="dropdown__item">Notifications</a></li>
-                 <li><a href="#0" class="dropdown__item margin-bottom-xs">Messages</a></li>
+               {!! Menu::get('user-dropdown')->asUl() !!}
+
                  <div class="border-top border-contrast-lower"></div><!-- Divider -->
                  <li><a href="#0" class="dropdown__item margin-top-xxxs">Account Settings</a></li>
                  <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="dropdown__item">Log Out</a></li>
                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none">
                     @csrf
                  </form>
-
-                 <ul class="radio-switch margin-left-xs margin-top-xs">
-                  <li class="radio-switch__item">
-                    <input class="radio-switch__input sr-only themeSwitch" type="radio" name="radio-desktop-switch" data-theme="light" id="radio-1" {{auth()->user()->theme() == 'light' ? 'checked' : ''}}>
-                    <label class="radio-switch__label" for="radio-1"><svg class="icon icon--xs" viewBox="0 0 16 16">
-                        <title>Enable light mode</title>
-                        <path d="M7 0h2v2H7zM12.88 1.637l1.414 1.415-1.415 1.413-1.414-1.414zM14 7h2v2h-2zM12.95 14.433l-1.415-1.414 1.414-1.414 1.415 1.413zM7 14h2v2H7zM2.98 14.363L1.566 12.95l1.415-1.414 1.414 1.415zM0 7h2v2H0zM3.05 1.707L4.465 3.12 3.05 4.535 1.636 3.121z" />
-                        <path d="M8 4C5.8 4 4 5.8 4 8s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4z" />
-                      </svg></label>
-                  </li>
-
-                  <li class="radio-switch__item">
-                    <input class="radio-switch__input sr-only themeSwitch" type="radio" name="radio-desktop-switch" data-theme="dark" id="radio-2" {{auth()->user()->theme() == 'dark' ? 'checked' : ''}}>
-                    <label class="radio-switch__label" for="radio-2"><svg class="icon icon--xs" viewBox="0 0 16 16">
-                        <title>Enable dark mode</title>
-                        <path d="M6,0C2.5,0.9,0,4.1,0,7.9C0,12.4,3.6,16,8.1,16c3.8,0,6.9-2.5,7.9-6C9.9,11.7,4.3,6.1,6,0z"></path>
-                      </svg></label>
-                    <div aria-hidden="true" class="radio-switch__marker"></div>
-                  </li>
-                </ul>
-               </ul>
-
+                 <!-- Theme Switch -->
+                 @include('components.layouts.partials.theme-switch-desktop')
             </li>
            </div>
            <!-- With avatar END-->
