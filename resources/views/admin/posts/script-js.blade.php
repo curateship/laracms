@@ -61,6 +61,10 @@
             autofocus: true,
             tools: {
                 header: Header,
+                list: {
+                    class: List,
+                    inlineToolbar: true,
+                },
                 embed: {
                     class: Embed,
                     inlineToolbar: true,
