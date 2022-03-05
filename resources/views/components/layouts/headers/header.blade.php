@@ -62,9 +62,7 @@
             <!-- Avatar Mobile Dropdown -->
             <nav id="user-menu" class="header-v2__nav header-v2__nav-dropdown">
                 <ul class="header-v2__nav-list">
-                    {!! Menu::get('user-dropdown')->asUl() !!}
-                 <div class="border-top border-contrast-lower"></div><!-- Divider -->
-                 <li><a href="#0" class="dropdown__item margin-top-xs">Account Settings</a></li>
+                {!! Menu::get('user-dropdown')->asUl() !!}
                  <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="dropdown__item">Log Out</a></li>
                 </ul>
                  <!-- Theme Switch -->
@@ -187,10 +185,7 @@
 
                <!-- avatar Dropdown -->
                <ul id="user-desktop-menu" class="dropdown__menu js-dropdown__menu" aria-label="submenu">
-               {!! Menu::get('user-dropdown')->asUl() !!}
-
-                 <div class="border-top border-contrast-lower"></div><!-- Divider -->
-                 <li><a href="#0" class="dropdown__item margin-top-xxxs">Account Settings</a></li>
+                 {!! Menu::get('user-dropdown')->asUl() !!}
                  <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="dropdown__item">Log Out</a></li>
                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none">
                     @csrf

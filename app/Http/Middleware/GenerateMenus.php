@@ -11,10 +11,13 @@ class GenerateMenus
     {
         // Header Menu
         \Menu::make('header', function ($menu) {
-            $menu->add('Contact',     ['route'  => 'index',  'class' => 'header-v2__nav-item header-v2__nav-item--main header-v2__nav-link', 'id' => 'home']);
-            $menu->add('About',     ['route'  => 'index',  'class' => 'header-v2__nav-item header-v2__nav-item--main header-v2__nav-link', 'id' => 'home']);
-            $menu->add('About',     ['route'  => 'index',  'class' => 'header-v2__nav-item header-v2__nav-item--main header-v2__nav-link', 'id' => 'home']);
-            $menu->add('About',     ['route'  => 'index',  'class' => 'header-v2__nav-item header-v2__nav-item--main header-v2__nav-link', 'id' => 'home']);
+
+            $about = $menu->add('About',    ['route'  => 'index', 'class' => 'header-v2__nav-item header-v2__nav-item--main']);
+            $about->link->attr(['class' => 'header-v2__nav-link', 'data-toggle' => 'dropdown']);
+
+            $about = $menu->add('About',    ['route'  => 'index', 'class' => 'header-v2__nav-item header-v2__nav-item--main']);
+            $about->link->attr(['class' => 'header-v2__nav-link', 'data-toggle' => 'dropdown']);
+          
         });
 
         // Footer Navigation
@@ -35,9 +38,20 @@ class GenerateMenus
 
         // User Dropdown Navigation
         \Menu::make('user-dropdown', function ($menu) {
-            $menu->add('Dashboard',     ['route'  => 'index',  'class' => 'dropdown__item link-plain', 'id' => 'home']);
-            $menu->add('Profile',     ['route'  => 'index',  'class' => 'dropdown__item', 'id' => 'home']);
-            $menu->add('Edit Profile',     ['route'  => 'index',  'class' => 'dropdown__item link-plain', 'id' => 'home']);
+
+            $menu = $menu->add('Dashboard',    ['route'  => 'index']);
+            $menu->link->attr(['class' => 'dropdown__item']);
+
+            $menu = $menu->add('Profile',    ['route'  => 'index']);
+            $menu->link->attr(['class' => 'dropdown__item']);
+
+            $menu = $menu->add('Edit Profile',    ['route'  => 'index']);
+            $menu->link->attr(['class' => 'dropdown__item']);
+
+            $menu->divide( ['class' => 'border-top border-contrast-lower margin-top-xs margin-bottom-xs'] );
+
+            $menu->link->attr(['class' => 'dropdown__item']);
+            
         });
     
         return $next($request);

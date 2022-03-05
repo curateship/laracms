@@ -1,9 +1,4 @@
 @extends('themes.default.layouts.app')
-
-@push('custom-scripts')
-    @include('admin.posts.script-editor-js')
-@endpush
-
 @section('content')
 <div class="container max-width-lg padding-y-xl grid gap-md">
   <!-- Sticky Share Sidebar -->
