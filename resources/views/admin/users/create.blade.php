@@ -1,4 +1,9 @@
 @extends('admin.layouts.app')
+
+@push('custom-scripts')
+    @include('admin.users.script-js')
+@endpush
+
 @section('content')
 
 <section class="margin-y-xl">
@@ -28,9 +33,9 @@
           <!-- Table -->
           <div class="margin-top-auto border-top border-contrast-lower"></div><!-- Divider -->
 
-          <!-- Register Form Content 👇-->
+          <!-- Register User Form 👇-->
           <div class="padding-md">
-          <form action="{{ route('admin.users.store') }}" method="POST">@csrf
+          <form action="{{ route('user.store') }}" method="POST">@csrf
             <form class="sign-up-form">
 
               <div class="text-component text-center">
@@ -84,6 +89,29 @@
               </div>
               <!-- Assign Roles END -->
 
+              <!-- Image Upload -->
+              <div class="file-upload inline-block margin-bottom-sm margin-top-sm">
+              <label for="upload-file" class="file-upload__label btn btn--primary">
+                <span class="flex items-center">
+                  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><path  stroke-linecap="square" stroke-linejoin="miter" d="M2 16v6h20v-6"></path><path stroke-linejoin="miter" stroke-linecap="butt" d="M12 17V2"></path><path stroke-linecap="square" stroke-linejoin="miter" d="M18 8l-6-6-6 6"></path></g></svg>
+
+                  <span class="margin-left-xxs file-upload__text file-upload__text--has-max-width">Upload Avatar</span>
+                </span>
+              </label>
+
+              <input type="hidden" name="original" value=""/>
+              <input type="hidden" name="thumbnail" value=""/>
+              <input type="hidden" name="medium" value=""/>
+
+              <input type="file" class="file-upload__input" name="media" id="upload-file" accept="image/jpeg, image/jpg, image/png, image/gif" required>
+
+
+              <br>
+              <img alt="thumbnail" id="upload-thumbnail" src="" style="display: none;">
+
+            </div>
+            <!-- Image Upload END -->
+
               <div class="margin-y-sm">
                 <button class="btn btn--primary btn--md width-15%">Create</button>
               </div>
@@ -91,7 +119,7 @@
             </form>
           </form>
           </div>
-          <!-- Register Form Content END -->
+          <!-- Register User Form Content END -->
           <!-- Table END -->
 
         </div><!-- END Col-12 Card -->

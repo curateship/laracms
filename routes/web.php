@@ -48,6 +48,9 @@ Route::get('/categories', [CategoryController::class, 'index'])->name('theme.def
 Route::get('/tags/search', [TagController::class, 'search'])->name('tags.search');
 Route::get('/tags/{tag:name}', [TagController::class, 'show'])->name('theme.default.archive.tags.show');
 
+Route::post('/user/upload', [AdminUserController::class, 'upload'])->name('user.upload');
+Route::post('/user/store', [AdminUserController::class, 'store'])->name('user.store');
+
 /*
 |--------------------------------------------------------------------------
 | // Admin Routes

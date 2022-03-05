@@ -100,7 +100,7 @@
           <li class="comments__comment">
             <div class="flex items-start">
               <a href="#0" class="comments__author-img">
-                <img class="block width-100% height-100% object-cover" src="{{ asset('assets/'.$comment->user->avatar)  }}" alt="Author picture">
+                <img class="block width-100% height-100% object-cover" src="{{ url('/storage').config('images.users_storage_path').$user->thumbnail  }}" alt="Author picture">
               </a>
 
               <div class="comments__content margin-top-xxxs">

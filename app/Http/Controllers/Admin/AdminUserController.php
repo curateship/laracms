@@ -12,8 +12,12 @@ use Artesaos\SEOTools\Facades\SEOMeta;
 
 // Supports
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 // Models
 use App\Models\Post;
@@ -67,7 +71,126 @@ class AdminUserController extends Controller
             $user->roles()->sync($roles);
         }
 
+        $original = ( $request->has('original') && !empty($request->input('original')) ) ? $request->input('original') : NULL;
+        $original = str_replace(url('/storage'.config('images.users_storage_path')), '', $original);
+
+        $thumbnail = ( $request->has('thumbnail') && !empty($request->input('thumbnail')) ) ? $request->input('thumbnail') : NULL;
+        $thumbnail = str_replace(url('/storage'.config('images.users_storage_path')), '', $thumbnail);
+
+        $medium = ( $request->has('medium') && !empty($request->input('medium')) )  ? $request->input('medium') : NULL;
+        $medium = str_replace(url('/storage'.config('images.users_storage_path')), '', $medium);
+
+        if($request->has('userId')){
+            $post = Post::find($request->input('userId'));
+
+            // If user was attached new image - we must remove old file;
+            if($post->original != $original){
+                $post->removePostImages('main');
+            }
+
+            // If body was update;
+            if($post->body != $request->input('description')){
+                $path = '/public'.config('images.users_storage_path');
+
+                // Get current body images;
+                $current_images = [];
+
+                $body_array = json_decode($post->body, true);
+                foreach($body_array['blocks'] as $block){
+                    if($block['type'] == 'image'){
+                        $url_array = explode('/', $block['data']['file']['url']);
+                        $current_images[] = Arr::last($url_array);
+                    }
+                }
+
+                // New body images;
+                $new_images = [];
+                $body_array = json_decode($request->input('description'), true);
+                foreach($body_array['blocks'] as $block){
+                    if($block['type'] == 'image'){
+                        $url_array = explode('/', $block['data']['file']['url']);
+                        $new_images[] = Arr::last($url_array);
+                    }
+                }
+
+                // If we do not have old image in new list - delete this file;
+                foreach($current_images as $image){
+                    if(!in_array($image, $new_images)){
+                        Storage::delete($path.'/original/'.$image);
+                        Storage::delete($path.'/medium/'.$image);
+                        Storage::delete($path.'/thumbnail/'.$image);
+                    }
+                }
+            }
+
+        }   else{
+            $post = new Post();
+            $post->user_id = Auth::id();
+        }
+
+        $user->original = $original;
+        $user->thumbnail = $thumbnail;
+        $user->medium = $medium;
+        $user->save();
+
         return redirect(route('admin.users.index'));
+    }
+
+    // Upload
+    public function upload(Request $request){
+        $mime_type = $request->file('file')->getMimeType();
+        $media_path = storage_path() . "/app";
+        $media = [
+            'original', 'medium', 'thumbnail'
+        ];
+
+        foreach($media as $key => $type){
+            File::ensureDirectoryExists($media_path . '/public/users/'.$type);
+            $media[$type] = config("images.$type");
+            unset($media[$key]);
+        }
+        unset($media['original']);
+
+        // Save original media file in file system;
+        $original = request()->file('file')->store("public/users/original");
+
+        $thumbnail_medium_name = Str::random(27) . '.' . Arr::last(explode('.', $original));
+
+        foreach($media as $type_name => $type){
+            if ($mime_type == 'image/gif') {
+                /* GIF */
+                $thumbnail_medium = new Imagick($media_path.'/'.$original);
+                $thumbnail_medium = $thumbnail_medium->coalesceImages();
+                do {
+                    $thumbnail_medium->resizeImage( $type['width'], $type['height'], Imagick::FILTER_BOX, 1, true );
+                } while ( $thumbnail_medium->nextImage());
+
+                $thumbnail_medium = $thumbnail_medium->deconstructImages();
+
+                $thumbnail_medium->writeImages($media_path . "/public/posts/$type_name/" . $thumbnail_medium_name, true);
+            }   else{
+                /* Other Image types */
+                $thumbnail_medium = Image::make(request()->file('file'));
+                $thumbnail_medium->resize($type['width'], $type['height'], function($constraint){
+                    $constraint->aspectRatio();
+                });
+
+
+                $thumbnail_medium->save($media_path . "/public/users/$type_name/" . $thumbnail_medium_name);
+            }
+
+            $media[$type_name]['path'] = $media_path . "/public/users/$type_name/" . $thumbnail_medium_name;
+        }
+
+        foreach($media as $key => $item){
+            $media[$key]['path'] = url('/').Storage::url(str_replace($media_path.'/', '', $item['path']));
+            unset($media[$key]['width']);
+            unset($media[$key]['height']);
+        }
+
+        $media['original']['path'] = url('/').Storage::url($original);
+
+        return $media;
     }
 
     // Edit
@@ -78,17 +201,6 @@ class AdminUserController extends Controller
              'roles' => Role::all(),
              'user' => User::find($id)
             ]);
-    }
-
-    // Update
-    public function update(Request $request, $id)
-    {
-        $user = User::findOrFail($id);
-        $user->update($request->except(['_token', 'roles']));
-        $user->roles()->sync($request->roles);
-        $request->session()->flash('success', 'You have edited the user');
-
-        return redirect(route('admin.users.index'));
     }
 
     // Destroy
@@ -118,6 +230,16 @@ class AdminUserController extends Controller
         }   else{
             $request->session()->flash('success', 'You have deleted the user');
         }
+    }
+
+    // Update
+    public function update(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $user->update($request->except(['_token', 'roles']));
+        $user->roles()->sync($request->roles);
+          
+        return redirect()->route('admin.users.edit', $user)->with('success', 'User has been updated.');
     }
 
     // Theme Switcher
