@@ -3,7 +3,7 @@
         $level = $block->{'level'};
     }
 
-    $centerClass = 'padding-md';
+    $centerClass = 'padding-y-md';
 
     switch ($level) {
         case '1':
@@ -18,7 +18,9 @@
     };
 @endphp
 
+<div class="editor-js-heading">
 <!-- Create block tag -->
 <{{$tag}} class={{$centerClass}}>
 {{$block->text}}
 </{{$tag}}>
+</div>

@@ -1,5 +1,23 @@
 @use '../base' as *;
 
+// list module styling
+.article-enlil-editor-list {
+    text-align: left;
+}
+
+// header module styling
+.editor-js-heading {
+    text-align: left;
+}
+
+// paragraph module styling
+.enlil-article{
+    p{
+        padding: 0.2em 0;
+    }
+}
+
+// Editor JS styling
 .ce-inline-toolbar__dropdown-content{
     svg{
         max-width: 12px;
@@ -109,13 +127,6 @@
 
 b{
     font-weight: bold;
-}
-
-
-.enlil-article{
-    p{
-        padding: 0.2em 0;
-    }
 }
 
 .cdx-notify{
