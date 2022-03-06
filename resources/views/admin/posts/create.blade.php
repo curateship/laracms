@@ -158,7 +158,7 @@
 
     <!-- Image Upload -->
     <div class="file-upload inline-block margin-bottom-sm">
-    <label for="upload-file" class="file-upload__label btn btn--primary">
+    <label for="upload-file" class="file-upload__label btn btn--subtle">
       <span class="flex items-center">
         <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><path  stroke-linecap="square" stroke-linejoin="miter" d="M2 16v6h20v-6"></path><path stroke-linejoin="miter" stroke-linecap="butt" d="M12 17V2"></path><path stroke-linecap="square" stroke-linejoin="miter" d="M18 8l-6-6-6 6"></path></g></svg>
 
