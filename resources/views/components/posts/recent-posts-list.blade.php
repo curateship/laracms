@@ -1,23 +1,23 @@
 <section class="articles-v3">
-    <ul class="grid gap-lg">
+    <ul class="grid gap-lg@md gap-md@xxs">
     @foreach($recent_posts as $recent_post)
       <li>
         <div class="grid gap-md items-start">
-          <a href="{{ route('post.show', $recent_post) }}" class="articles-v3__img col-5@md col-6@xs">
+          <a href="{{ route('post.show', $recent_post) }}" class="articles-v3__img col-5@md col-6@xxs">
             <figure class="aspect-ratio-4:3">
               <img class="block width-100%" loading="lazy" src="{{ url('/storage').config('images.posts_storage_path').$recent_post->thumbnail  }}" alt="Image description">
             </figure>
           </a>
     
-          <div class="col-10@md col-9@xs">
-            <div class="text-component">
+          <div class="col-10@md col-9@xxs">
 
-              <h2 class="articles-v3__headline"><a href="{{ route('post.show', $recent_post) }}">{{$recent_post->title}}</a></h2>
+            <div class="text-component articles-v3__headline">
+              <h2 class=" text-lg@md text-sm@xxs text-md@xs"><a href="{{ route('post.show', $recent_post) }}">{{$recent_post->title}}</a></h2>
             </div>
 
-            <p class="color-contrast-medium text-sm padding-top-md">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, accusantium consequatur. Perspiciatis! Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, accusantium consequatur. Perspiciatis!</p>
+            <p class="color-contrast-medium text-sm padding-top-md display@md">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, accusantium consequatur. Perspiciatis! Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, accusantium consequatur. Perspiciatis!</p>
 
-            <div class="articles-v3__author">
+            <div class="articles-v3__author display@md">
               <a href="#0" class="articles-v3__author-img">
                 <img class="object-cover"src="http://localhost:3000/storage/posts/medium/rmJ3xnp7mC9ZJb94IshrxkaPRyD.jpg" alt="Author picture">
               </a>
