@@ -28,7 +28,7 @@ class HomeController extends Controller
         $categories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(5)->get();
         $tags = Tag::latest()->take(10)->withCount('posts')->get();
 
-        return view('/themes.default.dashboard.home', [
+        return view('/themes.jpn.dashboard.home', [
         'posts' => $posts,
         'recent_posts' => $recent_posts,
         'categories' => $categories,

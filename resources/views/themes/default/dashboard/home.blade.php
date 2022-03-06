@@ -9,7 +9,6 @@
 
         <!-- 👇 Recent Post -->
           <div class="justify-between flex items-end justify-between@md margin-bottom-md hide@md">
-            <h3>Recent Post</h3>
             <div class="justify-between flex items-end justify-between@md">
             <a href="http://localhost:8000/post" class="btn btn--primary btn--sm radius-full margin-right-xs" role="text">My Feed</a> 
             <a href="http://localhost:8000/post" class="btn btn--subtle btn--sm radius-full margin-right-xs" role="text">Popular</a> 

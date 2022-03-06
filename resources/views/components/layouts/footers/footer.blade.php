@@ -1,4 +1,3 @@
-<!-- Footer -->
 <footer class="footer-v4 padding-y-lg">
   <div class="container max-width-lg">
     <nav class="footer-v4__nav">
@@ -30,4 +29,3 @@
     </div>
   </div>
 </footer>
-<!-- END -->
