@@ -1,0 +1,17 @@
+@use '../base' as *;
+
+/* -------------------------------- 
+
+File#: _1_lazy-load
+Title: Lazy Load
+Descr: A plugin used to load assets when they enter the viewport
+Usage: codyhouse.co/license
+
+-------------------------------- */
+html:not(.js) { // hide lazy loading content if JavaScript is disabled
+  [loading="lazy"][data-src],
+  [loading="lazy"][data-srcset],
+  picture[loading="lazy"] {
+    display: none;
+  }
+}

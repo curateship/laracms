@@ -16,7 +16,7 @@
             <a href="http://localhost:8000/post" class="btn btn--subtle btn--sm radius-full" role="text">New</a> 
             </div>
           </div>
-          @include('components.posts.recentposts')
+          @include('components.posts.recent-posts-list')
           <!-- Recent Post END -->
 
       </div><!-- Col-12 END -->

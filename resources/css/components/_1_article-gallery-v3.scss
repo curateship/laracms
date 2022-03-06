@@ -28,7 +28,7 @@ Usage: codyhouse.co/license
 }
 
 .articles-v3__headline {
-  font-size: var(--text-xl);
+  font-size: var(--text-lg);
 
   a {
     color: var(--color-contrast-higher);
@@ -42,7 +42,7 @@ Usage: codyhouse.co/license
 
 .articles-v3__author {
   display: grid;
-  grid-template-columns: 3em 1fr;
+  grid-template-columns: 2em 1fr;
   grid-gap: var(--space-xs);
   align-items: center;
   margin-top: var(--space-md);
@@ -50,8 +50,8 @@ Usage: codyhouse.co/license
 
 .articles-v3__author-img {
   display: block;
-  width: 3em;
-  height: 3em;
+  width: 2em;
+  height: 2em;
   border-radius: 50%;
   overflow: hidden;
   transition: transform .3s var(--ease-out-back);
