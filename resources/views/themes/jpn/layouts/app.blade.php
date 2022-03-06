@@ -22,40 +22,22 @@
 <body data-theme="@guest(){{config('app.default_theme')}}@else{{auth()->user()->theme()}}@endguest">
 
 <!-- Header -->
-<div class="margin-bottom-xxl">
+<div class="margin-bottom-xl padding-bottom-sm">
   @include('components.layouts.headers.header')
 </div>
 
-<!-- Content -->
+<!-- Content Body -->
 <div class="padding-top-sm">
   @yield('content')
 </div>
 
 <!-- Footer -->
-@include('components.layouts.footers.footer')
+<div class="padding-top-sm">
+  @include('components.layouts.footers.footer')
+</div>
 
 <!-- Scripts -->
 <script src="{{ asset('assets/js/scripts.js') }}"></script>
 
-<!-- Stacks other invidual scripts -->
-@stack('custom-scripts')
-
-<!-- Script to fix Modal overlap -->
-@if($errors->has('email') || $errors->has('password'))
-  <script>
-      // Create the event;
-      let event = new Event('openModal');
-
-      // Dispatch it to exist CodyHouse modal;
-      @if(old('target') != '')
-      document.getElementById('{{old('target')}}').dispatchEvent(event);
-          @else
-          document.getElementById('modal-forgot-password').dispatchEvent(event);
-          @endif
-
-  </script>
-@endif
-
-@yield('scripts')
 </body>
 </html>

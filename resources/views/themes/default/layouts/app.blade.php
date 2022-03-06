@@ -41,7 +41,6 @@
           @else
           document.getElementById('modal-forgot-password').dispatchEvent(event);
           @endif
-
   </script>
 @endif
 

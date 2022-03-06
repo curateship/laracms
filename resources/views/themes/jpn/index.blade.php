@@ -1,13 +1,13 @@
 @extends('themes.jpn.layouts.app')
 @section('content')
 
-<!-- 👇 Content Body Wrapper-->
+<!-- Content Body Wrapper-->
 <div class="container max-width-adaptive-lg">
   <div class="grid gap-md justify-between">
 
     <!-- Post Lists -->
     <div class="col-12@md">
-      @include('components.posts.recent-posts-list')
+      @include('components.posts.lists.recent-posts-list')
     </div>
 
     <!-- Sidebar -->

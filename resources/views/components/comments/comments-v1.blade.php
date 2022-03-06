@@ -1,8 +1,7 @@
-<div class="flex gap-sm flex-column flex-row@md justify-between items-center@md">
-  <div>
-    <!-- Comment header and counts -->
-    <h1 class="text-md">Comments ({{ count($post->comments) }})</h1>
-  </div>
+<div class="flex gap-sm flex-column flex-row@md justify-between items-center@md"><div>
+  <!-- Comment header and counts -->
+  <h1 class="text-md">Comments ({{ count($post->comments) }})</h1>
+</div>
 
   <!-- Sorting -->
   <form aria-label="Choose sorting option">
