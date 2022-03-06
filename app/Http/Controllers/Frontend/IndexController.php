@@ -19,7 +19,7 @@ class IndexController extends Controller
     public function index()
     {
         $recent_posts = Post::latest()->withCount('comments')->with('author')->paginate(10);
-        return view('/themes.default.index', [
+        return view('/themes.jpn.index', [
         'recent_posts' => $recent_posts,
         ]);  
     }  

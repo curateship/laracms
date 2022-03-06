@@ -19,7 +19,7 @@ class PostController extends Controller
         SEOMeta::setTitle($post->title);
         $recent_posts = Post::latest()->take(5)->get();
 
-        return view('/themes.default.posts.single', [
+        return view('/themes.jpn.posts.single', [
             'post' => $post,
             'recent_posts' => $recent_posts,
         ]);
