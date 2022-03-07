@@ -12,11 +12,11 @@
   <!-- Sticky Share Sidebar END -->
 
   <!-- Content Start -->
-  <div class="col-11@md padding-x-md@md">
+  <div class="col-11@md padding-x-lg@md">
     @include('components.posts.single.article-plain')
   <!-- Content END -->
 
-  <div class="border-top"></div>
+  <div class="border-top margin-top-lg"></div>
 
   <!-- Comments -->
   <section class="comments padding-md">

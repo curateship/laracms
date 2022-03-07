@@ -3,7 +3,7 @@
     <div class="header-v2__container container max-width-lg">
 
       <!-- LOGO -->
-      <div class="header-v2__logo padding-right-xl">
+      <div class="header-v2__logo padding-right-xxl">
         <a href="/">
           <svg width="104" height="30" viewBox="0 0 104 30">
             <title>Go to homepage</title>
