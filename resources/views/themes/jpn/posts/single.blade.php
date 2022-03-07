@@ -10,7 +10,7 @@
     @include('components.layouts.partials.sticky-sharebar')
   </div>
   <!-- Sticky Share Sidebar END -->
-test
+  
   <!-- Content Start -->
   <div class="col-11@md padding-x-lg@md">
     @include('components.posts.single.article-plain')
