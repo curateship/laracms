@@ -1,4 +1,4 @@
-@extends('themes.default.layouts.app')
+@extends('themes.jpn.layouts.app')
 @section('content')
 @include('components.layouts.partials.hero-random-image')
 

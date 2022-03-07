@@ -11,20 +11,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Roboto+Slab&display=swap" rel="stylesheet">
-</head>
 
 <!-- Back to Top -->
 <a class="back-to-top js-back-to-top" href="#" data-offset="100" data-duration="300">
   <svg class="icon" viewBox="0 0 20 20"><polyline points="2 13 10 5 18 13" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
 </a>
+</head>
 
 <!-- Theme config -->
 <body data-theme="@guest(){{config('app.default_theme')}}@else{{auth()->user()->theme()}}@endguest">
 
 <!-- Header -->
-<div class="">
   @include('components.layouts.headers.header')
-</div>
 
 <!-- Content Body -->
 <div class="padding-top-sm">
