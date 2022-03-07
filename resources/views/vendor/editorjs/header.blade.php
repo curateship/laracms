@@ -3,7 +3,7 @@
         $level = $block->{'level'};
     }
 
-    $centerClass = 'padding-y-md';
+    $centerClass = 'padding-y-xs';
 
     switch ($level) {
         case '1':

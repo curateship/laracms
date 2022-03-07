@@ -22,7 +22,7 @@
 <body data-theme="@guest(){{config('app.default_theme')}}@else{{auth()->user()->theme()}}@endguest">
 
 <!-- Header -->
-<div class="margin-bottom-xl padding-bottom-sm">
+<div class="">
   @include('components.layouts.headers.header')
 </div>
 

@@ -1,5 +1,6 @@
 @extends('themes.jpn.layouts.app')
 @section('content')
+@include('components.layouts.partials.hero-random-image')
 
 <!-- Content Body Component -->
 <div class="container max-width-lg grid gap-md">
@@ -7,8 +8,8 @@
 </div>
 
 <!-- Comment Component -->
-<section class="container comments max-width-md margin-top-xl">
+<div class="container comments max-width-md margin-top-xl">
   @include('components.comments.comments-v1')
-</section>
+</div>
 
  @endsection

@@ -7,7 +7,7 @@ return [
         'height' => 440
     ],
     'medium' => [
-        'width' => 1280,
-        'height' => 720
+        'width' => 1100,
+        'height' => 1480
     ],
 ];
