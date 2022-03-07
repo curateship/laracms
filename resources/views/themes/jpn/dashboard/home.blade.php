@@ -8,9 +8,9 @@
       <!-- Mobile Navigation Buttons -->
       <div class="justify-between flex items-end justify-between@md margin-bottom-md hide@md">
         <div class="justify-between flex items-end justify-between@md">
-        <a href="http://localhost:8000/post" class="btn btn--primary btn--sm radius-full margin-right-xs" role="text">My Feed</a> 
-        <a href="http://localhost:8000/post" class="btn btn--subtle btn--sm radius-full margin-right-xs" role="text">Popular</a> 
-        <a href="http://localhost:8000/post" class="btn btn--subtle btn--sm radius-full" role="text">New</a> 
+          <a href="http://localhost:8000/post" class="btn btn--primary btn--sm radius-full margin-right-xs" role="text">My Feed</a> 
+          <a href="http://localhost:8000/post" class="btn btn--subtle btn--sm radius-full margin-right-xs" role="text">Popular</a> 
+          <a href="http://localhost:8000/post" class="btn btn--subtle btn--sm radius-full" role="text">New</a> 
         </div>
       </div>
 

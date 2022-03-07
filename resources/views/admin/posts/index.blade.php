@@ -12,8 +12,8 @@
       <div class="col-12@md"><!-- 👇 Col 12 -->
         <div class="card" data-table-controls="table-1"><!-- Content Table Column -->
 
-<!-- Control Bar -->
-<div class="controlbar--sticky flex justify-between">
+          <!-- Control Bar -->
+          <div class="controlbar--sticky flex justify-between">
             <div class="inline-flex items-baseline">
             <nav class="breadcrumbs text-based padding-left-sm padding-sm" aria-label="Breadcrumbs">
               <ol class="flex flex-wrap gap-xxs">
@@ -24,61 +24,61 @@
                 <li class="breadcrumbs__item color-contrast-high" aria-current="page">Posts</li>
               </ol>
             </nav>
+            </div>
+
+            <!-- Menu Bar -->
+            <div class="flex flex-wrap items-center justify-between margin-right-sm">
+              <div class="flex flex-wrap">
+                <menu class="menu-bar js-int-table-actions__no-items-selected js-menu-bar">
+
+                  <li class="menu-bar__item"><a href="/admin/posts/create" role="menuitem">
+                    <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 20 20">
+                      <path d="M18.85 4.39l-3.32-3.32a0.83 0.83 0 0 0-1.18 0l-11.62 11.62a0.84 0.84 0 0 0-0.2 0.33l-1.66 4.98a0.83 0.83 0 0 0 0.79 1.09 0.84 0.84 0 0 0 0.26-0.04l4.98-1.66a0.84 0.84 0 0 0 0.33-0.2l11.62-11.62a0.83 0.83 0 0 0 0-1.18z m-6.54 1.08l1.17-1.18 2.15 2.15-1.18 1.17z"></path>
+                    </svg>
+                    </a>
+                    <span class="menu-bar__label">Add Post</span>
+                  </li>
+
+                  <li class="menu-bar__item" role="menuitem" aria-controls="post-search">
+                    <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 20 20">
+                      <path d="M11.25 17.5c4.83 0 8.75-3.93 8.75-8.75s-3.93-8.75-8.75-8.75-8.75 3.93-8.75 8.75 3.93 8.75 8.75 8.75z m0-15c3.45 0 6.25 2.8 6.25 6.25s-2.8 6.25-6.25 6.25-6.25-2.8-6.25-6.25 2.8-6.25 6.25-6.25z"></path><path d="M0.36 17.86l3-2.99a10.02 10.02 0 0 0 1.76 1.77l-2.98 3a1.25 1.25 0 0 1-1.78 0 1.25 1.25 0 0 1 0-1.78z"></path>
+                    </svg>
+                    <span class="menu-bar__label">Search Posts</span>
+                  </li>
+
+                </menu>
+
+                <menu class="menu-bar is-hidden js-int-table-actions__items-selected js-menu-bar delete-selected-posts">
+                  <li class="menu-bar__item" role="menuitem">
+                    <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 16 16">
+                      <g><path d="M2,6v8c0,1.1,0.9,2,2,2h8c1.1,0,2-0.9,2-2V6H2z"></path><path d="M12,3V1c0-0.6-0.4-1-1-1H5C4.4,0,4,0.4,4,1v2H0v2h16V3H12z M10,3H6V2h4V3z"></path></g>
+                    </svg>
+                    <span class="counter counter--critical counter--docked delete-counter">0 <i class="sr-only">Notifications</i></span>
+                    <span class="menu-bar__label">Delete</span>
+                  </li>
+                </menu>
+
               </div>
+            </div>
 
-              <!-- Menu Bar -->
-              <div class="flex flex-wrap items-center justify-between margin-right-sm">
-                    <div class="flex flex-wrap">
-                      <menu class="menu-bar js-int-table-actions__no-items-selected js-menu-bar">
-                      <li class="menu-bar__item"><a href="/admin/posts/create" role="menuitem">
-                          <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 20 20">
-                            <path d="M18.85 4.39l-3.32-3.32a0.83 0.83 0 0 0-1.18 0l-11.62 11.62a0.84 0.84 0 0 0-0.2 0.33l-1.66 4.98a0.83 0.83 0 0 0 0.79 1.09 0.84 0.84 0 0 0 0.26-0.04l4.98-1.66a0.84 0.84 0 0 0 0.33-0.2l11.62-11.62a0.83 0.83 0 0 0 0-1.18z m-6.54 1.08l1.17-1.18 2.15 2.15-1.18 1.17z"></path>
-                          </svg>
-                          </a>
-                          <span class="menu-bar__label">Add Post</span>
-
-                        </li>
-
-                        <li class="menu-bar__item" role="menuitem" aria-controls="post-search">
-                          <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 20 20">
-                            <path d="M11.25 17.5c4.83 0 8.75-3.93 8.75-8.75s-3.93-8.75-8.75-8.75-8.75 3.93-8.75 8.75 3.93 8.75 8.75 8.75z m0-15c3.45 0 6.25 2.8 6.25 6.25s-2.8 6.25-6.25 6.25-6.25-2.8-6.25-6.25 2.8-6.25 6.25-6.25z"></path><path d="M0.36 17.86l3-2.99a10.02 10.02 0 0 0 1.76 1.77l-2.98 3a1.25 1.25 0 0 1-1.78 0 1.25 1.25 0 0 1 0-1.78z"></path>
-                          </svg>
-                          <span class="menu-bar__label">Search Posts</span>
-                        </li>
-                      </menu>
-
-                      <menu class="menu-bar is-hidden js-int-table-actions__items-selected js-menu-bar delete-selected-posts">
-                        <li class="menu-bar__item" role="menuitem">
-                          <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 16 16">
-                            <g><path d="M2,6v8c0,1.1,0.9,2,2,2h8c1.1,0,2-0.9,2-2V6H2z"></path><path d="M12,3V1c0-0.6-0.4-1-1-1H5C4.4,0,4,0.4,4,1v2H0v2h16V3H12z M10,3H6V2h4V3z"></path></g>
-                          </svg>
-                          <span class="counter counter--critical counter--docked delete-counter">0 <i class="sr-only">Notifications</i></span>
-                          <span class="menu-bar__label">Delete</span>
-                        </li>
-                      </menu>
-
-                    </div>
-                  </div>
-
-                <div id="delete-post-dialog" class="dialog dialog--sticky js-dialog" data-animation="on">
-                    <div class="dialog__content max-width-xxs" role="alertdialog" aria-labelledby="dialog-sticky-title" aria-describedby="dialog-sticky-description">
-                        <div class="text-component">
-                            <h4 id="dialog-sticky-title">Are you sure what you want to delete selected post(-s)?</h4>
-                        </div>
-
-                        <footer class="margin-top-md">
-                            <div class="flex justify-end gap-xs flex-wrap">
-                                <button class="btn btn--subtle js-dialog__close">Cancel</button>
-                                <button id="accept-delete-posts" class="btn btn--accent">Delete</button>
-                            </div>
-                        </footer>
-
-                        <input type="hidden" id="delete-posts-list">
-                    </div>
+            <!-- Delete Confirmation -->
+            <div id="delete-post-dialog" class="dialog dialog--sticky js-dialog" data-animation="on">
+              <div class="dialog__content max-width-xxs" role="alertdialog" aria-labelledby="dialog-sticky-title" aria-describedby="dialog-sticky-description">
+                <div class="text-component">
+                  <h4 id="dialog-sticky-title">Are you sure what you want to delete selected post(-s)?</h4>
                 </div>
 
+                  <footer class="margin-top-md">
+                      <div class="flex justify-end gap-xs flex-wrap">
+                          <button class="btn btn--subtle js-dialog__close">Cancel</button>
+                          <button id="accept-delete-posts" class="btn btn--accent">Delete</button>
+                      </div>
+                  </footer>
+
+                <input type="hidden" id="delete-posts-list">
+              </div>
+            </div>
           </div>
-          <!-- END Control Bar-->
 
           <!-- Table -->
           <div class="margin-top-auto border-top border-contrast-lower border-opacity-30%"></div><!-- Divider -->
@@ -207,52 +207,59 @@
                           <div class="custom-checkbox__control" aria-hidden="true"></div>
                         </div>
                       </th>
+
                       <td class="int-table__cell flex">
+                      <!-- Image -->
                       <figure class="width-xl height-lg radius-lg flex-shrink-0 overflow-hidden margin-right-xs">
                         <img class="block width-100% height-100% object-cover" src="{{ url('/storage').config('images.posts_storage_path').$post->medium  }}" alt="Post Picture">
                       </figure>
+                      <!-- Post Title -->
                       <div class="line-height-xs padding-top-xxxs padding-left-xxs">
                         <div class=""><a href="{{ route ('post.edit', $post->slug) }}" class="link-subtle">{{ $post->title }}</a></div>
+                         <!-- Author -->
                         <p class="color-contrast-medium"><a href="#0" class="text-xs link-subtle">By: {!! $post->author != null ? $post->author->name : '<span style="font-weight: bold;color:red;">Deleted User</span>' !!}</a></p>
                       </div>
                       </td>
 
+                      <!-- Publish and Date -->
                       <td class="int-table__cell">Published</td>
                       <td class="int-table__cell">{{ $post->created_at->diffForHumans() }}</td>
 
                       <!-- Action Dropdown -->
                       <td class="int-table__cell">
-                      <button class="reset int-table__menu-btn margin-left-auto js-tab-focus" data-label="Edit row" aria-controls="menu-example-{{$post->id}}">
+                        <button class="reset int-table__menu-btn margin-left-auto js-tab-focus" data-label="Edit row" aria-controls="menu-example-{{$post->id}}">
                           <svg class="icon" viewBox="0 0 16 16">
                             <circle cx="8" cy="7.5" r="1.5" />
                             <circle cx="1.5" cy="7.5" r="1.5" />
                             <circle cx="14.5" cy="7.5" r="1.5" />
                           </svg>
                         </button>
+                        <menu id="menu-example-{{$post->id}}" class="menu js-menu">
 
-                          <menu id="menu-example-{{$post->id}}" class="menu js-menu">
+                          <!-- Preview Action -->
+                          <li role="menuitem">
+                            <span class="menu__content js-menu__content">
+                              <svg class="icon menu__icon" aria-hidden="true" viewBox="0 0 16 16">
+                                <path d="M15,4H1C0.4,4,0,4.4,0,5v10c0,0.6,0.4,1,1,1h14c0.6,0,1-0.4,1-1V5C16,4.4,15.6,4,15,4z M14,14H2V6h12V14z"></path>
+                                <rect x="2" width="12" height="2"></rect>
+                              </svg>
+                              <span><a class="text-decoration-none color-inherit" href="{{ route('post.show', $post) }}" target="_blank">Preview</a></span>
+                            </span>
+                          </li>
 
-                              <li role="menuitem">
-                          <span class="menu__content js-menu__content">
-                            <svg class="icon menu__icon" aria-hidden="true" viewBox="0 0 16 16">
-                              <path d="M15,4H1C0.4,4,0,4.4,0,5v10c0,0.6,0.4,1,1,1h14c0.6,0,1-0.4,1-1V5C16,4.4,15.6,4,15,4z M14,14H2V6h12V14z"></path>
-                              <rect x="2" width="12" height="2"></rect>
-                            </svg>
-                            <span><a class="text-decoration-none color-inherit" href="{{ route('post.show', $post) }}" target="_blank">Preview</a></span>
-                          </span>
-                              </li>
+                          <!-- Delete Action -->
+                          <li role="menuitem">
+                            <span class="menu__content js-menu__content">
+                              <svg class="icon menu__icon" aria-hidden="true" viewBox="0 0 12 12">
+                                <path d="M8.354,3.646a.5.5,0,0,0-.708,0L6,5.293,4.354,3.646a.5.5,0,0,0-.708.708L5.293,6,3.646,7.646a.5.5,0,0,0,.708.708L6,6.707,7.646,8.354a.5.5,0,1,0,.708-.708L6.707,6,8.354,4.354A.5.5,0,0,0,8.354,3.646Z"></path>
+                                <path d="M6,0a6,6,0,1,0,6,6A6.006,6.006,0,0,0,6,0ZM6,10a4,4,0,1,1,4-4A4,4,0,0,1,6,10Z"></path>
+                              </svg>
+                              <span class="delete-post-context-menu" data-post-id="{{ $post->id }}">Delete</span>
+                            </span>
+                          </li>
+                        </menu>
+                        <!-- Action Dropdown END-->
 
-                              <li role="menuitem">
-                          <span class="menu__content js-menu__content">
-                            <svg class="icon menu__icon" aria-hidden="true" viewBox="0 0 12 12">
-                              <path d="M8.354,3.646a.5.5,0,0,0-.708,0L6,5.293,4.354,3.646a.5.5,0,0,0-.708.708L5.293,6,3.646,7.646a.5.5,0,0,0,.708.708L6,6.707,7.646,8.354a.5.5,0,1,0,.708-.708L6.707,6,8.354,4.354A.5.5,0,0,0,8.354,3.646Z"></path>
-                              <path d="M6,0a6,6,0,1,0,6,6A6.006,6.006,0,0,0,6,0ZM6,10a4,4,0,1,1,4-4A4,4,0,0,1,6,10Z"></path>
-                            </svg>
-                            <span class="delete-post-context-menu" data-post-id="{{ $post->id }}">Delete</span>
-                          </span>
-                              </li>
-                          </menu>
-                          <!-- Action Dropdown END-->
                       </td>
                     </tr>
                     @endforeach
@@ -262,19 +269,19 @@
                 </table>
               </div>
             </div>
-          </div>
-          <!-- END Table-->
-        @include('components.layouts.partials.pagination', ['items' => $posts])
-            <!-- Pagination END-->
+          </div><!-- END Table-->
+
+          <!-- Pagination -->
+          @include('components.layouts.partials.pagination', ['items' => $posts])
+          <!-- Pagination END-->
 
         </div><!-- END Col-12 Card -->
       </div><!-- Col-12 END -->
 
-      <!-- Sidebar -->
-      <div class="col-3@md">
-        @include('admin.partials.sidebar')
-      </div>
-      <!-- Sidebar END -->
+    <!-- Sidebar -->
+    <div class="col-3@md">
+      @include('admin.partials.sidebar')
+    </div>
 
     </div><!-- Grid END -->
   </div>

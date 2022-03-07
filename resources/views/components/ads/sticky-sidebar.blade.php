@@ -1,4 +1,4 @@
-  <a class="card-v14 padding-sm flex flex-column position-fixed position-sticky top-sm@xs" href="#">
+  <a class="card-v14 padding-sm flex flex-column position-fixed position-sticky top-sm@xs">
     <h3 class="text-md">Profile Card</h3>
     <p class="color-contrast-medium text-sm padding-y-sm">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia minus culpa commodi! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia minus culpa commodi! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia minus culpa commodi! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia minus culpa commodi! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia minus culpa commodi!</p>
     <div class="avatar-group">

@@ -3,7 +3,7 @@
 
 <!-- Content Body Component -->
 <div class="container max-width-lg grid gap-md">
-  @include('components.posts.single.single-v2')
+  @include('components.posts.single.article-plain')
 </div>
 
 <!-- Comment Component -->

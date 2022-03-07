@@ -1,20 +1,19 @@
 @extends('themes.jpn.layouts.app')
 @section('content')
 
-<!-- Content Body Wrapper-->
 <div class="container max-width-adaptive-lg">
   <div class="grid gap-md justify-between">
 
-    <!-- Post Lists -->
+    <!-- Recent Post Lists Component -->
     <div class="col-12@md">
       @include('components.posts.lists.recent-posts-list')
     </div>
 
-    <!-- Sidebar -->
+    <!-- Ads Sticky Sidebar Desktop Component -->
     <div class="col-3@md">
-      @include('components.ads.sidebar')
+      @include('components.ads.sticky-sidebar')
     </div>
     
-  </div><!-- Grid END (col-12 and col-3) -->
-</div><!-- Container Wrapper END -->
+  </div>
+</div>
 @endsection
