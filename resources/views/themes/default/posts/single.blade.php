@@ -11,9 +11,8 @@
   <!-- Content Start -->
   <div class="col-11@md">
     <div class="card">
-    @include('components.posts.single.single-v1')
+    @include('components.posts.single.article-plain')
     </div>
-  </div>
   <!-- Content END -->
 
   <div class="border-top"></div>
@@ -23,6 +22,7 @@
     @include('components.comments.comments-v1')
   </section>
   <!-- END -->
+  </div>
 
   </div>
 </div>
@@ -30,7 +30,7 @@
 
 <!-- Sidebar -->
 <div class="col-3@md">
-  @include('components.ads.sidebar')
+  @include('components.ads.sticky-sidebar')
 </div>
 <!--Sidebar END -->
 

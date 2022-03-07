@@ -3,10 +3,10 @@
 @include('components.layouts.partials.hero-random-image')
 
 <div class="container max-width-adaptive-lg">
-  <div class="grid gap-md justify-between">
+  <div class="grid gap-md">
 
     <!-- Recent Post Lists Component -->
-    <div class="col-12@md z-index-1">
+    <div class="col-12@md">
       @include('components.posts.lists.recent-posts-list')
     </div>
 

@@ -1,5 +1,5 @@
 <section class="margin-bottom-lg">
-
+  <h3 class="padding-bottom-md">Related Posts</h3>
     <ul class="grid-auto-xs grid-auto-sm@sm grid-auto-md@md gap-md">
     @foreach($recent_posts as $recent_post)
     <li class="card">
