@@ -14,7 +14,7 @@
     }
 @endphp
 
-<figure class="margin-y-md article-enlil-editor-image<?= implode(' ', $classes) ?>">
+<figure class="margin-y-md article-enlil-editor-image <?= implode(' ', $classes) ?>">
     <img class="radius-md" src="{{ $block->file['url'] }}" alt="{{ !empty($block->caption) ? $block->caption : '' }}">
     @if (!empty($block->caption))
         <footer class="article-image-caption text-gray-400 text-sm">

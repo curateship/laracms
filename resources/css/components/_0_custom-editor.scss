@@ -1,5 +1,14 @@
 @use '../base' as *;
 
+.article-image--backgrounded{
+    display: flex;
+    justify-content: center;
+
+    img{
+        max-width: 60%;
+    }
+}
+
 // list module styling
 .article-enlil-editor-list {
     text-align: left;
