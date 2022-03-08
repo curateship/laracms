@@ -13,10 +13,10 @@
 </head>
 <body data-theme="@guest(){{config('app.default_theme')}}@else{{auth()->user()->theme()}}@endguest">
   @include('components.layouts.headers.header')
-  <div class="padding-top-sm">
-    @include('admin.partials.alerts')
+  @include('components.layouts.partials.hero-random-image')
+  @include('admin.partials.alerts')
     @yield('content')
-  </div>  @include('components.layouts.footers.footer')
+  @include('components.layouts.footers.footer')
 <script src="{{ asset('assets/js/scripts.js') }}"></script>
   @stack('custom-scripts')
 </body>

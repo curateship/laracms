@@ -5,8 +5,6 @@
 @endpush
 
 @section('content')
-
-<section class="margin-y-xl">
   <div class="container max-width-adaptive-lg">
     <div class="grid gap-md justify-between">
       <div class="col-12@md"><!-- 👇 Col 12 -->
@@ -133,6 +131,5 @@
 
     </div><!-- Grid END -->
   </div>
-</section
 
 @endsection

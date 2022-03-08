@@ -1,6 +1,5 @@
 @extends('themes.jpn.layouts.app')
 @section('content')
-@include('components.layouts.partials.hero-random-image')
 
 <div class="container max-width-adaptive-lg">
 <div class="grid gap-md">

@@ -23,6 +23,7 @@
 
 <!-- Header -->
   @include('components.layouts.headers.header')
+  @include('components.layouts.partials.hero-random-image')
 
 <!-- Content Body -->
 <div class="padding-top-sm">
