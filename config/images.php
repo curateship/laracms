@@ -2,6 +2,7 @@
 
 return [
     'posts_storage_path' => '/posts',
+    'users_storage_path' => '/users',
     'thumbnail' => [
         'width' => 520,
         'height' => 440

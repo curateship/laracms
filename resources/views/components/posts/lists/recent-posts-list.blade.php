@@ -10,7 +10,7 @@
             <img class="block width-100%" loading="lazy" src="{{ url('/storage').config('images.posts_storage_path').$recent_post->thumbnail  }}" alt="Image description">
           </figure>
         </a>
-  
+
         <div class="col-10@md col-9@xxs">
           <!-- Post Title -->
           <div class="text-component articles-v3__headline">
@@ -21,7 +21,7 @@
           <div class="articles-v3__author display@md">
             <!-- Author Image -->
             <a href="#0" class="articles-v3__author-img">
-              <img class="object-cover"src="http://localhost:3000/storage/posts/medium/rmJ3xnp7mC9ZJb94IshrxkaPRyD.jpg" alt="Author picture">
+              <img class="object-cover" src="{{$recent_post->author != null ? url('/storage'.config('images.users_storage_path').$recent_post->author->thumbnail) : asset('assets/img/avatar.png')}}" alt="Author picture">
             </a>
             <!-- Author name and time created -->
             <div class="text-component text-sm line-height-xs text-space-y-xxs">

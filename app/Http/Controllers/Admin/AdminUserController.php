@@ -29,7 +29,7 @@ class AdminUserController extends Controller
     // Index
     public function index(Request $request)
     {
-        
+
         SEOMeta::setTitle('Admin Users'); // Page Title
         if($request->has('sortBy') && $request->input('sortBy') !== 'role'){
             $users = User::orderBy($request->input('sortBy'), $request->input('sortDesc'));
@@ -139,6 +139,7 @@ class AdminUserController extends Controller
 
     // Upload
     public function upload(Request $request){
+        $path = '/public'.config('images.users_storage_path');
         $mime_type = $request->file('file')->getMimeType();
         $media_path = storage_path() . "/app";
         $media = [
@@ -153,9 +154,10 @@ class AdminUserController extends Controller
         unset($media['original']);
 
         // Save original media file in file system;
-        $original = request()->file('file')->store("public/users/original");
-
+        $original = request()->file('file')->getClientOriginalName();
         $thumbnail_medium_name = Str::random(27) . '.' . Arr::last(explode('.', $original));
+
+        $original = request()->file('file')->storeAs($path."/original", $thumbnail_medium_name);
 
         foreach($media as $type_name => $type){
             if ($mime_type == 'image/gif') {
@@ -168,7 +170,7 @@ class AdminUserController extends Controller
 
                 $thumbnail_medium = $thumbnail_medium->deconstructImages();
 
-                $thumbnail_medium->writeImages($media_path . "/public/posts/$type_name/" . $thumbnail_medium_name, true);
+                $thumbnail_medium->writeImages($media_path . "/public/users/$type_name/" . $thumbnail_medium_name, true);
             }   else{
                 /* Other Image types */
                 $thumbnail_medium = Image::make(request()->file('file'));
@@ -222,6 +224,9 @@ class AdminUserController extends Controller
                     'user_id' => null
                 ]);
 
+            // Remove user avatar if it not default;
+
+
             // And then - remove the user;
             User::destroy($id);
         }
@@ -237,9 +242,53 @@ class AdminUserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
-        $user->update($request->except(['_token', 'roles']));
+
+        if($user == null){
+            return redirect()->route('admin.users.edit', $user)->with('danger', 'Undefined user...');
+        }
+
+        // Email unique checking;
+        $exist_user = User::where('email', $request->input('email'))
+            ->first();
+        if($exist_user != null && $exist_user->id != $id){
+            return redirect()->route('admin.users.edit', $user)->with('danger', 'Email must be unique...');
+        }
+
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+
+        // Remove old avatar (if it not default);
+        if($request->has('thumbnail') && $user->thumbnail != $request->input('thumbnail')){
+            // Remove old avatar (if it not default);
+            if($user->thumbnail != ''){
+                $url_array = explode('/', $user->thumbnail);
+                $image = Arr::last($url_array);
+
+                $path = '/public'.config('images.users_storage_path');
+                Storage::delete($path.'/original/'.$image);
+                Storage::delete($path.'/medium/'.$image);
+                Storage::delete($path.'/thumbnail/'.$image);
+            }
+
+            $original = ( $request->has('original') && !empty($request->input('original')) ) ? $request->input('original') : NULL;
+            $original = str_replace(url('/storage'.config('images.users_storage_path')), '', $original);
+
+            $thumbnail = ( $request->has('thumbnail') && !empty($request->input('thumbnail')) ) ? $request->input('thumbnail') : NULL;
+            $thumbnail = str_replace(url('/storage'.config('images.users_storage_path')), '', $thumbnail);
+
+            $medium = ( $request->has('medium') && !empty($request->input('medium')) )  ? $request->input('medium') : NULL;
+            $medium = str_replace(url('/storage'.config('images.users_storage_path')), '', $medium);
+
+            $user->original = $original;
+            $user->thumbnail = $thumbnail;
+            $user->medium = $medium;
+        }
+
+        $user->save();
+
+        // Updating all data was get;
         $user->roles()->sync($request->roles);
-          
+
         return redirect()->route('admin.users.edit', $user)->with('success', 'User has been updated.');
     }
 

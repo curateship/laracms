@@ -75,7 +75,7 @@
                       <li>
                         <input class="checkbox" name="roles[]" type="checkbox" value="{{ $role->id }}" id="{{ $role->name }}"
                         @isset($user) @if(in_array($role->id, $user->roles->pluck('id')->toArray())) checked @endif @endisset">
-                        
+
                         <label for="{{ $role->name }}">{{ $role->name }}</label>
                       </li>
                       @endforeach

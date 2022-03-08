@@ -62,11 +62,11 @@
               {!! Menu::get('user-dropdown')->asUl() !!}
                <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="dropdown__item">Log Out</a></li>
               </ul>
-              
+
               <!-- Theme Switch -->
               @include('components.layouts.partials.theme-switch')
             </nav>
-            
+
             <!-- User icon if not logged in -->
             @else
             <button class="header-v2__nav-control reset anim-menu-btn anim-menu-btn--avatar" aria-controls="modal-login">
@@ -174,7 +174,7 @@
 
               <!-- With avatar -->
                <a href="#0" class="color-inherit flex height-100% width-100% flex-center dropdown__trigger js-dropdown__trigger">
-                  <img class="desktop-user-avatar" src="{{ asset('assets/img/avatar.png') }}" alt="Logged in user avatar">
+                  <img class="desktop-user-avatar radius-50%" src="{{url('/storage'.config('images.users_storage_path').\Illuminate\Support\Facades\Auth::user()->thumbnail)}}" alt="Logged in user avatar">
                </a>
 
                <!-- avatar Dropdown -->
