@@ -12,13 +12,16 @@
         </a>
 
         <div class="col-10@md col-9@xxs">
+
           <!-- Post Title -->
           <div class="text-component articles-v3__headline">
             <h2 class=" text-lg@md text-sm@xxs text-md@xs"><a href="{{ route('post.show', $recent_post) }}">{{$recent_post->title}}</a></h2>
           </div>
+
           <!-- Excerpt -->
           <p class="color-contrast-medium text-sm padding-top-md display@md">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, accusantium consequatur. Perspiciatis! Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, accusantium consequatur. Perspiciatis!</p>
-          <div class="articles-v3__author display@md">
+          <div class="articles-v3__author display@md padding-top-md">
+
             <!-- Author Image -->
             <a href="#0" class="articles-v3__author-img">
               <img class="object-cover" src="{{$recent_post->author != null ? url('/storage'.config('images.users_storage_path').$recent_post->author->thumbnail) : asset('assets/img/avatar.png')}}" alt="Author picture">

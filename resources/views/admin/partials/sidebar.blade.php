@@ -1,6 +1,6 @@
 <!-- 👇 Sidebar Wrapper-->
 <div class="card display@md position-fixed position-sticky top-sm@xs">
-    <div class="background-bg shadow-md border radius-md padding-bottom-sm">
+    <div class="background-bg radius-md padding-bottom-sm">
       <nav class="sidenav js-sidenav">
          <div class="sidenav__label margin-bottom-xs">
              </div>

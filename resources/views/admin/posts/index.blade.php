@@ -10,6 +10,7 @@
   <div class="grid gap-md justify-between">
     <div class="col-12@md"><!-- 👇 Col 12 -->
       <div class="card" data-table-controls="table-1"><!-- Content Table Column -->
+
         <!-- Control Bar -->
         <div class="controlbar--sticky flex justify-between">
           <div class="inline-flex items-baseline">
@@ -23,6 +24,7 @@
             </ol>
           </nav>
           </div>
+
           <!-- Menu Bar -->
           <div class="flex flex-wrap items-center justify-between margin-right-sm">
             <div class="flex flex-wrap">
@@ -52,6 +54,7 @@
               </menu>
             </div>
           </div>
+
           <!-- Delete Confirmation -->
           <div id="delete-post-dialog" class="dialog dialog--sticky js-dialog" data-animation="on">
             <div class="dialog__content max-width-xxs" role="alertdialog" aria-labelledby="dialog-sticky-title" aria-describedby="dialog-sticky-description">
@@ -68,7 +71,7 @@
             </div>
           </div>
         </div>
-        <!-- Table -->
+
         <div class="margin-top-auto border-top border-contrast-lower border-opacity-30%"></div><!-- Divider -->
         <!-- Table-->
         <div class="padding-sm">
@@ -168,6 +171,7 @@
                   </tr>
                 </thead>
                 <tbody class="int-table__body js-int-table__body">
+
                   <!-- Content Row -->
                   @foreach($posts as $post)
                   <tr class="int-table__row">
@@ -178,20 +182,25 @@
                       </div>
                     </th>
                     <td class="int-table__cell flex">
+
                     <!-- Image -->
                     <figure class="width-xl height-lg radius-lg flex-shrink-0 overflow-hidden margin-right-xs">
                       <img class="block width-100% height-100% object-cover" src="{{ url('/storage').config('images.posts_storage_path').$post->medium  }}" alt="Post Picture">
                     </figure>
+
                     <!-- Post Title -->
                     <div class="line-height-xs padding-top-xxxs padding-left-xxs">
                       <div class=""><a href="{{ route ('post.edit', $post->slug) }}" class="link-subtle">{{ \Str::limit( $post->title, 65) }}</a></div>
+
                        <!-- Author -->
                       <p class="color-contrast-medium"><a href="#0" class="text-xs link-subtle">By: {!! $post->author != null ? $post->author->name : '<span style="font-weight: bold;color:red;">Deleted User</span>' !!}</a></p>
                     </div>
                     </td>
+
                     <!-- Publish and Date -->
                     <td class="int-table__cell">Published</td>
                     <td class="int-table__cell">{{ $post->created_at->diffForHumans() }}</td>
+
                     <!-- Action Dropdown -->
                     <td class="int-table__cell">
                       <button class="reset int-table__menu-btn margin-left-auto js-tab-focus" data-label="Edit row" aria-controls="menu-example-{{$post->id}}">
@@ -202,6 +211,7 @@
                         </svg>
                       </button>
                       <menu id="menu-example-{{$post->id}}" class="menu js-menu">
+
                         <!-- Preview Action -->
                         <li role="menuitem">
                           <span class="menu__content js-menu__content">
@@ -212,6 +222,7 @@
                             <span><a class="text-decoration-none color-inherit" href="{{ route('post.show', $post) }}" target="_blank">Preview</a></span>
                           </span>
                         </li>
+
                         <!-- Delete Action -->
                         <li role="menuitem">
                           <span class="menu__content js-menu__content">
@@ -223,6 +234,7 @@
                           </span>
                         </li>
                       </menu>
+                      
                       <!-- Action Dropdown END-->
                     </td>
                   </tr>
