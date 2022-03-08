@@ -1,7 +1,7 @@
 
 <!-- Post Title -->
 <div class="text-component padding-bottom-md">
-  <h1>{{ $post->title }}</h1>
+  <h1 class="text-xl">{{ $post->title }}</h1>
 </div>
 
 <!-- Post Image -->
