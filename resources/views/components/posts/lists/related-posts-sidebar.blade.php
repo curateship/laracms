@@ -10,7 +10,7 @@
         </figure>
       </a>
         <div class="card__content recent-post-card line-height-1 margin-xxs">
-         <a href="{{ route('post.show', $recent_post) }}" class="link-subtle text-sm">{{ \Str::limit( $recent_post->title, 40) }}</a>
+         <a href="{{ route('post.show', $recent_post) }}" class="link-subtle text-sm">{{ \Str::limit( $recent_post->title, 55) }}</a>
           <p class="text-xs color-contrast-low padding-top-sm">{{ $recent_post->created_at->diffforhumans() }} <br></p>
         </div>
     @endforeach

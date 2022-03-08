@@ -215,7 +215,7 @@
                       </figure>
                       <!-- Post Title -->
                       <div class="line-height-xs padding-top-xxxs padding-left-xxs">
-                        <div class=""><a href="{{ route ('post.edit', $post->slug) }}" class="link-subtle">{{ $post->title }}</a></div>
+                        <div class=""><a href="{{ route ('post.edit', $post->slug) }}" class="link-subtle">{{ \Str::limit( $post->title, 65) }}</a></div>
                          <!-- Author -->
                         <p class="color-contrast-medium"><a href="#0" class="text-xs link-subtle">By: {!! $post->author != null ? $post->author->name : '<span style="font-weight: bold;color:red;">Deleted User</span>' !!}</a></p>
                       </div>

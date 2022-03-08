@@ -3,7 +3,7 @@
     <div class="header-v2__container container max-width-lg">
 
       <!-- LOGO -->
-      <div class="header-v2__logo padding-right-xxl">
+      <div class="header-v2__logo">
         <a href="/">
           <svg width="104" height="30" viewBox="0 0 104 30">
             <title>Go to homepage</title>
@@ -116,7 +116,7 @@
 
         <!-- Navigation Menu -->
         <nav id="main-menu" class="header-v2__nav" role="navigation">
-          <ul class="header-v2__nav-list header-v2__nav-list--main">
+          <ul class="header-v2__nav-list header-v2__nav-list--main padding-left-xxl">
 
             <li class="header-v2__nav-item header-v2__nav-item--main header-v2__nav-item--has-children">
               <a href="#0" class="header-v2__nav-link">

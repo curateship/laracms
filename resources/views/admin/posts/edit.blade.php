@@ -38,7 +38,7 @@
                     <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
                   </li>
 
-                  <li class="breadcrumbs__item color-contrast-high" aria-current="page">Edit {{ $post->title }}</li>
+                  <li class="breadcrumbs__item color-contrast-high" aria-current="page">Edit {{ \Str::limit( $post->title, 60) }}</li>
                 </ol>
               </nav>
               <!-- Bread Crumb END -->
