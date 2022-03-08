@@ -15,4 +15,4 @@ yarn-error.log
 /.vscode
 /config
 /Middleware/GenerateMenus.php
-/Http/Controllers/Frontend/IndexController.php
+app/Http/Controllers/Frontend/IndexController.php
