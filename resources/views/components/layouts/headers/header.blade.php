@@ -5,7 +5,7 @@
       <!-- LOGO -->
       <div class="header-v2__logo">
         <a href ="/">
-          <img src="{{ asset('assets/img/logo.svg') }}">
+          @include('components.layouts.svg.logo')
         </a>
       </div>
 
