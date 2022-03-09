@@ -17,5 +17,5 @@
 		</g>
 		</g>
 	</svg>
-	<h2 class="text-lg margin-left-xxxs letter-spacing-lg"><a class="link-subtle" href="/">PN</a></h2>
+	<h2 class="text-lg margin-left-xxxs letter-spacing-lg"><a class="link-logo" href="/">PN</a></h2>
 </div>

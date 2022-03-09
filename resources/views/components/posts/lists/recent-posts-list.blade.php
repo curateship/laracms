@@ -20,7 +20,7 @@
           </div>
 
           <!-- Excerpt -->
-          <div class="color-contrast-medium text-sm padding-top-md">
+          <div class="color-contrast-medium text-sm padding-top-md display@md">
               {!! $recent_post->body('short', 200) !!}
           </div>
           <div class="articles-v3__author display@md padding-top-md">
