@@ -18,7 +18,7 @@
           @auth
           <button class="header-v2__nav-control reset anim-menu-btn js-anim-menu-btn switch-icon switch-icon--rotate js-switch-icon js-tab-focus" aria-label="Toggle icon" menu-target="user-menu">
               <div class="mega-nav__icon-btn dropdown__wrapper inline-block author author--minimal-mobile switch-icon__icon switch-icon__icon--a">
-                  <div class="author__img-wrapper author--minimal-mobile dropdown__trigger">
+                  <div class="author__img-wrapper author--minimal-mobile dropdown__trigger object-cover">
                       <img src="{{ url('/storage'.config('images.users_storage_path').\Illuminate\Support\Facades\Auth::user()->thumbnail)  }}" alt="Logged in user avatar">
                   </div>
               </div>
@@ -137,7 +137,7 @@
 
               <!-- With avatar -->
                <a href="#0" class="color-inherit flex height-100% width-100% flex-center dropdown__trigger js-dropdown__trigger">
-                  <img class="desktop-user-avatar radius-50%" src="{{ url('/storage'.config('images.users_storage_path').\Illuminate\Support\Facades\Auth::user()->thumbnail) }}" alt="Logged in user avatar">
+                  <img class="desktop-user-avatar radius-50% object-cover" src="{{ url('/storage'.config('images.users_storage_path').\Illuminate\Support\Facades\Auth::user()->thumbnail) }}" alt="Logged in user avatar">
                </a>
 
                <!-- avatar Dropdown -->
