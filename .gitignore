@@ -13,3 +13,5 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+/config/seotools.php
+/app/Http/Middleware/GenerateMenus.php
