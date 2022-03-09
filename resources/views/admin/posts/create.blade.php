@@ -116,7 +116,7 @@
           <div class="grid margin-bottom-sm">
               <label class="form-label margin-bottom-xxxs" for="tag_category_{{ $tag_category->id }}">
               </label>
-              <select name="tag_category_{{ $tag_category->id }}[]" id="tag_category_{{ $tag_category->id }}" class="site-tag-pills form-control" data-id="{{ $tag_category->id }}" data-placeholder="Add {{ $tag_category->name }}" multiple></select>
+              <select name="tag_category_{{ $tag_category->id }}[]" id="tag_category_{{ $tag_category->id }}" class="site-tag-pills form-control" data-category-id="{{ $tag_category->id }}" data-placeholder="Add {{ $tag_category->name }}" multiple></select>
           </div>
       @endforeach
       <!--

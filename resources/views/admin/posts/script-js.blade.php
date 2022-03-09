@@ -189,12 +189,11 @@
     /* Tags */
 
     $('.site-tag-pills').each(function(){
-        $(this).attr('data-post-id', 123)
         select2ForTags(this);
     });
 
     function select2ForTags(selector){
-        const postId = $(selector).attr('data-post-id')
+        const categoryId = $(selector).attr('data-category-id')
         const placeholder = $(selector).attr('data-placeholder')
 
         $(selector).select2({
@@ -204,7 +203,7 @@
                 data: function (params) {
                     return {
                         search: params.term,
-                        postId: postId
+                        categoryId: categoryId
                     }
                 }
             },

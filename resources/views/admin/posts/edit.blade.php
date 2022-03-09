@@ -151,7 +151,7 @@
           <div class="grid margin-bottom-sm">
               <label class="form-label margin-bottom-xxxs" for="tag_category_{{ $tag_category->id }}">
               </label>
-              <select name="tag_category_{{ $tag_category->id }}[]" id="tag_category_{{ $tag_category->id }}" class="site-tag-pills" data-id="{{ $tag_category->id }}" data-placeholder="Edit {{ $tag_category->name }}" multiple>
+              <select name="tag_category_{{ $tag_category->id }}[]" id="tag_category_{{ $tag_category->id }}" class="site-tag-pills" data-category-id="{{ $tag_category->id }}" data-placeholder="Edit {{ $tag_category->name }}" multiple>
                   @foreach($post->tags($tag_category->id) as $tag)
                       <option value="{{$tag->id}}" selected>{{$tag->name}}</option>
                   @endforeach()
