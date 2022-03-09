@@ -19,7 +19,7 @@
           <button class="header-v2__nav-control reset anim-menu-btn js-anim-menu-btn switch-icon switch-icon--rotate js-switch-icon js-tab-focus" aria-label="Toggle icon" menu-target="user-menu">
               <div class="mega-nav__icon-btn dropdown__wrapper inline-block author author--minimal-mobile switch-icon__icon switch-icon__icon--a">
                   <div class="author__img-wrapper author--minimal-mobile dropdown__trigger">
-                      <img src="{{ 'https://images.assetsdelivery.com/compings_v2/salamatik/salamatik1801/salamatik180100019.jpg'  }}" alt="Logged in user avatar">
+                      <img src="{{ url('/storage'.config('images.users_storage_path').\Illuminate\Support\Facades\Auth::user()->thumbnail)  }}" alt="Logged in user avatar">
                   </div>
               </div>
               <svg class="avatar-cross-fix switch-icon__icon switch-icon__icon--b" viewBox="0 0 20 20">
@@ -58,11 +58,11 @@
               {!! Menu::get('user-dropdown')->asUl() !!}
                <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="dropdown__item">Log Out</a></li>
               </ul>
-              
+
               <!-- Theme Switch -->
               @include('components.layouts.partials.theme-switch')
             </nav>
-            
+
             <!-- User icon if not logged in -->
             @else
             <button class="header-v2__nav-control reset anim-menu-btn anim-menu-btn--avatar" aria-controls="modal-login">
@@ -113,40 +113,7 @@
         <!-- Navigation Menu -->
         <nav id="main-menu" class="header-v2__nav" role="navigation">
           <ul class="header-v2__nav-list header-v2__nav-list--main padding-left-xxxl">
-
-            <li class="header-v2__nav-item header-v2__nav-item--main header-v2__nav-item--has-children">
-              <a href="#0" class="header-v2__nav-link">
-                <span>About</span>
-                <svg class="header-v2__nav-dropdown-icon icon margin-left-xxxs" aria-hidden="true" viewBox="0 0 16 16">
-                  <polyline fill="none" stroke-width="1" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="3.5,6.5 8,11 12.5,6.5 "></polyline>
-                </svg>
-              </a>
-
-              <div class="header-v2__nav-dropdown header-v2__nav-dropdown--md">
-                <ul class="header-v2__nav-list header-v2__nav-list--title-desc">
-
-                  <li class="header-v2__nav-item">
-                    <a href="#0" class="header-v2__nav-link">
-                      <div>
-                        <strong>Sub nav item</strong>
-                      </div>
-                    </a>
-                  </li>
-
-                  <li class="header-v2__nav-item">
-                    <a href="#0" class="header-v2__nav-link">
-                      <div>
-                        <strong>Sub nav item</strong>
-                      </div>
-                    </a>
-                  </li>
-
-                </ul>
-              </div>
-            </li>
-
-            {!! Menu::get('header')->asUl() !!}
-
+            @include('components.layouts.headers.custom-menu-items', ['items' => Menu::get('header')->roots()])
           </ul>
         </nav>
 
@@ -170,7 +137,7 @@
 
               <!-- With avatar -->
                <a href="#0" class="color-inherit flex height-100% width-100% flex-center dropdown__trigger js-dropdown__trigger">
-                  <img class="desktop-user-avatar" src="{{ asset('assets/img/avatar.png') }}" alt="Logged in user avatar">
+                  <img class="desktop-user-avatar radius-50%" src="{{ url('/storage'.config('images.users_storage_path').\Illuminate\Support\Facades\Auth::user()->thumbnail) }}" alt="Logged in user avatar">
                </a>
 
                <!-- avatar Dropdown -->

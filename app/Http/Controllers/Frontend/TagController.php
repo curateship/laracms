@@ -35,32 +35,20 @@ class TagController extends Controller
 
     public function search(Request $request){
         $search = $request->input('search');
-        $post_id = $request->has('postId') ? $request->input('postId') : null;
+        $category_id = $request->has('categoryId') ? $request->input('categoryId') : null;
 
         $tags = Tag::where('tags.name', 'like', $search.'%')
+            ->where('category_id', $category_id)
             ->select('id', 'tags.name')
             ->get();
 
-        /*
-        if($post_id != null){
-            $post = Post::find($post_id);
-            $post_tags = $post->getTagNames();
-        }
-        */
-        $post_tags = [];
-
         $tags_array = [];
         foreach($tags as $tag){
-            if($post_id != null && in_array($tag->name, $post_tags)){
-                continue;
-            }
-
             $tags_array[] = [
                 'id' => $tag->id,
                 'text' => $tag->name
             ];
         }
-
 
         return [
             'results' => $tags_array
