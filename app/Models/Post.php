@@ -76,11 +76,28 @@ class Post extends Model
     /**
      * @throws EditorJSException
      */
-    public function body(): string
+    public function body($type = 'full'): string
     {
-      $convertToHtml = new EditorJSHtml($this->body);
-      return html_entity_decode($convertToHtml->render());
-  }
+        if($type == 'full'){
+            // Full content render;
+            $convertToHtml = new EditorJSHtml($this->body);
+            $content = $convertToHtml->render();
+        }   else{
+            // Get only text content from post body;
+            $data = json_decode($this->body, true);
+
+            $items = [];
+            foreach($data['blocks'] as $item){
+                if($item['type'] == 'paragraph'){
+                    $items[] = $item['data']['text'];
+                }
+            }
+
+            $content = '<div class="text-left">'.implode('<br>', $items).'</div>';
+        }
+
+        return html_entity_decode($content);
+    }
 
   public function removePostImages($type){
       $path = '/public'.config('images.posts_storage_path');
