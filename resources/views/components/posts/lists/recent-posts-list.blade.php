@@ -19,7 +19,9 @@
           </div>
 
           <!-- Excerpt -->
-          <p class="color-contrast-medium text-sm padding-top-md display@md">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, accusantium consequatur. Perspiciatis! Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, accusantium consequatur. Perspiciatis!</p>
+          <div class="color-contrast-medium text-sm padding-top-md display@md">
+              {!! $recent_post->body('short', 200) !!}
+          </div>
           <div class="articles-v3__author display@md padding-top-md">
 
             <!-- Author Image -->
