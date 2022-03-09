@@ -159,7 +159,7 @@
                 </li>
 
                 <li class="sidenav__item">
-                    <a href="#0" class="sidenav__link">
+                <a href="{{ route('admin.tags.index') }}" class="sidenav__link" {{ strpos(url()->full(), '/admin/tags') !== false ? 'aria-current=page' : '' }}>
                     <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16">
                       <g ><path d="M15.707,7.207,8.5,0H3V2H6.914l7.5,7.5a2.012,2.012,0,0,1,.187.227l1.106-1.106A1,1,0,0,0,15.707,7.207Z"></path> <path d="M13.707,10.207,6.5,3H1V8.5l7.207,7.207a1,1,0,0,0,1.414,0l4.086-4.086A1,1,0,0,0,13.707,10.207ZM4,7A1,1,0,1,1,5,6,1,1,0,0,1,4,7Z"></path>
                       </g>

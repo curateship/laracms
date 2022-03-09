@@ -5,6 +5,7 @@
     <li>
       <div class="grid gap-md items-start">
         <a href="{{ route('post.show', $recent_post) }}" class="articles-v3__img col-5@md col-6@xxs">
+          
           <!-- Image -->
           <figure class="aspect-ratio-4:3">
             <img class="block width-100%" loading="lazy" src="{{ url('/storage').config('images.posts_storage_path').$recent_post->thumbnail  }}" alt="Image description">
@@ -19,7 +20,7 @@
           </div>
 
           <!-- Excerpt -->
-          <div class="color-contrast-medium text-sm padding-top-md display@md">
+          <div class="color-contrast-medium text-sm padding-top-md">
               {!! $recent_post->body('short', 200) !!}
           </div>
           <div class="articles-v3__author display@md padding-top-md">

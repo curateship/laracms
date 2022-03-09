@@ -83,7 +83,7 @@
     <!-- Status Body -->
     <div class="margin-top-auto border-top border-contrast-lower opacity-40%"></div><!-- Divider -->
       <p class="padding-sm text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, accusantium consequatur. Perspiciatis! Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, accusantium consequatur. Perspiciatis!</p>
-        <img class="block width-100% height-100% object-cover" src="http://localhost:3000/storage/posts/thumbnail/slcL5KZINKspkTNTsUVh4rV6jUq.jpg" alt="Post Picture">
+        <img class="block width-100% height-100% object-cover" src="assets/img/random-backgrounds/3.jpg" alt="Post Picture">
     
         <!-- Comments -->
         <section class="comments padding-x-md">

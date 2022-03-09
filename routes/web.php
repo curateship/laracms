@@ -66,6 +66,7 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
     Route::resource('/users', AdminUserController::class); // User Route
     Route::resource('/posts', AdminPostController::class); // Post Route
     Route::resource('/categories', AdminCategoryController::class); // Category Route
+    Route::resource('/tags', AdminTagController::class); // Category Route
     Route::resource('/comments', AdminCommentController::class); // Comment Route
 });
 
