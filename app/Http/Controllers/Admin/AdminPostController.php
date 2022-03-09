@@ -268,9 +268,11 @@ class AdminPostController extends Controller
                 foreach ($tags_input as $tag_input) {
                     if(is_numeric($tag_input)){
                         $tag = Tag::where('id', $tag_input)
+                            ->where('category_id', $tag_category->id)
                             ->first();
                     }   else{
                         $tag = Tag::where('name', $tag_input)
+                            ->where('category_id', $tag_category->id)
                             ->first();
                     }
 
