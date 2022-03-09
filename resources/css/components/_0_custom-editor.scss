@@ -1,5 +1,11 @@
 @use '../base' as *;
 
+.article-image--bordered{
+    padding: 15px;
+    border-radius: 3px;
+    border: 1px solid var(--color-contrast-high);
+}
+
 .article-image--backgrounded{
     display: flex;
     justify-content: center;
