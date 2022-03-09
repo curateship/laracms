@@ -4,6 +4,17 @@
  */
 
 return [
+    'static_titles' => [
+        'App\Http\Controllers\Admin\AdminIndexController' => [
+            'index' => 'Admin from config'
+        ],
+        'App\Http\Controllers\Frontend\IndexController' => [
+            'index' => 'Site Title from config'
+        ],
+        'App\Http\Controllers\Admin\AdminUserController' => [
+            'index' => 'Admin Users from config'
+        ]
+    ],
     'meta' => [
         /*
          * The default configurations to be used by the meta generator.

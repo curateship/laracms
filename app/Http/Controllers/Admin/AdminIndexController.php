@@ -19,7 +19,8 @@ class AdminIndexController extends Controller
     // Index
     public function index()
     {
-        SEOMeta::setTitle('Admin');
+        SEOMeta::setTitle(config('seotools.static_titles.'.get_called_class().'.'.__FUNCTION__));
+
         return view('admin.dashboard.index', [
             'posts' => Post::with('category')->orderBy('id', 'DESC')->get(),
         ]);

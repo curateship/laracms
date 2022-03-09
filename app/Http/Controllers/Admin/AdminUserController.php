@@ -29,8 +29,8 @@ class AdminUserController extends Controller
     // Index
     public function index(Request $request)
     {
+        SEOMeta::setTitle(config('seotools.static_titles.'.get_called_class().'.'.__FUNCTION__));
 
-        SEOMeta::setTitle('Admin Users'); // Page Title
         if($request->has('sortBy') && $request->input('sortBy') !== 'role'){
             $users = User::orderBy($request->input('sortBy'), $request->input('sortDesc'));
         }   else{
