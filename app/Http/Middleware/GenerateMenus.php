@@ -18,6 +18,7 @@ class GenerateMenus
             // Adding sub items;
             $menu->add('Sub about 1', ['parent' => 'about1', 'url' => 'Link address']);
             $menu->add('Sub about 2', ['parent' => 'about1', 'url' => 'Link address']);
+            $menu->add('Sub about 3', ['parent' => 'about1', 'url' => 'Link address']);
 
             // Link2
             $menu->add('About 2', ['route'  => 'index']);

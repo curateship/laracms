@@ -112,7 +112,7 @@
 
         <!-- Navigation Menu -->
         <nav id="main-menu" class="header-v2__nav" role="navigation">
-          <ul class="header-v2__nav-list header-v2__nav-list--main padding-left-xxxl">
+          <ul class="header-v2__nav-list header-v2__nav-list--main padding-left-xl@md">
             @include('components.layouts.headers.custom-menu-items', ['items' => Menu::get('header')->roots()])
           </ul>
         </nav>
