@@ -11,7 +11,14 @@
 
     <!-- Ads Sticky Sidebar Desktop Component -->
     <div class="col-3@md margin-top">
-      <h3 class="padding-bottom-md color-contrast-high">Related Posts</h3>
+
+      <!-- Our Friends -->
+      <div class="card padding-sm">
+        <h3 class="padding-bottom-sm color-contrast-high text-md">Our Friends</h3>
+        {!! Menu::get('link-exchange')->asUl() !!}
+      </div>
+
+      <h3 class="padding-top-lg padding-bottom-md color-contrast-high">Related Posts</h3>
         @include('components.posts.lists.related-posts-sidebar')
     </div>
     

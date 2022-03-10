@@ -16,11 +16,11 @@ class RoleSeeder extends Seeder
         ]);
 
         DB::table('roles')->insert([
-            'name' => 'Author'
+            'name' => 'Editor'
         ]);
 
         DB::table('roles')->insert([
-            'name' => 'User'
+            'name' => 'Premium'
         ]);
     }
 }
