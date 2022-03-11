@@ -3,30 +3,18 @@
     <div class="background-bg radius-md padding-bottom-sm">
       <nav class="sidenav js-sidenav">
          <div class="sidenav__label margin-bottom-xs">
-             </div>
-                <ul class="sidenav__list">
+            </div>
+              <ul class="sidenav__list">
 
-                  <!-- Dashboard -->
-                  <li class="sidenav__item">
-                    <a href="/admin" class="sidenav__link">
-                      <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16"><g><path d="M6,0H1C0.4,0,0,0.4,0,1v5c0,0.6,0.4,1,1,1h5c0.6,0,1-0.4,1-1V1C7,0.4,6.6,0,6,0z M5,5H2V2h3V5z"></path><path d="M15,0h-5C9.4,0,9,0.4,9,1v5c0,0.6,0.4,1,1,1h5c0.6,0,1-0.4,1-1V1C16,0.4,15.6,0,15,0z M14,5h-3V2h3V5z"></path><path d="M6,9H1c-0.6,0-1,0.4-1,1v5c0,0.6,0.4,1,1,1h5c0.6,0,1-0.4,1-1v-5C7,9.4,6.6,9,6,9z M5,14H2v-3h3V14z"></path><path d="M15,9h-5c-0.6,0-1,0.4-1,1v5c0,0.6,0.4,1,1,1h5c0.6,0,1-0.4,1-1v-5C16,9.4,15.6,9,15,9z M14,14h-3v-3h3V14z"></path></g></svg>
-                        <span class="sidenav__text text-sm@md">Dashboard</span>
-                    </a>
-                      <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
-                        <svg class="icon" viewBox="0 0 12 12"><polygon points="4 3 8 6 4 9 4 3"/></svg>
-                      </button>
-                <ul class="sidenav__list">
-                  <li class="sidenav__item">
-                    <a href="admin/post/add" class="sidenav__link">
-                      <span class="sidenav__text text-sm@md">Add Post</span>
-                    </a>
-                  </li>
-                  <li class="sidenav__item">
-                    <a href="admin/users/create" class="sidenav__link">
-                      <span class="sidenav__text text-sm@md">Add User</span>
-                    </a>
-                  </li>
-                </ul>
+                <!-- Dashboard -->
+                <li class="sidenav__item">
+                <a href="{{ route('admin.index') }}" class="sidenav__link" {{ strpos(url()->full(), '/admin/') !== false ? 'aria-current=page' : '' }}>
+                    <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16"><g><path d="M6,0H1C0.4,0,0,0.4,0,1v5c0,0.6,0.4,1,1,1h5c0.6,0,1-0.4,1-1V1C7,0.4,6.6,0,6,0z M5,5H2V2h3V5z"></path><path d="M15,0h-5C9.4,0,9,0.4,9,1v5c0,0.6,0.4,1,1,1h5c0.6,0,1-0.4,1-1V1C16,0.4,15.6,0,15,0z M14,5h-3V2h3V5z"></path><path d="M6,9H1c-0.6,0-1,0.4-1,1v5c0,0.6,0.4,1,1,1h5c0.6,0,1-0.4,1-1v-5C7,9.4,6.6,9,6,9z M5,14H2v-3h3V14z"></path><path d="M15,9h-5c-0.6,0-1,0.4-1,1v5c0,0.6,0.4,1,1,1h5c0.6,0,1-0.4,1-1v-5C16,9.4,15.6,9,15,9z M14,14h-3v-3h3V14z"></path></g></svg>
+                      <span class="sidenav__text text-sm@md">Dashboard</span>
+                  </a>
+                    <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
+                      <svg class="icon" viewBox="0 0 12 12"><polygon points="4 3 8 6 4 9 4 3"/></svg>
+                    </button>
                 </li>
 
                 <!-- Posts -->

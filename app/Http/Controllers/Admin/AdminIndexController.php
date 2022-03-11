@@ -5,63 +5,32 @@ namespace App\Http\Controllers\Admin;
 // Others
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Artesaos\SEOTools\Facades\SEOTools;
-use Artesaos\SEOTools\Facades\SEOMeta;
+use Illuminate\Validation\Rule;
 
 // Models
-use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
-use App\Models\Role;
+use App\Models\Category;
+
+// Support
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Imagick;
 
 class AdminIndexController extends Controller
 {
+    private $rules = [
+        'name' => 'required|min:3|max:30',
+    ];
+
     // Index
     public function index()
     {
-        SEOMeta::setTitle(config('seotools.static_titles.'.get_called_class().'.'.__FUNCTION__));
-
-        return view('admin.dashboard.index', [
-            'posts' => Post::with('category')->orderBy('id', 'DESC')->get(),
-        ]);
+        return view('admin.dashboard.index');
     }
 
-    // Create
-    public function create()
-    {
-
-    }
-
-    // Store
-    public function store(Request $request)
-    {
-        dd($request->all());
-    }
-
-    public function show($id)
-    {
-        //
-    }
-
-    // Edit
-    public function edit(Post $post)
-    {
-
-        return view('admin.posts.pages.edit', [
-            'post' => $post,
-            'categories' => Category::pluck('name', 'id')
-        ]);
-    }
-
-    // Update
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    // Destroy
-    public function destroy($id)
-    {
-        //
-    }
 }

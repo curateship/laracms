@@ -11,7 +11,7 @@
 
       <div class="articles-v3__author padding-x-sm padding-top-sm">
         <a href="#0" class="articles-v3__author-img">
-          <img class="object-cover" src="http://localhost:3000/assets/img/avatar.png" alt="Author picture">
+          <img class="object-cover" src="/assets/img/avatar.png" alt="Author picture">
         </a>
 
         <div class="text-component text-xs line-height-xs text-space-y-xxs">
@@ -23,7 +23,7 @@
 
       <div class="articles-v3__author padding-x-sm padding-y-xs">
         <a href="#0" class="articles-v3__author-img">
-          <img class="object-cover" src="http://localhost:3000/assets/img/avatar.png" alt="Author picture">
+          <img class="object-cover" src="/assets/img/avatar.png" alt="Author picture">
         </a>
 
         <div class="text-component text-xs line-height-xs text-space-y-xxs">
@@ -40,7 +40,7 @@
       <div class="flex justify-between">
         <div class="inline-flex items-baseline articles-v3__author padding-sm">
           <a href="#0" class="articles-v3__author-img">
-            <img class="object-cover" src="http://localhost:3000/assets/img/avatar.png" alt="Author picture">
+            <img class="object-cover" src="/assets/img/avatar.png" alt="Author picture">
           </a>
 
           <div class="text-component text-sm line-height-xs text-space-y-xxs">
@@ -83,7 +83,7 @@
     <!-- Status Body -->
     <div class="margin-top-auto border-top border-contrast-lower opacity-40%"></div><!-- Divider -->
       <p class="padding-sm text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, accusantium consequatur. Perspiciatis! Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, accusantium consequatur. Perspiciatis!</p>
-        <img class="block width-100% height-100% object-cover" src="assets/img/random-backgrounds/3.jpg" alt="Post Picture">
+        <img class="block width-100% height-100% object-cover" src="/assets/img/random-backgrounds/3.jpg" alt="Post Picture">
     
         <!-- Comments -->
         <section class="comments padding-x-md">
@@ -113,7 +113,7 @@
             <li class="comments__comment">
               <div class="flex items-start">
                 <a href="#0" class="comments__author-img">
-                  <img src="http://localhost:3000/assets/img/avatar.png" alt="Author picture">
+                  <img class="object-cover" src="/assets/img/avatar.png" alt="Author picture">
                 </a>
           
                 <div class="comments__content margin-top-xxxs">
@@ -150,7 +150,7 @@
             <li class="comments__comment">
               <div class="flex items-start">
                 <a href="#0" class="comments__author-img">
-                  <img src="http://localhost:3000/assets/img/avatar.png" alt="Author picture">
+                  <img class="object-cover" src="/assets/img/avatar.png" alt="Author picture">
                 </a>
           
                 <div class="comments__content margin-top-xxxs">
@@ -194,7 +194,7 @@
                     <li class="comments__comment">
                       <div class="flex items-start">
                         <a href="#0" class="comments__author-img">
-                          <img src="http://localhost:3000/assets/img/avatar.png" alt="Author picture">
+                          <img class="object-cover" src="/assets/img/avatar.png" alt="Author picture">
                         </a>
                   
                         <div class="comments__content margin-top-xxxs">
