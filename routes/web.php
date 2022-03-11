@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\AdminPostController;
 use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminTagController;
 use App\Http\Controllers\Admin\AdminCommentController;
+use App\Http\Controllers\Admin\AdminVideoController;
 
 // Front-End Controllers
 use App\Http\Controllers\Frontend\IndexController;
@@ -62,12 +63,10 @@ Route::post('/post/upload/{type}', [AdminPostController::class, 'upload'])->name
 Route::post('/post/store', [AdminPostController::class, 'store'])->name('post.store')->middleware(['auth', 'verified']);
 Route::get('/post/edit/{post:slug}', [AdminPostController::class, 'edit'])->name('post.edit')->middleware(['auth', 'verified']);
 
-// User Admin
+// Users Admin
 Route::post('/user/upload', [AdminUserController::class, 'upload'])->name('user.upload');
 Route::post('/user/store', [AdminUserController::class, 'store'])->name('user.store');
-
-// Theme Switcher
-Route::post('users/saveTheme', [AdminUserController::class, 'saveTheme'])->middleware(['auth']);
+Route::post('users/saveTheme', [AdminUserController::class, 'saveTheme'])->middleware(['auth']); // Theme Switcher
 
 // Admin Prefix
 Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->group(function (){
@@ -77,6 +76,7 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
     Route::resource('/categories', AdminCategoryController::class); // Category Route
     Route::resource('/tags', AdminTagController::class); // Category Route
     Route::resource('/comments', AdminCommentController::class); // Comment Route
+    Route::resource('/videos', AdminVideoController::class); // Video Route
 });
 
 
