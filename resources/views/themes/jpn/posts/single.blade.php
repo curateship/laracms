@@ -1,6 +1,10 @@
 @extends('themes.jpn.layouts.app')
 @section('content')
 
+@push('custom-scripts')
+    @include('components.posts.comments.scripts-js')
+@endpush
+
 <div class="container max-width-adaptive-lg">
 <div class="grid gap-md">
 
@@ -9,7 +13,7 @@
     @include('components.layouts.partials.sticky-sharebar')
   </div>
   <!-- Sticky Share Sidebar END -->
-  
+
   <!-- Content Start -->
   <div class="col-11@md padding-x-lg@md">
     @include('components.posts.single.article-plain')

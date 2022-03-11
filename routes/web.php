@@ -30,11 +30,7 @@ route::get('/', [IndexController::class, 'index'])->name('index');
 route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(['auth', 'verified']);
 
 // Post
-Route::post('/post/upload/{type}', [AdminPostController::class, 'upload'])->name('post.upload')->middleware(['auth', 'verified']);
-Route::post('/post/store', [AdminPostController::class, 'store'])->name('post.store')->middleware(['auth', 'verified']);
-Route::get('/post/edit/{post:slug}', [AdminPostController::class, 'edit'])->name('post.edit')->middleware(['auth', 'verified']);
 Route::get('/post/{post:slug}', [PostController::class, 'show'])->name('post.show');
-Route::post('/post/{post:slug}', [PostController::class, 'addComment'])->name('post.add_comment');
 
 // Contact
 Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
@@ -48,14 +44,23 @@ Route::get('/categories', [CategoryController::class, 'index'])->name('theme.def
 Route::get('/tags/search', [TagController::class, 'search'])->name('tags.search');
 Route::get('/tags/{tag:name}', [TagController::class, 'show'])->name('theme.default.archive.tags.show');
 
-
+// Comments
+Route::get('post/comment/get/{post_id}', [PostController::class, 'getPostComments'])->name('post-comment-get')->middleware(['auth', 'verified']);
+Route::get('post/comment/reply', [PostController::class, 'reply'])->name('post-comment-reply')->middleware(['auth', 'verified']);
+Route::post('post/comment/reply-save', [PostController::class, 'saveReply'])->name('post-comment-reply-save')->middleware(['auth', 'verified']);
+Route::post('post/comment/save', [PostController::class, 'saveComment'])->name('post-comment-save')->middleware(['auth', 'verified']);
+// Old comment route;
+//Route::post('/post/addComment/{post:slug}', [PostController::class, 'addComment'])->name('post.add_comment');
 
 /*
 |--------------------------------------------------------------------------
 | // Admin Routes
 |--------------------------------------------------------------------------
 */
-
+// Post Admin;
+Route::post('/post/upload/{type}', [AdminPostController::class, 'upload'])->name('post.upload')->middleware(['auth', 'verified']);
+Route::post('/post/store', [AdminPostController::class, 'store'])->name('post.store')->middleware(['auth', 'verified']);
+Route::get('/post/edit/{post:slug}', [AdminPostController::class, 'edit'])->name('post.edit')->middleware(['auth', 'verified']);
 
 // User Admin
 Route::post('/user/upload', [AdminUserController::class, 'upload'])->name('user.upload');

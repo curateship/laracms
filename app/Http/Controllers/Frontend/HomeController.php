@@ -26,15 +26,15 @@ class HomeController extends Controller
         $recent_posts = Post::withCount('comments')->get();
         $recent_posts = Post::latest()->withCount('comments')->with('author')->paginate(8);
         $categories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(5)->get();
-        $tags = Tag::latest()->take(10)->withCount('posts')->get();
+        $tags = Tag::latest()->take(10)->get();
 
         return view('/themes.jpn.dashboard.home', [
         'posts' => $posts,
         'recent_posts' => $recent_posts,
         'categories' => $categories,
         'tags' => $tags,
-        ]);  
-    }  
+        ]);
+    }
 }
 
 
