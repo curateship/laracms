@@ -1,10 +1,15 @@
-<footer class="footer-v4 padding-y-lg">
+<footer class="padding-y-lg">
   <div class="container max-width-lg">
-    <nav class="footer-v4__nav">
-      <ul class="footer-v4__nav-list">
-          {!! Menu::get('footer')->asUl() !!}
-      </ul>
-    </nav>
+
+    <!-- Footer Navigation -->
+    <div class="flex justify-center">
+      {!! Menu::get('footer')->asUl() !!}
+    </div>
+
+    <!-- Logo and Social -->
+    <div class="text-center">
       @include('components.layouts.svg.logo-social-footer')
+    </div>
+
   </div>
 </footer>
