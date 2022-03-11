@@ -1,0 +1,74 @@
+@use '../base' as *;
+
+/* -------------------------------- 
+
+File#: _1_progress-bar
+Title: Progress Bar
+Descr: Display the current progress of a task
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+:root {
+  --progress-bar-width: 200px;
+  --progress-bar-height: 8px;
+  --progress-bar-radius: 50em;
+}
+
+.progress-bar {}
+
+.progress-bar__bg { // progress bar background element
+  position: relative;
+  width: var(--progress-bar-width);
+  height: var(--progress-bar-height);
+  border-radius: var(--progress-bar-radius);
+  background-color: alpha(var(--color-contrast-higher), 0.1);
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.progress-bar__fill { // progress bar fill element
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0%; // fallback value -> make sure to set it in the HTML
+  background-color: currentColor;
+}
+
+.progress-bar__value { // progress bar label -> used to show percentage value
+  flex-shrink: 0;
+}
+
+// --animate && --color-update
+// hide fill and value until the js has been initialized
+.js .progress-bar[data-animation="on"]:not(.progress-bar--init),
+.js .progress-bar--color-update:not(.progress-bar--init) {
+  .progress-bar__fill, .progress-bar__value {
+    opacity: 0;
+  }
+}
+
+// --color-update
+// define color thresholds
+.progress-bar--color-update {
+  --progress-bar-color-1: 30; // if percentage is <= to this value, the color of the bar will the one defined in the  .progress-bar--fill-color-1 class
+  --progress-bar-color-2: 65; // if percentage is <= to this value, the color of the bar will the one defined in the  .progress-bar--fill-color-2 class
+  --progress-bar-color-3: 100; // if percentage is <= to this value, the color of the bar will the one defined in the  .progress-bar--fill-color-3 class
+
+  &.progress-bar--init .progress-bar__fill {
+    transition: background-color .3s;
+  }
+}
+
+.progress-bar--fill-color-1 .progress-bar__fill {
+  background-color: var(--color-error);
+}
+
+.progress-bar--fill-color-2 .progress-bar__fill {
+  background-color: var(--color-warning);
+}
+
+.progress-bar--fill-color-3 .progress-bar__fill {
+  background-color: var(--color-success);
+}

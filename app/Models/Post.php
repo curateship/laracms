@@ -49,11 +49,6 @@ class Post extends Model
 	    return $this->hasMany(Comment::class)->whereNull('reply_id');
     }
 
-    public function image()
-    {
-	    return $this->morphOne(Image::class, 'imageable');
-    }
-
     public static function getNewSlug($slug, $posts) {
       $max_number = 0;
       foreach($posts as $post) {
@@ -131,7 +126,7 @@ class Post extends Model
                 break;
         }
   }
-
+    // HTML to text conversion 
     public static function truncateHtml($text, $length = 100, $ending = '...', $exact = true, $considerHtml = true): string
     {
         if ($considerHtml) {

@@ -79,7 +79,7 @@
             @endif
             @endif
 
-            <!-- Mobile search -->
+            <!-- Mobile search Toggle -->
             <button class="padding-top-xxxxs padding-left-xxxs header-v2__nav-control reset anim-menu-btn anim-menu-btn--search js-anim-menu-btn" aria-label="Toggle search" menu-target="search-menu">
                 <svg class="icon" viewBox="0 0 24 24">
                     <g class="icon__group" fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2">
@@ -113,6 +113,7 @@
         <!-- Navigation Menu -->
         <nav id="main-menu" class="header-v2__nav" role="navigation">
           <ul class="header-v2__nav-list header-v2__nav-list--main padding-left-xl@md">
+            <!-- Dropdown menu -->
             @include('components.layouts.headers.custom-menu-items', ['items' => Menu::get('header')->roots()])
           </ul>
         </nav>

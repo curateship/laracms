@@ -13,7 +13,7 @@
 </head>
 <body data-theme="@guest(){{config('app.default_theme')}}@else{{auth()->user()->theme()}}@endguest">
   @include('components.layouts.headers.header')
-  @include('components.layouts.partials.hero-random-image')
+  @include('admin.partials.hero-random-image')
   @include('admin.partials.alerts')
     @yield('content')
   @include('components.layouts.footers.footer')

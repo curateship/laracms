@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Imagick;
 
-class AdminIndexController extends Controller
+class AdminVideoController extends Controller
 {
     private $rules = [
         'name' => 'required|min:3|max:30',
@@ -30,7 +30,12 @@ class AdminIndexController extends Controller
     // Index
     public function index()
     {
-        return view('admin.dashboard.index');
+        return view('admin.videos.index');
     }
 
+    // Create
+    public function create()
+    {
+        return view('admin.videos.create');
+    }
 }
