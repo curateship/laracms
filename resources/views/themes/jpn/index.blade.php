@@ -12,7 +12,7 @@
     <div class="col-3@md">
       <!-- Our Friends -->
       <div class="card padding-sm">
-        <h3 class="color-contrast-high text-md">Our Friends</h3>
+        <h3 class="color-contrast-high text-md padding-bottom-xs">Our Friends</h3>
         {!! Menu::get('link-exchange')->asUl() !!}
       </div>
       <!-- Popular Posts -->

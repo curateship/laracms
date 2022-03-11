@@ -2,7 +2,7 @@
   <div class="container max-width-lg">
 
     <!-- Footer Navigation -->
-    <div class="flex justify-center">
+    <div class="flex justify-center padding-sm">
       {!! Menu::get('footer')->asUl() !!}
     </div>
 

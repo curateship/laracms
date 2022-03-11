@@ -18,7 +18,7 @@
       @include('components.posts.single.article-plain')
       <!-- Content END -->
 
-          <div class="border-top margin-top-lg"></div>
+          <div class="border-top margin-top-sm"></div>
 
           <!-- Comments -->
           <section class="comments padding-md">

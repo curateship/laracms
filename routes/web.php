@@ -45,6 +45,7 @@ Route::get('/categories', [CategoryController::class, 'index'])->name('theme.def
 Route::get('/tags/search', [TagController::class, 'search'])->name('tags.search');
 Route::get('/tags/{tag:name}', [TagController::class, 'show'])->name('theme.default.archive.tags.show');
 
+
 // Comments
 Route::get('post/comment/get/{post_id}', [PostController::class, 'getPostComments'])->name('post-comment-get')->middleware(['auth', 'verified']);
 Route::get('post/comment/reply', [PostController::class, 'reply'])->name('post-comment-reply')->middleware(['auth', 'verified']);
@@ -52,6 +53,10 @@ Route::post('post/comment/reply-save', [PostController::class, 'saveReply'])->na
 Route::post('post/comment/save', [PostController::class, 'saveComment'])->name('post-comment-save')->middleware(['auth', 'verified']);
 // Old comment route;
 //Route::post('/post/addComment/{post:slug}', [PostController::class, 'addComment'])->name('post.add_comment');
+
+Route::get('/tag/test',function(){
+    return view('themes.jpn.tags.related');
+  });
 
 /*
 |--------------------------------------------------------------------------
