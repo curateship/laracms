@@ -62,14 +62,16 @@ class AdminUserController extends Controller
         $user = User::create($request->except(['_token', 'roles']));
         $request->session()->flash('success', 'You have created the user');
 
-        $roles = [];
-        foreach($request->roles as $role_id){
-            $roles[] = [
-                'role_id' => $role_id
-            ];
-        }
-        if(count($roles) > 0){
-            $user->roles()->sync($roles);
+        if($request->has('roles') && count($request->input('roles')) > 0){
+            $roles = [];
+            foreach($request->input('roles') as $role_id){
+                $roles[] = [
+                    'role_id' => $role_id
+                ];
+            }
+            if(count($roles) > 0){
+                $user->roles()->sync($roles);
+            }
         }
 
         $original = ( $request->has('original') && !empty($request->input('original')) ) ? $request->input('original') : NULL;

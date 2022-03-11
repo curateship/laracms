@@ -9,6 +9,10 @@ use App\Models\Post;
 
 /**
  * @property mixed $user_id
+ * @property mixed $id
+ * @property mixed $reply_id
+ * @property mixed $the_comment
+ * @property mixed $post_id
  */
 class Comment extends Model
 {
@@ -23,6 +27,11 @@ class Comment extends Model
 
     public function user ()
     {
-        return $this->belongsTo(Post::class);
+        return User::find($this->user_id);//$this->belongsTo(User::class);
+    }
+
+    public function replies(){
+        return static::where('reply_id', $this->id)
+            ->get();
     }
 }

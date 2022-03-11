@@ -1,6 +1,10 @@
 @extends('themes.jpn.layouts.app')
 @section('content')
 
+@push('custom-scripts')
+    @include('components.posts.comments.scripts-js')
+@endpush
+
 <div class="container max-width-adaptive-lg">
   <div class="grid gap-md">
 
@@ -8,22 +12,28 @@
     <div class="col-1@md display@md">
       @include('components.layouts.partials.sticky-sharebar')
     </div>
-    
-    <!-- Content Start -->
-    <div class="col-11@md padding-x-lg@md">
+
+      <!-- Content Start -->
+      <div class="col-11@md padding-x-lg@md">
       @include('components.posts.single.article-plain')
-      <div class="border-top margin-top-lg"></div>
+      <!-- Content END -->
 
-      <!-- Comments -->
-      <section class="comments padding-top-md">
-        @include('components.comments.comments-v1')
-      </section>
-    </div>
+          <div class="border-top margin-top-lg"></div>
 
-    <!-- Sidebar -->
-    <div class="col-3@md">
-      @include('components.posts.lists.related-posts-sidebar')
-    </div>
+          <!-- Comments -->
+          <section class="comments padding-md">
+              @include('components.comments.comments-v1')
+          </section>
+          <!-- END -->
+
+      </div>
+      <!-- END -->
+
+      <!-- Sidebar -->
+      <div class="col-3@md">
+          @include('components.posts.lists.related-posts-sidebar')
+      </div>
+      <!--Sidebar END -->
 
   </div>
 </div>

@@ -1,6 +1,6 @@
 // File#: _1_read-more
 // Usage: codyhouse.co/license
-(function() {
+
     var ReadMore = function(element) {
       this.element = element;
       this.moreContent = this.element.getElementsByClassName('js-read-more__content');
@@ -15,11 +15,11 @@
       setBtnLabels(this);
       initReadMore(this);
     };
-  
-    function splitReadMore(readMore) { 
+
+    function splitReadMore(readMore) {
       splitChildren(readMore.element, readMore); // iterate through children and hide content
     };
-  
+
     function splitChildren(parent, readMore) {
       if(readMore.counting >= readMore.count) {
         Util.addClass(parent, 'js-read-more__content');
@@ -37,7 +37,7 @@
       parent.innerHTML = content;
       return parent.outerHTML;
     };
-  
+
     function wrapText(element, readMore) {
       var content = element.textContent;
       if(content.replace(/\s/g,'').length == 0) return '';// check if content is empty
@@ -54,7 +54,7 @@
       readMore.counting = readMore.count;
       return firstContent + '<span class="js-read-more__content">' + secondContent + '</span>';
     };
-  
+
     function setBtnLabels(readMore) { // set custom labels for read More/Less btns
       var btnLabels = readMore.element.getAttribute('data-btn-labels');
       if(btnLabels) {
@@ -63,7 +63,7 @@
         readMore.btnHideLabel = labelsArray[1].trim();
       }
     };
-  
+
     function initReadMore(readMore) { // add read more/read less buttons to the markup
       readMore.moreContent = readMore.element.getElementsByClassName('js-read-more__content');
       if( readMore.moreContent.length == 0 ) {
@@ -75,22 +75,22 @@
       if(readMore.ellipsis) {
         btnShow = '<span class="js-read-more__ellipsis" aria-hidden="true">...</span>'+ btnShow;
       }
-  
+
       readMore.moreContent[readMore.moreContent.length - 1].insertAdjacentHTML('afterend', btnHide);
       readMore.moreContent[0].insertAdjacentHTML('afterend', btnShow);
       resetAppearance(readMore);
       initEvents(readMore);
     };
-  
+
     function resetAppearance(readMore) { // hide part of the content
       for(var i = 0; i < readMore.moreContent.length; i++) Util.addClass(readMore.moreContent[i], 'is-hidden');
       Util.addClass(readMore.element, 'read-more--loaded'); // show entire component
     };
-  
+
     function initEvents(readMore) { // listen to the click on the read more/less btn
       readMore.btnToggle = readMore.element.getElementsByClassName('js-read-more__btn');
       readMore.ellipsis = readMore.element.getElementsByClassName('js-read-more__ellipsis');
-  
+
       readMore.btnToggle[0].addEventListener('click', function(event){
         event.preventDefault();
         updateVisibility(readMore, true);
@@ -100,7 +100,7 @@
         updateVisibility(readMore, false);
       });
     };
-  
+
     function updateVisibility(readMore, visibile) {
       for(var i = 0; i < readMore.moreContent.length; i++) Util.toggleClass(readMore.moreContent[i], 'is-hidden', !visibile);
       // reset btns appearance
@@ -117,19 +117,25 @@
         Util.moveFocus(readMore.btnToggle[0]);
       }
     };
-  
+
     function resetFocusTarget(target, tabindex) {
       if( parseInt(target.getAttribute('tabindex')) < 0) {
         target.style.outline = 'none';
         !tabindex && target.removeAttribute('tabindex');
       }
     };
-  
+
+function initReadMoreItems(){
     //initialize the ReadMore objects
     var readMore = document.getElementsByClassName('js-read-more');
     if( readMore.length > 0 ) {
-      for( var i = 0; i < readMore.length; i++) {
-        (function(i){new ReadMore(readMore[i]);})(i);
-      }
+        for( var i = 0; i < readMore.length; i++) {
+            // Skip already included components;
+            if(readMore[i].className.split(/\s+/).indexOf("read-more--loaded") !== -1){
+                continue;
+            }
+
+            (function(i){new ReadMore(readMore[i]);})(i);
+        }
     };
-  }());
+}

@@ -2,7 +2,7 @@
 @use '_1_read-more.scss' as *;
 @use '_1_details.scss' as *;
 
-/* -------------------------------- 
+/* --------------------------------
 
 File#: _2_comments
 Title: Comments
@@ -35,7 +35,7 @@ Usage: codyhouse.co/license
     color: var(--color-contrast-medium);
     cursor: pointer;
     user-select: none;
-  
+
     &:hover {
       color: var(--color-contrast-high);
     }
@@ -194,7 +194,8 @@ Usage: codyhouse.co/license
 }
 
 .comments__details { // nested comments
-  margin-top: var(--space-sm);
+    margin-top: -25px;
+    margin-bottom: 20px;
   margin-left: calc(var(--comments-author-img-size) + var(--comments-author-content-gap));
   padding-left: var(--comments-author-content-gap);
   border-left: 3px solid var(--color-contrast-lower);
