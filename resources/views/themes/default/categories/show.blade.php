@@ -22,7 +22,7 @@
             <div class="recent-post-card padding-xxxs">
               <p href="{{ route('post.show', $post) }}" class="color-contrast-high link-subtle text-sm">{{ \Str::limit( $post->title, 40) }}</p>
               <p class="text-xs color-contrast-low padding-top-xxs">{{ \Str::limit( $post->excerpt, 20) }}</p>
-              <p class="text-xs color-contrast-low padding-top-sm">{{ $post->created_at->diffforhumans() }} <br> {{ $post->author->name }}</p>
+              <p class="text-xs color-contrast-low padding-top-sm">{{ $post->created_at->diffforhumans() }} <br> {!! $post->author() != null ? $post->author()->name : '<span style="font-weight: bold;color:red;">Deleted User</span>' !!}</p>
             </div>
             </div>
             </div>
@@ -56,11 +56,11 @@
              @empty
              <p class="">There are no posts related to this category</p>
                 @endforelse
-                
-                {{ $posts->links() }}
-                     
 
- 
+                {{ $posts->links() }}
+
+
+
     </ul>
 </section>
           <!-- Recent Post END -->

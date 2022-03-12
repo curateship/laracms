@@ -22,7 +22,7 @@ class IndexController extends Controller
     {
         SEOMeta::setTitle(config('seotools.static_titles.'.get_called_class().'.'.__FUNCTION__));
 
-        $recent_posts = Post::latest()->withCount('comments')->with('author')->paginate(10);
+        $recent_posts = Post::latest()->withCount('comments')->whereNotNull('user_id')->paginate(10);
         return view('/themes.jpn.index', [
         'recent_posts' => $recent_posts,
         ]);

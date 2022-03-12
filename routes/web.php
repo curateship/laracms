@@ -43,7 +43,7 @@ Route::get('/categories', [CategoryController::class, 'index'])->name('theme.def
 
 // Tags
 Route::get('/tags/search', [TagController::class, 'search'])->name('tags.search');
-Route::get('/tags/{tag:name}', [TagController::class, 'show'])->name('theme.default.archive.tags.show');
+Route::get('/tags/{tags_categories_name}/{tag_name}', [TagController::class, 'show'])->name('theme.default.archive.tags.show');
 
 
 // Comments

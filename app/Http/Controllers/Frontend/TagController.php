@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 // Others
 use App\Http\Controllers\Controller;
+use App\Models\TagsCategories;
 use Illuminate\Http\Request;
 
 // Models
@@ -18,11 +19,26 @@ class TagController extends Controller
         // view all tags in the blog
     }
 
-    public function show(Tag $tag)
+    public function show($tags_categories_name, $tag_name)
     {
         $recent_posts = Post::latest()->take(5)->get();
         $categories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
         $tags = Tag::latest()->take(50)->get();
+
+        $category = TagsCategories::where('name', $tags_categories_name)
+            ->first();
+
+        if($category == null){
+            return abort(404);
+        }
+
+        $tag = Tag::where('name', $tag_name)
+            ->where('category_id', $category->id)
+            ->first();
+
+        if($tag == null){
+            return abort(404);
+        }
 
         return view('themes.default.tags.show', [
             'tag' => $tag,
