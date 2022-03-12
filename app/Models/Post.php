@@ -27,12 +27,16 @@ class Post extends Model
 
     public function author()
     {
-	    return $this->belongsTo(User::class, 'user_id');
+        if($this->user_id == null){
+            return null;
+        }   else{
+            return User::find($this->user_id);
+        }
     }
 
     public function category()
     {
-	    return $this->belongsTo(User::class);
+	    return $this->belongsTo(Category::class);
     }
 
     public function tags($category_id = null)
@@ -43,6 +47,12 @@ class Post extends Model
             return $this->belongsToMany(Tag::class)->where('category_id', $category_id)->get();
         }
     }
+
+    public function commentsCount()
+    {
+        return Comment::where('post_id', $this->id)->count();
+    }
+
 
     public function comments()
     {
@@ -126,7 +136,7 @@ class Post extends Model
                 break;
         }
   }
-    // HTML to text conversion 
+    // HTML to text conversion
     public static function truncateHtml($text, $length = 100, $ending = '...', $exact = true, $considerHtml = true): string
     {
         if ($considerHtml) {

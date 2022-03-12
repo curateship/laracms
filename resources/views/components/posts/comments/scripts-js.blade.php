@@ -67,6 +67,8 @@
                 if(type === 'reply'){
                     $('.post-comments[data-post-id="' + response.post_id + '"]').html(response.comments);
                     $('.post-comment-form[data-item-id="' + itemId + '"][data-type="reply"]').parents('.comment-form-box').remove()
+
+                    $('.comments__comment[data-comment-id="' + itemId + '"]').next('.comments__details').attr('open', 1)
                 }
 
                 initReadMoreItems()

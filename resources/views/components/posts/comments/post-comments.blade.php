@@ -1,5 +1,5 @@
 @foreach($post->comments as $comment)
-        <li class="comments__comment">
+        <li class="comments__comment" data-comment-id="{{$comment->id}}">
             <div class="flex items-start margin-bottom-sm">
                 <a href="#" class="comments__author-img">
                     <img class="block width-100% height-100% object-cover" src="{{ url('/storage').config('images.users_storage_path').$comment->user()->thumbnail  }}" alt="Author picture">

@@ -5,7 +5,7 @@
     <li>
       <div class="grid gap-md items-start">
         <a href="{{ route('post.show', $recent_post) }}" class="articles-v3__img col-5@md col-6@xxs">
-          
+
           <!-- Image -->
           <figure class="aspect-ratio-4:3">
             <img class="block width-100%" loading="lazy" src="{{ url('/storage').config('images.posts_storage_path').$recent_post->thumbnail  }}" alt="Image description">
@@ -27,11 +27,11 @@
 
             <!-- Author Image -->
             <a href="#0" class="articles-v3__author-img">
-              <img class="object-cover" src="{{$recent_post->author != null ? url('/storage'.config('images.users_storage_path').$recent_post->author->thumbnail) : asset('assets/img/avatar.png')}}" alt="Author picture">
+              <img class="object-cover" src="{{$recent_post->author() != null ? url('/storage'.config('images.users_storage_path').$recent_post->author()->thumbnail) : asset('assets/img/avatar.png')}}" alt="Author picture">
             </a>
             <!-- Author name and time created -->
             <div class="text-component text-sm line-height-xs text-space-y-xxs">
-              <p><a href="#0" class="articles-v3__author-name" rel="author">{!! $recent_post->author != null ? $recent_post->author->name : '<span style="font-weight: bold;color:red;">Deleted User</span>' !!}</a></p>
+              <p><a href="#0" class="articles-v3__author-name" rel="author">{!! $recent_post->author() != null ? $recent_post->author()->name : '<span style="font-weight: bold;color:red;">Deleted User</span>' !!}</a></p>
               <p class="color-contrast-medium">{{ $recent_post->created_at->diffforhumans() }} </p>
             </div>
 
