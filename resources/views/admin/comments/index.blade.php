@@ -220,7 +220,7 @@
                         <img class="block width-100% height-100% object-cover" src="/assets/img/table-v2-img-1.jpg" alt="Author picture">
                       </figure>
                       <div class="line-height-xs padding-top-xxxs">
-                        <div class=""><a href="#0" class="link-subtle">{{ \Illuminate\Support\Str::limit($comment->user->name, 10) }}</a></div>
+                        <div class=""><a href="#" class="link-subtle">{{ \Illuminate\Support\Str::limit($comment->user()->name, 10) }}</a></div>
                       </div>
                       </td>
 

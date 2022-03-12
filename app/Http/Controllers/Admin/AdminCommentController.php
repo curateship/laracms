@@ -24,7 +24,9 @@ class AdminCommentController extends Controller
         if($request->has('sortBy') && $request->input('sortBy') !== 'role'){
             $comments = Comment::orderBy($request->input('sortBy'), $request->input('sortDesc'));
         }   else{
-            $comments = Comment::orderBy('created_at', 'DESC')->with('user');
+            $comments = Comment::orderBy('created_at', 'DESC')
+                ->selectRaw('comments.*')
+                ->leftJoin('users', 'users.id', '=', 'comments.user_id');
         }
 
         return view('admin.comments.index', ['comments' => $comments->paginate(10)]);
@@ -71,6 +73,10 @@ class AdminCommentController extends Controller
         $ids = explode(',', $ids);
 
         foreach($ids as $id){
+            // Destroy comment replays;
+            Comment::where('reply_id', $id)
+                ->delete();
+
             // And then - remove the comment;
             Comment::destroy($id);
         }
