@@ -193,6 +193,10 @@ Usage: codyhouse.co/license
   background-color: var(--color-contrast-low);
 }
 
+.comment-form-box.reply-box{
+    margin-bottom: 35px;
+}
+
 .comments__details { // nested comments
     margin-top: -25px;
     margin-bottom: 20px;
