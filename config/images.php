@@ -3,6 +3,7 @@
 return [
     'posts_storage_path' => '/posts',
     'users_storage_path' => '/users',
+    'tags_storage_path' => '/tags',
     'thumbnail' => [
         'width' => 520,
         'height' => 440
