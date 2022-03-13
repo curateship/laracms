@@ -1,6 +1,10 @@
 @extends('admin.layouts.app')
+
+@push('custom-scripts')
+    @include('admin.tags.script-js')
+@endpush
+
 @section('content')
-  
 <!-- 👇 Content Body Wrapper-->
  <div class="container max-width-adaptive-lg">
     <div class="grid gap-md justify-between">
@@ -8,7 +12,7 @@
 
         <!-- Content Table Column -->
         <div class="card" data-table-controls="table-1">
-          
+
         <!-- Control Bar -->
         <div class="controlbar--sticky flex justify-between">
             <div class="inline-flex items-baseline">
@@ -38,7 +42,7 @@
     <div class="flex flex-wrap items-center justify-between margin-right-sm">
       <div class="flex flex-wrap">
         <menu class="menu-bar js-int-table-actions__no-items-selected js-menu-bar">
-        
+
           <li class="menu-bar__item" role="menuitem" aria-controls="post-search">
             <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 20 20">
               <path d="M11.25 17.5c4.83 0 8.75-3.93 8.75-8.75s-3.93-8.75-8.75-8.75-8.75 3.93-8.75 8.75 3.93 8.75 8.75 8.75z m0-15c3.45 0 6.25 2.8 6.25 6.25s-2.8 6.25-6.25 6.25-6.25-2.8-6.25-6.25 2.8-6.25 6.25-6.25z"></path><path d="M0.36 17.86l3-2.99a10.02 10.02 0 0 0 1.76 1.77l-2.98 3a1.25 1.25 0 0 1-1.78 0 1.25 1.25 0 0 1 0-1.78z"></path>
@@ -67,20 +71,21 @@
     @enderror
 
     <!-- Select Category Dropdown Autocomplete -->
-    <div class="autocomplete position-relative select-auto js-select-auto js-autocomplete" data-autocomplete-dropdown-visible-class="autocomplete--results-visible">
+    <div class="autocomplete position-relative select-auto js-select-auto js-autocomplete margin-bottom-md" data-autocomplete-dropdown-visible-class="autocomplete--results-visible">
 
       <!-- select -->
-      <select class="js-select-auto__select">
+      <select class="js-select-auto__select" required>
         <optgroup label="Select a Category">
-          <option>Select a Tag category</option>
-          <option value="0">Harry Potter</option>
-          <option value="1">Hermione Granger</option>
+            <option>Select a Tag category</option>
+            @foreach(\App\Models\TagsCategories::all() as $category)
+                <option value="{{$category->id}}">{{$category->name}}</option>
+            @endforeach
         </optgroup>
       </select>
 
       <!-- input -->
       <div class="select-auto__input-wrapper">
-        <input class="form-control js-autocomplete__input js-select-auto__input" type="text" name="autocomplete-input-id" id="autocomplete-input-id" placeholder="Select a Tag Category" autocomplete="off">
+        <input class="form-control js-autocomplete__input js-select-auto__input" type="text" name="tag_category" id="tag_category" placeholder="Select a Tag Category" autocomplete="off">
 
         <div class="select-auto__input-icon-wrapper">
           <!-- arrow icon -->
@@ -116,20 +121,23 @@
       </div>
 
       <p class="sr-only" aria-live="polite" aria-atomic="true"><span class="js-autocomplete__aria-results">0</span> results found.</p>
-    </div>    
-
-    <!-- Upload Button -->
-    <div class="file-upload inline-block margin-top-sm">
-    <label for="upload2" class="file-upload__label btn btn--subtle">
-      <span class="flex items-center">
-        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><path  stroke-linecap="square" stroke-linejoin="miter" d="M2 16v6h20v-6"></path><path stroke-linejoin="miter" stroke-linecap="butt" d="M12 17V2"></path><path stroke-linecap="square" stroke-linejoin="miter" d="M18 8l-6-6-6 6"></path></g></svg>
-        
-        <span class="margin-left-xxs file-upload__text file-upload__text--has-max-width">Upload Image</span>
-      </span>
-    </label> 
-  
-    <input type="file" class="file-upload__input" name="upload2" id="upload2" multiple>
     </div>
+
+      <!-- Image Upload -->
+      <div class="file-upload inline-block margin-bottom-sm">
+          <label for="upload-file" class="file-upload__label btn btn--subtle">
+          <span class="flex items-center">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><path  stroke-linecap="square" stroke-linejoin="miter" d="M2 16v6h20v-6"></path><path stroke-linejoin="miter" stroke-linecap="butt" d="M12 17V2"></path><path stroke-linecap="square" stroke-linejoin="miter" d="M18 8l-6-6-6 6"></path></g></svg>
+            <span class="margin-left-xxs file-upload__text file-upload__text--has-max-width">Upload Image</span>
+          </span>
+          </label>
+          <input type="hidden" name="original" value=""/>
+          <input type="hidden" name="thumbnail" value=""/>
+          <input type="hidden" name="medium" value=""/>
+          <input type="file" class="file-upload__input" name="file" id="upload-file" accept="image/jpeg, image/jpg, image/png, image/gif" required>
+          <br>
+          <img alt="thumbnail" id="upload-thumbnail" class="margin-top-md" src="" style="display: none;">
+      </div>
 
 
   </fieldset>

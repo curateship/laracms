@@ -31,11 +31,11 @@ class AdminPostController extends Controller
     // Index
     public function index(Request $request)
     {
-        SEOMeta::setTitle('Admin Posts');
+        SEOMeta::setTitle(config('seotools.static_titles.'.get_called_class().'.'.__FUNCTION__));
         if($request->has('sortBy') && $request->input('sortBy') !== 'role'){
             $posts = Post::orderBy($request->input('sortBy'), $request->input('sortDesc'));
         }   else{
-            $posts = Post::orderBy('created_at', 'DESC')->with('author');
+            $posts = Post::orderBy('created_at', 'DESC')->whereNotNull('user_id');
         }
 
         return view('admin.posts.index', [

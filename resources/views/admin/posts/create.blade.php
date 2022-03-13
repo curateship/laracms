@@ -1,13 +1,13 @@
 @extends('admin.layouts.app')
 
 @push('custom-scripts')
+    @include('admin.posts.script-select2-js')
     @include('admin.posts.script-editor-js')
     @include('admin.posts.script-editor-js-image')
     @include('admin.posts.script-editor-js-header')
     @include('admin.posts.script-editor-js-embed')
     @include('admin.posts.script-editor-js-list')
     @include('admin.posts.script-js')
-    @include('admin.posts.script-select2-js')
 @endpush
 
 @section('content')
