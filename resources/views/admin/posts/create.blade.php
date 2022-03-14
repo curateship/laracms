@@ -68,6 +68,14 @@
           <div id="js-editor-description" data-target-input="#description" class="site-editor margin-bottom-sm form-control width-100%"></div>
           <input type="hidden" name="description" id="description" required/>
       </div>
+
+      <!-- Excerpt -->
+      <textarea class="form-control width-100% margin-bottom-sm" type="text" name="excerpt" id="textarea" minlength="10" placeholder="Enter Your Excerpt" required>{{ old("excerpt") }}</textarea>
+
+      @error('excerpt')
+        <p>{{ $message }}</p>
+      @enderror
+
       <!-- Select Category Dropdown Autocomplete -->
       <div class="autocomplete position-relative select-auto js-select-auto js-autocomplete margin-bottom-sm" data-autocomplete-dropdown-visible-class="autocomplete--results-visible">
         <!-- select -->

@@ -61,6 +61,7 @@ class PostFactory extends Factory
 
         return [
             'title' => $this->faker->sentence(),
+            'excerpt' => $this->faker->sentence(),
             'slug' => $this->faker->unique()->slug(),
             'body' => '{"time":1645388269659,"blocks":[{"id":"0JuQqZUtap","type":"paragraph","data":{"text":"<b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry."}},{"id":"PwYPcaIhrm","type":"paragraph","data":{"text":"<b>Lorem Ipsum</b> has been the industry`s standard dummy text ever since the <b>1500s</b>, when an unknown printer took a galley of type and scrambled it to make a type specimen book."}},{"id":"Ns7mK-QUpp","type":"paragraph","data":{"text":"It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."}},{"id":"6gayfkxOJU","type":"paragraph","data":{"text":"It was popularised in the <b>1960s</b> with the release of Letraset sheets containing <b>Lorem Ipsum</b> passages, and more recently with desktop publishing software like Aldus PageMaker including versions of <b>Lorem Ipsum</b>."}}],"version":"2.23.2"}',
             'user_id' => User::factory(),

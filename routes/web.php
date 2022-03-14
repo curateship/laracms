@@ -54,9 +54,6 @@ Route::post('post/comment/save', [PostController::class, 'saveComment'])->name('
 // Old comment route;
 //Route::post('/post/addComment/{post:slug}', [PostController::class, 'addComment'])->name('post.add_comment');
 
-Route::get('/tag/test',function(){
-    return view('themes.jpn.tags.related');
-  });
 
 /*
 |--------------------------------------------------------------------------

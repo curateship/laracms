@@ -98,7 +98,7 @@ class AdminPostController extends Controller
         }
     }
 
-    // Upload
+    // Upload Images
     public function upload($upload_type, Request $request){
         $path = '/public'.config('images.posts_storage_path');
         $mime_type = $request->file('image')->getMimeType();
@@ -246,6 +246,7 @@ class AdminPostController extends Controller
         }
 
         $post->title = $title;
+        $post->excerpt = $excerpt;
         $post->slug = $slug;
         $post->body = $request->input('description');
         $post->category_id = $category->id;

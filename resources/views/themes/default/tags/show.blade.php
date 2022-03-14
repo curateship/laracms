@@ -6,7 +6,7 @@
 <section class="margin-y-xl">
   <div class="container max-width-adaptive-lg padding-top-sm">
     <div class="grid gap-md justify-between">
-      <div class="col-12@md">
+      <div class="col-15@md">
 
       <section class="margin-bottom-lg">
     <ul class="grid-auto-md gap-md">

@@ -16,13 +16,13 @@
   </div>
 
   <!-- Tags -->
-  <div class="padding-top-md text-left text-sm">
+  <div class="text-left text-sm">
       @foreach(\App\Models\TagsCategories::all() as $category)
           @if(count($category->tags()) > 0)
-              <div class="padding-y-xs">
+              <div class="">
                   {{$category->name}}:
                   @foreach($category->tags() as $tag)
-                      <button class="chip chip--interactive text-sm">
+                      <button class="chip chip--interactive text-sm margin-bottom-xxs">
                           <a class="link-subtle" href="/tags/{{$category->name}}/{{$tag->name}}">
                               <i class="chip__label">{{$tag->name}}</i>
                           </a>
