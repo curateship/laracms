@@ -129,7 +129,7 @@ class PostController extends Controller
             // Prepare comments view;
             $comments_view = view('components.posts.comments.post-comments', [
                 'last_comment_id' => 0,
-                'comments' => $post->comments(0),
+                'comments' => $post->commentsList(0),
                 'post' => $post
             ])->render();
         } else {
@@ -143,7 +143,7 @@ class PostController extends Controller
             // Prepare comments view;
             $comments_view = view('components.posts.comments.post-comments', [
                 'last_comment_id' => $comment->id,
-                'comments' => $post->comments($comment->id + 1),
+                'comments' => $post->commentsList($comment->id + 1),
                 'post' => $post
             ])->render();
         }
@@ -161,7 +161,7 @@ class PostController extends Controller
         return view('components.posts.comments.post-comments', [
             'post' => $post,
             'last_comment_id' => $last_comment_id,
-            'comments' => $post->comments($last_comment_id)
+            'comments' => $post->commentsList($last_comment_id)
         ])->render();
     }
 }

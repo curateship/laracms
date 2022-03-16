@@ -65,8 +65,12 @@ class Post extends Model
             ->count();
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class)->whereNull('reply_id');
+    }
 
-    public function comments($last_comment_id = 0)
+    public function commentsList($last_comment_id = 0)
     {
         $comments = Comment::leftJoin('users', 'users.id', '=', 'comments.user_id')
             ->where('post_id', $this->id)
