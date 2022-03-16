@@ -58,23 +58,31 @@ class PostController extends Controller
 
         // Get post comments list;
         $parent_comment = Comment::find($id);
-        $post = Post::find($parent_comment->post_id);
 
         $comment = new Comment();
         $comment->user_id = Auth::user()->id;
         $comment->reply_id = $id;
         $comment->the_comment = $replyComments;
-        $comment->post_id = $post->id;
+        $comment->post_id = $parent_comment->post_id;
         $comment->save();
-        $response = 'Reply successfully added!';
 
-        // Prepare comments view;
-        $comments_view = view('components.posts.comments.reply-list', [
-            'comment' => $parent_comment
-        ])->render();
+        // First reply or not?
+        if(Comment::where('reply_id', $id)->count() == 1){
+            // First;
+            $comments_view = view('components.posts.comments.reply-box', [
+                'comment' => $parent_comment,
+                'add_reply_list' => true
+            ])->render();
+        }   else{
+            // Not first;
+            // Prepare comments view;
+            $comments_view = view('components.posts.comments.reply-list', [
+                'comment' => $parent_comment
+            ])->render();
+        }
 
         return response()->json([
-            'result' => $response,
+            'result' => 'Reply successfully added!',
             'comments' => $comments_view,
             'post_id' => $parent_comment->post_id
         ]);

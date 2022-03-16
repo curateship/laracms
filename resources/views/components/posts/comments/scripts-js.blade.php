@@ -65,7 +65,19 @@
                 }
 
                 if(type === 'reply'){
-                    $('.details__content[data-comment-id="' + itemId + '"] > ul').html(response.comments)
+                    const replyCount = $('.comment-reply[data-reply-id="' + itemId + '"]').length - 1
+
+                    // If added reply list already exist;
+                    if(replyCount > 0){
+                        $('.details__content[data-comment-id="' + itemId + '"] > ul').html(response.comments)
+                    }   else{
+                        // If this is first reply in list;
+                        $('.comments__comment[data-comment-id="' + itemId + '"]').after(response.comments)
+                    }
+
+                    const newReplyCount = $('.comment-reply[data-reply-id="' + itemId + '"]').length - 1
+                    $('.reply-list-count[data-comment-id="' + itemId + '"]').html(newReplyCount)
+
                     $('.post-comment-form[data-item-id="' + itemId + '"][data-type="reply"]').parents('.comment-form-box').remove()
 
                     //$('.post-comments[data-post-id="' + response.post_id + '"]').html(response.comments);
