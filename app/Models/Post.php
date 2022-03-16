@@ -56,7 +56,15 @@ class Post extends Model
 
     public function comments()
     {
-	    return $this->hasMany(Comment::class)->whereNull('reply_id');
+        return Comment::leftJoin('users', 'users.id', '=', 'comments.user_id')
+            ->where('post_id', $this->id)
+            ->whereNull('reply_id')
+            ->select([
+                'comments.*',
+                'users.name as author_name',
+                'users.thumbnail as author_thumbnail'
+            ])
+            ->get();
     }
 
     public static function getNewSlug($slug, $posts) {

@@ -65,10 +65,11 @@
                 }
 
                 if(type === 'reply'){
-                    $('.post-comments[data-post-id="' + response.post_id + '"]').html(response.comments);
+                    $('.details__content[data-comment-id="' + itemId + '"] > ul').html(response.comments)
                     $('.post-comment-form[data-item-id="' + itemId + '"][data-type="reply"]').parents('.comment-form-box').remove()
 
-                    $('.comments__comment[data-comment-id="' + itemId + '"]').next('.comments__details').attr('open', 1)
+                    //$('.post-comments[data-post-id="' + response.post_id + '"]').html(response.comments);
+                    //$('.comments__comment[data-comment-id="' + itemId + '"]').next('.comments__details').attr('open', 1)
                 }
 
                 initReadMoreItems()
@@ -93,6 +94,32 @@
             }
         });
     })
+
+        $(document).on('click', '.show-comment-reply-list', function(){
+            const commentId = $(this).attr('data-comment-id')
+            const parent = $('.comments__details[data-comment-id="' + commentId + '"]')
+            const replyListBox = $('.details__content[data-comment-id="' + commentId + '"] > ul')
+
+            if(parent.attr('open') !== undefined){
+                console.log('Hide more comments')
+                replyListBox.html('')
+            }   else{
+                console.log('Show more comments')
+
+                $.ajax({
+                    data: {
+                        commentId: commentId
+                    },
+                    url: '{{route('post-comment-reply-list')}}',
+                    type: 'GET',
+                    success:function(response){
+                        replyListBox.html(response)
+
+                        initReadMoreItems()
+                    }
+                });
+            }
+        })
 
     initPostCommentsForms()
     initReadMoreItems()

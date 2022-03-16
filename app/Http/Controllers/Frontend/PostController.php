@@ -69,14 +69,21 @@ class PostController extends Controller
         $response = 'Reply successfully added!';
 
         // Prepare comments view;
-        $comments_view = view('components.posts.comments.post-comments', ['post' => $post])->render();
-
+        $comments_view = view('components.posts.comments.reply-list', [
+            'comment' => $parent_comment
+        ])->render();
 
         return response()->json([
             'result' => $response,
             'comments' => $comments_view,
             'post_id' => $parent_comment->post_id
         ]);
+    }
+
+    public function getReply(Request $request){
+        return view('components.posts.comments.reply-list', [
+            'comment' => Comment::find($request->input('commentId'))
+        ])->render();
     }
 
     public function saveComment(Request $request)
