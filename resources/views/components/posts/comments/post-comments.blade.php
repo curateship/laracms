@@ -1,4 +1,4 @@
-@foreach($post->comments() as $comment)
+@foreach($comments as $comment)
         <li class="comments__comment" data-comment-id="{{$comment->id}}">
             <div class="flex items-start margin-bottom-sm">
                 <a href="#" class="comments__author-img">
@@ -72,3 +72,7 @@
         @endif
 
 @endforeach
+
+@if($post->existMoreComments($last_comment_id) > 0)
+    <button type="button" class="load-more-comments f-header__btn btn btn--subtle radius-full" data-post-id="{{$post->id}}">Load more comments</button>
+@endif

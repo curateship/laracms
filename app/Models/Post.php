@@ -48,15 +48,24 @@ class Post extends Model
         }
     }
 
+    public function existMoreComments($last_comment_id = 0){
+        return Comment::where('post_id', $this->id)
+            ->whereNull('reply_id')
+            ->where('id', '>', $last_comment_id + 10)
+            ->count();
+    }
+
     public function commentsCount()
     {
-        return Comment::where('post_id', $this->id)->count();
+        return Comment::where('post_id', $this->id)
+            ->count();
     }
 
 
-    public function comments()
+    public function comments($last_comment_id = 0)
     {
         return Comment::leftJoin('users', 'users.id', '=', 'comments.user_id')
+            ->where('comments.id', '>', $last_comment_id)
             ->where('post_id', $this->id)
             ->whereNull('reply_id')
             ->select([
@@ -64,6 +73,7 @@ class Post extends Model
                 'users.name as author_name',
                 'users.thumbnail as author_thumbnail'
             ])
+            ->limit(10)
             ->get();
     }
 

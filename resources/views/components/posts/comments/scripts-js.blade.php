@@ -23,6 +23,30 @@
         $(this).parents('.comment-form-box').remove()
     })
 
+    $(document).on('click', '.load-more-comments', function(){
+        const postId = $(this).attr('data-post-id')
+        let lastCommentId
+        $('.comments__comment').each(function(){
+            lastCommentId = $(this).attr('data-comment-id')
+        })
+
+        $(this).remove()
+
+        loadPostComments(postId, lastCommentId, '.post-comments[data-post-id="' + postId + '"]')
+    })
+
+    function loadPostComments(postId, lastCommentId, container){
+        $.ajax({
+            url: '/post/comment/get/' + postId + '/' + lastCommentId,
+            type: 'GET',
+            success:function(response){
+                $(container).append(response)
+
+                initReadMoreItems()
+            }
+        });
+    }
+
     $(document).on('click', '.post-comment-bnt', function(e){
         e.preventDefault();
         const itemId = $(this).attr('data-item-id');
@@ -133,6 +157,7 @@
             }
         })
 
+    loadPostComments({{$post->id}}, 0, '.post-comments[data-post-id="{{$post->id}}"]')
     initPostCommentsForms()
     initReadMoreItems()
 }());

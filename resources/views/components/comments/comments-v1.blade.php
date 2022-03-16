@@ -21,7 +21,7 @@
 
 <!-- Comments -->
 <ul class="margin-bottom-lg margin-top-sm post-comments" data-post-id="{{$post->id}}">
-    @include('components.posts.comments.post-comments', ['post' => $post])
+    <!-- Now we got comments list over AJAX -->
 </ul>
 
 <!-- Add Comment Form -->

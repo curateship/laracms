@@ -130,4 +130,14 @@ class PostController extends Controller
             'comments' => $comments_view
         ]);
     }
+
+    public function getPostComments($post_id, $last_comment_id){
+        $post = Post::find($post_id);
+
+        return view('components.posts.comments.post-comments', [
+            'post' => $post,
+            'last_comment_id' => $last_comment_id,
+            'comments' => $post->comments($last_comment_id)
+        ])->render();
+    }
 }

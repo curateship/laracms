@@ -47,7 +47,7 @@ Route::get('/tags/{tags_categories_name}/{tag_name}', [TagController::class, 'sh
 
 
 // Comments
-Route::get('post/comment/get/{post_id}', [PostController::class, 'getPostComments'])->name('post-comment-get')->middleware(['auth', 'verified']);
+Route::get('post/comment/get/{post_id}/{last_comment_id}', [PostController::class, 'getPostComments'])->name('post-comment-get')->middleware(['auth', 'verified']);
 Route::get('post/comment/reply', [PostController::class, 'reply'])->name('post-comment-reply')->middleware(['auth', 'verified']);
 Route::post('post/comment/reply-save', [PostController::class, 'saveReply'])->name('post-comment-reply-save')->middleware(['auth', 'verified']);
 Route::post('post/comment/save', [PostController::class, 'saveComment'])->name('post-comment-save')->middleware(['auth', 'verified']);
