@@ -30,8 +30,45 @@ class Comment extends Model
         return User::find($this->user_id);//$this->belongsTo(User::class);
     }
 
-    public function replies(){
-        return static::where('reply_id', $this->id)
-            ->get();
+    public function replies($only_count = false, $last_comment_id = 0){
+        if($only_count){
+            if($last_comment_id == 0){
+                return static::where('reply_id', $this->id)
+                    ->count();
+            }   else{
+                $comments = static::where('reply_id', $this->id)
+                    ->where('comments.id', '<', $last_comment_id);
+
+                return count($comments->get());
+            }
+
+        }   else{
+            $comments = static::where('reply_id', $this->id)
+                ->leftJoin('users', 'users.id', '=', 'comments.user_id')
+                ->select([
+                    'comments.*',
+                    'users.name as author_name',
+                    'users.thumbnail as author_thumbnail'
+                ])
+                ->orderBy('comments.created_at', 'DESC')
+                ->limit(10);
+
+                if($last_comment_id > 0){
+                    $comments = $comments->where('comments.id', '<', $last_comment_id);
+                }
+
+            return $comments->get();
+        }
+    }
+
+    public function existMoreComments($last_comment_id = 0){
+        $comment_block = Comment::where('post_id', $this->id)
+            ->whereNull('reply_id');
+
+        if($last_comment_id > 0){
+            $comment_block = $comment_block->where('id', '<', $last_comment_id);
+        }
+
+        return count($comment_block->get());
     }
 }

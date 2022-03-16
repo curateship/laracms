@@ -48,15 +48,42 @@ class Post extends Model
         }
     }
 
+    public function existMoreComments($last_comment_id = 0){
+        $comment_block = Comment::where('post_id', $this->id)
+            ->whereNull('reply_id');
+
+        if($last_comment_id > 0){
+            $comment_block = $comment_block->where('id', '<', $last_comment_id);
+        }
+
+        return count($comment_block->get());
+    }
+
     public function commentsCount()
     {
-        return Comment::where('post_id', $this->id)->count();
+        return Comment::where('post_id', $this->id)
+            ->count();
     }
 
 
-    public function comments()
+    public function comments($last_comment_id = 0)
     {
-	    return $this->hasMany(Comment::class)->whereNull('reply_id');
+        $comments = Comment::leftJoin('users', 'users.id', '=', 'comments.user_id')
+            ->where('post_id', $this->id)
+            ->whereNull('reply_id')
+            ->select([
+                'comments.*',
+                'users.name as author_name',
+                'users.thumbnail as author_thumbnail'
+            ]);
+
+        if($last_comment_id > 0){
+            $comments = $comments->where('comments.id', '<', $last_comment_id);
+        }
+
+        return $comments->orderBy('created_at', 'DESC')
+            ->limit(10)
+            ->get();
     }
 
     public static function getNewSlug($slug, $posts) {

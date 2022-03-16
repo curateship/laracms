@@ -58,25 +58,53 @@ class PostController extends Controller
 
         // Get post comments list;
         $parent_comment = Comment::find($id);
-        $post = Post::find($parent_comment->post_id);
 
         $comment = new Comment();
         $comment->user_id = Auth::user()->id;
         $comment->reply_id = $id;
         $comment->the_comment = $replyComments;
-        $comment->post_id = $post->id;
+        $comment->post_id = $parent_comment->post_id;
         $comment->save();
-        $response = 'Reply successfully added!';
 
-        // Prepare comments view;
-        $comments_view = view('components.posts.comments.post-comments', ['post' => $post])->render();
-
+        // First reply or not?
+        $first_comment = false;
+        if(Comment::where('reply_id', $id)->count() == 1){
+            // First;
+            $comments_view = view('components.posts.comments.reply-box', [
+                'comment' => $parent_comment,
+                'add_reply_list' => true,
+                'reply_list' => $parent_comment->replies(false, $comment->id + 1),
+                'last_comment_id' => $comment->id
+            ])->render();
+            $first_comment = true;
+        }   else{
+            // Not first;
+            // Prepare comments view;
+            $comments_view = view('components.posts.comments.reply-list', [
+                'comment' => $parent_comment,
+                'reply_list' => $parent_comment->replies(false, $comment->id + 1),
+                'last_comment_id' => $comment->id
+            ])->render();
+        }
 
         return response()->json([
-            'result' => $response,
+            'result' => 'Reply successfully added!',
             'comments' => $comments_view,
-            'post_id' => $parent_comment->post_id
+            'post_id' => $parent_comment->post_id,
+            'total_replies' => $parent_comment->replies(true),
+            'first_comment' => $first_comment
         ]);
+    }
+
+    public function getReply(Request $request){
+        $parent_comment = Comment::find($request->input('commentId'));
+        $last_comment_id = $request->has('lastCommentId') ? $request->input('lastCommentId') : 0;
+
+        return view('components.posts.comments.reply-list', [
+            'comment' => $parent_comment,
+            'reply_list' => $parent_comment->replies(false, $last_comment_id),
+            'last_comment_id' => $last_comment_id
+        ])->render();
     }
 
     public function saveComment(Request $request)
@@ -91,9 +119,19 @@ class PostController extends Controller
             ->where('the_comment', $comment_text)
             ->first();
 
+        // Get post comments list;
+        $post = Post::find($id);
+
         if($exist) {
             $response = 'Same comment already exist';
             $error = true;
+
+            // Prepare comments view;
+            $comments_view = view('components.posts.comments.post-comments', [
+                'last_comment_id' => 0,
+                'comments' => $post->comments(0),
+                'post' => $post
+            ])->render();
         } else {
             $comment = new Comment;
             $comment->user_id = $user_id;
@@ -101,18 +139,29 @@ class PostController extends Controller
             $comment->the_comment = $comment_text;
             $comment->save();
             $response = 'Comment successfully added!';
+
+            // Prepare comments view;
+            $comments_view = view('components.posts.comments.post-comments', [
+                'last_comment_id' => $comment->id,
+                'comments' => $post->comments($comment->id + 1),
+                'post' => $post
+            ])->render();
         }
-
-        // Get post comments list;
-        $post = Post::find($id);
-
-        // Prepare comments view;
-        $comments_view = view('components.posts.comments.post-comments', ['post' => $post])->render();
 
         return response()->json([
             'error' => $error,
             'result' => $response,
             'comments' => $comments_view
         ]);
+    }
+
+    public function getPostComments($post_id, $last_comment_id){
+        $post = Post::find($post_id);
+
+        return view('components.posts.comments.post-comments', [
+            'post' => $post,
+            'last_comment_id' => $last_comment_id,
+            'comments' => $post->comments($last_comment_id)
+        ])->render();
     }
 }

@@ -1,7 +1,7 @@
 <div class="flex gap-sm flex-column flex-row@md justify-between items-center@md">
     <div>
         <!-- Comment header and counts -->
-        <h1 class="text-md">Comments ({{ count($post->comments) }})</h1>
+        <h1 class="text-md">Comments ({{ $post->commentsCount() }})</h1>
     </div>
 
   <!-- Sorting -->
@@ -21,7 +21,7 @@
 
 <!-- Comments -->
 <ul class="margin-bottom-lg margin-top-sm post-comments" data-post-id="{{$post->id}}">
-    @include('components.posts.comments.post-comments', ['post' => $post])
+    <!-- Now we got comments list over AJAX -->
 </ul>
 
 <!-- Add Comment Form -->
