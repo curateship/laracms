@@ -3,8 +3,12 @@
     object-fit: cover;
     z-index: 1;
   }
-  
+
   .post-content {
     z-index: 2;
     margin-top:-150px;
+  }
+
+  .tags-cols{
+      grid-template-columns: repeat(auto-fit, minmax(var(--col-min-width), 0.2fr)) !important;
   }

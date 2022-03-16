@@ -9,7 +9,7 @@
       <div class="col-15@md">
 
       <section class="margin-bottom-lg">
-    <ul class="grid-auto-md gap-md">
+    <ul class="grid-auto-md gap-md tags-cols">
 
     @forelse($posts as $post)
     <li class="card">
