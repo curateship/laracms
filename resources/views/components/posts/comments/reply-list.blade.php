@@ -1,5 +1,5 @@
 @foreach($reply_list as $reply)
-    <li class="comments__comment comment-reply-item" data-parent-comment-id="{{$reply->reply_id}}" data-comment-id="{{$reply->id}}">
+    <li class="comments__comment comment-reply-item" data-type="reply" data-parent-comment-id="{{$reply->reply_id}}" data-comment-id="{{$reply->id}}">
         <div class="flex items-start">
             <a href="#" class="comments__author-img">
                 <img class="block width-100% height-100% object-cover" src="{{ url('/storage').config('images.users_storage_path').$reply->author_thumbnail  }}" alt="Author picture">

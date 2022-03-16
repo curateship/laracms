@@ -123,7 +123,7 @@
                         $('.details__content[data-comment-id="' + itemId + '"] > ul').html(response.comments)
                     }   else{
                         // If this is first reply in list;
-                        $('.comments__comment[data-comment-id="' + itemId + '"]').after(response.comments)
+                        $('.comments__comment[data-comment-id="' + itemId + '"][data-type="reply"]').after(response.comments)
                     }
 
                     $('.reply-list-count[data-comment-id="' + itemId + '"]').html(response.total_replies)
