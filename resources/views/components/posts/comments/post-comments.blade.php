@@ -73,6 +73,6 @@
 
 @endforeach
 
-@if($post->existMoreComments($last_comment_id) > 0)
+@if($post->existMoreComments($last_comment_id) - 10 > 0)
     <button type="button" class="load-more-comments f-header__btn btn btn--subtle radius-full" data-post-id="{{$post->id}}">Load more comments</button>
 @endif

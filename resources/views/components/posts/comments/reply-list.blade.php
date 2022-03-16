@@ -1,5 +1,5 @@
-@foreach($comment->replies() as $reply)
-    <li class="comments__comment">
+@foreach($reply_list as $reply)
+    <li class="comments__comment comment-reply-item" data-parent-comment-id="{{$reply->reply_id}}" data-comment-id="{{$reply->id}}">
         <div class="flex items-start">
             <a href="#" class="comments__author-img">
                 <img class="block width-100% height-100% object-cover" src="{{ url('/storage').config('images.users_storage_path').$reply->author_thumbnail  }}" alt="Author picture">
@@ -35,3 +35,7 @@
         </div>
     </li>
 @endforeach
+
+@if($comment->replies(true, $last_comment_id) - 10 > 0)
+    <button type="button" class="load-more-reply f-header__btn btn btn--subtle radius-full" data-reply-id="{{$comment->id}}">Load more reply</button>
+@endif
