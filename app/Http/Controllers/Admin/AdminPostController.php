@@ -246,7 +246,7 @@ class AdminPostController extends Controller
         }
 
         $post->title = $title;
-        $post->excerpt = $excerpt;
+        $post->excerpt = '';
         $post->slug = $slug;
         $post->body = $request->input('description');
         $post->category_id = $category->id;
