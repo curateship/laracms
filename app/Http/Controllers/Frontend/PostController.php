@@ -22,8 +22,14 @@ class PostController extends Controller
         SEOMeta::setTitle($post->title);
         $recent_posts = Post::latest()->take(5)->get();
 
+        $post_tags_by_cats = [];
+        foreach($post->tags() as $post_tag){
+            $post_tags_by_cats[$post_tag->category_id][] = $post_tag;
+        }
+
         return view('/themes.jpn.posts.single', [
             'post' => $post,
+            'post_tags' => $post_tags_by_cats,
             'recent_posts' => $recent_posts,
         ]);
     }
