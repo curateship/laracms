@@ -5,6 +5,12 @@
 <!-- 👇 Content Body Wrapper-->
 <section class="margin-y-xl">
   <div class="container max-width-adaptive-lg padding-top-sm">
+
+      <!-- Post Title -->
+      <div class="text-component padding-bottom-md">
+          <h1 class="text-xl">{{ $tag->name }}</h1>
+      </div>
+
     <div class="grid gap-md justify-between">
       <div class="col-15@md">
 
