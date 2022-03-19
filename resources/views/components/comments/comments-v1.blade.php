@@ -1,7 +1,7 @@
 <div class="flex gap-sm flex-column flex-row@md justify-between items-center@md">
     <div>
         <!-- Comment header and counts -->
-        <h1 class="text-md">Comments ({{ $post->commentsCount() }})</h1>
+        <h1 class="text-md margin-bottom-md">Comments ({{ $post->commentsCount() }})</h1>
     </div>
 
   <!-- Sorting -->

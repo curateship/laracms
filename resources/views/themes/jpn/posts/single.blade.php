@@ -16,24 +16,18 @@
       <!-- Content Start -->
       <div class="col-11@md padding-x-lg@md">
       @include('components.posts.single.article-plain')
-      <!-- Content END -->
 
           <div class="border-top margin-top-sm"></div>
-
           <!-- Comments -->
-          <section class="comments padding-md">
+          <section class="comments margin-top-md">
               @include('components.comments.comments-v1')
           </section>
-          <!-- END -->
-
       </div>
-      <!-- END -->
 
       <!-- Sidebar -->
       <div class="col-3@md">
           @include('components.posts.lists.related-posts-sidebar')
       </div>
-      <!--Sidebar END -->
 
   </div>
 </div>
