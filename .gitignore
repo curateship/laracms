@@ -13,3 +13,8 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+/config/seotools.php
+/app/Http/Middleware/GenerateMenus.php
+/public/assets/img/random-backgrounds
+/public/assets/img/favicon.svg
+/resources/views/components/layouts/svg
