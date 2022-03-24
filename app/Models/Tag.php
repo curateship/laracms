@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use EditorJS\EditorJSException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,6 +11,7 @@ use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use SaperX\LaravelEditorjsHtml\EditorJSHtml;
 
 /**
  * @property mixed $id
@@ -17,6 +19,7 @@ use Illuminate\Support\Facades\Storage;
  * @property mixed $medium
  * @property mixed $thumbnail
  * @property mixed $name
+ * @property mixed $body
  */
 class Tag extends Model
 {
@@ -52,5 +55,40 @@ class Tag extends Model
         Storage::delete($path.$this->original['original']);
         Storage::delete($path.$this->medium);
         Storage::delete($path.$this->thumbnail);
+    }
+
+    /**
+     * @throws EditorJSException
+     */
+    public function body($type = 'full', $limit = 0): string
+    {
+        if($this->body == ''){
+            return '';
+        }
+
+        if($type == 'full'){
+            // Full content render;
+            $convertToHtml = new EditorJSHtml($this->body);
+            $content = $convertToHtml->render();
+        }   else{
+            // Get only text content from post body;
+            $data = json_decode($this->body, true);
+
+            $items = [];
+            foreach($data['blocks'] as $item){
+                if($item['type'] == 'paragraph'){
+                    $items[] = $item['data']['text'];
+                }
+            }
+
+            $content = '<div class="text-left">'.implode('<br>', $items).'</div>';
+        }
+
+        //dd($content);
+        if($limit > 0){
+            return \App\Models\Post::truncateHtml(html_entity_decode($content), $limit);
+        }   else{
+            return html_entity_decode($content);
+        }
     }
 }

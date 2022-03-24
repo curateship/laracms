@@ -185,6 +185,7 @@ class AdminTagController extends Controller
         $tag->original = $original;
         $tag->thumbnail = $thumbnail;
         $tag->medium = $medium;
+        $tag->body = $request->input('description');
         $tag->save();
 
         return redirect(route('admin.tags.index'));
