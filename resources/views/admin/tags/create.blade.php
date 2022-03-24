@@ -1,6 +1,9 @@
 @extends('admin.layouts.app')
 
 @push('custom-scripts')
+    @include('admin.posts.script-editor-js')
+    @include('admin.posts.script-editor-js-header')
+    @include('admin.posts.script-editor-js-list')
     @include('admin.tags.script-js')
 @endpush
 
@@ -59,7 +62,7 @@
 <!-- Table-->
 <div class="margin-top-auto border-top border-contrast-lower opacity-40%"></div><!-- Divider -->
 <div class="padding-md">
-<form action="{{ route('admin.tags.store') }}" method='post'>@csrf
+<form action="{{ route('admin.tags.store') }}" id="new-tag-form" method='post'>@csrf
 
   <fieldset class="margin-bottom-xxs">
 
@@ -69,6 +72,13 @@
     @error('title')
     <p>{{ $message }}</p>
     @enderror
+
+      <!-- START EditorJS body -->
+      <div>
+          <div id="js-editor-description" data-target-input="#description" class="site-editor margin-bottom-sm form-control width-100%"></div>
+          <input type="hidden" name="description" id="description" required/>
+      </div>
+      <!-- END EditorJS body  -->
 
     <!-- Select Category Dropdown Autocomplete -->
     <div class="autocomplete position-relative select-auto js-select-auto js-autocomplete margin-bottom-md" data-autocomplete-dropdown-visible-class="autocomplete--results-visible">
