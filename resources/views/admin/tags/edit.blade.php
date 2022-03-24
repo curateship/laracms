@@ -63,7 +63,7 @@
 <!-- Table-->
 <div class="margin-top-auto border-top border-contrast-lower opacity-40%"></div><!-- Divider -->
 <div class="padding-md">
-<form action="{{ route('admin.tags.store') }}" method='post'>
+<form action="{{ route('admin.tags.store') }}" id="new-tag-form" method='post'>
     @csrf
     <input type="hidden" value="{{$tag->id}}" name="tag_id">
 
