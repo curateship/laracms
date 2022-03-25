@@ -51,7 +51,7 @@ Route::get('post/comment/get/{post_id}/{last_comment_id}', [PostController::clas
 Route::get('post/comment/reply', [PostController::class, 'reply'])->name('post-comment-reply')->middleware(['auth', 'verified']);
 Route::post('post/comment/reply-save', [PostController::class, 'saveReply'])->name('post-comment-reply-save')->middleware(['auth', 'verified']);
 Route::post('post/comment/save', [PostController::class, 'saveComment'])->name('post-comment-save')->middleware(['auth', 'verified']);
-Route::get('post/comment/reply-get-list', [PostController::class, 'getReply'])->name('post-comment-reply-list')->middleware(['auth', 'verified']);
+Route::get('post/comment/reply-get-list', [PostController::class, 'getReply'])->name('post-comment-reply-list');
 // Old comment route;
 //Route::post('/post/addComment/{post:slug}', [PostController::class, 'addComment'])->name('post.add_comment');
 

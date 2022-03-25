@@ -5,7 +5,7 @@ namespace App\Models;
 use EditorJS\EditorJSException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
-use SaperX\LaravelEditorjsHtml\EditorJSHtml;
+use Ankitech\LaravelEditorjsHtml\EditorJSHtml;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -109,6 +109,19 @@ class Post extends Model
       return $slug . '-' . $max_number;
   }
 
+  public function fixBodyJSON(){
+        $body_array = json_decode($this->body, true);
+
+        foreach($body_array['blocks'] as $key => $item){
+            if($item['type'] == 'paragraph'){
+                $item['data']['alignment'] = 'left';
+                $body_array['blocks'][$key] = $item;
+            }
+        }
+
+        return json_encode($body_array);
+  }
+
     /**
      * @throws EditorJSException
      */
@@ -116,7 +129,8 @@ class Post extends Model
     {
         if($type == 'full'){
             // Full content render;
-            $convertToHtml = new EditorJSHtml($this->body);
+            $body = $this->fixBodyJSON();
+            $convertToHtml = new EditorJSHtml($body);
             $content = $convertToHtml->render();
         }   else{
             // Get only text content from post body;

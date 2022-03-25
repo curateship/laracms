@@ -11,7 +11,7 @@ use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use SaperX\LaravelEditorjsHtml\EditorJSHtml;
+use Ankitech\LaravelEditorjsHtml\EditorJSHtml;
 
 /**
  * @property mixed $id
