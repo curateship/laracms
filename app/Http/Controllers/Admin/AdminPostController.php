@@ -255,6 +255,9 @@ class AdminPostController extends Controller
         $post->medium = $medium;
         $post->save();
 
+        // Now we can save excerpt;
+        $post->excerpt = $post->body('short', 200);
+
         // Tags;
         // Removing old tags links;
         DB::table('post_tag')
