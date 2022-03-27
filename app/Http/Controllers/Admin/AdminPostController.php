@@ -256,7 +256,8 @@ class AdminPostController extends Controller
         $post->save();
 
         // Now we can save excerpt;
-        $post->excerpt = $post->body('short', 200);
+        $post->excerpt = strip_tags($post->body('short', 200));
+        $post->save();
 
         // Tags;
         // Removing old tags links;
