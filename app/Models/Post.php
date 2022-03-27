@@ -109,29 +109,11 @@ class Post extends Model
       return $slug . '-' . $max_number;
   }
 
-  public function fixBodyJSON(){
-        $body_array = json_decode($this->body, true);
-
-        foreach($body_array['blocks'] as $key => $item){
-            if($item['type'] == 'paragraph'){
-                $item['data']['alignment'] = 'left';
-                $body_array['blocks'][$key] = $item;
-            }
-        }
-
-        return json_encode($body_array);
-  }
-
-    /**
-     * @throws EditorJSException
-     */
     public function body($type = 'full', $limit = 0): string
     {
         if($type == 'full'){
             // Full content render;
-            $body = $this->fixBodyJSON();
-            $convertToHtml = new EditorJSHtml($body);
-            $content = $convertToHtml->render();
+            $content = static::jsonToHtml($this->body);
         }   else{
             // Get only text content from post body;
             $data = json_decode($this->body, true);
@@ -271,5 +253,52 @@ class Post extends Model
             }
         }
         return $truncate;
+    }
+
+    static function jsonToHtml($jsonStr) {
+        $obj = json_decode($jsonStr);
+
+        $html = '';
+        foreach ($obj->blocks as $block) {
+            switch ($block->type) {
+                case 'paragraph':
+                    $html .= '<p>' . $block->data->text . '</p>';
+                    break;
+
+                case 'header':
+                    $html .= '<h'. $block->data->level .'>' . $block->data->text . '</h'. $block->data->level .'>';
+                    break;
+
+                case 'raw':
+                    $html .= $block->data->html;
+                    break;
+
+                case 'list':
+                    $lsType = ($block->data->style == 'ordered') ? 'ol' : 'ul';
+                    $html .= '<' . $lsType . '>';
+                    foreach($block->data->items as $item) {
+                        $html .= '<li>' . $item . '</li>';
+                    }
+                    $html .= '</' . $lsType . '>';
+                    break;
+
+                case 'code':
+                    $html .= '<pre><code class="language-'. $block->data->lang .'">'. $block->data->code .'</code></pre>';
+                    break;
+
+                case 'image':
+                    $html .= '<div class="img_pnl"><img src="'. $block->data->file->url .'" /></div>';
+                    break;
+
+                case 'embed':
+                    $html .= '<iframe src="'.$block->data->embed.'" style="width:100%; height: 600px" scrolling="no" frameborder="no"></iframe>';
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        return '<div style="text-align: left">'.$html.'</div>';
     }
 }

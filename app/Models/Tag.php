@@ -57,9 +57,6 @@ class Tag extends Model
         Storage::delete($path.$this->thumbnail);
     }
 
-    /**
-     * @throws EditorJSException
-     */
     public function body($type = 'full', $limit = 0): string
     {
         if($this->body == ''){
@@ -68,8 +65,7 @@ class Tag extends Model
 
         if($type == 'full'){
             // Full content render;
-            $convertToHtml = new EditorJSHtml($this->body);
-            $content = $convertToHtml->render();
+            $content = Post::jsonToHtml($this->body);
         }   else{
             // Get only text content from post body;
             $data = json_decode($this->body, true);

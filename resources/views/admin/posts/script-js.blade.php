@@ -60,7 +60,10 @@
             placeholder: 'Tell your story...',
             autofocus: true,
             tools: {
-                header: Header,
+                header: {
+                    class: Header,
+                    inlineToolbar: true,
+                },
                 list: {
                     class: List,
                     inlineToolbar: true,
