@@ -2,10 +2,8 @@
 
 namespace App\Models;
 
-use EditorJS\EditorJSException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
-use Ankitech\LaravelEditorjsHtml\EditorJSHtml;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

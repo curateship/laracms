@@ -65,7 +65,8 @@ class AdminTagController extends Controller
 
             // Remove tags images;
             $tag = Tag::find($id);
-            $tag->removeTagImages();
+            $tag->removeTagImages('main');
+            $tag->removeTagImages('body');
 
             // Remove tags;
             $tag->delete();
@@ -79,9 +80,9 @@ class AdminTagController extends Controller
     }
 
     // Upload
-    public function upload(Request $request){
+    public function upload($upload_type, Request $request){
         $path = '/public'.config('images.tags_storage_path');
-        $mime_type = $request->file('file')->getMimeType();
+        $mime_type = $request->file('image')->getMimeType();
         $media_path = storage_path() . "/app";
         $media = [
             'original', 'medium', 'thumbnail'
@@ -95,10 +96,10 @@ class AdminTagController extends Controller
         unset($media['original']);
 
         // Save original media file in file system;
-        $original = request()->file('file')->getClientOriginalName();
+        $original = request()->file('image')->getClientOriginalName();
         $thumbnail_medium_name = Str::random(27) . '.' . Arr::last(explode('.', $original));
 
-        $original = request()->file('file')->storeAs($path."/original", $thumbnail_medium_name);
+        $original = request()->file('image')->storeAs($path."/original", $thumbnail_medium_name);
 
         foreach($media as $type_name => $type){
             if ($mime_type == 'image/gif') {
@@ -114,7 +115,7 @@ class AdminTagController extends Controller
                 $thumbnail_medium->writeImages($media_path . "/public/tags/$type_name/" . $thumbnail_medium_name, true);
             }   else{
                 /* Other Image types */
-                $thumbnail_medium = Image::make(request()->file('file'));
+                $thumbnail_medium = Image::make(request()->file('image'));
                 $thumbnail_medium->resize($type['width'], $type['height'], function($constraint){
                     $constraint->aspectRatio();
                 });
@@ -134,7 +135,18 @@ class AdminTagController extends Controller
 
         $media['original']['path'] = url('/').Storage::url($original);
 
-        return $media;
+        if($upload_type == 'main'){
+            return $media;
+        }
+
+        if($upload_type == 'editor'){
+            return [
+                'success' => 1,
+                'file' => [
+                    'url' => $media['medium']['path']
+                ]
+            ];
+        }
     }
 
     // Store or update;
@@ -177,8 +189,44 @@ class AdminTagController extends Controller
         $medium = str_replace(url('/storage'.config('images.tags_storage_path')), '', $medium);
 
         if($request->has('tag_id')){
+            // Remove tag image if it was updated;
             if($tag->original != $original){
-                $tag->removeTagImages();
+                $tag->removeTagImages('main');
+            }
+
+            // If body was update;
+            if($tag->body != $request->input('description')){
+                $path = '/public'.config('images.tags_storage_path');
+
+                // Get current body images;
+                $current_images = [];
+
+                $body_array = json_decode($tag->body, true);
+                foreach($body_array['blocks'] as $block){
+                    if($block['type'] == 'image'){
+                        $url_array = explode('/', $block['data']['file']['url']);
+                        $current_images[] = Arr::last($url_array);
+                    }
+                }
+
+                // New tag images;
+                $new_images = [];
+                $body_array = json_decode($request->input('description'), true);
+                foreach($body_array['blocks'] as $block){
+                    if($block['type'] == 'image'){
+                        $url_array = explode('/', $block['data']['file']['url']);
+                        $new_images[] = Arr::last($url_array);
+                    }
+                }
+
+                // If we do not have old image in new list - delete this file;
+                foreach($current_images as $image){
+                    if(!in_array($image, $new_images)){
+                        Storage::delete($path.'/original/'.$image);
+                        Storage::delete($path.'/medium/'.$image);
+                        Storage::delete($path.'/thumbnail/'.$image);
+                    }
+                }
             }
         }
 
