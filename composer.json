@@ -6,7 +6,6 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
-        "ankitech/laravel-editorjs-html": "^1.0",
         "artesaos/seotools": "^0.22.0",
         "doctrine/dbal": "^3.3",
         "fruitcake/laravel-cors": "^2.0",

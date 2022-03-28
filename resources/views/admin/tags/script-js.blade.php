@@ -19,11 +19,11 @@
         e.preventDefault()
 
         let formData = new FormData()
-        formData.append('file', $('#upload-file')[0].files[0])
+        formData.append('image', $('#upload-file')[0].files[0])
         formData.append('_token', $('meta[name="csrf-token"]').attr('content'))
 
         $.ajax({
-            url : '/tags/upload',
+            url : '/tags/upload/main',
             type : 'POST',
             data : formData,
             processData: false,  // tell jQuery not to process the data
@@ -117,7 +117,18 @@
                 list: {
                     class: List,
                     inlineToolbar: true,
-                }
+                },
+                image: {
+                    class: window.ImageTool,
+                    config: {
+                        additionalRequestHeaders: {
+                            "X-CSRF-TOKEN": '{{csrf_token()}}'
+                        },
+                        endpoints: {
+                            byFile: '/tags/upload/editor',
+                        }
+                    }
+                },
             },
             readOnly,
             data

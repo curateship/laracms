@@ -4,6 +4,7 @@
     @include('admin.posts.script-editor-js')
     @include('admin.posts.script-editor-js-header')
     @include('admin.posts.script-editor-js-list')
+    @include('admin.posts.script-editor-js-image')
     @include('admin.tags.script-js')
 @endpush
 
@@ -146,7 +147,7 @@
           <input type="hidden" name="original" value="{{$tag->original}}"/>
           <input type="hidden" name="thumbnail" value="{{$tag->thumbnail}}"/>
           <input type="hidden" name="medium" value="{{$tag->medium}}"/>
-          <input type="file" class="file-upload__input" name="file" id="upload-file" accept="image/jpeg, image/jpg, image/png, image/gif">
+          <input type="file" class="file-upload__input" name="image" id="upload-file" accept="image/jpeg, image/jpg, image/png, image/gif">
           <br>
           <img alt="thumbnail" id="upload-thumbnail" class="margin-top-md" src="{{ url('/storage').config('images.tags_storage_path').$tag->thumbnail  }}" style="">
       </div>
