@@ -285,7 +285,7 @@ class Post extends Model
                     break;
 
                 case 'image':
-                    $html .= '<div class="img_pnl"><img src="'. $block->data->file->url .'" /></div>';
+                    $html .= '<div class="img_pnl padding-y-md"><img class="radius-lg" src="'. $block->data->file->url .'" /></div>';
                     break;
 
                 case 'embed':
