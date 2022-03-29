@@ -6,7 +6,7 @@
 
 <!-- Post Image -->
 <figure class="text-center padding-bottom-sm">
-  <img class="radius-lg" src="{{ url('/storage').config('images.posts_storage_path').$post->medium  }}" alt="Image description">
+    {!! $content !!}
 </figure>
 
 <!-- Post Body -->

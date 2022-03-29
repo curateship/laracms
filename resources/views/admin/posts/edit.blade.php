@@ -178,7 +178,7 @@
       <span class="flex items-center">
         <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><path  stroke-linecap="square" stroke-linejoin="miter" d="M2 16v6h20v-6"></path><path stroke-linejoin="miter" stroke-linecap="butt" d="M12 17V2"></path><path stroke-linecap="square" stroke-linejoin="miter" d="M18 8l-6-6-6 6"></path></g></svg>
 
-        <span class="margin-left-xxs file-upload__text file-upload__text--has-max-width">Edit Image</span>
+        <span class="margin-left-xxs file-upload__text file-upload__text--has-max-width">Edit media</span>
       </span>
     </label>
 
@@ -186,11 +186,19 @@
         <input type="hidden" name="thumbnail" value="{{$post->thumbnail}}"/>
         <input type="hidden" name="medium" value="{{$post->medium}}"/>
 
-    <input type="file" class="file-upload__input" name="image" id="upload-file" accept="image/jpeg, image/jpg, image/png, image/gif">
+        <input type="hidden" name="type" value="{{$post->type}}"/>
+
+        <input type="hidden" name="video_original" value="{{$post->video_original}}"/>
+        <input type="hidden" name="video_thumbnail" value="{{$post->video_thumbnail}}"/>
+        <input type="hidden" name="video_medium" value="{{$post->video_medium}}"/>
+
+    <input type="file" class="file-upload__input" name="image" id="upload-file" accept="image/jpeg, image/jpg, image/png, image/gif, video/mp4, video/webm">
 
 
     <br>
-    <img alt="thumbnail" id="upload-thumbnail" class="margin-top-md" src="{{url('/storage'.config('images.posts_storage_path').$post->thumbnail)}}">
+    <div id="upload-thumbnail" class="margin-top-md">
+        {!! $content !!}
+    </div>
   </div>
   <!-- Image Upload END -->
 
