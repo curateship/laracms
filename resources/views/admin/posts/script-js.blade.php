@@ -24,7 +24,29 @@
 
         $('#upload-thumbnail').html('Uploading...')
 
+        $('#uploading-progress-bar').show()
+
         $.ajax({
+            xhr: function() {
+                var xhr = new window.XMLHttpRequest();
+                xhr.upload.addEventListener("progress", function(evt) {
+                    if (evt.lengthComputable) {
+                        var percentComplete = ((evt.loaded / evt.total) * 100);
+
+                        // make sure to select the proper progress bar element - in this example we take the first available one
+                        var progressBar = document.getElementsByClassName('js-progress-bar')[0];
+                        // define the custom event and set the final value of the progress (70)
+                        var event = new CustomEvent('updateProgress', {detail: {value: percentComplete}});
+                        // dispatch the event
+                        progressBar.dispatchEvent(event);
+
+                        if(percentComplete === 100){
+                            $('#upload-thumbnail').html('Data processing on the server. Please wait...')
+                        }
+                    }
+                }, false);
+                return xhr;
+            },
             url : '/post/upload/main',
             type : 'POST',
             data : formData,
@@ -32,6 +54,8 @@
             contentType: false,  // tell jQuery not to set contentType
             success : function(data) {
                 if(data.thumbnail !== null){
+                    $('#uploading-progress-bar').hide()
+
                     $('#upload-thumbnail').html(data.content)
 
                     $('input[name="original"]').val(data.original.path);

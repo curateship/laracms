@@ -194,8 +194,14 @@
 
     <input type="file" class="file-upload__input" name="image" id="upload-file" accept="image/jpeg, image/jpg, image/png, image/gif, video/mp4, video/webm">
 
-
     <br>
+
+    <div id="uploading-progress-bar" class="progress-bar progress-bar--color-update flex flex-column items-center js-progress-bar margin-top-md" style="display: none;">
+        <div class="progress-bar__bg " aria-hidden="true">
+            <div class="progress-bar__fill " style="width: 0%;"></div>
+        </div>
+    </div>
+
     <div id="upload-thumbnail" class="margin-top-md">
         {!! $content !!}
     </div>
