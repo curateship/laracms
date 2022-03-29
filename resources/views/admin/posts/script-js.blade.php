@@ -22,6 +22,8 @@
         formData.append('image', $('#upload-file')[0].files[0])
         formData.append('_token', $('meta[name="csrf-token"]').attr('content'))
 
+        $('#upload-thumbnail').html('Uploading...')
+
         $.ajax({
             url : '/post/upload/main',
             type : 'POST',
@@ -30,11 +32,18 @@
             contentType: false,  // tell jQuery not to set contentType
             success : function(data) {
                 if(data.thumbnail !== null){
-                    $('#upload-thumbnail').attr('src', data.thumbnail.path).fadeIn()
+                    $('#upload-thumbnail').html(data.content)
 
                     $('input[name="original"]').val(data.original.path);
                     $('input[name="thumbnail"]').val(data.thumbnail.path);
                     $('input[name="medium"]').val(data.medium.path);
+                    $('input[name="type"]').val(data.type);
+
+                    if(data.type === 'video'){
+                        $('input[name="video_original"]').val(data.video_original.path);
+                        $('input[name="video_thumbnail"]').val(data.video_thumbnail.path);
+                        $('input[name="video_medium"]').val(data.video_medium.path);
+                    }
                 }
             }
         });

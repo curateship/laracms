@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,6 +17,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed $category_id
  * @property int|mixed|string|null $user_id
  * @property mixed $body
+ * @property mixed $type
+ * @property mixed $id
  */
 class Post extends Model
 {
@@ -136,6 +139,7 @@ class Post extends Model
 
   public function removePostImages($type){
       $path = '/public'.config('images.posts_storage_path');
+      $video_path = '/public'.config('images.videos_storage_path');
 
         switch($type){
             // Main;
@@ -143,6 +147,25 @@ class Post extends Model
                 Storage::delete($path.$this->original['original']);
                 Storage::delete($path.$this->medium);
                 Storage::delete($path.$this->thumbnail);
+
+                // Of this post have video type - we must remove video file too;
+                if($this->type == 'video'){
+                    // Get video from paths from table;
+                    $videos = DB::table('posts_videos')
+                        ->where('post_id', $this->id)
+                        ->get();
+
+                    foreach($videos as $video){
+                        Storage::delete($video_path.$video->original);
+                        Storage::delete($video_path.$video->medium);
+                        Storage::delete($video_path.$video->thumbnail);
+                    }
+
+                    // Then we need to remove writes in DB;
+                    DB::table('posts_videos')
+                        ->where('post_id', $this->id)
+                        ->delete();
+                }
                 break;
 
             // In body images;

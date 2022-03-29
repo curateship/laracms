@@ -14,6 +14,7 @@ use Artesaos\SEOTools\Facades\JsonLdMulti;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -27,8 +28,27 @@ class PostController extends Controller
             $post_tags_by_cats[$post_tag->category_id][] = $post_tag;
         }
 
+        if($post->type == 'image'){
+            $content = '<img class="radius-lg" alt="thumbnail" src="'.'/storage'.config('images.posts_storage_path').$post->medium.'">';
+        }   else{
+            $video = DB::table('posts_videos')
+                ->where('post_id', $post->id)
+                ->first();
+
+            // Render video player;
+            $content = view('admin.posts.script-video-js-player', [
+                'poster' => '/storage'.config('images.posts_storage_path').$post->medium,
+                'video_mp4' => '/storage'.config('images.videos_storage_path').$video->medium,
+                'video_webm' => '/storage'.config('images.videos_storage_path').$video->medium,
+                'player_width' => config('images.player_size_original.width'),
+                'player_height' => config('images.player_size_original.height'),
+                'auto_width' => true
+            ])->render();
+        }
+
         return view('/themes.jpn.posts.single', [
             'post' => $post,
+            'content' => $content,
             'post_tags' => $post_tags_by_cats,
             'recent_posts' => $recent_posts,
         ]);
