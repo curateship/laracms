@@ -87,5 +87,9 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
     Route::resource('/videos', AdminVideoController::class); // Video Route
 });
 
+// Storage cleaning;
+route::get('/storageCleaning/893ecd6be152d794338e56f9711cb252', function(){
+    \App\Components\Images::cleanStorage();
+});
 
 
