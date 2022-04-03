@@ -52,43 +52,6 @@
                 </ul>
               </li>
 
-              <!-- Videos -->
-              <li class="sidenav__item">
-              <a href="{{ route('admin.videos.index') }}" class="sidenav__link" {{ strpos(url()->full(), '/admin/videos') !== false ? 'aria-current=page' : '' }}>
-                  <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16"><g>
-                  <path d="M15,4H1A.945.945,0,0,0,0,5V15a.945.945,0,0,0,1,1H15a.945.945,0,0,0,1-1V5A.945.945,0,0,0,15,4ZM6,13V7l5,3Z"></path><path d="M3,0H13a1,1,0,0,1,1,1V2a0,0,0,0,1,0,0H2A0,0,0,0,1,2,2V1A1,1,0,0,1,3,0Z"></path>
-                  </svg>
-                  <span class="sidenav__text text-sm@md">Videos</span>
-                </a>
-
-                <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
-                  <svg class="icon" viewBox="0 0 12 12"><polygon points="4 3 8 6 4 9 4 3"/></svg>
-                </button>
-
-                <ul class="sidenav__list">
-                  <li class="sidenav__item">
-                    <a href="/admin/posts/create" class="sidenav__link">
-                      <span class="sidenav__text text-sm@md">Add new</span>
-                    </a>
-                  </li>
-
-                  <li class="sidenav__item">
-                    <a href="#0" class="sidenav__link">
-                      <span class="sidenav__text text-sm@md">Draft</span>
-                      <span class="sidenav__counter">4 <i class="sr-only">notifications</i></span>
-                    </a>
-                  </li>
-
-                  <li class="sidenav__item">
-                    <a href="/admin/post/trash" class="sidenav__link">
-                      <span class="sidenav__text text-sm@md">Trash</span>
-                      <span class="sidenav__counter">3 <i class="sr-only">notifications</i></span>
-                    </a>
-                  </li>
-
-                </ul>
-              </li>
-
               <!-- Users -->
               <li class="sidenav__item">
                   <a href="{{ route('admin.users.index') }}" class="sidenav__link" {{ strpos(url()->full(), '/admin/users') !== false ? 'aria-current=page' : '' }}>
