@@ -202,10 +202,12 @@ class AdminTagController extends Controller
                 $current_images = [];
 
                 $body_array = json_decode($tag->body, true);
-                foreach($body_array['blocks'] as $block){
-                    if($block['type'] == 'image'){
-                        $url_array = explode('/', $block['data']['file']['url']);
-                        $current_images[] = Arr::last($url_array);
+                if(isset($body_array['blocks'])){
+                    foreach($body_array['blocks'] as $block){
+                        if($block['type'] == 'image'){
+                            $url_array = explode('/', $block['data']['file']['url']);
+                            $current_images[] = Arr::last($url_array);
+                        }
                     }
                 }
 
