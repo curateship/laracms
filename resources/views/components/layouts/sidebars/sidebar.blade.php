@@ -103,9 +103,7 @@
             </ul>
 
             <div class="sidenav__divider margin-y-xs" role="presentation"></div>
-              <x-categories.side-categories :categories="$categories"/>
               <div class="sidenav__divider margin-y-xs" role="presentation"></div>
-              <x-tags.side-tags :tags="$tags"/>
           </nav>
     </div>
  </div>

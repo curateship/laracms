@@ -70,7 +70,7 @@
 
       <!-- Sidebar -->
       <div class="col-3@md">
-        @include('admin.partials.sidebar')
+        @include('components.layouts.sidebars.sidebar')
       </div>
       <!-- Sidebar END -->
 
