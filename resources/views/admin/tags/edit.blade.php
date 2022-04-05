@@ -10,7 +10,6 @@
 
 @section('content')
 <!-- 👇 Content Body Wrapper-->
-<section class="margin-y-xl">
   <div class="container max-width-adaptive-lg">
     <div class="grid gap-md justify-between">
       <div class="col-12@md">
@@ -32,7 +31,7 @@
                   </li>
 
                   <li class="breadcrumbs__item color-contrast-low">
-                    <a href="/admin/categories" class="color-inherit link-subtle">Tags</a>
+                    <a href="/admin/tags" class="color-inherit link-subtle">Tags</a>
                     <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
                   </li>
 
@@ -171,5 +170,4 @@
 
     </div><!-- Grid END (col-12 and col-3) -->
   </div><!-- Container Wrapper END -->
-</section
 @endsection

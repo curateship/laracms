@@ -93,3 +93,10 @@ route::get('/storageCleaning/893ecd6be152d794338e56f9711cb252', function(){
 });
 
 
+Route::get('/profile', function () {
+    return view('themes/jpn/users/profile');
+});
+
+Route::get('/profile/edit', function () {
+    return view('themes/jpn/users/edit-profile');
+});
