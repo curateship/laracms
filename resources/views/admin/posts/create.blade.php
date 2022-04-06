@@ -168,9 +168,14 @@
           <div id="upload-thumbnail" class="margin-top-md"></div>
       </div>
     </fieldset>
-    <div class="flex justify-end gap-xs">
-      <button class="btn btn--primary">Publish</button>
+
+    <div class="flex gap-sm justify-end">
+        <input type="hidden" name="status" value="draft">
+        <div class="flex justify-end gap-xs">
+            <button class="btn btn--primary">Save as draft</button>
+        </div>
     </div>
+
     </form>
   </div>
   <!-- END Table-->

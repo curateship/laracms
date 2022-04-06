@@ -41,11 +41,16 @@ class AdminPostController extends Controller
     // Index
     public function index(Request $request)
     {
+
         SEOMeta::setTitle(config('seotools.static_titles.'.get_called_class().'.'.__FUNCTION__));
         if($request->has('sortBy') && $request->input('sortBy') !== 'role'){
             $posts = Post::orderBy($request->input('sortBy'), $request->input('sortDesc'));
         }   else{
             $posts = Post::orderBy('created_at', 'DESC')->whereNotNull('user_id');
+        }
+
+        if($request->has('status')){
+            $posts = $posts->where('status', $request->input('status'));
         }
 
         return view('admin.posts.index', [
@@ -322,13 +327,12 @@ class AdminPostController extends Controller
 
         // Generate slug
         $slug = Str::slug($title, '-');
-        $post_with_same_slug = Post::where('slug', $slug)->first();
+        $post_with_same_slug = Post::where('slug', 'like', $slug . '%')->first();
 
-        if ($post_with_same_slug) {
+        if ($post_with_same_slug != null) {
             // Ignore, if we have same post with this slug;
             if(!$request->has('postId') || ($request->has('postId') && $request->input('postId') != $post_with_same_slug->id)){
-                $duplicated_slugs = Post::select('slug')->where('slug', 'like', $slug . '%')->orderBy('slug', 'desc')->get();
-                $slug = Post::getNewSlug($slug, $duplicated_slugs);
+                $slug = Post::getNewSlug($slug, [$post_with_same_slug]);
             }
         }
 
@@ -412,6 +416,7 @@ class AdminPostController extends Controller
         $post->thumbnail = $thumbnail;
         $post->medium = $medium;
         $post->type = $request->input('type');
+        $post->status = $request->input('status');
         $post->save();
 
         // Now we can save excerpt;
@@ -475,7 +480,7 @@ class AdminPostController extends Controller
             }
         }
 
-        if($request->has('postId')){
+        if($request->has('postId') || $request->input('status') == 'draft'){
             return redirect('/post/edit/'.$post->slug);
         }   else{
             return redirect('/post/'.$post->slug);

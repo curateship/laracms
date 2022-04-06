@@ -15,13 +15,18 @@ use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
     public function show(Post $post) {
+        // Only author or author can preview posts in draft;
+        if($post->status == 'draft' && (!Gate::allows('is-admin') || (!Auth::guest() && Auth::id() != $post->user_id))){
+            return abort(404);
+        }
 
         SEOMeta::setTitle($post->title);
-        $recent_posts = Post::latest()->take(5)->get();
+        $recent_posts = Post::latest()->where('status', 'published')->take(5)->get();
 
         $post_tags_by_cats = [];
         foreach($post->tags() as $post_tag){
