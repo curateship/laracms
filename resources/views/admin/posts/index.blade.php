@@ -26,7 +26,13 @@
                 <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
               </li>
 
-              <li class="breadcrumbs__item color-contrast-high" aria-current="page">Published</li>
+              <li class="breadcrumbs__item color-contrast-high" aria-current="page">
+                  <a href="/admin/posts" class="color-inherit link-subtle">All</a>
+                  <span class="margin-left-sm margin-right-xs">/</span>
+                  <a href="/admin/posts?status=draft" class="color-inherit link-subtle">Draft</a>
+                  <span class="margin-left-sm margin-right-xs">/</span>
+                  <a href="/admin/posts?status=published" class="color-inherit link-subtle">Published</a>
+              </li>
             </ol>
           </nav>
           </div>
@@ -123,9 +129,21 @@
                         </li>
                       </ul>
                     </th>
-                    <th class="int-table__cell int-table__cell--th">
+                    <th class="int-table__cell int-table__cell--th int-table__cell--sort js-int-table__cell--sort
+                    @if(request()->get('sortBy') === 'status')
+                    @if(request()->get('sortDesc') === 'desc')
+                        int-table__cell--desc
+                      @endif
+                    @if(request()->get('sortDesc') === 'asc')
+                        int-table__cell--asc
+                      @endif
+                    @endif
+                        " data-sort-col="status">
                       <div class="flex items-center">
                         <span>Status</span>
+                          <svg class="icon icon--xxs margin-left-xxxs int-table__sort-icon" aria-hidden="true" viewBox="0 0 12 12">
+                              <polygon class="arrow-up" points="6 0 10 5 2 5 6 0" />
+                              <polygon class="arrow-down" points="6 12 2 7 10 7 6 12" /></svg>
                       </div>
                       <ul class="sr-only js-int-table__sort-list">
                         <li>
@@ -204,7 +222,7 @@
                     </td>
 
                     <!-- Publish and Date -->
-                    <td class="int-table__cell">Published</td>
+                    <td class="int-table__cell">{{ $post->status }}</td>
                     <td class="int-table__cell">{{ $post->created_at->diffForHumans() }}</td>
 
                     <!-- Action Dropdown -->

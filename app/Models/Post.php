@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed $body
  * @property mixed $type
  * @property mixed $id
+ * @property mixed $status
  */
 class Post extends Model
 {
