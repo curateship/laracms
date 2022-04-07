@@ -176,7 +176,8 @@ class PostController extends Controller
         return response()->json([
             'error' => $error,
             'result' => $response,
-            'comments' => $comments_view
+            'comments' => $comments_view,
+            'commentsCount' => $post->commentsCount()
         ]);
     }
 

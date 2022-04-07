@@ -128,6 +128,11 @@
         });
     }
 
+    $(document).on('click', '.postSaveAs', function(){
+        $('input[name="status"]').val($(this).attr('data-status'))
+        $('#new-post-form').submit()
+    })
+
     $(document).on('submit', '#new-post-form', function(e){
         e.preventDefault()
 

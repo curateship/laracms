@@ -113,6 +113,8 @@
                     setTimeout(function(){
                         postResultMessage.fadeOut()
                     }, 3000)
+
+                    $('.comments-count').html(response.commentsCount)
                 }
 
                 if(type === 'reply'){
