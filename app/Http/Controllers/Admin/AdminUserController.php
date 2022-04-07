@@ -243,6 +243,10 @@ class AdminUserController extends Controller
     // Update
     public function update(Request $request, $id)
     {
+        if(!Gate::allows('is-admin') && (Auth::id() != $id)){
+            return abort(404);
+        }
+
         $user = User::findOrFail($id);
 
         if($user == null){
