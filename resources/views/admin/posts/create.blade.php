@@ -170,9 +170,14 @@
     </fieldset>
 
     <div class="flex gap-sm justify-end">
-        <input type="hidden" name="status" value="draft">
+        <input type="hidden" name="status" value="">
+
         <div class="flex justify-end gap-xs">
-            <button class="btn btn--primary">Save as draft</button>
+            <button type="button" class="btn btn--primary postSaveAs" data-status="draft">Save as draft</button>
+        </div>
+
+        <div class="flex justify-end gap-xs">
+            <button type="button" class="btn btn--primary postSaveAs" data-status="published">Publish</button>
         </div>
     </div>
 
