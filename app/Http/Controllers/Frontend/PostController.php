@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use App\Models\Post;
 
+use App\Models\Tag;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\TwitterCard;
@@ -194,5 +195,49 @@ class PostController extends Controller
             'last_comment_id' => $last_comment_id,
             'comments' => $post->commentsList($last_comment_id)
         ])->render();
+    }
+
+    public function postSearch(Request $request, $search_request){
+        $search_like = str_replace(' ', '%', $search_request);
+
+        // Search by tags;
+        $tags = Tag::where('name', 'like', '%'.$search_like.'%')
+            ->get();
+
+        $tags_ids = [];
+        foreach($tags as $tag){
+            $tags_ids[] = $tag->id;
+        }
+
+        $posts_by_tag = DB::table('post_tag')
+            ->whereIn('tag_id', $tags_ids)
+            ->get();
+
+        $posts_ids = [];
+        foreach($posts_by_tag as $post_link){
+            $posts_ids[] = $post_link->post_id;
+        }
+
+
+        // Search by titles or body and tags (by post id);
+        $by_title_and_body = Post::where('status', 'published')
+            ->where(function($query) use($search_like, $posts_ids){
+                $query->where('title', 'like', '%'.$search_like.'%')
+                    ->orWhere('body', 'like', '%'.$search_like.'%')
+                    ->orWhereIn('id', $posts_ids);
+            });
+
+        $count = $by_title_and_body->count();
+        $by_title_and_body = $by_title_and_body->paginate(10);
+
+        session([
+            'search' => $search_request
+        ]);
+
+        return view('themes.jpn.users.search', [
+            'search' => $search_request,
+            'total' => $count,
+            'posts' => $by_title_and_body
+        ]);
     }
 }
