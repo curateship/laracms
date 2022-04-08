@@ -91,6 +91,12 @@ class UserController extends Controller
     }
 
     public function showProfile($user_id){
+        if(Auth::guest() && $user_id == 'my'){
+            return abort(404);
+        }   elseif($user_id == 'my'){
+            return redirect('/profiles/'.Auth::id());
+        }
+
         $user = User::find($user_id);
 
         if($user == null){

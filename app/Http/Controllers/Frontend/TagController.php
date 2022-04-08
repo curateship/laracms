@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 // Others
 use App\Http\Controllers\Controller;
 use App\Models\TagsCategories;
+use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Http\Request;
 
 // Models
@@ -39,6 +40,8 @@ class TagController extends Controller
         if($tag == null){
             return abort(404);
         }
+
+        SEOMeta::setTitle($tag->name.' - '.SEOMeta::getDefaultTitle());
 
         return view('themes.default.tags.show', [
             'tag' => $tag,

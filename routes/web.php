@@ -97,3 +97,6 @@ route::get('/storageCleaning/893ecd6be152d794338e56f9711cb252', function(){
 Route::get('/profiles/{user_id}', [UserController::class, 'showProfile']);
 Route::get('/profile/edit', [UserController::class, 'editProfile'])->middleware(['auth'])->name('profile.edit');
 Route::post('/profile/edit/{user_id}', [UserController::class, 'profileUpdate'])->middleware(['auth'])->name('profile.update');
+
+// Search;
+Route::get('/search/{search_request}', [PostController::class, 'postSearch'])->name('posts.search');
