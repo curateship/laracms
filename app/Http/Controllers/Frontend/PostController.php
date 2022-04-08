@@ -234,6 +234,8 @@ class PostController extends Controller
             'search' => $search_request
         ]);
 
+        SEOMeta::setTitle($search_request.' - '.SEOMeta::getDefaultTitle());
+
         return view('themes.jpn.users.search', [
             'search' => $search_request,
             'total' => $count,
