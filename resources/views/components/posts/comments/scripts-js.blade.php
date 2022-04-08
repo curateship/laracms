@@ -113,8 +113,6 @@
                     setTimeout(function(){
                         postResultMessage.fadeOut()
                     }, 3000)
-
-                    $('.comments-count').html(response.commentsCount)
                 }
 
                 if(type === 'reply'){
@@ -138,6 +136,8 @@
 
                     $('.post-comment-form[data-item-id="' + itemId + '"][data-type="reply"]').parents('.comment-form-box').remove()
                 }
+
+                $('.comments-count').html(response.commentsCount)
 
                 initReadMoreItems()
             }

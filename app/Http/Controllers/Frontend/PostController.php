@@ -112,12 +112,15 @@ class PostController extends Controller
             ])->render();
         }
 
+        $post = Post::find($parent_comment->post_id);
+
         return response()->json([
             'result' => 'Reply successfully added!',
             'comments' => $comments_view,
             'post_id' => $parent_comment->post_id,
             'total_replies' => $parent_comment->replies(true),
-            'first_comment' => $first_comment
+            'first_comment' => $first_comment,
+            'commentsCount' => $post->commentsCount()
         ]);
     }
 
