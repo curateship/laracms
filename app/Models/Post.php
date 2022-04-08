@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -322,5 +324,42 @@ class Post extends Model
         }
 
         return '<div style="text-align: left">'.$html.'</div>';
+    }
+
+    public function addViewHistory($ip, $user_agent){
+        $user_id = Auth::guest() ? null : Auth::id();
+
+        // Check user view for this post;
+        $exist_views = DB::table('posts_views')
+            ->where('post_id', $this->id)
+            ->where('ip', $ip)
+            ->where('user_agent', $user_agent);
+
+        if($user_id == null){
+            $exist_views = $exist_views->whereNull('viewer_id');
+        }   else{
+            $exist_views = $exist_views->where('viewer_id', $user_id);
+        }
+
+        $exist_views = $exist_views->first();
+
+        if($exist_views == null){
+            DB::table('posts_views')
+                ->insert([
+                    'post_id' => $this->id,
+                    'viewer_id' => $user_id,
+                    'ip' => $ip,
+                    'user_agent' => $user_agent,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
+                ]);
+        }
+    }
+
+    public function getViewsCount(): int
+    {
+        return DB::table('posts_views')
+            ->where('post_id', $this->id)
+            ->count();
     }
 }

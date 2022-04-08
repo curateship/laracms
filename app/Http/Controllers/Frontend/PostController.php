@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
-    public function show(Post $post) {
+    public function show(Request $request, Post $post) {
         // Only author or author can preview posts in draft;
         if($post->status == 'draft' && (!Gate::allows('is-admin') || (!Auth::guest() && Auth::id() != $post->user_id))){
             return abort(404);
@@ -50,6 +50,8 @@ class PostController extends Controller
                 'auto_width' => true
             ])->render();
         }
+
+        $post->addViewHistory($request->ip(), $request->userAgent());
 
         return view('/themes.jpn.posts.single', [
             'post' => $post,
