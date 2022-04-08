@@ -11,10 +11,18 @@
         
             <ul class="sidenav__list">
 
+            <!-- DashBoard -->
+            <li class="sidenav__item">
+                <a href="http://localhost:3000/admin/setting" class="sidenav__link">
+                  <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16"><g><path d="M6,0H1C0.4,0,0,0.4,0,1v5c0,0.6,0.4,1,1,1h5c0.6,0,1-0.4,1-1V1C7,0.4,6.6,0,6,0z M5,5H2V2h3V5z"></path><path d="M15,0h-5C9.4,0,9,0.4,9,1v5c0,0.6,0.4,1,1,1h5c0.6,0,1-0.4,1-1V1C16,0.4,15.6,0,15,0z M14,5h-3V2h3V5z"></path><path d="M6,9H1c-0.6,0-1,0.4-1,1v5c0,0.6,0.4,1,1,1h5c0.6,0,1-0.4,1-1v-5C7,9.4,6.6,9,6,9z M5,14H2v-3h3V14z"></path><path d="M15,9h-5c-0.6,0-1,0.4-1,1v5c0,0.6,0.4,1,1,1h5c0.6,0,1-0.4,1-1v-5C16,9.4,15.6,9,15,9z M14,14h-3v-3h3V14z"></path></g></svg>
+                  <span class="sidenav__text text-sm@md">Dashboard</span>
+                </a>
+              </li>
+
             <li class="sidenav__item">
                 <a href="/admin/post" class="sidenav__link">
                   <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16"><g><path d="M14,7H2v7c0,0.6,0.4,1,1,1h10c0.6,0,1-0.4,1-1V7z"></path><rect y="1" width="16" height="4"></rect></g></svg>
-                  <span class="sidenav__text text-sm@md">My Post</span>
+                  <span class="sidenav__text text-sm@md">Posts</span>
                   <span class="sidenav__counter">12 <i class="sr-only">notifications</i></span>
                 </a>
         
@@ -60,22 +68,48 @@
                 </ul>
               </li>
 
+              <!-- Comments -->
+              <li class="sidenav__item">
+              <a href="{{ route('admin.comments.index') }}" class="sidenav__link" {{ strpos(url()->full(), '/admin/comments') !== false ? 'aria-current=page' : '' }}>
+                  <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16">
+                    <g ><path d="M14.75 4.25h-1.5v4.75a1.5 1.5 0 0 1-1.5 1.5h-4.47l-2 1.75h4.64l3.43 2.45a0.25 0.25 0 0 0 0.15 0.05 0.25 0.25 0 0 0 0.11-0.03 0.25 0.25 0 0 0 0.14-0.22v-2.25h1a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1z"></path>
+                      <path d="M11.75 1h-10.5a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h1.5v3.25a0.25 0.25 0 0 0 0.15 0.23 0.25 0.25 0 0 0 0.1 0.02 0.25 0.25 0 0 0 0.16-0.06l3.93-3.44h4.66a1 1 0 0 0 1-1v-7a1 1 0 0 0-1-1z"></path>
+                    </g>
+                  </svg>
+                      <span class="sidenav__text text-sm@md">Comments</span>
+                  </a>
+                    <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
+                      <svg class="icon" viewBox="0 0 12 12"><polygon points="4 3 8 6 4 9 4 3"/></svg>
+                    </button>
+              <ul class="sidenav__list">
+
+                <li class="sidenav__item">
+                  <a href="#0" class="sidenav__link">
+                    <span class="sidenav__text text-sm@md">Add New</span>
+                  </a>
+                </li>
+
+              </ul>
+              </li>
+
+               <!-- My Feeds -->
               <li class="sidenav__item">
                 <a href="http://localhost:3000/admin/setting" class="sidenav__link">
                   <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16">
                   <g ><path d="M1.33 0h13.3q1.33 0 1.33 1.33v2.66q0 1.33-1.33 1.33h-13.3q-1.33 0-1.33-1.33v-2.66q0-1.33 1.33-1.33z"></path><path d="M0 7.98h15.96v2.66h-15.96z"></path><path d="M0 13.3h9.31v2.66h-9.31z"></path>
                   </g>
                 </svg>
-                  <span class="sidenav__text text-sm@md">My Feeds</span>
+                  <span class="sidenav__text text-sm@md">Feeds</span>
                 </a>
               </li>
-        
+
+              <!-- My Followers -->
               <li class="sidenav__item">
                 <a href="#0" class="sidenav__link">
                   <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16">
                   <g ><path d="M8,6L8,6C6.3,6,5,4.7,5,3v0c0-1.7,1.3-3,3-3h0c1.7,0,3,1.3,3,3v0C11,4.7,9.7,6,8,6z"></path> <polygon points="10,16 6,16 6,12 4,10 4,7 12,7 12,10 10,12 "></polygon> <path d="M2,5L2,5C0.9,5,0,4.1,0,3v0c0-1.1,0.9-2,2-2h0c1.1,0,2,0.9,2,2v0C4,4.1,3.1,5,2,5z"></path> <polygon points="3,10.4 3,6 0,6 0,9 1,10 1,14 4,14 4,11.4 "></polygon> <path d="M14,5L14,5c1.1,0,2-0.9,2-2v0c0-1.1-0.9-2-2-2h0c-1.1,0-2,0.9-2,2v0C12,4.1,12.9,5,14,5z"></path> <polygon points="13,10.4 13,6 16,6 16,9 15,10 15,14 12,14 12,11.4 "></polygon></g>
                   </svg>
-                  <span class="sidenav__text text-sm@md">My followers</span>
+                  <span class="sidenav__text text-sm@md">Followers</span>
                 </a>
               </li>
             </ul>

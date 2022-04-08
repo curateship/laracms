@@ -100,3 +100,7 @@ Route::post('/profile/edit/{user_id}', [UserController::class, 'profileUpdate'])
 
 // Search;
 Route::get('/search/{search_request}', [PostController::class, 'postSearch'])->name('posts.search');
+
+Route::get('/dashboard', function () {
+    return view('themes/jpn/users/dashboard');
+});
