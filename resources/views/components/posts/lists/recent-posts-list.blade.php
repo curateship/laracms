@@ -31,7 +31,7 @@
             </a>
             <!-- Author name and time created -->
             <div class="text-component text-sm line-height-xs text-space-y-xxs">
-              <p><a href="#0" class="articles-v3__author-name" rel="author">{!! $recent_post->author() != null ? $recent_post->author()->name : '<span style="font-weight: bold;color:red;">Deleted User</span>' !!}</a></p>
+              <p><a href="/profiles/{{$recent_post->author()->id}}" class="articles-v3__author-name" rel="author">{!! $recent_post->author() != null ? $recent_post->author()->name : '<span style="font-weight: bold;color:red;">Deleted User</span>' !!}</a></p>
               <p class="color-contrast-medium">{{ $recent_post->created_at->diffforhumans() }} </p>
             </div>
 

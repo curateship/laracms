@@ -7,7 +7,7 @@
 
             <div class="comments__content margin-top-xxxs">
                 <div class="text-component text-sm text-space-y-xs line-height-sm read-more js-read-more" data-characters="150" data-btn-class="comments__readmore-btn js-tab-focus">
-                    <p><a href="#" class="comments__author-name" rel="author">{{$reply->author_name}}</a></p>
+                    <p><a href="/profiles/{{$reply->user_id}}" class="comments__author-name" rel="author">{{$reply->author_name}}</a></p>
                     <p>{{$reply->the_comment}}</p>
                 </div>
 

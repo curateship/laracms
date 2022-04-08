@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GenerateMenus
 {
@@ -23,7 +24,7 @@ class GenerateMenus
             // Link3
             $menu->add('About 3', ['route'  => 'index']);
         });
-            
+
         // Links Sidebar
             \Menu::make('link-exchange', function ($menu) {
            // Link 1
@@ -41,10 +42,10 @@ class GenerateMenus
             $menu = $menu->add('Dashboard',    ['route'  => 'index']);
             $menu->link->attr(['class' => 'dropdown__item']);
             // Profile
-            $menu = $menu->add('Profile',    ['route'  => 'index']);
+            $menu = $menu->add('Profile',    ['url'  => url('/').'/profiles/my']);
             $menu->link->attr(['class' => 'dropdown__item']);
             // Edit Profile
-            $menu = $menu->add('Edit Profile',    ['route'  => 'index']);
+            $menu = $menu->add('Edit Profile',    ['url'  => url('/').'/profile/edit']);
             $menu->link->attr(['class' => 'dropdown__item']);
             // Divider
             $menu->divide( ['class' => 'border-top border-contrast-lower margin-top-xs margin-bottom-xs'] );
