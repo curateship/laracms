@@ -40,9 +40,7 @@ class TagController extends Controller
         if($tag == null){
             return abort(404);
         }
-
-        SEOMeta::setTitle($tag->name.' - '.SEOMeta::getDefaultTitle());
-
+        SEOMeta::setTitle($tag->name);
         return view('themes.default.tags.show', [
             'tag' => $tag,
             'posts' => $tag->posts()->paginate(10),
