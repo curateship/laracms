@@ -36,16 +36,14 @@
                   </li>
 
                   <li class="sidenav__item">
-                    <a href="#0" class="sidenav__link">
-                      <span class="sidenav__text text-sm@md">Draft</span>
-                      <span class="sidenav__counter">4 <i class="sr-only">notifications</i></span>
+                    <a href="/admin/posts?status=published" class="sidenav__link">
+                      <span class="sidenav__text text-sm@md">Published</span>
                     </a>
                   </li>
 
                   <li class="sidenav__item">
-                    <a href="/admin/post/trash" class="sidenav__link">
-                      <span class="sidenav__text text-sm@md">Trash</span>
-                      <span class="sidenav__counter">3 <i class="sr-only">notifications</i></span>
+                    <a href="/admin/posts?status=draft" class="sidenav__link">
+                      <span class="sidenav__text text-sm@md">Draft</span>
                     </a>
                   </li>
 

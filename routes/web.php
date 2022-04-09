@@ -11,7 +11,6 @@ use App\Http\Controllers\Admin\AdminPostController;
 use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminTagController;
 use App\Http\Controllers\Admin\AdminCommentController;
-use App\Http\Controllers\Admin\AdminVideoController;
 
 // Front-End Controllers
 use App\Http\Controllers\Frontend\IndexController;
@@ -46,15 +45,25 @@ Route::get('/categories', [CategoryController::class, 'index'])->name('theme.def
 Route::get('/tags/search', [TagController::class, 'search'])->name('tags.search');
 Route::get('/tags/{tags_categories_name}/{tag_name}', [TagController::class, 'show'])->name('theme.default.archive.tags.show');
 
-
 // Comments
 Route::get('post/comment/get/{post_id}/{last_comment_id}', [PostController::class, 'getPostComments'])->name('post-comment-get');
 Route::get('post/comment/reply', [PostController::class, 'reply'])->name('post-comment-reply')->middleware(['auth', 'verified']);
 Route::post('post/comment/reply-save', [PostController::class, 'saveReply'])->name('post-comment-reply-save')->middleware(['auth', 'verified']);
 Route::post('post/comment/save', [PostController::class, 'saveComment'])->name('post-comment-save')->middleware(['auth', 'verified']);
 Route::get('post/comment/reply-get-list', [PostController::class, 'getReply'])->name('post-comment-reply-list');
-// Old comment route;
-//Route::post('/post/addComment/{post:slug}', [PostController::class, 'addComment'])->name('post.add_comment');
+
+// Profiles;
+Route::get('/profiles/{user_id}', [UserController::class, 'showProfile']);
+Route::get('/profile/edit', [UserController::class, 'editProfile'])->middleware(['auth'])->name('profile.edit');
+Route::post('/profile/edit/{user_id}', [UserController::class, 'profileUpdate'])->middleware(['auth'])->name('profile.update');
+
+// Search;
+Route::get('/search/{search_request}', [PostController::class, 'postSearch'])->name('posts.search');
+
+// Temp
+Route::get('/dashboard', function () {
+    return view('themes/jpn/users/dashboard');
+});
 
 
 /*
@@ -86,21 +95,4 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
     Route::resource('/tags', AdminTagController::class); // Category Route
     Route::resource('/comments', AdminCommentController::class); // Comment Route
     Route::resource('/videos', AdminVideoController::class); // Video Route
-});
-
-// Storage cleaning;
-route::get('/storageCleaning/893ecd6be152d794338e56f9711cb252', function(){
-    \App\Components\Images::cleanStorage();
-});
-
-// Profiles;
-Route::get('/profiles/{user_id}', [UserController::class, 'showProfile']);
-Route::get('/profile/edit', [UserController::class, 'editProfile'])->middleware(['auth'])->name('profile.edit');
-Route::post('/profile/edit/{user_id}', [UserController::class, 'profileUpdate'])->middleware(['auth'])->name('profile.update');
-
-// Search;
-Route::get('/search/{search_request}', [PostController::class, 'postSearch'])->name('posts.search');
-
-Route::get('/dashboard', function () {
-    return view('themes/jpn/users/dashboard');
 });
