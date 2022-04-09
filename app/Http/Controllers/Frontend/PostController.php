@@ -28,6 +28,7 @@ class PostController extends Controller
 
         // SEO Title
         SEOMeta::setTitle($post->title);
+        SEOMeta::setDescription($post->excerpt);
         $recent_posts = Post::latest()->where('status', 'published')->take(5)->get();
 
         $post_tags_by_cats = [];
