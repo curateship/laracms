@@ -26,6 +26,7 @@ class PostController extends Controller
             return abort(404);
         }
 
+        // SEO Title
         SEOMeta::setTitle($post->title);
         $recent_posts = Post::latest()->where('status', 'published')->take(5)->get();
 
@@ -62,6 +63,7 @@ class PostController extends Controller
         ]);
     }
 
+    // Comment
     public function addComment(Post $post)
     {
         $attributes = request()->validate([
@@ -74,6 +76,7 @@ class PostController extends Controller
         return redirect('/post/' . $post->slug . '#comment_' . $comment->id)->with('success', 'Comment has been added.');
     }
 
+    // Reply
     public function reply(Request $request)
     {
         return view('components.posts.comments.form', ['title' => 'Reply on comment', 'item_id' => $request->input('replyId'), 'type' => 'reply'])->render();
@@ -127,6 +130,7 @@ class PostController extends Controller
         ]);
     }
 
+    // Get replies
     public function getReply(Request $request){
         $parent_comment = Comment::find($request->input('commentId'));
         $last_comment_id = $request->has('lastCommentId') ? $request->input('lastCommentId') : 0;
@@ -138,6 +142,7 @@ class PostController extends Controller
         ])->render();
     }
 
+    // Save Comment
     public function saveComment(Request $request)
     {
         $id = $request->input('itemId');
@@ -197,6 +202,7 @@ class PostController extends Controller
         ])->render();
     }
 
+    // Post Search
     public function postSearch(Request $request, $search_request){
         $search_like = str_replace(' ', '%', $search_request);
 
@@ -233,7 +239,8 @@ class PostController extends Controller
         session([
             'search' => $search_request
         ]);
-        
+
+        // SEO title
         SEOMeta::setTitle($search_request);
         return view('themes.jpn.users.search', [
             'search' => $search_request,

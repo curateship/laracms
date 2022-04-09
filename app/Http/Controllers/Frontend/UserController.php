@@ -38,12 +38,14 @@ class UserController extends Controller
         ]);
     }
 
+   // Edit
     public function editProfile(){
         return view('themes.jpn.users.edit-profile', [
             'user' => Auth::user()
         ]);
     }
-
+    
+    // Update
     public function profileUpdate(Request $request, $id)
     {
         if(!Gate::allows('is-admin') && (Auth::id() != $id)){

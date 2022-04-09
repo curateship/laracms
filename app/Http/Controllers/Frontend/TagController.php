@@ -15,11 +15,6 @@ use App\Models\Tag;
 
 class TagController extends Controller
 {
-    public function index()
-    {
-        // view all tags in the blog
-    }
-
     public function show($tags_categories_name, $tag_name)
     {
         $recent_posts = Post::latest()->take(5)->get();
@@ -40,6 +35,8 @@ class TagController extends Controller
         if($tag == null){
             return abort(404);
         }
+
+        // SEO Title
         SEOMeta::setTitle($tag->name);
         return view('themes.default.tags.show', [
             'tag' => $tag,
@@ -50,6 +47,7 @@ class TagController extends Controller
         ]);
     }
 
+   // Search
     public function search(Request $request){
         $search = $request->input('search');
         $category_id = $request->has('categoryId') ? $request->input('categoryId') : null;
