@@ -26,7 +26,7 @@
           <div class="articles-v3__author display@md padding-top-md">
 
             <!-- Author Image -->
-            <a href="#0" class="articles-v3__author-img">
+            <a href="/profiles/{{$recent_post->author()->id}}" class="articles-v3__author-img">
               <img class="object-cover" src="{{$recent_post->author() != null ? url('/storage'.config('images.users_storage_path').$recent_post->author()->thumbnail) : asset('assets/img/avatar.png')}}" alt="Author picture">
             </a>
             <!-- Author name and time created -->
