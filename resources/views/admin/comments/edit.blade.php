@@ -32,6 +32,15 @@
                 <div class="flex flex-wrap">
                   <menu class="menu-bar js-int-table-actions__no-items-selected js-menu-bar">
 
+                    <li class="menu-bar__item" role="menuitem">
+                      <a class="text-decoration-none color-inherit" href="" target="_blank">
+                        <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 20 20">
+                        <path d="M19.79 9.52c-0.16-0.25-3.96-6.2-9.83-6.2s-9.67 5.95-9.83 6.2a0.83 0.83 0 0 0 0 0.88c0.16 0.25 3.96 6.2 9.83 6.2s9.67-5.95 9.83-6.2a0.83 0.83 0 0 0 0-0.88z m-9.83 5.42c-4.1 0-7.17-3.69-8.12-4.98a13.85 13.85 0 0 1 4.87-4.21 4.11 4.11 0 0 0-0.9 2.55 4.15 4.15 0 0 0 8.3 0 4.11 4.11 0 0 0-0.89-2.54 13.94 13.94 0 0 1 4.86 4.2c-0.95 1.3-4.01 4.98-8.12 4.98z"></path>
+                        </svg>
+                        <span class="menu-bar__label">View Post</span>
+                        </a>
+                    </li>
+
                     <li class="menu-bar__item" role="menuitem" aria-controls="post-search">
                       <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 20 20">
                         <path d="M11.25 17.5c4.83 0 8.75-3.93 8.75-8.75s-3.93-8.75-8.75-8.75-8.75 3.93-8.75 8.75 3.93 8.75 8.75 8.75z m0-15c3.45 0 6.25 2.8 6.25 6.25s-2.8 6.25-6.25 6.25-6.25-2.8-6.25-6.25 2.8-6.25 6.25-6.25z"></path><path d="M0.36 17.86l3-2.99a10.02 10.02 0 0 0 1.76 1.77l-2.98 3a1.25 1.25 0 0 1-1.78 0 1.25 1.25 0 0 1 0-1.78z"></path>

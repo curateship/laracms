@@ -16,24 +16,26 @@
   <a class="back-to-top js-back-to-top" href="#" data-offset="100" data-duration="300">
     <svg class="icon" viewBox="0 0 20 20"><polyline points="2 13 10 5 18 13" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
   </a>
-
 </head>
 
 <!-- Theme config -->
 <body data-theme="@guest(){{config('app.default_theme')}}@else{{auth()->user()->theme()}}@endguest">
 
 <!-- Header -->
-  @include('components.layouts.headers.header')
-  @include('components.layouts.partials.hero-random-image')
-    @yield('content')
+@include('components.layouts.headers.header')
+@include('components.layouts.partials.hero-random-image')
 
-  <!-- Footer -->
-  <div class="padding-top-sm">
-    @include('components.layouts.footers.footer')
-  </div>
+<div class="padding-top-sm">
+  @yield('content')
+</div>
+
+<!-- Footer -->
+<div class="padding-top-sm">
+  @include('components.layouts.footers.footer')
+</div>
 
 <!-- Scripts -->
 <script src="{{ asset('assets/js/scripts.js') }}"></script>
-@stack('custom-scripts')
+  @stack('custom-scripts')
 </body>
 </html>
