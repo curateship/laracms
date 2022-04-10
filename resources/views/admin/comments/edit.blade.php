@@ -21,7 +21,7 @@
                   <a href="/admin/comments" class="color-inherit link-subtle">Comments</a>
                   <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
                 </li>
-                
+
                 <li class="breadcrumbs__item color-contrast-high" aria-current="page">Edit </li>
               </ol>
             </nav>
@@ -33,7 +33,7 @@
                   <menu class="menu-bar js-int-table-actions__no-items-selected js-menu-bar">
 
                     <li class="menu-bar__item" role="menuitem">
-                      <a class="text-decoration-none color-inherit" href="" target="_blank">
+                      <a class="text-decoration-none color-inherit" href="{{ route('post.show', $comment->relatedPost()) }}" target="_blank">
                         <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 20 20">
                         <path d="M19.79 9.52c-0.16-0.25-3.96-6.2-9.83-6.2s-9.67 5.95-9.83 6.2a0.83 0.83 0 0 0 0 0.88c0.16 0.25 3.96 6.2 9.83 6.2s9.67-5.95 9.83-6.2a0.83 0.83 0 0 0 0-0.88z m-9.83 5.42c-4.1 0-7.17-3.69-8.12-4.98a13.85 13.85 0 0 1 4.87-4.21 4.11 4.11 0 0 0-0.9 2.55 4.15 4.15 0 0 0 8.3 0 4.11 4.11 0 0 0-0.89-2.54 13.94 13.94 0 0 1 4.86 4.2c-0.95 1.3-4.01 4.98-8.12 4.98z"></path>
                         </svg>

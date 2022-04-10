@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminVideoController;
 use App\Http\Controllers\Frontend\UserController;
 use Illuminate\Support\Facades\Route;
 
