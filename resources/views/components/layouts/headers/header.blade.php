@@ -93,14 +93,10 @@
             <!-- Search Box -->
             <div id="search-menu" class="header-v2__nav header-v2__nav-search">
                 <div class="">
-                    <form action="" method="GET">
-                        <input type="hidden" name="limit" value="">
-                        <input type="hidden" name="sort" value="">
-                        <input type="hidden" name="order" value="">
-                        <input class="form-control width-100%" type="text" name="q" value="" id="megasite-search" placeholder="Search something" aria-label="Search">
-                    </form>
-                    <div>
-                    </div>
+                    <input type="hidden" name="limit" value="">
+                    <input type="hidden" name="sort" value="">
+                    <input type="hidden" name="order" value="">
+                    <input class="form-control width-100%" type="text" name="search-input"  id="megasite-search" placeholder="Search something" aria-label="Search" value="{{\Illuminate\Support\Facades\Route::currentRouteName() == 'posts.search' ? session('search') : ''}}">
                 </div>
             </div>
 
