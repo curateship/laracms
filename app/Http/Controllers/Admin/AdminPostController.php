@@ -49,12 +49,15 @@ class AdminPostController extends Controller
             $posts = Post::orderBy('created_at', 'DESC')->whereNotNull('user_id');
         }
 
-        if($request->has('status')){
-            $posts = $posts->where('status', $request->input('status'));
+        $status = 'All';
+        if($request->has('status') && $request->input('status') != 'All'){
+            $posts = $posts->where('status', strtolower($request->input('status')));
+            $status = ucfirst($request->input('status'));
         }
 
         return view('admin.posts.index', [
             'posts' => $posts->paginate(10),
+            'status' => $status
         ]);
     }
 

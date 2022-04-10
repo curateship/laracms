@@ -28,7 +28,7 @@
               </li>
 
               <li class="breadcrumbs__item color-contrast-high" aria-current="page">
-                  <a href="/admin/posts" class="color-inherit link-subtle">All</a>
+                  <a href="/admin/posts?status={{$status}}" class="color-inherit link-subtle">{{$status}}</a>
               </li>
             </ol>
           </nav>
