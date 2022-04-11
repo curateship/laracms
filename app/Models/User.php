@@ -15,6 +15,15 @@ use App\Models\Category;
 
 /**
  * @method static find(int|string|null $id)
+ * @property mixed|string $name
+ * @property \Illuminate\Support\Carbon|mixed $updated_at
+ * @property \Illuminate\Support\Carbon|mixed $created_at
+ * @property \Illuminate\Support\Carbon|mixed $email_verified_at
+ * @property mixed|string $password
+ * @property mixed|string $email
+ * @property mixed $medium
+ * @property mixed $thumbnail
+ * @property mixed|string $remember_token
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
