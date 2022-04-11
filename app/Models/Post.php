@@ -362,4 +362,54 @@ class Post extends Model
             ->where('post_id', $this->id)
             ->count();
     }
+
+    public function getRecentList($by_array, $limit = 5){
+        $posts = Post::where('status', 'published')
+            ->where('id', '!=', $this->id);
+
+        $posts_ids = [];
+        foreach($by_array as $by_item){
+            switch($by_item){
+                case 'tags':
+                    // Getting post_tags;
+                    $tags = DB::table('post_tag')
+                        ->where('post_id', $this->id)
+                        ->get();
+
+                    $tags_ids = [];
+                    foreach($tags as $tag){
+                        $tags_ids[] = $tag->tag_id;
+                    }
+
+                    // Getting other posts with same tag;
+                    $posts_data = DB::table('post_tag')
+                        ->whereIn('tag_id', $tags_ids)
+                        ->where('post_id', '!=', $this->id)
+                        ->get();
+
+                    foreach($posts_data as $post){
+                        $posts_ids[] = $post->post_id;
+                    }
+                    break;
+
+                case 'title':
+                    // Prepare title;
+                    $like_title = str_replace(' ', '%', $this->title);
+                    $posts_data = Post::where('title', 'like', "%$like_title%")
+                        ->where('id', '!=', $this->id)
+                        ->get();
+
+                    foreach($posts_data as $post){
+                        $posts_ids[] = $post->id;
+                    }
+                    break;
+            }
+        }
+
+        return $posts->whereIn('id', $posts_ids)
+            ->inRandomOrder()
+            ->latest()
+            ->take($limit)
+            ->get();
+    }
 }
