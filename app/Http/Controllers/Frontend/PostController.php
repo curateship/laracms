@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Post;
 
@@ -20,16 +21,102 @@ use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
+    public function index(Request $request)
+    {
+
+        SEOMeta::setTitle(config('seotools.static_titles.'.get_called_class().'.'.__FUNCTION__));
+        if($request->has('sortBy') && $request->input('sortBy') !== 'role'){
+            $posts = Post::orderBy($request->input('sortBy'), $request->input('sortDesc'));
+        }   else{
+            $posts = Post::orderBy('created_at', 'DESC')->whereNotNull('user_id');
+        }
+
+        $status = 'All';
+        if($request->has('status') && $request->input('status') != 'All'){
+            $posts = $posts->where('status', strtolower($request->input('status')));
+            $status = ucfirst($request->input('status'));
+        }
+
+        $posts = $posts->where('user_id', Auth::id());
+
+        return view('admin.posts.index', [
+            'posts' => $posts->paginate(10),
+            'status' => $status
+        ]);
+    }
+
+    // Create
+    public function create()
+    {
+        return view('admin.posts.create', [
+            'categories' => Category::pluck('name', 'id')
+        ]);
+    }
+
+    // Destroy
+    public function destroy(string $ids, Request $request)
+    {
+        $ids = explode(',', $ids);
+
+        foreach($ids as $id){
+            // Checking author;
+            $post = Post::find($id);
+            if($post->user_id != Auth::id()){
+                continue;
+            }
+
+            // Remove tags links;
+            DB::table('post_tag')
+                ->where('post_id', $id)
+                ->delete();
+
+            // Remove all reply comments;
+            Comment::where('post_id', $id)
+                ->whereNotNull('reply_id')
+                ->delete();
+
+            // Remove all comment;
+            Comment::where('post_id', $id)
+                ->whereNull('reply_id')
+                ->delete();
+
+            // Remove all video links;
+            DB::table('posts_videos')
+                ->where('post_id', $id)
+                ->delete();
+
+            // remove all views;
+            DB::table('posts_views')
+                ->where('post_id', $id)
+                ->delete();
+
+            // Remove post images;
+            $post = Post::find($id);
+            $post->removePostImages('main');
+            $post->removePostImages('body');
+
+            // And then - remove the post;
+            Post::destroy($id);
+        }
+
+        if(count($ids) > 1){
+            $request->session()->flash('success', 'You have deleted all selected posts');
+        }   else{
+            $request->session()->flash('success', 'You have deleted the post');
+        }
+    }
+
     public function show(Request $request, Post $post) {
         // Only author or author can preview posts in draft;
-        if($post->status == 'draft' && (!Gate::allows('is-admin') || (!Auth::guest() && Auth::id() != $post->user_id))){
-            return abort(404);
+        if($post->status == 'draft'){
+            if(!Gate::allows('is-admin') && (!Auth::guest() && Auth::id() != $post->user_id)){
+                return abort(404);
+            }
         }
 
         // SEO Title
         SEOMeta::setTitle($post->title);
         SEOMeta::setDescription($post->excerpt);
-        $recent_posts = Post::latest()->where('status', 'published')->take(5)->get();
 
         $post_tags_by_cats = [];
         foreach($post->tags() as $post_tag){
@@ -60,7 +147,7 @@ class PostController extends Controller
             'post' => $post,
             'content' => $content,
             'post_tags' => $post_tags_by_cats,
-            'recent_posts' => $recent_posts,
+            'recent_posts' => $post->getRecentList(['title', 'tags']),
         ]);
     }
 

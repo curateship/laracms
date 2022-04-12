@@ -191,7 +191,7 @@
                     _token: $('meta[name="csrf-token"]').attr('content'),
                     _method: 'DELETE',
                 },
-                url: '/admin/posts/' + selectedPosts.join(','),
+                url: '{{\Illuminate\Support\Facades\Gate::allows('is-admin') ? '/admin' : ''}}/posts/' + selectedPosts.join(','),
                 type: 'POST',
                 success:function(){
                     location.reload()

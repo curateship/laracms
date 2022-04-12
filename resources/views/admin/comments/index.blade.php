@@ -238,7 +238,7 @@
                           <span class="menu__content js-menu__content">
                             <svg class="icon menu__icon" aria-hidden="true" viewBox="0 0 12 12">
                             <path d="M11.87 5.71c-0.1-0.15-2.38-3.72-5.89-3.72s-5.8 3.57-5.9 3.72a0.5 0.5 0 0 0 0 0.53c0.1 0.15 2.38 3.72 5.9 3.72s5.8-3.57 5.89-3.72a0.5 0.5 0 0 0 0-0.53z m-5.89 3.25c-2.46 0-4.3-2.21-4.88-2.98a8.31 8.31 0 0 1 2.93-2.53 2.47 2.47 0 0 0-0.54 1.53 2.49 2.49 0 0 0 4.98 0 2.47 2.47 0 0 0-0.54-1.52 8.36 8.36 0 0 1 2.92 2.52c-0.57 0.78-2.41 2.99-4.87 2.98z"></path>                            </svg>
-                            <span>View Post</span>
+                            <span><a class="text-decoration-none color-inherit" href="{{ route('post.show', $comment->relatedPost()) }}" target="_blank">View Post</a></span>
                           </span>
                         </li>
 

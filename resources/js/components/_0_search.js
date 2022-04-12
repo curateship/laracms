@@ -5,6 +5,13 @@
         }
     })
 
+    $(document).on('keydown', '#megasite-search', function(e){
+        e.preve
+        if (e.which === 13) {
+            search($(this).val())
+        }
+    })
+
     $(document).on('click', '.search-input__btn', function(e){
         search($('#search-input').val())
     })

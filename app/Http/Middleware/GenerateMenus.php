@@ -42,10 +42,10 @@ class GenerateMenus
             $menu = $menu->add('Dashboard',    ['url'  => url('/').'/dashboard']);
             $menu->link->attr(['class' => 'dropdown__item']);
             // Profile
-            $menu = $menu->add('Profile',    ['url'  => url('/').'/profiles/my']);
+            $menu = $menu->add('Profile',    ['url'  => url('/').'/user/my']);
             $menu->link->attr(['class' => 'dropdown__item']);
             // Edit Profile
-            $menu = $menu->add('Edit Profile',    ['url'  => url('/').'/profile/edit']);
+            $menu = $menu->add('Edit Profile',    ['url'  => url('/').'/user/edit']);
             $menu->link->attr(['class' => 'dropdown__item']);
             // Divider
             $menu->divide( ['class' => 'border-top border-contrast-lower margin-top-xs margin-bottom-xs'] );

@@ -17,7 +17,7 @@
         <div class="padding-md">
         <h3 class="padding-bottom-sm">Edit Profile</h3>
 
-        <form action="/profile/edit/{{$user->id}}" method='post' autocomplete="off" >
+        <form action="/user/edit/{{$user->id}}" method='post' autocomplete="off" >
             @csrf
 
         <fieldset class="margin-bottom-xxs">

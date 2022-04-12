@@ -18,7 +18,7 @@ class UserController extends Controller
         if(Auth::guest() && $user_id == 'my'){
             return abort(404);
         }   elseif($user_id == 'my'){
-            return redirect('/profiles/'.Auth::id());
+            return redirect('/user/'.Auth::id());
         }
 
         $user = User::find($user_id);
@@ -44,7 +44,7 @@ class UserController extends Controller
             'user' => Auth::user()
         ]);
     }
-    
+
     // Update
     public function profileUpdate(Request $request, $id)
     {

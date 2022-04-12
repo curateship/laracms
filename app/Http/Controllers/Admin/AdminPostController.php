@@ -49,12 +49,15 @@ class AdminPostController extends Controller
             $posts = Post::orderBy('created_at', 'DESC')->whereNotNull('user_id');
         }
 
-        if($request->has('status')){
-            $posts = $posts->where('status', $request->input('status'));
+        $status = 'All';
+        if($request->has('status') && $request->input('status') != 'All'){
+            $posts = $posts->where('status', strtolower($request->input('status')));
+            $status = ucfirst($request->input('status'));
         }
 
         return view('admin.posts.index', [
             'posts' => $posts->paginate(10),
+            'status' => $status
         ]);
     }
 
@@ -117,8 +120,24 @@ class AdminPostController extends Controller
                 ->where('post_id', $id)
                 ->delete();
 
-            // Remove all comments;
+            // Remove all reply comments;
             Comment::where('post_id', $id)
+                ->whereNotNull('reply_id')
+                ->delete();
+
+            // Remove all comment;
+            Comment::where('post_id', $id)
+                ->whereNull('reply_id')
+                ->delete();
+
+            // Remove all video links;
+            DB::table('posts_videos')
+                ->where('post_id', $id)
+                ->delete();
+
+            // remove all views;
+            DB::table('posts_views')
+                ->where('post_id', $id)
                 ->delete();
 
             // Remove post images;
