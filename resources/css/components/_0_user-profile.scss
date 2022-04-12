@@ -1,0 +1,11 @@
+@use '../base' as *;
+
+.profile-author-box{
+    height: 300px;
+    position: relative;
+}
+
+.profile-author-avatar{
+    margin-top: -100px;
+    z-index: 1;
+}
