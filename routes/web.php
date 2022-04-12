@@ -97,3 +97,6 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
     Route::resource('/comments', AdminCommentController::class); // Comment Route
     Route::resource('/videos', AdminVideoController::class); // Video Route
 });
+
+// Other users posts;
+Route::resource('/posts', PostController::class)->middleware(['auth']); // Post Route

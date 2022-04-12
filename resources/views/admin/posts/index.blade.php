@@ -17,18 +17,18 @@
           <nav class="breadcrumbs text-based padding-left-sm padding-sm" aria-label="Breadcrumbs">
             <ol class="flex flex-wrap gap-xxs">
               <li class="breadcrumbs__item color-contrast-low">
-                <a href="/admin" class="color-inherit link-subtle">Home</a>
+                <a href="{{\Illuminate\Support\Facades\Gate::allows('is-admin') ? '/admin' : '/'}}" class="color-inherit link-subtle">Home</a>
                 <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
               </li>
 
               <!-- Breadcrumb -->
               <li class="breadcrumbs__item color-contrast-low">
-                <a href="" class="color-inherit link-subtle">Post</a>
+                <a href="{{\Illuminate\Support\Facades\Gate::allows('is-admin') ? '/admin' : ''}}/posts" class="color-inherit link-subtle">Post</a>
                 <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
               </li>
 
               <li class="breadcrumbs__item color-contrast-high" aria-current="page">
-                  <a href="/admin/posts?status={{$status}}" class="color-inherit link-subtle">{{$status}}</a>
+                  <a href="{{\Illuminate\Support\Facades\Gate::allows('is-admin') ? '/admin' : ''}}/posts?status={{$status}}" class="color-inherit link-subtle">{{$status}}</a>
               </li>
             </ol>
           </nav>
@@ -38,7 +38,7 @@
           <div class="flex flex-wrap items-center justify-between margin-right-sm">
             <div class="flex flex-wrap">
               <menu class="menu-bar js-int-table-actions__no-items-selected js-menu-bar">
-                <li class="menu-bar__item"><a href="/admin/posts/create" role="menuitem">
+                <li class="menu-bar__item"><a href="{{\Illuminate\Support\Facades\Gate::allows('is-admin') ? '/admin' : ''}}/posts/create" role="menuitem">
                   <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 20 20">
                     <path d="M18.85 4.39l-3.32-3.32a0.83 0.83 0 0 0-1.18 0l-11.62 11.62a0.84 0.84 0 0 0-0.2 0.33l-1.66 4.98a0.83 0.83 0 0 0 0.79 1.09 0.84 0.84 0 0 0 0.26-0.04l4.98-1.66a0.84 0.84 0 0 0 0.33-0.2l11.62-11.62a0.83 0.83 0 0 0 0-1.18z m-6.54 1.08l1.17-1.18 2.15 2.15-1.18 1.17z"></path>
                   </svg>
@@ -273,7 +273,13 @@
     </div><!-- Col-12 END -->
   <!-- Sidebar -->
   <div class="col-3@md">
-    @include('admin.partials.sidebar')
+
+      @if(\Illuminate\Support\Facades\Gate::allows('is-admin'))
+          @include('admin.partials.sidebar-admin')
+      @else
+          @include('admin.partials.sidebar')
+      @endif
+
   </div>
   </div><!-- Grid END -->
 </div>

@@ -19,7 +19,7 @@
 
                 <!-- Posts -->
                 <li class="sidenav__item">
-                <a href="/posts" class="sidenav__link" {{ strpos(url()->full(), '/posts') !== false ? 'aria-current=page' : '' }}>
+                <a href="{{ route('admin.posts.index') }}" class="sidenav__link" {{ strpos(url()->full(), '/admin/posts') !== false ? 'aria-current=page' : '' }}>
                   <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16"><g><path d="M14,7H2v7c0,0.6,0.4,1,1,1h10c0.6,0,1-0.4,1-1V7z"></path><rect y="1" width="16" height="4"></rect></g></svg>
                   <span class="sidenav__text text-sm@md">Posts</span>
                 </a>
@@ -30,24 +30,169 @@
 
                 <ul class="sidenav__list">
                   <li class="sidenav__item">
-                    <a href="/posts/create" class="sidenav__link">
+                    <a href="/admin/posts/create" class="sidenav__link">
                       <span class="sidenav__text text-sm@md">Add new</span>
                     </a>
                   </li>
 
                   <li class="sidenav__item">
-                    <a href="/posts?status=published" class="sidenav__link">
+                    <a href="/admin/posts?status=published" class="sidenav__link">
                       <span class="sidenav__text text-sm@md">Published</span>
                     </a>
                   </li>
 
                   <li class="sidenav__item">
-                    <a href="/posts?status=draft" class="sidenav__link">
+                    <a href="/admin/posts?status=draft" class="sidenav__link">
                       <span class="sidenav__text text-sm@md">Draft</span>
                     </a>
                   </li>
 
                 </ul>
+              </li>
+
+              <!-- Users -->
+              <li class="sidenav__item">
+                  <a href="{{ route('admin.users.index') }}" class="sidenav__link" {{ strpos(url()->full(), '/admin/users') !== false ? 'aria-current=page' : '' }}>
+                  <svg class="icon sidenav__icon" aria-hidden="false" viewBox="0 0 16 16" aria-current="page"><g><path d="M12.25,8.231C11.163,9.323,9.659,10,8,10S4.837,9.323,3.75,8.231C1.5,9.646,0,12.145,0,15v1h16 v-1C16,12.145,14.5,9.646,12.25,8.231z"></path><circle cx="8" cy="4" r="4"></circle></g></svg>
+                      <span class="sidenav__text text-sm@md">Users</span>
+                  </a>
+                    <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
+                      <svg class="icon" viewBox="0 0 12 12"><polygon points="4 3 8 6 4 9 4 3"/></svg>
+                    </button>
+              <ul class="sidenav__list">
+                <li class="sidenav__item">
+                  <a href="/admin/users/create" class="sidenav__link">
+                    <span class="sidenav__text text-sm@md">Add New</span>
+                  </a>
+                </li>
+                <li class="sidenav__item">
+                  <a href="#0" class="sidenav__link">
+                    <span class="sidenav__text text-sm@md">Admins</span>
+                  </a>
+                </li>
+                <li class="sidenav__item">
+                  <a href="#0" class="sidenav__link">
+                    <span class="sidenav__text text-sm@md">Editors</span>
+                  </a>
+                </li>
+                <li class="sidenav__item">
+                  <a href="#0" class="sidenav__link">
+                    <span class="sidenav__text text-sm@md">Registered</span>
+                  </a>
+                </li>
+                <li class="sidenav__item">
+                  <a href="#0" class="sidenav__link">
+                    <span class="sidenav__text text-sm@md">Trash</span>
+                  </a>
+                </li>
+              </ul>
+              </li>
+
+              <!-- Comments -->
+              <li class="sidenav__item">
+              <a href="{{ route('admin.comments.index') }}" class="sidenav__link" {{ strpos(url()->full(), '/admin/comments') !== false ? 'aria-current=page' : '' }}>
+                  <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16">
+                    <g ><path d="M14.75 4.25h-1.5v4.75a1.5 1.5 0 0 1-1.5 1.5h-4.47l-2 1.75h4.64l3.43 2.45a0.25 0.25 0 0 0 0.15 0.05 0.25 0.25 0 0 0 0.11-0.03 0.25 0.25 0 0 0 0.14-0.22v-2.25h1a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1z"></path>
+                      <path d="M11.75 1h-10.5a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h1.5v3.25a0.25 0.25 0 0 0 0.15 0.23 0.25 0.25 0 0 0 0.1 0.02 0.25 0.25 0 0 0 0.16-0.06l3.93-3.44h4.66a1 1 0 0 0 1-1v-7a1 1 0 0 0-1-1z"></path>
+                    </g>
+                  </svg>
+                      <span class="sidenav__text text-sm@md">Comments</span>
+                  </a>
+                    <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
+                      <svg class="icon" viewBox="0 0 12 12"><polygon points="4 3 8 6 4 9 4 3"/></svg>
+                    </button>
+              <ul class="sidenav__list">
+
+                <li class="sidenav__item">
+                  <a href="#0" class="sidenav__link">
+                    <span class="sidenav__text text-sm@md">Add New</span>
+                  </a>
+                </li>
+
+              </ul>
+              </li>
+
+              <!-- Tags -->
+              <li class="sidenav__item">
+              <a href="{{ route('admin.tags.index') }}" class="sidenav__link" {{ strpos(url()->full(), '/admin/tags') !== false ? 'aria-current=page' : '' }}>
+                  <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16">
+                    <g ><path d="M15.707,7.207,8.5,0H3V2H6.914l7.5,7.5a2.012,2.012,0,0,1,.187.227l1.106-1.106A1,1,0,0,0,15.707,7.207Z"></path> <path d="M13.707,10.207,6.5,3H1V8.5l7.207,7.207a1,1,0,0,0,1.414,0l4.086-4.086A1,1,0,0,0,13.707,10.207ZM4,7A1,1,0,1,1,5,6,1,1,0,0,1,4,7Z"></path>
+                    </g>
+                  </svg>
+                      <span class="sidenav__text text-sm@md">Tags</span>
+                  </a>
+                    <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
+                      <svg class="icon" viewBox="0 0 12 12"><polygon points="4 3 8 6 4 9 4 3"/></svg>
+                    </button>
+              <ul class="sidenav__list">
+                <li class="sidenav__item">
+                  <a href="#0" class="sidenav__link">
+                    <span class="sidenav__text text-sm@md">Add New</span>
+                  </a>
+                </li>
+                <li class="sidenav__item">
+                  <a href="#0" class="sidenav__link">
+                    <span class="sidenav__text text-sm@md">Admins</span>
+                  </a>
+                </li>
+                <li class="sidenav__item">
+                  <a href="#0" class="sidenav__link">
+                    <span class="sidenav__text text-sm@md">Editors</span>
+                  </a>
+                </li>
+                <li class="sidenav__item">
+                  <a href="#0" class="sidenav__link">
+                    <span class="sidenav__text text-sm@md">Registered</span>
+                  </a>
+                </li>
+                <li class="sidenav__item">
+                  <a href="#0" class="sidenav__link">
+                    <span class="sidenav__text text-sm@md">Trash</span>
+                  </a>
+                </li>
+              </ul>
+              </li>
+
+              <!-- Categories -->
+              <li class="sidenav__item">
+                <a href="{{ route('admin.categories.index') }}" class="sidenav__link" {{ strpos(url()->full(), '/admin/categories') !== false ? 'aria-current=page' : '' }}>
+                  <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16">
+                    <g >
+                      <path d="M15,4H1A1,1,0,0,0,.02,5.2l2,10A1,1,0,0,0,3,16H13a1,1,0,0,0,.98-.8l2-10A1,1,0,0,0,15,4Z"></path><path d="M3,2H13a1,1,0,0,0,0-2H3A1,1,0,0,0,3,2Z"></path>
+                    </g>
+                  </svg>
+                      <span class="sidenav__text text-sm@md">Categories</span>
+                  </a>
+                    <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
+                      <svg class="icon" viewBox="0 0 12 12"><polygon points="4 3 8 6 4 9 4 3"/></svg>
+                    </button>
+              <ul class="sidenav__list">
+                <li class="sidenav__item">
+                  <a href="#0" class="sidenav__link">
+                    <span class="sidenav__text text-sm@md">Add New</span>
+                  </a>
+                </li>
+                <li class="sidenav__item">
+                  <a href="#0" class="sidenav__link">
+                    <span class="sidenav__text text-sm@md">Admins</span>
+                  </a>
+                </li>
+                <li class="sidenav__item">
+                  <a href="#0" class="sidenav__link">
+                    <span class="sidenav__text text-sm@md">Editors</span>
+                  </a>
+                </li>
+                <li class="sidenav__item">
+                  <a href="#0" class="sidenav__link">
+                    <span class="sidenav__text text-sm@md">Registered</span>
+                  </a>
+                </li>
+                <li class="sidenav__item">
+                  <a href="#0" class="sidenav__link">
+                    <span class="sidenav__text text-sm@md">Trash</span>
+                  </a>
+                </li>
+              </ul>
               </li>
 
               <!-- Galleries -->
