@@ -49,7 +49,7 @@
                                  </g>
                              </svg>
 
-                             <span>120</span>
+                             <span>{{$post->getViewsCount()}}</span>
                          </button>
                      </li>
 
