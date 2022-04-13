@@ -24,6 +24,9 @@ use App\Models\Category;
  * @property mixed $medium
  * @property mixed $thumbnail
  * @property mixed|string $remember_token
+ * @property array|mixed|string|string[]|null $cover_original
+ * @property array|mixed|string|string[]|null $cover_medium
+ * @property array|mixed|string|string[]|null $cover_thumbnail
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
