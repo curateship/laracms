@@ -189,7 +189,11 @@
     </div><!-- Col-12 END -->
     <!-- Sidebar -->
     <div class="col-3@md">
-      @include('admin.partials.sidebar')
+        @if(\Illuminate\Support\Facades\Gate::allows('is-admin'))
+            @include('admin.partials.sidebar-admin')
+        @else
+            @include('admin.partials.sidebar')
+        @endif
     </div>
     <!-- Sidebar END -->
   </div><!-- Grid END (col-12 and col-3) -->

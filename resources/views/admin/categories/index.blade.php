@@ -18,7 +18,7 @@
             </ol>
           </nav>
             </div>
-            
+
             <!-- Menu Bar -->
             <div class="flex flex-wrap items-center justify-between margin-right-sm">
                   <div class="flex flex-wrap">
@@ -64,92 +64,92 @@
                         <div class="custom-checkbox__control" aria-hidden="true"></div>
                       </div>
                     </td>
-          
+
                     <th class="int-table__cell int-table__cell--th int-table__cell--sort js-int-table__cell--sort">
                       <div class="flex items-center">
                         <span>Name</span>
-          
+
                         <svg class="icon icon--xxs margin-left-xxxs int-table__sort-icon" aria-hidden="true" viewBox="0 0 12 12">
                           <polygon class="arrow-up" points="6 0 10 5 2 5 6 0" />
                           <polygon class="arrow-down" points="6 12 2 7 10 7 6 12" /></svg>
                       </div>
-          
+
                       <ul class="sr-only js-int-table__sort-list">
                         <li>
                           <input type="radio" name="sortingName" id="sortingNameNone" value="none" checked>
                           <label for="sortingNameNone">No sorting</label>
                         </li>
-          
+
                         <li>
                           <input type="radio" name="sortingName" id="sortingNameAsc" value="asc">
                           <label for="sortingNameAsc">Sort in ascending order</label>
                         </li>
-          
+
                         <li>
                           <input type="radio" name="sortingName" id="sortingNameDes" value="desc">
                           <label for="sortingNameDes">Sort in descending order</label>
                         </li>
                       </ul>
                     </th>
-          
+
                     <th class="int-table__cell int-table__cell--th int-table__cell--sort js-int-table__cell--sort">
                       <div class="flex items-center">
                         <span>Status</span>
-          
+
                         <svg class="icon icon--xxs margin-left-xxxs int-table__sort-icon" aria-hidden="true" viewBox="0 0 12 12">
                           <polygon class="arrow-up" points="6 0 10 5 2 5 6 0" />
                           <polygon class="arrow-down" points="6 12 2 7 10 7 6 12" /></svg>
                       </div>
-          
+
                       <ul class="sr-only js-int-table__sort-list">
                         <li>
                           <input type="radio" name="sortingEmail" id="sortingEmailNone" value="none" checked>
                           <label for="sortingEmailNone">No sorting</label>
                         </li>
-          
+
                         <li>
                           <input type="radio" name="sortingEmail" id="sortingEmailAsc" value="asc">
                           <label for="sortingEmailAsc">Sort in ascending order</label>
                         </li>
-          
+
                         <li>
                           <input type="radio" name="sortingEmail" id="sortingEmailDes" value="desc">
                           <label for="sortingEmailDes">Sort in descending order</label>
                         </li>
                       </ul>
                     </th>
-          
+
                     <th class="int-table__cell int-table__cell--th int-table__cell--sort js-int-table__cell--sort" data-date-format="dd-mm-yyyy">
                       <div class="flex items-center">
                         <span>Date</span>
-          
+
                         <svg class="icon icon--xxs margin-left-xxxs int-table__sort-icon" aria-hidden="true" viewBox="0 0 12 12">
                           <polygon class="arrow-up" points="6 0 10 5 2 5 6 0" />
                           <polygon class="arrow-down" points="6 12 2 7 10 7 6 12" /></svg>
                       </div>
-          
+
                       <ul class="sr-only js-int-table__sort-list">
                         <li>
                           <input type="radio" name="sortingDate" id="sortingDateNone" value="none" checked>
                           <label for="sortingDateNone">No sorting</label>
                         </li>
-          
+
                         <li>
                           <input type="radio" name="sortingDate" id="sortingDateAsc" value="asc">
                           <label for="sortingDateAsc">Sort in ascending order</label>
                         </li>
-          
+
                         <li>
                           <input type="radio" name="sortingDate" id="sortingDateDes" value="desc">
                           <label for="sortingDateDes">Sort in descending order</label>
                         </li>
                       </ul>
                     </th>
-          
+
                     <th class="int-table__cell int-table__cell--th text-right">Action</th>
                   </tr>
                 </thead>
-          
+
                 <tbody class="int-table__body js-int-table__body">
                   @foreach($categories as $category)
                   <tr class="int-table__row">
@@ -165,8 +165,8 @@
                     </figure>
                     <div class="line-height-xs padding-top-xxxs">
                       <div class=""><a href="{{ route('admin.categories.edit', $category) }}" class="link-subtle">{{ $category->name }}</a></div>
-                      <p class="color-contrast-medium"><a href="#0" class="text-sm link-subtle">james4523</a></p>   
-                    </div>    
+                      <p class="color-contrast-medium"><a href="#0" class="text-sm link-subtle">james4523</a></p>
+                    </div>
                     </td>
                     <td class="int-table__cell">Published</td>
                     <td class="int-table__cell">{{ $category->created_at->diffForHumans() }}</td>
@@ -224,7 +224,11 @@
     </div><!-- Col-12 END -->
     <!-- Sidebar -->
     <div class="col-3@md">
-      @include('admin.partials.sidebar')
+        @if(\Illuminate\Support\Facades\Gate::allows('is-admin'))
+            @include('admin.partials.sidebar-admin')
+        @else
+            @include('admin.partials.sidebar')
+        @endif
     </div>
     <!-- Sidebar END -->
   </div><!-- Grid END -->

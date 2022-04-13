@@ -69,8 +69,8 @@ class UserController extends Controller
         $user->email = $request->input('email');
 
         // Remove old avatar (if it not default);
-        if($request->has('thumbnail') && $user->thumbnail != $request->input('thumbnail')){
-            // Remove old avatar (if it not default);
+        if($request->has('avatar-thumbnail') && $user->thumbnail != $request->input('avatar-thumbnail')){
+            // Remove old avatar;
             if($user->thumbnail != ''){
                 $url_array = explode('/', $user->thumbnail);
                 $image = Arr::last($url_array);
@@ -81,18 +81,44 @@ class UserController extends Controller
                 Storage::delete($path.'/thumbnail/'.$image);
             }
 
-            $original = ( $request->has('original') && !empty($request->input('original')) ) ? $request->input('original') : NULL;
-            $original = str_replace(url('/storage'.config('images.users_storage_path')), '', $original);
+            $avatar_original = ( $request->has('avatar-original') && !empty($request->input('avatar-original')) ) ? $request->input('avatar-original') : NULL;
+            $avatar_original = str_replace(url('/storage'.config('images.users_storage_path')), '', $avatar_original);
 
-            $thumbnail = ( $request->has('thumbnail') && !empty($request->input('thumbnail')) ) ? $request->input('thumbnail') : NULL;
-            $thumbnail = str_replace(url('/storage'.config('images.users_storage_path')), '', $thumbnail);
+            $avatar_thumbnail = ( $request->has('avatar-thumbnail') && !empty($request->input('avatar-thumbnail')) ) ? $request->input('avatar-thumbnail') : NULL;
+            $avatar_thumbnail = str_replace(url('/storage'.config('images.users_storage_path')), '', $avatar_thumbnail);
 
-            $medium = ( $request->has('medium') && !empty($request->input('medium')) )  ? $request->input('medium') : NULL;
-            $medium = str_replace(url('/storage'.config('images.users_storage_path')), '', $medium);
+            $avatar_medium = ( $request->has('avatar-medium') && !empty($request->input('avatar-medium')) )  ? $request->input('avatar-medium') : NULL;
+            $avatar_medium = str_replace(url('/storage'.config('images.users_storage_path')), '', $avatar_medium);
 
-            $user->original = $original;
-            $user->thumbnail = $thumbnail;
-            $user->medium = $medium;
+            $user->original = $avatar_original;
+            $user->thumbnail = $avatar_thumbnail;
+            $user->medium = $avatar_medium;
+        }
+
+        if($request->has('cover-thumbnail') && $user->cover_thumbnail != $request->input('cover-thumbnail')){
+            // Remove old cover;
+            if($user->cover_thumbnail != ''){
+                $url_array = explode('/', $user->cover_thumbnail);
+                $image = Arr::last($url_array);
+
+                $path = '/public'.config('images.users_storage_path');
+                Storage::delete($path.'/original/'.$image);
+                Storage::delete($path.'/medium/'.$image);
+                Storage::delete($path.'/thumbnail/'.$image);
+            }
+
+            $cover_original = ( $request->has('cover-original') && !empty($request->input('cover-original')) ) ? $request->input('cover-original') : NULL;
+            $cover_original = str_replace(url('/storage'.config('images.users_storage_path')), '', $cover_original);
+
+            $cover_thumbnail = ( $request->has('cover-thumbnail') && !empty($request->input('cover-thumbnail')) ) ? $request->input('cover-thumbnail') : NULL;
+            $cover_thumbnail = str_replace(url('/storage'.config('images.users_storage_path')), '', $cover_thumbnail);
+
+            $avatar_medium = ( $request->has('cover-medium') && !empty($request->input('cover-medium')) )  ? $request->input('cover-medium') : NULL;
+            $avatar_medium = str_replace(url('/storage'.config('images.users_storage_path')), '', $avatar_medium);
+
+            $user->cover_original = $cover_original;
+            $user->cover_thumbnail = $cover_thumbnail;
+            $user->cover_medium = $avatar_medium;
         }
 
         $user->save();

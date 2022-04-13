@@ -59,6 +59,7 @@ class AdminUserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $validedData = $request->validated();
+
         $user = User::create($request->except(['_token', 'roles']));
         $request->session()->flash('success', 'You have created the user');
 
@@ -74,66 +75,57 @@ class AdminUserController extends Controller
             }
         }
 
-        $original = ( $request->has('original') && !empty($request->input('original')) ) ? $request->input('original') : NULL;
-        $original = str_replace(url('/storage'.config('images.users_storage_path')), '', $original);
+        $avatar_original = ( $request->has('avatar-original') && !empty($request->input('avatar-original')) ) ? $request->input('avatar-original') : NULL;
+        $avatar_original = str_replace(url('/storage'.config('images.users_storage_path')), '', $avatar_original);
 
-        $thumbnail = ( $request->has('thumbnail') && !empty($request->input('thumbnail')) ) ? $request->input('thumbnail') : NULL;
-        $thumbnail = str_replace(url('/storage'.config('images.users_storage_path')), '', $thumbnail);
+        $avatar_thumbnail = ( $request->has('avatar-thumbnail') && !empty($request->input('avatar-thumbnail')) ) ? $request->input('avatar-thumbnail') : NULL;
+        $avatar_thumbnail = str_replace(url('/storage'.config('images.users_storage_path')), '', $avatar_thumbnail);
 
-        $medium = ( $request->has('medium') && !empty($request->input('medium')) )  ? $request->input('medium') : NULL;
-        $medium = str_replace(url('/storage'.config('images.users_storage_path')), '', $medium);
+        $avatar_medium = ( $request->has('avatar-medium') && !empty($request->input('avatar-medium')) )  ? $request->input('avatar-medium') : NULL;
+        $avatar_medium = str_replace(url('/storage'.config('images.users_storage_path')), '', $avatar_medium);
+
+        $cover_original = ( $request->has('cover-original') && !empty($request->input('cover-original')) ) ? $request->input('cover-original') : NULL;
+        $cover_original = str_replace(url('/storage'.config('images.users_storage_path')), '', $cover_original);
+
+        $cover_thumbnail = ( $request->has('cover-thumbnail') && !empty($request->input('cover-thumbnail')) ) ? $request->input('cover-thumbnail') : NULL;
+        $cover_thumbnail = str_replace(url('/storage'.config('images.users_storage_path')), '', $cover_thumbnail);
+
+        $cover_medium = ( $request->has('cover-medium') && !empty($request->input('cover-medium')) )  ? $request->input('cover-medium') : NULL;
+        $cover_medium = str_replace(url('/storage'.config('images.users_storage_path')), '', $cover_medium);
 
         if($request->has('userId')){
-            $post = Post::find($request->input('userId'));
+            $user = User::find($request->input('userId'));
 
             // If user was attached new image - we must remove old file;
-            if($post->original != $original){
-                $post->removePostImages('main');
-            }
+            // Avatar;
+            if($user->original != $avatar_original){
+                $url_array = explode('/', $user->original);
+                $image = Arr::last($url_array);
 
-            // If body was update;
-            if($post->body != $request->input('description')){
                 $path = '/public'.config('images.users_storage_path');
-
-                // Get current body images;
-                $current_images = [];
-
-                $body_array = json_decode($post->body, true);
-                foreach($body_array['blocks'] as $block){
-                    if($block['type'] == 'image'){
-                        $url_array = explode('/', $block['data']['file']['url']);
-                        $current_images[] = Arr::last($url_array);
-                    }
-                }
-
-                // New body images;
-                $new_images = [];
-                $body_array = json_decode($request->input('description'), true);
-                foreach($body_array['blocks'] as $block){
-                    if($block['type'] == 'image'){
-                        $url_array = explode('/', $block['data']['file']['url']);
-                        $new_images[] = Arr::last($url_array);
-                    }
-                }
-
-                // If we do not have old image in new list - delete this file;
-                foreach($current_images as $image){
-                    if(!in_array($image, $new_images)){
-                        Storage::delete($path.'/original/'.$image);
-                        Storage::delete($path.'/medium/'.$image);
-                        Storage::delete($path.'/thumbnail/'.$image);
-                    }
-                }
+                Storage::delete($path.'/original/'.$image);
+                Storage::delete($path.'/medium/'.$image);
+                Storage::delete($path.'/thumbnail/'.$image);
             }
 
-        }   else{
-            $post = new Post();
-            $post->user_id = Auth::id();
+            // Cover
+            if($user->cover_original != $cover_original){
+                $url_array = explode('/', $user->cover_original);
+                $image = Arr::last($url_array);
+
+                $path = '/public'.config('images.users_storage_path');
+                Storage::delete($path.'/original/'.$image);
+                Storage::delete($path.'/medium/'.$image);
+                Storage::delete($path.'/thumbnail/'.$image);
+            }
         }
 
-        $user->original = $original;
-        $user->thumbnail = $thumbnail;
-        $user->medium = $medium;
+        $user->original = $avatar_original;
+        $user->thumbnail = $avatar_thumbnail;
+        $user->medium = $avatar_medium;
+        $user->cover_original = $cover_original;
+        $user->cover_thumbnail = $cover_thumbnail;
+        $user->cover_medium = $cover_medium;
         $user->save();
 
         return redirect(route('admin.users.index'));
@@ -264,7 +256,7 @@ class AdminUserController extends Controller
         $user->email = $request->input('email');
 
         // Remove old avatar (if it not default);
-        if($request->has('thumbnail') && $user->thumbnail != $request->input('thumbnail')){
+        if($request->has('avatar-thumbnail') && $user->thumbnail != $request->input('avatar-thumbnail')){
             // Remove old avatar (if it not default);
             if($user->thumbnail != ''){
                 $url_array = explode('/', $user->thumbnail);
@@ -276,18 +268,44 @@ class AdminUserController extends Controller
                 Storage::delete($path.'/thumbnail/'.$image);
             }
 
-            $original = ( $request->has('original') && !empty($request->input('original')) ) ? $request->input('original') : NULL;
-            $original = str_replace(url('/storage'.config('images.users_storage_path')), '', $original);
+            $avatar_original = ( $request->has('avatar-original') && !empty($request->input('avatar-original')) ) ? $request->input('avatar-original') : NULL;
+            $avatar_original = str_replace(url('/storage'.config('images.users_storage_path')), '', $avatar_original);
 
-            $thumbnail = ( $request->has('thumbnail') && !empty($request->input('thumbnail')) ) ? $request->input('thumbnail') : NULL;
-            $thumbnail = str_replace(url('/storage'.config('images.users_storage_path')), '', $thumbnail);
+            $avatar_thumbnail = ( $request->has('avatar-thumbnail') && !empty($request->input('avatar-thumbnail')) ) ? $request->input('avatar-thumbnail') : NULL;
+            $avatar_thumbnail = str_replace(url('/storage'.config('images.users_storage_path')), '', $avatar_thumbnail);
 
-            $medium = ( $request->has('medium') && !empty($request->input('medium')) )  ? $request->input('medium') : NULL;
-            $medium = str_replace(url('/storage'.config('images.users_storage_path')), '', $medium);
+            $avatar_medium = ( $request->has('avatar-medium') && !empty($request->input('avatar-medium')) )  ? $request->input('avatar-medium') : NULL;
+            $avatar_medium = str_replace(url('/storage'.config('images.users_storage_path')), '', $avatar_medium);
 
-            $user->original = $original;
-            $user->thumbnail = $thumbnail;
-            $user->medium = $medium;
+            $user->original = $avatar_original;
+            $user->thumbnail = $avatar_thumbnail;
+            $user->medium = $avatar_medium;
+        }
+
+        if($request->has('cover-thumbnail') && $user->cover_thumbnail != $request->input('cover-thumbnail')){
+            // Remove old avatar (if it not default);
+            if($user->cover_thumbnail != ''){
+                $url_array = explode('/', $user->cover_thumbnail);
+                $image = Arr::last($url_array);
+
+                $path = '/public'.config('images.users_storage_path');
+                Storage::delete($path.'/original/'.$image);
+                Storage::delete($path.'/medium/'.$image);
+                Storage::delete($path.'/thumbnail/'.$image);
+            }
+
+            $cover_original = ( $request->has('cover-original') && !empty($request->input('cover-original')) ) ? $request->input('cover-original') : NULL;
+            $cover_original = str_replace(url('/storage'.config('images.users_storage_path')), '', $cover_original);
+
+            $cover_thumbnail = ( $request->has('cover-thumbnail') && !empty($request->input('cover-thumbnail')) ) ? $request->input('cover-thumbnail') : NULL;
+            $cover_thumbnail = str_replace(url('/storage'.config('images.users_storage_path')), '', $cover_thumbnail);
+
+            $cover_medium = ( $request->has('cover-medium') && !empty($request->input('cover-medium')) )  ? $request->input('cover-medium') : NULL;
+            $cover_medium = str_replace(url('/storage'.config('images.users_storage_path')), '', $cover_medium);
+
+            $user->cover_original = $cover_original;
+            $user->cover_thumbnail = $cover_thumbnail;
+            $user->cover_medium = $cover_medium;
         }
 
         $user->save();

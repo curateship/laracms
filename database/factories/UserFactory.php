@@ -44,8 +44,10 @@ class UserFactory extends Factory
         $image = new Imagick();
         $image->newPseudoImage(1024, 768, "radial-gradient:$color_1-$color_2");
         $image->writeImages("$media_path$path/original/$file_name.png", true);
+        $image->writeImages("$media_path$path/original/$file_name-cover.png", true);
 
         $for_factory_updates['original'] = "/original/$file_name.png";
+        $for_factory_updates['cover-original'] = "/original/$file_name-cover.png";
 
         foreach($media as $type){
             if($type == 'original'){
@@ -56,8 +58,10 @@ class UserFactory extends Factory
             $image = new Imagick();
             $image->newPseudoImage($type_config['width'], $type_config['height'], "radial-gradient:$color_1-$color_2");
             $image->writeImages("$media_path$path/$type/$file_name.png", true);
+            $image->writeImages("$media_path$path/$type/$file_name-cover.png", true);
 
             $for_factory_updates[$type] = "/$type/$file_name.png";
+            $for_factory_updates['cover-'.$type] = "/$type/$file_name-cover.png";
         }
 
         return [
@@ -69,6 +73,9 @@ class UserFactory extends Factory
             'original' => $for_factory_updates['original'],
             'medium' => $for_factory_updates['medium'],
             'thumbnail' => $for_factory_updates['thumbnail'],
+            'cover_original' => $for_factory_updates['cover-original'],
+            'cover_medium' => $for_factory_updates['cover-medium'],
+            'cover_thumbnail' => $for_factory_updates['cover-thumbnail'],
         ];
     }
 

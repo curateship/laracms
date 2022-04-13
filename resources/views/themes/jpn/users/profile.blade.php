@@ -3,7 +3,7 @@
 <div class="container max-width-lg padding-y-lg grid gap-md">
 
     <!-- Author Box -->
-    <div class="profile-author-box" style="background-image: url('{{ url('/storage'.config('images.users_storage_path').$user->medium) }}')"></div>
+    <div class="profile-author-box" style="background-image: url('{{ url('/storage'.config('images.users_storage_path').$user->cover_medium) }}')"></div>
         <!-- Author Picture -->
         <div class="author author--featured padding-bottom-sm profile-author-avatar">
             <a href="/user/{{$user->id}}" class="author__img-wrapper">
