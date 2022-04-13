@@ -119,6 +119,7 @@
                         },
                         endpoints: {
                             byFile: '/post/upload/editor',
+                            byUrl: '/post/upload/editor'
                         }
                     }
                 },
