@@ -32,7 +32,7 @@
           </a>
         </div>
       </div>
-        
+
     </div>
 
     <!-- Col 8 -->
@@ -84,7 +84,7 @@
     <div class="margin-top-auto border-top border-contrast-lower opacity-40%"></div><!-- Divider -->
       <p class="padding-sm text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, accusantium consequatur. Perspiciatis! Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, accusantium consequatur. Perspiciatis!</p>
         <img class="block width-100% height-100% object-cover" src="/assets/img/random-backgrounds/3.jpg" alt="Post Picture">
-    
+
         <!-- Comments -->
         <section class="comments padding-x-md">
           <div class="margin-bottom-lg padding-top-md">
@@ -92,14 +92,14 @@
               <div>
                 <h1 class="text-component text-sm color-contrast-medium">Comments (23)</h1>
               </div>
-            
+
               <form aria-label="Choose sorting option">
                 <div class="flex flex-wrap gap-sm text-sm">
                   <div class="position-relative">
                     <input class="comments__sorting-label" type="radio" name="sortComments" id="sortCommentsPopular" checked>
                     <label for="sortCommentsPopular">Popular</label>
                   </div>
-              
+
                   <div class="position-relative">
                     <input class="comments__sorting-label" type="radio" name="sortComments" id="sortCommentsNewest">
                     <label for="sortCommentsNewest">Newest</label>
@@ -115,7 +115,7 @@
                 <a href="#0" class="comments__author-img">
                   <img class="object-cover" src="/assets/img/avatar.png" alt="Author picture">
                 </a>
-          
+
                 <div class="comments__content margin-top-xxxs">
                   <div class="text-component text-sm text-space-y-xs line-height-sm read-more js-read-more" data-characters="150" data-btn-class="comments__readmore-btn js-tab-focus">
                     <p><a href="#0" class="comments__author-name" rel="author">Olivia Gribben</a></p>
@@ -123,7 +123,7 @@
 
                     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit sit sed cupiditate vel, sapiente aspernatur, reiciendis repellat ad delectus quia ea ipsam minima in dignissimos commodi velit nemo voluptatibus quisquam.</p>
                   </div>
-          
+
                   <div class="margin-top-xs text-sm">
                     <div class="flex gap-xxs items-center">
                       <button class="reset comments__vote-btn js-comments__vote-btn js-tab-focus" data-label="Like this comment along with 5 other people" aria-pressed="false">
@@ -133,13 +133,13 @@
 
                         <span class="margin-left-xxxs js-comments__vote-label" aria-hidden="true">5</span>
                       </button>
-            
+
                       <span class="comments__inline-divider" aria-hidden="true"></span>
-            
+
                       <button class="reset comments__label-btn js-tab-focus">Reply</button>
-            
+
                       <span class="comments__inline-divider" aria-hidden="true"></span>
-          
+
                       <time class="comments__time" aria-label="1 hour ago">1h</time>
                     </div>
                   </div>
@@ -152,13 +152,13 @@
                 <a href="#0" class="comments__author-img">
                   <img class="object-cover" src="/assets/img/avatar.png" alt="Author picture">
                 </a>
-          
+
                 <div class="comments__content margin-top-xxxs">
                   <div class="text-component text-sm text-space-y-xs line-height-sm read-more js-read-more" data-characters="150" data-btn-class="comments__readmore-btn js-tab-focus">
                     <p><a href="#0" class="comments__author-name" rel="author">Olivia Gribben</a></p>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, accusantium consequatur. Perspiciatis!</p>
                   </div>
-          
+
                   <div class="margin-top-xs text-sm">
                     <div class="flex gap-xxs items-center">
                       <button class="reset comments__vote-btn js-comments__vote-btn js-tab-focus" data-label="Like this comment along with 5 other people" aria-pressed="false">
@@ -168,13 +168,13 @@
 
                         <span class="margin-left-xxxs js-comments__vote-label" aria-hidden="true">5</span>
                       </button>
-            
+
                       <span class="comments__inline-divider" aria-hidden="true"></span>
-            
+
                       <button class="reset comments__label-btn js-tab-focus">Reply</button>
-            
+
                       <span class="comments__inline-divider" aria-hidden="true"></span>
-          
+
                       <time class="comments__time" aria-label="1 hour ago">1h</time>
                     </div>
                   </div>
@@ -188,7 +188,7 @@
                     <span>View 2 replies</span>
                   </span>
                 </summary>
-              
+
                 <div class="details__content js-details__content">
                   <ul>
                     <li class="comments__comment">
@@ -196,29 +196,29 @@
                         <a href="#0" class="comments__author-img">
                           <img class="object-cover" src="/assets/img/avatar.png" alt="Author picture">
                         </a>
-                  
+
                         <div class="comments__content margin-top-xxxs">
                           <div class="text-component text-sm text-space-y-xs line-height-sm read-more js-read-more" data-characters="150" data-btn-class="comments__readmore-btn js-tab-focus">
                             <p><a href="#0" class="comments__author-name" rel="author">Olivia Gribben</a></p>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, accusantium consequatur. Perspiciatis!</p>
                           </div>
-                  
+
                           <div class="margin-top-xs text-sm">
                             <div class="flex gap-xxs items-center">
                               <button class="reset comments__vote-btn js-comments__vote-btn js-tab-focus" data-label="Like this comment along with 5 other people" aria-pressed="false">
                                 <span class="comments__vote-icon-wrapper">
                                   <svg class="icon block" viewBox="0 0 12 12" aria-hidden="true"><path d="M11.045,2.011a3.345,3.345,0,0,0-4.792,0c-.075.075-.15.225-.225.3-.075-.074-.15-.224-.225-.3a3.345,3.345,0,0,0-4.792,0,3.345,3.345,0,0,0,0,4.792l5.017,4.718L11.045,6.8A3.484,3.484,0,0,0,11.045,2.011Z"></path></svg>
                                 </span>
-                                
+
                                 <span class="margin-left-xxxs js-comments__vote-label" aria-hidden="true">5</span>
                               </button>
-                    
+
                               <span class="comments__inline-divider" aria-hidden="true"></span>
-                    
+
                               <button class="reset comments__label-btn js-tab-focus">Reply</button>
-                    
+
                               <span class="comments__inline-divider" aria-hidden="true"></span>
-                  
+
                               <time class="comments__time" aria-label="1 hour ago">1h</time>
                             </div>
                           </div>
@@ -260,9 +260,13 @@
 
     <!-- 👇 Col 3 -->
     <div class="col-3@md">
-      @include('admin.partials.sidebar')
+        @if(\Illuminate\Support\Facades\Gate::allows('is-admin'))
+            @include('admin.partials.sidebar-admin')
+        @else
+            @include('admin.partials.sidebar')
+        @endif
     </div>
-    
+
   </div><!-- Grid END -->
 </div>
 
