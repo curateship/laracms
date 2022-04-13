@@ -31,6 +31,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Imagick;
@@ -74,6 +75,11 @@ class AdminPostController extends Controller
     {
         $post = Post::where('slug', $post_slug)
             ->first();
+
+        // Only author or author can preview posts in draft;
+        if(!Gate::allows('is-admin') && (!Auth::guest() && Auth::id() != $post->user_id)){
+            return abort(404);
+        }
 
         if($post->type == 'video'){
             $video = DB::table('posts_videos')
@@ -160,8 +166,24 @@ class AdminPostController extends Controller
     public function upload($upload_type, Request $request){
         $path = '/public'.config('images.posts_storage_path');
         $path_video = '/public'.config('images.videos_storage_path');
-        $mime_type = $request->file('image')->getMimeType();
-        $media_type = substr($mime_type, 0, 5) === 'image' ? 'image' : 'video';
+
+        if($request->has('url')){
+            $url = $request->input('url');
+            $file_ext = Arr::last(explode('.', $url));
+            $thumbnail_medium_name = Str::random(27) . '.' . $file_ext;
+
+            Storage::put($path."/original".$thumbnail_medium_name, file_get_contents($url));
+            $media_type = 'image';
+            $mime_type = Storage::mimeType($path."/original".$thumbnail_medium_name);
+        }   else{
+            $original = request()->file('image')->getClientOriginalName();
+            $thumbnail_medium_name = Str::random(27) . '.' . Arr::last(explode('.', $original));
+
+            $mime_type = $request->file('image')->getMimeType();
+            $media_type = substr($mime_type, 0, 5) === 'image' ? 'image' : 'video';
+        }
+
+
         $media_path = storage_path() . "/app";
         $media = [
             'original', 'medium', 'thumbnail'
@@ -176,11 +198,12 @@ class AdminPostController extends Controller
         unset($media['original']);
 
         // Save original media file in file system;
-        $original = request()->file('image')->getClientOriginalName();
-        $thumbnail_medium_name = Str::random(27) . '.' . Arr::last(explode('.', $original));
-
         if($media_type == 'image'){
-            $original = request()->file('image')->storeAs($path."/original", $thumbnail_medium_name);
+            if($request->has('url')){
+                $original = $path."/original".$thumbnail_medium_name;
+            }   else{
+                $original = request()->file('image')->storeAs($path."/original", $thumbnail_medium_name);
+            }
 
             foreach($media as $type_name => $type){
                 /* Gif and Images */
@@ -197,7 +220,13 @@ class AdminPostController extends Controller
                     $thumbnail_medium->writeImages($media_path . "$path/$type_name/" . $thumbnail_medium_name, true);
                 }   else{
                     /* Other Image types */
-                    $thumbnail_medium = \Intervention\Image\Facades\Image::make(request()->file('image'));
+                    if($request->has('url')){
+                        $source = Storage::get($path."/original".$thumbnail_medium_name);
+                    }   else{
+                        $source = request()->file('image');
+                    }
+
+                    $thumbnail_medium = \Intervention\Image\Facades\Image::make($source);
                     $thumbnail_medium->resize($type['width'], $type['height'], function($constraint){
                         $constraint->aspectRatio();
                     });
