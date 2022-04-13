@@ -31,6 +31,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Imagick;
@@ -74,6 +75,11 @@ class AdminPostController extends Controller
     {
         $post = Post::where('slug', $post_slug)
             ->first();
+
+        // Only author or author can preview posts in draft;
+        if(!Gate::allows('is-admin') && (!Auth::guest() && Auth::id() != $post->user_id)){
+            return abort(404);
+        }
 
         if($post->type == 'video'){
             $video = DB::table('posts_videos')
