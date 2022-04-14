@@ -1,4 +1,4 @@
-@extends('themes.layouts.app')
+@extends('theme.layouts.app')
 
 @push('custom-scripts')
     @include('admin.users.script-js')

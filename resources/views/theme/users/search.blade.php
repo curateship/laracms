@@ -1,4 +1,4 @@
-@extends('themes.layouts.app')
+@extends('theme.layouts.app')
 @section('content')
     <!-- My Posts-->
     <section class="margin-y-xl">
