@@ -1,4 +1,4 @@
-@extends('themes.layouts.app')
+@extends('theme.layouts.app')
 @section('title', $tag->name . ' Tag | MyBlog')
 @section('content')
 

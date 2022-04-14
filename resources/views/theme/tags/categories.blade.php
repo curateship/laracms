@@ -4,8 +4,8 @@
 <div class="container max-width-adaptive-lg">
   <div class="grid gap-md">
 
-  <h1>Interactive</h1>
-    @include('components.tags.lists.related-posts')
+  <h1>Category</h1>
+    @include('components.tags.lists.tag-categories')
 
   </div>
 </div>

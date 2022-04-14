@@ -66,8 +66,8 @@ Route::get('/dashboard', function () {
     return view('themes/jpn/users/dashboard');
 });
 
-Route::get('/dashboard', function () {
-    return view('themes/jpn/users/dashboard');
+Route::get('/categories', function () {
+    return view('theme/tags/categories');
 });
 
 
