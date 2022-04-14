@@ -38,7 +38,7 @@ class TagController extends Controller
 
         // SEO Title
         SEOMeta::setTitle($tag->name);
-        return view('themes.default.tags.show', [
+        return view('theme.tags.show', [
             'tag' => $tag,
             'posts' => $tag->posts()->paginate(10),
             'recent_posts' => $recent_posts,

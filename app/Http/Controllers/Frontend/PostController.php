@@ -143,7 +143,7 @@ class PostController extends Controller
 
         $post->addViewHistory($request->ip(), $request->userAgent());
 
-        return view('/themes.jpn.posts.single', [
+        return view('/theme.posts.single', [
             'post' => $post,
             'content' => $content,
             'post_tags' => $post_tags_by_cats,
@@ -330,7 +330,7 @@ class PostController extends Controller
 
         // SEO title
         SEOMeta::setTitle($search_request);
-        return view('themes.jpn.users.search', [
+        return view('theme.users.search', [
             'search' => $search_request,
             'total' => $count,
             'posts' => $by_title_and_body

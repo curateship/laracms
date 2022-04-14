@@ -66,6 +66,10 @@ Route::get('/dashboard', function () {
     return view('themes/jpn/users/dashboard');
 });
 
+Route::get('/dashboard', function () {
+    return view('themes/jpn/users/dashboard');
+});
+
 
 /*
 |--------------------------------------------------------------------------

@@ -32,7 +32,7 @@ class UserController extends Controller
             ->orderBy('created_at', 'DESC')
             ->paginate(10);
 
-        return view('themes.jpn.users.profile', [
+        return view('theme.users.profile', [
             'user' => $user,
             'posts' => $posts
         ]);
@@ -40,7 +40,7 @@ class UserController extends Controller
 
    // Edit
     public function editProfile(){
-        return view('themes.jpn.users.edit-profile', [
+        return view('theme.users.edit-profile', [
             'user' => Auth::user()
         ]);
     }

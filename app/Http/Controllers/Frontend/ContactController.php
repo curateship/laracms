@@ -14,7 +14,7 @@ class ContactController extends Controller
 {
     public function create()
     {
-        return view('themes.default.pages.contact');
+        return view('theme.pages.contact');
     }
 
     public function store()
