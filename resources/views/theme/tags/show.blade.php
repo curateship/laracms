@@ -1,7 +1,6 @@
 @extends('theme.layouts.app')
 @section('content')
 
-<!-- 👇 Content Body Wrapper-->
 <div class="container max-width-adaptive-lg">
 
     <!-- Tag Title -->
@@ -24,5 +23,5 @@
         @include('components.layouts.partials.pagination', ['items' => $posts])
     </div>
 
-</div><!-- Container Wrapper END -->
+</div>
 @endsection

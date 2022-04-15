@@ -20,11 +20,14 @@
 
     <!-- Sidebar -->
     <div class="col-3@md">
-      @include('components.layouts.sidebars.sidebar-filter')
-      @include('components.layouts.sidebars.sidebar')
+    @if(\Illuminate\Support\Facades\Gate::allows('is-admin'))
+            @include('admin.partials.sidebar-admin')
+        @else
+            @include('admin.partials.sidebar')
+        @endif
     </div>
 
-  </div><!-- Grid END (col-12 and col-3) -->
-</div><!-- Container Wrapper END -->
+  </div>
+</div>
 
 @endsection
