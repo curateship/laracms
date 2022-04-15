@@ -3,7 +3,7 @@
 
 <div class="container max-width-adaptive-lg">
   <div class="grid gap-md">
-test
+
     <!-- Recent Post Lists Component -->
     <div class="col-12@md margin-bottom-sm">
         @include('components.posts.lists.recent-posts-list')
