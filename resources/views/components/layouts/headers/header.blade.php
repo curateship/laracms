@@ -5,7 +5,7 @@
       <!-- LOGO -->
       <div class="header-v2__logo">
         <a href ="/">
-          @include('components.layouts.svg.logo')
+          @include('theme.layouts.svg.logo')
         </a>
       </div>
 
