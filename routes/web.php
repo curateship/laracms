@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminVideoController;
+use App\Http\Controllers\Frontend\UserController;
 use Illuminate\Support\Facades\Route;
 
 // Admin Controllers
@@ -10,7 +12,6 @@ use App\Http\Controllers\Admin\AdminPostController;
 use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminTagController;
 use App\Http\Controllers\Admin\AdminCommentController;
-use App\Http\Controllers\Admin\AdminVideoController;
 
 // Front-End Controllers
 use App\Http\Controllers\Frontend\IndexController;
@@ -45,15 +46,29 @@ Route::get('/categories', [CategoryController::class, 'index'])->name('theme.def
 Route::get('/tags/search', [TagController::class, 'search'])->name('tags.search');
 Route::get('/tags/{tags_categories_name}/{tag_name}', [TagController::class, 'show'])->name('theme.default.archive.tags.show');
 
-
 // Comments
-Route::get('post/comment/get/{post_id}/{last_comment_id}', [PostController::class, 'getPostComments'])->name('post-comment-get')->middleware(['auth', 'verified']);
+Route::get('post/comment/get/{post_id}/{last_comment_id}', [PostController::class, 'getPostComments'])->name('post-comment-get');
 Route::get('post/comment/reply', [PostController::class, 'reply'])->name('post-comment-reply')->middleware(['auth', 'verified']);
 Route::post('post/comment/reply-save', [PostController::class, 'saveReply'])->name('post-comment-reply-save')->middleware(['auth', 'verified']);
 Route::post('post/comment/save', [PostController::class, 'saveComment'])->name('post-comment-save')->middleware(['auth', 'verified']);
-Route::get('post/comment/reply-get-list', [PostController::class, 'getReply'])->name('post-comment-reply-list')->middleware(['auth', 'verified']);
-// Old comment route;
-//Route::post('/post/addComment/{post:slug}', [PostController::class, 'addComment'])->name('post.add_comment');
+Route::get('post/comment/reply-get-list', [PostController::class, 'getReply'])->name('post-comment-reply-list');
+
+// Profiles;
+Route::get('/user/edit', [UserController::class, 'editProfile'])->middleware(['auth'])->name('profile.edit');
+Route::get('/user/{user_id}', [UserController::class, 'showProfile']);
+Route::post('/user/edit/{user_id}', [UserController::class, 'profileUpdate'])->middleware(['auth'])->name('profile.update');
+
+// Search;
+Route::get('/search/{search_request}', [PostController::class, 'postSearch'])->name('posts.search');
+
+// Temp
+Route::get('/dashboard', function () {
+    return view('themes/jpn/users/dashboard');
+});
+
+Route::get('/categories', function () {
+    return view('theme/tags/categories');
+});
 
 
 /*
@@ -63,7 +78,7 @@ Route::get('post/comment/reply-get-list', [PostController::class, 'getReply'])->
 */
 // Tags;
 Route::get('/tags/edit/{tag_id}', [AdminTagController::class, 'edit'])->name('admin.tags.edit')->middleware(['auth', 'verified']);
-Route::post('/tags/upload', [AdminTagController::class, 'upload'])->name('admin.tags.upload')->middleware(['auth', 'verified']);
+Route::post('/tags/upload/{type}', [AdminTagController::class, 'upload'])->name('admin.tags.upload')->middleware(['auth', 'verified']);
 Route::post('/tags/store', [AdminTagController::class, 'store'])->name('admin.tags.store')->middleware(['auth', 'verified']);
 
 // Post Admin;
@@ -87,5 +102,5 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
     Route::resource('/videos', AdminVideoController::class); // Video Route
 });
 
-
-
+// Other users posts;
+Route::resource('/posts', PostController::class)->middleware(['auth']); // Post Route

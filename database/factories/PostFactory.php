@@ -59,6 +59,8 @@ class PostFactory extends Factory
 
         dump('New post successfully added.');
 
+        $rand_status = ['draft', 'published'];
+
         return [
             'title' => $this->faker->sentence(),
             'excerpt' => $this->faker->sentence(),
@@ -69,6 +71,7 @@ class PostFactory extends Factory
             'medium' => "/medium/$file_name.png",
             'thumbnail' => "/thumbnail/$file_name.png",
             'category_id' => Category::all()->random()->id,
+            'status' => Arr::random($rand_status)
         ];
     }
 }

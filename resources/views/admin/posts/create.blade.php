@@ -24,11 +24,11 @@
           <nav class="breadcrumbs text-based padding-left-sm padding-sm" aria-label="Breadcrumbs">
             <ol class="flex flex-wrap gap-xxs">
               <li class="breadcrumbs__item color-contrast-low">
-                <a href="/admin" class="color-inherit link-subtle">Home</a>
+                <a href="{{\Illuminate\Support\Facades\Gate::allows('is-admin') ? '/admin' : '/'}}" class="color-inherit link-subtle">Home</a>
                 <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
               </li>
               <li class="breadcrumbs__item color-contrast-low">
-                <a href="/admin/posts" class="color-inherit link-subtle">Posts</a>
+                <a href="{{\Illuminate\Support\Facades\Gate::allows('is-admin') ? '/admin' : ''}}/posts" class="color-inherit link-subtle">Posts</a>
                 <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
               </li>
               <li class="breadcrumbs__item color-contrast-high" aria-current="page">Create</li>
@@ -69,12 +69,13 @@
           <input type="hidden" name="description" id="description" required/>
       </div>
 
-      <!-- Excerpt -->
+      <!-- Excerpt
       <textarea class="form-control width-100% margin-bottom-sm" type="text" name="excerpt" id="textarea" minlength="10" placeholder="Enter Your Excerpt" required>{{ old("excerpt") }}</textarea>
 
       @error('excerpt')
         <p>{{ $message }}</p>
       @enderror
+        -->
 
       <!-- Select Category Dropdown Autocomplete -->
       <div class="autocomplete position-relative select-auto js-select-auto js-autocomplete margin-bottom-sm" data-autocomplete-dropdown-visible-class="autocomplete--results-visible">
@@ -140,20 +141,46 @@
         <label for="upload-file" class="file-upload__label btn btn--subtle">
           <span class="flex items-center">
             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><path  stroke-linecap="square" stroke-linejoin="miter" d="M2 16v6h20v-6"></path><path stroke-linejoin="miter" stroke-linecap="butt" d="M12 17V2"></path><path stroke-linecap="square" stroke-linejoin="miter" d="M18 8l-6-6-6 6"></path></g></svg>
-            <span class="margin-left-xxs file-upload__text file-upload__text--has-max-width">Upload Image</span>
+            <span class="margin-left-xxs file-upload__text file-upload__text--has-max-width">Upload media</span>
           </span>
         </label>
+
           <input type="hidden" name="original" value=""/>
           <input type="hidden" name="thumbnail" value=""/>
           <input type="hidden" name="medium" value=""/>
-          <input type="file" class="file-upload__input" name="image" id="upload-file" accept="image/jpeg, image/jpg, image/png, image/gif" required>
+
+          <input type="hidden" name="type" value=""/>
+
+          <input type="hidden" name="video_original" value=""/>
+          <input type="hidden" name="video_thumbnail" value=""/>
+          <input type="hidden" name="video_medium" value=""/>
+
+
+          <input type="file" class="file-upload__input" name="image" id="upload-file" accept="image/jpeg, image/jpg, image/png, image/gif, image/gif, video/mp4, video/webm" required>
           <br>
-          <img alt="thumbnail" id="upload-thumbnail" class="margin-top-md" src="" style="display: none;">
+
+          <div id="uploading-progress-bar" class="progress-bar progress-bar--color-update flex flex-column items-center js-progress-bar margin-top-md" style="display: none;">
+              <div class="progress-bar__bg " aria-hidden="true">
+                  <div class="progress-bar__fill " style="width: 0%;"></div>
+              </div>
+          </div>
+
+          <div id="upload-thumbnail" class="margin-top-md"></div>
       </div>
     </fieldset>
-    <div class="flex justify-end gap-xs">
-      <button class="btn btn--primary">Publish</button>
+
+    <div class="flex gap-sm justify-end">
+        <input type="hidden" name="status" value="">
+
+        <div class="flex justify-end gap-xs">
+            <button type="button" class="btn btn--primary postSaveAs" data-status="draft">Save as draft</button>
+        </div>
+
+        <div class="flex justify-end gap-xs">
+            <button type="button" class="btn btn--primary postSaveAs" data-status="published">Publish</button>
+        </div>
     </div>
+
     </form>
   </div>
   <!-- END Table-->
@@ -162,7 +189,11 @@
     </div><!-- Col-12 END -->
     <!-- Sidebar -->
     <div class="col-3@md">
-      @include('admin.partials.sidebar')
+        @if(\Illuminate\Support\Facades\Gate::allows('is-admin'))
+            @include('admin.partials.sidebar-admin')
+        @else
+            @include('admin.partials.sidebar')
+        @endif
     </div>
     <!-- Sidebar END -->
   </div><!-- Grid END (col-12 and col-3) -->

@@ -19,11 +19,11 @@
         e.preventDefault()
 
         let formData = new FormData()
-        formData.append('file', $('#upload-file')[0].files[0])
+        formData.append('image', $('#upload-file')[0].files[0])
         formData.append('_token', $('meta[name="csrf-token"]').attr('content'))
 
         $.ajax({
-            url : '/tags/upload',
+            url : '/tags/upload/main',
             type : 'POST',
             data : formData,
             processData: false,  // tell jQuery not to process the data
@@ -41,7 +41,7 @@
     }
     $(document).on('change', '#upload-file', uploadMedia);
 
-    $(document).on('submit', '#new-post-form', function(e){
+    $(document).on('submit', '#new-tag-form', function(e){
         e.preventDefault()
 
         const target = $($('#js-editor-description').attr('data-target-input'))
@@ -53,22 +53,8 @@
             console.log('Saving failed: ', error)
         });
 
-        const tagsCount = $('.select2-selection__choice').length
-
-        if(tagsCount === 0){
-            const searchField = $('.select2-search__field')
-            searchField.addClass('no-tags')
-            setTimeout(function(){
-                searchField.removeClass('no-tags')
-            }, 700)
-
-            $('.select2.select2-container').addClass('select2-container--focus')
-
-            return
-        }
-
         setTimeout(function(){
-            $('#new-post-form')[0].submit();
+            $('#new-tag-form')[0].submit();
         }, 200)
     });
 
@@ -106,6 +92,47 @@
                 }
             });
         }
+    }
+
+    const editBlock = $('#js-editor-description')
+    if(editBlock.length > 0){
+        let readOnly = false
+        let data = {}
+
+        if(editBlock.attr('data-read-only') === 'true'){
+            readOnly = true
+            data = JSON.parse($('#description-json-data').val())
+        }
+
+        if(editBlock.attr('data-post-body') !== undefined && editBlock.attr('data-post-body') !== null){
+            data = JSON.parse(editBlock.attr('data-post-body'))
+        }
+
+        editor = new EditorJS({
+            holder: 'js-editor-description',
+            placeholder: 'Tell your story...',
+            autofocus: true,
+            tools: {
+                header: Header,
+                list: {
+                    class: List,
+                    inlineToolbar: true,
+                },
+                image: {
+                    class: window.ImageTool,
+                    config: {
+                        additionalRequestHeaders: {
+                            "X-CSRF-TOKEN": '{{csrf_token()}}'
+                        },
+                        endpoints: {
+                            byFile: '/tags/upload/editor',
+                        }
+                    }
+                },
+            },
+            readOnly,
+            data
+        });
     }
 
     $(document).on('click', '.tag-list-checkbox', function(){

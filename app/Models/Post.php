@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use EditorJS\EditorJSException;
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use SaperX\LaravelEditorjsHtml\EditorJSHtml;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,6 +19,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed $category_id
  * @property int|mixed|string|null $user_id
  * @property mixed $body
+ * @property mixed $type
+ * @property mixed $id
+ * @property mixed $status
  */
 class Post extends Model
 {
@@ -109,15 +113,11 @@ class Post extends Model
       return $slug . '-' . $max_number;
   }
 
-    /**
-     * @throws EditorJSException
-     */
     public function body($type = 'full', $limit = 0): string
     {
         if($type == 'full'){
             // Full content render;
-            $convertToHtml = new EditorJSHtml($this->body);
-            $content = $convertToHtml->render();
+            $content = static::jsonToHtml($this->body);
         }   else{
             // Get only text content from post body;
             $data = json_decode($this->body, true);
@@ -142,6 +142,7 @@ class Post extends Model
 
   public function removePostImages($type){
       $path = '/public'.config('images.posts_storage_path');
+      $video_path = '/public'.config('images.videos_storage_path');
 
         switch($type){
             // Main;
@@ -149,6 +150,25 @@ class Post extends Model
                 Storage::delete($path.$this->original['original']);
                 Storage::delete($path.$this->medium);
                 Storage::delete($path.$this->thumbnail);
+
+                // Of this post have video type - we must remove video file too;
+                if($this->type == 'video'){
+                    // Get video from paths from table;
+                    $videos = DB::table('posts_videos')
+                        ->where('post_id', $this->id)
+                        ->get();
+
+                    foreach($videos as $video){
+                        Storage::delete($video_path.$video->original);
+                        Storage::delete($video_path.$video->medium);
+                        Storage::delete($video_path.$video->thumbnail);
+                    }
+
+                    // Then we need to remove writes in DB;
+                    DB::table('posts_videos')
+                        ->where('post_id', $this->id)
+                        ->delete();
+                }
                 break;
 
             // In body images;
@@ -257,5 +277,139 @@ class Post extends Model
             }
         }
         return $truncate;
+    }
+
+    static function jsonToHtml($jsonStr) {
+        $obj = json_decode($jsonStr);
+
+        $html = '';
+        foreach ($obj->blocks as $block) {
+            switch ($block->type) {
+                case 'paragraph':
+                    $html .= '<p>' . $block->data->text . '</p>';
+                    break;
+
+                case 'header':
+                    $html .= '<h'. $block->data->level .'>' . $block->data->text . '</h'. $block->data->level .'>';
+                    break;
+
+                case 'raw':
+                    $html .= $block->data->html;
+                    break;
+
+                case 'list':
+                    $lsType = ($block->data->style == 'ordered') ? 'ol' : 'ul';
+                    $html .= '<' . $lsType . '>';
+                    foreach($block->data->items as $item) {
+                        $html .= '<li>' . $item . '</li>';
+                    }
+                    $html .= '</' . $lsType . '>';
+                    break;
+
+                case 'code':
+                    $html .= '<pre><code class="language-'. $block->data->lang .'">'. $block->data->code .'</code></pre>';
+                    break;
+
+                case 'image':
+                    $html .= '<div class="img_pnl padding-y-md"><img class="radius-lg" src="'. $block->data->file->url .'" /></div>';
+                    break;
+
+                case 'embed':
+                    $html .= '<iframe src="'.$block->data->embed.'" style="width:100%; height: 600px" scrolling="no" frameborder="no"></iframe>';
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        return '<div style="text-align: left">'.$html.'</div>';
+    }
+
+    public function addViewHistory($ip, $user_agent){
+        $user_id = Auth::guest() ? null : Auth::id();
+
+        // Check user view for this post;
+        $exist_views = DB::table('posts_views')
+            ->where('post_id', $this->id)
+            ->where('ip', $ip)
+            ->where('user_agent', $user_agent);
+
+        if($user_id == null){
+            $exist_views = $exist_views->whereNull('viewer_id');
+        }   else{
+            $exist_views = $exist_views->where('viewer_id', $user_id);
+        }
+
+        $exist_views = $exist_views->first();
+
+        if($exist_views == null){
+            DB::table('posts_views')
+                ->insert([
+                    'post_id' => $this->id,
+                    'viewer_id' => $user_id,
+                    'ip' => $ip,
+                    'user_agent' => $user_agent,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
+                ]);
+        }
+    }
+
+    public function getViewsCount(): int
+    {
+        return DB::table('posts_views')
+            ->where('post_id', $this->id)
+            ->count();
+    }
+
+    public function getRecentList($by_array, $limit = 5){
+        $posts = Post::where('status', 'published')
+            ->where('id', '!=', $this->id);
+
+        $posts_ids = [];
+        foreach($by_array as $by_item){
+            switch($by_item){
+                case 'tags':
+                    // Getting post_tags;
+                    $tags = DB::table('post_tag')
+                        ->where('post_id', $this->id)
+                        ->get();
+
+                    $tags_ids = [];
+                    foreach($tags as $tag){
+                        $tags_ids[] = $tag->tag_id;
+                    }
+
+                    // Getting other posts with same tag;
+                    $posts_data = DB::table('post_tag')
+                        ->whereIn('tag_id', $tags_ids)
+                        ->where('post_id', '!=', $this->id)
+                        ->get();
+
+                    foreach($posts_data as $post){
+                        $posts_ids[] = $post->post_id;
+                    }
+                    break;
+
+                case 'title':
+                    // Prepare title;
+                    $like_title = str_replace(' ', '%', $this->title);
+                    $posts_data = Post::where('title', 'like', "%$like_title%")
+                        ->where('id', '!=', $this->id)
+                        ->get();
+
+                    foreach($posts_data as $post){
+                        $posts_ids[] = $post->id;
+                    }
+                    break;
+            }
+        }
+
+        return $posts->whereIn('id', $posts_ids)
+            ->inRandomOrder()
+            ->latest()
+            ->take($limit)
+            ->get();
     }
 }

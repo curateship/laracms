@@ -71,4 +71,8 @@ class Comment extends Model
 
         return count($comment_block->get());
     }
+
+    public function relatedPost(){
+        return Post::find($this->post_id);
+    }
 }

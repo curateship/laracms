@@ -87,27 +87,65 @@
               </div>
               <!-- Assign Roles END -->
 
-              <!-- Image Upload -->
-              <div class="file-upload inline-block margin-bottom-sm margin-top-sm">
-              <label for="upload-file" class="file-upload__label btn btn--subtle">
-                <span class="flex items-center">
-                  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><path  stroke-linecap="square" stroke-linejoin="miter" d="M2 16v6h20v-6"></path><path stroke-linejoin="miter" stroke-linecap="butt" d="M12 17V2"></path><path stroke-linecap="square" stroke-linejoin="miter" d="M18 8l-6-6-6 6"></path></g></svg>
+                <div class="flex justify-start gap-lg">
+                    <!-- Edit Avatar -->
+                    <div class="file-upload inline-block">
+                        <label for="avatar-upload-file" class="file-upload__label btn btn--subtle">
+            <span class="flex items-center">
+              <svg class="icon" viewBox="0 0 20 20" aria-hidden="true">
+                <g fill="currentColor">
+                  <path d="M18 12v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                  <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 13V2"></path>
+                  <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7l5-5 5 5"></path>
+                </g>
+              </svg>
 
-                  <span class="margin-left-xxs file-upload__text file-upload__text--has-max-width">Upload Avatar</span>
-                </span>
-              </label>
+              <span class="margin-left-xxs file-upload__text file-upload__text--has-max-width">Edit Avatar</span>
+            </span>
+                        </label>
 
-              <input type="hidden" name="original" value=""/>
-              <input type="hidden" name="thumbnail" value=""/>
-              <input type="hidden" name="medium" value=""/>
+                        <input type="hidden" name="avatar-original" value=""/>
+                        <input type="hidden" name="avatar-thumbnail" value=""/>
+                        <input type="hidden" name="avatar-medium" value=""/>
 
-              <input type="file" class="file-upload__input" name="media" id="upload-file" accept="image/jpeg, image/jpg, image/png, image/gif" required>
+                        <input type="file" class="file-upload__input" name="image" id="avatar-upload-file" accept="image/jpeg, image/jpg, image/png, image/gif">
 
+                        <br><br>
 
-              <br>
-              <img alt="thumbnail" id="upload-thumbnail" src="" style="display: none;">
+                        <div class="author author--featured padding-bottom-sm">
+                            <div class="author__img-wrapper">
+                                <img alt="thumbnail" id="avatar-upload-thumbnail" src="" style="display: none">
+                            </div>
+                        </div>
+                    </div>
 
-            </div>
+                    <!-- Edit cover -->
+                    <div class="file-upload inline-block">
+                        <label for="cover-upload-file" class="file-upload__label btn btn--subtle">
+            <span class="flex items-center">
+              <svg class="icon" viewBox="0 0 20 20" aria-hidden="true">
+                <g fill="currentColor">
+                  <path d="M18 12v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                  <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 13V2"></path>
+                  <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7l5-5 5 5"></path>
+                </g>
+              </svg>
+
+              <span class="margin-left-xxs file-upload__text file-upload__text--has-max-width">Edit Cover</span>
+            </span>
+                        </label>
+
+                        <input type="hidden" name="cover-original" value=""/>
+                        <input type="hidden" name="cover-thumbnail" value=""/>
+                        <input type="hidden" name="cover-medium" value=""/>
+
+                        <input type="file" class="file-upload__input" name="image" id="cover-upload-file" accept="image/jpeg, image/jpg, image/png, image/gif">
+
+                        <br><br>
+
+                        <img alt="thumbnail" id="cover-upload-thumbnail" src="" style="display: none">
+                    </div>
+                </div>
             <!-- Image Upload END -->
 
               <div class="margin-y-sm">
@@ -125,7 +163,11 @@
 
       <!-- Sidebar -->
       <div class="col-3@md">
-        @include('admin.partials.sidebar')
+          @if(\Illuminate\Support\Facades\Gate::allows('is-admin'))
+              @include('admin.partials.sidebar-admin')
+          @else
+              @include('admin.partials.sidebar')
+          @endif
       </div>
       <!-- Sidebar END -->
 

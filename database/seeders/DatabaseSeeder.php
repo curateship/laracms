@@ -10,6 +10,7 @@ use App\Models\Tag;
 use App\Models\TagsCategories;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 
@@ -25,6 +26,7 @@ class DatabaseSeeder extends Seeder
         Comment::truncate();
         TagsCategories::truncate();
         Tag::truncate();
+        DB::table('role_user')->delete();
 
         Schema::enableForeignKeyConstraints();
         $this->call(RoleSeeder::class);
@@ -35,5 +37,6 @@ class DatabaseSeeder extends Seeder
         TagsCategories::factory(5)->create();
         Tag::factory(10)->create();
         $this->call(PostTagsSeeder::class);
+        $this->call(UserSeeder::class);
     }
 }

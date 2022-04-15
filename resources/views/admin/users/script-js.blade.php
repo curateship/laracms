@@ -12,11 +12,12 @@
         }
     }
 
-    function uploadMedia(e) {
-        e.preventDefault()
+    function uploadMedia(type) {
+        //e.preventDefault()
 
         let formData = new FormData()
-        formData.append('file', $('#upload-file')[0].files[0])
+        formData.append('file', $('#' + type + '-upload-file')[0].files[0])
+        formData.append('type', type)
         formData.append('_token', $('meta[name="csrf-token"]').attr('content'))
 
         $.ajax({
@@ -27,17 +28,24 @@
             contentType: false,  // tell jQuery not to set contentType
             success : function(data) {
                 if(data.thumbnail !== null){
-                    $('#upload-thumbnail').attr('src', data.thumbnail.path).fadeIn()
+                    $('#' + type + '-upload-thumbnail').attr('src', data.thumbnail.path).fadeIn()
 
-                    $('input[name="original"]').val(data.original.path);
-                    $('input[name="thumbnail"]').val(data.thumbnail.path);
-                    $('input[name="medium"]').val(data.medium.path);
+                    $('input[name="' + type + '-original"]').val(data.original.path);
+                    $('input[name="' + type + '-thumbnail"]').val(data.thumbnail.path);
+                    $('input[name="' + type + '-medium"]').val(data.medium.path);
                 }
             }
         });
     }
-    $(document).on('change', '#upload-file', uploadMedia);
-    
+
+    $(document).on('change', '#avatar-upload-file', function(){
+        uploadMedia('avatar')
+    });
+
+    $(document).on('change', '#cover-upload-file', function(){
+        uploadMedia('cover')
+    });
+
     // Mass Deletes;
     function getSelectedList(){
         let selectedUsers = []
