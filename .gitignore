@@ -17,5 +17,3 @@ yarn-error.log
 /app/Http/Middleware/GenerateMenus.php
 /public/assets/img/random-backgrounds
 /public/assets/img/favicon.svg
-/resources/views/components/layouts/svg
-/resources/views/theme/
