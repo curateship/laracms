@@ -1,6 +1,10 @@
 @extends('admin.layouts.app')
 
 @push('custom-scripts')
+    @include('admin.posts.script-editor-js')
+    @include('admin.posts.script-editor-js-header')
+    @include('admin.posts.script-editor-js-list')
+    @include('admin.posts.script-editor-js-image')
     @include('admin.tags.script-js')
 @endpush
 
@@ -59,7 +63,7 @@
 <!-- Table-->
 <div class="margin-top-auto border-top border-contrast-lower opacity-40%"></div><!-- Divider -->
 <div class="padding-md">
-<form action="{{ route('admin.tags.store') }}" method='post'>@csrf
+<form action="{{ route('admin.tags.store') }}" id="new-tag-form" method='post'>@csrf
 
   <fieldset class="margin-bottom-xxs">
 
@@ -69,6 +73,13 @@
     @error('title')
     <p>{{ $message }}</p>
     @enderror
+
+      <!-- START EditorJS body -->
+      <div>
+          <div id="js-editor-description" data-target-input="#description" class="site-editor margin-bottom-sm form-control width-100%"></div>
+          <input type="hidden" name="description" id="description" required/>
+      </div>
+      <!-- END EditorJS body  -->
 
     <!-- Select Category Dropdown Autocomplete -->
     <div class="autocomplete position-relative select-auto js-select-auto js-autocomplete margin-bottom-md" data-autocomplete-dropdown-visible-class="autocomplete--results-visible">
@@ -134,7 +145,7 @@
           <input type="hidden" name="original" value=""/>
           <input type="hidden" name="thumbnail" value=""/>
           <input type="hidden" name="medium" value=""/>
-          <input type="file" class="file-upload__input" name="file" id="upload-file" accept="image/jpeg, image/jpg, image/png, image/gif" required>
+          <input type="file" class="file-upload__input" name="image" id="upload-file" accept="image/jpeg, image/jpg, image/png, image/gif" required>
           <br>
           <img alt="thumbnail" id="upload-thumbnail" class="margin-top-md" src="" style="display: none;">
       </div>
@@ -156,7 +167,11 @@
 
       <!-- Sidebar -->
       <div class="col-3@md">
-        @include('admin.partials.sidebar')
+          @if(\Illuminate\Support\Facades\Gate::allows('is-admin'))
+              @include('admin.partials.sidebar-admin')
+          @else
+              @include('admin.partials.sidebar')
+          @endif
       </div>
       <!-- Sidebar END -->
 

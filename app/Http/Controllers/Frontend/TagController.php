@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 // Others
 use App\Http\Controllers\Controller;
 use App\Models\TagsCategories;
+use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Http\Request;
 
 // Models
@@ -14,11 +15,6 @@ use App\Models\Tag;
 
 class TagController extends Controller
 {
-    public function index()
-    {
-        // view all tags in the blog
-    }
-
     public function show($tags_categories_name, $tag_name)
     {
         $recent_posts = Post::latest()->take(5)->get();
@@ -40,7 +36,9 @@ class TagController extends Controller
             return abort(404);
         }
 
-        return view('themes.default.tags.show', [
+        // SEO Title
+        SEOMeta::setTitle($tag->name);
+        return view('theme.tags.show', [
             'tag' => $tag,
             'posts' => $tag->posts()->paginate(10),
             'recent_posts' => $recent_posts,
@@ -49,6 +47,7 @@ class TagController extends Controller
         ]);
     }
 
+   // Search
     public function search(Request $request){
         $search = $request->input('search');
         $category_id = $request->has('categoryId') ? $request->input('categoryId') : null;

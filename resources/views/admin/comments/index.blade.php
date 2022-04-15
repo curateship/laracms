@@ -29,14 +29,6 @@
               <div class="flex flex-wrap items-center justify-between margin-right-sm">
                 <div class="flex flex-wrap">
                   <menu class="menu-bar js-int-table-actions__no-items-selected js-menu-bar">
-                  <li class="menu-bar__item"><a href="/admin/comments/create" role="menuitem">
-                      <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 20 20">
-                        <path d="M18.85 4.39l-3.32-3.32a0.83 0.83 0 0 0-1.18 0l-11.62 11.62a0.84 0.84 0 0 0-0.2 0.33l-1.66 4.98a0.83 0.83 0 0 0 0.79 1.09 0.84 0.84 0 0 0 0.26-0.04l4.98-1.66a0.84 0.84 0 0 0 0.33-0.2l11.62-11.62a0.83 0.83 0 0 0 0-1.18z m-6.54 1.08l1.17-1.18 2.15 2.15-1.18 1.17z"></path>
-                      </svg>
-                      </a>
-                      <span class="menu-bar__label">Add Comment</span>
-
-                    </li>
 
                     <li class="menu-bar__item" role="menuitem" aria-controls="post-search">
                       <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 20 20">
@@ -241,22 +233,12 @@
                     </tr>
                     <!-- Action Dropdown -->
                     <menu id="menu-example-{{$comment->id}}" class="menu js-menu">
-                        <li role="menuitem">
-                          <span class="menu__content js-menu__content">
-                            <svg class="icon menu__icon" aria-hidden="true" viewBox="0 0 12 12">
-                              <path d="M10.121.293a1,1,0,0,0-1.414,0L1,8,0,12l4-1,7.707-7.707a1,1,0,0,0,0-1.414Z"></path>
-                            </svg>
-                            <span>View</span>
-                          </span>
-                        </li>
 
                         <li role="menuitem">
                           <span class="menu__content js-menu__content">
-                            <svg class="icon menu__icon" aria-hidden="true" viewBox="0 0 16 16">
-                              <path d="M15,4H1C0.4,4,0,4.4,0,5v10c0,0.6,0.4,1,1,1h14c0.6,0,1-0.4,1-1V5C16,4.4,15.6,4,15,4z M14,14H2V6h12V14z"></path>
-                              <rect x="2" width="12" height="2"></rect>
-                            </svg>
-                            <span>Preview</span>
+                            <svg class="icon menu__icon" aria-hidden="true" viewBox="0 0 12 12">
+                            <path d="M11.87 5.71c-0.1-0.15-2.38-3.72-5.89-3.72s-5.8 3.57-5.9 3.72a0.5 0.5 0 0 0 0 0.53c0.1 0.15 2.38 3.72 5.9 3.72s5.8-3.57 5.89-3.72a0.5 0.5 0 0 0 0-0.53z m-5.89 3.25c-2.46 0-4.3-2.21-4.88-2.98a8.31 8.31 0 0 1 2.93-2.53 2.47 2.47 0 0 0-0.54 1.53 2.49 2.49 0 0 0 4.98 0 2.47 2.47 0 0 0-0.54-1.52 8.36 8.36 0 0 1 2.92 2.52c-0.57 0.78-2.41 2.99-4.87 2.98z"></path>                            </svg>
+                            <span><a class="text-decoration-none color-inherit" href="{{ route('post.show', $comment->relatedPost()) }}" target="_blank">View Post</a></span>
                           </span>
                         </li>
 
@@ -286,7 +268,11 @@
 
       <!-- Sidebar -->
       <div class="col-3@md">
-        @include('admin.partials.sidebar')
+          @if(\Illuminate\Support\Facades\Gate::allows('is-admin'))
+              @include('admin.partials.sidebar-admin')
+          @else
+              @include('admin.partials.sidebar')
+          @endif
       </div>
       <!-- Sidebar END -->
 

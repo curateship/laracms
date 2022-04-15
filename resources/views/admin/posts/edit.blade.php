@@ -29,12 +29,12 @@
                 <ol class="flex flex-wrap gap-xxs">
 
                   <li class="breadcrumbs__item color-contrast-low">
-                    <a href="/admin" class="color-inherit link-subtle">Home</a>
+                    <a href="{{\Illuminate\Support\Facades\Gate::allows('is-admin') ? '/admin' : '/'}}" class="color-inherit link-subtle">Home</a>
                     <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
                   </li>
 
                   <li class="breadcrumbs__item color-contrast-low">
-                    <a href="/admin/posts" class="color-inherit link-subtle">Posts</a>
+                    <a href="{{\Illuminate\Support\Facades\Gate::allows('is-admin') ? '/admin' : ''}}/posts" class="color-inherit link-subtle">Posts</a>
                     <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
                   </li>
 
@@ -178,7 +178,7 @@
       <span class="flex items-center">
         <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><path  stroke-linecap="square" stroke-linejoin="miter" d="M2 16v6h20v-6"></path><path stroke-linejoin="miter" stroke-linecap="butt" d="M12 17V2"></path><path stroke-linecap="square" stroke-linejoin="miter" d="M18 8l-6-6-6 6"></path></g></svg>
 
-        <span class="margin-left-xxs file-upload__text file-upload__text--has-max-width">Edit Image</span>
+        <span class="margin-left-xxs file-upload__text file-upload__text--has-max-width">Edit media</span>
       </span>
     </label>
 
@@ -186,19 +186,49 @@
         <input type="hidden" name="thumbnail" value="{{$post->thumbnail}}"/>
         <input type="hidden" name="medium" value="{{$post->medium}}"/>
 
-    <input type="file" class="file-upload__input" name="image" id="upload-file" accept="image/jpeg, image/jpg, image/png, image/gif">
+        <input type="hidden" name="type" value="{{$post->type}}"/>
 
+        <input type="hidden" name="video_original" value="{{$post->video_original}}"/>
+        <input type="hidden" name="video_thumbnail" value="{{$post->video_thumbnail}}"/>
+        <input type="hidden" name="video_medium" value="{{$post->video_medium}}"/>
+
+    <input type="file" class="file-upload__input" name="image" id="upload-file" accept="image/jpeg, image/jpg, image/png, image/gif, video/mp4, video/webm">
 
     <br>
-    <img alt="thumbnail" id="upload-thumbnail" class="margin-top-md" src="{{url('/storage'.config('images.posts_storage_path').$post->thumbnail)}}">
+
+    <div id="uploading-progress-bar" class="progress-bar progress-bar--color-update flex flex-column items-center js-progress-bar margin-top-md" style="display: none;">
+        <div class="progress-bar__bg " aria-hidden="true">
+            <div class="progress-bar__fill " style="width: 0%;"></div>
+        </div>
+    </div>
+
+    <div id="upload-thumbnail" class="margin-top-md">
+        {!! $content !!}
+    </div>
   </div>
   <!-- Image Upload END -->
 
   </fieldset>
 
-  <div class="flex justify-end gap-xs">
-        <button class="btn btn--primary">Save</button>
-      </div>
+    <div class="flex gap-sm justify-end">
+        <div class="flex justify-end gap-xs">
+            <button class="btn btn--primary">Save changes</button>
+        </div>
+        @if($post->status == 'published')
+            <input type="hidden" name="status" value="draft">
+            <div class="flex justify-end gap-xs">
+                <button class="btn btn--primary">Move to drafts</button>
+            </div>
+        @endif
+
+        @if($post->status == 'draft')
+            <input type="hidden" name="status" value="published">
+            <div class="flex justify-end gap-xs">
+                <button class="btn btn--primary">Publish</button>
+            </div>
+        @endif
+    </div>
+
    </form>
 </div>
 <!-- END Table-->
@@ -210,7 +240,11 @@
 
       <!-- Sidebar -->
       <div class="col-3@md">
-        @include('admin.partials.sidebar')
+          @if(\Illuminate\Support\Facades\Gate::allows('is-admin'))
+              @include('admin.partials.sidebar-admin')
+          @else
+              @include('admin.partials.sidebar')
+          @endif
       </div>
       <!-- Sidebar END -->
 

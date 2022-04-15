@@ -35,6 +35,21 @@
             <div class="flex flex-wrap items-center justify-between margin-right-sm">
                   <div class="flex flex-wrap">
                     <menu class="menu-bar js-int-table-actions__no-items-selected js-menu-bar">
+
+                    <div class="inline-flex items-baseline padding-x-sm">
+                        <label class="text-sm color-contrast-medium margin-right-xs" for="selectThis"></label>
+
+                        <div class="select inline-block js-select" data-trigger-class="reset text-sm color-contrast-high text-underline inline-flex items-center cursor-pointer js-tab-focus">
+                            <select name="selectThis" id="selectThis">
+                            <option value="0" selected>All Tags</option>
+                            <option value="1">Cat 1</option>
+                            <option value="2">Cat 2</option>
+                            </select>
+
+                            <svg class="icon icon--xxxs margin-left-xxs" viewBox="0 0 8 8"><path d="M7.934,1.251A.5.5,0,0,0,7.5,1H.5a.5.5,0,0,0-.432.752l3.5,6a.5.5,0,0,0,.864,0l3.5-6A.5.5,0,0,0,7.934,1.251Z"/></svg>
+                        </div>
+                    </div>
+
                     <li class="menu-bar__item"><a href="/admin/tags/create" role="menuitem">
                         <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 20 20">
                           <path d="M18.85 4.39l-3.32-3.32a0.83 0.83 0 0 0-1.18 0l-11.62 11.62a0.84 0.84 0 0 0-0.2 0.33l-1.66 4.98a0.83 0.83 0 0 0 0.79 1.09 0.84 0.84 0 0 0 0.26-0.04l4.98-1.66a0.84 0.84 0 0 0 0.33-0.2l11.62-11.62a0.83 0.83 0 0 0 0-1.18z m-6.54 1.08l1.17-1.18 2.15 2.15-1.18 1.17z"></path>
@@ -279,7 +294,11 @@
     </div><!-- Col-12 END -->
     <!-- Sidebar -->
     <div class="col-3@md">
-      @include('admin.partials.sidebar')
+        @if(\Illuminate\Support\Facades\Gate::allows('is-admin'))
+            @include('admin.partials.sidebar-admin')
+        @else
+            @include('admin.partials.sidebar')
+        @endif
     </div>
     <!-- Sidebar END -->
   </div><!-- Grid END -->

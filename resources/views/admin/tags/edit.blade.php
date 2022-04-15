@@ -1,12 +1,15 @@
 @extends('admin.layouts.app')
 
 @push('custom-scripts')
+    @include('admin.posts.script-editor-js')
+    @include('admin.posts.script-editor-js-header')
+    @include('admin.posts.script-editor-js-list')
+    @include('admin.posts.script-editor-js-image')
     @include('admin.tags.script-js')
 @endpush
 
 @section('content')
 <!-- 👇 Content Body Wrapper-->
-<section class="margin-y-xl">
   <div class="container max-width-adaptive-lg">
     <div class="grid gap-md justify-between">
       <div class="col-12@md">
@@ -28,7 +31,7 @@
                   </li>
 
                   <li class="breadcrumbs__item color-contrast-low">
-                    <a href="/admin/categories" class="color-inherit link-subtle">Tags</a>
+                    <a href="/admin/tags" class="color-inherit link-subtle">Tags</a>
                     <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
                   </li>
 
@@ -60,7 +63,7 @@
 <!-- Table-->
 <div class="margin-top-auto border-top border-contrast-lower opacity-40%"></div><!-- Divider -->
 <div class="padding-md">
-<form action="{{ route('admin.tags.store') }}" method='post'>
+<form action="{{ route('admin.tags.store') }}" id="new-tag-form" method='post'>
     @csrf
     <input type="hidden" value="{{$tag->id}}" name="tag_id">
 
@@ -72,6 +75,13 @@
     @error('title')
     <p>{{ $message }}</p>
     @enderror
+
+      <!-- START EditorJS body -->
+      <div>
+          <div id="js-editor-description" data-target-input="#description" data-post-body="{{$tag->body != '' ? $tag->body : '{}'}}" class="site-editor margin-bottom-sm form-control width-100%"></div>
+          <input type="hidden" name="description" id="description" required/>
+      </div>
+      <!-- END EditorJS body  -->
 
   <!-- Select Category Dropdown Autocomplete -->
       <div class="autocomplete position-relative select-auto js-select-auto js-autocomplete margin-bottom-md" data-autocomplete-dropdown-visible-class="autocomplete--results-visible">
@@ -136,7 +146,7 @@
           <input type="hidden" name="original" value="{{$tag->original}}"/>
           <input type="hidden" name="thumbnail" value="{{$tag->thumbnail}}"/>
           <input type="hidden" name="medium" value="{{$tag->medium}}"/>
-          <input type="file" class="file-upload__input" name="file" id="upload-file" accept="image/jpeg, image/jpg, image/png, image/gif">
+          <input type="file" class="file-upload__input" name="image" id="upload-file" accept="image/jpeg, image/jpg, image/png, image/gif">
           <br>
           <img alt="thumbnail" id="upload-thumbnail" class="margin-top-md" src="{{ url('/storage').config('images.tags_storage_path').$tag->thumbnail  }}" style="">
       </div>
@@ -154,11 +164,14 @@
 
       <!-- Sidebar -->
       <div class="col-3@md">
-        @include('admin.partials.sidebar')
+          @if(\Illuminate\Support\Facades\Gate::allows('is-admin'))
+              @include('admin.partials.sidebar-admin')
+          @else
+              @include('admin.partials.sidebar')
+          @endif
       </div>
       <!-- Sidebar END -->
 
     </div><!-- Grid END (col-12 and col-3) -->
   </div><!-- Container Wrapper END -->
-</section
 @endsection

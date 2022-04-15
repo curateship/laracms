@@ -32,14 +32,6 @@ class AdminCommentController extends Controller
         return view('admin.comments.index', ['comments' => $comments->paginate(10)]);
     }
 
-    // Create
-    public function create()
-    {
-        return view('admin.comments.create', [
-            'posts' => Post::pluck('title', 'id')
-        ]);
-    }
-
     // Store
     public function store(Request $request)
     {
@@ -54,7 +46,6 @@ class AdminCommentController extends Controller
     public function edit(Comment $comment)
     {
         return view('admin.comments.edit', [
-            'posts' => Post::pluck('title', 'id'),
             'comment' => $comment
         ]);
     }

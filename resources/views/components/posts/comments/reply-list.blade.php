@@ -1,13 +1,13 @@
 @foreach($reply_list as $reply)
     <li class="comments__comment comment-reply-item" data-type="reply" data-parent-comment-id="{{$reply->reply_id}}" data-comment-id="{{$reply->id}}">
         <div class="flex items-start">
-            <a href="#" class="comments__author-img">
+            <a href="/user/{{$reply->user_id}}" class="comments__author-img">
                 <img class="block width-100% height-100% object-cover" src="{{ url('/storage').config('images.users_storage_path').$reply->author_thumbnail  }}" alt="Author picture">
             </a>
 
             <div class="comments__content margin-top-xxxs">
                 <div class="text-component text-sm text-space-y-xs line-height-sm read-more js-read-more" data-characters="150" data-btn-class="comments__readmore-btn js-tab-focus">
-                    <p><a href="#" class="comments__author-name" rel="author">{{$reply->author_name}}</a></p>
+                    <p><a href="/user/{{$reply->user_id}}" class="comments__author-name" rel="author">{{$reply->author_name}}</a></p>
                     <p>{{$reply->the_comment}}</p>
                 </div>
 
