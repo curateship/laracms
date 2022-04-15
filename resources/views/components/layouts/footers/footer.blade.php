@@ -8,7 +8,7 @@
 
     <!-- Logo and Social -->
     <div class="text-center">
-      @include('components.layouts.svg.logo-social-footer')
+      @include('theme.layouts.svg.logo-social-footer')
     </div>
 
   </div>
