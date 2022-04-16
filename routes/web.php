@@ -63,7 +63,7 @@ Route::get('/search/{search_request}', [PostController::class, 'postSearch'])->n
 
 // Temp
 Route::get('/dashboard', function () {
-    return view('themes/jpn/users/dashboard');
+    return view('theme/users/dashboard');
 });
 
 Route::get('/categories', function () {

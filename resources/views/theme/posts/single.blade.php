@@ -20,7 +20,7 @@
           <div class="border-top margin-top-sm"></div>
           <!-- Comments -->
           <section class="comments margin-top-md">
-              @include('components.comments.comments-v1')
+              @include('components.comments.list')
           </section>
       </div>
 
