@@ -1,11 +1,21 @@
 @use '../base' as *;
 
 .profile-author-box{
-    height: 300px;
+    min-height: 300px;
+    max-height: 300px;
     position: relative;
 }
 
 .profile-author-avatar{
     margin-top: -100px;
     z-index: 1;
+}
+
+.author__img-wrapper{
+    svg{
+        .none-avatar{
+            fill: var(--color-primary, #4827ec);
+            stroke: var(--color-primary, #4827ec);
+        }
+    }
 }
