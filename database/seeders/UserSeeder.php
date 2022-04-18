@@ -20,12 +20,12 @@ class UserSeeder extends Seeder
         $admin->remember_token = Str::random(10);
         $admin->created_at = now();
         $admin->updated_at = now();
-
-        // Random user background;
-        $r_user = User::find(1);
-        $admin->original = $r_user->original;
-        $admin->medium = $r_user->medium;
-        $admin->thumbnail = $r_user->thumbnail;
+        $admin->original = null;
+        $admin->medium = null;
+        $admin->thumbnail = null;
+        $admin->cover_original = null;
+        $admin->cover_medium = null;
+        $admin->cover_thumbnail = null;
         $admin->save();
 
         // Role;
