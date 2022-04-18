@@ -37,13 +37,13 @@
                     <menu class="menu-bar js-int-table-actions__no-items-selected js-menu-bar">
 
                     <div class="inline-flex items-baseline padding-x-sm">
-                        <label class="text-sm color-contrast-medium margin-right-xs" for="selectThis"></label>
-
+                        <label class="text-sm color-contrast-medium margin-right-xs" for="categoryFilter"></label>
                         <div class="select inline-block js-select" data-trigger-class="reset text-sm color-contrast-high text-underline inline-flex items-center cursor-pointer js-tab-focus">
-                            <select name="selectThis" id="selectThis">
-                            <option value="0" selected>All Tags</option>
-                            <option value="1">Cat 1</option>
-                            <option value="2">Cat 2</option>
+                            <select name="selectThis" id="categoryFilter">
+                                <option value="0" {{request()->get('category') == '' ? 'selected' : ''}}>All Tags</option>
+                                @foreach(\App\Models\TagsCategories::all() as $category)
+                                    <option value="{{$category->id}}" {{request()->get('category') == $category->id ? 'selected' : ''}}>{{$category->name}}</option>
+                                @endforeach
                             </select>
 
                             <svg class="icon icon--xxxs margin-left-xxs" viewBox="0 0 8 8"><path d="M7.934,1.251A.5.5,0,0,0,7.5,1H.5a.5.5,0,0,0-.432.752l3.5,6a.5.5,0,0,0,.864,0l3.5-6A.5.5,0,0,0,7.934,1.251Z"/></svg>

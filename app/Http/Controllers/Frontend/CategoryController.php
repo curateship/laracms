@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\TagsCategories;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Tag;
@@ -12,7 +13,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::with('user')->orderBy('id', 'DESC')->paginate(10);
+        $categories = TagsCategories::orderBy('id', 'DESC')->paginate(10);
 
         $cats = [];
         foreach($categories as $category){
