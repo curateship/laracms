@@ -118,7 +118,7 @@
     .custom-ext-url-result{
         display: flex;
         justify-content: center;
-        max-width: 600px;
+        max-width: 1000px;
         margin-left: auto;
         margin-right: auto;
     }
