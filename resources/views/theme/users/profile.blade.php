@@ -1,6 +1,6 @@
 @extends('theme.layouts.app')
 @section('content')
-<div class="container max-width-lg grid gap-md">
+<div class="container max-width-lg grid gap-xl">
 
     <!-- User Bio -->
     @include('components.users.user-bio')

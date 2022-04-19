@@ -123,6 +123,7 @@
                         }
                     }
                 },
+                extUrl: ExtMediaUrl
             },
             readOnly,
             data
