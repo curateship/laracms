@@ -41,6 +41,10 @@ class AdminTagController extends Controller
             $tags = Tag::orderBy('created_at', 'DESC');
         }
 
+        if($request->has('category')){
+            $tags = $tags->where('category_id', $request->input('category'));
+        }
+
         return view('admin.tags.index', [
             'tags' => $tags->paginate(10),
         ]);

@@ -4,8 +4,14 @@
 <div class="container max-width-adaptive-lg">
   <div class="grid gap-md">
 
-  <h1>Category</h1>
-    @include('components.tags.lists.tag-categories')
+  @foreach($categories as $category)
+      <h1>{{$category->name}}</h1>
+      @if(isset($tags[$category->id]))
+        @include('components.tags.lists.tag-categories', ['tags' => $tags[$category->id]])
+      @else
+        No tags
+      @endif
+  @endforeach
 
   </div>
 </div>

@@ -41,6 +41,15 @@
     }
     $(document).on('change', '#upload-file', uploadMedia);
 
+    $(document).on('change', '#categoryFilter', function(){
+        if(parseInt($(this).val()) > 0){
+            location.href = location.pathname + '?category=' + $(this).val()
+        }   else{
+            location.href = location.pathname
+        }
+
+    })
+
     $(document).on('submit', '#new-tag-form', function(e){
         e.preventDefault()
 

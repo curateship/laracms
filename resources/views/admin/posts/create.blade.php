@@ -4,6 +4,7 @@
     @include('admin.posts.script-select2-js')
     @include('admin.posts.script-editor-js')
     @include('admin.posts.script-editor-js-image')
+    @include('admin.posts.editorjs-custom-ext-url.custom-ext')
     @include('admin.posts.script-editor-js-header')
     @include('admin.posts.script-editor-js-embed')
     @include('admin.posts.script-editor-js-list')

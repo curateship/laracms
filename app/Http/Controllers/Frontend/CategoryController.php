@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\TagsCategories;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Tag;
@@ -12,8 +13,27 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        return view('theme.categories.index', [
-            'categories' => Category::withCount('posts')->paginate(100)
+        $categories = TagsCategories::orderBy('id', 'DESC')->paginate(10);
+
+        $cats = [];
+        foreach($categories as $category){
+            $cats[] = $category->id;
+        }
+
+        $tags = Tag::whereIn('category_id', $cats)
+            ->leftJoin('categories', 'categories.id', '=', 'tags.category_id')
+            ->select(['tags.*', 'categories.name as cat_name'])
+            ->get();
+
+        $tags_in_cats = [];
+        foreach($tags as $tag){
+            $tags_in_cats[$tag->category_id][] = $tag;
+        }
+
+        //admin.categories.index
+        return view('theme.tags.categories', [
+            'categories' => $categories,
+            'tags' => $tags_in_cats
         ]);
     }
 

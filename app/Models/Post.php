@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed $type
  * @property mixed $id
  * @property mixed $status
+ * @property mixed $excerpt
  */
 class Post extends Model
 {
@@ -316,6 +317,16 @@ class Post extends Model
 
                 case 'embed':
                     $html .= '<iframe src="'.$block->data->embed.'" style="width:100%; height: 600px" scrolling="no" frameborder="no"></iframe>';
+                    break;
+
+                case 'extUrl':
+                    if($block->data->type == 'image'){
+                        $html .= '<div class="img_pnl padding-y-md custom-ext-url-result-on-render"><img src="'.$block->data->url.'" alt="ext-url-image"></div>';
+                    }
+
+                    if($block->data->type == 'video'){
+                        $html .= '<div class="img_pnl padding-y-md custom-ext-url-result-on-render"><video controls="controls" preload="metadata"><source src="'.$block->data->url.'" type="video/mp4"></video></div>';
+                    }
                     break;
 
                 default:

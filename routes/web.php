@@ -66,9 +66,11 @@ Route::get('/dashboard', function () {
     return view('theme/users/dashboard');
 });
 
+/*
 Route::get('/categories', function () {
     return view('theme/tags/categories');
 });
+*/
 
 
 /*
