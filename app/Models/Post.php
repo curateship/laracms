@@ -321,7 +321,7 @@ class Post extends Model
 
                 case 'extUrl':
                     if($block->data->type == 'image'){
-                        $html .= '<div class="img_pnl padding-y-md custom-ext-url-result-on-render"><img src="'.$block->data->url.'" alt="ext-url-image"></div>';
+                        $html .= '<div class="img_pnl padding-y-md custom-ext-url-result-on-render"><img class="radius-lg" src="'.$block->data->url.'" alt="ext-url-image"></div>';
                     }
 
                     if($block->data->type == 'video'){

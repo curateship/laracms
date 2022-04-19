@@ -3,7 +3,7 @@
         static get toolbox() {
             return {
                 title: 'External media URL',
-                icon: '<svg width="16px" height="16px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M2 2h6v3.5l.5.5H12v1h1V4.8l-.15-.36-3.28-3.3L9.22 1H1.5l-.5.5v13l.5.5H5v-1H2V2zm7 0l3 3H9V2zm5.5 6h-8l-.5.5v6l.5.5h8l.5-.5v-6l-.5-.5zM14 9v4l-1.63-1.6h-.71l-1.16 1.17-2.13-2.13h-.71L7 11.1V9h7zm-2.8 4.27l.81-.81L13.55 14h-1.62l-.73-.73zM7 14v-1.49l1-1L10.52 14H7zm5.5-3.5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/></svg>'
+                icon: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><title>code</title><g fill="currentColor"><path fill="currentColor" d="M12.7,11.7l-1.4-1.4L13.6,8l-2.3-2.3l1.4-1.4l3,3c0.4,0.4,0.4,1,0,1.4L12.7,11.7z"></path> <path fill="currentColor" d="M3.3,11.7l-3-3c-0.4-0.4-0.4-1,0-1.4l3-3l1.4,1.4L2.4,8l2.3,2.3L3.3,11.7z"></path> <path d="M6,15c-0.1,0-0.2,0-0.3-0.1c-0.5-0.2-0.8-0.7-0.6-1.3l4-12c0.2-0.5,0.7-0.8,1.3-0.6 c0.5,0.2,0.8,0.7,0.6,1.3l-4,12C6.8,14.7,6.4,15,6,15z"></path></g></svg>'
             };
         }
 
