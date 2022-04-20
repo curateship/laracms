@@ -71,27 +71,17 @@ class TagController extends Controller
     }
 
     public function showCategory($category_name){
-        $categories = TagsCategories::where('name', $category_name)->get();
+        $category = TagsCategories::where('name', $category_name)->first();
 
-        $cats = [];
-        foreach($categories as $category){
-            $cats[] = $category->id;
-        }
-
-        $tags = Tag::whereIn('category_id', $cats)
+        $tags = Tag::where('category_id', $category->id)
             ->leftJoin('tags_categories', 'tags_categories.id', '=', 'tags.category_id')
             ->select(['tags.*', 'tags_categories.name as cat_name'])
-            ->get();
-
-        $tags_in_cats = [];
-        foreach($tags as $tag){
-            $tags_in_cats[$tag->category_id][] = $tag;
-        }
+            ->paginate(10);
 
         //admin.categories.index
         return view('theme.tags.categories', [
-            'categories' => $categories,
-            'tags' => $tags_in_cats
+            'category' => $category,
+            'tags' => $tags
         ]);
     }
 }
