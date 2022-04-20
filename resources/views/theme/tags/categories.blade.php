@@ -4,15 +4,17 @@
 <div class="container max-width-adaptive-lg">
   <div class="grid gap-md">
 
-  @foreach($categories as $category)
       <h1>{{$category->name}}</h1>
-      @if(isset($tags[$category->id]))
-        @include('components.tags.lists.tag-categories', ['tags' => $tags[$category->id]])
+      @if(count($tags) > 0)
+          @include('components.tags.lists.tag-categories', ['tags' => $tags])
       @else
-        No tags
+          No tags
       @endif
-  @endforeach
 
   </div>
+
+    <div>
+        @include('components.layouts.partials.pagination', ['items' => $tags])
+    </div>
 </div>
 @endsection
