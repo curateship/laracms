@@ -26,7 +26,7 @@
 
       <!-- Sidebar -->
       <div class="col-3@md">
-          <h3 class="padding-bottom-sm">Related Posts</h3>
+          <h3 class="padding-bottom-sm color-contrast-high">Related Posts</h3>
           @include('components.posts.lists.related-posts-sidebar')
       </div>
 
