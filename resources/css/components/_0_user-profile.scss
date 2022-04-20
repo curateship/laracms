@@ -7,8 +7,21 @@
 }
 
 .profile-author-avatar{
-    padding-top: 200px;
     z-index: 1;
+    bottom: -110px;
+    position: absolute;
+    left: 0;
+    right: 0;
+
+    .with-svg-box{
+        padding-top: 20px;
+    }
+}
+
+.profile-edit-button-box{
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }
 
 .author__img-wrapper{
