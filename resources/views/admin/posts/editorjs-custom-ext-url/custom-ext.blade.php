@@ -21,6 +21,8 @@
 
             const input = document.createElement('input')
             input.classList.add('custom-ext-input')
+            input.classList.add('form-control')
+            input.classList.add('radius-full')
             input.placeholder = 'Enter external media URL (picture or video)'
             input.value = this.data && this.data.url ? this.data.url : ''
             this.wrapper.appendChild(input)

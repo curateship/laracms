@@ -1,15 +1,15 @@
 @extends('theme.layouts.app')
 @section('content')
-<div class="container max-width-lg grid gap-xl">
+<div class="container max-width-lg grid gap-md">
 
     <!-- User Bio -->
     @include('components.users.user-bio')
 
     <!-- User's Posts -->
-    <div class="container max-width-adaptive-lg">
+    <div class="container max-width-adaptive-lg padding-top-lg">
 
     <!-- Posts -->
-    <div class="padding-bottom-md">
+    <div class="padding-bottom-md padding-top-md">
         <h1 class="text-xl padding-bottom-md">{{$user->name}}'s Posts</h1>
         @include('components.users.users-posts')
     </div>

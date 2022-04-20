@@ -18,7 +18,7 @@ class TagController extends Controller
     public function show($tags_categories_name, $tag_name)
     {
         $recent_posts = Post::latest()->take(5)->get();
-        $categories = Tag::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
+        $categories = Tag::take(10)->get();
         $tags = Tag::latest()->take(50)->get();
 
         $category = TagsCategories::where('name', $tags_categories_name)
@@ -68,5 +68,30 @@ class TagController extends Controller
         return [
             'results' => $tags_array
         ];
+    }
+
+    public function showCategory($category_name){
+        $categories = TagsCategories::where('name', $category_name)->get();
+
+        $cats = [];
+        foreach($categories as $category){
+            $cats[] = $category->id;
+        }
+
+        $tags = Tag::whereIn('category_id', $cats)
+            ->leftJoin('categories', 'categories.id', '=', 'tags.category_id')
+            ->select(['tags.*', 'categories.name as cat_name'])
+            ->get();
+
+        $tags_in_cats = [];
+        foreach($tags as $tag){
+            $tags_in_cats[$tag->category_id][] = $tag;
+        }
+
+        //admin.categories.index
+        return view('theme.tags.categories', [
+            'categories' => $categories,
+            'tags' => $tags_in_cats
+        ]);
     }
 }
