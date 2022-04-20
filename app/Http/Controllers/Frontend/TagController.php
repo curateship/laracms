@@ -79,8 +79,8 @@ class TagController extends Controller
         }
 
         $tags = Tag::whereIn('category_id', $cats)
-            ->leftJoin('categories', 'categories.id', '=', 'tags.category_id')
-            ->select(['tags.*', 'categories.name as cat_name'])
+            ->leftJoin('tags_categories', 'tags_categories.id', '=', 'tags.category_id')
+            ->select(['tags.*', 'tags_categories.name as cat_name'])
             ->get();
 
         $tags_in_cats = [];
