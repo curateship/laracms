@@ -72,6 +72,11 @@ class TagController extends Controller
 
     public function showCategory($category_name){
         $category = TagsCategories::where('name', $category_name)->first();
+
+        if($category == null){
+            return abort(404);
+        }
+
         $tags = Tag::where('category_id', $category->id)->paginate(10);
 
         return view('theme.tags.categories', [
