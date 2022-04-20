@@ -72,13 +72,8 @@ class TagController extends Controller
 
     public function showCategory($category_name){
         $category = TagsCategories::where('name', $category_name)->first();
+        $tags = Tag::where('category_id', $category->id)->paginate(10);
 
-        $tags = Tag::where('category_id', $category->id)
-            ->leftJoin('tags_categories', 'tags_categories.id', '=', 'tags.category_id')
-            ->select(['tags.*', 'tags_categories.name as cat_name'])
-            ->paginate(10);
-
-        //admin.categories.index
         return view('theme.tags.categories', [
             'category' => $category,
             'tags' => $tags
