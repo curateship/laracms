@@ -157,9 +157,21 @@
                                       </li>
                                   </ul>
                               </th>
-                              <th class="int-table__cell int-table__cell--th">
+                              <th class="int-table__cell int-table__cell--th  int-table__cell--sort js-int-table__cell--sort
+                              @if(request()->get('sortBy') === 'use_count')
+                              @if(request()->get('sortDesc') === 'desc')
+                                  int-table__cell--desc
+                              @endif
+                              @if(request()->get('sortDesc') === 'asc')
+                                  int-table__cell--asc
+                              @endif
+                              @endif
+                                  " data-sort-col="use_count">
                                   <div class="flex items-center">
                                       <span>Use count</span>
+                                      <svg class="icon icon--xxs margin-left-xxxs int-table__sort-icon" aria-hidden="true" viewBox="0 0 12 12">
+                                          <polygon class="arrow-up" points="6 0 10 5 2 5 6 0" />
+                                          <polygon class="arrow-down" points="6 12 2 7 10 7 6 12" /></svg>
                                   </div>
                                   <ul class="sr-only js-int-table__sort-list">
                                       <li>
@@ -238,7 +250,7 @@
                                   <td class="int-table__cell">{{ $tag->category()->name }}</td>
 
                                   <!-- Post count who use this tag -->
-                                  <td class="int-table__cell">{{ $tag->useCount() }}</td>
+                                  <td class="int-table__cell">{{ $tag->use_count }}</td>
 
                                   <!-- Created at Date -->
                                   <td class="int-table__cell">{{ $tag->created_at->diffForHumans() }}</td>
