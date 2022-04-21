@@ -1,4 +1,3 @@
-<!-- Forgot Password Form Start 👇-->
 <form action="{{ route('password.request') }}" method="POST">@csrf
 <form class="password-reset-form">
   <div class="text-component text-center margin-bottom-md">
@@ -29,4 +28,3 @@
   </div>
 </form>
 </form>
-<!-- Forgot Password Form END-->

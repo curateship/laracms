@@ -1,4 +1,3 @@
-<!-- Reset Password Form Start 👇-->
 <form method="POST" action="{{ route('password.update') }}">@csrf
   <input type="hidden" name="token" value="{{ $request->route('token') }}">
     <form class="password-reset-form">
@@ -49,4 +48,3 @@
   </div>
 </form>
 </form>
-<!-- Reset Password Form END-->

@@ -9,11 +9,10 @@
         @include('components.posts.lists.recent-posts-list')
     </div>
 
+    <!-- Popular Posts -->
     <div class="col-3@md">
-
-      <!-- Popular Posts -->
-      <h3 class="padding-bottom-md color-contrast-high">Popular Posts</h3>
-        @include('components.posts.lists.related-posts-sidebar')
+    <h3 class="padding-bottom-md color-contrast-high">Popular Posts</h3>
+      @include('components.posts.lists.related-posts-sidebar')
     </div>
 
   </div>

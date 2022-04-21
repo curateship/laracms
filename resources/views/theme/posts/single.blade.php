@@ -13,22 +13,22 @@
       @include('components.layouts.partials.sticky-sharebar')
     </div>
 
-      <!-- Content Start -->
-      <div class="col-11@md padding-x-lg@md">
-      @include('components.posts.single.article-plain')
+    <!-- Content -->
+    <div class="col-11@md padding-x-lg@md">
+    @include('components.posts.single.article-plain')
 
-          <div class="border-top margin-top-sm"></div>
-          <!-- Comments -->
-          <section class="comments margin-top-md">
-              @include('components.comments.list')
-          </section>
-      </div>
+        <!-- Comments -->
+        <div class="border-top margin-top-sm"></div>
+        <section class="comments margin-top-md">
+            @include('components.comments.list')
+        </section>
+    </div>
 
-      <!-- Sidebar -->
-      <div class="col-3@md">
-          <h3 class="padding-bottom-sm color-contrast-high">Related Posts</h3>
-          @include('components.posts.lists.related-posts-sidebar')
-      </div>
+    <!-- Sidebar -->
+    <div class="col-3@md">
+        <h3 class="padding-bottom-sm color-contrast-high">Related Posts</h3>
+        @include('components.posts.lists.related-posts-sidebar')
+    </div>
 
   </div>
 </div>
