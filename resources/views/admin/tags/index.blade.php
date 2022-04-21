@@ -237,7 +237,9 @@
 
                                       <!-- Image -->
                                       <figure class="width-xl height-lg radius-lg flex-shrink-0 overflow-hidden margin-right-xs">
-                                          <img class="block width-100% height-100% object-cover" src="{{ url('/storage').config('images.tags_storage_path').$tag->medium  }}" alt="Tag Picture">
+                                          @if($tag->thumbnail != '')
+                                              <img class="block width-100% height-100% object-cover" src="{{ url('/storage').config('images.tags_storage_path').$tag->thumbnail  }}" alt="Tag Picture">
+                                          @endif
                                       </figure>
 
                                       <!-- Tag Name -->
