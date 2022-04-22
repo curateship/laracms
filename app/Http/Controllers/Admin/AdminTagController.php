@@ -35,10 +35,13 @@ class AdminTagController extends Controller
     public function index(Request $request)
     {
         SEOMeta::setTitle(config('seotools.static_titles.'.get_called_class().'.'.__FUNCTION__));
+
+        $tags =Tag::leftJoin(DB::raw("(select tag_id, count(post_id) as use_count from post_tag group by tag_id) as links"), 'links.tag_id', '=', 'tags.id');
+
         if($request->has('sortBy') && $request->input('sortBy') !== 'role'){
-            $tags = Tag::orderBy($request->input('sortBy'), $request->input('sortDesc'));
+            $tags = $tags->orderBy($request->input('sortBy'), $request->input('sortDesc'));
         }   else{
-            $tags = Tag::orderBy('created_at', 'DESC');
+            $tags = $tags->orderBy('created_at', 'DESC');
         }
 
         if($request->has('category')){

@@ -423,4 +423,41 @@ class Post extends Model
             ->take($limit)
             ->get();
     }
+
+    public static function getPostsListByView($period = null){
+        switch($period){
+            case 'day':
+                $add_where = "where created_at between '".date('Y-m-d', strtotime(date('Y-m-d').' -1 days'))." 00:00:00' and '".date('Y-m-d')." 23:59:59'";
+                break;
+
+            case 'week':
+                $add_where = "where created_at between '".date('Y-m-d', strtotime(date('Y-m-d').' -7 days'))." 00:00:00' and '".date('Y-m-d')." 23:59:59'";
+                break;
+
+            case 'month':
+                $add_where = "where created_at between '".date('Y-m-d', strtotime(date('Y-m-d').' -1 months'))." 00:00:00' and '".date('Y-m-d')." 23:59:59'";
+                break;
+
+            case 'year':
+                $add_where = "where created_at between '".date('Y-m-d', strtotime(date('Y-m-d').' -1 years'))." 00:00:00' and '".date('Y-m-d')." 23:59:59'";
+                break;
+
+            default:
+                $add_where = '';
+        }
+
+        return static::select(['posts.*', 'views.views_count'])
+            ->leftJoin(DB::raw('(
+                    select post_id, count(*) as views_count
+                    from posts_views
+                    '.$add_where.'
+                    group by post_id
+                ) as views'), 'views.post_id', 'posts.id')
+            ->whereNotNull('user_id')
+            ->whereNotNull('views_count')
+            ->where('status', 'published')
+            ->orderBy('views_count', 'DESC')
+            ->limit(10)
+            ->get();
+    }
 }
