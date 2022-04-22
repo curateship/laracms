@@ -26,8 +26,8 @@
     @auth()
         @if($user->id == \Illuminate\Support\Facades\Auth::id())
             <div class="profile-edit-button-box">
-                <a href="/user/edit">
-                    <button type="button" class="btn btn--primary" data-status="draft">Edit profile</button>
+                <a href="/user/edit" class="link-plain">
+                    <button type="button" class="btn btn--subtle" data-status="draft">Edit profile</button>
                 </a>
             </div>
         @endif
