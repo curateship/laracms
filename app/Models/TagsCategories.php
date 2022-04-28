@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property mixed $id
+ * @property mixed|string $name
  */
 class TagsCategories extends Model
 {
