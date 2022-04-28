@@ -583,6 +583,10 @@ class ScraperService {
                       $thumbnail_medium->writeImages($media_path . "$path/$type_name/" . $thumbnail_medium_name, true);
                   }   else{
                       /* Other Image types */
+
+                      // Turn off memory limits;
+                      ini_set('memory_limit', '-1');
+
                       $source = Storage::get($path."/original/".$thumbnail_medium_name);
 
                       $thumbnail_medium = \Intervention\Image\Facades\Image::make($source);
