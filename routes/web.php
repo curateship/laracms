@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\AdminPostController;
 use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminTagController;
 use App\Http\Controllers\Admin\AdminCommentController;
+use App\Http\Controllers\Admin\AdminScraperController;
 
 // Front-End Controllers
 use App\Http\Controllers\Frontend\IndexController;
@@ -48,11 +49,11 @@ Route::get('/tags/search', [TagController::class, 'search'])->name('tags.search'
 Route::get('/tags/{tags_categories_name}/{tag_name}', [TagController::class, 'show'])->name('theme.default.archive.tags.show');
 
 // Comments
-Route::get('post/comment/get/{post_id}/{last_comment_id}', [PostController::class, 'getPostComments'])->name('post-comment-get');
-Route::get('post/comment/reply', [PostController::class, 'reply'])->name('post-comment-reply')->middleware(['auth', 'verified']);
-Route::post('post/comment/reply-save', [PostController::class, 'saveReply'])->name('post-comment-reply-save')->middleware(['auth', 'verified']);
-Route::post('post/comment/save', [PostController::class, 'saveComment'])->name('post-comment-save')->middleware(['auth', 'verified']);
-Route::get('post/comment/reply-get-list', [PostController::class, 'getReply'])->name('post-comment-reply-list');
+Route::get('/post/comment/get/{post_id}/{last_comment_id}', [PostController::class, 'getPostComments'])->name('post-comment-get');
+Route::get('/post/comment/reply', [PostController::class, 'reply'])->name('post-comment-reply')->middleware(['auth', 'verified']);
+Route::post('/post/comment/reply-save', [PostController::class, 'saveReply'])->name('post-comment-reply-save')->middleware(['auth', 'verified']);
+Route::post('/post/comment/save', [PostController::class, 'saveComment'])->name('post-comment-save')->middleware(['auth', 'verified']);
+Route::get('/post/comment/reply-get-list', [PostController::class, 'getReply'])->name('post-comment-reply-list');
 
 // Profiles;
 Route::get('/user/edit', [UserController::class, 'editProfile'])->middleware(['auth'])->name('profile.edit');
@@ -79,6 +80,21 @@ Route::get('/categories', function () {
 | // Admin Routes
 |--------------------------------------------------------------------------
 */
+// Scraper;
+Route::get('/scraper', [AdminScraperController::class, 'index'])->middleware(['auth', 'auth.isAdmin']);
+Route::get('/scraper/settings', [AdminScraperController::class, 'scraperSetting'])->middleware(['auth', 'auth.isAdmin']);
+Route::post('/scraper/store', [AdminScraperController::class, 'storeScraperSetting'])->middleware(['auth', 'auth.isAdmin'])->name('scraper.store');
+Route::post('/scraper/scraper-v1', [AdminScraperController::class, 'saveScraper'])->middleware(['auth', 'auth.isAdmin'])->name('scraper.save_scraper');
+Route::get('/scraper/run_pause/{id}', [AdminScraperController::class, 'runpauseScraperCron'])->middleware(['auth', 'auth.isAdmin'])->name('scraper.run_pause');
+Route::get('/scraper/stop/{id}', [AdminScraperController::class, 'stopScraperCron'])->middleware(['auth', 'auth.isAdmin'])->name('scraper.stop');
+Route::get('/scraper/delete/{id}', [AdminScraperController::class, 'deleteScraperCron'])->middleware(['auth', 'auth.isAdmin'])->name('scraper.delete');
+Route::get('/scraper/retry', [AdminScraperController::class, 'retryScraper'])->middleware(['auth', 'auth.isAdmin'])->name('scraper.retry');
+Route::post('/scraper/get_logs', [AdminScraperController::class, 'getLogs'])->middleware(['auth', 'auth.isAdmin'])->name('scraper.get_logs');
+Route::post('/scraper/delete_log_item', [AdminScraperController::class, 'deleteLogItem'])->middleware(['auth', 'auth.isAdmin'])->name('scraper.delete_log_item');
+Route::get('/scraper/scraper-v1', [AdminScraperController::class, 'newScraper'])->middleware(['auth', 'auth.isAdmin']);
+Route::get('/scraper/scraper-v1/{id}', [AdminScraperController::class, 'loadScraper'])->middleware(['auth', 'auth.isAdmin']);
+
+
 // Tags;
 Route::get('/tags/edit/{tag_id}', [AdminTagController::class, 'edit'])->name('admin.tags.edit')->middleware(['auth', 'verified']);
 Route::post('/tags/upload/{type}', [AdminTagController::class, 'upload'])->name('admin.tags.upload')->middleware(['auth', 'verified']);
@@ -92,7 +108,7 @@ Route::get('/post/edit/{post:slug}', [AdminPostController::class, 'edit'])->name
 // Users Admin
 Route::post('/user/upload', [AdminUserController::class, 'upload'])->name('user.upload');
 Route::post('/user/store', [AdminUserController::class, 'store'])->name('user.store');
-Route::post('users/saveTheme', [AdminUserController::class, 'saveTheme'])->middleware(['auth']); // Theme Switcher
+Route::post('/users/saveTheme', [AdminUserController::class, 'saveTheme'])->middleware(['auth']); // Theme Switcher
 
 // Admin Prefix
 Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->group(function (){

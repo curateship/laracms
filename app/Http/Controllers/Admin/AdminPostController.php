@@ -258,6 +258,10 @@ class AdminPostController extends Controller
             // Compress video;
             $compress_array = [
                 [
+                    'path' => 'original',
+                    'resolution' => 0
+                ],
+                [
                     'path' => 'thumbnail',
                     'resolution' => 480
                 ],
@@ -273,13 +277,13 @@ class AdminPostController extends Controller
             foreach($compress_array as $compress){
                 if($height < $width){
                     // For Landscape view;
-                    $m_video_width = $compress['resolution'];
-                    $m_video_height = ceil($height * ($compress['resolution']/$width));
+                    $m_video_width = $compress['path'] == 'original' ? $width : $compress['resolution'];
+                    $m_video_height = ceil($height * ($compress['path'] == 'original' ? $width : $compress['resolution']/$width));
                     if($m_video_height % 2 == 1) $m_video_height++;
                 }   else{
                     // For Portrait view;
-                    $m_video_height = $compress['resolution'];
-                    $m_video_width = ceil($width * ($compress['resolution']/$height));
+                    $m_video_height = $compress['path'] == 'original' ? $height : $compress['resolution'];
+                    $m_video_width = ceil($width * ($compress['path'] == 'original' ? $height : $compress['resolution']/$height));
                     if($m_video_width % 2 == 1) $m_video_width++;
                 }
 
@@ -314,12 +318,23 @@ class AdminPostController extends Controller
                     ->setAudioChannels(2)
                     ->setAudioKiloBitrate(256);
 
-                $m_video->save($format, storage_path() . "/app".$path_video."/".$compress['path']."/" . $thumbnail_medium_name);
+                if($compress['path'] != 'original'){
+                    $m_video->save($format, storage_path() . "/app".$path_video."/".$compress['path']."/" . $thumbnail_medium_name);
+                }
 
                 /* Make preview images for post */
+                $source = storage_path() . "/app".$path."/".$compress['path']."/" . $image_file_name;
                 $m_video
                     ->frame(Coordinate\TimeCode::fromSeconds(5))
-                    ->save(storage_path() . "/app".$path."/".$compress['path']."/" . $image_file_name);
+                    ->save($source);
+
+                // Resize preview;
+                $thumbnail_medium = \Intervention\Image\Facades\Image::make($source);
+                $thumbnail_medium->resize($m_video_width, $m_video_height, function($constraint){
+                    $constraint->aspectRatio();
+                });
+
+                $thumbnail_medium->save($source);
             }
 
             // Add images paths in response;
