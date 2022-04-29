@@ -700,7 +700,7 @@ class ScraperService {
                 /* Make preview images for post */
                 $source = storage_path() . "/app".$path."/".$compress['path']."/" . $image_file_name;
                 $m_video
-                    ->frame(Coordinate\TimeCode::fromSeconds(5))
+                    ->frame(Coordinate\TimeCode::fromSeconds(3))
                     ->save($source);
 
                 // Resize preview;
