@@ -479,7 +479,11 @@ class AdminPostController extends Controller
         $post->thumbnail = $thumbnail;
         $post->medium = $medium;
         $post->type = $request->input('type');
-        $post->status = $request->input('status');
+
+        if($request->has('status') && in_array($request->input('status'), ['draft', 'published'])){
+            $post->status = $request->input('status');
+        }
+
         $post->save();
 
         // Now we can save excerpt;

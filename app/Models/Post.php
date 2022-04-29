@@ -460,4 +460,61 @@ class Post extends Model
             ->limit(10)
             ->get();
     }
+
+    static public function autoTitle($tags_in_cats){
+        // Get title template;
+        $template = config('posts.auto_title_template');
+        // Render title from tags;
+        $title_array = [];
+        $str_block_count = 0;
+        foreach ($template as $template_item) {
+            if (!isset($template_item['category_id'])) {
+                $title_array[] = implode($template_item);
+                $str_block_count++;
+                continue;
+            }
+
+            $cat_request_name = 'tag_category_' . $template_item['category_id'];
+
+            if (isset($tags_in_cats[$cat_request_name])) {
+                $cat_in_request = $tags_in_cats[$cat_request_name];
+                $rand_array = [];
+                $limit = min($template_item['limit'], count($cat_in_request));
+                for ($i = 0; $i < $limit ; $i++) {
+                    if(is_numeric($cat_in_request[$i])){
+                        $tag = Tag::find($cat_in_request[$i]);
+                        if($tag !== null) $rand_array[] = $tag->name;
+                    }   else{
+                        $rand_array[] = $cat_in_request[$i];
+                    }
+                }
+                if (count($rand_array) > 0) {
+                    $title_array[] = implode(' ', $rand_array);
+                }
+            }   else{
+                $title_array[] = null;
+            }
+        }
+
+        // Little fix for title;
+        foreach($title_array as $key => $item){
+            if($item == null){
+                unset($title_array[$key]);
+                if(isset($title_array[$key-1])){
+                    unset($title_array[$key-1]);
+                    $str_block_count--;
+                }
+            }
+
+            if($item == ' '){
+                unset($title_array[$key]);
+                $str_block_count--;
+            }
+        }
+
+        return [
+            'title_array' => $title_array,
+            'str_block_count' => $str_block_count
+        ];
+    }
 }
