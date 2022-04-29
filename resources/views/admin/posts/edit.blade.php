@@ -212,20 +212,20 @@
   </fieldset>
 
     <div class="flex gap-sm justify-end">
+        <input type="hidden" name="status" value="">
+
         <div class="flex justify-end gap-xs">
             <button class="btn btn--primary">Save changes</button>
         </div>
         @if($post->status == 'published')
-            <input type="hidden" name="status" value="draft">
             <div class="flex justify-end gap-xs">
-                <button class="btn btn--primary">Move to drafts</button>
+                <button class="btn btn--primary postSaveAs" data-status="draft">Move to drafts</button>
             </div>
         @endif
 
         @if($post->status == 'draft')
-            <input type="hidden" name="status" value="published">
             <div class="flex justify-end gap-xs">
-                <button class="btn btn--primary">Publish</button>
+                <button class="btn btn--primary postSaveAs" data-status="published">Publish</button>
             </div>
         @endif
     </div>
