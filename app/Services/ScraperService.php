@@ -650,6 +650,8 @@ class ScraperService {
             $image_file_name = str_replace('.'.$file_ext, '', $thumbnail_medium_name).'.jpg';
 
             foreach($compress_array as $compress){
+                Log::info('>>> Saving video for '.$compress['path']);
+
                 if($height < $width){
                     // For Landscape view;
                     $m_video_width = $compress['path'] == 'original' ? $width : $compress['resolution'];
@@ -698,10 +700,25 @@ class ScraperService {
                 }
 
                 /* Make preview images for post */
+                // Getting video duration;
+                $duration = $video_stream->get('duration');
+
+                Log::info('>>> Video duration '.$duration.' sec.');
+
+                // If video longer than 1 second;
+                if($duration > 1){
+                    $time_to_image = 1;
+                }  else{
+                    // If video shorter than 1 seconds, than we set tts like current duration - 0.1;
+                    $time_to_image = $duration - 0.1;
+                }
+
                 $source = storage_path() . "/app".$path."/".$compress['path']."/" . $image_file_name;
+                Log::info('>>> Trying to save image: '.$source);
                 $m_video
-                    ->frame(Coordinate\TimeCode::fromSeconds(3))
+                    ->frame(Coordinate\TimeCode::fromSeconds($time_to_image))
                     ->save($source);
+                Log::info('>>> Image successfully saved.');
 
                 // Resize preview;
                 $thumbnail_medium = \Intervention\Image\Facades\Image::make($source);
@@ -764,8 +781,6 @@ class ScraperService {
           'status' => 'draft',
           'tags' => $tags
         ];
-
-          dump($post_data);
 
         // Step 3: Save Post.
         if (!$this->add_post($post_data)) {
@@ -1019,6 +1034,22 @@ class ScraperService {
    * Once copy 1 GB, close file and reopen to append.
    */
   public function chunked_copy($source_url, $destination) {
+    // Fix URLs with Japanese symbols;
+      $change = true;
+      while($change){
+          preg_match('/[\p{Katakana}\p{Hiragana}\p{Han}]+/u', $source_url, $matches, PREG_OFFSET_CAPTURE);
+
+          if(count($matches) > 0){
+              $match = $matches[0][0];
+
+              $part_1 = substr($source_url, 0, $matches[0][1]);
+              $part_2 = substr($source_url, $matches[0][1] + strlen($match), strlen($source_url));
+              $source_url = $part_1.urlencode($match).$part_2;
+          }   else{
+              $change = false;
+          }
+      }
+
     // No time limits for loading real big files;
     set_time_limit(-1);
 
