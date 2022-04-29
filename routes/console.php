@@ -28,6 +28,10 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 
+Artisan::command('test', function () {
+    dump('Nothing to test now');
+})->purpose('Method for tests');
+
 
 Artisan::command('auto-title', function () {
     $posts = Post::where('status', 'draft')
