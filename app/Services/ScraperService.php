@@ -1165,17 +1165,15 @@ class ScraperService {
   public function check_scraper_status() {
     // Check current scraper status.
     $scraper_info = Scraper::find($this->scraper->id);
-    if ($scraper_info->status == 'paused') {
-      // Save current status.
-      ScraperStat::where('scraper_id', $this->scraper->id)->update([
-        'list_page_url' => $this->scraper_status['list_page'],
-        'item_url' => $this->scraper_status['detail_page']
-      ]);
-      return true;
-    } else if ($scraper_info->status == 'stopped') {
-      return true;
-    }
-    return false;
+
+    // Save current status.
+    ScraperStat::where('scraper_id', $this->scraper->id)
+        ->update([
+            'list_page_url' => $this->scraper_status['list_page'],
+            'item_url' => $this->scraper_status['detail_page']
+        ]);
+
+    return $scraper_info->status == 'paused' || $scraper_info->status == 'stopped';
   }
 
   public function check_rescraper_status() {
