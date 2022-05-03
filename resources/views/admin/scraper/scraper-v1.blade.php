@@ -5,14 +5,12 @@
 @endpush
 
 @section('content')
-  <section>
-    <div class="container max-width-lg">
-      <div class="grid">
-        <main class="position-relative z-index-1 col-15@md link-card radius-md">
-          @include('admin.scraper.control')
-          <div class="margin-top-auto border-top border-contrast-lower"></div><!-- Divider -->
+<div class="container max-width-adaptive-lg">
+  <div class="grid gap-md justify-between">
+    <div class="col-12@md"><!-- 👇 Col 12 -->
+      <div class="card" data-table-controls="table-1"><!-- Content Table Column -->
 
-          <div class="padding-md">
+               <div class="padding-md">
             <form id="formScraper" method="POST" action="{{ url('/scraper/scraper-v1') }}">
               @csrf
               <input type="hidden" name="action" value="{{$action}}" />
@@ -129,7 +127,7 @@
                       </div> <!-- end of <div class="grid gap-xs"> -->
                     </div>
 
-                    <h3 class="text-md padding-top-md">Individual Page Crawl (Level 2)</h4>
+                    <h3 class="text-md">Individual Page Crawl (Level 2)</h4>
                     <div class="margin-bottom-sm">
                       <div class="margin-bottom-sm margin-top-md">
                         <input class="form-control width-100%" name="title" value="{{ isset($scraper_info->title) ? $scraper_info->title : old('title')}}" placeholder="Title" >
@@ -173,8 +171,19 @@
               </div>
             </div><!-- end of <div class="padding-md"> -->
           </form>
-        </main><!-- .column -->
-      </div><!-- /.grid -->
-    </div><!-- /.container -->
-  </section>
+
+      </div><!-- END Col-12 Card -->
+    </div><!-- Col-12 END -->
+    <!-- Sidebar -->
+    <div class="col-3@md">
+        @if(\Illuminate\Support\Facades\Gate::allows('is-admin'))
+            @include('admin.partials.sidebar-admin')
+        @else
+            @include('admin.partials.sidebar')
+        @endif
+    </div>
+    <!-- Sidebar END -->
+  </div><!-- Grid END -->
+</div>
+
 @endsection
