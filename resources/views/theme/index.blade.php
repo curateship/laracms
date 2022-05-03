@@ -11,6 +11,9 @@
 
     <!-- Popular Posts -->
     <div class="col-3@md">
+    <h3 class="padding-bottom-md color-contrast-high">Popular Origins</h3>
+      @include('components.tags.lists.popular-tags')
+
     <h3 class="padding-bottom-md color-contrast-high">Popular Posts</h3>
       @include('components.posts.lists.popular-posts-sidebar')
     </div>
