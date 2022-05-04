@@ -32,6 +32,9 @@ use App\Http\Controllers\Frontend\TagController;
 route::get('/', [IndexController::class, 'index'])->name('index');
 route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(['auth', 'verified']);
 
+// Users;
+route::get('/users', [UserController::class, 'index'])->name('index');
+
 // Post
 Route::get('/post/{post:slug}', [PostController::class, 'show'])->name('post.show');
 
