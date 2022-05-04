@@ -27,6 +27,7 @@ class Tag extends Model
     public function posts()
     {
         return Post::leftJoin('post_tag', 'post_tag.post_id', '=', 'posts.id')
+            ->where('posts.status', 'published')
             ->where('tag_id', $this->id)
             ->select('posts.*');
     }

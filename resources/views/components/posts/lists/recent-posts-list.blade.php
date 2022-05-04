@@ -27,7 +27,9 @@
 
             <!-- Author Image -->
             <a href="/user/{{$recent_post->author()->id}}" class="articles-v3__author-img">
-              <img class="object-cover" src="{{$recent_post->author() != null ? url('/storage'.config('images.users_storage_path').$recent_post->author()->thumbnail) : asset('assets/img/avatar.png')}}" alt="Author picture">
+                @if($recent_post->author() != null)
+                    {!! $recent_post->author()->getAvatar(false, ['width' => 40, 'height' => 40], ['object-cover'])->content !!}
+                @endif
             </a>
             <!-- Author name and time created -->
             <div class="text-component text-sm line-height-xs text-space-y-xxs">

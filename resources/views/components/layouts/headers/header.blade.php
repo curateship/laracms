@@ -16,11 +16,11 @@
 
           @auth
           <!-- With avatar -->
-          @if(\Illuminate\Support\Facades\Auth::user()->thumbnail != '')
+          @if(\Illuminate\Support\Facades\Auth::user()->getAvatar()->in_storage)
           <button class="header-v2__nav-control reset anim-menu-btn js-anim-menu-btn switch-icon switch-icon--rotate js-switch-icon js-tab-focus" aria-label="Toggle icon" menu-target="user-menu">
               <div class="mega-nav__icon-btn dropdown__wrapper inline-block author author--minimal-mobile switch-icon__icon switch-icon__icon--a">
                   <div class="author__img-wrapper author--minimal-mobile dropdown__trigger object-cover margin-top-xxxs">
-                      <img src="{{ url('/storage'.config('images.users_storage_path').\Illuminate\Support\Facades\Auth::user()->thumbnail)  }}" alt="Logged in user avatar">
+                      {!! \Illuminate\Support\Facades\Auth::user()->getAvatar()->content !!}
                   </div>
               </div>
               <svg class="avatar-cross-fix switch-icon__icon switch-icon__icon--b" viewBox="0 0 20 20">
@@ -32,26 +32,11 @@
           </button>
           <!-- End with avatar -->
           @else
-                    <!-- Without With avatar -->
-
-                    <button class="header-v2__nav-control reset anim-menu-btn anim-menu-btn--avatar js-anim-menu-btn" aria-label="Toggle icon" menu-target="user-menu">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
-                            <title>face-man</title>
-                            <g class="icon__group" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" transform="translate(0.5 0.5)" fill="currentColor" stroke="currentColor">
-                                <path fill="none" stroke-miterlimit="10"
-                                      d="M1.051,10.933 C4.239,6.683,9.875,11.542,16,6c3,4.75,6.955,4.996,6.955,4.996"></path>
-                                <circle data-stroke="none" fill="currentColor" cx="7.5" cy="14.5" r="1.5" stroke-linejoin="miter"
-                                        stroke-linecap="square" stroke="none"></circle>
-                                <circle data-stroke="none" fill="currentColor" cx="16.5" cy="14.5" r="1.5" stroke-linejoin="miter"
-                                        stroke-linecap="square" stroke="none"></circle>
-                                <circle fill="none" stroke="currentColor" stroke-miterlimit="10" cx="12" cy="12" r="11"></circle>
-                                <path d="M4.222 4.222l15.556 15.556" />
-                                <path d="M19.778 4.222L4.222 19.778" />
-                            </g>
-                        </svg>
-                    </button>
-
-                    <!-- Without With avatar END -->
+            <!-- Without With avatar -->
+            <button class="header-v2__nav-control reset anim-menu-btn anim-menu-btn--avatar js-anim-menu-btn" aria-label="Toggle icon" menu-target="user-menu">
+                {!! \Illuminate\Support\Facades\Auth::user()->getAvatar(true, ['width' => 25, 'height' => 25])->content !!}
+            </button>
+            <!-- Without With avatar END -->
           @endif
 
             <!-- Avatar Mobile Dropdown -->

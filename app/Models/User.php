@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 Use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Support\Facades\Hash;
@@ -107,5 +108,38 @@ class User extends Authenticatable implements MustVerifyEmail
     public function categories()
     {
         return $this->hasMany(Category::class);
+    }
+
+    public function getAvatar($show_cross = false, $svg_size = ['width' => 25, 'height' => 25], $class_array = []){
+        $exist_in_storage = false;
+
+        if($this->thumbnail != ''){
+            // Checking avatar in storage;
+            $exist_in_storage = Storage::exists('/public'.config('images.users_storage_path').$this->thumbnail);
+        }
+
+        if($exist_in_storage){
+            $content = '<img class="'.implode(' ', $class_array).'" src="'. url('/storage'.config('images.users_storage_path').$this->thumbnail).'" alt="User avatar">';
+        }   else{
+            // Add SVG;
+            $content = '<svg xmlns="http://www.w3.org/2000/svg" width="'.$svg_size['width'].'" height="'.$svg_size['height'].'" viewBox="0 0 25 25">
+                            <title>face-man</title>
+                            <g class="icon__group" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" transform="translate(0.5 0.5)" fill="currentColor" stroke="currentColor">
+                                <path fill="none" stroke-miterlimit="10"
+                                      d="M1.051,10.933 C4.239,6.683,9.875,11.542,16,6c3,4.75,6.955,4.996,6.955,4.996"></path>
+                                <circle data-stroke="none" fill="currentColor" cx="7.5" cy="14.5" r="1.5" stroke-linejoin="miter"
+                                        stroke-linecap="square" stroke="none"></circle>
+                                <circle data-stroke="none" fill="currentColor" cx="16.5" cy="14.5" r="1.5" stroke-linejoin="miter"
+                                        stroke-linecap="square" stroke="none"></circle>
+                                <circle fill="none" stroke="currentColor" stroke-miterlimit="10" cx="12" cy="12" r="11"></circle>
+                                '.($show_cross ? '<path d="M4.222 4.222l15.556 15.556" /><path d="M19.778 4.222L4.222 19.778" />' : '').'
+                            </g>
+                        </svg>';
+        }
+
+        return (object)[
+            'in_storage' => $exist_in_storage,
+            'content' => $content
+        ];
     }
 }

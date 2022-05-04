@@ -21,6 +21,7 @@ class TagsCategories extends Model
     public function posts(){
         return Post::leftJoin('post_tag', 'post_tag.post_id', '=', 'posts.id')
             ->leftJoin('tags', 'tags.id', '=', 'post_tag.tag_id')
+            ->where('posts.status', 'published')
             ->where('tags.category_id', $this->id)
             ->select('posts.*')
             ->get();
