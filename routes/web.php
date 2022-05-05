@@ -72,17 +72,11 @@ Route::get('/dashboard', function () {
 });
 
 /*
-Route::get('/categories', function () {
-    return view('theme/tags/categories');
-});
-*/
-
-
-/*
 |--------------------------------------------------------------------------
 | // Admin Routes
 |--------------------------------------------------------------------------
 */
+
 // Scraper;
 Route::get('/scraper', [AdminScraperController::class, 'index'])->middleware(['auth', 'auth.isAdmin']);
 Route::get('/scraper/settings', [AdminScraperController::class, 'scraperSetting'])->middleware(['auth', 'auth.isAdmin']);
