@@ -10,7 +10,7 @@
 
     <!-- Sticky Share Sidebar -->
     <div class="col-1@md display@md">
-      @include('components.layouts.partials.sticky-sharebar')
+      @include('components.layouts.partials.sticky-interactions')
     </div>
 
     <!-- Content -->
