@@ -758,10 +758,10 @@ class ScraperService {
         // Generate slug
           $title = strip_tags($title);
           $slug = Str::slug($title, '-');
-          $post_with_same_slug = Post::where('slug', 'like', $slug . '%')->get();
+          $posts_with_same_slug = Post::where('slug', 'like', $slug . '%')->get();
 
-          if (count($post_with_same_slug) > 0) {
-              $slug = Post::getNewSlug($slug, $post_with_same_slug);
+          if (count($posts_with_same_slug) > 0) {
+              $slug = Post::getNewSlug($slug, $posts_with_same_slug);
           }
 
         $post_data = [
@@ -1146,6 +1146,17 @@ class ScraperService {
             $tag->category_id = $tag_category->id;
             $tag->body = '{"time": '.time().',"blocks":[]}';
             $tag->save();
+
+              $slug = Str::slug($tag_input, '-');
+              $exist = Tag::where('slug', 'like', $slug . '%')
+                  ->get();
+
+              if (count($exist) > 0) {
+                  $slug = Post::getNewSlug($slug, $exist);
+              }
+
+              $tag->slug = $slug;
+              $tag->save();
           }
 
           // Insert posts_tag

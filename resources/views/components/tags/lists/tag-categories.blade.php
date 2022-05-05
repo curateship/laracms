@@ -2,7 +2,7 @@
   <ul class="flex flex-wrap gap-xxs">
 
   @foreach($tags as $tag)
-      <a class="link-subtle" href="/tags/{{$tag->cat_name}}/{{$tag->name}}">
+      <a class="link-subtle" href="/tags/{{$tag->cat_name}}/{{$tag->slug}}">
           <li>
               <span class="chip text-sm">
                   @if($tag->thumbnail != '')

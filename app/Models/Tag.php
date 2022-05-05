@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Storage;
  * @property mixed $thumbnail
  * @property mixed $name
  * @property mixed $body
+ * @property mixed|string $slug
  */
 class Tag extends Model
 {

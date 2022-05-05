@@ -15,7 +15,7 @@ use App\Models\Tag;
 
 class TagController extends Controller
 {
-    public function show($tags_categories_name, $tag_name)
+    public function show($tags_categories_name, $tag_slug)
     {
         $recent_posts = Post::latest()->take(5)->get();
         $categories = Tag::take(10)->get();
@@ -28,7 +28,7 @@ class TagController extends Controller
             return abort(404);
         }
 
-        $tag = Tag::where('name', $tag_name)
+        $tag = Tag::where('slug', $tag_slug)
             ->where('category_id', $category->id)
             ->first();
 

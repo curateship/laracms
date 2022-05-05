@@ -23,7 +23,11 @@ class TagsCategories extends Model
         return Tag::where('tags_categories.name', $category_name)
             ->leftJoin('tags_categories', 'tags_categories.id', '=', 'tags.category_id')
             ->leftJoin(DB::raw('(
-                select tag_id, count(*) as post_count from post_tag group by tag_id
+                select tag_id, count(*) as post_count
+                from post_tag
+                left join posts on posts.id = post_tag.post_id
+                where posts.status = "published"
+                group by tag_id
             ) as post_tag'), 'post_tag.tag_id', '=', 'tags.id')
             ->orderBy('post_count', 'desc')
             ->limit($limit)
