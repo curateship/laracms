@@ -517,4 +517,22 @@ class Post extends Model
             'str_block_count' => $str_block_count
         ];
     }
+
+    public static function getListByTagName($tag_name, $order = ['by' => 'created_at', 'order' => 'desc'], $limit = 10){
+        $posts_tags = DB::table('post_tag')
+            ->leftJoin('tags', 'tags.id', '=', 'post_tag.tag_id')
+            ->where('tags.name', $tag_name)
+            ->select('post_id')
+            ->get();
+
+        $posts_ids = [];
+        foreach($posts_tags as $posts_tag){
+            $posts_ids[] = $posts_tag->post_id;
+        }
+
+        return static::whereIn('id', $posts_ids)
+            ->orderBy($order['by'], $order['order'])
+            ->limit($limit)
+            ->get();
+    }
 }
