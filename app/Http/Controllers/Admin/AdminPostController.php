@@ -390,13 +390,16 @@ class AdminPostController extends Controller
 
         // Generate slug
         $slug = Str::slug($title, '-');
-        $post_with_same_slug = Post::where('slug', 'like', $slug . '%')->first();
+        $posts_with_same_slug = Post::where('slug', 'like', $slug . '%');
 
-        if ($post_with_same_slug != null) {
-            // Ignore, if we have same post with this slug;
-            if(!$request->has('postId') || ($request->has('postId') && $request->input('postId') != $post_with_same_slug->id)){
-                $slug = Post::getNewSlug($slug, [$post_with_same_slug]);
-            }
+        if($request->has('postId')){
+            $posts_with_same_slug = $posts_with_same_slug->where('id', '!=', $request->has('postId'));
+        }
+
+        $posts_with_same_slug = $posts_with_same_slug->get();
+
+        if (count($posts_with_same_slug) > 0) {
+            $slug = Post::getNewSlug($slug, $posts_with_same_slug);
         }
 
         $category = Category::where('name', $request->input('category'))
@@ -529,9 +532,19 @@ class AdminPostController extends Controller
                     // If tag doesn't exist yet, create it;
                     if ($tag == null) {
                         $tag = new Tag;
-                        $tag->body = '';
+                        $tag->body = '{"time": '.time().',"blocks":[]}';
                         $tag->name = $tag_input;
                         $tag->category_id = $tag_category->id;
+
+                        $slug = Str::slug($tag_input, '-');
+                        $exist = Tag::where('slug', 'like', $slug . '%')
+                            ->get();
+
+                        if (count($exist) > 0) {
+                            $slug = Post::getNewSlug($slug, $exist);
+                        }
+
+                        $tag->slug = $slug;
                         $tag->save();
                     }
 
@@ -553,5 +566,15 @@ class AdminPostController extends Controller
             return redirect('/post/'.$post->slug);
         }
 
+    }
+
+    public function move(Request $request){
+        $posts_array = explode(',', $request->input('list'));
+
+        Post::whereIn('id', $posts_array)
+            ->update([
+                'updated_at' => now(),
+                'status' => $request->input('direction')
+            ]);
     }
 }

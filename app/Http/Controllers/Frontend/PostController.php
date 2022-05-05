@@ -336,4 +336,15 @@ class PostController extends Controller
             'posts' => $by_title_and_body
         ]);
     }
+
+    public function move(Request $request){
+        $posts_array = explode(',', $request->input('list'));
+
+        Post::whereIn('id', $posts_array)
+            ->where('user_id', Auth::id())
+            ->update([
+                'updated_at' => now(),
+                'status' => $request->input('direction')
+            ]);
+    }
 }

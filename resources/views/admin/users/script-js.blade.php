@@ -33,6 +33,14 @@
                     $('input[name="' + type + '-original"]').val(data.original.path);
                     $('input[name="' + type + '-thumbnail"]').val(data.thumbnail.path);
                     $('input[name="' + type + '-medium"]').val(data.medium.path);
+
+                    if(type === 'cover'){
+                        $('#cover-upload-thumbnail').fadeIn()
+                    }
+
+                    if(type === 'avatar'){
+                        $('#avatar-upload-thumbnail').fadeIn()
+                    }
                 }
             }
         });

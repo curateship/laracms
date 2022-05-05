@@ -110,7 +110,7 @@
 
                         <div class="author author--featured padding-bottom-sm">
                             <div class="author__img-wrapper">
-                                <img alt="thumbnail" id="avatar-upload-thumbnail" src="{{url('/storage'.config('images.users_storage_path').$user->thumbnail)}}">
+                                <img alt="thumbnail" id="avatar-upload-thumbnail" src="{{url('/storage'.config('images.users_storage_path').$user->thumbnail)}}" style="{{$user->thumbnail == '' ? 'display: none' : ''}}">
                             </div>
                         </div>
                     </div>
@@ -139,7 +139,7 @@
 
                         <br><br>
 
-                        <img alt="thumbnail" id="cover-upload-thumbnail" src="{{url('/storage'.config('images.users_storage_path').$user->cover_thumbnail)}}">
+                        <img alt="thumbnail" id="cover-upload-thumbnail" src="{{url('/storage'.config('images.users_storage_path').$user->cover_thumbnail)}}" style="{{$user->cover_thumbnail == '' ? 'display: none' : ''}}">
                     </div>
                 </div>
 

@@ -32,6 +32,9 @@ use App\Http\Controllers\Frontend\TagController;
 route::get('/', [IndexController::class, 'index'])->name('index');
 route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(['auth', 'verified']);
 
+// Users;
+route::get('/users', [UserController::class, 'index'])->name('index');
+
 // Post
 Route::get('/post/{post:slug}', [PostController::class, 'show'])->name('post.show');
 
@@ -46,7 +49,7 @@ Route::get('/categories', [CategoryController::class, 'index'])->name('theme.def
 // Tags
 Route::get('/category/{category_name}', [TagController::class, 'showCategory'])->name('tags.category');
 Route::get('/tags/search', [TagController::class, 'search'])->name('tags.search');
-Route::get('/tags/{tags_categories_name}/{tag_name}', [TagController::class, 'show'])->name('theme.default.archive.tags.show');
+Route::get('/tags/{tags_categories_name}/{tag_slug}', [TagController::class, 'show'])->name('theme.default.archive.tags.show');
 
 // Comments
 Route::get('/post/comment/get/{post_id}/{last_comment_id}', [PostController::class, 'getPostComments'])->name('post-comment-get');
@@ -59,6 +62,10 @@ Route::get('/post/comment/reply-get-list', [PostController::class, 'getReply'])-
 Route::get('/user/edit', [UserController::class, 'editProfile'])->middleware(['auth'])->name('profile.edit');
 Route::get('/user/{user_id}', [UserController::class, 'showProfile']);
 Route::post('/user/edit/{user_id}', [UserController::class, 'profileUpdate'])->middleware(['auth'])->name('profile.update');
+
+// Posts;
+Route::resource('/posts', PostController::class)->middleware(['auth']);
+Route::post('/posts/move', [PostController::class, 'move'])->name('post.move')->middleware(['auth', 'verified']);
 
 // Search;
 Route::get('/search/{search_request}', [PostController::class, 'postSearch'])->name('posts.search');
@@ -95,6 +102,7 @@ Route::post('/tags/upload/{type}', [AdminTagController::class, 'upload'])->name(
 Route::post('/tags/store', [AdminTagController::class, 'store'])->name('admin.tags.store')->middleware(['auth', 'verified']);
 
 // Post Admin;
+Route::post('/admin/posts/move', [AdminPostController::class, 'move'])->name('post.move')->middleware(['auth', 'auth.isAdmin']);
 Route::post('/post/upload/{type}', [AdminPostController::class, 'upload'])->name('post.upload')->middleware(['auth', 'verified']);
 Route::post('/post/store', [AdminPostController::class, 'store'])->name('post.store')->middleware(['auth', 'verified']);
 Route::get('/post/edit/{post:slug}', [AdminPostController::class, 'edit'])->name('post.edit')->middleware(['auth', 'verified']);
@@ -114,6 +122,3 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
     Route::resource('/comments', AdminCommentController::class); // Comment Route
     Route::resource('/videos', AdminVideoController::class); // Video Route
 });
-
-// Other users posts;
-Route::resource('/posts', PostController::class)->middleware(['auth']); // Post Route

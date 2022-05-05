@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 // Others
 use App\Http\Controllers\Controller;
+use App\Models\TagsCategories;
 use Illuminate\Http\Request;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Artesaos\SEOTools\Facades\SEOMeta;
@@ -26,7 +27,10 @@ class IndexController extends Controller
 
         return view('/theme.index', [
             'recent_posts' => $posts,
-            'popular_posts' => Post::getPostsListByView('month')
+            'popular_posts' => Post::getPostsListByView('month'),
+            'specific_tag_posts' => Post::getListByTagName('dolores', ['by' => 'created_at', 'order' => 'desc'], 10),
+            'popular_tags_category_name' => 'magni',
+            'popular_tags' => TagsCategories::popularTags('magni')
         ]);
     }
 }

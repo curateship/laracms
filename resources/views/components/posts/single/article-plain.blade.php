@@ -23,7 +23,7 @@
                     {{$category->name}}:
                     @foreach($post_tags[$category->id] as $tag)
                         <button class="chip chip--interactive text-sm margin-bottom-xxs">
-                            <a class="link-subtle" href="/tags/{{$category->name}}/{{$tag->name}}">
+                            <a class="link-subtle" href="/tags/{{$category->name}}/{{$tag->slug}}">
                                 <i class="chip__label">{{$tag->name}}</i>
                             </a>
                         </button>

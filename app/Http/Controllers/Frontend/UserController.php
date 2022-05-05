@@ -14,6 +14,15 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
+    public function index(){
+        $users = User::orderBy('name')
+            ->paginate(20);
+
+        return view('theme.users.all', [
+            'users' => $users
+        ]);
+    }
+
     public function showProfile($user_id){
         if(Auth::guest() && $user_id == 'my'){
             return abort(404);
