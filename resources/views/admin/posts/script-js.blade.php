@@ -183,7 +183,33 @@
     function setMarkersAndFillForm(){
         const selectedUsers = getSelectedList()
 
-        $('.delete-counter').html(selectedUsers.length + ' <i class="sr-only">Notifications</i>')
+        if(selectedUsers.length > 0){
+            $('.delete-counter').html(selectedUsers.length + ' <i class="sr-only">Notifications</i>')
+            $('.move-counter').html(selectedUsers.length + ' <i class="sr-only">Notifications</i>')
+
+            $('.move-selected-posts').removeClass('is-hidden')
+            $('.delete-selected-posts').removeClass('is-hidden')
+        }   else{
+            $('.move-selected-posts').addClass('is-hidden')
+            $('.delete-selected-posts').addClass('is-hidden')
+        }
+    }
+
+    function movePostsArray(selectedPosts){
+        if(selectedPosts.length > 0){
+            $.ajax({
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    direction: $('.move-selected-posts').attr('data-direction'),
+                    list: selectedPosts.join(',')
+                },
+                url: '{{\Illuminate\Support\Facades\Gate::allows('is-admin') ? '/admin' : ''}}/posts/move/',
+                type: 'POST',
+                success:function(){
+                    location.reload()
+                }
+            });
+        }
     }
 
     function deletePostsArray(selectedPosts){
@@ -211,6 +237,13 @@
     })
 
     // Delete from delete button;
+    $(document).on('click', '.move-selected-posts', function(){
+        const event = new Event('openDialog');
+        document.getElementById('move-post-dialog').dispatchEvent(event);
+        $('#move-posts-list').val(getSelectedList().join(','))
+    })
+
+    // Delete from delete button;
     $(document).on('click', '.delete-selected-posts', function(){
         const event = new Event('openDialog');
         document.getElementById('delete-post-dialog').dispatchEvent(event);
@@ -227,6 +260,11 @@
     // Delete accepting from dialog;
     $(document).on('click', '#accept-delete-posts', function(){
         deletePostsArray($('#delete-posts-list').val().split(','))
+    })
+
+    // Move accepting from dialog;
+    $(document).on('click', '#accept-move-posts', function(){
+        movePostsArray($('#move-posts-list').val().split(','))
     })
 
     /* Tags */

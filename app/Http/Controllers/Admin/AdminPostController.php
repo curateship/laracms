@@ -554,4 +554,14 @@ class AdminPostController extends Controller
         }
 
     }
+
+    public function move(Request $request){
+        $posts_array = explode(',', $request->input('list'));
+
+        Post::whereIn('id', $posts_array)
+            ->update([
+                'updated_at' => now(),
+                'status' => $request->input('direction')
+            ]);
+    }
 }

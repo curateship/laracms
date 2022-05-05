@@ -63,6 +63,10 @@ Route::get('/user/edit', [UserController::class, 'editProfile'])->middleware(['a
 Route::get('/user/{user_id}', [UserController::class, 'showProfile']);
 Route::post('/user/edit/{user_id}', [UserController::class, 'profileUpdate'])->middleware(['auth'])->name('profile.update');
 
+// Posts;
+Route::resource('/posts', PostController::class)->middleware(['auth']);
+Route::post('/posts/move', [PostController::class, 'move'])->name('post.move')->middleware(['auth', 'verified']);
+
 // Search;
 Route::get('/search/{search_request}', [PostController::class, 'postSearch'])->name('posts.search');
 
@@ -98,6 +102,7 @@ Route::post('/tags/upload/{type}', [AdminTagController::class, 'upload'])->name(
 Route::post('/tags/store', [AdminTagController::class, 'store'])->name('admin.tags.store')->middleware(['auth', 'verified']);
 
 // Post Admin;
+Route::post('/admin/posts/move', [AdminPostController::class, 'move'])->name('post.move')->middleware(['auth', 'auth.isAdmin']);
 Route::post('/post/upload/{type}', [AdminPostController::class, 'upload'])->name('post.upload')->middleware(['auth', 'verified']);
 Route::post('/post/store', [AdminPostController::class, 'store'])->name('post.store')->middleware(['auth', 'verified']);
 Route::get('/post/edit/{post:slug}', [AdminPostController::class, 'edit'])->name('post.edit')->middleware(['auth', 'verified']);
@@ -117,6 +122,3 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
     Route::resource('/comments', AdminCommentController::class); // Comment Route
     Route::resource('/videos', AdminVideoController::class); // Video Route
 });
-
-// Other users posts;
-Route::resource('/posts', PostController::class)->middleware(['auth']); // Post Route
