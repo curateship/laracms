@@ -6,6 +6,9 @@
 
     <!-- Recent Post Lists Component -->
     <div class="col-12@md margin-bottom-sm">
+    <h3 class="padding-bottom-md color-contrast-high">Featured</h3>
+        @include('components.posts.lists.specific-tag-posts')
+    <h3 class="padding-bottom-md color-contrast-high">New</h3>
         @include('components.posts.lists.recent-posts-list')
     </div>
 
