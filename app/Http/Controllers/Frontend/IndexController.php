@@ -28,9 +28,9 @@ class IndexController extends Controller
         return view('/theme.index', [
             'recent_posts' => $posts,
             'popular_posts' => Post::getPostsListByView('month'),
-            'specific_tag_posts' => Post::getListByTagName('Apron', ['by' => 'created_at', 'order' => 'desc'], 10),
+            'specific_tag_posts' => Post::getListByTagName('Featured', ['by' => 'created_at', 'order' => 'desc'], 10),
             'popular_tags_category_name' => 'Origins',
-            'popular_tags' => TagsCategories::popularTags('Origins')
+            'popular_tags' => TagsCategories::popularTags('Origins')->take(5),
         ]);
     }
 }
