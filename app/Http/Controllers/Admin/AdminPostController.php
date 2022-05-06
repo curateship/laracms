@@ -56,6 +56,14 @@ class AdminPostController extends Controller
             $status = ucfirst($request->input('status'));
         }
 
+        if($request->has('search') && $request->input('search') != ''){
+            $search_input = $request->input('search');
+            $posts = $posts->where(function($query) use ($search_input){
+                $query->where('title', 'like', '%'.$search_input.'%')
+                    ->whereOr('body', 'like', '%'.$search_input.'%');
+            });
+        }
+
         return view('admin.posts.index', [
             'posts' => $posts->paginate(10),
             'status' => $status

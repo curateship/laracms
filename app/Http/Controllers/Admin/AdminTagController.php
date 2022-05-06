@@ -48,6 +48,11 @@ class AdminTagController extends Controller
             $tags = $tags->where('category_id', $request->input('category'));
         }
 
+        if($request->has('search') && $request->input('search') != ''){
+            $search_input = str_replace(' ', '%', $request->input('search'));
+            $tags = $tags->where('name', 'like', '%'.$search_input.'%');
+        }
+
         return view('admin.tags.index', [
             'tags' => $tags->paginate(10),
         ]);

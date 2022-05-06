@@ -71,8 +71,8 @@
                 <div class="modal modal--search modal--animate-fade bg bg-opacity-90% flex flex-center padding-md backdrop-blur-10 js-modal" id="post-search">
                   <div class="modal__content width-100% max-width-sm max-height-100% overflow-auto" role="alertdialog" aria-labelledby="modal-search-title" aria-describedby="">
                     <form class="full-screen-search">
-                      <label for="search-input-x" id="modal-search-title" class="sr-only">Search</label>
-                      <input class="reset full-screen-search__input" type="search" name="search-input-x" id="search-input-x" placeholder="Search...">
+                      <label for="search" id="modal-search-title" class="sr-only">Search</label>
+                      <input class="reset full-screen-search__input" type="search" name="search" id="search" placeholder="Search...">
                       <button class="reset full-screen-search__btn">
                         <svg class="icon" viewBox="0 0 24 24">
                           <title>Search</title>
