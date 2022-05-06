@@ -135,6 +135,15 @@
         $('#new-post-form').submit()
     })
 
+    $(document).on('change', '#statusFilter', function(){
+        if($(this).val() !== ''){
+            location.href = location.pathname + '?status=' + $(this).val()
+        }   else{
+            location.href = location.pathname
+        }
+
+    })
+
     $(document).on('submit', '#new-post-form', function(e){
         e.preventDefault()
 
