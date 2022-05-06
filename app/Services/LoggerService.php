@@ -60,14 +60,13 @@ class LoggerService {
         'url' => '',
         'report' => serialize($this->log_params)
       ];
+
+
       if ($include_url) {
         $param['url'] = $this->scraper_url;
       }
 
-      ScraperLog::updateOrCreate(
-        ['url' => $param['url']],
-        $param
-      );
+      ScraperLog::updateOrCreate($param);
     }
 
     // After save log data, reset log params.
