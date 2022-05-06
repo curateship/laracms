@@ -396,7 +396,8 @@
     border: none;
     outline: 0;
     box-shadow: none;
-    -webkit-appearance: textfield
+    -webkit-appearance: textfield;
+    color: var(--color-contrast-higher);
 }
 
 .select2-container--default .select2-results > .select2-results__options {
