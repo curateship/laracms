@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminVideoController;
-use App\Http\Controllers\Frontend\UserController;
 use Illuminate\Support\Facades\Route;
 
 // Admin Controllers
@@ -21,6 +19,8 @@ use App\Http\Controllers\Frontend\PostController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Frontend\TagController;
+use App\Http\Controllers\Frontend\UserController;
+
 
 /*
 |--------------------------------------------------------------------------

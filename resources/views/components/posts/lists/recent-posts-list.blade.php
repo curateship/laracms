@@ -31,6 +31,7 @@
                     {!! $recent_post->author()->getAvatar(false, ['width' => 40, 'height' => 40], ['object-cover'])->content !!}
                 @endif
             </a>
+            
             <!-- Author name and time created -->
             <div class="text-component text-sm line-height-xs text-space-y-xxs">
               <p><a href="/user/{{$recent_post->author()->id}}" class="articles-v3__author-name" rel="author">{!! $recent_post->author() != null ? $recent_post->author()->name : '<span style="font-weight: bold;color:red;">Deleted User</span>' !!}</a></p>
