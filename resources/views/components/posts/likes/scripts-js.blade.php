@@ -5,8 +5,6 @@
 
         const postId = $(this).attr('data-post-id')
 
-        console.log('postId: ' + postId)
-
         $.ajax({
             data: {
                 _token: $('meta[name="csrf-token"]').attr('content'),

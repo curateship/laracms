@@ -21,6 +21,7 @@ use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Frontend\TagController;
 use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\Frontend\LikeController;
+use App\Http\Controllers\Frontend\FollowController;
 
 
 /*
@@ -35,6 +36,9 @@ route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(
 
 // Users;
 route::get('/users', [UserController::class, 'index'])->name('index');
+
+// Follow;
+Route::post('/users/follow', [FollowController::class, 'follow'])->name('users.follow')->middleware(['auth']);
 
 // Likes;
 Route::post('/like/post', [LikeController::class, 'like'])->name('post.like');
