@@ -43,8 +43,10 @@
 
     <!-- Status Body -->
     <div class="margin-top-auto border-top border-contrast-lower opacity-40%"></div><!-- Divider -->
-      <p class="padding-sm text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, accusantium consequatur. Perspiciatis! Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, accusantium consequatur. Perspiciatis!</p>
+      <h4 class="padding-sm">Post Title</h4>
         <img class="block width-100% height-100% object-cover" src="/assets/img/random-backgrounds/3.jpg" alt="Post Picture">
+          <p class="padding-sm text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, accusantium consequatur. Perspiciatis! Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, accusantium consequatur. Perspiciatis!</p>
+    <div class="margin-top-auto border-top border-contrast-lower opacity-40%"></div><!-- Divider -->
 
         <!-- Comments -->
         <section class="comments padding-x-md">
