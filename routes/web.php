@@ -20,6 +20,7 @@ use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Frontend\TagController;
 use App\Http\Controllers\Frontend\UserController;
+use App\Http\Controllers\Frontend\LikeController;
 
 
 /*
@@ -34,6 +35,9 @@ route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(
 
 // Users;
 route::get('/users', [UserController::class, 'index'])->name('index');
+
+// Likes;
+Route::post('/like/post', [LikeController::class, 'like'])->name('post.like');
 
 // Post
 Route::get('/post/{post:slug}', [PostController::class, 'show'])->name('post.show');

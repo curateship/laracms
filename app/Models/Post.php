@@ -535,4 +535,21 @@ class Post extends Model
             ->limit($limit)
             ->get();
     }
+
+    public function likes(){
+        return Like::where('post_id', $this->id);
+    }
+
+    public function userLiked(){
+        $user_liked = false;
+        if(!Auth::guest()){
+            foreach($this->likes()->get() as $like){
+                if($like->user_id == Auth::id()){
+                    $user_liked = true;
+                }
+            }
+        }
+
+        return $user_liked;
+    }
 }
