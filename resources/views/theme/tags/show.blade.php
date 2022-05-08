@@ -3,7 +3,6 @@
 
 <div class="container max-width-adaptive-lg">
 
-
     <div class="text-component flex gap-md">
         @if($tag->thumbnail != '')
             <div class="tag-thumbnail-on-page">
@@ -23,7 +22,7 @@
 
     <!-- Post list -->
     <section class="margin-bottom-lg">
-      @include('components.tags.lists.show')
+      @include('components.tags.show')
     </section>
 
     <!-- Pagination -->
