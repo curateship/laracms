@@ -241,11 +241,11 @@
         const urlArray = url.split('?')
         let paramsResult = []
 
-        if(urlArray[1] !== undefined){
+        if(urlArray[1] !== undefined && !replacePage){
             const paramsArray = urlArray[1].split('&')
 
             paramsArray.forEach(function(item){
-                if(item.indexOf('page') !== -1 && !replacePage){
+                if(item.indexOf('page') !== -1 || item.indexOf('search') !== -1){
                     paramsResult.push(item)
                     return false
                 }

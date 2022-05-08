@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Follow;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -41,8 +42,19 @@ class UserController extends Controller
             ->orderBy('created_at', 'DESC')
             ->paginate(10);
 
+        $followed = false;
+        if(!Auth::guest()){
+            // Checking of following;
+            $exist_follow = Follow::where('user_id', Auth::id())
+                ->where('follow_user_id', $user->id)
+                ->first();
+
+            $followed = $exist_follow != null;
+        }
+
         return view('theme.users.profile', [
             'user' => $user,
+            'followed' => $followed,
             'posts' => $posts
         ]);
     }

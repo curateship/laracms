@@ -3,6 +3,7 @@
 
 @push('custom-scripts')
     @include('components.posts.comments.scripts-js')
+    @include('components.posts.likes.scripts-js')
 @endpush
 
 <div class="container max-width-adaptive-lg">
