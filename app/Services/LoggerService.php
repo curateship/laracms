@@ -66,7 +66,19 @@ class LoggerService {
         $param['url'] = $this->scraper_url;
       }
 
-      ScraperLog::updateOrCreate($param);
+      dump($param);
+
+      $log = ScraperLog::where('scraper_id', $param['scraper_id'])
+          ->first();
+
+      if($log == null){
+          $log = new ScraperLog();
+      }
+
+        $log->scraper_id = $param['scraper_id'];
+        $log->url = $param['url'];
+        $log->report = $param['report'];
+        $log->save();
     }
 
 
