@@ -69,6 +69,7 @@ class LoggerService {
       ScraperLog::updateOrCreate($param);
     }
 
+
     // After save log data, reset log params.
     $this->init_log_params();
   }
