@@ -1050,6 +1050,12 @@ class ScraperService {
           }
       }
 
+      // Fix Strange URLs;
+      $file_name_src = Arr::last(explode('/', $source_url));
+      $file_name = urlencode($file_name_src);
+
+      $source_url = str_replace($file_name_src, $file_name, $source_url);
+
     // No time limits for loading real big files;
     set_time_limit(-1);
 
