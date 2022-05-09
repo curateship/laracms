@@ -1,24 +1,21 @@
-@extends('theme.layouts.app')
+@extends('admin.layouts.app')
 @section('content')
-<div class="container max-width-lg grid gap-md">
 
-    <!-- User Bio -->
-    @include('components.users.user-bio')
+<div class="container max-width-adaptive-lg padding-top-md">
+  <div class="grid gap-md">
 
-    <!-- User's Posts -->
-    <div class="container max-width-adaptive-lg padding-top-lg">
-
-    <!-- Posts -->
-    <div class="padding-bottom-md padding-top-md">
-        <h1 class="text-xl padding-bottom-md">{{$user->name}}'s Posts</h1>
-        @include('components.users.users-posts')
+    <!-- Col 4 -->
+    <div class="col-4@md card padding-bottom-md">
+        @include('components.users.user-bio-card')
     </div>
 
-    <!-- Pagination -->
-    <div class="padding-bottom-md">
-        @include('components.layouts.partials.pagination', ['items' => $posts])
+    <!-- Col 8 -->
+    <div class="col-11@md">
+    <h1 class="text-xl padding-bottom-md">{{$user->name}}'s Posts</h1>
+    @include('components.users.lists.users-posts')
     </div>
 
-    </div>
-<!-- END -->
- @endsection
+  </div>
+</div>
+
+@endsection

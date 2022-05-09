@@ -83,7 +83,7 @@
               </div>
               <!-- Change Roles END -->
 
-                <div class="flex justify-start gap-lg">
+                <div class="flex justify-start gap-lg padding-top-sm">
                     <!-- Edit Avatar -->
                     <div class="file-upload inline-block">
                         <label for="avatar-upload-file" class="file-upload__label btn btn--subtle">
