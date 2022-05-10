@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 // Others
 use App\Http\Controllers\Controller;
+use App\Models\Like;
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\FFMpeg;
 use FFMpeg\FFProbe;
@@ -149,9 +150,13 @@ class AdminPostController extends Controller
                 ->where('post_id', $id)
                 ->delete();
 
-            // remove all views;
+            // Remove all views;
             DB::table('posts_views')
                 ->where('post_id', $id)
+                ->delete();
+
+            // Remove likes;
+            Like::where('post_id', $id)
                 ->delete();
 
             // Remove post images;

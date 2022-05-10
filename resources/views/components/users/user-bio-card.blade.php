@@ -3,7 +3,12 @@
 @endpush
 
 <figure class="card__img img-blend corner-shadow" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light" data-blend-height="50%">
-    <div class="corner top right corner-bg-darker"></div>
+    @if($user->cover_medium != '')
+        <div class="corner top right corner-bg-darker"></div>
+        <img class="radius-md" src="{{url('/storage'.config('images.users_storage_path').$user->cover_medium)}}" alt="Card preview img">
+    @else
+        <div style="height: 20px;"></div>
+    @endif
 
     @auth()
         @if($user->id == \Illuminate\Support\Facades\Auth::id())
@@ -30,8 +35,6 @@
             </menu>
         @endif
         @endauth
-
-    <img class="radius-md" src="/assets/img/article-v3-img-1.jpg" alt="Card preview img">
 </figure>
 
 <!-- Avatar -->
