@@ -3,7 +3,6 @@
 
 <div class="container max-width-adaptive-lg">
   <div class="grid gap-md justify-between">
-
     <!-- Col 4 -->
     <div class="col-4@md card">
       <p class="padding-sm">Latest Feeds</p>
@@ -11,7 +10,7 @@
     </div>
 
     <!-- Col 8 -->
-    <div class="col-8@md card">
+    <div class="col-8@md">
       @include('components.posts.lists.infinite-posts')
     </div>
 

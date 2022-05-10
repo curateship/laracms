@@ -374,4 +374,38 @@ class PostController extends Controller
 
         return view('components.posts.lists.masonry-infinite-item', $data)->render();
     }
+
+    public function ajaxInfiniteShowPosts($page_num){
+        $perpage = 3;
+        $offset = ($page_num - 1) * $perpage;
+
+        $posts = Post::where('status', 'published')
+            ->orderBy('created_at', 'DESC')
+            ->offset($offset)
+            ->limit($perpage)
+            ->get();
+
+        $posts_count = Post::where([
+            'status' => 'published'
+        ])->count();
+
+        foreach($posts as $post){
+            if(Auth::guest()){
+                $post->user_liked = false;
+            }   else{
+                $post->user_liked = $post->userLiked();
+            }
+        }
+
+        $data['total'] = $posts_count;
+        $data['posts'] = $posts;
+        $data['api_route'] = 'posts';
+        $data['nextpage'] = ($posts_count - $offset - $perpage) > 0 ? ($page_num + 1) : 0;
+
+        if(count($posts) == 0){
+            abort(204);
+        }
+
+        return view('components.posts.lists.infinite-posts-item', $data)->render();
+    }
 }

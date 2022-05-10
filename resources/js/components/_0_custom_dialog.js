@@ -10,7 +10,7 @@
       this.showClass = "dialog--is-visible";
       initDialog(this);
     };
-  
+
     function initDialog(dialog) {
       if ( dialog.triggers ) {
         for(var i = 0; i < dialog.triggers.length; i++) {
@@ -22,15 +22,21 @@
           });
         }
       }
-      
+
       // listen to the openDialog event -> open dialog without a trigger button
       dialog.element.addEventListener('openDialog', function(event){
         if(event.detail) self.selectedTrigger = event.detail;
         showDialog(dialog);
         initDialogEvents(dialog);
       });
+
+      // List to closeDialog event -> close dialog without a trigger button
+        dialog.element.addEventListener('closeDialog', function(event){
+            if(event.detail) self.selectedTrigger = event.detail;
+            closeDialog(dialog);
+        });
     };
-  
+
     function showDialog(dialog) {
       Util.addClass(dialog.element, dialog.showClass);
       getFocusableElements(dialog);
@@ -42,7 +48,7 @@
       });
       emitDialogEvents(dialog, 'dialogIsOpen');
     };
-  
+
     function closeDialog(dialog) {
       Util.removeClass(dialog.element, dialog.showClass);
       dialog.firstFocusable = null;
@@ -52,19 +58,19 @@
       cancelDialogEvents(dialog);
       emitDialogEvents(dialog, 'dialogIsClose');
     };
-    
+
     function initDialogEvents(dialog) {
       //add event listeners
       dialog.element.addEventListener('keydown', handleEvent.bind(dialog));
       dialog.element.addEventListener('click', handleEvent.bind(dialog));
     };
-  
+
     function cancelDialogEvents(dialog) {
       //remove event listeners
       dialog.element.removeEventListener('keydown', handleEvent.bind(dialog));
       dialog.element.removeEventListener('click', handleEvent.bind(dialog));
     };
-    
+
     function handleEvent(event) {
       // handle events
       switch(event.type) {
@@ -76,7 +82,7 @@
         }
       }
     };
-    
+
     function initKeyDown(dialog, event) {
       if( event.keyCode && event.keyCode == 27 || event.key && event.key == 'Escape' ) {
         //close dialog on esc
@@ -86,14 +92,14 @@
         trapFocus(dialog, event);
       }
     };
-  
+
     function initClick(dialog, event) {
       //close dialog when clicking on close button
       if( !event.target.closest('.js-dialog__close') ) return;
       event.preventDefault();
       closeDialog(dialog);
     };
-  
+
     function trapFocus(dialog, event) {
       if( dialog.firstFocusable == document.activeElement && event.shiftKey) {
         //on Shift+Tab -> focus last focusable element when focus moves out of dialog
@@ -106,14 +112,14 @@
         dialog.firstFocusable.focus();
       }
     };
-  
+
     function getFocusableElements(dialog) {
       //get all focusable elements inside the dialog
       var allFocusable = dialog.element.querySelectorAll('[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex]:not([tabindex="-1"]), [contenteditable], audio[controls], video[controls], summary');
       getFirstVisible(dialog, allFocusable);
       getLastVisible(dialog, allFocusable);
     };
-  
+
     function getFirstVisible(dialog, elements) {
       //get first visible focusable element inside the dialog
       for(var i = 0; i < elements.length; i++) {
@@ -123,7 +129,7 @@
         }
       }
     };
-  
+
     function getLastVisible(dialog, elements) {
       //get last visible focusable element inside the dialog
       for(var i = elements.length - 1; i >= 0; i--) {
@@ -133,12 +139,12 @@
         }
       }
     };
-  
+
     function emitDialogEvents(dialog, eventName) {
       var event = new CustomEvent(eventName, {detail: dialog.selectedTrigger});
       dialog.element.dispatchEvent(event);
     };
-  
+
     //initialize the Dialog objects
     var dialogs = document.getElementsByClassName('js-dialog');
     if( dialogs.length > 0 ) {
