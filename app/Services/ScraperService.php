@@ -1033,8 +1033,9 @@ class ScraperService {
    * Copy from source to destination by 1 mb at a time until copy 1 GB.
    * Once copy 1 GB, close file and reopen to append.
    */
-  public function chunked_copy($source_url, $destination) {
-    // Fix URLs with Japanese symbols;
+  public static function chunked_copy($source_url, $destination) {
+      /*
+      // Fix URLs with Japanese symbols;
       $change = true;
       while($change){
           preg_match('/[\p{Katakana}\p{Hiragana}\p{Han}]+/u', $source_url, $matches, PREG_OFFSET_CAPTURE);
@@ -1045,12 +1046,14 @@ class ScraperService {
               $part_1 = substr($source_url, 0, $matches[0][1]);
               $part_2 = substr($source_url, $matches[0][1] + strlen($match), strlen($source_url));
               $source_url = $part_1.urlencode($match).$part_2;
+              $jap_symbols = true;
           }   else{
               $change = false;
           }
       }
+      */
 
-      // Fix Strange URLs;
+      // Fix Strange URLs and Japanese symbols;
       $file_name_src = Arr::last(explode('/', $source_url));
       $file_name = urlencode($file_name_src);
 
