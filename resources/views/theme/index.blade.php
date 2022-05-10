@@ -4,7 +4,7 @@
 <div class="container max-width-adaptive-lg">
   <div class="grid gap-md">
 
-    <!-- Recent Post Lists Component -->
+    <!-- Recent Posts -->
     <div class="col-12@md margin-bottom-sm">
         @include('components.posts.lists.specific-tag-posts')
     </div>
