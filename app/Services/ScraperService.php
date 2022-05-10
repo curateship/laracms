@@ -1105,7 +1105,7 @@ class ScraperService {
       $post->medium = $post_data['medium'];
       $post->thumbnail = $post_data['thumbnail'];
       $post->category_id = 1;
-      $post->status = 'draft';
+      $post->status = 'published';
       $post->save();
 
     if ( !empty($post_data['video']) ) {

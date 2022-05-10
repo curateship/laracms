@@ -349,4 +349,29 @@ class PostController extends Controller
                 'status' => $request->input('direction')
             ]);
     }
+
+    public function ajaxShowPosts($page_num){
+        $perpage = 20;
+        $offset = ($page_num - 1) * $perpage;
+
+        $posts = Post::where('status', 'published')
+            ->offset($offset)
+            ->limit($perpage)
+            ->get();
+
+        $posts_count = Post::where([
+            'status' => 'published'
+        ])->count();
+
+        $data['total'] = $posts_count;
+        $data['posts'] = $posts;
+        $data['api_route'] = 'posts';
+        $data['nextpage'] = ($posts_count - $offset - $perpage) > 0 ? ($page_num + 1) : 0;
+
+        if(count($posts) == 0){
+            abort(204);
+        }
+
+        return view('components.posts.lists.masonry-infinite-item', $data)->render();
+    }
 }
