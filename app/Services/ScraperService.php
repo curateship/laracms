@@ -1034,7 +1034,8 @@ class ScraperService {
    * Once copy 1 GB, close file and reopen to append.
    */
   public function chunked_copy($source_url, $destination) {
-    // Fix URLs with Japanese symbols;
+      /*
+      // Fix URLs with Japanese symbols;
       $change = true;
       while($change){
           preg_match('/[\p{Katakana}\p{Hiragana}\p{Han}]+/u', $source_url, $matches, PREG_OFFSET_CAPTURE);
@@ -1045,12 +1046,14 @@ class ScraperService {
               $part_1 = substr($source_url, 0, $matches[0][1]);
               $part_2 = substr($source_url, $matches[0][1] + strlen($match), strlen($source_url));
               $source_url = $part_1.urlencode($match).$part_2;
+              $jap_symbols = true;
           }   else{
               $change = false;
           }
       }
+      */
 
-      // Fix Strange URLs;
+      // Fix Strange URLs and Japanese symbols;
       $file_name_src = Arr::last(explode('/', $source_url));
       $file_name = urlencode($file_name_src);
 
@@ -1102,7 +1105,7 @@ class ScraperService {
       $post->medium = $post_data['medium'];
       $post->thumbnail = $post_data['thumbnail'];
       $post->category_id = 1;
-      $post->status = 'draft';
+      $post->status = 'published';
       $post->save();
 
     if ( !empty($post_data['video']) ) {

@@ -46,6 +46,9 @@ Route::post('/like/post', [LikeController::class, 'like'])->name('post.like');
 // Post
 Route::get('/post/{post:slug}', [PostController::class, 'show'])->name('post.show');
 
+// Posts masonry ajax;
+Route::get('/masonry/posts/page/{id}', [PostController::class, 'ajaxShowPosts']);//->middleware('cache');
+
 // Contact
 Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
