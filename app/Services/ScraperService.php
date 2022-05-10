@@ -1033,7 +1033,7 @@ class ScraperService {
    * Copy from source to destination by 1 mb at a time until copy 1 GB.
    * Once copy 1 GB, close file and reopen to append.
    */
-  public static function chunked_copy($source_url, $destination) {
+  public function chunked_copy($source_url, $destination) {
       /*
       // Fix URLs with Japanese symbols;
       $change = true;
