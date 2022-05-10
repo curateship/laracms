@@ -8,7 +8,35 @@
     margin-bottom: 20px;
 }
 
-@include breakpoint(xs) {
+@include breakpoint(w280) {
+    .grid-item {
+        width: 110px;
+
+        h3{
+            font-size: 8px;
+        }
+    }
+
+    .preload-item{
+        max-width: 100px;
+    }
+}
+
+@include breakpoint(w320) {
+    .grid-item {
+        width: 130px;
+
+        h3{
+            font-size: 10px;
+        }
+    }
+
+    .preload-item{
+        max-width: 120px;
+    }
+}
+
+@include breakpoint(w340) {
     .grid-item {
         width: 135px;
 
@@ -22,9 +50,37 @@
     }
 }
 
-@include breakpoint(sm){
+@include breakpoint(w360) {
     .grid-item {
-        width: 220px;
+        width: 150px;
+
+        h3{
+            font-size: 10px;
+        }
+    }
+
+    .preload-item{
+        max-width: 140px;
+    }
+}
+
+@include breakpoint(w420) {
+    .grid-item {
+        width: 155px;
+
+        h3{
+            font-size: 10px;
+        }
+    }
+
+    .preload-item{
+        max-width: 145px;
+    }
+}
+
+@include breakpoint(w540){
+    .grid-item {
+        width: 120px;
     }
 
     .preload-item{
@@ -32,30 +88,40 @@
     }
 }
 
-@include breakpoint(md){
-    .grid-item{
-        width: 230px;
+@include breakpoint(sm){
+    .grid-item {
+        width: 240px;
     }
 
     .preload-item{
-        max-width: 220px;
+        max-width: 260px;
+    }
+}
+
+@include breakpoint(md){
+    .grid-item {
+        width: 260px;
+    }
+
+    .preload-item{
+        max-width: 260px;
     }
 }
 
 @include breakpoint(lg){
     .grid-item {
-        width: 260px;
+        width: 300px;
         h3{
             font-size: 13px;
         }
     }
 
     .preload-item{
-        max-width: 250px;
+        max-width: 290px;
     }
 }
 
-@include breakpoint(xl){
+@include breakpoint(w1920){
     .grid-item {
         width: 300px;
         h3{

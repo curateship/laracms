@@ -1,11 +1,19 @@
 // to edit the breakpoints, check the style.scss file
 
 $breakpoints: (
-  xs: 32rem, // ~512px
-  sm: 48rem, // ~768px
-  md: 64rem, // ~1024px
-  lg: 80rem, // ~1280px
-  xl: 90rem  // ~1440px
+    w280: 17.5rem, //280px, // Custom
+    w320: 20rem, //320px, // Custom
+    w340: 21.25rem, //340px, // Custom
+    w360: 22.5rem, //360px, // Custom
+    w420: 26.25rem, //420px, // Custom
+    xs: 32rem, // ~512px
+    w540: 33.75rem, //540px, // Custom
+    sm: 48rem, // ~768px
+    md: 64rem, // ~1024px
+    lg: 80rem, // ~1280px
+    xl: 90rem,  // ~1440px
+    w1440: 90rem, //1440px, // Custom
+    w1920: 120rem, //1920px, // Custom
 ) !default;
 
 @mixin breakpoint($breakpoint, $logic: false) {

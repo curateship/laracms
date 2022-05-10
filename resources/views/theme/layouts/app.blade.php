@@ -36,6 +36,8 @@
 
 <!-- Scripts -->
 <script src="{{ asset('assets/js/scripts.js') }}"></script>
+<script src="{{ asset('assets/js/infinite-scroll.pkgd.js') }}"></script>
+<script src="{{ asset('assets/js/masonry.pkgd.min.js') }}"></script>
   @stack('custom-scripts')
 </body>
 </html>
