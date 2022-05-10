@@ -48,6 +48,7 @@ Route::get('/post/{post:slug}', [PostController::class, 'show'])->name('post.sho
 
 // Posts masonry ajax;
 Route::get('/masonry/posts/page/{id}', [PostController::class, 'ajaxShowPosts']);//->middleware('cache');
+Route::get('/infinite/posts/page/{id}', [PostController::class, 'ajaxInfiniteShowPosts']);//->middleware('cache');
 
 // Contact
 Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');

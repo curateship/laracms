@@ -77,22 +77,27 @@ class Post extends Model
 
     public function commentsList($last_comment_id = 0)
     {
-        $comments = Comment::leftJoin('users', 'users.id', '=', 'comments.user_id')
-            ->where('post_id', $this->id)
-            ->whereNull('reply_id')
-            ->select([
-                'comments.*',
-                'users.name as author_name',
-                'users.thumbnail as author_thumbnail'
-            ]);
+        $comments = Comment::whereNull('reply_id')
+            ->where('post_id', $this->id);
 
         if($last_comment_id > 0){
             $comments = $comments->where('comments.id', '<', $last_comment_id);
         }
 
-        return $comments->orderBy('created_at', 'DESC')
+        $comments = $comments->orderBy('created_at', 'DESC')
             ->limit(10)
             ->get();
+
+        $authors = [];
+        foreach($comments as $comment){
+            if(!isset($authors[$comment->user_id])){
+                $authors[$comment->user_id] = User::find($comment->user_id);
+            }
+
+            $comment->author = $authors[$comment->user_id];
+        }
+
+        return $comments;
     }
 
     public static function getNewSlug($slug, $posts) {
