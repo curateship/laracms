@@ -8,63 +8,76 @@
     margin-bottom: 20px;
 }
 
-@include breakpoint(w280) {
+@include breakpoint(w1920){
     .grid-item {
-        width: 110px;
-
+        width: 300px;
         h3{
-            font-size: 8px;
+            font-size: 13px;
         }
     }
 
     .preload-item{
-        max-width: 100px;
+        max-width: 290px;
     }
 }
 
-@include breakpoint(w320) {
+@include breakpoint(xl){
     .grid-item {
-        width: 130px;
-
+        width: 300px;
         h3{
-            font-size: 10px;
+            font-size: 13px;
         }
     }
 
     .preload-item{
-        max-width: 120px;
+        max-width: 290px;
     }
 }
 
-@include breakpoint(w340) {
+@include max-breakpoint(lg){
     .grid-item {
-        width: 135px;
-
+        width: 300px;
         h3{
-            font-size: 10px;
+            font-size: 13px;
         }
     }
 
     .preload-item{
-        max-width: 125px;
+        max-width: 290px;
     }
 }
 
-@include breakpoint(w360) {
+@include max-breakpoint(md){
+    .grid-item {
+        width: 260px;
+    }
+
+    .preload-item{
+        max-width: 260px;
+    }
+}
+
+@include max-breakpoint(sm){
     .grid-item {
         width: 150px;
-
-        h3{
-            font-size: 10px;
-        }
     }
 
     .preload-item{
-        max-width: 140px;
+        max-width: 260px;
     }
 }
 
-@include breakpoint(w420) {
+@include max-breakpoint(w540){
+    .grid-item {
+        width: 120px;
+    }
+
+    .preload-item{
+        max-width: 210px;
+    }
+}
+
+@include max-breakpoint(w420) {
     .grid-item {
         width: 155px;
 
@@ -78,59 +91,59 @@
     }
 }
 
-@include breakpoint(w540){
+@include max-breakpoint(w360) {
     .grid-item {
-        width: 120px;
-    }
+        width: 150px;
 
-    .preload-item{
-        max-width: 210px;
-    }
-}
-
-@include breakpoint(sm){
-    .grid-item {
-        width: 240px;
-    }
-
-    .preload-item{
-        max-width: 260px;
-    }
-}
-
-@include breakpoint(md){
-    .grid-item {
-        width: 260px;
-    }
-
-    .preload-item{
-        max-width: 260px;
-    }
-}
-
-@include breakpoint(lg){
-    .grid-item {
-        width: 300px;
         h3{
-            font-size: 13px;
+            font-size: 10px;
         }
     }
 
     .preload-item{
-        max-width: 290px;
+        max-width: 140px;
     }
 }
 
-@include breakpoint(w1920){
+@include max-breakpoint(w340) {
     .grid-item {
-        width: 300px;
+        width: 135px;
+
         h3{
-            font-size: 13px;
+            font-size: 10px;
         }
     }
 
     .preload-item{
-        max-width: 290px;
+        max-width: 125px;
+    }
+}
+
+@include max-breakpoint(w320) {
+    .grid-item {
+        width: 130px;
+
+        h3{
+            font-size: 10px;
+        }
+    }
+
+    .preload-item{
+        max-width: 120px;
+    }
+}
+
+@include max-breakpoint(w280) {
+    .grid-item {
+        width: 110px;
+
+        h3{
+            font-size: 8px;
+        }
+    }
+
+    .preload-item{
+        max-width: 100px;
     }
 }
 
@@ -200,8 +213,8 @@
 
 .preload-box{
     position: absolute;
-    left: -5px;
-    right: -5px;
+    left: -20px;
+    right: -20px;
     top: -5px;
     z-index: 1;
     background-color:  var(--color-bg, #fff);

@@ -323,9 +323,12 @@ class ScraperService {
       $page_links = [];
     }
 
-    if (count($page_links) == 0)
-      $this->logger->update_log_param('detail_url', 0);
-    $this->logger->save_log();
+    if (count($page_links) == 0){
+        $this->logger->update_log_param('detail_url', 0);
+        $this->logger->save_log();
+    }
+
+
 
     return $page_links;
   }
@@ -344,8 +347,12 @@ class ScraperService {
     $crawler = $client->request('GET', $url);
 
     $this->logger->setUrl($url);
-    if (!$crawler)
-      $this->logger->update_log_param('scrape', 0);
+    if (!$crawler){
+        $this->logger->update_log_param('scrape', 0);
+    }   else{
+        $this->logger->update_log_param('scrape', 'Successfully');
+    }
+
 
     Log::info('Scraping item detail page... (' . $url . ')');
 
@@ -355,7 +362,8 @@ class ScraperService {
 
     $titles = $this->filterItemInfo($crawler, $this->scraper->title, 'content');
     if (count($titles) > 0) {
-      // Log::info('Scrape "Title" >>> Success!');
+        //Log::info('Scrape "Title" >>> Success!');
+        $this->logger->update_log_param('title', $titles[0]);
     } else {
       // Log::error('Scrape "Title" >>> Not Found!');
       $scrape_status = false;
@@ -380,6 +388,18 @@ class ScraperService {
     if (count($images) == 0 && count($videos) == 0) {
       $scrape_status = false;
       $this->logger->update_log_param('media', 0);
+    }   else{
+        $type = 'Unknown';
+
+        if(count($images) > 0){
+            $type = 'Image';
+        }
+
+        if(count($videos) > 0){
+            $type = 'Video';
+        }
+
+        $this->logger->update_log_param('media', $type);
     }
 
     // Get tags Info
@@ -433,18 +453,20 @@ class ScraperService {
     //   // $this->logger->update_log_param('misc', 0);
     // }
 
+      $tags = [
+          'artists' => $artists,
+          'origins' => $origins,
+          'characters' => $characters,
+          'medias' => $medias,
+          'misc' => $misc
+      ];
+
     if (count($artists) == 0 && count($origins) == 0 && count($characters) == 0 && count($medias) == 0 && count($misc) == 0) {
       $scrape_status = false;
       $this->logger->update_log_param('tags', 0);
+    }   else{
+        $this->logger->update_log_param('tags', json_encode($tags));
     }
-
-    $tags = [
-      'artists' => $artists,
-      'origins' => $origins,
-      'characters' => $characters,
-      'medias' => $medias,
-      'misc' => $misc
-    ];
 
     if ($scrape_status === true) {
       // Now it's time to add post based on scraped data.
@@ -482,6 +504,8 @@ class ScraperService {
           $url = $media_info['url'];
           $file_ext = Arr::last(explode('.', $url));
 
+          $this->logger->update_log_param('source_media', $url);
+
           // Change extension if we have some sh*t;
           switch($file_ext){
               // jpe fix;
@@ -510,6 +534,8 @@ class ScraperService {
               $scrape_status = false;
               $this->logger->update_log_param('download', 0);
               break;
+          } else{
+              $this->logger->update_log_param('download', 'Successfully - '.$original);
           }
 
 
@@ -783,13 +809,17 @@ class ScraperService {
         ];
 
         // Step 3: Save Post.
-        if (!$this->add_post($post_data)) {
+          $saved_post = $this->add_post($post_data);
+        if (!isset($saved_post->id)) {
           Log::error('>>> Failed to add post!');
           // Log error
           $this->logger->update_log_param('save', 0);
+        }   else{
+          $this->logger->update_log_param('save', 'Successfully - Post ID: '.$saved_post->id);
         }
       }
     }
+
     $this->logger->save_log();
 
     return compact('titles', 'images', 'videos', 'tags');
@@ -1179,7 +1209,7 @@ class ScraperService {
         }
       }
     }
-    return true;
+    return $post;
   }
 
   public function check_scraper_status() {

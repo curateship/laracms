@@ -294,7 +294,7 @@ class AdminScraperController extends Controller
 
   public function getLogs(Request $request) {
     $time = !empty($request->input('time')) ? $request->input('time') : '';
-    $logs = LoggerService::get_log($time);
+    $logs = LoggerService::get_log();
 
     $ids = [];
     $log_ids = ScraperLog::select(['id'])->get();
@@ -308,10 +308,21 @@ class AdminScraperController extends Controller
       $scraper_ids[] = $scraper->id;
     }
 
+    $logs_content = '';
+    foreach($logs as $log){
+        $logs_content .= view('admin.scraper.logs-item', [
+            'scraper_url' => $log['scraper_url'],
+            'messages' => $log['messages'],
+            'log_id' => $log['id'],
+            'page_url' => $log['scraper_url'],
+            'scraper_id' => $log['scraper_id']
+        ])->render();
+    }
+
     return response()->json([
       'status' => true,
       'log_time' => date('Y-m-d H:i:s'), // Get current time
-      'data' => $logs,
+      'data' => $logs_content,
       'ids' => $ids,
       'scraper_ids' => $scraper_ids,
       'rescrape' => true//'ready' $re_scraper_settings && $re_scraper_settings['value'] == 'stopped' ? false : true

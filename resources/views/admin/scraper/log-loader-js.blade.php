@@ -43,7 +43,10 @@
       var url = data['scraper_url'];
       var messages = data['messages'];
 
-      var template = $('#log_template').html();
+      var template = $('#log_template').text();
+
+      console.log(template)
+
       template = template.replace('{log_id}', log_id);
       template = template.replace('{page_url}', url);
       template = template.replace('{scraper_id}', scraper_id);
@@ -65,6 +68,9 @@
       });
 
       template = template.replace('{messages}', message_templates);
+
+      //console.log(template)
+
       return template;
     }
 
@@ -128,7 +134,12 @@
           if (response.status == false) {
           } else {
             log_time = response.log_time;
-            displayLog(response.data);
+            //displayLog(response.data);
+              $('#logs-section').html(response.data);
+
+              if (scroll_to_bottom)
+                  $('#logs-section').scrollTop($('#logs-section')[0].scrollHeight);
+
             removeLog(response.ids);
             removeScrapers(response.scraper_ids);
             updateRescraperStatus(response.rescrape);
