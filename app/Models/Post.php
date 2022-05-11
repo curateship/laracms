@@ -557,4 +557,26 @@ class Post extends Model
 
         return $user_liked;
     }
+
+    public function prepareContent($image_classes = ''){
+        if($this->type == 'image'){
+            $content = '<img class="radius-lg '.$image_classes.'" alt="thumbnail" src="'.'/storage'.config('images.posts_storage_path').$this->medium.'">';
+        }   else{
+            $video = DB::table('posts_videos')
+                ->where('post_id', $this->id)
+                ->first();
+
+            // Render video player;
+            $content = view('admin.posts.script-video-js-player', [
+                'poster' => '/storage'.config('images.posts_storage_path').$this->medium,
+                'video_mp4' => '/storage'.config('images.videos_storage_path').$video->medium,
+                'video_webm' => '/storage'.config('images.videos_storage_path').$video->medium,
+                'player_width' => config('images.player_size_original.width'),
+                'player_height' => config('images.player_size_original.height'),
+                'auto_width' => true
+            ])->render();
+        }
+
+        return $content;
+    }
 }
