@@ -59,9 +59,8 @@
         <a class="text-decoration-none color-inherit" href="{{route('post.show', $post)}}">{{$post->title}}</a>
     </h4>
 
-    <figure class="image-zoom js-image-zoom ">
+    <figure class="{{$post->type == 'image' ? 'image-zoom js-image-zoom' : ''}}">
         {!! $post->content !!}
-        <!--<img class="block width-100% height-100% object-cover image-zoom__preview js-image-zoom__preview" src="{{url('/storage').config('images.posts_storage_path').$post->medium}}" alt="Image of {{ $post->title }}">-->
     </figure>
 
 

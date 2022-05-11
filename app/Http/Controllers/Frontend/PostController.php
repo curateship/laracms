@@ -123,7 +123,7 @@ class PostController extends Controller
             $post_tags_by_cats[$post_tag->category_id][] = $post_tag;
         }
 
-        $content = $post->prepareContent();
+        $content = $post->prepareContent('radius-lg');
 
         $post->addViewHistory($request->ip(), $request->userAgent());
 
