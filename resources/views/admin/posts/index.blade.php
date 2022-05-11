@@ -162,8 +162,8 @@
             </div>
         </div>
 
-        <div class="margin-top-auto border-top border-contrast-lower border-opacity-30%"></div><!-- Divider -->
         <!-- Table-->
+        <div class="margin-top-auto border-top border-contrast-lower border-opacity-30%"></div><!-- Divider -->
         <div class="padding-sm">
           <div id="table-1" class="int-table text-sm js-int-table">
             <div class="int-table__inner margin-bottom-xs">
@@ -286,9 +286,11 @@
                     <td class="int-table__cell flex">
 
                     <!-- Image -->
-                    <figure class="width-xl height-lg radius-lg flex-shrink-0 overflow-hidden margin-right-xs">
-                      <img class="block width-100% height-100% object-cover" src="{{ url('/storage').config('images.posts_storage_path').$post->medium  }}" alt="Post Picture">
-                    </figure>
+                    <a href="{{ route('post.show', $post) }}" target="_blank">
+                      <figure class="width-xl height-lg radius-lg flex-shrink-0 overflow-hidden margin-right-xs">
+                        <img class="block width-100% height-100% object-cover" src="{{ url('/storage').config('images.posts_storage_path').$post->medium  }}" alt="Post Picture">
+                      </figure>
+                    </a>
 
                     <!-- Post Title -->
                     <div class="line-height-xs padding-top-xxxs padding-left-xxs">
@@ -352,15 +354,14 @@
         <!-- Pagination END-->
       </div><!-- END Col-12 Card -->
     </div><!-- Col-12 END -->
+    
   <!-- Sidebar -->
   <div class="col-3@md">
-
       @if(\Illuminate\Support\Facades\Gate::allows('is-admin'))
           @include('admin.partials.sidebar-admin')
       @else
           @include('admin.partials.sidebar')
       @endif
-
   </div>
   </div><!-- Grid END -->
 </div>

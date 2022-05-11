@@ -11,12 +11,12 @@
     </a>
     @else
     <span class="card__img card__img-cropped bg-opacity-50%"></span>
-    <div class="post-cell text-component line-height-xs v-space-xxs text-sm line-height-md">
+    <div class="post-cell text-component line-height-xs v-space-xxs">
 
     </div>
     @endif
-    <div class="user-cell">
-        <h3 class="text-xs padding-xs@md text-md@md"><a class="color-contrast-low" href="{{ route('post.show', $post) }}">{{ $post->title }}</a></h3>
+    <div class="user-cell bg-black radius-md radius-top-right-0 radius-top-left-0">
+        <h3 class="padding-sm"><a class="color-contrast-medium link-plain" href="{{ route('post.show', $post) }}">{{ $post->title }}</a></h3>
     </div>
 </div>
 @endforeach

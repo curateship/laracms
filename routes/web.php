@@ -34,13 +34,13 @@ use App\Http\Controllers\Frontend\FollowController;
 route::get('/', [IndexController::class, 'index'])->name('index');
 route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(['auth', 'verified']);
 
-// Users;
+// Users
 route::get('/users', [UserController::class, 'index'])->name('index');
 
-// Follow;
+// Follow
 Route::post('/users/follow', [FollowController::class, 'follow'])->name('users.follow')->middleware(['auth']);
 
-// Likes;
+// Likes
 Route::post('/like/post', [LikeController::class, 'like'])->name('post.like');
 
 // Post
@@ -70,16 +70,16 @@ Route::post('/post/comment/reply-save', [PostController::class, 'saveReply'])->n
 Route::post('/post/comment/save', [PostController::class, 'saveComment'])->name('post-comment-save')->middleware(['auth', 'verified']);
 Route::get('/post/comment/reply-get-list', [PostController::class, 'getReply'])->name('post-comment-reply-list');
 
-// Profiles;
+// Profiles
 Route::get('/user/edit', [UserController::class, 'editProfile'])->middleware(['auth'])->name('profile.edit');
 Route::get('/user/{user_id}', [UserController::class, 'showProfile']);
 Route::post('/user/edit/{user_id}', [UserController::class, 'profileUpdate'])->middleware(['auth'])->name('profile.update');
 
-// Posts;
+// Posts
 Route::resource('/posts', PostController::class)->middleware(['auth']);
 Route::post('/posts/move', [PostController::class, 'move'])->name('post.move')->middleware(['auth', 'verified']);
 
-// Search;
+// Search
 Route::get('/search/{search_request}', [PostController::class, 'postSearch'])->name('posts.search');
 
 // Temp
@@ -93,7 +93,7 @@ Route::get('/dashboard', function () {
 |--------------------------------------------------------------------------
 */
 
-// Scraper;
+// Scraper
 Route::get('/scraper', [AdminScraperController::class, 'index'])->middleware(['auth', 'auth.isAdmin']);
 Route::get('/scraper/settings', [AdminScraperController::class, 'scraperSetting'])->middleware(['auth', 'auth.isAdmin']);
 Route::post('/scraper/store', [AdminScraperController::class, 'storeScraperSetting'])->middleware(['auth', 'auth.isAdmin'])->name('scraper.store');
@@ -113,7 +113,7 @@ Route::get('/tags/edit/{tag_id}', [AdminTagController::class, 'edit'])->name('ad
 Route::post('/tags/upload/{type}', [AdminTagController::class, 'upload'])->name('admin.tags.upload')->middleware(['auth', 'verified']);
 Route::post('/tags/store', [AdminTagController::class, 'store'])->name('admin.tags.store')->middleware(['auth', 'verified']);
 
-// Post Admin;
+// Post Admin
 Route::post('/admin/posts/move', [AdminPostController::class, 'move'])->name('post.move')->middleware(['auth', 'auth.isAdmin']);
 Route::post('/post/upload/{type}', [AdminPostController::class, 'upload'])->name('post.upload')->middleware(['auth', 'verified']);
 Route::post('/post/store', [AdminPostController::class, 'store'])->name('post.store')->middleware(['auth', 'verified']);
