@@ -25,8 +25,8 @@ class LoggerService {
     $this->log_params = [
       'proxy' => '',
       'default_url' => '',
+      'source_media' => '',
       'scrape' => '',
-      'detail_url' => '',
       'title' => '',
       // 'image' => '',
       // 'video' => '',
@@ -55,18 +55,22 @@ class LoggerService {
 
     // Save this log into database.
     if (count($this->log_params) > 0) {
+        if(isset($this->log_params['tags'])){
+            $this->log_params['tags'] = json_decode($this->log_params['tags']);
+        }
+
+        $this->log_params = json_encode($this->log_params);
+
       $param = [
         'scraper_id' => $this->scraper_id,
         'url' => '',
-        'report' => serialize($this->log_params)
+        'report' => $this->log_params
       ];
 
 
       if ($include_url) {
         $param['url'] = $this->scraper_url;
       }
-
-      dump($param);
 
       $log = ScraperLog::where('scraper_id', $param['scraper_id'])
           ->first();
@@ -86,7 +90,7 @@ class LoggerService {
     $this->init_log_params();
   }
 
-  public static function get_log($date) {
+  public static function get_log($date = '') {
     if (!empty($date)) {
       // Make sure $time is valid timestamp value
       $time = date('Y-m-d H:i:s', strtotime($date));
@@ -126,11 +130,22 @@ class LoggerService {
 
     $output_url = true;
 
-    $log_report = unserialize($log_info->report);
+    $log_report = json_decode($log_info->report, true);
+
+
     foreach($log_report as $key => $status) {
+        if(!is_numeric($status)){
+            $messages[] = [
+                "message" => '<b>'.$key.'</b> - '.($key == 'tags' ? json_encode($status) : $status),
+                "status" => 1
+            ];
+
+            continue;
+        }
+
       switch ($key) {
         case 'proxy':
-          if (!$status) {
+          if ($status == 0) {
             $messages[] = [
               "message" => "Cannot find <strong>IP:Port</strong> info. Scraper is canceled.",
               "status" => 0
@@ -139,7 +154,7 @@ class LoggerService {
           }
           break;
         case 'default_url':
-          if (!$status) {
+          if ($status == 0) {
             $messages[] = [
               "message" => "Cannot find <strong>default list page url</strong>. Scraper is canceled.",
               "status" => 0
@@ -148,7 +163,7 @@ class LoggerService {
           }
           break;
         case 'scrape':
-          if (!$status) {
+          if ($status == 0) {
             $messages[] = [
               "message" => "Failed to scrape url: (" . $log_info->url . ")",
               "status" => 0
@@ -157,7 +172,7 @@ class LoggerService {
           }
           break;
         case 'detail_url':
-          if (!$status) {
+          if ($status == 0) {
             $messages[] = [
               "message" => "Cannot find any detail page url from: (" . $log_info->url . ")",
               "status" => 0
@@ -166,7 +181,7 @@ class LoggerService {
           }
           break;
         case 'title':
-          if (!$status) {
+          if ($status == 0) {
             $messages[] = [
               "message" => "Failed to scrape <strong>title</strong>",
               "status" => 0
@@ -174,7 +189,7 @@ class LoggerService {
           }
           break;
         case 'media':
-          if (!$status) {
+          if ($status == 0) {
             $messages[] = [
               "message" => "Failed to scrape <strong>image/video</strong>",
               "status" => 0
@@ -198,7 +213,7 @@ class LoggerService {
         //   }
         //   break;
         case 'tags':
-          if (!$status) {
+          if ($status == 0) {
             $messages[] = [
               "message" => "Failed to scrape <strong>tags</strong>",
               "status" => 0
@@ -246,7 +261,7 @@ class LoggerService {
         //   }
         //   break;
         case 'download':
-          if (!$status) {
+          if ($status == 0) {
             $messages[] = [
               "message" => "Failed to download <strong>image/video</strong> files.",
               "status" => 0
@@ -254,16 +269,16 @@ class LoggerService {
           }
           break;
         case 'save':
-          if (!$status) {
+          if ($status == 0) {
             $messages[] = [
               "message" => "Failed to add a new post with scraped data.",
               "status" => 0
             ];
           }
           break;
-        default:
       }
     }
+
     return [
       'output_url' => $output_url,
       'messages' => $messages

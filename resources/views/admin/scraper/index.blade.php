@@ -33,8 +33,10 @@
             </div> <!-- end of <div class="flex flex-wrap items-center justify-between margin-right-xxs"> -->
           </div><!-- .flex -->
           @endforeach
-
       </div><!-- END Col-12 Card -->
+
+        <div id="logs-section" class="margin-left-sm margin-right-sm padding-sm text-sm"></div>
+
     </div><!-- Col-12 END -->
     <!-- Sidebar -->
     <div class="col-3@md">
