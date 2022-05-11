@@ -560,7 +560,7 @@ class Post extends Model
 
     public function prepareContent($image_classes = ''){
         if($this->type == 'image'){
-            $content = '<img class="radius-lg '.$image_classes.'" alt="thumbnail" src="'.'/storage'.config('images.posts_storage_path').$this->medium.'">';
+            $content = '<img class="'.$image_classes.'" alt="thumbnail" src="'.'/storage'.config('images.posts_storage_path').$this->medium.'">';
         }   else{
             $video = DB::table('posts_videos')
                 ->where('post_id', $this->id)
