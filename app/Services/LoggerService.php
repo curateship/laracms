@@ -130,8 +130,11 @@ class LoggerService {
 
     $output_url = true;
 
-    $log_report = json_decode($log_info->report, true);
-
+    if($log_info->report != ''){
+        $log_report = json_decode($log_info->report, true);
+    }   else{
+        $log_report = [];
+    }
 
     foreach($log_report as $key => $status) {
         if(!is_numeric($status)){
