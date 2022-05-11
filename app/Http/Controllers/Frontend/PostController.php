@@ -123,23 +123,7 @@ class PostController extends Controller
             $post_tags_by_cats[$post_tag->category_id][] = $post_tag;
         }
 
-        if($post->type == 'image'){
-            $content = '<img class="radius-lg" alt="thumbnail" src="'.'/storage'.config('images.posts_storage_path').$post->medium.'">';
-        }   else{
-            $video = DB::table('posts_videos')
-                ->where('post_id', $post->id)
-                ->first();
-
-            // Render video player;
-            $content = view('admin.posts.script-video-js-player', [
-                'poster' => '/storage'.config('images.posts_storage_path').$post->medium,
-                'video_mp4' => '/storage'.config('images.videos_storage_path').$video->medium,
-                'video_webm' => '/storage'.config('images.videos_storage_path').$video->medium,
-                'player_width' => config('images.player_size_original.width'),
-                'player_height' => config('images.player_size_original.height'),
-                'auto_width' => true
-            ])->render();
-        }
+        $content = $post->prepareContent();
 
         $post->addViewHistory($request->ip(), $request->userAgent());
 
@@ -395,6 +379,11 @@ class PostController extends Controller
             }   else{
                 $post->user_liked = $post->userLiked();
             }
+        }
+
+        // Preparing posts content;
+        foreach($posts as $post){
+            $post->content = $post->prepareContent('block width-100% height-100% object-cover image-zoom__preview js-image-zoom__preview');
         }
 
         $data['total'] = $posts_count;
