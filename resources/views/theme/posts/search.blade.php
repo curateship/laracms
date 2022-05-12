@@ -6,7 +6,7 @@
 
 <!-- Search Results -->
 <div class="padding-bottom-md">
-    @include('components.posts.lists.search-results')
+    @include('components.posts.lists.filtered-posts.search-results')
 </div>
        
 <!-- Pagination -->

@@ -9,7 +9,7 @@
         @if($theme == 'classic')
             @include('components.posts.lists.specific-tag-posts')
         @else
-            @include('components.posts.lists.masonry-infinite')
+            @include('components.posts.lists.infinite-masonry.list')
         @endif
     </div>
 
@@ -19,7 +19,7 @@
       @include('components.tags.lists.popular-tags')
 
     <h3 class="padding-bottom-md color-contrast-high">Popular Posts</h3>
-      @include('components.posts.lists.popular-posts-sidebar')
+      @include('components.posts.lists..filtered-posts.popular-posts-sidebar')
     </div>
 
   </div>

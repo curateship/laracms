@@ -316,7 +316,7 @@ class PostController extends Controller
 
         // SEO title
         SEOMeta::setTitle($search_request);
-        return view('theme.users.search', [
+        return view('theme.posts.search', [
             'search' => $search_request,
             'total' => $count,
             'posts' => $by_title_and_body
@@ -334,6 +334,7 @@ class PostController extends Controller
             ]);
     }
 
+    // Infinite Masonry
     public function ajaxShowPosts($page_num){
         $perpage = 20;
         $offset = ($page_num - 1) * $perpage;
@@ -356,9 +357,10 @@ class PostController extends Controller
             abort(204);
         }
 
-        return view('components.posts.lists.masonry-infinite-item', $data)->render();
+        return view('components.posts.lists.infinite-masonry.item', $data)->render();
     }
 
+    // Infinite Posts for Home
     public function ajaxInfiniteShowPosts($page_num){
         $perpage = 3;
         $offset = ($page_num - 1) * $perpage;
@@ -395,6 +397,6 @@ class PostController extends Controller
             abort(204);
         }
 
-        return view('components.posts.lists.infinite-posts-item', $data)->render();
+        return view('components.posts.lists.infinite-posts.item', $data)->render();
     }
 }
