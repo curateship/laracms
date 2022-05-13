@@ -9,6 +9,17 @@
     <input class="form-control width-100%" type="text" value='{{ $user->email }}' name="email" placeholder="Edit Email" required>
     </div>
 
+    <!-- Bio -->
+    <div class="character-count js-character-count">
+    <textarea class="form-control width-100% js-character-count__input" name="textareaName" id="textareaName" maxlength="300" placeholder="Enter your Bio"></textarea>
+    
+    <div class="character-count__helper character-count__helper--dynamic text-sm margin-top-xxxs" aria-live="polite" aria-atomic="true">
+      You have <span class="js-character-count__counter"></span> characters left
+    </div>
+
+    <div class="character-count__helper character-count__helper--static text-sm margin-top-xxxs">Max 300 characters</div>
+  </div>
+
     <div class="margin-bottom-sm">
         <div class="flex justify-between margin-bottom-xxxs">
         <label class="form-label" for="input-password">Change Password</label>
