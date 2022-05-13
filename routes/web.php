@@ -50,6 +50,10 @@ Route::get('/post/{post:slug}', [PostController::class, 'show'])->name('post.sho
 Route::get('/masonry/posts/page/{id}', [PostController::class, 'ajaxShowPosts']);//->middleware('cache');
 Route::get('/infinite/posts/page/{id}', [PostController::class, 'ajaxInfiniteShowPosts']);//->middleware('cache');
 
+// Posts
+Route::resource('/posts', PostController::class)->middleware(['auth']);
+Route::post('/posts/move', [PostController::class, 'move'])->name('post.move')->middleware(['auth', 'verified']);
+
 // Contact
 Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
@@ -75,9 +79,6 @@ Route::get('/user/edit', [UserController::class, 'editProfile'])->middleware(['a
 Route::get('/user/{user_id}', [UserController::class, 'showProfile']);
 Route::post('/user/edit/{user_id}', [UserController::class, 'profileUpdate'])->middleware(['auth'])->name('profile.update');
 
-// Posts
-Route::resource('/posts', PostController::class)->middleware(['auth']);
-Route::post('/posts/move', [PostController::class, 'move'])->name('post.move')->middleware(['auth', 'verified']);
 
 // Search
 Route::get('/search/{search_request}', [PostController::class, 'postSearch'])->name('posts.search');
