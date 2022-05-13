@@ -732,7 +732,7 @@ class ScraperService {
                 Log::info('>>> Video duration '.$duration.' sec.');
 
                 // If video longer than 1 second;
-                if($duration > 1){
+                if(round($duration) > 1){
                     $time_to_image = 1;
                 }  else{
                     // If video shorter than 1 seconds, than we set tts like current duration - 0.1;
@@ -745,6 +745,11 @@ class ScraperService {
                     ->frame(Coordinate\TimeCode::fromSeconds($time_to_image))
                     ->save($source);
                 Log::info('>>> Image successfully saved.');
+
+                if(!file_exists($source)){
+                    Log::error('>>> Failed to save preview Image');
+                    $scrape_status = false;
+                }
 
                 // Resize preview;
                 $thumbnail_medium = \Intervention\Image\Facades\Image::make($source);
