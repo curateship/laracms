@@ -9,8 +9,8 @@
 <div id="notifications-popover" class="popover notif-popover bg-light radius-md shadow-md js-popover" role="dialog">
   <header class="bg-light bg-opacity-90% backdrop-blur-10 padding-sm shadow-xs position-sticky top-0 z-index-2">
     <div class="flex justify-between items-baseline">
-      <h1 class="text-base">Notifications</h1>
-      <a class="text-sm" href="#0">View all</a>
+    <h1 class="text-base color-contrast-medium">Notifications</h1>
+      <a class="text-sm link-plain" href="#0">View all</a>
     </div>
   </header>
 

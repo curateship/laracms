@@ -19,7 +19,7 @@
   </button>
 
   @else
-    <!-- With SVG avatar -->
+    <!-- With SVG avatar if no image is uploaded -->
     <button class="header-v2__nav-control reset anim-menu-btn anim-menu-btn--avatar js-anim-menu-btn" aria-label="Toggle icon" menu-target="user-menu">
         {!! \Illuminate\Support\Facades\Auth::user()->getAvatar(true, ['width' => 25, 'height' => 25])->content !!}
     </button>
@@ -41,7 +41,7 @@
     <button class="header-v2__nav-control reset anim-menu-btn anim-menu-btn--avatar" aria-controls="modal-login">
       <a href="{{ route('login') }}" class="header-v2__nav-link">
         <svg class="icon" viewBox="0 0 23 23">
-          <title>Go to account settings</title>
+          <title>Login</title>
             <g class="icon__group" fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2">
               <circle cx="12" cy="6" r="4" />
               <path d="M12 13a8 8 0 00-8 8h16a8 8 0 00-8-8z" />
