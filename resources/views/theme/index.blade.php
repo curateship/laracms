@@ -6,11 +6,7 @@
 
     <!-- Recent Posts -->
     <div class="col-12@md margin-bottom-sm">
-        @if($theme == 'classic')
-            @include('components.posts.lists.specific-tag-posts')
-        @else
-            @include('components.posts.lists.infinite-masonry.list')
-        @endif
+      @include('components.posts.lists.filtered-posts.specific-tag-posts-list')
     </div>
 
     <!-- Popular Posts -->

@@ -47,15 +47,6 @@
     @include('components.layouts.headers.partials.theme-switch-desktop')
     </li>
     </div><!-- With avatar END-->
-      <div class="padding-x-xxxs">
-      @include('components.layouts.headers.partials.desktop-notifications')        
-      </div>
-    <li class="f-header__item"><a href="/home" class="f-header__btn btn btn--subtle radius-full">Dashboard</a></li>
-
-    <!-- is-admin Middleware for Admin Button -->
-    @can('is-admin')
-    <li class="f-header__item"><a href="/admin" class="f-header__btn btn btn--dark radius-full">Admin</a></li>
-    @endcan
 
     <!-- Login and Signup for not logged in -->
     @else
