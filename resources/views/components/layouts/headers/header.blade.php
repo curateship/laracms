@@ -23,11 +23,10 @@
         </button><!-- Mobile Hamburger Menu -->
       </div>
 
-      <!-- Navigation Menu -->
+      <!-- Navigation -->
       <nav id="main-menu" class="header-v2__nav" role="navigation">
         <ul class="header-v2__nav-list header-v2__nav-list--main padding-left-xl@md">
-        <!-- Custom Menu -->
-        @include('components.layouts.headers.partials.custom-menu-items', ['items' => Menu::get('header')->roots()])
+          @include('components.layouts.headers.partials.custom-menu-items', ['items' => Menu::get('header')->roots()])<!-- Custom Menu -->
         </ul>
       </nav>
 
@@ -35,7 +34,8 @@
       <div class="header-v2__nav header__icon-btns header-v2__nav-align-right header__icon-btns--desktop">
         @include('components.layouts.headers.partials.desktop-search')
         @include('components.layouts.headers.partials.desktop-user-dropdown')
-
+        
+        @auth
         <div class="padding-x-xxxs">
           @include('components.layouts.headers.partials.desktop-notifications')        
         </div>
@@ -44,6 +44,7 @@
         @can('is-admin')<!-- is-admin Middleware for Admin Button -->
           <div class="f-header__item"><a href="/admin" class="f-header__btn btn btn--dark radius-full">Admin</a></div>
         @endcan
+        @endif
 
       </div>
 

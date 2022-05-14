@@ -63,11 +63,28 @@
         {!! $post->content !!}
     </figure>
 
-
-
     <div class="padding-sm text-sm">
         {!! $post->body() !!}
     </div>
+
+        <!-- Tags -->
+        <div class="text-left text-sm">
+        @foreach(\App\Models\TagsCategories::all() as $category)
+            @if(isset($post_tags[$category->id]) && count($post_tags[$category->id]) > 0)
+                <div class="">
+                    {{$category->name}}:
+                    @foreach($post_tags[$category->id] as $tag)
+                        <button class="chip chip--interactive text-sm margin-bottom-xxs">
+                            <a class="link-subtle" href="/tags/{{$category->name}}/{{$tag->slug}}">
+                                <i class="chip__label">{{$tag->name}}</i>
+                            </a>
+                        </button>
+                    @endforeach()
+                </div>
+            @endif
+        @endforeach
+    </div>
+</div>
 
     <!-- Comments -->
     <section class="comments padding-x-xs">
