@@ -47,10 +47,13 @@
     <h4>{{$user->name}}</h4>
 </div>
 
-<!-- Follow -->
-<div class="flex justify-center padding-top-md">
-    @auth()
-        @if($user->id != \Illuminate\Support\Facades\Auth::id())
+<!-- User`s bio -->
+<div class="padding-xs" style="font-size: 13px;">{{$user->bio}}</div>
+
+@auth()
+    @if($user->id != \Illuminate\Support\Facades\Auth::id())
+        <!-- Follow -->
+        <div class="flex justify-center padding-top-sm padding-bottom-sm">
             <ul class="choice-tags js-choice-tags">
                 <li>
                     <label class="choice-tag choice-tag--checkbox text-sm js-choice-tag {{$followed ? 'choice-tag--checked' : ''}}" for="follow-button-input">
@@ -60,7 +63,7 @@
                     </label>
                 </li>
             </ul>
-        @endif
-    @endauth
-</div>
+        </div>
+    @endif
+@endauth
 
