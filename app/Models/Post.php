@@ -381,48 +381,37 @@ class Post extends Model
 
     public function getRecentList($by_array, $limit = 5){
         $posts = Post::where('status', 'published')
-            ->where('id', '!=', $this->id);
+            ->where('posts.id', '!=', $this->id);
 
-        $posts_ids = [];
         foreach($by_array as $by_item){
             switch($by_item){
                 case 'tags':
-                    // Getting post_tags;
-                    $tags = DB::table('post_tag')
-                        ->where('post_id', $this->id)
-                        ->get();
-
-                    $tags_ids = [];
-                    foreach($tags as $tag){
-                        $tags_ids[] = $tag->tag_id;
-                    }
+                    $post_tags = Tag::leftJoin('post_tag', 'post_tag.tag_id', '=', 'tags.id')
+                        ->select('tags.*')
+                        ->where('post_id', $this->id);
 
                     // Getting other posts with same tag;
-                    $posts_data = DB::table('post_tag')
-                        ->whereIn('tag_id', $tags_ids)
-                        ->where('post_id', '!=', $this->id)
-                        ->get();
+                    $posts = $posts->leftJoin('post_tag', 'post_tag.post_id', '=', 'posts.id')
+                        ->joinSub($post_tags, 'tags', function ($join) {
+                            $join->on('tags.id', '=', 'post_tag.tag_id');
+                        });
 
-                    foreach($posts_data as $post){
-                        $posts_ids[] = $post->post_id;
-                    }
                     break;
 
                 case 'title':
                     // Prepare title;
                     $like_title = str_replace(' ', '%', $this->title);
-                    $posts_data = Post::where('title', 'like', "%$like_title%")
-                        ->where('id', '!=', $this->id)
-                        ->get();
-
-                    foreach($posts_data as $post){
-                        $posts_ids[] = $post->id;
+                    if(count($by_array) > 1){
+                        $posts = $posts->whereOr('title', 'like', "%$like_title%");
+                    }   else{
+                        $posts = $posts->where('title', 'like', "%$like_title%");
                     }
+
                     break;
             }
         }
 
-        return $posts->whereIn('id', $posts_ids)
+        return $posts->select('posts.*')
             ->inRandomOrder()
             ->latest()
             ->take($limit)

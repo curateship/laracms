@@ -88,6 +88,7 @@ class UserController extends Controller
 
         $user->name = $request->input('name');
         $user->email = $request->input('email');
+        $user->bio = $request->has('bio') ? $request->input('bio') : null;
 
         // Remove old avatar (if it not default);
         if($request->has('avatar-thumbnail') && $user->thumbnail != $request->input('avatar-thumbnail')){

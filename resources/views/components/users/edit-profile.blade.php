@@ -1,3 +1,7 @@
+@push('custom-scripts')
+    @include('components.users.scripts-js')
+@endpush
+
 <form action="/user/edit/{{$user->id}}" method='post' autocomplete="off" >
   @csrf
   <fieldset class="margin-bottom-xxs">
@@ -11,10 +15,10 @@
 
     <!-- Bio -->
     <div class="character-count js-character-count">
-    <textarea class="form-control width-100% js-character-count__input" name="textareaName" id="textareaName" maxlength="300" placeholder="Enter your Bio"></textarea>
-    
+    <textarea class="form-control width-100% js-character-count__input" name="bio" id="userBio" maxlength="300" placeholder="Enter your Bio">{{$user->bio}}</textarea>
+
     <div class="character-count__helper character-count__helper--dynamic text-sm margin-top-xxxs" aria-live="polite" aria-atomic="true">
-      You have <span class="js-character-count__counter"></span> characters left
+      You have <span id="bioLength" class="js-character-count__counter">{{300 - strlen($user->bio)}}</span> characters left
     </div>
 
     <div class="character-count__helper character-count__helper--static text-sm margin-top-xxxs">Max 300 characters</div>

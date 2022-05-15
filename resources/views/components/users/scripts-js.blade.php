@@ -23,5 +23,9 @@
             }
         });
     })
+
+    $(document).on('keyup', '#userBio', function(e){
+        $('#bioLength').html(300 - $(this).val().length)
+    })
 }());
 </script>
