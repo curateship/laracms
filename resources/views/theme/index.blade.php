@@ -6,7 +6,7 @@
 
     <!-- Recent Posts -->
     <div class="col-12@md margin-bottom-sm">
-      @include('components.posts.lists.filtered-posts.specific-tag-posts-list')
+      @include('components.posts.lists.recent-posts.recent-posts-list')
     </div>
 
     <!-- Popular Posts -->
