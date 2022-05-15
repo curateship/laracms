@@ -15,7 +15,9 @@
   @include('components.layouts.headers.header')
   @include('admin.partials.hero-random-image')
   @include('admin.partials.alerts')
+
     @yield('content')
+
   @include('components.layouts.footers.footer')
   <script src="{{ asset('assets/js/scripts.js') }}"></script>
   <script src="{{ asset('assets/js/infinite-scroll.pkgd.js') }}"></script>

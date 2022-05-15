@@ -1,4 +1,4 @@
-<div class="container max-width-lg margin-top-md position-relative">
+<div class="container max-width-lg position-relative">
     <div class="preload-box" aria-hidden="true">
         <ul class="grid preload-grid gap-sm">
             @for($i = 1 ; $i <= 12 ; $i++)
