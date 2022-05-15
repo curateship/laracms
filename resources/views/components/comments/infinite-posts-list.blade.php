@@ -2,7 +2,7 @@
 <ul class="margin-top-sm post-comments" data-post-id="{{$post->id}}"></ul>
 
 <!-- Add Comment Form -->
-<div class="margin-top-lg margin-bottom-sm">
+<div class="margin-top-md margin-bottom-sm">
   @auth
       @include('components.posts.comments.clean-comment-form')
   @endauth
