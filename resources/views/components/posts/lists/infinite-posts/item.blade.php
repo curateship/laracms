@@ -1,5 +1,5 @@
 @foreach($posts as $post)
-    <div class="card margin-bottom-xs post-card" data-post-id="{{$post->id}}">
+    <div class="card margin-bottom-md post-card" data-post-id="{{$post->id}}">
     <div class="flex justify-between mb-3">
         <div class="inline-flex items-baseline articles-v3__author padding-sm">
             <a href="{{$post->author() != null ? '/user/'.$post->author()->id : '#'}}" class="articles-v3__author-img ">
@@ -63,12 +63,9 @@
         {!! $post->content !!}
     </figure>
 
-
-
     <div class="padding-sm text-sm">
         {!! $post->body() !!}
     </div>
-    <div class="margin-top-auto border-top border-contrast-lower opacity-40%"></div><!-- Divider -->
 
     <div class="padding-sm text-left text-sm">
         @foreach(\App\Models\TagsCategories::all() as $category)
@@ -90,8 +87,8 @@
     <div class="margin-top-auto border-top border-contrast-lower opacity-40%"></div><!-- Divider -->
 
     <!-- Comments -->
-    <section class="comments padding-x-md margin-bottom-sm padding-top-sm">
-        @include('components.comments.list')
+    <section class="comments padding-x-xs">
+        @include('components.comments.infinite-posts-list')
     </section>
 
     <!-- Interaction -->
