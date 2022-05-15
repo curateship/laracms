@@ -385,6 +385,12 @@ class PostController extends Controller
 
         // Preparing posts content;
         foreach($posts as $post){
+            $post_tags_by_cats = [];
+            foreach($post->tags() as $post_tag){
+                $post_tags_by_cats[$post_tag->category_id][] = $post_tag;
+            }
+
+            $post->tags = $post_tags_by_cats;
             $post->content = $post->prepareContent('block width-100% height-100% object-cover image-zoom__preview js-image-zoom__preview');
         }
 

@@ -70,6 +70,25 @@
     </div>
     <div class="margin-top-auto border-top border-contrast-lower opacity-40%"></div><!-- Divider -->
 
+    <div class="padding-sm text-left text-sm">
+        @foreach(\App\Models\TagsCategories::all() as $category)
+            @if(isset($post->tags[$category->id]) && count($post->tags[$category->id]) > 0)
+                <div class="">
+                    {{$category->name}}:
+                    @foreach($post->tags[$category->id] as $tag)
+                        <button class="chip chip--interactive text-sm margin-bottom-xxs">
+                            <a class="link-subtle" href="/tags/{{$category->name}}/{{$tag->slug}}">
+                                <i class="chip__label">{{$tag->name}}</i>
+                            </a>
+                        </button>
+                    @endforeach()
+                </div>
+            @endif
+        @endforeach
+    </div>
+
+    <div class="margin-top-auto border-top border-contrast-lower opacity-40%"></div><!-- Divider -->
+
     <!-- Comments -->
     <section class="comments padding-x-md margin-bottom-sm padding-top-sm">
         @include('components.comments.list')
