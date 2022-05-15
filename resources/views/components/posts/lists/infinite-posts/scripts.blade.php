@@ -1,6 +1,11 @@
 <script>
+    let postType = $('.infinite-posts-list').attr('data-type')
+    if(postType === undefined || postType === null){
+
+    }
+
     var infScroll = new InfiniteScroll('.infinite-posts-list', {
-        path: '/infinite/posts/page/@{{#}}?time=' + Date.now(),
+        path: '/infinite/posts/page/@{{#}}?type=' + postType + '&time=' + Date.now(),
         append: '.post-card',
         history: false,
         //outlayer: $grid,

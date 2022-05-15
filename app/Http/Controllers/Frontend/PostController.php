@@ -361,15 +361,33 @@ class PostController extends Controller
     }
 
     // Infinite Posts for Home
-    public function ajaxInfiniteShowPosts($page_num){
+    public function ajaxInfiniteShowPosts(Request $request, $page_num){
         $perpage = 3;
         $offset = ($page_num - 1) * $perpage;
 
         $posts = Post::where('status', 'published')
+            ->select('posts.*')
             ->orderBy('created_at', 'DESC')
             ->offset($offset)
-            ->limit($perpage)
-            ->get();
+            ->limit($perpage);
+
+        // Filter;
+        if($request->has('type')){
+            switch($request->input('type')){
+                // Get users following list;
+                case 'followings':
+                    $posts = $posts->leftJoin('follows', 'follows.follow_user_id', '=', 'posts.user_id')
+                        ->where('follows.user_id', Auth::id());
+                    break;
+
+                // All or nothing;
+                default:
+                case 'all':
+                    // Nothing;
+            }
+        }
+
+        $posts = $posts->get();
 
         $posts_count = Post::where([
             'status' => 'published'
