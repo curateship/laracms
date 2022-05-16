@@ -6,7 +6,11 @@
 
     <!-- Recent Posts -->
     <div class="col-12@md margin-bottom-sm">
-      @include('components.posts.lists.recent-posts.recent-posts-list')
+        @if($theme == 'classic')
+            @include('components.posts.lists.recent-posts.recent-posts-list')
+        @else
+            @include('components.posts.lists.infinite-masonry.list')
+        @endif
     </div>
 
     <!-- Popular Posts -->
