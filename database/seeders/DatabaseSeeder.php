@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use App\Models\Comment;
+use App\Models\Follow;
 use App\Models\Post;
 use App\Models\Role;
 use App\Models\Scraper;
@@ -30,6 +31,7 @@ class DatabaseSeeder extends Seeder
         TagsCategories::truncate();
         Tag::truncate();
         Scraper::truncate();
+        Follow::truncate();
         ScraperStat::truncate();
         ScraperLog::truncate();
         DB::table('role_user')->delete();
