@@ -513,19 +513,22 @@ class Post extends Model
     }
 
     public static function getListByTagName($tag_name, $order = ['by' => 'created_at', 'order' => 'desc'], $limit = 10){
-        $posts_tags = DB::table('post_tag')
-            ->leftJoin('tags', 'tags.id', '=', 'post_tag.tag_id')
-            ->where('tags.name', $tag_name)
-            ->select('post_id')
+        $tags = Tag::where('name', $tag_name)
             ->get();
 
-        $posts_ids = [];
-        foreach($posts_tags as $posts_tag){
-            $posts_ids[] = $posts_tag->post_id;
+        $tags_ids = [];
+        foreach($tags as $tag){
+            $tags_ids[] = $tag->id;
         }
 
-        return static::whereIn('id', $posts_ids)
-            ->orderBy($order['by'], $order['order'])
+        $post_tags = DB::table('post_tag')
+            ->whereIn('tag_id', $tags_ids);
+
+        return static::joinSub($post_tags, 'post_tag', function ($join) {
+                $join->on('post_tag.post_id', '=', 'posts.id');
+            })
+            ->where('posts.status', 'published')
+            ->orderBy('posts.'.$order['by'], $order['order'])
             ->limit($limit)
             ->get();
     }
