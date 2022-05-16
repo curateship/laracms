@@ -20,4 +20,4 @@
     </div>
 </div>
 
-<div class="infinite-posts-list" data-type="followings"></div>
+<div class="infinite-posts-list" data-type="all"></div>
