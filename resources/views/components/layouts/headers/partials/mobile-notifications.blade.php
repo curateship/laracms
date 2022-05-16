@@ -1,4 +1,4 @@
-<button class="reset js-tab-focus anim-menu-btn anim-menu-btn--notifications js-anim-menu-btn" aria-controls="notifications-popover">
+<button class="reset js-tab-focus anim-menu-btn anim-menu-btn--notifications js-anim-menu-btn" aria-label="Toggle Notifications" menu-target="notifications-menu">
   <svg class="icon" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor">
     <title>Notifications</title>
       <g class="icon__group">
@@ -10,7 +10,7 @@
   </svg>
 </button>
 
-<div id="notifications-popover" class="popover notif-popover bg-light radius-md shadow-md js-popover" role="dialog">
+<div id="notifications-menu" class="header-v2__nav">
   <header class="bg-light bg-opacity-90% backdrop-blur-10 padding-sm shadow-xs position-sticky top-0 z-index-2">
     <div class="flex justify-between items-baseline">
     <h1 class="text-base color-contrast-medium">Notifications</h1>

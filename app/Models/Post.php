@@ -386,15 +386,22 @@ class Post extends Model
         foreach($by_array as $by_item){
             switch($by_item){
                 case 'tags':
-                    $post_tags = Tag::leftJoin('post_tag', 'post_tag.tag_id', '=', 'tags.id')
-                        ->select('tags.*')
-                        ->where('post_id', $this->id);
+                    $post_tags = DB::table('post_tag')
+                        ->where('post_id', $this->id)
+                        ->get();
+
+                    $post_tags_in = [];
+                    foreach($post_tags as $post_tag){
+                        $post_tags_in[] = $post_tag->tag_id;
+                    }
 
                     // Getting other posts with same tag;
-                    $posts = $posts->leftJoin('post_tag', 'post_tag.post_id', '=', 'posts.id')
-                        ->joinSub($post_tags, 'tags', function ($join) {
-                            $join->on('tags.id', '=', 'post_tag.tag_id');
-                        });
+                    $posts = $posts->leftJoin(DB::raw('(
+                        select post_id from post_tag
+                        where tag_id in ('.implode(',', $post_tags_in).')
+                        and `post_id` != '.$this->id.'
+                        group by post_id
+                    ) as post_tag'), 'post_tag.post_id', '=', 'posts.id');
 
                     break;
 
@@ -513,19 +520,22 @@ class Post extends Model
     }
 
     public static function getListByTagName($tag_name, $order = ['by' => 'created_at', 'order' => 'desc'], $limit = 10){
-        $posts_tags = DB::table('post_tag')
-            ->leftJoin('tags', 'tags.id', '=', 'post_tag.tag_id')
-            ->where('tags.name', $tag_name)
-            ->select('post_id')
+        $tags = Tag::where('name', $tag_name)
             ->get();
 
-        $posts_ids = [];
-        foreach($posts_tags as $posts_tag){
-            $posts_ids[] = $posts_tag->post_id;
+        $tags_ids = [];
+        foreach($tags as $tag){
+            $tags_ids[] = $tag->id;
         }
 
-        return static::whereIn('id', $posts_ids)
-            ->orderBy($order['by'], $order['order'])
+        $post_tags = DB::table('post_tag')
+            ->whereIn('tag_id', $tags_ids);
+
+        return static::joinSub($post_tags, 'post_tag', function ($join) {
+                $join->on('post_tag.post_id', '=', 'posts.id');
+            })
+            ->where('posts.status', 'published')
+            ->orderBy('posts.'.$order['by'], $order['order'])
             ->limit($limit)
             ->get();
     }

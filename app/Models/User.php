@@ -142,4 +142,13 @@ class User extends Authenticatable implements MustVerifyEmail
             'content' => $content
         ];
     }
+
+    public function getFollowList($limit = 20){
+        return static::leftJoin('follows', 'follows.follow_user_id', '=', 'users.id')
+            ->where('follows.user_id', $this->id)
+            ->whereNotNull('follows.follow_user_id')
+            ->select('users.*')
+            ->limit($limit)
+            ->get();
+    }
 }

@@ -4,7 +4,7 @@
 <!-- Add Comment Form -->
 <div class="margin-top-md margin-bottom-sm">
   @auth
-      @include('components.posts.comments.clean-comment-form')
+      @include('components.posts.comments.clean-comment-form', ['type' => 'new', 'item_id' => $post->id])
   @endauth
 </div>
 <!-- If guest -->

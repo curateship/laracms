@@ -55,7 +55,8 @@ class UserController extends Controller
         return view('theme.users.profile', [
             'user' => $user,
             'followed' => $followed,
-            'posts' => $posts
+            'posts' => $posts,
+            'follows' => $user->getFollowList()
         ]);
     }
 
