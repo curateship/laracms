@@ -1,23 +1,32 @@
-<div class="">
+<div class="comment-form-box {{$type == 'reply' ? 'reply-box' : ''}}">
 
-    <div class="flex gap-xs">
+    <form class="flex gap-xs post-comment-form {{$type == 'reply' ? 'reply-form' : ''}}" method="POST" encrypt="multipart/form-data" data-item-id="{{$item_id}}" data-type="{{$type}}">
+        @csrf
       <!-- Avatar -->
-      <div class="avatar">
-        <figure class="avatar__figure" role="img" aria-label="Emily Ewing">
-          <svg class="avatar__placeholder" aria-hidden="true" viewBox="0 0 20 20" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="6" r="2.5" stroke="currentColor"/><path d="M10,10.5a4.487,4.487,0,0,0-4.471,4.21L5.5,15.5h9l-.029-.79A4.487,4.487,0,0,0,10,10.5Z" stroke="currentColor"/></svg>
-          <img class="avatar__img" src="https://codyhouse.co/app/assets/img/avatar-img-1.svg" alt="Emily Ewing" title="Emily Ewing">
-        </figure>
+      <div class="comments__author-img" style="margin: 0">
+          {!! \Illuminate\Support\Facades\Auth::user()->getAvatar(false, ['width' => 40, 'height' => 40])->content !!}
       </div>
 
       <!-- Form -->
       <div class="width-100%">
-        <textarea class="form-control width-100%" name="textarea" id="textarea" placeholder="Write a comment" rows="1"></textarea>
+          <input type="hidden" name="itemId" value="{{$item_id}}">
+        <textarea class="commentNewContent form-control width-100%" name="commentNewContent" data-type="{{$type}}" data-item-id="{{$item_id}}" placeholder="Write a comment" rows="1"></textarea>
       </div>
 
         <div>
-            <button type="button" class="btn btn--subtle radius-lg">Post</button>
+            <button type="button" class="post-comment-bnt btn btn--subtle radius-lg" data-type="{{$type}}" data-item-id="{{$item_id}}" disabled>
+                @if($type == 'new')
+                    Post
+                @endif
+                @if($type == 'reply')
+                    Reply
+                @endif
+            </button>
+            @if($type == 'reply')
+                <button class="cancel-reply btn btn--primary">Cancel</button>
+            @endif
         </div>
-    </div>
+    </form>
 
-
+    <div class="post-result-message" data-item-id="{{$item_id}}"></div>
 </div>

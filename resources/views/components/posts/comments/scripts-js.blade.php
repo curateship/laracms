@@ -5,7 +5,7 @@
         $('.commentNewContent').each(function(){
             $(this).text()
             $(this).bind('input propertychange', function() {
-                const postBtn = $('.postbtn[data-item-id="' + $(this).attr('data-item-id') + '"][data-type="' + $(this).attr('data-type') + '"]')
+                const postBtn = $('.post-comment-bnt[data-item-id="' + $(this).attr('data-item-id') + '"][data-type="' + $(this).attr('data-type') + '"]')
 
                 console.log('[data-item-id="' + $(this).attr('data-item-id') + '"][data-type="' + $(this).attr('data-type') + '"]')
 
@@ -103,7 +103,7 @@
                 if(type === 'new'){
                     $('.post-comments[data-post-id="' + itemId + '"]').html(response.comments);
 
-                    $('.post-comment-bnt[data-item-id="' + itemId + '"]').html('Post comment');
+                    $('.post-comment-bnt[data-item-id="' + itemId + '"]').html('Post');
                     postResultMessage.html(response.result).fadeIn()
 
                     if(response.error === false){

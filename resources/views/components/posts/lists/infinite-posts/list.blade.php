@@ -1,6 +1,7 @@
 @push('custom-scripts')
     @include('components.posts.comments.scripts-js')
     @include('components.posts.likes.scripts-js')
+    @include('components.posts.lists.script-infinite-scroll')
     @include('components.posts.lists.infinite-posts.scripts')
 @endpush
 

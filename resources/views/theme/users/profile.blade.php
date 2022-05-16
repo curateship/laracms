@@ -13,7 +13,7 @@
       <!-- Followers -->
       <div class="card">
         <div class="flex justify-between items-baseline padding-sm">
-          <h1 class="text-base color-contrast-medium">Followers (323)</h1>
+          <h1 class="text-base color-contrast-medium">Followers ({{count($follows)}})</h1>
           <a class="text-sm link-plain" href="#0">View all</a>
         </div>
         <div class="margin-top-auto border-top border-contrast-lower opacity-40%"></div><!-- Divider -->
