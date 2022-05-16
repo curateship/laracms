@@ -244,6 +244,8 @@ Usage: For LaraCMS
 
 .notif-popover.popover{
     @include max-breakpoint(md){
-        right: 20px;
+        right: 20px !important;
+        left: 20px !important;
+        width: auto;
     }
 }
