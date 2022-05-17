@@ -23,9 +23,11 @@
 
     // Get notifications every 10 seconds;
     setInterval(function(){
-        getNotifications()
+        if($('.popover--is-visible').length === 0){
+            getNotifications()
+        }
     }, 10000)
-
+/*
     $(document).on('click', '.notifications-url', function(){
         // Mark notification as read;
         const targetUrl = $(this).attr('data-url')
@@ -39,6 +41,17 @@
             },
             success:function(){
                 location.href = targetUrl
+            }
+        });
+    })
+*/
+    $(document).on('click', 'button.notifications-bell', function(){
+        $.ajax({
+            url: '{{route('notifications.markAll')}}',
+            type: 'POST',
+            success:function(){
+                $('.notifications-counter').hide()
+                $('.notifications-counter-value').html('')
             }
         });
     })

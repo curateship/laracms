@@ -1,4 +1,4 @@
-<button class="reset js-tab-focus anim-menu-btn anim-menu-btn--notifications js-anim-menu-btn" aria-label="Toggle Notifications" menu-target="notifications-menu">
+<button class="reset js-tab-focus anim-menu-btn anim-menu-btn--notifications js-anim-menu-btn notifications-bell" aria-label="Toggle Notifications" menu-target="notifications-menu">
   <svg class="icon" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor">
     <title>Notifications</title>
       <g class="icon__group">

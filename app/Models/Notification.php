@@ -37,12 +37,19 @@ class Notification extends Model
     public static function getNotificationsList($user_id, $type = 'all', $limit = 10){
         $notifications = static::where('user_id', $user_id);
 
+        if($type == 'all'){
+            $notifications = $notifications->orderBy('read_at', 'ASC')
+                ->orderBy('created_at', 'DESC');
+        }
+
         if($type == 'unread'){
-            $notifications = $notifications->whereNull('read_at');
+            $notifications = $notifications->whereNull('read_at')
+                ->orderBy('created_at', 'DESC');
         }
 
         if($type == 'read'){
-            $notifications = $notifications->where('read_at');
+            $notifications = $notifications->where('read_at')
+                ->orderBy('read_at', 'DESC');
         }
 
         return $notifications

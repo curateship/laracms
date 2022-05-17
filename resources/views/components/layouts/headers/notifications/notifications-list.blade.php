@@ -14,6 +14,10 @@
                         <p class="text-xs color-contrast-medium margin-top-xxxxs"><time>{{$notification->created_at->diffForHumans()}}</time></p>
                     </div>
                 </div>
+
+                @if($notification->read_at == '')
+                    <div class="notif__dot margin-left-auto" aria-hidden="true"></div>
+                @endif
             </div>
         </li>
     @endforeach

@@ -13,6 +13,7 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         //
-        '/notifications/markAsRead'
+        '/notifications/markAsRead',
+        '/notifications/markAllAsRead'
     ];
 }

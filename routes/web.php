@@ -41,6 +41,7 @@ route::get('/users', [UserController::class, 'index'])->name('index');
 // Notifications
 route::get('/notifications/getList', [NotificationController::class, 'getList'])->name('notifications.get')->middleware(['auth']);
 route::post('/notifications/markAsRead', [NotificationController::class, 'markAsRead'])->name('notifications.mark')->middleware(['auth']);
+route::post('/notifications/markAllAsRead', [NotificationController::class, 'markAllAsRead'])->name('notifications.markAll')->middleware(['auth']);
 
 // Follow
 Route::post('/users/follow', [FollowController::class, 'follow'])->name('users.follow')->middleware(['auth']);
