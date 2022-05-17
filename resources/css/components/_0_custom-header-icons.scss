@@ -249,3 +249,22 @@ Usage: For LaraCMS
         width: auto;
     }
 }
+
+svg.avatar{
+    max-width: none !important;
+}
+
+.notification-avatar-box{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    flex-shrink: 0;
+
+    .notification-avatar{
+        width: var(--notif-figure-size);
+        height: var(--notif-figure-size);
+        border-radius: 50%;
+    }
+}

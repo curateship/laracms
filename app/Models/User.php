@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 Use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -122,7 +123,7 @@ class User extends Authenticatable implements MustVerifyEmail
             $content = '<img class="'.implode(' ', $class_array).'" src="'. url('/storage'.config('images.users_storage_path').$this->thumbnail).'" alt="User avatar">';
         }   else{
             // Add SVG;
-            $content = '<svg xmlns="http://www.w3.org/2000/svg" width="'.$svg_size['width'].'" height="'.$svg_size['height'].'" viewBox="0 0 25 25">
+            $content = '<svg xmlns="http://www.w3.org/2000/svg" class="avatar" width="'.$svg_size['width'].'" height="'.$svg_size['height'].'" viewBox="0 0 25 25">
                             <title>face-man</title>
                             <g class="icon__group" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" transform="translate(0.5 0.5)" fill="currentColor" stroke="currentColor">
                                 <path fill="none" stroke-miterlimit="10"
@@ -150,5 +151,18 @@ class User extends Authenticatable implements MustVerifyEmail
             ->select('users.*')
             ->limit($limit)
             ->get();
+    }
+
+    public function followersBroadcast($title, $content, $url){
+        $followers = static::leftJoin('follows', 'follows.user_id', '=', 'users.id')
+            ->where('follows.follow_user_id', $this->id)
+            ->whereNotNull('follows.user_id')
+            ->select('users.*')
+            ->get();
+
+        // This is method will be better if we have user "jobs" in Laravel;
+        foreach($followers as $follower){
+            Notification::send(Auth::id(), $follower->id, $title, $content, $url);
+        }
     }
 }

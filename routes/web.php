@@ -22,6 +22,7 @@ use App\Http\Controllers\Frontend\TagController;
 use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\Frontend\LikeController;
 use App\Http\Controllers\Frontend\FollowController;
+use App\Http\Controllers\Frontend\NotificationController;
 
 
 /*
@@ -36,6 +37,10 @@ route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(
 
 // Users
 route::get('/users', [UserController::class, 'index'])->name('index');
+
+// Notifications
+route::get('/notifications/getList', [NotificationController::class, 'getList'])->name('notifications.get')->middleware(['auth']);
+route::post('/notifications/markAsRead', [NotificationController::class, 'markAsRead'])->name('notifications.mark')->middleware(['auth']);
 
 // Follow
 Route::post('/users/follow', [FollowController::class, 'follow'])->name('users.follow')->middleware(['auth']);

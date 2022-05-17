@@ -13,8 +13,11 @@
       <div class="flex header-menu-box gap-md">
         @include('components.layouts.headers.partials.mobile-user-dropdown')
         @include('components.layouts.headers.partials.mobile-search')
-        
+
         @auth
+          @push('custom-scripts')
+              @include('components.layouts.headers.notifications.script-js')
+          @endpush
           @include('components.layouts.headers.partials.mobile-notifications')
         @endif
 
@@ -34,12 +37,12 @@
       <div class="header-v2__nav header__icon-btns header-v2__nav-align-right header__icon-btns--desktop">
         @include('components.layouts.headers.partials.desktop-search')
         @include('components.layouts.headers.partials.desktop-user-dropdown')
-        
+
         @auth
         <div class="padding-x-xxxs">
-          @include('components.layouts.headers.partials.desktop-notifications')        
+          @include('components.layouts.headers.partials.desktop-notifications')
         </div>
-        
+
         <div class="f-header__item"><a href="/home" class="f-header__btn btn btn--subtle radius-full">Dashboard</a></div>
         @can('is-admin')<!-- is-admin Middleware for Admin Button -->
           <div class="f-header__item"><a href="/admin" class="f-header__btn btn btn--dark radius-full">Admin</a></div>
