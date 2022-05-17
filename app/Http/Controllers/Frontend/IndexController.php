@@ -31,7 +31,7 @@ class IndexController extends Controller
             $posts = [];
         }
 
-        return view('/theme.index', [
+        return view('/theme.index.full-width', [
             'theme' => $theme,
             'recent_posts' => $posts,
             'popular_posts' => Post::getPostsListByView('month'),

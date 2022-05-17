@@ -32,7 +32,7 @@
     </div>
 
     <!-- Users Posts -->
-    <div class="col-8@md">
+    <div class="col-11@md">
         <h1 class="text-xl padding-bottom-md">{{$user->name}}'s Posts</h1>
         @include('components.users.lists.users-posts')
     </div>

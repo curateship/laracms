@@ -17,11 +17,17 @@
     <!-- Content -->
     <div class="col-11@md padding-x-lg@md">
       @include('components.posts.single.article-plain')
-      <!-- Comments -->
-      <div class="border-top margin-top-sm"></div>
-        <section class="comments margin-top-md">
-          @include('components.comments.list')
-        </section>
+
+    <!-- Author Box -->
+    <div class="padding-y-lg">
+    @include('components.users.author-box')
+    </div>
+
+    <!-- Comments -->
+    <div class="border-top margin-top-sm"></div>
+      <section class="comments margin-top-md">
+        @include('components.comments.list')
+      </section>
     </div>
 
     <!-- Sidebar -->
