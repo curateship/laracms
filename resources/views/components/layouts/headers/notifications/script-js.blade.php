@@ -27,8 +27,10 @@
             getNotifications()
         }
     }, 10000)
-/*
+
     $(document).on('click', '.notifications-url', function(){
+        location.href = $(this).attr('data-url')
+        /*
         // Mark notification as read;
         const targetUrl = $(this).attr('data-url')
         const notificationId = $(this).attr('data-notification-id')
@@ -43,8 +45,9 @@
                 location.href = targetUrl
             }
         });
+        */
     })
-*/
+
     $(document).on('click', 'button.notifications-bell', function(){
         $.ajax({
             url: '{{route('notifications.markAll')}}',
