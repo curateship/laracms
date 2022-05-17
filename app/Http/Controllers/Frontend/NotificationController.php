@@ -12,7 +12,7 @@ class NotificationController extends Controller
 {
     //
     public function getList(){
-        $list = Notification::getNotificationsList(Auth::id(), 'unread');
+        $list = Notification::getNotificationsList(Auth::id());
 
         foreach($list as $item){
             if($item->init_user_id != null){
@@ -23,12 +23,11 @@ class NotificationController extends Controller
             }
         }
 
-
         return [
             'content' => view('components.layouts.headers.notifications.notifications-list', [
                     'notifications_list' => $list]
             )->render(),
-            'count' => count($list)
+            'count' => count(Notification::getNotificationsList(Auth::id(), 'unread'))
         ];
     }
 
@@ -40,5 +39,12 @@ class NotificationController extends Controller
         }
 
         return $notification->markAsRead();
+    }
+
+    public function markAllAsRead(){
+        Notification::where('user_id', Auth::id())
+            ->update([
+                'read_at' => now()
+            ]);
     }
 }
