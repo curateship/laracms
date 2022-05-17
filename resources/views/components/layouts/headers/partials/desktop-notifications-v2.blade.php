@@ -4,8 +4,6 @@
     <path d="M16,12V7a6,6,0,0,0-6-6h0A6,6,0,0,0,4,7v5L2,16H18Z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="2" />
     <path d="M7.184,18a2.982,2.982,0,0,0,5.632,0Z" />
   </svg>
-  <span class="counter counter-desktop counter--critical counter--docked delete-counter">1 <i class="sr-only">Notifications</i></span>
-
 </button>
 
 <div id="notifications-popover" class="popover notif-popover bg-light radius-md shadow-md js-popover" role="dialog">
@@ -32,6 +30,7 @@
           </div>
         </div>
 
+        <div class="notif__dot margin-left-auto" aria-hidden="true"></div>
       </a>
     </li>
 

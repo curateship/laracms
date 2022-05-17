@@ -8,19 +8,23 @@
           <path d="M19.778 4.222L4.222 19.778" />
       </g>
   </svg>
+  <span class="counter counter--critical counter--docked delete-counter">1 <i class="sr-only">Notifications</i></span>
+
 </button>
 
 <div id="notifications-menu" class="header-v2__nav">
-  <header class="bg-light bg-opacity-90% backdrop-blur-10 padding-sm shadow-xs position-sticky top-0 z-index-2">
+  <header class="position-sticky top-0 z-index-2">
     <div class="flex justify-between items-baseline">
     <h1 class="text-base color-contrast-medium">Notifications</h1>
       <a class="text-sm link-plain" href="#0">View all</a>
+      
     </div>
   </header>
 
-  <ul class="notif ">
+  <ul class="notif margin-top-sm">
+  <div class="margin-top-auto border-top border-contrast-lower opacity-40%"></div><!-- Divider -->
 
-    <li class="notif__item ">
+    <li class="notif__item">
       <a class="notif__link flex padding-sm" href="#0">
         <figure class="notif__figure margin-right-xs color-accent" aria-hidden="true">
           <img src="https://codyhouse.co/app/assets/img/notifications-img-3.jpg" alt="user picture">
@@ -34,7 +38,6 @@
           </div>
         </div>
 
-        <div class="notif__dot margin-left-auto" aria-hidden="true"></div>
       </a>
     </li>
 
