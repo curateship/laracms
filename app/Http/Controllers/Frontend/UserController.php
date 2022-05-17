@@ -56,7 +56,8 @@ class UserController extends Controller
             'user' => $user,
             'followed' => $followed,
             'posts' => $posts,
-            'follows' => $user->getFollowList()
+            'followers' => $user->getFollowersList(),
+            'following' => $user->getFollowingList()
         ]);
     }
 

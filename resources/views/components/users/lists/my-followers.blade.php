@@ -1,8 +1,8 @@
-@foreach($follows as $user)
+@foreach($follow_list as $user)
     <div class="padding-xs flex gap-xs items-center">
         <div class="avatar avatar--md flex justify-between">
             <figure class="avatar__figure" role="img" aria-label="{{$user->name}}">
-                {!! $user->getAvatar(false, ['width' => 45, 'height' => 45], ['avatar__img'])->content !!}
+                {!! $user->getAvatar(false, ['width' => 40, 'height' => 40], ['avatar__img'])->content !!}
             </figure>
         </div>
         <div class="text-sm">
