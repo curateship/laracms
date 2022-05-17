@@ -8,7 +8,7 @@
           <path d="M19.778 4.222L4.222 19.778" />
       </g>
   </svg>
-  <span class="counter counter--critical counter--docked delete-counter">1 <i class="sr-only">Notifications</i></span>
+  <span class="counter counter--critical counter--docked delete-counter notifications-counter" style="display: none;"><span class="notifications-counter-value"></span> <i class="sr-only">Notifications</i></span>
 
 </button>
 
@@ -17,29 +17,9 @@
     <div class="flex justify-between items-baseline">
     <h1 class="text-base color-contrast-medium">Notifications</h1>
       <a class="text-sm link-plain" href="#0">View all</a>
-      
+
     </div>
   </header>
 
-  <ul class="notif margin-top-sm">
-  <div class="margin-top-auto border-top border-contrast-lower opacity-40%"></div><!-- Divider -->
-
-    <li class="notif__item">
-      <a class="notif__link flex padding-sm" href="#0">
-        <figure class="notif__figure margin-right-xs color-accent" aria-hidden="true">
-          <img src="https://codyhouse.co/app/assets/img/notifications-img-3.jpg" alt="user picture">
-        </figure>
-
-        <div class="flex-grow margin-right-xs">
-
-          <div>
-            <p class="text-sm"><i class="font-semibold">David Smith</i> Added a new post: How to gain muscle in 3 months</p>
-            <p class="text-xs color-contrast-medium margin-top-xxxxs"><time>12 hours ago</time></p>
-          </div>
-        </div>
-
-      </a>
-    </li>
-
-  </ul>
+  <div class="notification-list"></div>
 </div>
