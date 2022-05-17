@@ -2,12 +2,14 @@
 
 use App\Models\Post;
 use App\Models\Tag;
+use App\Models\User;
 use App\Services\ScraperService;
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\FFMpeg;
 use FFMpeg\Coordinate;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use App\Models\Scraper;
 use App\Models\ScraperLog;
