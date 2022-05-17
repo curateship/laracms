@@ -147,7 +147,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getFollowList($limit = 20){
         return static::leftJoin('follows', 'follows.follow_user_id', '=', 'users.id')
             ->where('follows.user_id', $this->id)
-            ->whereNotNull('follows.follow_user_id')
             ->select('users.*')
             ->limit($limit)
             ->get();
@@ -156,13 +155,12 @@ class User extends Authenticatable implements MustVerifyEmail
     public function followersBroadcast($title, $content, $url){
         $followers = static::leftJoin('follows', 'follows.user_id', '=', 'users.id')
             ->where('follows.follow_user_id', $this->id)
-            ->whereNotNull('follows.user_id')
             ->select('users.*')
             ->get();
 
         // This is method will be better if we have user "jobs" in Laravel;
         foreach($followers as $follower){
-            Notification::send(Auth::id(), $follower->id, $title, $content, $url);
+            Notification::send($follower->id, Auth::id(), $title, $content, $url);
         }
     }
 }

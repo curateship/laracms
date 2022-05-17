@@ -574,7 +574,7 @@ class AdminPostController extends Controller
         }
 
         $user = User::find($post->user_id);
-        $user->followersBroadcast(Auth::user()->name, 'Added a new post: '.$post->title, '/posts/'.$post->slug);
+        $user->followersBroadcast(Auth::user()->name, 'Added a new post: '.$post->title, '/post/'.$post->slug);
 
         if($request->has('postId') || $request->input('status') == 'draft'){
             return redirect('/post/edit/'.$post->slug);
