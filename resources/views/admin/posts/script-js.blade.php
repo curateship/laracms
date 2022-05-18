@@ -132,7 +132,17 @@
 
     $(document).on('click', '.postSaveAs', function(){
         $('input[name="status"]').val($(this).attr('data-status'))
-        $('#new-post-form').submit()
+
+        const uploadButton = $('label[for="upload-file"]')
+        if($('input[name="original"]').val() === ''){
+            uploadButton.removeClass('btn--subtle').addClass('btn--primary')
+
+            setTimeout(function(){
+                uploadButton.removeClass('btn--primary').addClass('btn--subtle')
+            }, 1000)
+        }   else{
+            $('#new-post-form').submit()
+        }
     })
 
     $(document).on('change', '#statusFilter', function(){
