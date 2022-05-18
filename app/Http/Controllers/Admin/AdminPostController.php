@@ -481,13 +481,13 @@ class AdminPostController extends Controller
                     }
                 }
             }
-
-            // Remove old notifications;
-            Notification::removeNotificationForPost($post->id);
         }   else{
             $post = new Post();
             $post->user_id = Auth::id();
         }
+
+        $old_title = $post->title;
+        $old_body = $post->body;
 
         $post->title = $title;
         $post->excerpt = '';
@@ -577,8 +577,15 @@ class AdminPostController extends Controller
         }
 
         // Add notifications;
-        $user = User::find($post->user_id);
-        $user->followersBroadcast(Auth::user()->name, 'Added a new post: '.$post->title, '/post/'.$post->slug, $post->id);
+        if(json_decode($old_body)->blocks != json_decode($post->body)->blocks || $old_title != $post->title){
+            if($request->has('postId')){
+                // Remove old notifications;
+                Notification::removeNotificationForPost($post->id);
+            }
+
+            $user = User::find($post->user_id);
+            $user->followersBroadcast(Auth::user()->name, 'Added a new post: '.$post->title, '/post/'.$post->slug, $post->id);
+        }
 
         if($request->has('postId') || $request->input('status') == 'draft'){
             return redirect('/post/edit/'.$post->slug);
