@@ -487,7 +487,7 @@ class AdminPostController extends Controller
         }
 
         $old_title = $post->title;
-        $old_body = $post->body;
+        $old_body = $post->id == null ? json_encode(['blocks' => []]) : $post->body;
 
         $post->title = $title;
         $post->excerpt = '';
