@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Comment;
+use App\Models\Follow;
 use App\Models\Post;
 
 use App\Models\Tag;
@@ -127,7 +128,20 @@ class PostController extends Controller
 
         $post->addViewHistory($request->ip(), $request->userAgent());
 
+        $followed = false;
+        if(!Auth::guest()){
+            // Checking of following;
+            $exist_follow = Follow::where('user_id', Auth::id())
+                ->where('follow_user_id', $post->user_id)
+                ->first();
+
+            $followed = $exist_follow != null;
+        }
+
+        $post->author = $post->author();
+
         return view('/theme.posts.single', [
+            'followed' => $followed,
             'post' => $post,
             'content' => $content,
             'post_tags' => $post_tags_by_cats,
