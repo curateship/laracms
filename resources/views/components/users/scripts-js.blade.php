@@ -5,6 +5,12 @@
 
         const userId = $(this).attr('data-user-id')
 
+        @if(\Illuminate\Support\Facades\Auth::guest())
+            $('.follow-label').html('Follow')
+            $('.follow-button-input').prop('checked', false)
+            location.href = '/login'
+        @endif
+
         $.ajax({
             data: {
                 _token: $('meta[name="csrf-token"]').attr('content'),
@@ -13,6 +19,10 @@
             url: '{{route('users.follow')}}',
             type: 'POST',
             success:function(response){
+                if(response.message === 'Unauthenticated.'){
+                    location.href = '/login'
+                }
+
                 if(parseInt(response.status) === 1){
                     $('.follow-label').html('Unfollow')
                     $('.follow-button-input').prop('checked', true)
