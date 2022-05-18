@@ -39,7 +39,7 @@ class GenerateMenus
         \Menu::make('user-dropdown', function ($menu) {
 
             // Dashboard
-            $menu = $menu->add('Dashboard',    ['url'  => url('/').'/dashboard']);
+            $menu = $menu->add('Home',    ['url'  => url('/').'/home']);
             $menu->link->attr(['class' => 'dropdown__item']);
             // Profile
             $menu = $menu->add('Profile',    ['url'  => url('/').'/user/my']);
