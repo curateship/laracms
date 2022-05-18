@@ -14,7 +14,7 @@
 
 <div id="notifications-menu" class="header-v2__nav">
   <header class="position-sticky top-0 z-index-2">
-    <div class="flex justify-between items-baseline">
+    <div class="flex justify-between items-baseline padding-bottom-md padding-xxs">
     <h1 class="text-base color-contrast-medium">Notifications</h1>
       <a class="text-sm link-plain" href="#0">View all</a>
 

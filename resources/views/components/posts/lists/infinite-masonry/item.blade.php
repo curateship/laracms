@@ -11,6 +11,6 @@
 
     @endif
     <div class="bg-dark radius-md radius-top-right-0 radius-top-left-0">
-        <h3 class="padding-sm"><a class="color-contrast-medium link-plain" href="{{ route('post.show', $post) }}">{{ $post->title }}</a></h3>
+        <h3 class="padding-sm"><a class="color-contrast-medium link-plain text-sm" href="{{ route('post.show', $post) }}">{{ $post->title }}</a></h3>
     </div>
 @endforeach
