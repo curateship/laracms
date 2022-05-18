@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 @section('content')
 
-<div class="container max-width-adaptive-lg padding-top-md">
+<div class="container max-width-adaptive-lg">
   <div class="grid gap-md">
 
     <!-- User Informations -->
@@ -11,7 +11,7 @@
       </div>
 
         <!-- Following -->
-        <div class="card">
+        <div class="card margin-top-md">
             <div class="flex justify-between items-baseline padding-sm">
                 <h1 class="text-base color-contrast-medium">Following ({{count($following)}})</h1>
                 <a class="text-sm link-plain" href="#0">View all</a>
@@ -21,7 +21,7 @@
         </div>
 
       <!-- Followers -->
-        <div class="card margin-top-sm">
+        <div class="card margin-top-md">
             <div class="flex justify-between items-baseline padding-sm">
               <h1 class="text-base color-contrast-medium">Followers ({{count($followers)}})</h1>
               <a class="text-sm link-plain" href="#0">View all</a>
@@ -33,8 +33,16 @@
 
     <!-- Users Posts -->
     <div class="col-11@md">
-        <h1 class="text-xl padding-bottom-md">{{$user->name}}'s Posts</h1>
-        @include('components.users.lists.users-posts')
+
+      <!-- Mobile Navigation Buttons -->
+      <div class="justify-between flex items-end justify-between@md margin-bottom-md">
+        <div class="justify-between flex items-end justify-between@md">
+          <a href="http://localhost:8000/post" class="btn btn--primary btn--sm radius-full margin-right-xs" role="text">{{$user->name}}'s Posts</a>
+          <a href="http://localhost:8000/post" class="btn btn--subtle btn--sm radius-full margin-right-xs" role="text">Likes</a>
+          <a href="http://localhost:8000/post" class="btn btn--subtle btn--sm radius-full" role="text">Comments</a>
+        </div>
+      </div>
+              @include('components.users.lists.users-posts')
     </div>
 
   </div>
