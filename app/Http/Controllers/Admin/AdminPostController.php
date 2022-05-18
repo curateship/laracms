@@ -577,17 +577,22 @@ class AdminPostController extends Controller
         }
 
         // Add notifications;
-        if(json_decode($old_body)->blocks != json_decode($post->body)->blocks || $old_title != $post->title){
-            $user = User::find($post->user_id);
+        if($request->input('status') != 'draft'){
+            if(json_decode($old_body)->blocks != json_decode($post->body)->blocks || $old_title != $post->title){
+                $user = User::find($post->user_id);
 
-            if($request->has('postId')){
-                // Remove old notifications;
-                Notification::removeNotificationForPost($post->id);
+                if($request->has('postId')){
+                    // Remove old notifications;
+                    Notification::removeNotificationForPost($post->id);
 
-                $user->followersBroadcast(Auth::user()->name, 'Updated a post: '.$post->title, '/post/'.$post->slug, $post->id);
-            }   else{
-                $user->followersBroadcast(Auth::user()->name, 'Added a new post: '.$post->title, '/post/'.$post->slug, $post->id);
+                    $user->followersBroadcast(Auth::user()->name, 'Updated a post: '.$post->title, '/post/'.$post->slug, $post->id);
+                }   else{
+                    $user->followersBroadcast(Auth::user()->name, 'Added a new post: '.$post->title, '/post/'.$post->slug, $post->id);
+                }
             }
+        }   else{
+            // If post moved to draft status - remove old notifications;
+            Notification::removeNotificationForPost($post->id);
         }
 
         if($request->has('postId') || $request->input('status') == 'draft'){
@@ -595,7 +600,6 @@ class AdminPostController extends Controller
         }   else{
             return redirect('/post/'.$post->slug);
         }
-
     }
 
     public function move(Request $request){
