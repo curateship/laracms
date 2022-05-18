@@ -578,13 +578,16 @@ class AdminPostController extends Controller
 
         // Add notifications;
         if(json_decode($old_body)->blocks != json_decode($post->body)->blocks || $old_title != $post->title){
+            $user = User::find($post->user_id);
+
             if($request->has('postId')){
                 // Remove old notifications;
                 Notification::removeNotificationForPost($post->id);
-            }
 
-            $user = User::find($post->user_id);
-            $user->followersBroadcast(Auth::user()->name, 'Added a new post: '.$post->title, '/post/'.$post->slug, $post->id);
+                $user->followersBroadcast(Auth::user()->name, 'Updated a post: '.$post->title, '/post/'.$post->slug, $post->id);
+            }   else{
+                $user->followersBroadcast(Auth::user()->name, 'Added a new post: '.$post->title, '/post/'.$post->slug, $post->id);
+            }
         }
 
         if($request->has('postId') || $request->input('status') == 'draft'){
