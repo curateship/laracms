@@ -1,4 +1,4 @@
-(function() {
+function initBlend(){
     $('.img-blend').each(function(){
         const pattern = $(this).attr('data-blend-pattern').split(',')
         let color = $(this).attr('data-blend-color');
@@ -62,4 +62,6 @@
             }
         }
     })
-}());
+}
+
+initBlend();

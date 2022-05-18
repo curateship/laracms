@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 // Others
 use App\Http\Controllers\Controller;
 use App\Models\Like;
+use App\Models\Notification;
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\FFMpeg;
 use FFMpeg\FFProbe;
@@ -481,6 +482,8 @@ class AdminPostController extends Controller
                 }
             }
 
+            // Remove old notifications;
+            Notification::removeNotificationForPost($post->id);
         }   else{
             $post = new Post();
             $post->user_id = Auth::id();
@@ -573,8 +576,9 @@ class AdminPostController extends Controller
             }
         }
 
+        // Add notifications;
         $user = User::find($post->user_id);
-        $user->followersBroadcast(Auth::user()->name, 'Added a new post: '.$post->title, '/post/'.$post->slug);
+        $user->followersBroadcast(Auth::user()->name, 'Added a new post: '.$post->title, '/post/'.$post->slug, $post->id);
 
         if($request->has('postId') || $request->input('status') == 'draft'){
             return redirect('/post/edit/'.$post->slug);

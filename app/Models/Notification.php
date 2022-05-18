@@ -12,18 +12,20 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed $init_user_id
  * @property mixed $user_id
  * @property \Illuminate\Support\Carbon $read_at
+ * @property mixed $post_id
  */
 class Notification extends Model
 {
     use HasFactory;
 
-    public static function send($target_user_id, $init_user_id, $title, $content, $url){
+    public static function send($target_user_id, $init_user_id, $title, $content, $url, $post_id){
         $notification = new static();
         $notification->user_id = $target_user_id;
         $notification->init_user_id = $init_user_id;
         $notification->title = $title;
         $notification->content = $content;
         $notification->url = $url;
+        $notification->post_id = $post_id;
         $notification->save();
     }
 
@@ -55,5 +57,10 @@ class Notification extends Model
         return $notifications
             ->limit($limit)
             ->get();
+    }
+
+    public static function removeNotificationForPost($post_id){
+        Notification::where('post_id', $post_id)
+            ->delete();
     }
 }

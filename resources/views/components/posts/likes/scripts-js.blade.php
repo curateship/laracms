@@ -25,6 +25,14 @@
                 if(parseInt(response.error) === 0){
                     $this.addClass('comments__vote-btn--pressed')
                 }
+
+                if(parseInt(response.error) === 419){
+                    $this.removeClass('comments__vote-btn--pressed')
+
+                    setTimeout(function(){
+                        location.href = '/login'
+                    }, 200)
+                }
             }
         });
     })
