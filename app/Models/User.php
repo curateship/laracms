@@ -168,7 +168,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
         // This is method will be better if we have user "jobs" in Laravel;
         foreach($followers as $follower){
-            Notification::send($follower->id, Auth::id(), $title, $content, $url, $post_id);
+            if(Auth::id() != $follower->id){
+                Notification::send($follower->id, Auth::id(), $title, $content, $url, $post_id);
+            }
         }
     }
 }
