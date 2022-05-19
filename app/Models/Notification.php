@@ -36,7 +36,7 @@ class Notification extends Model
         return true;
     }
 
-    public static function getNotificationsList($user_id, $type = 'all', $limit = 10){
+    public static function getNotificationsList($user_id, $type = 'all', $limit = 5){
         $notifications = static::where('user_id', $user_id);
 
         if($type == 'all'){
