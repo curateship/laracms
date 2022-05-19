@@ -160,6 +160,10 @@ class AdminPostController extends Controller
             Like::where('post_id', $id)
                 ->delete();
 
+            // Remove notifications;
+            Notification::where('post_id', $id)
+                ->delete();
+
             // Remove post images;
             $post = Post::find($id);
             $post->removePostImages('main');
