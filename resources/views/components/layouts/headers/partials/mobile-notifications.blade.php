@@ -9,12 +9,11 @@
       </g>
   </svg>
   <span class="counter counter--critical counter--docked delete-counter notifications-counter" style="display: none;"><span class="notifications-counter-value"></span> <i class="sr-only">Notifications</i></span>
-
 </button>
 
 <div id="notifications-menu" class="header-v2__nav">
   <header class="position-sticky top-0 z-index-2">
-    <div class="flex justify-between items-baseline padding-bottom-md">
+    <div class="flex justify-between items-baseline padding-bottom-sm">
     <h1 class="text-base color-contrast-medium">Notifications</h1>
 
       <!-- Delete -->
@@ -24,16 +23,17 @@
           </svg>
           <span class="menu-bar__label">Clear</span>
         </li>
-
-
     </div>
   </header>
+  <div class="border-top border-contrast-lower opacity-80%"></div><!-- Divider -->
+
 
   <div class="notification-list"></div>
 
-  <div class="margin-top-auto border-top border-contrast-lower opacity-80%"></div><!-- Divider -->
-  <div class="text-center padding-xs">
-    <a class="text-sm" href="#0">View all</a>
+  <div class="margin-top-auto border-top border-contrast-lower opacity-80% padding-bottom-xs"></div><!-- Divider -->
+  <div class="text-center padding-sm">
+    <a class="text-sm color-contrast-low link-plain" href="#0">View all</a>
+    <svg class="icon color-contrast-low padding-top-xxxs" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
   </div>
 
 </div>

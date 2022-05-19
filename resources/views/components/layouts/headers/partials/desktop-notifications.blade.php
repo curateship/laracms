@@ -27,10 +27,13 @@
 
   <div class="notification-list"></div>
 
-  <div class="margin-top-auto border-top border-contrast-lower opacity-80%"></div><!-- Divider -->
+  <div class="border-top border-contrast-lower opacity-80%"></div><!-- Divider -->
   <div class="text-center padding-xs">
     
-    <a class="text-sm" href="#0">View all</a>
+    <a class="text-sm color-contrast-low link-plain" href="#0">View all
+      <svg class="icon color-contrast-low padding-top-xxxs" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
+    </a>
+    
   </div>
 
 </div>
