@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Follow;
+use App\Models\Notification;
 use App\Models\Post;
 
 use App\Models\Tag;
@@ -263,6 +264,12 @@ class PostController extends Controller
             $comment->the_comment = $comment_text;
             $comment->save();
             $response = 'Comment successfully added!';
+
+            $author = $post->author();
+
+            if($user_id != $author->id){
+                Notification::send($author->id, $user_id, Auth::user()->name, 'Commented on your post: '.$post->title, '/post/'.$post->slug, $post->id);
+            }
 
             // Prepare comments view;
             $comments_view = view('components.posts.comments.post-comments', [
