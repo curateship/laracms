@@ -125,7 +125,7 @@ class PostController extends Controller
             $post_tags_by_cats[$post_tag->category_id][] = $post_tag;
         }
 
-        $content = $post->prepareContent('radius-lg');
+        $content = $post->prepareContent('radius-lg image-zoom__preview js-image-zoom__preview');
 
         $post->addViewHistory($request->ip(), $request->userAgent());
 
