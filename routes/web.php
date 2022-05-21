@@ -34,6 +34,7 @@ use App\Http\Controllers\Frontend\NotificationController;
 // Index/Dashboard
 route::get('/', [IndexController::class, 'index'])->name('index');
 route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(['auth', 'verified']);
+route::get('/dashboard/getListBadges', [HomeController::class, 'getListBadges'])->middleware(['auth', 'verified']);
 
 // Users
 route::get('/users', [UserController::class, 'index'])->name('index');

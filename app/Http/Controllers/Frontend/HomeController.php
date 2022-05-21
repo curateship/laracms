@@ -35,6 +35,37 @@ class HomeController extends Controller
             'tags' => $tags,
         ]);
     }
+
+    public function getListBadges(){
+        $posts = Post::groupBy('status')
+            ->selectRaw('status, count(*) as count');
+
+        if(!Gate::allows('is-admin')){
+            $posts = $posts->where('user_id', Auth::id());
+        }
+
+        $posts = $posts->get();
+
+        $templates = [
+            'drafts' => 0,
+            'published' => 0
+        ];
+
+        foreach($posts as $post){
+            switch($post->status){
+                case 'published':
+                    $templates['published'] += $post->count;
+                    break;
+                case 'draft':
+                    $templates['drafts'] += $post->count;
+                    break;
+            }
+        }
+
+        $templates['total'] = $templates['drafts'] + $templates['published'];
+
+        return $templates;
+    }
 }
 
 
