@@ -353,6 +353,22 @@ class ScraperService {
         $this->logger->update_log_param('scrape', 'Successfully');
     }
 
+    if($this->scraper->stop_url == $url){
+        Log::info('Scraper has reach stop url and will be stopped');
+
+        // Mark current scraper as completed.
+        $scraper_info = Scraper::find($this->scraper->id);
+        if ( $scraper_info ) {
+            $scraper_info->status = 'stopped';
+            $scraper_info->save();
+        }
+
+        // Delete scraper status info from stats table
+        ScraperStat::where('scraper_id', $this->scraper->id)->delete();
+
+        return false;
+    }
+
 
     Log::info('Scraping item detail page... (' . $url . ')');
 
