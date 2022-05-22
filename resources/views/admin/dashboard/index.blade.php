@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
-@section('content')
 
+@section('content')
 <div class="container max-width-adaptive-lg">
   <div class="grid gap-md justify-between">
     <!-- Col 4 -->

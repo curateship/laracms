@@ -1,3 +1,7 @@
+@push('custom-scripts')
+    @include('admin.dashboard.scripts')
+@endpush
+
 <!-- 👇 Sidebar Wrapper-->
 <div class="card display@md position-fixed position-sticky top-sm@xs">
     <div class="background-bg radius-md padding-bottom-sm">
@@ -22,6 +26,7 @@
                 <a href="/posts" class="sidenav__link" {{ strpos(url()->full(), '/posts') !== false ? 'aria-current=page' : '' }}>
                   <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16"><g><path d="M14,7H2v7c0,0.6,0.4,1,1,1h10c0.6,0,1-0.4,1-1V7z"></path><rect y="1" width="16" height="4"></rect></g></svg>
                   <span class="sidenav__text text-sm@md">Posts</span>
+                    <span class="sidenav__counter dashboard-counter" data-target="total">0</span>
                 </a>
 
                 <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
@@ -38,12 +43,14 @@
                   <li class="sidenav__item">
                     <a href="/posts?status=published" class="sidenav__link">
                       <span class="sidenav__text text-sm@md">Published</span>
+                        <span class="sidenav__counter dashboard-counter" data-target="published">0</span>
                     </a>
                   </li>
 
                   <li class="sidenav__item">
                     <a href="/posts?status=draft" class="sidenav__link">
                       <span class="sidenav__text text-sm@md">Draft</span>
+                        <span class="sidenav__counter dashboard-counter" data-target="drafts">0</span>
                     </a>
                   </li>
 

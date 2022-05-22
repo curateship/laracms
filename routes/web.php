@@ -34,6 +34,7 @@ use App\Http\Controllers\Frontend\NotificationController;
 // Index/Dashboard
 route::get('/', [IndexController::class, 'index'])->name('index');
 route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(['auth', 'verified']);
+route::get('/dashboard/getListBadges', [HomeController::class, 'getListBadges'])->middleware(['auth', 'verified']);
 
 // Users
 route::get('/users', [UserController::class, 'index'])->name('index');
@@ -42,6 +43,7 @@ route::get('/users', [UserController::class, 'index'])->name('index');
 route::get('/notifications/getList', [NotificationController::class, 'getList'])->name('notifications.get')->middleware(['auth']);
 route::post('/notifications/markAsRead', [NotificationController::class, 'markAsRead'])->name('notifications.mark')->middleware(['auth']);
 route::post('/notifications/markAllAsRead', [NotificationController::class, 'markAllAsRead'])->name('notifications.markAll')->middleware(['auth']);
+route::post('/notifications/clear', [NotificationController::class, 'clear'])->name('notifications.clear')->middleware(['auth']);
 
 // Follow
 Route::post('/users/follow', [FollowController::class, 'follow'])->name('users.follow')->middleware(['auth']);
