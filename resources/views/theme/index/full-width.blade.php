@@ -5,7 +5,7 @@
 
     <!-- Recent Posts -->
     <div class="margin-bottom-sm">
-    @include('components.posts.lists.infinite-masonry.list')
+      @include('components.posts.lists.recent-posts.recent-posts-grid')
     </div>
 
 </div>
