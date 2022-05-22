@@ -60,11 +60,11 @@
 @supports(--css: variables) {
   [data-theme="dark"] {
     // main
-    @include defineColorHSL(--color-primary-darker, 15, 93%, 45%);
-    @include defineColorHSL(--color-primary-dark, 15, 93%, 55%);
-    @include defineColorHSL(--color-primary, 15, 93%, 65%);
-    @include defineColorHSL(--color-primary-light, 15, 93%, 75%);
-    @include defineColorHSL(--color-primary-lighter, 15, 93%, 85%);
+    @include defineColorHSL(--color-primary-darker, 44, 73%, 49%);
+    @include defineColorHSL(--color-primary-dark, 44, 73%, 59%);
+    @include defineColorHSL(--color-primary, 44, 73%, 69%);
+    @include defineColorHSL(--color-primary-light, 44, 73%, 79%);
+    @include defineColorHSL(--color-primary-lighter, 44, 73%, 89%);
 
     @include defineColorHSL(--color-accent-darker, 342, 92%, 41%);
     @include defineColorHSL(--color-accent-dark, 342, 92%, 47%);
@@ -95,17 +95,17 @@
     @include defineColorHSL(--color-error-lighter, 342, 92%, 65%);
 
     // background
-    @include defineColorHSL(--color-bg-darker, 204, 15%, 6%);
-    @include defineColorHSL(--color-bg-dark, 203, 18%, 9%);
-    @include defineColorHSL(--color-bg, 203, 24%, 13%);
-    @include defineColorHSL(--color-bg-light, 203, 18%, 17%);
-    @include defineColorHSL(--color-bg-lighter, 204, 15%, 20%);
+    @include defineColorHSL(--color-bg-darker, 0, 0%, 9%);
+    @include defineColorHSL(--color-bg-dark, 0, 0%, 12%);
+    @include defineColorHSL(--color-bg, 0, 0%, 16%);
+    @include defineColorHSL(--color-bg-light, 0, 0%, 20%);
+    @include defineColorHSL(--color-bg-lighter, 0, 0%, 23%);
 
     // color contrasts
-    @include defineColorHSL(--color-contrast-lower, 208, 12%, 24%);
-    @include defineColorHSL(--color-contrast-low, 208, 6%, 40%);
-    @include defineColorHSL(--color-contrast-medium, 213, 5%, 56%);
-    @include defineColorHSL(--color-contrast-high, 223, 8%, 82%);
+    @include defineColorHSL(--color-contrast-lower, 240, 1%, 27%);
+    @include defineColorHSL(--color-contrast-low, 240, 0%, 42%);
+    @include defineColorHSL(--color-contrast-medium, 240, 1%, 58%);
+    @include defineColorHSL(--color-contrast-high, 240, 4%, 82%);
     @include defineColorHSL(--color-contrast-higher, 240, 100%, 99%);
 
     // font rendering
