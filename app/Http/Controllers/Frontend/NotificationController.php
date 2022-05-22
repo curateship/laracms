@@ -47,4 +47,12 @@ class NotificationController extends Controller
                 'read_at' => now()
             ]);
     }
+
+    public function clear(){
+        Notification::where('user_id', Auth::id())
+            ->update([
+                'read_at' => now(),
+                'visible' => 0
+            ]);
+    }
 }

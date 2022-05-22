@@ -53,7 +53,7 @@
         </div>
     </div>
 
-    <!-- Status Body -->
+    <!-- Post Image and Title -->
     <div class="margin-top-auto border-top border-contrast-lower opacity-40%"></div><!-- Divider -->
     <h4 class="padding-sm">
         <a class="text-decoration-none color-inherit" href="{{route('post.show', $post)}}">{{$post->title}}</a>
@@ -63,10 +63,15 @@
         {!! $post->content !!}
     </figure>
 
+    <!-- Excerpt -->
     <div class="padding-sm text-sm">
-        {!! $post->body() !!}
+      {{$post->excerpt}} 
+      <a class="link-plain color-contrast-high" href="{{route('post.show', $post)}}">
+        <span class="chip text-xs padding-xxxs">Read Full Post</span>
+      </a>
     </div>
 
+    <!-- Tags -->
     <div class="padding-sm text-left text-sm">
         @foreach(\App\Models\TagsCategories::all() as $category)
             @if(isset($post->tags[$category->id]) && count($post->tags[$category->id]) > 0)

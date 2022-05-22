@@ -1,3 +1,7 @@
+@push('custom-scripts')
+    @include('admin.dashboard.scripts')
+@endpush
+
 <!-- 👇 Sidebar Wrapper-->
 <div class="card display@md position-fixed position-sticky top-sm@xs">
     <div class="background-bg radius-md padding-bottom-sm">
@@ -22,6 +26,7 @@
                 <a href="{{ route('admin.posts.index') }}" class="sidenav__link" {{ strpos(url()->full(), '/admin/posts') !== false ? 'aria-current=page' : '' }}>
                   <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16"><g><path d="M14,7H2v7c0,0.6,0.4,1,1,1h10c0.6,0,1-0.4,1-1V7z"></path><rect y="1" width="16" height="4"></rect></g></svg>
                   <span class="sidenav__text text-sm@md">Posts</span>
+                    <span class="sidenav__counter dashboard-counter" data-target="total">0</span>
                 </a>
 
                 <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
@@ -38,12 +43,14 @@
                   <li class="sidenav__item">
                     <a href="/admin/posts?status=published" class="sidenav__link">
                       <span class="sidenav__text text-sm@md">Published</span>
+                        <span class="sidenav__counter dashboard-counter" data-target="published">0</span>
                     </a>
                   </li>
 
                   <li class="sidenav__item">
                     <a href="/admin/posts?status=draft" class="sidenav__link">
                       <span class="sidenav__text text-sm@md">Draft</span>
+                        <span class="sidenav__counter dashboard-counter" data-target="drafts">0</span>
                     </a>
                   </li>
 
@@ -204,7 +211,6 @@
                     </g>
                   </svg>
                       <span class="sidenav__text text-sm@md">Galleries</span>
-                      <span class="sidenav__counter">3 <i class="sr-only">notifications</i></span>
                   </a>
                     <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
                       <svg class="icon" viewBox="0 0 12 12"><polygon points="4 3 8 6 4 9 4 3"/></svg>
@@ -255,7 +261,7 @@
                     <path d="M14,1H2A2,2,0,0,0,0,3v.4L8,7.9l8-4.4V3A2,2,0,0,0,14,1Z"></path><path d="M7.5,9.9,0,5.7V13a2,2,0,0,0,2,2H14a2,2,0,0,0,2-2V5.7L8.5,9.9A1.243,1.243,0,0,1,7.5,9.9Z"></path>                      </g>
                   </svg>
                     <span class="sidenav__text text-sm@md">Email</span>
-                    <span class="sidenav__counter">3 <i class="sr-only">notifications</i></span>
+                    <!--<span class="sidenav__counter">3 <i class="sr-only">notifications</i></span>-->
                 </a>
                   <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
                     <svg class="icon" viewBox="0 0 12 12"><polygon points="4 3 8 6 4 9 4 3"/></svg>

@@ -1,11 +1,10 @@
-
 <!-- Post Title -->
 <div class="text-component padding-bottom-md">
   <h1 class="text-xl">{{ $post->title }}</h1>
 </div>
 
 <!-- Post Image -->
-<figure class="text-center padding-bottom-sm">
+<figure class="text-center padding-bottom-sm image-zoom js-image-zoom">
     {!! $content !!}
 </figure>
 
@@ -33,3 +32,9 @@
         @endforeach
     </div>
 </div>
+
+@push('custom-scripts')
+    <script>
+        initImagesZoom()
+    </script>
+@endpush

@@ -96,6 +96,10 @@
               <div class="padding-top-md">
                 <fieldset class="margin-bottom-md padding-bottom-md">
                   <div class="text-component margin-bottom-md text-left">
+                    <h3 class="text-md padding-bottom-sm">General Setting</h4>
+                    <input class="form-control width-100%" type="text" name="input" id="input" placeholder="Input STOP url">
+                    <p class="margin-top-sm padding-bottom-md text-sm color-contrast-medium">Scraper will automatically stop scraping if it detect this URL</p>
+
                     <h3 class="text-md padding-bottom-sm">Index Crawl (Level 1)</h4>
 
                     <div class="margin-bottom-sm">
