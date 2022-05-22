@@ -48,6 +48,19 @@
         */
     })
 
+    $(document).on('click', '.clear-notifications', function(){
+        $.ajax({
+            url: '{{route('notifications.clear')}}',
+            type: 'POST',
+            success:function(){
+                $('.notifications-counter').hide()
+                $('.notifications-counter-value').html('')
+
+                getNotifications()
+            }
+        });
+    })
+
     $(document).on('click', 'button.notifications-bell', function(){
         $.ajax({
             url: '{{route('notifications.markAll')}}',

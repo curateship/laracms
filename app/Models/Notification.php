@@ -55,6 +55,7 @@ class Notification extends Model
         }
 
         return $notifications
+            ->where('visible', 1)
             ->limit($limit)
             ->get();
     }
