@@ -83,9 +83,10 @@ Artisan::command('scrape {scraper_id}', function () {
         $scraper = Scraper::find($scraper_id);
         if ($scraper) {
             // Do Scrape action.
+            Log::info('Run Scraper by id (' . $scraper_id . ') - ' . date("Y-m-d H:i:s") );
             $scraper_service = new ScraperService($scraper, $scraper_settings);
             $scraper_service->run();
-            Log::info('Run Scraper by id (' . $scraper_id . ') - ' . date("Y-m-d H:i:s") );
+            Log::info('Scraper finished working - ' . date("Y-m-d H:i:s") );
         }
     } else {
         Log::info('Run Re-Scraper - ' . date("Y-m-d H:i:s") );
