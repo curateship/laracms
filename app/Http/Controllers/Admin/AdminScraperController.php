@@ -115,6 +115,7 @@ class AdminScraperController extends Controller
         'character'   => request('character'),
         'media'       => request('media'),
         'misc'        => request('misc'),
+        'stop_url'    => \request('sport_url'),
         'status'      => 'stopped'
       ]);
     } else {
@@ -139,6 +140,7 @@ class AdminScraperController extends Controller
       $scraper->character = request('character');
       $scraper->media = request('media');
       $scraper->misc = request('misc');
+      $scraper->stop_url = request('stop_url');
       $scraper->save();
     }
 
