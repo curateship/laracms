@@ -222,7 +222,7 @@
                     direction: $('.move-selected-posts').attr('data-direction'),
                     list: selectedPosts.join(',')
                 },
-                url: '{{\Illuminate\Support\Facades\Gate::allows('is-admin') ? '/admin' : ''}}/posts/move/',
+                url: '{{\Illuminate\Support\Facades\Gate::allows('is-admin') ? '/admin' : ''}}/posts/move',
                 type: 'POST',
                 success:function(){
                     location.reload()
