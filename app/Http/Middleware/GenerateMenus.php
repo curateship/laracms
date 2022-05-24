@@ -14,15 +14,16 @@ class GenerateMenus
         \Menu::make('header', function ($menu) {
 
             // Link1
-            $menu->add('About 1', ['route'  => 'index'])->id('about1');
-            // Adding sub items;
-            $menu->add('Sub about 1', ['parent' => 'about1', 'url' => 'Link address']);
-            $menu->add('Sub about 2', ['parent' => 'about1', 'url' => 'Link address']);
-            $menu->add('Sub about 3', ['parent' => 'about1', 'url' => 'Link address']);
+            $menu->add('Origins', ['url'  => url('/').'/category/origins']);
             // Link2
-            $menu->add('About 2', ['route'  => 'index']);
+            $menu->add('Characters', ['url'  => url('/').'/category/characters']);
             // Link3
-            $menu->add('About 3', ['route'  => 'index']);
+            $menu->add('Artists', ['url'  => url('/').'/category/artists']);
+
+            // Dropdown Links
+            $menu->add('Friends', ['route'  => 'index'])->id('about1');
+            // Adding sub items;
+            $menu->add('Japanation', ['parent' => 'about1', 'url' => 'https://japanation.com']);
         });
 
         // Links Sidebar
@@ -53,10 +54,9 @@ class GenerateMenus
 
         // Footer Navigation
         \Menu::make('footer', function ($menu) {
-            $menu->add('Home',     ['route'  => 'index',  'class' => 'footer-v4__nav-item', 'id' => 'home']);
-            $menu->add('Contact',     ['route'  => 'login',  'class' => 'footer-v4__nav-item', 'id' => 'home']);
-            $menu->add('Term',     ['route'  => 'index',  'class' => 'footer-v4__nav-item', 'id' => 'home']);
-            $menu->add('About us',     ['route'  => 'index',  'class' => 'footer-v4__nav-item', 'id' => 'home']);
+            $menu->add('Home',     ['url'  => url('/').'/',  'class' => 'footer-v4__nav-item', 'id' => 'home']);
+            $menu->add('Contact',     ['url'  => url('/page/contact').'/',  'class' => 'footer-v4__nav-item', 'id' => 'home']);
+            $menu->add('Term',     ['url'  => url('/page/term').'/',  'class' => 'footer-v4__nav-item', 'id' => 'home']);
         });
 
         return $next($request);
