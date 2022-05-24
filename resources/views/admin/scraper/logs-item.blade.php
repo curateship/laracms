@@ -1,5 +1,7 @@
 <div class="log-item" data-id="{{$log_id}}" data-url="{{$page_url}}" data-scraper_id="{scraper_id}" style="position: relative;">
     <div class="message-item margin-bottom-xs msg-error">
+        {!! $page_url !!}
+        <br>
         {!! $scraper_url !!}
     </div>
     @foreach($messages as $message)

@@ -14,7 +14,7 @@ use Goutte\Client;
 use Symfony\Component\HttpClient\HttpClient;
 use Illuminate\Support\Facades\Log;
 use App\Services\LoggerService;
-use App\Models\{Post, ScraperLog, ScraperStat, Scraper, Tag, TagsCategories};
+use App\Models\{Post, ScraperLog, Scraper, Tag, TagsCategories};
 
 /**
  * @property $status
@@ -25,6 +25,8 @@ class ScraperService {
   public $domain = null;
   public $logger = null;
   public $proxies = [];
+
+  private $page_url, $url;
 
   public $scraper_status = [
     'id' => 0,
@@ -57,6 +59,7 @@ class ScraperService {
 
   public function run() {
     Scraper::where('id', $this->scraper->id)->update(['status' => 'running']);
+    ScraperLog::where('scraper_id', $this->scraper->id)->delete();
 
     // Log::info('Prepare to run scraper...');
 
@@ -72,12 +75,11 @@ class ScraperService {
     if (!isset($this->scraper->default_url)) {
       Log::warning('Scraper is canceled, because could not find main list page url.');
       $this->logger->update_log_param('default_url', 0);
-      $this->logger->save_log(false);
+      $this->logger->save_log();
       return;
     }
 
-    // Check if the scraper was paused before.
-    $scraper_stats = ScraperStat::where('scraper_id', $this->scraper->id)->first();
+    // TODO Check if the scraper was paused before.
 
     // Next Pagination direction
     $direction = $this->scraper->direction == "1" ? 'forward' : 'backward';
@@ -87,37 +89,15 @@ class ScraperService {
 
     $list_page_url = $this->scraper->default_url;
 
+    if($this->scraper->last_page_url != '' && $this->scraper->default_url != $this->scraper->last_page_url){
+        $list_page_url = $this->scraper->last_page_url;
+    }
+
     Log::info('===============================================================================================');
     Log::info('Starting scraper...');
 
-    $can_scrape = true;
-    if ($scraper_stats) {
-      $can_scrape = false;
-    }
-
     $debug_data = [];
     while(true) {
-      if (!$can_scrape && $scraper_stats && $scraper_stats->list_page_url != $list_page_url) {
-        // Get next page url.
-        $next_page_num = $direction == 'forward' ? $next_page_num + 1 : $next_page_num - 1;
-        if ($next_page_num == -1)
-          break;
-
-        // generate next page url
-        $list_page_url = $this->getNextListPageUrl($list_page_url, $next_page_num);
-        if (!$list_page_url)
-          break;
-
-        $this->scraper_status['list_page'] = $list_page_url;
-        $this->scraper_status['detail_page'] = '';
-
-        continue;
-      }
-
-      if ($scraper_stats && $scraper_stats->list_page_url == $list_page_url && $scraper_stats->item_url == '') {
-        $can_scrape = true;
-      }
-
       // Step 1 : Scrape List Page
       Log::info('_______________________________________________________________________');
       Log::info('Scraping list page... (' . $list_page_url . ')');
@@ -130,10 +110,6 @@ class ScraperService {
       // Step 2 : Scrape Item Page
       if (!empty($links)) {
         foreach($links as $page_url) {
-          if (!$can_scrape && $scraper_stats && $scraper_stats->item_url != $page_url) {
-            continue;
-          }
-
           $can_scrape = true;
 
           // Check whether current scraper should be paused.
@@ -141,7 +117,9 @@ class ScraperService {
           if ($this->check_scraper_status())
             return;
 
-          $scraped_data = $this->scrapeDetailPage($page_url);
+            $this->logger->updateUrls($list_page_url, $page_url);
+
+            $scraped_data = $this->scrapeDetailPage($page_url);
           $debug_data[] = [
             'list_url' => $list_page_url,
             'url' => $page_url,
@@ -159,6 +137,8 @@ class ScraperService {
         break;
       }
 
+      $next_page_num = $this->getPageNumFromPageListUrl($this->scraper->last_page_url);
+
       // Step 3 : Get next page url.
       $next_page_num = $direction == 'forward' ? $next_page_num + 1 : $next_page_num - 1;
       // Log::debug('Next page num: ' . $next_page_num);
@@ -170,6 +150,9 @@ class ScraperService {
       // Log::debug('Next page url: ' . $list_page_url);
       if (!$list_page_url)
         break;
+
+      $this->scraper->last_page_url = $list_page_url;
+      $this->scraper->save();
 
       $this->scraper_status['list_page'] = $list_page_url;
       $this->scraper_status['detail_page'] = '';
@@ -183,12 +166,12 @@ class ScraperService {
 
     // Mark current scraper as completed.
     $scraper_info = Scraper::find($this->scraper->id);
-    if ( $scraper_info ) {
-      $scraper_info->update(['status' => 'stopped']);
-    }
+    $scraper_info->status = 'stopped';
 
-    // Delete scraper status info from stats table
-    ScraperStat::where('scraper_id', $this->scraper->id)->delete();
+    // Delete scraper status info from stats ta ble
+    $scraper_info->last_page_url = null;
+
+    $scraper_info->save();
 
     return $debug_data;
   }
@@ -240,6 +223,8 @@ class ScraperService {
             // Check whether to stop rescrape.
             if ($this->check_rescraper_status())
               return;
+
+            $this->logger->updateUrls($list_page_url, $page_url);
 
             $scraped_data = $this->scrapeDetailPage($page_url);
             $debug_data[] = [
@@ -304,7 +289,6 @@ class ScraperService {
 
     $crawler = $client->request('GET', $url);
 
-    $this->logger->setUrl($url);
     if (!$crawler)
       $this->logger->update_log_param('scrape', 0);
 
@@ -346,26 +330,28 @@ class ScraperService {
 
     $crawler = $client->request('GET', $url);
 
-    $this->logger->setUrl($url);
     if (!$crawler){
         $this->logger->update_log_param('scrape', 0);
     }   else{
         $this->logger->update_log_param('scrape', 'Successfully');
     }
 
+
+    $scraper_info = Scraper::find($this->scraper->id);
+
     if($this->scraper->stop_url == $url){
         Log::info('Scraper has reach stop url and will be stopped');
 
         // Mark current scraper as completed.
-        $scraper_info = Scraper::find($this->scraper->id);
         if ( $scraper_info ) {
             $scraper_info->status = 'stopped';
             $scraper_info->save();
         }
 
-        // Delete scraper status info from stats table
-        ScraperStat::where('scraper_id', $this->scraper->id)->delete();
+        return false;
+    }
 
+    if($scraper_info->status == 'stopped'){
         return false;
     }
 
@@ -385,6 +371,33 @@ class ScraperService {
       $scrape_status = false;
       $this->logger->update_log_param('title', 0);
     }
+
+      $title = $titles[0];
+
+      // Generate slug
+      $title = strip_tags($title);
+      $slug_original = Str::slug($title, '-');
+      $posts_with_same_slug = Post::where('slug', 'like', $slug_original . '%')->get();
+
+      if (count($posts_with_same_slug) > 0) {
+          $slug = Post::getNewSlug($slug_original, $posts_with_same_slug);
+      } else{
+          $slug = $slug_original;
+      }
+
+      Log::info('Post original slug: '.$slug_original);
+      Log::info('Post new slug (if exist): '.$slug);
+      Log::info('Post hash: '.md5($slug_original));
+
+      // Check exist post;
+      if(Post::whereRaw('MD5(slug) = "'.md5($slug_original).'"')->first() !== null){
+          Log::info('>>> Media already exist in posts. Skipping... <<<');
+
+          $this->logger->update_log_param('scrape', 'Skipped');
+
+          return false;
+      }
+
 
     $images = $this->filterItemInfo($crawler, $this->scraper->image, 'src', $url);
     // if (count($images) > 0) {
@@ -479,9 +492,9 @@ class ScraperService {
 
     if (count($artists) == 0 && count($origins) == 0 && count($characters) == 0 && count($medias) == 0 && count($misc) == 0) {
       $scrape_status = false;
-      $this->logger->update_log_param('tags', 0);
+      $this->logger->update_log_param('tags', []);
     }   else{
-        $this->logger->update_log_param('tags', json_encode($tags));
+        $this->logger->update_log_param('tags', $tags);
     }
 
     if ($scrape_status === true) {
@@ -800,16 +813,6 @@ class ScraperService {
       // Download & Upload media files completed. Now it's time to add post.
       if ($scrape_status) {
         // Step 2: Prepare data for post.
-        $title = $titles[0];
-
-        // Generate slug
-          $title = strip_tags($title);
-          $slug = Str::slug($title, '-');
-          $posts_with_same_slug = Post::where('slug', 'like', $slug . '%')->get();
-
-          if (count($posts_with_same_slug) > 0) {
-              $slug = Post::getNewSlug($slug, $posts_with_same_slug);
-          }
 
         $post_data = [
           'user_id' => $this->scraper->user_id,
@@ -1238,11 +1241,7 @@ class ScraperService {
     $scraper_info = Scraper::find($this->scraper->id);
 
     // Save current status.
-    ScraperStat::where('scraper_id', $this->scraper->id)
-        ->update([
-            'list_page_url' => $this->scraper_status['list_page'],
-            'item_url' => $this->scraper_status['detail_page']
-        ]);
+    $scraper_info->last_page_url = $this->scraper_status['list_page'];
 
     return $scraper_info->status == 'paused' || $scraper_info->status == 'stopped';
   }
