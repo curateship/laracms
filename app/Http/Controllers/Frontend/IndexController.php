@@ -24,7 +24,7 @@ class IndexController extends Controller
         SEOMeta::setTitle(config('seotools.static_titles.'.get_called_class().'.'.__FUNCTION__));
 
         //$theme = 'classic';
-        $theme = 'masonry';
+        $theme = 'classic';
         if($theme == 'classic'){
             $posts = Post::where('status', 'published')->latest()->withCount('comments')->whereNotNull('user_id')->paginate(10);
         }   else{
