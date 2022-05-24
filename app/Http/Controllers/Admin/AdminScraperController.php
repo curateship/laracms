@@ -12,7 +12,7 @@ use App\Services\ScraperService;
 use App\Services\LoggerService;
 use Illuminate\Support\Facades\Validator;
 
-use App\Models\{Scraper, ScraperStat, ScraperLog, User};
+use App\Models\{Scraper, ScraperLog, User};
 //use Modules\Post\Entities\{ PostSetting, Post, PostsTag, PostsMeta };
 //use Modules\Users\Entities\{User, Role};
 //use Modules\Tag\Entities\{Tag, TagCategory};
@@ -115,7 +115,7 @@ class AdminScraperController extends Controller
         'character'   => request('character'),
         'media'       => request('media'),
         'misc'        => request('misc'),
-        'stop_url'    => \request('sport_url'),
+        'stop_url'    => request('sport_url'),
         'status'      => 'stopped'
       ]);
     } else {
@@ -152,16 +152,6 @@ class AdminScraperController extends Controller
       // Run scraper for current scraper.
       $scraper->status = 'ready';
       $scraper->save();
-
-      // Add/Update scraper status info into stats table
-      $scraper_stats = ScraperStat::where('scraper_id', $scraper->id)->first();
-      if (!$scraper_stats) {
-          $stat = new ScraperStat();
-          $stat->scraper_id = $scraper->id;
-          $stat->list_page_url = $scraper->default_url;
-          $stat->item_url = '';
-          $stat->save();
-      }
     }
 
     if ($action == 'scrape') // Redirect to scraper list page.
@@ -187,6 +177,8 @@ class AdminScraperController extends Controller
       // Save current status into stats table.
       // Current list page and item index or page.
       // Do this action from scheduler? Or is it possible to get current status from scheduler here?
+    }   else{
+        ScraperLog::where('scraper_id', $scraper_info->id)->delete();
     }
 
     $success_message = $status == 'paused' ? 'Scraper is scheduled to run.' : 'Scraper is paused.';
@@ -206,13 +198,10 @@ class AdminScraperController extends Controller
     }
 
     $scraper_info->status = 'stopped';
-    $scraper_info->save();
 
     // Reset scraper status info from stats table
-    ScraperStat::where('scraper_id', $id)->update([
-      'list_page_url' => $scraper_info->default_url,
-      'item_url' => ''
-    ]);
+      $scraper_info->last_page_url = null;
+      $scraper_info->save();
 
     return response()->json([
       'status' => true,
@@ -230,9 +219,6 @@ class AdminScraperController extends Controller
     }
 
     $scraper_info->delete();
-
-    // Delete scraper status info from stats table
-    ScraperStat::where('scraper_id', $id)->delete();
 
     return response()->json([
       'status' => true,
@@ -295,8 +281,7 @@ class AdminScraperController extends Controller
   }
 
   public function getLogs(Request $request) {
-    $time = !empty($request->input('time')) ? $request->input('time') : '';
-    $logs = LoggerService::get_log();
+    $logs = LoggerService::get_log(date('Y-m-d H:i:s', strtotime(now().' -1 minute')));
 
     $ids = [];
     $log_ids = ScraperLog::select(['id'])->get();
@@ -316,7 +301,7 @@ class AdminScraperController extends Controller
             'scraper_url' => $log['scraper_url'],
             'messages' => $log['messages'],
             'log_id' => $log['id'],
-            'page_url' => $log['scraper_url'],
+            'page_url' => $log['page_url'],
             'scraper_id' => $log['scraper_id']
         ])->render();
     }

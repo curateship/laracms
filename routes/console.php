@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Post;
+use App\Models\ScraperStat;
 use App\Models\Tag;
 use App\Models\User;
 use App\Services\ScraperService;
@@ -70,7 +71,6 @@ Artisan::command('auto-title', function () {
     dump('All drafts was renamed!');
 })->purpose('For automatic draft posts rename');
 
-
 Artisan::command('scrape {scraper_id}', function () {
     $scraper_settings = [
         'scraper_ip_ports' => [],
@@ -84,6 +84,13 @@ Artisan::command('scrape {scraper_id}', function () {
         if ($scraper) {
             // Do Scrape action.
             Log::info('Run Scraper by id (' . $scraper_id . ') - ' . date("Y-m-d H:i:s") );
+
+            // Add/Update scraper status info into stats table
+            if ($scraper->last_page_url == null) {
+                $scraper->last_page_url = $scraper->default_url;
+                $scraper->save();
+            }
+
             $scraper_service = new ScraperService($scraper, $scraper_settings);
             $scraper_service->run();
             Log::info('Scraper finished working - ' . date("Y-m-d H:i:s") );
