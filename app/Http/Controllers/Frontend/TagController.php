@@ -15,10 +15,10 @@ use App\Models\Tag;
 
 class TagController extends Controller
 {
-    public function show($tags_categories_name, $tag_name)
+    public function show($tags_categories_name, $tag_slug)
     {
         $recent_posts = Post::latest()->take(5)->get();
-        $categories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
+        $categories = Tag::take(10)->get();
         $tags = Tag::latest()->take(50)->get();
 
         $category = TagsCategories::where('name', $tags_categories_name)
@@ -28,7 +28,7 @@ class TagController extends Controller
             return abort(404);
         }
 
-        $tag = Tag::where('name', $tag_name)
+        $tag = Tag::where('slug', $tag_slug)
             ->where('category_id', $category->id)
             ->first();
 
@@ -68,5 +68,23 @@ class TagController extends Controller
         return [
             'results' => $tags_array
         ];
+    }
+
+    public function showCategory($category_name){
+        $category = TagsCategories::where('name', $category_name)->first();
+
+        if($category == null){
+            return abort(404);
+        }
+
+        $tags = Tag::where('category_id', $category->id)
+            ->leftJoin('tags_categories', 'tags_categories.id', '=', 'tags.category_id')
+            ->select(['tags.*', 'tags_categories.name as cat_name'])
+            ->paginate(50);
+
+        return view('theme.tags.categories', [
+            'category' => $category,
+            'tags' => $tags
+        ]);
     }
 }

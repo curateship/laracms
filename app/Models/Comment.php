@@ -44,20 +44,25 @@ class Comment extends Model
 
         }   else{
             $comments = static::where('reply_id', $this->id)
-                ->leftJoin('users', 'users.id', '=', 'comments.user_id')
-                ->select([
-                    'comments.*',
-                    'users.name as author_name',
-                    'users.thumbnail as author_thumbnail'
-                ])
                 ->orderBy('comments.created_at', 'DESC')
                 ->limit(10);
 
-                if($last_comment_id > 0){
-                    $comments = $comments->where('comments.id', '<', $last_comment_id);
+            if($last_comment_id > 0){
+                $comments = $comments->where('comments.id', '<', $last_comment_id);
+            }
+
+            $comments = $comments->get();
+
+            $authors = [];
+            foreach($comments as $comment){
+                if(!isset($authors[$comment->user_id])){
+                    $authors[$comment->user_id] = User::find($comment->user_id);
                 }
 
-            return $comments->get();
+                $comment->author = $authors[$comment->user_id];
+            }
+
+            return $comments;
         }
     }
 

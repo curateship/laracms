@@ -37,13 +37,13 @@
                     <menu class="menu-bar js-int-table-actions__no-items-selected js-menu-bar">
 
                     <div class="inline-flex items-baseline padding-x-sm">
-                        <label class="text-sm color-contrast-medium margin-right-xs" for="selectThis"></label>
-
+                        <label class="text-sm color-contrast-medium margin-right-xs" for="categoryFilter"></label>
                         <div class="select inline-block js-select" data-trigger-class="reset text-sm color-contrast-high text-underline inline-flex items-center cursor-pointer js-tab-focus">
-                            <select name="selectThis" id="selectThis">
-                            <option value="0" selected>All Tags</option>
-                            <option value="1">Cat 1</option>
-                            <option value="2">Cat 2</option>
+                            <select name="selectThis" id="categoryFilter">
+                                <option value="0" {{request()->get('category') == '' ? 'selected' : ''}}>All Tags</option>
+                                @foreach(\App\Models\TagsCategories::all() as $category)
+                                    <option value="{{$category->id}}" {{request()->get('category') == $category->id ? 'selected' : ''}}>{{$category->name}}</option>
+                                @endforeach
                             </select>
 
                             <svg class="icon icon--xxxs margin-left-xxs" viewBox="0 0 8 8"><path d="M7.934,1.251A.5.5,0,0,0,7.5,1H.5a.5.5,0,0,0-.432.752l3.5,6a.5.5,0,0,0,.864,0l3.5-6A.5.5,0,0,0,7.934,1.251Z"/></svg>
@@ -57,13 +57,45 @@
                         </a>
                         <span class="menu-bar__label">Add Tag</span>
                       </li>
-                      <li class="menu-bar__item" role="menuitem" aria-controls="tag-search">
-                        <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 20 20">
-                          <path d="M11.25 17.5c4.83 0 8.75-3.93 8.75-8.75s-3.93-8.75-8.75-8.75-8.75 3.93-8.75 8.75 3.93 8.75 8.75 8.75z m0-15c3.45 0 6.25 2.8 6.25 6.25s-2.8 6.25-6.25 6.25-6.25-2.8-6.25-6.25 2.8-6.25 6.25-6.25z"></path><path d="M0.36 17.86l3-2.99a10.02 10.02 0 0 0 1.76 1.77l-2.98 3a1.25 1.25 0 0 1-1.78 0 1.25 1.25 0 0 1 0-1.78z"></path>
+
+                    <!-- Search -->
+                    <li class="menu-bar__item" role="menuitem" aria-controls="tag-search">
+                    <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 20 20">
+                        <path d="M11.25 17.5c4.83 0 8.75-3.93 8.75-8.75s-3.93-8.75-8.75-8.75-8.75 3.93-8.75 8.75 3.93 8.75 8.75 8.75z m0-15c3.45 0 6.25 2.8 6.25 6.25s-2.8 6.25-6.25 6.25-6.25-2.8-6.25-6.25 2.8-6.25 6.25-6.25z"></path><path d="M0.36 17.86l3-2.99a10.02 10.02 0 0 0 1.76 1.77l-2.98 3a1.25 1.25 0 0 1-1.78 0 1.25 1.25 0 0 1 0-1.78z"></path>
+                    </svg>
+                    <span class="menu-bar__label">Search Tags</span>
+                    </li>
+
+                    <!-- Search Modal -->
+                    <div class="modal modal--search modal--animate-fade bg bg-opacity-90% flex flex-center padding-md backdrop-blur-10 js-modal" id="tag-search">
+                    <div class="modal__content width-100% max-width-sm max-height-100% overflow-auto" role="alertdialog" aria-labelledby="modal-search-title" aria-describedby="">
+                        <form class="full-screen-search">
+                        <label for="search" id="modal-search-title" class="sr-only">Search</label>
+                        <input class="reset full-screen-search__input" type="search" name="search" id="search" placeholder="Search...">
+                        <button class="reset full-screen-search__btn">
+                            <svg class="icon" viewBox="0 0 24 24">
+                            <title>Search</title>
+                            <g stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" stroke="currentColor" fill="none" stroke-miterlimit="10">
+                                <line x1="22" y1="22" x2="15.656" y2="15.656"></line>
+                                <circle cx="10" cy="10" r="8"></circle>
+                            </g>
+                            </svg>
+                        </button>
+                        </form>
+                    </div>
+
+                    <button class="reset modal__close-btn modal__close-btn--outer  js-modal__close js-tab-focus">
+                        <svg class="icon icon--sm" viewBox="0 0 24 24">
+                        <title>Close modal window</title>
+                        <g fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="3" y1="3" x2="21" y2="21" />
+                            <line x1="21" y1="3" x2="3" y2="21" />
+                        </g>
                         </svg>
-                        <span class="menu-bar__label">Search Tags</span>
-                      </li>
+                    </button>
+                    </div>
                     </menu>
+
                     <menu class="menu-bar is-hidden js-int-table-actions__items-selected js-menu-bar delete-selected-tags">
                       <li class="menu-bar__item" role="menuitem">
                         <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 16 16">
@@ -157,9 +189,21 @@
                                       </li>
                                   </ul>
                               </th>
-                              <th class="int-table__cell int-table__cell--th">
+                              <th class="int-table__cell int-table__cell--th  int-table__cell--sort js-int-table__cell--sort
+                              @if(request()->get('sortBy') === 'use_count')
+                              @if(request()->get('sortDesc') === 'desc')
+                                  int-table__cell--desc
+                              @endif
+                              @if(request()->get('sortDesc') === 'asc')
+                                  int-table__cell--asc
+                              @endif
+                              @endif
+                                  " data-sort-col="use_count">
                                   <div class="flex items-center">
                                       <span>Use count</span>
+                                      <svg class="icon icon--xxs margin-left-xxxs int-table__sort-icon" aria-hidden="true" viewBox="0 0 12 12">
+                                          <polygon class="arrow-up" points="6 0 10 5 2 5 6 0" />
+                                          <polygon class="arrow-down" points="6 12 2 7 10 7 6 12" /></svg>
                                   </div>
                                   <ul class="sr-only js-int-table__sort-list">
                                       <li>
@@ -225,7 +269,11 @@
 
                                       <!-- Image -->
                                       <figure class="width-xl height-lg radius-lg flex-shrink-0 overflow-hidden margin-right-xs">
-                                          <img class="block width-100% height-100% object-cover" src="{{ url('/storage').config('images.tags_storage_path').$tag->medium  }}" alt="Tag Picture">
+                                          @if($tag->thumbnail != '')
+                                              <img class="block width-100% height-100% object-cover" src="{{ url('/storage').config('images.tags_storage_path').$tag->thumbnail  }}" alt="Tag Picture">
+                                          @else
+                                              <div class="tag-without-image"></div>
+                                          @endif
                                       </figure>
 
                                       <!-- Tag Name -->
@@ -238,7 +286,7 @@
                                   <td class="int-table__cell">{{ $tag->category()->name }}</td>
 
                                   <!-- Post count who use this tag -->
-                                  <td class="int-table__cell">{{ $tag->useCount() }}</td>
+                                  <td class="int-table__cell">{{ $tag->use_count }}</td>
 
                                   <!-- Created at Date -->
                                   <td class="int-table__cell">{{ $tag->created_at->diffForHumans() }}</td>

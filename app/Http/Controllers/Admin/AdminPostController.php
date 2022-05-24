@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 // Others
 use App\Http\Controllers\Controller;
+use App\Models\Like;
+use App\Models\Notification;
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\FFMpeg;
 use FFMpeg\FFProbe;
@@ -54,6 +56,14 @@ class AdminPostController extends Controller
         if($request->has('status') && $request->input('status') != 'All'){
             $posts = $posts->where('status', strtolower($request->input('status')));
             $status = ucfirst($request->input('status'));
+        }
+
+        if($request->has('search') && $request->input('search') != ''){
+            $search_input = $request->input('search');
+            $posts = $posts->where(function($query) use ($search_input){
+                $query->where('title', 'like', '%'.$search_input.'%')
+                    ->whereOr('body', 'like', '%'.$search_input.'%');
+            });
         }
 
         return view('admin.posts.index', [
@@ -118,6 +128,7 @@ class AdminPostController extends Controller
     // Destroy
     public function destroy(string $ids, Request $request)
     {
+
         $ids = explode(',', $ids);
 
         foreach($ids as $id){
@@ -136,20 +147,28 @@ class AdminPostController extends Controller
                 ->whereNull('reply_id')
                 ->delete();
 
-            // Remove all video links;
-            DB::table('posts_videos')
+            // Remove all views;
+            DB::table('posts_views')
                 ->where('post_id', $id)
                 ->delete();
 
-            // remove all views;
-            DB::table('posts_views')
-                ->where('post_id', $id)
+            // Remove likes;
+            Like::where('post_id', $id)
+                ->delete();
+
+            // Remove notifications;
+            Notification::where('post_id', $id)
                 ->delete();
 
             // Remove post images;
             $post = Post::find($id);
             $post->removePostImages('main');
             $post->removePostImages('body');
+
+            // Remove all video links;
+            DB::table('posts_videos')
+                ->where('post_id', $id)
+                ->delete();
 
             // And then - remove the post;
             Post::destroy($id);
@@ -258,6 +277,10 @@ class AdminPostController extends Controller
             // Compress video;
             $compress_array = [
                 [
+                    'path' => 'original',
+                    'resolution' => 0
+                ],
+                [
                     'path' => 'thumbnail',
                     'resolution' => 480
                 ],
@@ -273,13 +296,13 @@ class AdminPostController extends Controller
             foreach($compress_array as $compress){
                 if($height < $width){
                     // For Landscape view;
-                    $m_video_width = $compress['resolution'];
-                    $m_video_height = ceil($height * ($compress['resolution']/$width));
+                    $m_video_width = $compress['path'] == 'original' ? $width : $compress['resolution'];
+                    $m_video_height = ceil($height * ($compress['path'] == 'original' ? $width : $compress['resolution']/$width));
                     if($m_video_height % 2 == 1) $m_video_height++;
                 }   else{
                     // For Portrait view;
-                    $m_video_height = $compress['resolution'];
-                    $m_video_width = ceil($width * ($compress['resolution']/$height));
+                    $m_video_height = $compress['path'] == 'original' ? $height : $compress['resolution'];
+                    $m_video_width = ceil($width * ($compress['path'] == 'original' ? $height : $compress['resolution']/$height));
                     if($m_video_width % 2 == 1) $m_video_width++;
                 }
 
@@ -314,12 +337,23 @@ class AdminPostController extends Controller
                     ->setAudioChannels(2)
                     ->setAudioKiloBitrate(256);
 
-                $m_video->save($format, storage_path() . "/app".$path_video."/".$compress['path']."/" . $thumbnail_medium_name);
+                if($compress['path'] != 'original'){
+                    $m_video->save($format, storage_path() . "/app".$path_video."/".$compress['path']."/" . $thumbnail_medium_name);
+                }
 
                 /* Make preview images for post */
+                $source = storage_path() . "/app".$path."/".$compress['path']."/" . $image_file_name;
                 $m_video
                     ->frame(Coordinate\TimeCode::fromSeconds(5))
-                    ->save(storage_path() . "/app".$path."/".$compress['path']."/" . $image_file_name);
+                    ->save($source);
+
+                // Resize preview;
+                $thumbnail_medium = \Intervention\Image\Facades\Image::make($source);
+                $thumbnail_medium->resize($m_video_width, $m_video_height, function($constraint){
+                    $constraint->aspectRatio();
+                });
+
+                $thumbnail_medium->save($source);
             }
 
             // Add images paths in response;
@@ -375,13 +409,16 @@ class AdminPostController extends Controller
 
         // Generate slug
         $slug = Str::slug($title, '-');
-        $post_with_same_slug = Post::where('slug', 'like', $slug . '%')->first();
+        $posts_with_same_slug = Post::where('slug', 'like', $slug . '%');
 
-        if ($post_with_same_slug != null) {
-            // Ignore, if we have same post with this slug;
-            if(!$request->has('postId') || ($request->has('postId') && $request->input('postId') != $post_with_same_slug->id)){
-                $slug = Post::getNewSlug($slug, [$post_with_same_slug]);
-            }
+        if($request->has('postId')){
+            $posts_with_same_slug = $posts_with_same_slug->where('id', '!=', $request->has('postId'));
+        }
+
+        $posts_with_same_slug = $posts_with_same_slug->get();
+
+        if (count($posts_with_same_slug) > 0) {
+            $slug = Post::getNewSlug($slug, $posts_with_same_slug);
         }
 
         $category = Category::where('name', $request->input('category'))
@@ -449,11 +486,13 @@ class AdminPostController extends Controller
                     }
                 }
             }
-
         }   else{
             $post = new Post();
             $post->user_id = Auth::id();
         }
+
+        $old_title = $post->title;
+        $old_body = $post->id == null ? json_encode(['blocks' => []]) : $post->body;
 
         $post->title = $title;
         $post->excerpt = '';
@@ -464,7 +503,11 @@ class AdminPostController extends Controller
         $post->thumbnail = $thumbnail;
         $post->medium = $medium;
         $post->type = $request->input('type');
-        $post->status = $request->input('status');
+
+        if($request->has('status') && in_array($request->input('status'), ['draft', 'published'])){
+            $post->status = $request->input('status');
+        }
+
         $post->save();
 
         // Now we can save excerpt;
@@ -510,9 +553,19 @@ class AdminPostController extends Controller
                     // If tag doesn't exist yet, create it;
                     if ($tag == null) {
                         $tag = new Tag;
-                        $tag->body = '';
+                        $tag->body = '{"time": '.time().',"blocks":[]}';
                         $tag->name = $tag_input;
                         $tag->category_id = $tag_category->id;
+
+                        $slug = Str::slug($tag_input, '-');
+                        $exist = Tag::where('slug', 'like', $slug . '%')
+                            ->get();
+
+                        if (count($exist) > 0) {
+                            $slug = Post::getNewSlug($slug, $exist);
+                        }
+
+                        $tag->slug = $slug;
                         $tag->save();
                     }
 
@@ -528,11 +581,39 @@ class AdminPostController extends Controller
             }
         }
 
+        // Add notifications;
+        if($request->input('status') != 'draft'){
+            if(json_decode($old_body)->blocks != json_decode($post->body)->blocks || $old_title != $post->title){
+                $user = User::find($post->user_id);
+
+                if($request->has('postId')){
+                    // Remove old notifications;
+                    Notification::removeNotificationForPost($post->id);
+
+                    $user->followersBroadcast(Auth::user()->name, 'Updated a post: '.$post->title, '/post/'.$post->slug, $post->id);
+                }   else{
+                    $user->followersBroadcast(Auth::user()->name, 'Added a new post: '.$post->title, '/post/'.$post->slug, $post->id);
+                }
+            }
+        }   else{
+            // If post moved to draft status - remove old notifications;
+            Notification::removeNotificationForPost($post->id);
+        }
+
         if($request->has('postId') || $request->input('status') == 'draft'){
             return redirect('/post/edit/'.$post->slug);
         }   else{
             return redirect('/post/'.$post->slug);
         }
+    }
 
+    public function move(Request $request){
+        $posts_array = explode(',', $request->input('list'));
+
+        Post::whereIn('id', $posts_array)
+            ->update([
+                'updated_at' => now(),
+                'status' => $request->input('direction')
+            ]);
     }
 }

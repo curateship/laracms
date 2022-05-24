@@ -2,7 +2,7 @@
 @section('content')
 
 <!-- Confirm Password Form Wrapper Start -->
-<div class="container max-width-xs margin-top-xxl padding-lg card">
+<div class="container max-width-xs padding-lg card">
 
 <!-- Confirm Password Form Start -->
   @include('components.auth.confirm-password')

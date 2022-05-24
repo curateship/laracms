@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Follow;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,6 +15,15 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
+    public function index(){
+        $users = User::orderBy('name')
+            ->paginate(20);
+
+        return view('theme.users.all', [
+            'users' => $users
+        ]);
+    }
+
     public function showProfile($user_id){
         if(Auth::guest() && $user_id == 'my'){
             return abort(404);
@@ -32,9 +42,22 @@ class UserController extends Controller
             ->orderBy('created_at', 'DESC')
             ->paginate(10);
 
+        $followed = false;
+        if(!Auth::guest()){
+            // Checking of following;
+            $exist_follow = Follow::where('user_id', Auth::id())
+                ->where('follow_user_id', $user->id)
+                ->first();
+
+            $followed = $exist_follow != null;
+        }
+
         return view('theme.users.profile', [
             'user' => $user,
-            'posts' => $posts
+            'followed' => $followed,
+            'posts' => $posts,
+            'followers' => $user->getFollowersList(),
+            'following' => $user->getFollowingList()
         ]);
     }
 
@@ -67,6 +90,7 @@ class UserController extends Controller
 
         $user->name = $request->input('name');
         $user->email = $request->input('email');
+        $user->bio = $request->has('bio') ? $request->input('bio') : null;
 
         // Remove old avatar (if it not default);
         if($request->has('avatar-thumbnail') && $user->thumbnail != $request->input('avatar-thumbnail')){

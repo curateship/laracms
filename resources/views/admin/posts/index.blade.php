@@ -38,6 +38,19 @@
           <div class="flex flex-wrap items-center justify-between margin-right-sm">
             <div class="flex flex-wrap">
               <menu class="menu-bar js-int-table-actions__no-items-selected js-menu-bar">
+                  <div class="inline-flex items-baseline padding-x-sm">
+                      <label class="text-sm color-contrast-medium margin-right-xs" for="statusFilter"></label>
+                      <div class="select inline-block js-select" data-trigger-class="reset text-sm color-contrast-high text-underline inline-flex items-center cursor-pointer js-tab-focus">
+                          <select name="selectThis" id="statusFilter">
+                              <option value="" {{request()->get('status') == '' ? 'selected' : ''}}>All Posts</option>
+                              <option value="published" {{request()->get('status') == 'published' ? 'selected' : ''}}>Published</option>
+                              <option value="draft" {{request()->get('status') == 'draft' ? 'selected' : ''}}>Drafts</option>
+                          </select>
+
+                          <svg class="icon icon--xxxs margin-left-xxs" viewBox="0 0 8 8"><path d="M7.934,1.251A.5.5,0,0,0,7.5,1H.5a.5.5,0,0,0-.432.752l3.5,6a.5.5,0,0,0,.864,0l3.5-6A.5.5,0,0,0,7.934,1.251Z"/></svg>
+                      </div>
+                  </div>
+
                 <li class="menu-bar__item"><a href="/posts/create" role="menuitem">
                   <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 20 20">
                     <path d="M18.85 4.39l-3.32-3.32a0.83 0.83 0 0 0-1.18 0l-11.62 11.62a0.84 0.84 0 0 0-0.2 0.33l-1.66 4.98a0.83 0.83 0 0 0 0.79 1.09 0.84 0.84 0 0 0 0.26-0.04l4.98-1.66a0.84 0.84 0 0 0 0.33-0.2l11.62-11.62a0.83 0.83 0 0 0 0-1.18z m-6.54 1.08l1.17-1.18 2.15 2.15-1.18 1.17z"></path>
@@ -45,13 +58,65 @@
                   </a>
                   <span class="menu-bar__label">Add Post</span>
                 </li>
+
+                <!-- Search -->
                 <li class="menu-bar__item" role="menuitem" aria-controls="post-search">
                   <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 20 20">
                     <path d="M11.25 17.5c4.83 0 8.75-3.93 8.75-8.75s-3.93-8.75-8.75-8.75-8.75 3.93-8.75 8.75 3.93 8.75 8.75 8.75z m0-15c3.45 0 6.25 2.8 6.25 6.25s-2.8 6.25-6.25 6.25-6.25-2.8-6.25-6.25 2.8-6.25 6.25-6.25z"></path><path d="M0.36 17.86l3-2.99a10.02 10.02 0 0 0 1.76 1.77l-2.98 3a1.25 1.25 0 0 1-1.78 0 1.25 1.25 0 0 1 0-1.78z"></path>
                   </svg>
                   <span class="menu-bar__label">Search Posts</span>
                 </li>
+
+                <!-- Search Modal -->
+                <div class="modal modal--search modal--animate-fade bg bg-opacity-90% flex flex-center padding-md backdrop-blur-10 js-modal" id="post-search">
+                  <div class="modal__content width-100% max-width-sm max-height-100% overflow-auto" role="alertdialog" aria-labelledby="modal-search-title" aria-describedby="">
+                    <form class="full-screen-search">
+                      <label for="search" id="modal-search-title" class="sr-only">Search</label>
+                      <input class="reset full-screen-search__input" type="search" name="search" id="search" placeholder="Search...">
+                      <button class="reset full-screen-search__btn">
+                        <svg class="icon" viewBox="0 0 24 24">
+                          <title>Search</title>
+                          <g stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" stroke="currentColor" fill="none" stroke-miterlimit="10">
+                            <line x1="22" y1="22" x2="15.656" y2="15.656"></line>
+                            <circle cx="10" cy="10" r="8"></circle>
+                          </g>
+                        </svg>
+                      </button>
+                    </form>
+                  </div>
+
+                  <button class="reset modal__close-btn modal__close-btn--outer  js-modal__close js-tab-focus">
+                    <svg class="icon icon--sm" viewBox="0 0 24 24">
+                      <title>Close modal window</title>
+                      <g fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="3" x2="21" y2="21" />
+                        <line x1="21" y1="3" x2="3" y2="21" />
+                      </g>
+                    </svg>
+                  </button>
+                </div>
               </menu>
+
+                @if(request()->get('status') === 'draft')
+                    <menu class="menu-bar is-hidden js-int-table-actions__items-selected js-menu-bar move-selected-posts" data-direction="published">
+                        <li class="menu-bar__item" role="menuitem">
+                            <svg class="icon menu-bar__icon" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 115.4 122.88"><title>up-arrow</title><path d="M24.94,67.88A14.66,14.66,0,0,1,4.38,47L47.83,4.21a14.66,14.66,0,0,1,20.56,0L111,46.15A14.66,14.66,0,0,1,90.46,67.06l-18-17.69-.29,59.17c-.1,19.28-29.42,19-29.33-.25L43.14,50,24.94,67.88Z"/></svg>
+                            <span class="counter counter--critical counter--docked move-counter">0 <i class="sr-only">Notifications</i></span>
+                            <span class="menu-bar__label">Move to Published</span>
+                        </li>
+                    </menu>
+                @endif
+
+                @if(request()->get('status') === 'published')
+                    <menu class="menu-bar is-hidden js-int-table-actions__items-selected js-menu-bar move-selected-posts" data-direction="draft">
+                        <li class="menu-bar__item" role="menuitem">
+                            <svg class="icon menu-bar__icon" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 115.4 122.88"><title>down-arrow</title><path d="M24.94,55A14.66,14.66,0,0,0,4.38,75.91l43.45,42.76a14.66,14.66,0,0,0,20.56,0L111,76.73A14.66,14.66,0,0,0,90.46,55.82l-18,17.69-.29-59.17c-.1-19.28-29.42-19-29.33.24l.29,58.34L24.94,55Z"/></svg>
+                            <span class="counter counter--critical counter--docked move-counter">0 <i class="sr-only">Notifications</i></span>
+                            <span class="menu-bar__label">Move to Draft</span>
+                        </li>
+                    </menu>
+                @endif
+
               <menu class="menu-bar is-hidden js-int-table-actions__items-selected js-menu-bar delete-selected-posts">
                 <li class="menu-bar__item" role="menuitem">
                   <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 16 16">
@@ -79,10 +144,26 @@
               <input type="hidden" id="delete-posts-list">
             </div>
           </div>
+
+            <!-- Moving confirmation -->
+            <div id="move-post-dialog" class="dialog dialog--sticky js-dialog" data-animation="on">
+                <div class="dialog__content max-width-xxs" role="alertdialog" aria-labelledby="dialog-sticky-title" aria-describedby="dialog-sticky-description">
+                    <div class="text-component">
+                        <h4 id="dialog-sticky-title">Are you sure what you want to move selected post(-s)?</h4>
+                    </div>
+                    <footer class="margin-top-md">
+                        <div class="flex justify-end gap-xs flex-wrap">
+                            <button class="btn btn--subtle js-dialog__close">Cancel</button>
+                            <button id="accept-move-posts" class="btn btn--accent">Move</button>
+                        </div>
+                    </footer>
+                    <input type="hidden" id="move-posts-list">
+                </div>
+            </div>
         </div>
 
-        <div class="margin-top-auto border-top border-contrast-lower border-opacity-30%"></div><!-- Divider -->
         <!-- Table-->
+        <div class="margin-top-auto border-top border-contrast-lower border-opacity-30%"></div><!-- Divider -->
         <div class="padding-sm">
           <div id="table-1" class="int-table text-sm js-int-table">
             <div class="int-table__inner margin-bottom-xs">
@@ -205,9 +286,11 @@
                     <td class="int-table__cell flex">
 
                     <!-- Image -->
-                    <figure class="width-xl height-lg radius-lg flex-shrink-0 overflow-hidden margin-right-xs">
-                      <img class="block width-100% height-100% object-cover" src="{{ url('/storage').config('images.posts_storage_path').$post->medium  }}" alt="Post Picture">
-                    </figure>
+                    <a href="{{ route('post.show', $post) }}" target="_blank">
+                      <figure class="width-xl height-lg radius-lg flex-shrink-0 overflow-hidden margin-right-xs">
+                        <img class="block width-100% height-100% object-cover" src="{{ url('/storage').config('images.posts_storage_path').$post->medium  }}" alt="Post Picture">
+                      </figure>
+                    </a>
 
                     <!-- Post Title -->
                     <div class="line-height-xs padding-top-xxxs padding-left-xxs">
@@ -267,19 +350,19 @@
           </div>
         </div><!-- END Table-->
         <!-- Pagination -->
+        <div class="margin-top-auto border-top border-contrast-lower"></div><!-- Divider -->
         @include('components.layouts.partials.pagination', ['items' => $posts])
         <!-- Pagination END-->
       </div><!-- END Col-12 Card -->
     </div><!-- Col-12 END -->
+    
   <!-- Sidebar -->
   <div class="col-3@md">
-
       @if(\Illuminate\Support\Facades\Gate::allows('is-admin'))
           @include('admin.partials.sidebar-admin')
       @else
           @include('admin.partials.sidebar')
       @endif
-
   </div>
   </div><!-- Grid END -->
 </div>

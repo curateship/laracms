@@ -55,13 +55,16 @@ class TagFactory extends Factory
             $for_factory_updates[$type] = "/$type/$file_name.png";
         }
 
+        $title = $this->faker->word();
+
         return [
-            'name' => $this->faker->word(),
+            'name' => $title,
             'category_id' => TagsCategories::all()->random()->id,
             'original' => $for_factory_updates['original'],
             'medium' => $for_factory_updates['medium'],
             'thumbnail' => $for_factory_updates['thumbnail'],
-            'body' => '{"time":1648143854001,"blocks":[{"id":"vijzrMkD7N","type":"paragraph","data":{"text":"<b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry. <b>Lorem Ipsum</b> has been the industry`s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."}}],"version":"2.23.2"}'
+            'body' => '{"time":1648143854001,"blocks":[{"id":"vijzrMkD7N","type":"paragraph","data":{"text":"<b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry. <b>Lorem Ipsum</b> has been the industry`s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."}}],"version":"2.23.2"}',
+            'slug' => Str::slug($title, '-')
         ];
     }
 }

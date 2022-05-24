@@ -109,6 +109,54 @@ Usage: For LaraCMS
     }
 }
 
+// animated notifications icon
+.anim-menu-btn--notifications{
+    .icon{
+        height: 20px;
+        width: 20px;
+    }
+}
+
+.anim-menu-btn--notifications {
+    .icon__group {
+        transform-origin: 12px 12px;
+        transform: rotate(0deg);
+        transition: transform 0.3s var(--ease-out);
+
+        > * {
+            transition: transform 0.3s var(--ease-in-out),
+            stroke-dashoffset 0.3s, opacity 0.3s;
+        }
+
+        > *:nth-child(3) {
+            stroke-dashoffset: 24;
+            stroke-dasharray: 24;
+        }
+
+        > *:nth-child(4) {
+            stroke-dashoffset: 24;
+            stroke-dasharray: 24;
+        }
+    }
+
+    &.anim-menu-btn--state-b {
+        .icon__group {
+            transform: rotate(-90deg);
+
+            > *:nth-child(1), > *:nth-child(2) {
+                opacity: 0;
+            }
+
+            > *:nth-child(3) {
+                stroke-dashoffset: 48;
+            }
+            > *:nth-child(4) {
+                stroke-dashoffset: 48;
+            }
+        }
+    }
+}
+
 // animated avatar icon
 .anim-menu-btn--avatar {
     .icon__group {
@@ -192,4 +240,31 @@ Usage: For LaraCMS
 .author--minimal-mobile {
     --author-img-size: .8em;
     align-items: center;
+}
+
+.notif-popover.popover{
+    @include max-breakpoint(md){
+        right: 20px !important;
+        left: 20px !important;
+        width: auto;
+    }
+}
+
+svg.avatar{
+    max-width: none !important;
+}
+
+.notification-avatar-box{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    flex-shrink: 0;
+
+    .notification-avatar{
+        width: var(--notif-figure-size);
+        height: var(--notif-figure-size);
+        border-radius: 50%;
+    }
 }

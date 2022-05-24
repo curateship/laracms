@@ -1,3 +1,7 @@
+@push('custom-scripts')
+    @include('admin.dashboard.scripts')
+@endpush
+
 <!-- 👇 Sidebar Wrapper-->
 <div class="card display@md position-fixed position-sticky top-sm@xs">
     <div class="background-bg radius-md padding-bottom-sm">
@@ -22,6 +26,7 @@
                 <a href="{{ route('admin.posts.index') }}" class="sidenav__link" {{ strpos(url()->full(), '/admin/posts') !== false ? 'aria-current=page' : '' }}>
                   <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16"><g><path d="M14,7H2v7c0,0.6,0.4,1,1,1h10c0.6,0,1-0.4,1-1V7z"></path><rect y="1" width="16" height="4"></rect></g></svg>
                   <span class="sidenav__text text-sm@md">Posts</span>
+                    <span class="sidenav__counter dashboard-counter" data-target="total">0</span>
                 </a>
 
                 <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
@@ -38,12 +43,14 @@
                   <li class="sidenav__item">
                     <a href="/admin/posts?status=published" class="sidenav__link">
                       <span class="sidenav__text text-sm@md">Published</span>
+                        <span class="sidenav__counter dashboard-counter" data-target="published">0</span>
                     </a>
                   </li>
 
                   <li class="sidenav__item">
                     <a href="/admin/posts?status=draft" class="sidenav__link">
                       <span class="sidenav__text text-sm@md">Draft</span>
+                        <span class="sidenav__counter dashboard-counter" data-target="drafts">0</span>
                     </a>
                   </li>
 
@@ -204,7 +211,6 @@
                     </g>
                   </svg>
                       <span class="sidenav__text text-sm@md">Galleries</span>
-                      <span class="sidenav__counter">3 <i class="sr-only">notifications</i></span>
                   </a>
                     <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
                       <svg class="icon" viewBox="0 0 12 12"><polygon points="4 3 8 6 4 9 4 3"/></svg>
@@ -255,7 +261,7 @@
                     <path d="M14,1H2A2,2,0,0,0,0,3v.4L8,7.9l8-4.4V3A2,2,0,0,0,14,1Z"></path><path d="M7.5,9.9,0,5.7V13a2,2,0,0,0,2,2H14a2,2,0,0,0,2-2V5.7L8.5,9.9A1.243,1.243,0,0,1,7.5,9.9Z"></path>                      </g>
                   </svg>
                     <span class="sidenav__text text-sm@md">Email</span>
-                    <span class="sidenav__counter">3 <i class="sr-only">notifications</i></span>
+                    <!--<span class="sidenav__counter">3 <i class="sr-only">notifications</i></span>-->
                 </a>
                   <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
                     <svg class="icon" viewBox="0 0 12 12"><polygon points="4 3 8 6 4 9 4 3"/></svg>
@@ -269,35 +275,31 @@
                 </ul>
             </li>
 
-            <!-- Comments -->
+            <!-- Scraper -->
             <li class="sidenav__item">
-              <a href="#0" class="sidenav__link">
+              <a href="/scraper/scraper-v1/1" class="sidenav__link" {{ str_replace(url('/'), '', url()->full()) === '/scraper/scraper-v1/1' ? 'aria-current=page' : '' }}>
                 <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16">
                   <g >
                    <path d="M14,0H2C0.9,0,0,0.9,0,2v12c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2V2C16,0.9,15.1,0,14,0z M4,2h2v4H4V2z M6,11.7V14H4v-2.3c-0.6-0.3-1-1-1-1.7c0-1.1,0.9-2,2-2s2,0.9,2,2C7,10.7,6.6,11.4,6,11.7z M12,14h-2v-4h2V14z M11,8 C9.9,8,9,7.1,9,6c0-0.7,0.4-1.4,1-1.7V2h2v2.3c0.6,0.3,1,1,1,1.7C13,7.1,12.1,8,11,8z"></path>
                   </g>
                 </svg>
-                  <span class="sidenav__text text-sm@md">Tools</span>
+                  <span class="sidenav__text text-sm@md">Scraper</span>
               </a>
                 <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
                   <svg class="icon" viewBox="0 0 12 12"><polygon points="4 3 8 6 4 9 4 3"/></svg>
                 </button>
              <ul class="sidenav__list">
                <li class="sidenav__item">
-                 <a href="#0" class="sidenav__link">
-                   <span class="sidenav__text text-sm@md">Scrapers</span>
-                 </a>
-               </li>
-               <li class="sidenav__item">
-                 <a href="#0" class="sidenav__link">
-                   <span class="sidenav__text text-sm@md">Tag Titles</span>
+                 <a href="/scraper" class="sidenav__link">
+                   <span class="sidenav__text text-sm@md">Running</span>
                  </a>
                </li>
                 </ul>
                 </li>
 
+              <!-- Settings -->
               <li class="sidenav__item">
-                <a href="http://localhost:3000/admin/setting" class="sidenav__link">
+                <a href="/admin/setting" class="sidenav__link">
                   <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16"><g><circle cx="6" cy="8" r="2"></circle><path d="M10,2H6C2.7,2,0,4.7,0,8s2.7,6,6,6h4c3.3,0,6-2.7,6-6S13.3,2,10,2z M10,12H6c-2.2,0-4-1.8-4-4s1.8-4,4-4h4 c2.2,0,4,1.8,4,4S12.2,12,10,12z"></path></g></svg>
                   <span class="sidenav__text text-sm@md">Settings</span>
                 </a>

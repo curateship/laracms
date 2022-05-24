@@ -1,7 +1,7 @@
 <div class="flex gap-sm flex-column flex-row@md justify-between items-center@md">
     <div>
         <!-- Comment header and counts -->
-        <h1 class="text-md margin-bottom-md">Comments (<span class="comments-count">{{ $post->commentsCount() }}</span>)</h1>
+        <h1 class="text-md margin-bottom-md">Comments (<span class="comments-count" data-post-id="{{$post->id}}">{{ $post->commentsCount() }}</span>)</h1>
     </div>
 
   <!-- Sorting -->
@@ -20,9 +20,7 @@
 </div>
 
 <!-- Comments -->
-<ul class="margin-bottom-lg margin-top-sm post-comments" data-post-id="{{$post->id}}">
-    <!-- Now we got comments list over AJAX -->
-</ul>
+<ul class="margin-bottom-lg margin-top-sm post-comments" data-post-id="{{$post->id}}"></ul>
 
 <!-- Add Comment Form -->
 @auth

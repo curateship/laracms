@@ -25,7 +25,7 @@
 @include('components.layouts.headers.header')
 @include('components.layouts.partials.hero-random-image')
 
-<div class="padding-top-sm">
+<div class="padding-top-xs">
   @yield('content')
 </div>
 

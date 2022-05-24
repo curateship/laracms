@@ -1,12 +1,11 @@
 <script>
-    (function() {
     /* Comments ajax */
     function initPostCommentsForms(){
         // Comments post form;
         $('.commentNewContent').each(function(){
             $(this).text()
             $(this).bind('input propertychange', function() {
-                const postBtn = $('.postbtn[data-item-id="' + $(this).attr('data-item-id') + '"][data-type="' + $(this).attr('data-type') + '"]')
+                const postBtn = $('.post-comment-bnt[data-item-id="' + $(this).attr('data-item-id') + '"][data-type="' + $(this).attr('data-type') + '"]')
 
                 console.log('[data-item-id="' + $(this).attr('data-item-id') + '"][data-type="' + $(this).attr('data-type') + '"]')
 
@@ -76,6 +75,7 @@
 
     $(document).on('click', '.post-comment-bnt', function(e){
         e.preventDefault();
+        const postId = $(this).parents('.comments').children('.post-comments').attr('data-post-id')
         const itemId = $(this).attr('data-item-id');
         const type = $(this).attr('data-type');
 
@@ -103,7 +103,7 @@
                 if(type === 'new'){
                     $('.post-comments[data-post-id="' + itemId + '"]').html(response.comments);
 
-                    $('.post-comment-bnt[data-item-id="' + itemId + '"]').html('Post comment');
+                    $('.post-comment-bnt[data-item-id="' + itemId + '"]').html('Post');
                     postResultMessage.html(response.result).fadeIn()
 
                     if(response.error === false){
@@ -137,7 +137,7 @@
                     $('.post-comment-form[data-item-id="' + itemId + '"][data-type="reply"]').parents('.comment-form-box').remove()
                 }
 
-                $('.comments-count').html(response.commentsCount)
+                $('.comments-count[data-post-id="' + postId + '"]').html(response.commentsCount)
 
                 initReadMoreItems()
             }
@@ -162,36 +162,39 @@
         });
     })
 
-        $(document).on('click', '.show-comment-reply-list', function(){
-            const commentId = $(this).attr('data-comment-id')
-            const parent = $('.comments__details[data-comment-id="' + commentId + '"]')
-            const replyListBox = $('.details__content[data-comment-id="' + commentId + '"] > ul')
-            const arrow = $('.reply-arrow[data-comment-id="' + commentId + '"]')
+    $(document).on('click', '.show-comment-reply-list', function(){
+        const commentId = $(this).attr('data-comment-id')
+        const parent = $('.comments__details[data-comment-id="' + commentId + '"]')
+        const replyListBox = $('.details__content[data-comment-id="' + commentId + '"] > ul')
+        const arrow = $('.reply-arrow[data-comment-id="' + commentId + '"]')
 
-            if(parent.attr('open') !== undefined){
-                console.log('Hide more comments')
-                replyListBox.html('')
-                arrow.css('transform', 'rotate(0deg)')
-            }   else{
-                console.log('Show more comments')
+        if(parent.attr('open') !== undefined){
+            console.log('Hide more comments')
+            replyListBox.html('')
+            arrow.css('transform', 'rotate(0deg)')
+        }   else{
+            console.log('Show more comments')
 
-                $.ajax({
-                    data: {
-                        commentId: commentId
-                    },
-                    url: '{{route('post-comment-reply-list')}}',
-                    type: 'GET',
-                    success:function(response){
-                        replyListBox.html(response)
-                        arrow.css('transform', 'rotate(90deg)')
-                        initReadMoreItems()
-                    }
-                });
-            }
-        })
+            $.ajax({
+                data: {
+                    commentId: commentId
+                },
+                url: '{{route('post-comment-reply-list')}}',
+                type: 'GET',
+                success:function(response){
+                    replyListBox.html(response)
+                    arrow.css('transform', 'rotate(90deg)')
+                    initReadMoreItems()
+                }
+            });
+        }
+    })
 
-    loadPostComments({{$post->id}}, 0, '.post-comments[data-post-id="{{$post->id}}"]')
+    $('.post-comments').each(function(){
+        const postId = $(this).attr('data-post-id')
+        loadPostComments(postId, 0, '.post-comments[data-post-id="' + postId + '"]')
+    })
+
     initPostCommentsForms()
     initReadMoreItems()
-}());
 </script>

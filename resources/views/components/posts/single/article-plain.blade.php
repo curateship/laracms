@@ -1,11 +1,10 @@
-
 <!-- Post Title -->
 <div class="text-component padding-bottom-md">
   <h1 class="text-xl">{{ $post->title }}</h1>
 </div>
 
 <!-- Post Image -->
-<figure class="text-center padding-bottom-sm">
+<figure class="text-center padding-bottom-sm image-zoom js-image-zoom">
     {!! $content !!}
 </figure>
 
@@ -23,7 +22,7 @@
                     {{$category->name}}:
                     @foreach($post_tags[$category->id] as $tag)
                         <button class="chip chip--interactive text-sm margin-bottom-xxs">
-                            <a class="link-subtle" href="/tags/{{$category->name}}/{{$tag->name}}">
+                            <a class="link-subtle" href="/tags/{{$category->name}}/{{$tag->slug}}">
                                 <i class="chip__label">{{$tag->name}}</i>
                             </a>
                         </button>
@@ -33,3 +32,9 @@
         @endforeach
     </div>
 </div>
+
+@push('custom-scripts')
+    <script>
+        initImagesZoom()
+    </script>
+@endpush

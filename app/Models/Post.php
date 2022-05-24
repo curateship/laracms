@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed $type
  * @property mixed $id
  * @property mixed $status
+ * @property mixed $excerpt
  */
 class Post extends Model
 {
@@ -76,22 +77,27 @@ class Post extends Model
 
     public function commentsList($last_comment_id = 0)
     {
-        $comments = Comment::leftJoin('users', 'users.id', '=', 'comments.user_id')
-            ->where('post_id', $this->id)
-            ->whereNull('reply_id')
-            ->select([
-                'comments.*',
-                'users.name as author_name',
-                'users.thumbnail as author_thumbnail'
-            ]);
+        $comments = Comment::whereNull('reply_id')
+            ->where('post_id', $this->id);
 
         if($last_comment_id > 0){
             $comments = $comments->where('comments.id', '<', $last_comment_id);
         }
 
-        return $comments->orderBy('created_at', 'DESC')
+        $comments = $comments->orderBy('created_at', 'DESC')
             ->limit(10)
             ->get();
+
+        $authors = [];
+        foreach($comments as $comment){
+            if(!isset($authors[$comment->user_id])){
+                $authors[$comment->user_id] = User::find($comment->user_id);
+            }
+
+            $comment->author = $authors[$comment->user_id];
+        }
+
+        return $comments;
     }
 
     public static function getNewSlug($slug, $posts) {
@@ -318,6 +324,16 @@ class Post extends Model
                     $html .= '<iframe src="'.$block->data->embed.'" style="width:100%; height: 600px" scrolling="no" frameborder="no"></iframe>';
                     break;
 
+                case 'extUrl':
+                    if($block->data->type == 'image'){
+                        $html .= '<div class="img_pnl padding-y-md custom-ext-url-result-on-render"><img class="radius-lg" src="'.$block->data->url.'" alt="ext-url-image"></div>';
+                    }
+
+                    if($block->data->type == 'video'){
+                        $html .= '<div class="img_pnl padding-y-md custom-ext-url-result-on-render"><video controls="controls" preload="metadata"><source src="'.$block->data->url.'" type="video/mp4"></video></div>';
+                    }
+                    break;
+
                 default:
                     break;
             }
@@ -365,51 +381,201 @@ class Post extends Model
 
     public function getRecentList($by_array, $limit = 5){
         $posts = Post::where('status', 'published')
-            ->where('id', '!=', $this->id);
+            ->where('posts.id', '!=', $this->id);
 
-        $posts_ids = [];
         foreach($by_array as $by_item){
             switch($by_item){
                 case 'tags':
-                    // Getting post_tags;
-                    $tags = DB::table('post_tag')
+                    $post_tags = DB::table('post_tag')
                         ->where('post_id', $this->id)
                         ->get();
 
-                    $tags_ids = [];
-                    foreach($tags as $tag){
-                        $tags_ids[] = $tag->tag_id;
+                    $post_tags_in = [];
+                    foreach($post_tags as $post_tag){
+                        $post_tags_in[] = $post_tag->tag_id;
                     }
 
                     // Getting other posts with same tag;
-                    $posts_data = DB::table('post_tag')
-                        ->whereIn('tag_id', $tags_ids)
-                        ->where('post_id', '!=', $this->id)
-                        ->get();
+                    $posts = $posts->leftJoin(DB::raw('(
+                        select post_id from post_tag
+                        where tag_id in ('.implode(',', $post_tags_in).')
+                        and `post_id` != '.$this->id.'
+                        group by post_id
+                    ) as post_tag'), 'post_tag.post_id', '=', 'posts.id');
 
-                    foreach($posts_data as $post){
-                        $posts_ids[] = $post->post_id;
-                    }
                     break;
 
                 case 'title':
                     // Prepare title;
                     $like_title = str_replace(' ', '%', $this->title);
-                    $posts_data = Post::where('title', 'like', "%$like_title%")
-                        ->where('id', '!=', $this->id)
-                        ->get();
-
-                    foreach($posts_data as $post){
-                        $posts_ids[] = $post->id;
+                    if(count($by_array) > 1){
+                        $posts = $posts->whereOr('title', 'like', "%$like_title%");
+                    }   else{
+                        $posts = $posts->where('title', 'like', "%$like_title%");
                     }
+
                     break;
             }
         }
 
-        return $posts->whereIn('id', $posts_ids)
+        return $posts->select('posts.*')
             ->inRandomOrder()
             ->latest()
             ->take($limit)
             ->get();
+    }
+
+    public static function getPostsListByView($period = null){
+        switch($period){
+            case 'day':
+                $add_where = "where created_at between '".date('Y-m-d', strtotime(date('Y-m-d').' -1 days'))." 00:00:00' and '".date('Y-m-d')." 23:59:59'";
+                break;
+
+            case 'week':
+                $add_where = "where created_at between '".date('Y-m-d', strtotime(date('Y-m-d').' -7 days'))." 00:00:00' and '".date('Y-m-d')." 23:59:59'";
+                break;
+
+            case 'month':
+                $add_where = "where created_at between '".date('Y-m-d', strtotime(date('Y-m-d').' -1 months'))." 00:00:00' and '".date('Y-m-d')." 23:59:59'";
+                break;
+
+            case 'year':
+                $add_where = "where created_at between '".date('Y-m-d', strtotime(date('Y-m-d').' -1 years'))." 00:00:00' and '".date('Y-m-d')." 23:59:59'";
+                break;
+
+            default:
+                $add_where = '';
+        }
+
+        return static::select(['posts.*', 'views.views_count'])
+            ->leftJoin(DB::raw('(
+                    select post_id, count(*) as views_count
+                    from posts_views
+                    '.$add_where.'
+                    group by post_id
+                ) as views'), 'views.post_id', 'posts.id')
+            ->whereNotNull('user_id')
+            ->whereNotNull('views_count')
+            ->where('status', 'published')
+            ->orderBy('views_count', 'DESC')
+            ->limit(10)
+            ->get();
+    }
+
+    static public function autoTitle($tags_in_cats){
+        // Get title template;
+        $template = config('posts.auto_title_template');
+        // Render title from tags;
+        $title_array = [];
+        $str_block_count = 0;
+        foreach ($template as $template_item) {
+            if (!isset($template_item['category_id'])) {
+                $title_array[] = implode($template_item);
+                $str_block_count++;
+                continue;
+            }
+
+            $cat_request_name = 'tag_category_' . $template_item['category_id'];
+
+            if (isset($tags_in_cats[$cat_request_name])) {
+                $cat_in_request = $tags_in_cats[$cat_request_name];
+                $rand_array = [];
+                $limit = min($template_item['limit'], count($cat_in_request));
+                for ($i = 0; $i < $limit ; $i++) {
+                    if(is_numeric($cat_in_request[$i])){
+                        $tag = Tag::find($cat_in_request[$i]);
+                        if($tag !== null) $rand_array[] = $tag->name;
+                    }   else{
+                        $rand_array[] = $cat_in_request[$i];
+                    }
+                }
+                if (count($rand_array) > 0) {
+                    $title_array[] = implode(' ', $rand_array);
+                }
+            }   else{
+                $title_array[] = null;
+            }
+        }
+
+        // Little fix for title;
+        foreach($title_array as $key => $item){
+            if($item == null){
+                unset($title_array[$key]);
+                if(isset($title_array[$key-1])){
+                    unset($title_array[$key-1]);
+                    $str_block_count--;
+                }
+            }
+
+            if($item == ' '){
+                unset($title_array[$key]);
+                $str_block_count--;
+            }
+        }
+
+        return [
+            'title_array' => $title_array,
+            'str_block_count' => $str_block_count
+        ];
+    }
+
+    public static function getListByTagName($tag_name, $order = ['by' => 'created_at', 'order' => 'desc'], $limit = 10){
+        $tags = Tag::where('name', $tag_name)
+            ->get();
+
+        $tags_ids = [];
+        foreach($tags as $tag){
+            $tags_ids[] = $tag->id;
+        }
+
+        $post_tags = DB::table('post_tag')
+            ->whereIn('tag_id', $tags_ids);
+
+        return static::joinSub($post_tags, 'post_tag', function ($join) {
+                $join->on('post_tag.post_id', '=', 'posts.id');
+            })
+            ->where('posts.status', 'published')
+            ->orderBy('posts.'.$order['by'], $order['order'])
+            ->limit($limit)
+            ->get();
+    }
+
+    public function likes(){
+        return Like::where('post_id', $this->id);
+    }
+
+    public function userLiked(){
+        $user_liked = false;
+        if(!Auth::guest()){
+            foreach($this->likes()->get() as $like){
+                if($like->user_id == Auth::id()){
+                    $user_liked = true;
+                }
+            }
+        }
+
+        return $user_liked;
+    }
+
+    public function prepareContent($image_classes = ''){
+        if($this->type == 'image'){
+            $content = '<img class="'.$image_classes.'" alt="thumbnail" src="'.'/storage'.config('images.posts_storage_path').$this->medium.'">';
+        }   else{
+            $video = DB::table('posts_videos')
+                ->where('post_id', $this->id)
+                ->first();
+
+            // Render video player;
+            $content = view('admin.posts.script-video-js-player', [
+                'poster' => '/storage'.config('images.posts_storage_path').$this->medium,
+                'video_mp4' => '/storage'.config('images.videos_storage_path').$video->medium,
+                'video_webm' => '/storage'.config('images.videos_storage_path').$video->medium,
+                'player_width' => config('images.player_size_original.width'),
+                'player_height' => config('images.player_size_original.height'),
+                'auto_width' => true
+            ])->render();
+        }
+
+        return $content;
     }
 }

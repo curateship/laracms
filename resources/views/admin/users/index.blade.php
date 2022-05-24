@@ -39,12 +39,42 @@
                       </a>
                     </li>
 
-                    <li class="menu-bar__item" role="menuitem" aria-controls="post-search">
-                      <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 20 20">
+                    <!-- Search -->
+                    <li class="menu-bar__item" role="menuitem" aria-controls="user-search">
+                    <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 20 20">
                         <path d="M11.25 17.5c4.83 0 8.75-3.93 8.75-8.75s-3.93-8.75-8.75-8.75-8.75 3.93-8.75 8.75 3.93 8.75 8.75 8.75z m0-15c3.45 0 6.25 2.8 6.25 6.25s-2.8 6.25-6.25 6.25-6.25-2.8-6.25-6.25 2.8-6.25 6.25-6.25z"></path><path d="M0.36 17.86l3-2.99a10.02 10.02 0 0 0 1.76 1.77l-2.98 3a1.25 1.25 0 0 1-1.78 0 1.25 1.25 0 0 1 0-1.78z"></path>
-                      </svg>
-                      <span class="menu-bar__label">Search Posts</span>
+                    </svg>
+                    <span class="menu-bar__label">Search Tags</span>
                     </li>
+
+                    <!-- Search Modal -->
+                    <div class="modal modal--search modal--animate-fade bg bg-opacity-90% flex flex-center padding-md backdrop-blur-10 js-modal" id="user-search">
+                    <div class="modal__content width-100% max-width-sm max-height-100% overflow-auto" role="alertdialog" aria-labelledby="modal-search-title" aria-describedby="">
+                        <form class="full-screen-search">
+                        <label for="search" id="modal-search-title" class="sr-only">Search</label>
+                        <input class="reset full-screen-search__input" type="search" name="search" id="search" placeholder="Search...">
+                        <button class="reset full-screen-search__btn">
+                            <svg class="icon" viewBox="0 0 24 24">
+                            <title>Search</title>
+                            <g stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" stroke="currentColor" fill="none" stroke-miterlimit="10">
+                                <line x1="22" y1="22" x2="15.656" y2="15.656"></line>
+                                <circle cx="10" cy="10" r="8"></circle>
+                            </g>
+                            </svg>
+                        </button>
+                        </form>
+                    </div>
+
+                    <button class="reset modal__close-btn modal__close-btn--outer  js-modal__close js-tab-focus">
+                        <svg class="icon icon--sm" viewBox="0 0 24 24">
+                        <title>Close modal window</title>
+                        <g fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="3" y1="3" x2="21" y2="21" />
+                            <line x1="21" y1="3" x2="3" y2="21" />
+                        </g>
+                        </svg>
+                    </button>
+                    </div>
                   </menu>
 
                   <menu class="menu-bar is-hidden js-int-table-actions__items-selected js-menu-bar delete-selected-users">
@@ -132,8 +162,77 @@
                         </ul>
                       </th>
 
-                      <th class="int-table__cell int-table__cell--th text-left">Posts</th>
-                      <th class="int-table__cell int-table__cell--th text-left">Comments</th>
+                      <th class="int-table__cell int-table__cell--th int-table__cell--sort js-int-table__cell--sort
+                          @if(request()->get('sortBy') === 'posts_count')
+                              @if(request()->get('sortDesc') === 'desc')
+                                  int-table__cell--desc
+                              @endif
+                              @if(request()->get('sortDesc') === 'asc')
+                                  int-table__cell--asc
+                              @endif
+                          @endif
+                          " data-sort-col="posts_count">
+                          <div class="flex items-center">
+                              <span>Posts</span>
+
+                              <svg class="icon icon--xxs margin-left-xxxs int-table__sort-icon" aria-hidden="true" viewBox="0 0 12 12">
+                                  <polygon class="arrow-up" points="6 0 10 5 2 5 6 0" />
+                                  <polygon class="arrow-down" points="6 12 2 7 10 7 6 12" /></svg>
+                          </div>
+
+                          <ul class="sr-only js-int-table__sort-list">
+                              <li>
+                                  <input type="radio" name="sortingEmail" id="sortingEmailNone" value="none" checked>
+                                  <label for="sortingEmailNone">No sorting</label>
+                              </li>
+
+                              <li>
+                                  <input type="radio" name="sortingEmail" id="sortingEmailAsc" value="asc">
+                                  <label for="sortingEmailAsc">Sort in ascending order</label>
+                              </li>
+
+                              <li>
+                                  <input type="radio" name="sortingEmail" id="sortingEmailDes" value="desc">
+                                  <label for="sortingEmailDes">Sort in descending order</label>
+                              </li>
+                          </ul>
+                      </th>
+
+                      <th class="int-table__cell int-table__cell--th int-table__cell--sort js-int-table__cell--sort
+                          @if(request()->get('sortBy') === 'comments_count')
+                              @if(request()->get('sortDesc') === 'desc')
+                                  int-table__cell--desc
+                              @endif
+                              @if(request()->get('sortDesc') === 'asc')
+                                  int-table__cell--asc
+                              @endif
+                          @endif
+                          " data-sort-col="comments_count">
+                          <div class="flex items-center">
+                              <span>Comments</span>
+
+                              <svg class="icon icon--xxs margin-left-xxxs int-table__sort-icon" aria-hidden="true" viewBox="0 0 12 12">
+                                  <polygon class="arrow-up" points="6 0 10 5 2 5 6 0" />
+                                  <polygon class="arrow-down" points="6 12 2 7 10 7 6 12" /></svg>
+                          </div>
+
+                          <ul class="sr-only js-int-table__sort-list">
+                              <li>
+                                  <input type="radio" name="sortingEmail" id="sortingEmailNone" value="none" checked>
+                                  <label for="sortingEmailNone">No sorting</label>
+                              </li>
+
+                              <li>
+                                  <input type="radio" name="sortingEmail" id="sortingEmailAsc" value="asc">
+                                  <label for="sortingEmailAsc">Sort in ascending order</label>
+                              </li>
+
+                              <li>
+                                  <input type="radio" name="sortingEmail" id="sortingEmailDes" value="desc">
+                                  <label for="sortingEmailDes">Sort in descending order</label>
+                              </li>
+                          </ul>
+                      </th>
 
 
                       <th class="int-table__cell int-table__cell--th int-table__cell--sort js-int-table__cell--sort
@@ -228,7 +327,9 @@
 
                       <td class="int-table__cell flex bg-color-black">
                       <figure class="width-lg height-lg radius-50% flex-shrink-0 overflow-hidden margin-right-xs">
-                        <a href="{{ route ('admin.users.edit', $user->id) }}"><img class="block width-100% height-100% object-cover" src="{{url('/storage'.config('images.users_storage_path').$user->thumbnail)}}" alt="Author picture"></a>
+                        <a href="{{ route ('admin.users.edit', $user->id) }}">
+                            {!! $user->getAvatar(false, ['width' => 45, 'height' => 45], ['block', 'width-100%', 'height-100%', 'object-cover'])->content !!}
+                        </a>
                       </figure>
                       <div class="line-height-xs padding-top-xxxs">
                         <p class=""><a href="{{ route ('admin.users.edit', $user->id) }}" class="link-subtle">{{ $user->name }}</a></p>
@@ -236,8 +337,8 @@
                       </div>
                       </td>
 
-                      <td class="int-table__cell">24</td>
-                      <td class="int-table__cell">324</td>
+                      <td class="int-table__cell">{{$user->posts_count != '' ? $user->posts_count : 0}}</td>
+                      <td class="int-table__cell">{{$user->comments_count != '' ? $user->comments_count : 0}}</td>
                       <td class="int-table__cell">Editor</td>
                       <td class="int-table__cell">{{ $user->created_at->diffForHumans() }}</td>
 

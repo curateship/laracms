@@ -1,0 +1,30 @@
+@use '../base' as *;
+
+/* -------------------------------- 
+
+File#: _1_character-count
+Title: Character Count
+Descr: Show the number of remaining characters while typing
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+.character-count {}
+
+.character-count__helper {
+  text-align: right;
+}
+
+.character-count__helper--dynamic {
+  display: none;
+}
+
+.js {
+  .character-count__helper--static {
+    display: none;
+  }
+
+  .character-count__helper--dynamic {
+    display: block;
+  }
+}

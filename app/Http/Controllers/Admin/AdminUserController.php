@@ -12,6 +12,7 @@ use Artesaos\SEOTools\Facades\SEOMeta;
 
 // Supports
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
@@ -39,6 +40,14 @@ class AdminUserController extends Controller
 
         if(Gate::denies('logged-in')){
             dd('no access allowed');
+        }
+
+        $users = $users->leftJoin(DB::raw("(select user_id, count(*) as posts_count from posts group by user_id) as posts"), 'posts.user_id', '=', 'users.id')
+            ->leftJoin(DB::raw("(select user_id, count(*) as comments_count from comments group by user_id) as comments"), 'comments.user_id', '=', 'users.id');
+
+        if($request->has('search') && $request->input('search') != ''){
+            $search_input = str_replace(' ', '%', $request->input('search'));
+            $users = $users->where('name', 'like', '%'.$search_input.'%');
         }
 
         if(Gate::allows('is-admin')){

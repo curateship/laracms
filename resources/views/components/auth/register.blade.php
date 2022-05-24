@@ -1,4 +1,3 @@
-<!-- Register Form Content 👇-->
 <form action="{{ route('register') }}" method="POST">@csrf
   <form class="sign-up-form padding-lg">
 
@@ -54,4 +53,3 @@
 
   </form>
 </form>
-<!-- Register Form Content END -->

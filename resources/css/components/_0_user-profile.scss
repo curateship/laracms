@@ -1,11 +1,35 @@
 @use '../base' as *;
 
 .profile-author-box{
-    height: 300px;
+    min-height: 300px;
+    max-height: 300px;
     position: relative;
 }
 
 .profile-author-avatar{
-    margin-top: -100px;
     z-index: 1;
+    bottom: -110px;
+    position: absolute;
+    left: 0;
+    right: 0;
+
+    .with-svg-box{
+        padding-top: 20px;
+    }
+}
+
+.profile-edit-button-box{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    display: flex;
+}
+
+.author__img-wrapper{
+    svg{
+        .none-avatar{
+            fill: var(--color-primary, #4827ec);
+            stroke: var(--color-primary, #4827ec);
+        }
+    }
 }

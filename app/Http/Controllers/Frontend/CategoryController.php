@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\TagsCategories;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Tag;
@@ -12,8 +13,10 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        return view('theme.categories.index', [
-            'categories' => Category::withCount('posts')->paginate(100)
+        $categories = Category::orderBy('id', 'DESC')->paginate(10);
+
+        return view('admin.categories.index', [
+            'categories' => $categories
         ]);
     }
 

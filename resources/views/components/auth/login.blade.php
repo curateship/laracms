@@ -1,10 +1,9 @@
-<!-- Login Form Start 👇-->
-  <form action="{{ route('login') }}" method="POST" class="login-form">
-      @csrf
-      <div class="text-component text-center margin-bottom-sm">
-        <h1>Log in</h1>
+<form action="{{ route('login') }}" method="POST" class="login-form">
+  @csrf
+    <div class="text-component text-center margin-bottom-sm">
+      <h1>Log in</h1>
 
-        <div class="text-center">
+      <div class="text-center">
         <p>Don't have an account? <a href="/register">Get started</a></p>
       </div>
 
@@ -32,6 +31,4 @@
       <div class="margin-bottom-sm margin-top-md">
         <button class="btn btn--primary btn--md width-100%">Login</button>
       </div>
-
 </form>
-<!-- Login Form END-->

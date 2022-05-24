@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Comment;
+use App\Models\Follow;
+use App\Models\Notification;
 use App\Models\Post;
 
 use App\Models\Tag;
@@ -123,31 +125,30 @@ class PostController extends Controller
             $post_tags_by_cats[$post_tag->category_id][] = $post_tag;
         }
 
-        if($post->type == 'image'){
-            $content = '<img class="radius-lg" alt="thumbnail" src="'.'/storage'.config('images.posts_storage_path').$post->medium.'">';
-        }   else{
-            $video = DB::table('posts_videos')
-                ->where('post_id', $post->id)
-                ->first();
-
-            // Render video player;
-            $content = view('admin.posts.script-video-js-player', [
-                'poster' => '/storage'.config('images.posts_storage_path').$post->medium,
-                'video_mp4' => '/storage'.config('images.videos_storage_path').$video->medium,
-                'video_webm' => '/storage'.config('images.videos_storage_path').$video->medium,
-                'player_width' => config('images.player_size_original.width'),
-                'player_height' => config('images.player_size_original.height'),
-                'auto_width' => true
-            ])->render();
-        }
+        $content = $post->prepareContent('radius-lg image-zoom__preview js-image-zoom__preview');
 
         $post->addViewHistory($request->ip(), $request->userAgent());
 
+        $followed = false;
+        if(!Auth::guest()){
+            // Checking of following;
+            $exist_follow = Follow::where('user_id', Auth::id())
+                ->where('follow_user_id', $post->user_id)
+                ->first();
+
+            $followed = $exist_follow != null;
+        }
+
+        $post->author = $post->author();
+
         return view('/theme.posts.single', [
+            'followed' => $followed,
             'post' => $post,
             'content' => $content,
             'post_tags' => $post_tags_by_cats,
             'recent_posts' => $post->getRecentList(['title', 'tags']),
+            'likes_count' => $post->likes()->count(),
+            'user_liked' => $post->userLiked()
         ]);
     }
 
@@ -264,6 +265,12 @@ class PostController extends Controller
             $comment->save();
             $response = 'Comment successfully added!';
 
+            $author = $post->author();
+
+            if($user_id != $author->id){
+                Notification::send($author->id, $user_id, Auth::user()->name, 'Commented on your post: '.$post->title, '/post/'.$post->slug, $post->id);
+            }
+
             // Prepare comments view;
             $comments_view = view('components.posts.comments.post-comments', [
                 'last_comment_id' => $comment->id,
@@ -330,10 +337,111 @@ class PostController extends Controller
 
         // SEO title
         SEOMeta::setTitle($search_request);
-        return view('theme.users.search', [
+        return view('theme.posts.search', [
             'search' => $search_request,
             'total' => $count,
             'posts' => $by_title_and_body
         ]);
+    }
+
+    public function move(Request $request){
+        $posts_array = explode(',', $request->input('list'));
+
+        Post::whereIn('id', $posts_array)
+            ->where('user_id', Auth::id())
+            ->update([
+                'updated_at' => now(),
+                'status' => $request->input('direction')
+            ]);
+    }
+
+    // Infinite Masonry
+    public function ajaxShowPosts($page_num){
+        $perpage = 20;
+        $offset = ($page_num - 1) * $perpage;
+
+        $posts = Post::where('status', 'published')
+            ->offset($offset)
+            ->limit($perpage)
+            ->get();
+
+        $posts_count = Post::where([
+            'status' => 'published'
+        ])->count();
+
+        $data['total'] = $posts_count;
+        $data['posts'] = $posts;
+        $data['api_route'] = 'posts';
+        $data['nextpage'] = ($posts_count - $offset - $perpage) > 0 ? ($page_num + 1) : 0;
+
+        if(count($posts) == 0){
+            abort(204);
+        }
+
+        return view('components.posts.lists.infinite-masonry.item', $data)->render();
+    }
+
+    // Infinite Posts for Home
+    public function ajaxInfiniteShowPosts(Request $request, $page_num){
+        $perpage = 3;
+        $offset = ($page_num - 1) * $perpage;
+
+        $posts = Post::where('status', 'published')
+            ->select('posts.*')
+            ->orderBy('created_at', 'DESC')
+            ->offset($offset)
+            ->limit($perpage);
+
+        // Filter;
+        if($request->has('type')){
+            switch($request->input('type')){
+                // Get users following list;
+                case 'followings':
+                    $posts = $posts->leftJoin('follows', 'follows.follow_user_id', '=', 'posts.user_id')
+                        ->where('follows.user_id', Auth::id());
+                    break;
+
+                // All or nothing;
+                default:
+                case 'all':
+                    // Nothing;
+            }
+        }
+
+        $posts = $posts->get();
+
+        $posts_count = Post::where([
+            'status' => 'published'
+        ])->count();
+
+        foreach($posts as $post){
+            if(Auth::guest()){
+                $post->user_liked = false;
+            }   else{
+                $post->user_liked = $post->userLiked();
+            }
+        }
+
+        // Preparing posts content;
+        foreach($posts as $post){
+            $post_tags_by_cats = [];
+            foreach($post->tags() as $post_tag){
+                $post_tags_by_cats[$post_tag->category_id][] = $post_tag;
+            }
+
+            $post->tags = $post_tags_by_cats;
+            $post->content = $post->prepareContent('block width-100% height-100% object-cover image-zoom__preview js-image-zoom__preview');
+        }
+
+        $data['total'] = $posts_count;
+        $data['posts'] = $posts;
+        $data['api_route'] = 'posts';
+        $data['nextpage'] = ($posts_count - $offset - $perpage) > 0 ? ($page_num + 1) : 0;
+
+        if(count($posts) == 0){
+            abort(204);
+        }
+
+        return view('components.posts.lists.infinite-posts.item', $data)->render();
     }
 }
