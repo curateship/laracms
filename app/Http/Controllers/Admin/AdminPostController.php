@@ -128,6 +128,7 @@ class AdminPostController extends Controller
     // Destroy
     public function destroy(string $ids, Request $request)
     {
+
         $ids = explode(',', $ids);
 
         foreach($ids as $id){
@@ -144,11 +145,6 @@ class AdminPostController extends Controller
             // Remove all comment;
             Comment::where('post_id', $id)
                 ->whereNull('reply_id')
-                ->delete();
-
-            // Remove all video links;
-            DB::table('posts_videos')
-                ->where('post_id', $id)
                 ->delete();
 
             // Remove all views;
@@ -168,6 +164,11 @@ class AdminPostController extends Controller
             $post = Post::find($id);
             $post->removePostImages('main');
             $post->removePostImages('body');
+
+            // Remove all video links;
+            DB::table('posts_videos')
+                ->where('post_id', $id)
+                ->delete();
 
             // And then - remove the post;
             Post::destroy($id);
