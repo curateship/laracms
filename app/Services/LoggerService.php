@@ -9,20 +9,7 @@ use App\Models\{ScraperLog};
 
 class LoggerService {
   private $scraper_id = 0;
-  private $scraper_url = '';
-  private $log_params = [];
-
-  public function __construct($scraper_id) {
-    $this->scraper_id = $scraper_id;
-    $this->init_log_params();
-  }
-
-  public function setUrl($url) {
-    $this->scraper_url = $url;
-  }
-
-  public function init_log_params() {
-    $this->log_params = [
+  private $log_params = [
       'proxy' => '',
       'default_url' => '',
       'source_media' => '',
@@ -31,7 +18,7 @@ class LoggerService {
       // 'image' => '',
       // 'video' => '',
       'media' => '',
-      'tags' => '',
+      'tags' => [],
       // 'artists' => '',
       // 'origins' => '',
       // 'characters' => '',
@@ -39,67 +26,67 @@ class LoggerService {
       // 'misc' => '',
       'download' => '',
       'save' => '',
-    ];
+  ];
+  private $page_url, $url;
+
+  public function __construct($scraper_id) {
+    $this->scraper_id = $scraper_id;
+  }
+
+  public function updateUrls($page_url, $url){
+      $this->page_url = $page_url;
+      $this->url = $url;
   }
 
   public function update_log_param($key, $value) {
     if (isset($this->log_params[$key]))
       $this->log_params[$key] = $value;
+
+      $this->save_log();
   }
 
-  public function save_log($include_url = true) {
-    // Remove any item hasn't set yet, that is, remove all item have null value.
-    $this->log_params = array_filter($this->log_params, function($v) {
-      return $v !== '';
-    });
+  public function save_log() {
+      $page_url = $this->page_url;
+      $item_url = $this->url;
 
-    // Save this log into database.
-    if (count($this->log_params) > 0) {
-        if(isset($this->log_params['tags'])){
-            $this->log_params['tags'] = json_decode($this->log_params['tags']);
-        }
-
-        $this->log_params = json_encode($this->log_params);
-
+      // Save this log into database.
       $param = [
-        'scraper_id' => $this->scraper_id,
-        'url' => '',
-        'report' => $this->log_params
+          'scraper_id' => $this->scraper_id,
+          'url' => $item_url,
+          'page_url' => $page_url,
+          'report' => json_encode($this->log_params)
       ];
 
-
-      if ($include_url) {
-        $param['url'] = $this->scraper_url;
-      }
-
       $log = ScraperLog::where('scraper_id', $param['scraper_id'])
+          ->where('page_url', $param['page_url'])
+          ->where('url', $param['url'])
           ->first();
 
       if($log == null){
           $log = new ScraperLog();
+          $log->scraper_id = $param['scraper_id'];
+          $log->page_url = $param['page_url'];
+          $log->url = $param['url'];
       }
 
-        $log->scraper_id = $param['scraper_id'];
-        $log->url = $param['url'];
-        $log->report = $param['report'];
-        $log->save();
-    }
-
-
-    // After save log data, reset log params.
-    $this->init_log_params();
+      $log->report = $param['report'];
+      $log->save();
   }
 
   public static function get_log($date = '') {
+      $logs = ScraperLog::select('scraper_logs.*')
+          ->leftJoin('scrapers', 'scrapers.id', '=', 'scraper_logs.scraper_id')
+          ->where('scrapers.status', 'running');
+
     if (!empty($date)) {
       // Make sure $time is valid timestamp value
       $time = date('Y-m-d H:i:s', strtotime($date));
 
       // Get all logs info after this time.
-      $logs = ScraperLog::where('created_at', '>=', $time)->get();
-    } else {
-      $logs = ScraperLog::all();
+        $logs->where('scraper_logs.created_at', '>=', $time);
     }
+
+      $logs = $logs->get();
 
     $log_data = [];
     foreach($logs as $log) {
@@ -115,6 +102,7 @@ class LoggerService {
           'id' => $log->id,
           'scraper_id' => $log->scraper_id,
           'scraper_url' => $log->url,
+          'page_url' => $log->page_url,
           'output_url' => $log_messages['output_url'],
           'domain' => $scraper_domain,
           'messages' => $log_messages['messages']
@@ -137,6 +125,10 @@ class LoggerService {
     }
 
     foreach($log_report as $key => $status) {
+        if($status == '' || $status == []){
+            continue;
+        }
+
         if(!is_numeric($status)){
             $messages[] = [
                 "message" => '<b>'.$key.'</b> - '.($key == 'tags' ? json_encode($status) : $status),
