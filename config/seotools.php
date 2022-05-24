@@ -6,13 +6,13 @@
 return [
     'static_titles' => [
         'App\Http\Controllers\Admin\AdminIndexController' => [
-            'index' => 'Admin from config'
+            'index' => 'Admin'
         ],
         'App\Http\Controllers\Frontend\IndexController' => [
-            'index' => 'Hentai Videos, Anime and More!'
+            'index' => 'Hentai Anime Videos - HentaiVice'
         ],
         'App\Http\Controllers\Admin\AdminUserController' => [
-            'index' => 'Admin Users from config'
+            'index' => 'Admin Users'
         ]
     ],
     'meta' => [
