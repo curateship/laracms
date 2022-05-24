@@ -1,5 +1,4 @@
 @if(count(range(1, $items->lastPage())) > 1)
-    <div class="margin-top-auto border-top border-contrast-lower"></div><!-- Divider -->
     <nav class="pagination text-sm" aria-label="Pagination">
         <ol class="pagination__list flex flex-wrap gap-xs justify-center padding-sm">
 

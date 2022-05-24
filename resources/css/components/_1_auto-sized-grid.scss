@@ -19,7 +19,7 @@ Usage: codyhouse.co/license
 .grid-auto-xs { --col-min-width: 8rem; }
 .grid-auto-sm { --col-min-width: 10rem; }
 .grid-auto-md { --col-min-width: 12rem; }
-.grid-auto-lg { --col-min-width: 20rem; }
+.grid-auto-lg { --col-min-width: 15rem; }
 .grid-auto-xl { --col-min-width: 25rem; }
 
 @each $breakpoint, $value in $breakpoints { 
@@ -27,7 +27,7 @@ Usage: codyhouse.co/license
     .grid-auto-xs\@#{$breakpoint} { --col-min-width: 8rem; }
     .grid-auto-sm\@#{$breakpoint} { --col-min-width: 10rem; }
     .grid-auto-md\@#{$breakpoint} { --col-min-width: 12rem; }
-    .grid-auto-lg\@#{$breakpoint} { --col-min-width: 20rem; }
+    .grid-auto-lg\@#{$breakpoint} { --col-min-width: 15rem; }
     .grid-auto-xl\@#{$breakpoint} { --col-min-width: 25rem; }
   }
 }

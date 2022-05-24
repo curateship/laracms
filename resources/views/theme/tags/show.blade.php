@@ -4,13 +4,11 @@
 <div class="container max-width-adaptive-lg">
 
     <!-- Tag Informations -->
-    <div class="margin-bottom-lg">
-      @include('components.tags.tag-informations')
-    </div>
+    @include('components.tags.tag-informations')
 
     <!-- Post list -->
     <div class="margin-bottom-lg">
-      @include('components.tags.lists.show-posts')
+      @include('components.tags.lists.show-posts-simple')
     </div>
 
     <!-- Pagination -->

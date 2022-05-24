@@ -350,6 +350,7 @@
           </div>
         </div><!-- END Table-->
         <!-- Pagination -->
+        <div class="margin-top-auto border-top border-contrast-lower"></div><!-- Divider -->
         @include('components.layouts.partials.pagination', ['items' => $posts])
         <!-- Pagination END-->
       </div><!-- END Col-12 Card -->
