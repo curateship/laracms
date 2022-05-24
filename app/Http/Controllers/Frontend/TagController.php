@@ -80,7 +80,7 @@ class TagController extends Controller
         $tags = Tag::where('category_id', $category->id)
             ->leftJoin('tags_categories', 'tags_categories.id', '=', 'tags.category_id')
             ->select(['tags.*', 'tags_categories.name as cat_name'])
-            ->paginate(10);
+            ->paginate(50);
 
         return view('theme.tags.categories', [
             'category' => $category,
