@@ -1152,7 +1152,7 @@ class ScraperService {
       $post->title = $post_data['title'];
       $post->slug = $post_data['slug'];
       $post->body = $post_data['description'];
-      $post->excerpt = $post_data['description'];
+      $post->excerpt = '';
       $post->user_id = $post_data['user_id'];
       $post->type = $post_data['post_type'];
       $post->original = $post_data['original'];
