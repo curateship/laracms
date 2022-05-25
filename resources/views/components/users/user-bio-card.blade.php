@@ -2,12 +2,12 @@
     @include('components.users.scripts-js')
 @endpush
 
-<figure class="card__img img-blend corner-shadow" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light" data-blend-height="50%">
+<figure class="card__img img-blend corner-shadow" data-blend-pattern="0,0,1,0" data-blend-height="50%" style="background-color: var(--color-bg-light);">
     @if($user->cover_medium != '')
         <div class="corner top right corner-bg-darker"></div>
         <img class="radius-md" src="{{url('/storage'.config('images.users_storage_path').$user->cover_medium)}}" alt="Card preview img">
     @else
-        <div style="height: 20px;"></div>
+        <div style="height: 50px;"></div>
     @endif
 
     @auth()
@@ -39,7 +39,7 @@
 
 <!-- Avatar -->
 <figure class="flex justify-center margin-bottom-sm reveal-fx reveal-fx--scale">
-    {!! $user->getAvatar(false, ['width' => 100, 'height' => 100], ['block width-xxl height-xxl radius-50% border border-bg border-2 shadow-sm card-author'])->content !!}
+    {!! $user->getAvatar(false, ['width' => 100, 'height' => 100], ['block width-xxl height-xxl radius-50% border border-bg border-2 shadow-sm'])->content !!}
 </figure>
 
 <!-- User's name -->

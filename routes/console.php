@@ -32,8 +32,49 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 Artisan::command('test', function () {
-    dump('Nothing to test now');
+    //dump('Nothing to test now');
+    //dd(hash_file('md5', 'https://thehentaiworld.com/wp-content/uploads/2022/04/Widowmaker-Cpt-Flapjack-Overwatch-Animated-Hentai-3D-CGI-Video.mp4'));
 })->purpose('Method for tests');
+
+Artisan::command('storage:hash', function(){
+    $posts = Post::whereNull('file_hash')
+        ->get();
+
+    foreach($posts as $post){
+        $file = '';
+
+        if($post->type == 'image'){
+            $path = config('images.posts_storage_path');
+            $file = $path.$post->original;
+        }
+
+        if($post->type == 'video'){
+            $path = config('images.videos_storage_path');
+            $video = \Illuminate\Support\Facades\DB::table('posts_videos')
+                ->where('post_id', $post->id)
+                ->first();
+
+            if($video != null){
+                $file = $path.$video->original;
+            }   else{
+                dump("ERROR: Cant resolve video file path! Post with ID $post->id was been skipped.");
+                continue;
+            }
+        }
+
+        $file_real_path = storage_path('app/public'.$file);
+        if(file_exists($file_real_path)){
+            $hash = hash_file('md5', $file_real_path);
+            Post::where('id', $post->id)
+                ->update([
+                    'file_hash' => $hash
+                ]);
+            dump("Original file has $hash successfully added for post with ID $post->id");
+        }   else{
+            dump("ERROR: Cant resolve file by path! Post with ID $post->id was been skipped.");
+        }
+    }
+})->purpose('Add original file hash for exist posts');;
 
 
 Artisan::command('auto-title', function () {

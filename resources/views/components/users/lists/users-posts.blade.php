@@ -2,7 +2,7 @@
     @foreach($posts as $post)
         <li class="card">
             <div class="">
-                <a href="/">
+                <a href="/post/{{$post->slug}}">
                     <figure class="aspect-ratio-4:3 margin-bottom-xs">
                         <img class="block width-100%" loading="lazy" src="{{url('/storage').config('images.posts_storage_path').$post->medium}}" alt="Image description">
                     </figure>

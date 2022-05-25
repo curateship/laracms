@@ -132,46 +132,8 @@ class AdminPostController extends Controller
         $ids = explode(',', $ids);
 
         foreach($ids as $id){
-            // Remove tags links;
-            DB::table('post_tag')
-                ->where('post_id', $id)
-                ->delete();
-
-            // Remove all reply comments;
-            Comment::where('post_id', $id)
-                ->whereNotNull('reply_id')
-                ->delete();
-
-            // Remove all comment;
-            Comment::where('post_id', $id)
-                ->whereNull('reply_id')
-                ->delete();
-
-            // Remove all views;
-            DB::table('posts_views')
-                ->where('post_id', $id)
-                ->delete();
-
-            // Remove likes;
-            Like::where('post_id', $id)
-                ->delete();
-
-            // Remove notifications;
-            Notification::where('post_id', $id)
-                ->delete();
-
-            // Remove post images;
             $post = Post::find($id);
-            $post->removePostImages('main');
-            $post->removePostImages('body');
-
-            // Remove all video links;
-            DB::table('posts_videos')
-                ->where('post_id', $id)
-                ->delete();
-
-            // And then - remove the post;
-            Post::destroy($id);
+            $post->dropWithContent();
         }
 
         if(count($ids) > 1){
@@ -405,6 +367,18 @@ class AdminPostController extends Controller
 
     // Store or update;
     public function store(Request $request){
+        if($request->has('status') && $request->input('status') == 'delete'){
+            $post = Post::find($request->input('postId'));
+
+            if(Auth::id() == $post->user_id || Gate::allows('is-admin')){
+                $post->dropWithContent();
+
+                return redirect('/posts');
+            }
+
+            return abort(404);
+        }
+
         $title = strip_tags($request->input('title'));
 
         // Generate slug
