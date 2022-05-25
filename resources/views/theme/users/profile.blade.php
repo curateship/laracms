@@ -43,6 +43,10 @@
         </div>
       </div>
               @include('components.users.lists.users-posts')
+        <!-- Pagination -->
+        <div class="border-top border-contrast-lower margin-top-sm"></div><!-- Divider -->
+        @include('components.layouts.partials.pagination', ['items' => $posts])
+        <!-- Pagination END-->
     </div>
 
   </div>
