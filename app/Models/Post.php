@@ -578,4 +578,46 @@ class Post extends Model
 
         return $content;
     }
+
+    public function dropWithContent(){
+        // Remove tags links;
+        DB::table('post_tag')
+            ->where('post_id', $this->id)
+            ->delete();
+
+        // Remove all reply comments;
+        Comment::where('post_id', $this->id)
+            ->whereNotNull('reply_id')
+            ->delete();
+
+        // Remove all comment;
+        Comment::where('post_id', $this->id)
+            ->whereNull('reply_id')
+            ->delete();
+
+        // Remove all views;
+        DB::table('posts_views')
+            ->where('post_id', $this->id)
+            ->delete();
+
+        // Remove likes;
+        Like::where('post_id', $this->id)
+            ->delete();
+
+        // Remove notifications;
+        Notification::where('post_id', $this->id)
+            ->delete();
+
+        // Remove post images;
+        $this->removePostImages('main');
+        $this->removePostImages('body');
+
+        // Remove all video links;
+        DB::table('posts_videos')
+            ->where('post_id', $this->id)
+            ->delete();
+
+        // And then - remove the post;
+        static::destroy($this->id);
+    }
 }
