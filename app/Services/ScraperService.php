@@ -376,28 +376,12 @@ class ScraperService {
 
       // Generate slug
       $title = strip_tags($title);
-      $slug_original = Str::slug($title, '-');
-      $posts_with_same_slug = Post::where('slug', 'like', $slug_original . '%')->get();
+      $slug = Str::slug($title, '-');
+      $posts_with_same_slug = Post::where('slug', 'like', $slug . '%')->get();
 
       if (count($posts_with_same_slug) > 0) {
-          $slug = Post::getNewSlug($slug_original, $posts_with_same_slug);
-      } else{
-          $slug = $slug_original;
+          $slug = Post::getNewSlug($slug, $posts_with_same_slug);
       }
-
-      Log::info('Post original slug: '.$slug_original);
-      Log::info('Post new slug (if exist): '.$slug);
-      Log::info('Post hash: '.md5($slug_original));
-
-      // Check exist post;
-      if(Post::whereRaw('MD5(slug) = "'.md5($slug_original).'"')->first() !== null){
-          Log::info('>>> Media already exist in posts. Skipping... <<<');
-
-          $this->logger->update_log_param('scrape', 'Skipped');
-
-          return false;
-      }
-
 
     $images = $this->filterItemInfo($crawler, $this->scraper->image, 'src', $url);
     // if (count($images) > 0) {
@@ -531,6 +515,21 @@ class ScraperService {
 
       foreach($media_files as $media_info) {
           $url = $media_info['url'];
+
+          // Check exist post;
+          $hash = hash_file('md5', $url);
+          Log::info('Post hash: '.$hash);
+
+          if(Post::where('file_hash', $hash)->first() !== null){
+              Log::info('>>> Media already exist in posts. Skipping... <<<');
+
+              $this->logger->update_log_param('scrape', 'Skipped');
+
+              $scrape_status = false;
+              continue;
+          }
+
+
           $file_ext = Arr::last(explode('.', $url));
 
           $this->logger->update_log_param('source_media', $url);
@@ -1152,7 +1151,7 @@ class ScraperService {
       $post->title = $post_data['title'];
       $post->slug = $post_data['slug'];
       $post->body = $post_data['description'];
-      $post->excerpt = $post_data['description'];
+      $post->excerpt = '';
       $post->user_id = $post_data['user_id'];
       $post->type = $post_data['post_type'];
       $post->original = $post_data['original'];
@@ -1162,7 +1161,26 @@ class ScraperService {
       $post->status = 'draft';
       $post->save();
 
-    if ( !empty($post_data['video']) ) {
+      $file = '';
+      if($post->type == 'image'){
+          $path = config('images.posts_storage_path');
+          $file = $path.$post->original;
+      }
+
+      if($post->type == 'video'){
+          $path = config('images.videos_storage_path');
+          $file = $path.$post_data['video']['original'];
+      }
+
+      if($file != ''){
+          $file_real_path = storage_path('app/public'.$file);
+          $hash = hash_file('md5', $file_real_path);
+
+          $post->file_hash = $hash;
+          $post->save();
+      }
+
+    if ( $post->type == 'video' ) {
         DB::table('posts_videos')
             ->insert([
                 'post_id' => $post->id,
