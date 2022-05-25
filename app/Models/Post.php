@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed $id
  * @property mixed $status
  * @property mixed $excerpt
+ * @property false|mixed|string $file_hash
  */
 class Post extends Model
 {
