@@ -17,7 +17,7 @@
                 <a class="text-sm link-plain" href="#0">View all</a>
             </div>
             <div class="margin-top-auto border-top border-contrast-lower opacity-40%"></div><!-- Divider -->
-            @include('components.users.lists.my-followers', ['follow_list' => $following])
+            @include('components.users.lists.my-followers-with-button', ['follow_list' => $following])
         </div>
 
       <!-- Followers -->
@@ -34,7 +34,6 @@
     <!-- Users Posts -->
     <div class="col-11@md">
 
-      <!-- Mobile Navigation Buttons -->
       <div class="justify-between flex items-end justify-between@md margin-bottom-md">
         <div class="justify-between flex items-end justify-between@md">
           <a href="http://localhost:8000/post" class="btn btn--primary btn--sm radius-full margin-right-xs" role="text">{{$user->name}}'s Posts</a>
@@ -42,11 +41,10 @@
           <a href="http://localhost:8000/post" class="btn btn--subtle btn--sm radius-full" role="text">Comments</a>
         </div>
       </div>
-              @include('components.users.lists.users-posts')
-        <!-- Pagination -->
-        <div class="border-top border-contrast-lower margin-top-sm"></div><!-- Divider -->
-        @include('components.layouts.partials.pagination', ['items' => $posts])
-        <!-- Pagination END-->
+      @include('components.users.lists.users-posts')
+
+      <!-- Pagination -->
+      @include('components.layouts.partials.pagination', ['items' => $posts])
     </div>
 
   </div>
