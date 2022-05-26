@@ -44,7 +44,10 @@
       @include('components.users.lists.users-posts')
 
       <!-- Pagination -->
-      @include('components.layouts.partials.pagination', ['items' => $posts])
+      <div class="margin-top-md">
+        @include('components.layouts.partials.pagination', ['items' => $posts])
+      </div>
+
     </div>
 
   </div>

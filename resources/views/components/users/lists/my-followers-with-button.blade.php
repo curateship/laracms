@@ -1,19 +1,25 @@
 @foreach($follow_list as $user)
 <div class="user-cell">
+
+  <!-- Avatar and Name -->
   <div class="user-cell__body">
-  <a href="/user/{{$user->id}}">
-    <figure class="avatar__figure avatar avatar--lg" role="img" aria-label="{{$user->name}}">
-      {!! $user->getAvatar(false, ['width' => 50, 'height' => 50], ['avatar__img'])->content !!}
-    </figure>
-  </a>
-  
-    <div class="user-cell__content text-component line-height-sm text-space-y-xxs">
-      <p><a href="/user/{{$user->id}}" class="color-contrast-high link-subtle text-sm">{{$user->name}}</a></p>
-    </div>
+    <a href="/user/{{$user->id}}">
+      <figure class="avatar__figure avatar avatar--lg" role="img" aria-label="{{$user->name}}">
+        {!! $user->getAvatar(false, ['width' => 50, 'height' => 50], ['avatar__img'])->content !!}
+      </figure>
+    </a>
+    <a href="/user/{{$user->id}}" class="color-contrast-high link-subtle text-sm">{{$user->name}}</a>
   </div>
 
-  <div class="user-cell__cta">
-    <button class='btn btn--subtle'>Follow</button>
-  </div>
+  <!-- Follow Icon -->
+  <ul class="choice-tags flex flex-wrap js-choice-tags">
+    <li>
+      <label class="choice-tag choice-tag--checkbox text-sm js-choice-tag" for="checkbox-tag-phone-call">
+        <input class="sr-only" type="checkbox" id="checkbox-tag-phone-call">
+        <svg class="choice-tag__icon icon" viewBox="0 0 16 16" aria-hidden="true"><g class="choice-tag__icon-group" fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"><line x1="-6" y1="8" x2="8" y2="8" /><line x1="8" y1="8" x2="22" y2="8"/><line x1="8" y1="2" x2="8" y2="14"/></g></svg>
+      </label>
+    </li>
+  </ul>
+
 </div>
 @endforeach
