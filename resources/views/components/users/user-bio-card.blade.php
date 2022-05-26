@@ -48,7 +48,7 @@
 </div>
 
 <!-- User`s bio -->
-<div class="padding-xs" style="font-size: 13px;">{{$user->bio}}</div>
+<div class="padding-md text-component text-sm">{{$user->bio}}</div>
 
 @auth()
     @if($user->id != \Illuminate\Support\Facades\Auth::id())

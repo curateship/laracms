@@ -10,7 +10,7 @@ Usage: codyhouse.co/license
 -------------------------------- */
 
 :root {
-  --user-cell-img-size: 64px;
+  --user-cell-img-size: 50px;
 }
 
 .user-cell {
@@ -18,7 +18,7 @@ Usage: codyhouse.co/license
   font-size: 1rem; // children font size not affected by global change of body font-size
 
   background: alpha(var(--color-contrast-lower), 0.5);
-  padding: var(--space-sm);
+  padding: var(--space-xs);
   border-radius: var(--radius-md);
 }
 
