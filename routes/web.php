@@ -90,6 +90,8 @@ Route::post('/user/edit/{user_id}', [UserController::class, 'profileUpdate'])->m
 
 // Search
 Route::get('/search/{search_request}', [PostController::class, 'postSearch'])->name('posts.search');
+// Most liked;
+Route::get('/mostLiked', [PostController::class, 'mostLiked'])->name('posts.mostLiked');
 
 // Temp
 Route::get('/dashboard', function () {
