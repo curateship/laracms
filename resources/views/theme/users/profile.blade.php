@@ -41,7 +41,7 @@
           <a href="http://localhost:8000/post" class="btn btn--subtle btn--sm radius-full" role="text">Comments</a>
         </div>
       </div>
-      @include('components.users.lists.users-posts')
+      @include('components.users.lists.user-posts')
 
       <!-- Pagination -->
       <div class="margin-top-md">
