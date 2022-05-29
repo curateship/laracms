@@ -96,7 +96,7 @@ Artisan::command('auto-title', function () {
 
         $title_result = Post::autoTitle($tags_in_cats);
 
-        $title = implode($title_result['title_array']);
+        $title = implode(' ', $title_result['title_array']);
         if (count($title_result['title_array']) == $title_result['str_block_count']) {
             // No tags? Nothing to do;
             dump('Post with ID: '.$post->id.' has no need to rename');
