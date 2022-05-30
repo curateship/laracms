@@ -24,7 +24,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function showProfile($user_id){
+    public function showProfile(Request $request, $user_id){
         if(Auth::guest() && $user_id == 'my'){
             return abort(404);
         }   elseif($user_id == 'my'){
@@ -37,10 +37,21 @@ class UserController extends Controller
             return abort(404);
         }
 
-        $posts = Post::where('user_id', $user->id)
-            ->where('status', 'published')
-            ->orderBy('created_at', 'DESC')
-            ->paginate(10);
+        $posts = [];
+        if($request->has('type')){
+            if($request->input('type') == 'liked'){
+                $posts = Post::leftJoin('likes', 'likes.post_id', '=', 'posts.id')
+                    ->where('status', 'published')
+                    ->where('likes.user_id', $user->id)
+                    ->orderBy('likes.created_at', 'DESC')
+                    ->paginate(10);
+            }
+        }   else{
+            $posts = Post::where('user_id', $user->id)
+                ->where('status', 'published')
+                ->orderBy('created_at', 'DESC')
+                ->paginate(10);
+        }
 
         $followed = false;
         if(!Auth::guest()){
