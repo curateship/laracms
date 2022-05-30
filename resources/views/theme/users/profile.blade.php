@@ -27,7 +27,7 @@
               <a class="text-sm link-plain" href="#0">View all</a>
             </div>
             <div class="margin-top-auto border-top border-contrast-lower opacity-40%"></div><!-- Divider -->
-              @include('components.users.lists.my-followers', ['follow_list' => $followers])
+              @include('components.users.lists.my-followers-with-button', ['follow_list' => $followers])
         </div>
     </div>
 
