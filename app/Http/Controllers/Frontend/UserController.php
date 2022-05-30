@@ -24,14 +24,15 @@ class UserController extends Controller
         ]);
     }
 
-    public function showProfile(Request $request, $user_id){
-        if(Auth::guest() && $user_id == 'my'){
+    public function showProfile(Request $request, $user_name){
+        if(Auth::guest() && $user_name == 'my'){
             return abort(404);
-        }   elseif($user_id == 'my'){
-            return redirect('/user/'.Auth::id());
+        }   elseif($user_name == 'my'){
+            return redirect('/user/'.Auth::user()->username);
         }
 
-        $user = User::find($user_id);
+        $user = User::where('username', $user_name)
+            ->first();
 
         if($user == null){
             return abort(404);
@@ -99,6 +100,14 @@ class UserController extends Controller
             return redirect()->route('profile.edit', $user)->with('danger', 'Email must be unique...');
         }
 
+        // Username;
+        $exist_user = User::where('username', $request->input('username'))
+            ->first();
+        if($exist_user != null && $exist_user->id != $id){
+            return redirect()->route('profile.edit', $user)->with('danger', 'Username must be unique...');
+        }
+
+        $user->username = $request->input('username');
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->bio = $request->has('bio') ? $request->input('bio') : null;

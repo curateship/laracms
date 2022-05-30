@@ -67,7 +67,7 @@ class AdminUserController extends Controller
     // Store
     public function store(StoreUserRequest $request)
     {
-        $validedData = $request->validated();
+        $request->validated();
 
         $user = User::create($request->except(['_token', 'roles']));
         $request->session()->flash('success', 'You have created the user');
@@ -261,6 +261,7 @@ class AdminUserController extends Controller
             return redirect()->route('admin.users.edit', $user)->with('danger', 'Email must be unique...');
         }
 
+        $user->username = $request->input('username');
         $user->name = $request->input('name');
         $user->email = $request->input('email');
 

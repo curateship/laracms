@@ -29,6 +29,7 @@ use App\Models\Category;
  * @property array|mixed|string|string[]|null $cover_original
  * @property array|mixed|string|string[]|null $cover_medium
  * @property array|mixed|string|string[]|null $cover_thumbnail
+ * @property mixed|string $username
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -40,6 +41,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $fillable = [
+        'username',
         'name',
         'email',
         'password',

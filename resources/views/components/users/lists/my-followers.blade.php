@@ -6,7 +6,7 @@
             </figure>
         </div>
         <div class="text-sm">
-            <a href="/user/{{$user->id}}" class="color-inherit link-subtle" target="_blank">{{$user->name}}</a>
+            <a href="/user/{{$user->username}}" class="color-inherit link-subtle" target="_blank">{{$user->name}}</a>
         </div>
     </div>
 @endforeach

@@ -5,11 +5,11 @@
 <div class="user-cell">
   <div class="user-cell__body">
     <figure aria-hidden="true">
-        <a href="/user/{{$post->author->id}}" class="color-contrast-high link-plain">{!! $post->author->getAvatar(false, ['width' => 45, 'height' => 45], ['user-cell__img'])->content !!}</a>
+        <a href="/user/{{$post->author->username}}" class="color-contrast-high link-plain">{!! $post->author->getAvatar(false, ['width' => 45, 'height' => 45], ['user-cell__img'])->content !!}</a>
     </figure>
 
     <div class="user-cell__content text-component line-height-md text-space-y-xxs">
-      <p><a href="/user/{{$post->author->id}}" class="color-contrast-high link-plain"><strong>{{$post->author->name}}</strong></a></p>
+      <p><a href="/user/{{$post->author->username}}" class="color-contrast-high link-plain"><strong>{{$post->author->name}}</strong></a></p>
       <p class="color-contrast-medium">{{$post->author->bio}}</p>
     </div>
   </div>

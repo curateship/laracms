@@ -3,12 +3,12 @@
 
   <!-- Avatar and Name -->
   <div class="user-cell__body">
-    <a href="/user/{{$user->id}}">
+    <a href="/user/{{$user->username}}">
       <figure class="avatar__figure avatar avatar--lg" role="img" aria-label="{{$user->name}}">
         {!! $user->getAvatar(false, ['width' => 48, 'height' => 48], ['avatar__img'])->content !!}
       </figure>
     </a>
-    <a href="/user/{{$user->id}}" class="color-contrast-high link-subtle text-sm">{{$user->name}}</a>
+    <a href="/user/{{$user->username}}" class="color-contrast-high link-subtle text-sm">{{$user->name}}</a>
   </div>
 
   <!-- Follow Icon -->

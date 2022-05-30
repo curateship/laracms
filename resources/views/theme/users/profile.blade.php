@@ -36,8 +36,8 @@
 
       <div class="justify-between flex items-end justify-between@md margin-bottom-md">
         <div class="justify-between flex items-end justify-between@md">
-          <a href="/user/{{$user->id}}" class="btn {{request()->get('type') === null ? 'btn--primary' : 'btn--subtle'}} btn--sm radius-full margin-right-xs" role="text">{{$user->name}}'s Posts</a>
-          <a href="/user/{{$user->id}}?type=liked" class="btn {{request()->get('type') === 'liked' ? 'btn--primary' : 'btn--subtle'}} btn--sm radius-full margin-right-xs" role="text">Likes</a>
+          <a href="/user/{{$user->username}}" class="btn {{request()->get('type') === null ? 'btn--primary' : 'btn--subtle'}} btn--sm radius-full margin-right-xs" role="text">{{$user->name}}'s Posts</a>
+          <a href="/user/{{$user->username}}?type=liked" class="btn {{request()->get('type') === 'liked' ? 'btn--primary' : 'btn--subtle'}} btn--sm radius-full margin-right-xs" role="text">Likes</a>
           <a href="#" class="btn btn--subtle btn--sm radius-full" role="text">Comments</a>
         </div>
       </div>

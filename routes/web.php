@@ -85,7 +85,7 @@ Route::get('/post/comment/reply-get-list', [PostController::class, 'getReply'])-
 
 // Profiles
 Route::get('/user/edit', [UserController::class, 'editProfile'])->middleware(['auth'])->name('profile.edit');
-Route::get('/user/{user_id}', [UserController::class, 'showProfile']);
+Route::get('/user/{username}', [UserController::class, 'showProfile']);
 Route::post('/user/edit/{user_id}', [UserController::class, 'profileUpdate'])->middleware(['auth'])->name('profile.update');
 
 
