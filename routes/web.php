@@ -127,6 +127,7 @@ Route::post('/tags/store', [AdminTagController::class, 'store'])->name('admin.ta
 
 // Post Admin
 Route::post('/admin/posts/move', [AdminPostController::class, 'move'])->name('post.move')->middleware(['auth', 'auth.isAdmin']);
+Route::get('/post/upload/getUploadForm/{type}', [AdminPostController::class, 'getUploadForm'])->name('post.getUploadForm')->middleware(['auth', 'verified']);
 Route::post('/post/upload/image/{type}', [AdminPostController::class, 'upload'])->name('post.upload.image')->middleware(['auth', 'verified']);
 Route::post('/post/upload/video/{type}', [AdminVideoController::class, 'upload'])->name('post.upload.video')->middleware(['auth', 'verified']);
 Route::post('/post/store', [AdminPostController::class, 'store'])->name('post.store')->middleware(['auth', 'verified']);
