@@ -49,6 +49,5 @@ class DatabaseSeeder extends Seeder
         $this->call(PostTagsSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(ScraperSeeder::class);
-        $this->call(ScraperTagsCategoriesSeeder::class);
     }
 }
