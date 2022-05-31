@@ -2,13 +2,13 @@
     <div class="card margin-bottom-md post-card" data-post-id="{{$post->id}}">
     <div class="flex justify-between mb-3">
         <div class="inline-flex items-baseline articles-v3__author padding-sm">
-            <a href="{{$post->author() != null ? '/user/'.$post->author()->id : '#'}}" class="articles-v3__author-img ">
+            <a href="{{$post->author() != null ? '/user/'.$post->author()->username : '#'}}" class="articles-v3__author-img ">
                 {!! $post->author()->getAvatar(false, ['width' => 45, 'height' => 45], ['block', 'width-100%', 'height-100%', 'object-cover'])->content !!}
             </a>
 
             <div class="text-component text-sm line-height-xs text-space-y-xxs">
                 <p>
-                    <a href="{{$post->author() != null ? '/user/'.$post->author()->id : '#'}}" class="articles-v3__author-name" rel="author">{!! $post->author() != null ? $post->author()->name : '<span style="font-weight: bold;color:red;">Deleted User</span>' !!}</a>
+                    <a href="{{$post->author() != null ? '/user/'.$post->author()->username : '#'}}" class="articles-v3__author-name" rel="author">{!! $post->author() != null ? $post->author()->name : '<span style="font-weight: bold;color:red;">Deleted User</span>' !!}</a>
                 </p>
                 <p class="color-contrast-medium">{{$post->created_at->diffForHumans()}}</p>
             </div>

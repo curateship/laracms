@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminIndexController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AdminRoleController;
 use App\Http\Controllers\Admin\AdminPostController;
+use App\Http\Controllers\Admin\AdminVideoController;
 use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminTagController;
 use App\Http\Controllers\Admin\AdminCommentController;
@@ -23,7 +24,6 @@ use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\Frontend\LikeController;
 use App\Http\Controllers\Frontend\FollowController;
 use App\Http\Controllers\Frontend\NotificationController;
-use App\Http\Controllers\Admin\AdminVideoController;
 
 
 /*
@@ -88,16 +88,11 @@ Route::get('/user/edit', [UserController::class, 'editProfile'])->middleware(['a
 Route::get('/user/{username}', [UserController::class, 'showProfile']);
 Route::post('/user/edit/{user_id}', [UserController::class, 'profileUpdate'])->middleware(['auth'])->name('profile.update');
 
-
 // Search
 Route::get('/search/{search_request}', [PostController::class, 'postSearch'])->name('posts.search');
+
 // Most liked;
 Route::get('/mostLiked', [PostController::class, 'mostLiked'])->name('posts.mostLiked');
-
-// Temp
-Route::get('/dashboard', function () {
-    return view('theme/users/dashboard');
-});
 
 /*
 |--------------------------------------------------------------------------
