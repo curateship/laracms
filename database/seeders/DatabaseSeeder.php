@@ -9,7 +9,6 @@ use App\Models\Post;
 use App\Models\Role;
 use App\Models\Scraper;
 use App\Models\ScraperLog;
-use App\Models\ScraperStat;
 use App\Models\Tag;
 use App\Models\TagsCategories;
 use App\Models\User;
@@ -32,7 +31,6 @@ class DatabaseSeeder extends Seeder
         Tag::truncate();
         Scraper::truncate();
         Follow::truncate();
-        ScraperStat::truncate();
         ScraperLog::truncate();
         DB::table('role_user')->delete();
 
