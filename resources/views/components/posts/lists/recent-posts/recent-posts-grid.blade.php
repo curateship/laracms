@@ -26,15 +26,15 @@
           <div class="articles-v3__author display@md padding-top-md">
 
             <!-- Author Image -->
-            <a href="/user/{{$recent_post->author()->id}}" class="articles-v3__author-img">
+            <a href="/user/{{$recent_post->author()->username}}" class="articles-v3__author-img">
                 @if($recent_post->author() != null)
                     {!! $recent_post->author()->getAvatar(false, ['width' => 40, 'height' => 40], ['object-cover'])->content !!}
                 @endif
             </a>
-            
+
             <!-- Author name and time created -->
             <div class="text-component text-sm line-height-xs text-space-y-xxs">
-              <p><a href="/user/{{$recent_post->author()->id}}" class="articles-v3__author-name" rel="author">{!! $recent_post->author() != null ? $recent_post->author()->name : '<span style="font-weight: bold;color:red;">Deleted User</span>' !!}</a></p>
+              <p><a href="/user/{{$recent_post->author()->username}}" class="articles-v3__author-name" rel="author">{!! $recent_post->author() != null ? $recent_post->author()->name : '<span style="font-weight: bold;color:red;">Deleted User</span>' !!}</a></p>
               <p class="color-contrast-medium">{{ $recent_post->created_at->diffforhumans() }} </p>
             </div>
 

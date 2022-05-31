@@ -50,6 +50,9 @@
                     </footer>
                     @empty
                     <p class="">No *{{$search}}* post where found</p>
+                </div>
+            </li>
         @endforelse
-        
+
     </ul>
+</section>

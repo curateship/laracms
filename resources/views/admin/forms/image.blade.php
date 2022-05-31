@@ -10,10 +10,7 @@
     <input type="hidden" name="thumbnail" value=""/>
     <input type="hidden" name="medium" value=""/>
     <input type="hidden" name="type" value=""/>
-    <input type="hidden" name="video_original" value=""/>
-    <input type="hidden" name="video_thumbnail" value=""/>
-    <input type="hidden" name="video_medium" value=""/>
-    <input type="file" class="file-upload__input" name="image" id="upload-file" accept="image/jpeg, image/jpg, image/png, image/gif, image/gif, video/mp4, video/webm" required>
+    <input type="file" class="file-upload__input" name="image" id="upload-file" accept="image/jpeg, image/jpg, image/png, image/gif, image/gif" required>
     <br>
     <div id="uploading-progress-bar" class="progress-bar progress-bar--color-update flex flex-column items-center js-progress-bar margin-top-md" style="display: none;">
         <div class="progress-bar__bg " aria-hidden="true">

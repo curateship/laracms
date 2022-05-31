@@ -19,7 +19,7 @@
       @include('components.tags.lists.popular-tags')
 
     <h3 class="padding-bottom-md color-contrast-high">Popular Posts</h3>
-      @include('components.posts.lists..filtered-posts.popular-posts-sidebar')
+      @include('components.posts.lists.filtered-posts.popular-posts-sidebar')
     </div>
 
   </div>

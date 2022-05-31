@@ -344,6 +344,19 @@ class PostController extends Controller
         ]);
     }
 
+    // Most liked posts;
+    public function mostLiked(){
+        $posts = Post::whereNotNull('post_id')
+            ->leftJoin(DB::raw('(select post_id, count(*) as likes_count from likes group by post_id) as likes'), 'likes.post_id', '=', 'posts.id')
+            ->orderBy('likes_count', 'desc')
+            ->select('posts.*')
+            ->paginate(20);
+
+        return view('theme.posts.mostLiked', [
+            'posts' => $posts
+        ]);
+    }
+
     public function move(Request $request){
         $posts_array = explode(',', $request->input('list'));
 

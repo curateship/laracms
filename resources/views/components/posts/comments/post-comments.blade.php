@@ -1,13 +1,13 @@
 @foreach($comments as $comment)
         <li class="comments__comment" data-type="comment" data-comment-id="{{$comment->id}}">
             <div class="flex items-start margin-bottom-sm">
-                <a href="/user/{{$comment->user_id}}" class="comments__author-img">
+                <a href="/user/{{$comment->author->username}}" class="comments__author-img">
                     {!! $comment->author->getAvatar(false, ['width' => 45, 'height' => 45], ['block', 'width-100%', 'height-100%', 'object-cover'])->content !!}
                 </a>
 
                 <div class="comments__content margin-top-xxxs">
                     <div class="text-component text-sm text-space-y-xs line-height-sm js-read-more" data-characters="150" data-btn-class="comments__readmore-btn js-tab-focus">
-                        <p><a href="/user/{{$comment->user_id}}" class="comments__author-name" rel="author">{{$comment->author->name}}</a></p>
+                        <p><a href="/user/{{$comment->author->username}}" class="comments__author-name" rel="author">{{$comment->author->name}}</a></p>
                         <p>{{$comment->the_comment}}</p>
                     </div>
 
