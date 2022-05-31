@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Post;
 use App\Models\User;
 
+/**
+ * @property mixed|string $slug
+ * @property mixed|string $name
+ */
 class Category extends Model
 {
     use HasFactory;

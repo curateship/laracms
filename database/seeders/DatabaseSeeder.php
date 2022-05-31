@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Follow;
+use App\Models\Like;
 use App\Models\Post;
 use App\Models\Role;
 use App\Models\Scraper;
@@ -32,16 +33,18 @@ class DatabaseSeeder extends Seeder
         Scraper::truncate();
         Follow::truncate();
         ScraperLog::truncate();
+        Like::truncate();
+        DB::table('posts_videos')->delete();
+        DB::table('posts_views')->delete();
         DB::table('role_user')->delete();
-
 
         Schema::enableForeignKeyConstraints();
         $this->call(RoleSeeder::class);
         $this->call(RoleUserSeeder::class);
-        Category::factory(10)->create();
+        $this->call(CategoriesSeeder::class);
         Post::factory(20)->create();
         Comment::factory(10)->create();
-        TagsCategories::factory(5)->create();
+        $this->call(TagsCategoriesSeeder::class);
         Tag::factory(10)->create();
         $this->call(PostTagsSeeder::class);
         $this->call(UserSeeder::class);

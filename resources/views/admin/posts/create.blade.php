@@ -85,13 +85,14 @@
         <select class="js-select-auto__select">
           <optgroup>
             @foreach($categories as $key => $category)
-            <option value="{{ $key }}">{{ $category }}</option>
+            <option value="{{ $key }}" {{$key == 1 ? 'selected' : ''}}>{{ $category }}</option>
             @endforeach
           </optgroup>
         </select>
         <!-- input -->
         <div class="select-auto__input-wrapper">
-          <input class="form-control js-autocomplete__input js-select-auto__input" type="text" name="category" placeholder="Select a Category" autocomplete="off" required>
+          <input class="form-control js-autocomplete__input js-select-auto__input" value="Post" type="text" name="category" placeholder="Select a Category" autocomplete="off" required>
+
           <div class="select-auto__input-icon-wrapper">
 
             <!-- arrow icon -->
