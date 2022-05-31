@@ -22,17 +22,9 @@ class IndexController extends Controller
     public function index()
     {
         SEOMeta::setTitle(config('seotools.static_titles.'.get_called_class().'.'.__FUNCTION__));
-
-        //$theme = 'classic';
-        $theme = 'masonry';
-        if($theme == 'classic'){
-            $posts = Post::where('status', 'published')->latest()->withCount('comments')->whereNotNull('user_id')->paginate(10);
-        }   else{
-            $posts = [];
-        }
-
+        $posts = Post::where('status', 'published')->latest()->withCount('comments')->whereNotNull('user_id')->paginate(12);
+        
         return view('/theme.index.full-width', [
-            'theme' => $theme,
             'recent_posts' => $posts,
             'popular_posts' => Post::getPostsListByView('month'),
             'specific_tag_posts' => Post::getListByTagName('Featured', ['by' => 'created_at', 'order' => 'desc'], 10),
