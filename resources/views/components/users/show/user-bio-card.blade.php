@@ -1,5 +1,5 @@
 @push('custom-scripts')
-    @include('components.users.scripts-js')
+    @include('components.users.show.scripts-js')
 @endpush
 
 <figure class="card__img img-blend corner-shadow" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light" data-blend-height="50%" style="background-color: var(--color-bg-light);">

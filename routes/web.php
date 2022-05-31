@@ -92,7 +92,7 @@ Route::post('/user/edit/{user_id}', [UserController::class, 'profileUpdate'])->m
 Route::get('/search/{search_request}', [PostController::class, 'postSearch'])->name('posts.search');
 
 // Most liked;
-Route::get('/mostLiked', [PostController::class, 'mostLiked'])->name('posts.mostLiked');
+Route::get('/most-liked', [PostController::class, 'mostLiked'])->name('posts.most-liked');
 
 /*
 |--------------------------------------------------------------------------

@@ -16,11 +16,11 @@
 
     <!-- Content -->
     <div class="col-11@md padding-x-lg@md">
-      @include('components.posts.single.article-plain')
+      @include('components.posts.show.article-plain')
 
     <!-- Author Box -->
     <div class="padding-y-lg">
-    @include('components.users.author-box')
+    @include('components.users.show.author-box')
     </div>
 
     <!-- Comments -->

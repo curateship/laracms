@@ -141,7 +141,7 @@ class PostController extends Controller
 
         $post->author = $post->author();
 
-        return view('/theme.posts.single', [
+        return view('/theme.posts.show', [
             'followed' => $followed,
             'post' => $post,
             'content' => $content,
@@ -352,7 +352,7 @@ class PostController extends Controller
             ->select('posts.*')
             ->paginate(20);
 
-        return view('theme.posts.mostLiked', [
+        return view('theme.posts.most-liked', [
             'posts' => $posts
         ]);
     }

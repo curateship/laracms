@@ -7,7 +7,7 @@
     <!-- User Informations -->
     <div class="col-4@md margin-bottom-md">
       <div class="card margin-bottom-sm">
-        @include('components.users.user-bio-card')
+        @include('components.users.show.user-bio-card')
       </div>
 
         <!-- Following -->

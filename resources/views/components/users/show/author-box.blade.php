@@ -1,5 +1,5 @@
 @push('custom-scripts')
-    @include('components.users.scripts-js')
+    @include('components.users.show.scripts-js')
 @endpush
 
 <div class="user-cell">
