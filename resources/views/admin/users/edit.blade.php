@@ -50,6 +50,16 @@
                 value="{{ old('name') }}@isset($user){{ $user->name }} @endisset">
               </div>
 
+                <div class="padding-bottom-sm">
+                    @error('username')
+                    <span class="form-control--error" role="alert">
+                <strong>{{ $message }}</strong>
+                </span>
+                    @enderror
+                    <input class="form-control width-100%" type="text" name="username" id="username" placeholder="Enter Username"
+                           value="{{ old('username') }}@isset($user){{ $user->username }} @endisset">
+                </div>
+
               <div class="margin-bottom-sm">
                 @error('email')
                 <span class="form-control--error" role="alert">

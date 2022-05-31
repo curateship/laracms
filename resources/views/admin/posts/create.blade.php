@@ -85,13 +85,14 @@
         <select class="js-select-auto__select">
           <optgroup>
             @foreach($categories as $key => $category)
-            <option value="{{ $key }}">{{ $category }}</option>
+            <option value="{{ $key }}" {{$key == 1 ? 'selected' : ''}}>{{ $category }}</option>
             @endforeach
           </optgroup>
         </select>
         <!-- input -->
         <div class="select-auto__input-wrapper">
-          <input class="form-control js-autocomplete__input js-select-auto__input" type="text" name="category" placeholder="Select a Category" autocomplete="off" required>
+          <input class="form-control js-autocomplete__input js-select-auto__input" value="Post" type="text" name="category" placeholder="Select a Category" autocomplete="off" required>
+
           <div class="select-auto__input-icon-wrapper">
 
             <!-- arrow icon -->
@@ -137,23 +138,24 @@
 
       <!-- Content Type Selection -->
       <div class="grid gap-sm items-center@md padding-top-xs">
-        <div class="col-8@md">
-          <ul class="flex flex-wrap gap-md">
-            <li>
-              <input class="radio" type="radio" name="radioButton" id="radio1" checked>
-              <label for="radio1">Image</label>
-            </li>
-            <li>
-              <input class="radio" type="radio" name="radioButton" id="radio2">
-              <label for="radio2">Video</label>
-            </li>
-          </ul>
-        </div>
-      
+            <div class="col-8@md">
+              <ul class="flex flex-wrap gap-md">
+                <li>
+                  <input class="radio uploading-form-type" type="radio" name="type" id="image-uploading" value="image">
+                  <label for="image-uploading">Image</label>
+                </li>
+                <li>
+                  <input class="radio uploading-form-type" type="radio" name="type" id="video-uploading" value="video">
+                  <label for="video-uploading">Video</label>
+                </li>
+              </ul>
+            </div>
+
       <!-- Content Type Form -->
-      <div class="padding-top-md">
-        @include('admin.forms.image')
+      <div class="padding-top-md" id="uploading-form">
+
       </div>
+    </div>
 
     </fieldset>
 

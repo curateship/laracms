@@ -29,6 +29,7 @@ use App\Models\Category;
  * @property array|mixed|string|string[]|null $cover_original
  * @property array|mixed|string|string[]|null $cover_medium
  * @property array|mixed|string|string[]|null $cover_thumbnail
+ * @property mixed|string $username
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -40,6 +41,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $fillable = [
+        'username',
         'name',
         'email',
         'password',
@@ -145,19 +147,55 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function getFollowingList($limit = 20){
-        return static::leftJoin('follows', 'follows.follow_user_id', '=', 'users.id')
+        $data = static::leftJoin('follows', 'follows.follow_user_id', '=', 'users.id')
             ->where('follows.user_id', $this->id)
             ->select('users.*')
             ->limit($limit)
             ->get();
+
+        foreach($data as $item){
+            $item->followed = true;
+        }
+
+        if(!Auth::guest() && Auth::id() != $this->id){
+            $other_user_data = static::leftJoin('follows', 'follows.follow_user_id', '=', 'users.id')
+                ->where('follows.user_id', Auth::id())
+                ->select('users.*')
+                ->limit($limit)
+                ->get();
+
+            $other_user_data_array = [];
+            foreach($other_user_data as $item){
+                $other_user_data_array[] = $item->id;
+            }
+
+            foreach($data as $item){
+                $item->followed = in_array($item->id, $other_user_data_array);
+            }
+        }
+
+        return $data;
     }
 
     public function getFollowersList($limit = 20){
-        return static::leftJoin('follows', 'follows.user_id', '=', 'users.id')
+        $data = static::leftJoin('follows', 'follows.user_id', '=', 'users.id')
             ->where('follows.follow_user_id', $this->id)
             ->select('users.*')
             ->limit($limit)
             ->get();
+
+        $followings = $this->getFollowingList();
+        $followings_array = [];
+
+        foreach($followings as $following){
+            $followings_array[] = $following->id;
+        }
+
+        foreach($data as $item){
+            $item->followed = in_array($item->id, $followings_array);
+        }
+
+        return $data;
     }
 
     public function followersBroadcast($title, $content, $url, $post_id){

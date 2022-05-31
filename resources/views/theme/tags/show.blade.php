@@ -4,7 +4,7 @@
 <div class="container max-width-adaptive-lg">
 
     <!-- Tag Informations -->
-    @include('components.tags.tag-informations')
+    @include('components.tags.show.tag-informations')
 
     <!-- Post list -->
     <div class="margin-bottom-lg">
