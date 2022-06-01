@@ -74,8 +74,17 @@ Artisan::command('storage:hash', function(){
             dump("ERROR: Cant resolve file by path! Post with ID $post->id was been skipped.");
         }
     }
-})->purpose('Add original file hash for exist posts');;
+})->purpose('Add original file hash for exist posts');
 
+Artisan::command('user-rename', function () {
+    $users = User::where('username', '')
+        ->get();
+
+    foreach($users as $user){
+        $user->username = 'user'.$user->id;
+        $user->save();
+    }
+})->purpose('Add username for users without them.');
 
 Artisan::command('auto-title', function () {
     $posts = Post::where('status', 'draft')
