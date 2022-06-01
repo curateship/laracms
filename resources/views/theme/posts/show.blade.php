@@ -7,21 +7,11 @@
 @endpush
 
 <div class="container max-width-adaptive-lg">
-  <div class="grid gap-md">
-
-    <!-- Sticky Interactions Sidebar -->
-    <div class="col-1@md display@md">
-      @include('components.layouts.partials.sticky-interactions')
-    </div>
+  <div class="grid gap-sm">
 
     <!-- Content -->
     <div class="col-11@md padding-x-lg@md">
       @include('components.posts.show.image-type')
-
-    <!-- Author Box -->
-    <div class="padding-y-lg">
-    @include('components.users.show.author-box')
-    </div>
 
     <!-- Comments -->
     <div class="border-top margin-top-sm"></div>
@@ -39,5 +29,4 @@
   </div>
 </div>
 
-@endsection
-
+ @endsection
