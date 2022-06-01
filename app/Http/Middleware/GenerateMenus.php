@@ -14,16 +14,23 @@ class GenerateMenus
         \Menu::make('header', function ($menu) {
 
             // Link1
-            $menu->add('Origins', ['url'  => url('/').'/category/origins']);
-            // Link2
-            $menu->add('Characters', ['url'  => url('/').'/category/characters']);
-            // Link3
-            $menu->add('Artists', ['url'  => url('/').'/category/artists']);
+            $menu->add('Users', ['url'  => url('/').'/users']);
 
-            // Dropdown Links
-            $menu->add('Friends', ['route'  => 'index'])->id('about1');
+            // Tags Dropdown Links
+            $menu->add('Tags', ['route'  => 'index'])->id('Tags');
             // Adding sub items;
-            $menu->add('Site1', ['parent' => 'about1', 'url' => 'https://site1.com']);
+            $menu->add('Origins', ['parent' => 'Tags', 'url' => url('/').'/category/origins']);
+            $menu->add('Characters', ['parent' => 'Tags', 'url' => url('/').'/category/characters']);
+            $menu->add('Artists', ['parent' => 'Tags', 'url' => url('/').'/category/artists']);
+            $menu->add('Tags', ['parent' => 'Tags', 'url' => url('/').'/category/misc']);
+            $menu->add('Media', ['parent' => 'Tags', 'url' => url('/').'/category/media']);
+
+            // Filter Dropdown Links
+            $menu->add('Filter', ['route'  => 'index'])->id('filter');
+            // Adding sub items;
+            $menu->add('Most Liked', ['parent' => 'filter', 'url' => url('/').'/most-liked']);
+            $menu->add('Most Commented', ['parent' => 'filter', 'url' => url('/').'/most-commented']);
+            $menu->add('Most Viewed', ['parent' => 'filter', 'url' => url('/').'/most-viewed']);
         });
 
         // Links Sidebar
