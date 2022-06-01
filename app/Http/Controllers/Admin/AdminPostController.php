@@ -6,15 +6,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Like;
 use App\Models\Notification;
-use FFMpeg\Coordinate\Dimension;
-use FFMpeg\FFMpeg;
-use FFMpeg\FFProbe;
-use FFMpeg\Coordinate;
-use FFMpeg\Format\Video\Ogg;
-use FFMpeg\Format\Video\WebM;
-use FFMpeg\Format\Video\WMV;
-use FFMpeg\Format\Video\WMV3;
-use FFMpeg\Format\Video\X264;
 use Illuminate\Http\Request;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Artesaos\SEOTools\Facades\SEOMeta;
@@ -106,6 +97,7 @@ class AdminPostController extends Controller
         }
 
         if($post->type == 'image'){
+            // Render simple image box;
             $content = '<img alt="thumbnail" src="'.'/storage'.config('images.posts_storage_path').$post->thumbnail.'">';
         }   else{
             // Render video player;
@@ -132,46 +124,8 @@ class AdminPostController extends Controller
         $ids = explode(',', $ids);
 
         foreach($ids as $id){
-            // Remove tags links;
-            DB::table('post_tag')
-                ->where('post_id', $id)
-                ->delete();
-
-            // Remove all reply comments;
-            Comment::where('post_id', $id)
-                ->whereNotNull('reply_id')
-                ->delete();
-
-            // Remove all comment;
-            Comment::where('post_id', $id)
-                ->whereNull('reply_id')
-                ->delete();
-
-            // Remove all views;
-            DB::table('posts_views')
-                ->where('post_id', $id)
-                ->delete();
-
-            // Remove likes;
-            Like::where('post_id', $id)
-                ->delete();
-
-            // Remove notifications;
-            Notification::where('post_id', $id)
-                ->delete();
-
-            // Remove post images;
             $post = Post::find($id);
-            $post->removePostImages('main');
-            $post->removePostImages('body');
-
-            // Remove all video links;
-            DB::table('posts_videos')
-                ->where('post_id', $id)
-                ->delete();
-
-            // And then - remove the post;
-            Post::destroy($id);
+            $post->dropWithContent();
         }
 
         if(count($ids) > 1){
@@ -217,151 +171,43 @@ class AdminPostController extends Controller
         unset($media['original']);
 
         // Save original media file in file system;
-        if($media_type == 'image'){
-            if($request->has('url')){
-                $original = $path."/original".$thumbnail_medium_name;
-            }   else{
-                $original = request()->file('image')->storeAs($path."/original", $thumbnail_medium_name);
-            }
-
-            foreach($media as $type_name => $type){
-                /* Gif and Images */
-                if ($mime_type == 'image/gif') {
-                    /* GIF */
-                    $thumbnail_medium = new Imagick($media_path.'/'.$original);
-                    $thumbnail_medium = $thumbnail_medium->coalesceImages();
-                    do {
-                        $thumbnail_medium->resizeImage( $type['width'], $type['height'], Imagick::FILTER_BOX, 1, true );
-                    } while ( $thumbnail_medium->nextImage());
-
-                    $thumbnail_medium = $thumbnail_medium->deconstructImages();
-
-                    $thumbnail_medium->writeImages($media_path . "$path/$type_name/" . $thumbnail_medium_name, true);
-                }   else{
-                    /* Other Image types */
-                    if($request->has('url')){
-                        $source = Storage::get($path."/original".$thumbnail_medium_name);
-                    }   else{
-                        $source = request()->file('image');
-                    }
-
-                    $thumbnail_medium = \Intervention\Image\Facades\Image::make($source);
-                    $thumbnail_medium->resize($type['width'], $type['height'], function($constraint){
-                        $constraint->aspectRatio();
-                    });
-
-
-                    $thumbnail_medium->save($media_path . "$path/$type_name/" . $thumbnail_medium_name);
-                }
-
-                $media[$type_name]['path'] = $media_path . "$path/$type_name/" . $thumbnail_medium_name;
-            }
+        if($request->has('url')){
+            $original = $path."/original".$thumbnail_medium_name;
+        }   else{
+            $original = request()->file('image')->storeAs($path."/original", $thumbnail_medium_name);
         }
 
-        /* Video files */
-        if($media_type == 'video'){
-            $original = request()->file('image')->storeAs($path_video."/original", $thumbnail_medium_name);
+        foreach($media as $type_name => $type){
+            /* Gif and Images */
+            if ($mime_type == 'image/gif') {
+                /* GIF */
+                $thumbnail_medium = new Imagick($media_path.'/'.$original);
+                $thumbnail_medium = $thumbnail_medium->coalesceImages();
+                do {
+                    $thumbnail_medium->resizeImage( $type['width'], $type['height'], Imagick::FILTER_BOX, 1, true );
+                } while ( $thumbnail_medium->nextImage());
 
-            $ffprobe = FFProbe::create();
-            $video_stream = $ffprobe
-                ->streams(storage_path() . "/app".$path_video."/original/" . $thumbnail_medium_name)
-                ->videos()
-                ->first();
+                $thumbnail_medium = $thumbnail_medium->deconstructImages();
 
-            /* At first, we need to compress video */
-            // Get current video size;
-            $video_dimensions = $video_stream->getDimensions();
-            $width = $video_dimensions->getWidth();
-            $height = $video_dimensions->getHeight();
-
-            // Compress video;
-            $compress_array = [
-                [
-                    'path' => 'original',
-                    'resolution' => 0
-                ],
-                [
-                    'path' => 'thumbnail',
-                    'resolution' => 480
-                ],
-                [
-                    'path' => 'medium',
-                    'resolution' => 720
-                ],
-            ];
-
-            $video_extension = strtolower(substr($thumbnail_medium_name, strrpos($thumbnail_medium_name,".") + 1));
-            $image_file_name = str_replace('.'.$video_extension, '', $thumbnail_medium_name).'.jpg';
-
-            foreach($compress_array as $compress){
-                if($height < $width){
-                    // For Landscape view;
-                    $m_video_width = $compress['path'] == 'original' ? $width : $compress['resolution'];
-                    $m_video_height = ceil($height * ($compress['path'] == 'original' ? $width : $compress['resolution']/$width));
-                    if($m_video_height % 2 == 1) $m_video_height++;
+                $thumbnail_medium->writeImages($media_path . "$path/$type_name/" . $thumbnail_medium_name, true);
+            }   else{
+                /* Other Image types */
+                if($request->has('url')){
+                    $source = Storage::get($path."/original".$thumbnail_medium_name);
                 }   else{
-                    // For Portrait view;
-                    $m_video_height = $compress['path'] == 'original' ? $height : $compress['resolution'];
-                    $m_video_width = ceil($width * ($compress['path'] == 'original' ? $height : $compress['resolution']/$height));
-                    if($m_video_width % 2 == 1) $m_video_width++;
+                    $source = request()->file('image');
                 }
 
-                // Resize video
-                $ffmpeg = FFMpeg::create();
-                $m_video = $ffmpeg->open(storage_path() . "/app".$path_video."/original/" . $thumbnail_medium_name);
-                $m_video
-                    ->filters()
-                    ->resize(new Dimension($m_video_width, $m_video_height))
-                    ->synchronize();
-
-                switch($video_extension){
-                    case 'ogg':
-                        $format = new Ogg();
-                        break;
-                    case 'webm':
-                        $format = new WebM();
-                        break;
-                    case 'wmv':
-                        $format = new WMV();
-                        break;
-                    case 'wmv3':
-                        $format = new WMV3();
-                        break;
-                    default:
-                        $format = new X264();
-
-                }
-
-                $format
-                    ->setKiloBitrate(704)
-                    ->setAudioChannels(2)
-                    ->setAudioKiloBitrate(256);
-
-                if($compress['path'] != 'original'){
-                    $m_video->save($format, storage_path() . "/app".$path_video."/".$compress['path']."/" . $thumbnail_medium_name);
-                }
-
-                /* Make preview images for post */
-                $source = storage_path() . "/app".$path."/".$compress['path']."/" . $image_file_name;
-                $m_video
-                    ->frame(Coordinate\TimeCode::fromSeconds(5))
-                    ->save($source);
-
-                // Resize preview;
                 $thumbnail_medium = \Intervention\Image\Facades\Image::make($source);
-                $thumbnail_medium->resize($m_video_width, $m_video_height, function($constraint){
+                $thumbnail_medium->resize($type['width'], $type['height'], function($constraint){
                     $constraint->aspectRatio();
                 });
 
-                $thumbnail_medium->save($source);
+
+                $thumbnail_medium->save($media_path . "$path/$type_name/" . $thumbnail_medium_name);
             }
 
-            // Add images paths in response;
-            $path_array = ['original', 'medium', 'thumbnail'];
-            foreach($path_array as $path_item){
-                $media[$path_item]['path'] =  $media_path . "$path/$path_item/" . $image_file_name;
-                $media['video_'.$path_item]['path'] =  $media_path . "$path_video/$path_item/" . $thumbnail_medium_name;
-            }
+            $media[$type_name]['path'] = $media_path . "$path/$type_name/" . $thumbnail_medium_name;
         }
 
         // Clean response array;
@@ -371,19 +217,8 @@ class AdminPostController extends Controller
             unset($media[$key]['height']);
         }
 
-        if($media_type == 'image'){
-            $media['original']['path'] = url('/').Storage::url($original);
-            $media['content'] = '<img alt="thumbnail" src="'.$media['thumbnail']['path'].'">';
-        }   else{
-            // Render video player;
-            $media['content'] = view('admin.posts.script-video-js-player', [
-                'poster' => $media['medium']['path'],
-                'video_mp4' => $media['video_medium']['path'],
-                'video_webm' => $media['video_medium']['path'],
-                'player_width' => config('images.player_size_thumbnail.width'),
-                'player_height' => config('images.player_size_thumbnail.height')
-            ])->render();
-        }
+        $media['original']['path'] = url('/').Storage::url($original);
+        $media['content'] = '<img alt="thumbnail" src="'.$media['thumbnail']['path'].'">';
 
         $media['type'] = $media_type;
 
@@ -405,6 +240,18 @@ class AdminPostController extends Controller
 
     // Store or update;
     public function store(Request $request){
+        if($request->has('status') && $request->input('status') == 'delete'){
+            $post = Post::find($request->input('postId'));
+
+            if(Auth::id() == $post->user_id || Gate::allows('is-admin')){
+                $post->dropWithContent();
+
+                return redirect('/posts');
+            }
+
+            return abort(404);
+        }
+
         $title = strip_tags($request->input('title'));
 
         // Generate slug
@@ -615,5 +462,16 @@ class AdminPostController extends Controller
                 'updated_at' => now(),
                 'status' => $request->input('direction')
             ]);
+    }
+
+    public function getUploadForm($type){
+        switch($type){
+            case 'image':
+                return view('admin.forms.image')->render();
+            case 'video':
+                return view('admin.forms.video')->render();
+        }
+
+        return false;
     }
 }

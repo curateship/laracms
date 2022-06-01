@@ -1,6 +1,6 @@
 @push('custom-scripts')
-    @include('components.posts.lists.script-infinite-scroll')
-    @include('components.posts.lists.script-masonry')
+    @include('components.posts.lists.infinite-masonry.script-infinite-scroll')
+    @include('components.posts.lists.infinite-masonry.script-masonry')
     @include('components.posts.lists.infinite-masonry.scripts')
 @endpush
 

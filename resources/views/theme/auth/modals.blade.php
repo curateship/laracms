@@ -86,6 +86,17 @@
       <input class="form-control width-100%" type="text" name="name" id="name" placeholder="Enter Name">
     </div>
 
+    <div class="padding-bottom-sm">
+        @if(old('target') == 'modal-signup')
+            @error('username')
+            <span class="form-control--error" role="alert">
+              <strong>{{ $message }}</strong>
+              </span>
+            @enderror
+        @endif
+        <input class="form-control width-100%" type="text" name="username" id="username" placeholder="Enter Username">
+    </div>
+
     <div class="margin-bottom-sm">
         @if(old('target') == 'modal-signup')
             @error('email')

@@ -10,12 +10,12 @@
   --btn-font-size: 1em;
   --btn-padding-x: var(--space-sm);
   --btn-padding-y: var(--space-xxs);
-  --btn-radius: var(--radius-md);
+  --btn-radius: var(--radius-lg);
 }
 
 .btn {
-  background: var(--color-bg-dark);
-  color: var(--color-contrast-higher);
+  background: alpha(var(--color-bg-dark), 0.76);
+  color: var(--color-contrast-medium);
   cursor: pointer;
   text-decoration: none;
   line-height: 1.2;
@@ -65,7 +65,7 @@
 }
 
 .btn--accent {
-  background: var(--color-accent);
+  background: var(--color-error);
   color: var(--color-white);
   box-shadow: inset 0px 1px 0px alpha(var(--color-white), 0.15), var(--shadow-xs);
 

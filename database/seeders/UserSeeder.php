@@ -13,6 +13,7 @@ class UserSeeder extends Seeder
     {
         // Admin;
         $admin = new User();
+        $admin->username = 'admin';
         $admin->name = 'Admin';
         $admin->email = 'typham2@gmail.com';
         $admin->email_verified_at = now();

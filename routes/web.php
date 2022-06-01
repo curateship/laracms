@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminIndexController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AdminRoleController;
 use App\Http\Controllers\Admin\AdminPostController;
+use App\Http\Controllers\Admin\AdminVideoController;
 use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminTagController;
 use App\Http\Controllers\Admin\AdminCommentController;
@@ -84,17 +85,14 @@ Route::get('/post/comment/reply-get-list', [PostController::class, 'getReply'])-
 
 // Profiles
 Route::get('/user/edit', [UserController::class, 'editProfile'])->middleware(['auth'])->name('profile.edit');
-Route::get('/user/{user_id}', [UserController::class, 'showProfile']);
+Route::get('/user/{username}', [UserController::class, 'showProfile']);
 Route::post('/user/edit/{user_id}', [UserController::class, 'profileUpdate'])->middleware(['auth'])->name('profile.update');
-
 
 // Search
 Route::get('/search/{search_request}', [PostController::class, 'postSearch'])->name('posts.search');
 
-// Temp
-Route::get('/dashboard', function () {
-    return view('theme/users/dashboard');
-});
+// Most liked;
+Route::get('/most-liked', [PostController::class, 'mostLiked'])->name('posts.most-liked');
 
 /*
 |--------------------------------------------------------------------------
@@ -124,7 +122,9 @@ Route::post('/tags/store', [AdminTagController::class, 'store'])->name('admin.ta
 
 // Post Admin
 Route::post('/admin/posts/move', [AdminPostController::class, 'move'])->name('post.move')->middleware(['auth', 'auth.isAdmin']);
-Route::post('/post/upload/{type}', [AdminPostController::class, 'upload'])->name('post.upload')->middleware(['auth', 'verified']);
+Route::get('/post/upload/getUploadForm/{type}', [AdminPostController::class, 'getUploadForm'])->name('post.getUploadForm')->middleware(['auth', 'verified']);
+Route::post('/post/upload/image/{type}', [AdminPostController::class, 'upload'])->name('post.upload.image')->middleware(['auth', 'verified']);
+Route::post('/post/upload/video/{type}', [AdminVideoController::class, 'upload'])->name('post.upload.video')->middleware(['auth', 'verified']);
 Route::post('/post/store', [AdminPostController::class, 'store'])->name('post.store')->middleware(['auth', 'verified']);
 Route::get('/post/edit/{post:slug}', [AdminPostController::class, 'edit'])->name('post.edit')->middleware(['auth', 'verified']);
 

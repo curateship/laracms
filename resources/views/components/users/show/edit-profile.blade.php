@@ -1,5 +1,5 @@
 @push('custom-scripts')
-    @include('components.users.scripts-js')
+    @include('components.users.show.scripts-js')
 @endpush
 
 <form action="/user/edit/{{$user->id}}" method='post' autocomplete="off" >
@@ -8,6 +8,10 @@
     <div class="margin-bottom-sm">
     <input class="form-control width-100%" type="text" value='{{ $user->name }}' name="name" placeholder="Edit Name" required>
     </div>
+
+      <div class="margin-bottom-sm">
+          <input class="form-control width-100%" type="text" value='{{ $user->username }}' name="username" placeholder="Edit Username" required>
+      </div>
 
     <div class="margin-bottom-sm">
     <input class="form-control width-100%" type="text" value='{{ $user->email }}' name="email" placeholder="Edit Email" required>

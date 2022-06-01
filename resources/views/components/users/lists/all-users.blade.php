@@ -1,7 +1,7 @@
 <div class="margin-bottom-md">
     <ul class="flex flex-wrap gap-xxs">
          @foreach($users as $user)
-             <a class="link-subtle" href="/user/{{$user->id}}">
+             <a class="link-subtle" href="/user/{{$user->username}}">
                  <li>
                      <span class="chip text-sm">
                          @if($user->thumbnail != '')

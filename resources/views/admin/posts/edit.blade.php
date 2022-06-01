@@ -193,7 +193,7 @@
         <input type="hidden" name="video_thumbnail" value="{{$post->video_thumbnail}}"/>
         <input type="hidden" name="video_medium" value="{{$post->video_medium}}"/>
 
-    <input type="file" class="file-upload__input" name="image" id="upload-file" accept="image/jpeg, image/jpg, image/png, image/gif, video/mp4, video/webm">
+    <input type="file" class="file-upload__input" name="image" id="upload-file" accept="{{$post->type == 'image' ? 'image/jpeg, image/jpg, image/png, image/gif' : 'video/mp4, video/webm'}}">
 
     <br>
 
@@ -215,8 +215,13 @@
         <input type="hidden" name="status" value="">
 
         <div class="flex justify-end gap-xs">
+            <button class="btn btn--accent postSaveAs" data-status="delete">Delete post</button>
+        </div>
+
+        <div class="flex justify-end gap-xs">
             <button class="btn btn--primary">Save changes</button>
         </div>
+
         @if($post->status == 'published')
             <div class="flex justify-end gap-xs">
                 <button class="btn btn--primary postSaveAs" data-status="draft">Move to drafts</button>

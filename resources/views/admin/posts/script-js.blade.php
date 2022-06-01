@@ -47,7 +47,7 @@
                 }, false);
                 return xhr;
             },
-            url : '/post/upload/main',
+            url : '/post/upload/' + $('.uploading-form-type:checked').val() + '/main',
             type : 'POST',
             data : formData,
             processData: false,  // tell jQuery not to process the data
@@ -73,6 +73,18 @@
         });
     }
     $(document).on('change', '#upload-file', uploadMedia);
+
+    $(document).on('click', '.uploading-form-type', function(){
+        const type = $(this).val()
+
+        $.ajax({
+            url: '/post/upload/getUploadForm/' + type,
+            type: 'GET',
+            success:function(response){
+                $('#uploading-form').html(response)
+            }
+        });
+    });
 
     const editBlock = $('#js-editor-description')
     if(editBlock.length > 0){
@@ -134,7 +146,7 @@
         $('input[name="status"]').val($(this).attr('data-status'))
 
         const uploadButton = $('label[for="upload-file"]')
-        if($('input[name="original"]').val() === ''){
+        if($('input[name="original"]').val() === '' || $('input[name="original"]').val() === undefined){
             uploadButton.removeClass('btn--subtle').addClass('btn--primary')
 
             setTimeout(function(){

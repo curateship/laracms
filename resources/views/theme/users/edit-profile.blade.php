@@ -13,7 +13,7 @@
       <!-- Edit Profile -->
       <div class="col-12@md card padding-md">
         <h3 class="padding-bottom-sm">Edit Profile</h3>
-        @include('components.users.edit-profile')
+        @include('components.users.show.edit-profile')
       </div>
 
       <!-- Sidebar -->

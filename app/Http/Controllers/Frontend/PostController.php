@@ -141,7 +141,7 @@ class PostController extends Controller
 
         $post->author = $post->author();
 
-        return view('/theme.posts.single', [
+        return view('/theme.posts.show', [
             'followed' => $followed,
             'post' => $post,
             'content' => $content,
@@ -337,10 +337,23 @@ class PostController extends Controller
 
         // SEO title
         SEOMeta::setTitle($search_request);
-        return view('theme.posts.search', [
+        return view('theme.posts.search-result', [
             'search' => $search_request,
             'total' => $count,
             'posts' => $by_title_and_body
+        ]);
+    }
+
+    // Most liked posts;
+    public function mostLiked(){
+        $posts = Post::whereNotNull('post_id')
+            ->leftJoin(DB::raw('(select post_id, count(*) as likes_count from likes group by post_id) as likes'), 'likes.post_id', '=', 'posts.id')
+            ->orderBy('likes_count', 'desc')
+            ->select('posts.*')
+            ->paginate(20);
+
+        return view('theme.posts.most-liked', [
+            'posts' => $posts
         ]);
     }
 
