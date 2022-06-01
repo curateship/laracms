@@ -9,7 +9,7 @@ return [
             'index' => 'Admin'
         ],
         'App\Http\Controllers\Frontend\IndexController' => [
-            'index' => 'Hentai Anime Videos - HentaiVice'
+            'index' => 'Index Title'
         ],
         'App\Http\Controllers\Admin\AdminUserController' => [
             'index' => 'Admin Users'
@@ -20,7 +20,7 @@ return [
          * The default configurations to be used by the meta generator.
          */
         'defaults'       => [
-            'title'        => "HentaiVice", // set false to total remove
+            'title'        => "Site Title", // set false to total remove
             'titleBefore'  => false, // Put defaults.title before page title, like 'It's Over 9000! - Dashboard'
             'description'  => false, // set false to total remove
             'separator'    => ' - ',
