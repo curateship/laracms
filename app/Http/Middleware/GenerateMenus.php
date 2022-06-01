@@ -23,16 +23,16 @@ class GenerateMenus
             // Dropdown Links
             $menu->add('Friends', ['route'  => 'index'])->id('about1');
             // Adding sub items;
-            $menu->add('Japanation', ['parent' => 'about1', 'url' => 'https://japanation.com']);
+            $menu->add('Site1', ['parent' => 'about1', 'url' => 'https://site1.com']);
         });
 
         // Links Sidebar
             \Menu::make('link-exchange', function ($menu) {
            // Link 1
-           $menu = $menu->add('Hentai Haven',    ['url'  => 'https://google.com']);
+           $menu = $menu->add('Site2',    ['url'  => 'https://google.com']);
            $menu->link->attr(['class' => 'link-plain text-sm color-contrast-medium']);
            // Link 2
-           $menu = $menu->add('Hentai School',    ['url'  => 'https://google.com']);
+           $menu = $menu->add('Site3',    ['url'  => 'https://google.com']);
            $menu->link->attr(['class' => 'link-plain text-sm color-contrast-medium']);
         });
 
