@@ -16,7 +16,7 @@
 
     <!-- Content -->
     <div class="col-11@md padding-x-lg@md">
-      @include('components.posts.show.image-type')
+      @include('components.posts.show.video-type')
 
     <!-- Author Box -->
     <div class="padding-y-lg">
