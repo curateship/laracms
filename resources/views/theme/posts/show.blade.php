@@ -10,7 +10,7 @@
   <div class="grid gap-sm">
 
     <!-- Content -->
-    <div class="col-11@md padding-x-lg@md">
+    <div class="col-12@md padding-right-lg@md">
       @include('components.posts.show.image-type')
 
     <!-- Comments -->
