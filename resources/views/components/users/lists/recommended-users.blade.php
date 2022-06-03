@@ -1,7 +1,3 @@
-<div class="padding-y-md">
-  Recommended Users
-</div>
-
 <div class="user-cell">
   <!-- Avatar and Name -->
   <div class="user-cell__body">

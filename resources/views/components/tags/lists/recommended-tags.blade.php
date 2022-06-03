@@ -1,7 +1,3 @@
-<div class="padding-y-md">
-  Recommended Tags
-</div>
-
 <div class="user-cell">
   <!-- Image and Tag -->
   <div class="user-cell__body">
