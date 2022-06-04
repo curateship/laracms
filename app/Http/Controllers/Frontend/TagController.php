@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 // Others
 use App\Http\Controllers\Controller;
+use App\Models\Follow;
 use App\Models\TagsCategories;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Http\Request;
@@ -12,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Auth;
 
 class TagController extends Controller
 {
@@ -36,6 +38,16 @@ class TagController extends Controller
             return abort(404);
         }
 
+        if(!Auth::guest()){
+            $follow = Follow::where('follow_tag_id', $tag->id)
+                ->where('user_id', Auth::id())
+                ->first();
+
+            $followed = $follow != null;
+        }   else{
+            $followed = false;
+        }
+
         // SEO Title
         SEOMeta::setTitle($tag->name);
         return view('theme.tags.show', [
@@ -43,7 +55,8 @@ class TagController extends Controller
             'posts' => $tag->posts()->paginate(10),
             'recent_posts' => $recent_posts,
             'categories' => $categories,
-            'tags' => $tags
+            'tags' => $tags,
+            'followed' => $followed
         ]);
     }
 
