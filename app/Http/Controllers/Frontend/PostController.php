@@ -408,6 +408,13 @@ class PostController extends Controller
         // Filter;
         if($request->has('type')){
             switch($request->input('type')){
+                // Get user following tags list;
+                case 'followings-tags':
+                    $posts = $posts->leftJoin('post_tag', 'post_tag.post_id', '=', 'posts.id')
+                        ->leftJoin('follows', 'follows.follow_tag_id', '=', 'post_tag.tag_id')
+                        ->where('follows.user_id', Auth::id());
+                    break;
+
                 // Get users following list;
                 case 'followings':
                     $posts = $posts->leftJoin('follows', 'follows.follow_user_id', '=', 'posts.user_id')
