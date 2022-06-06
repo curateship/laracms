@@ -31,6 +31,13 @@ class GenerateMenus
             $menu->add('Most Liked', ['parent' => 'filter', 'url' => url('/').'/most-liked']);
             $menu->add('Most Commented', ['parent' => 'filter', 'url' => url('/').'/most-commented']);
             $menu->add('Most Viewed', ['parent' => 'filter', 'url' => url('/').'/most-viewed']);
+
+            // Friends Dropdown Links
+            $menu->add('Friends', ['route'  => 'index'])->id('friend');
+            // Adding sub items;
+            $menu->add('Hentai Stream', ['parent' => 'friend', 'url' => 'https://hentaistream.com']);
+            $menu->add('Most Commented', ['parent' => 'filter', 'url' => url('/').'/most-commented']);
+            $menu->add('Most Viewed', ['parent' => 'filter', 'url' => url('/').'/most-viewed']);
         });
 
         // Links Sidebar
