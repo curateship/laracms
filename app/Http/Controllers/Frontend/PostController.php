@@ -400,7 +400,6 @@ class PostController extends Controller
         $offset = ($page_num - 1) * $perpage;
 
         $posts = Post::where('status', 'published')
-            ->select('posts.*')
             ->orderBy('created_at', 'DESC')
             ->offset($offset)
             ->limit($perpage);
@@ -410,9 +409,18 @@ class PostController extends Controller
             switch($request->input('type')){
                 // Get user following tags list;
                 case 'followings-tags':
-                    $posts = $posts->leftJoin('post_tag', 'post_tag.post_id', '=', 'posts.id')
-                        ->leftJoin('follows', 'follows.follow_tag_id', '=', 'post_tag.tag_id')
-                        ->where('follows.user_id', Auth::id());
+                    $view = 'components.posts.lists.infinite-posts.item-tag';
+                    $select_array[] = 'follow_tags';
+
+                    $posts = $posts->leftJoin(DB::raw('(
+                            select post_id, GROUP_CONCAT(tag_id) as follow_tags
+                            from follows
+                            left join post_tag on post_tag.tag_id = follows.follow_tag_id
+                            where user_id = '.Auth::id().'
+                            and follow_tag_id is not null
+                            group by post_id
+                        ) as follows'), 'follows.post_id', '=', 'posts.id')
+                        ->whereNotNull('follows.post_id');
                     break;
 
                 // Get users following list;
@@ -424,11 +432,14 @@ class PostController extends Controller
                 // All or nothing;
                 default:
                 case 'all':
-                    // Nothing;
+                    $view = 'components.posts.lists.infinite-posts.item';
+
             }
         }
 
-        $posts = $posts->get();
+        $select_array[] = 'posts.*';
+        $posts = $posts->select($select_array)
+            ->get();
 
         $posts_count = Post::where([
             'status' => 'published'
@@ -439,6 +450,19 @@ class PostController extends Controller
                 $post->user_liked = false;
             }   else{
                 $post->user_liked = $post->userLiked();
+            }
+
+            if(isset($post->follow_tags)){
+                $tags = explode(',', $post->follow_tags);
+                $follow_tags = [];
+                foreach($tags as $tag){
+                    $follow_tags[] = Tag::where('tags.id', $tag)
+                        ->leftJoin('tags_categories', 'tags_categories.id', '=', 'tags.category_id')
+                        ->select('tags.*', 'tags_categories.name as category_name')
+                        ->first();
+                }
+
+                $post->follow_tags = $follow_tags;
             }
         }
 
@@ -462,6 +486,6 @@ class PostController extends Controller
             abort(204);
         }
 
-        return view('components.posts.lists.infinite-posts.item', $data)->render();
+        return view($view, $data)->render();
     }
 }
