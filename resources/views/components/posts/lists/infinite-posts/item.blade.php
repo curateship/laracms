@@ -1,5 +1,4 @@
-@foreach($posts as $post)
-    <div class="card margin-bottom-md post-card" data-post-id="{{$post->id}}">
+<div class="card margin-bottom-md post-card" data-post-id="{{$post->id}}">
     <div class="flex justify-between mb-3">
         <div class="inline-flex items-baseline articles-v3__author padding-sm">
             <a href="{{$post->author() != null ? '/user/'.$post->author()->username : '#'}}" class="articles-v3__author-img ">
@@ -65,10 +64,10 @@
 
     <!-- Excerpt -->
     <div class="padding-sm text-sm">
-      {{$post->excerpt}} 
-      <a class="link-plain color-contrast-high" href="{{route('post.show', $post)}}">
-        <span class="chip text-xs padding-xxxs">Read Full Post</span>
-      </a>
+        {{$post->excerpt}}
+        <a class="link-plain color-contrast-high" href="{{route('post.show', $post)}}">
+            <span class="chip text-xs padding-xxxs">Read Full Post</span>
+        </a>
     </div>
 
     <!-- Tags -->
@@ -124,5 +123,4 @@
 
         </ul>
     </footer>
-    </div>
-@endforeach
+</div>

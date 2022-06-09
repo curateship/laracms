@@ -404,41 +404,40 @@ class PostController extends Controller
             ->offset($offset)
             ->limit($perpage);
 
+        $select[] = 'posts.*';
+
         // Filter;
         if($request->has('type')){
             switch($request->input('type')){
+                // Get users following list;
                 // Get user following tags list;
                 case 'followings-tags':
-                    $view = 'components.posts.lists.infinite-posts.item-tag';
-                    $select_array[] = 'follow_tags';
-
-                    $posts = $posts->leftJoin(DB::raw('(
+                case 'followings':
+                    $posts = $posts->leftJoin(DB::raw("(
+                        select posts.id as post_id
+                        from follows
+                        left join posts on posts.user_id = follows.follow_user_id
+                        where follows.user_id = ".Auth::id()."
+                    ) as follows_user"), 'follows_user.post_id', '=', 'posts.id')
+                        ->leftJoin(DB::raw('(
                             select post_id, GROUP_CONCAT(tag_id) as follow_tags
                             from follows
                             left join post_tag on post_tag.tag_id = follows.follow_tag_id
                             where user_id = '.Auth::id().'
                             and follow_tag_id is not null
                             group by post_id
-                        ) as follows'), 'follows.post_id', '=', 'posts.id')
-                        ->whereNotNull('follows.post_id');
-                    break;
-
-                // Get users following list;
-                case 'followings':
-                    $posts = $posts->leftJoin('follows', 'follows.follow_user_id', '=', 'posts.user_id')
-                        ->where('follows.user_id', Auth::id());
+                        ) as follows_tags'), 'follows_tags.post_id', '=', 'posts.id');
+                    $select[] = 'follow_tags';
                     break;
 
                 // All or nothing;
                 default:
                 case 'all':
-                    $view = 'components.posts.lists.infinite-posts.item';
-
+                    // Nothing;
             }
         }
 
-        $select_array[] = 'posts.*';
-        $posts = $posts->select($select_array)
+        $posts = $posts->select($select)
             ->get();
 
         $posts_count = Post::where([
@@ -486,6 +485,6 @@ class PostController extends Controller
             abort(204);
         }
 
-        return view($view, $data)->render();
+        return view('components.posts.lists.infinite-posts.items', $data)->render();
     }
 }
