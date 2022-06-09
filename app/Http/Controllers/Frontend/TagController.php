@@ -14,6 +14,7 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class TagController extends Controller
 {
@@ -91,7 +92,17 @@ class TagController extends Controller
         }
 
         $tags = Tag::where('category_id', $category->id)
+            ->leftJoin(DB::raw("(
+                select tags.id as tag_id
+                from tags
+                left join post_tag on post_tag.tag_id = tags.id
+                left join posts on posts.id = post_tag.post_id
+                where tags.category_id = $category->id
+                and posts.status = 'published'
+                group by tags.id
+            ) as true_tags"), 'true_tags.tag_id', '=', 'tags.id')
             ->leftJoin('tags_categories', 'tags_categories.id', '=', 'tags.category_id')
+            ->whereNotNull('true_tags.tag_id')
             ->select(['tags.*', 'tags_categories.name as cat_name'])
             ->paginate(50);
 
