@@ -357,6 +357,10 @@ class AdminPostController extends Controller
 
         $post->save();
 
+        if($request->input('status') == 'published'){
+            $post->created_at = now();
+        }
+
         // Now we can save excerpt;
         $post->excerpt = strip_tags($post->body('short', 200));
         $post->save();
