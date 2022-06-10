@@ -494,7 +494,7 @@ class PostController extends Controller
             ->leftJoin(DB::raw('(select post_id, count(*) as comments_count from comments group by post_id) as comments'), 'comments.post_id', '=', 'posts.id')
             ->orderBy('comments_count', 'desc')
             ->select('posts.*')
-            ->paginate(2);
+            ->paginate(20);
 
         return view('theme.posts.most-commented', [
             'posts' => $posts,
