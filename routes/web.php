@@ -94,6 +94,8 @@ Route::get('/search/{search_request}', [PostController::class, 'postSearch'])->n
 
 // Most liked;
 Route::get('/most-liked', [PostController::class, 'mostLiked'])->name('posts.most-liked');
+Route::get('/most-commented', [PostController::class, 'mostCommented'])->name('posts.most-commented');
+Route::get('/most-viewed', [PostController::class, 'mostViewed'])->name('posts.most-viewed');
 
 /*
 |--------------------------------------------------------------------------

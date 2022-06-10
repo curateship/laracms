@@ -52,7 +52,7 @@
                              <span>{{$post->getViewsCount()}}</span>
                          </button>
                      </li>
-                     
+
                         </ul>
                     </footer>
                     @empty
@@ -60,6 +60,5 @@
                 </div>
             </li>
         @endforelse
-
     </ul>
 </section>

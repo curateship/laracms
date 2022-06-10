@@ -353,7 +353,8 @@ class PostController extends Controller
             ->paginate(20);
 
         return view('theme.posts.most-liked', [
-            'posts' => $posts
+            'posts' => $posts,
+            'search' => ''
         ]);
     }
 
@@ -486,5 +487,31 @@ class PostController extends Controller
         }
 
         return view('components.posts.lists.infinite-posts.items', $data)->render();
+    }
+
+    public function mostCommented(){
+        $posts = Post::whereNotNull('post_id')
+            ->leftJoin(DB::raw('(select post_id, count(*) as comments_count from comments group by post_id) as comments'), 'comments.post_id', '=', 'posts.id')
+            ->orderBy('comments_count', 'desc')
+            ->select('posts.*')
+            ->paginate(2);
+
+        return view('theme.posts.most-commented', [
+            'posts' => $posts,
+            'search' => ''
+        ]);
+    }
+
+    public function mostViewed(Request $request){
+        $posts = Post::whereNotNull('post_id')
+            ->leftJoin(DB::raw('(select post_id, count(*) as views_count from posts_views group by post_id) as views'), 'views.post_id', '=', 'posts.id')
+            ->orderBy('views_count', 'desc')
+            ->select('posts.*')
+            ->paginate(20);
+
+        return view('theme.posts.most-viewed', [
+            'posts' => $posts,
+            'search' => ''
+        ]);
     }
 }
