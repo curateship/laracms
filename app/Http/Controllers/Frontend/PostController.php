@@ -141,7 +141,7 @@ class PostController extends Controller
 
         $post->author = $post->author();
 
-        return view('/theme.posts.show', [
+        return view('/theme.posts.types.'.$post->type, [
             'followed' => $followed,
             'post' => $post,
             'content' => $content,
@@ -353,7 +353,8 @@ class PostController extends Controller
             ->paginate(20);
 
         return view('theme.posts.most-liked', [
-            'posts' => $posts
+            'posts' => $posts,
+            'search' => ''
         ]);
     }
 
@@ -400,18 +401,34 @@ class PostController extends Controller
         $offset = ($page_num - 1) * $perpage;
 
         $posts = Post::where('status', 'published')
-            ->select('posts.*')
             ->orderBy('created_at', 'DESC')
             ->offset($offset)
             ->limit($perpage);
+
+        $select[] = 'posts.*';
 
         // Filter;
         if($request->has('type')){
             switch($request->input('type')){
                 // Get users following list;
+                // Get user following tags list;
+                case 'followings-tags':
                 case 'followings':
-                    $posts = $posts->leftJoin('follows', 'follows.follow_user_id', '=', 'posts.user_id')
-                        ->where('follows.user_id', Auth::id());
+                    $posts = $posts->leftJoin(DB::raw("(
+                        select posts.id as post_id
+                        from follows
+                        left join posts on posts.user_id = follows.follow_user_id
+                        where follows.user_id = ".Auth::id()."
+                    ) as follows_user"), 'follows_user.post_id', '=', 'posts.id')
+                        ->leftJoin(DB::raw('(
+                            select post_id, GROUP_CONCAT(tag_id) as follow_tags
+                            from follows
+                            left join post_tag on post_tag.tag_id = follows.follow_tag_id
+                            where user_id = '.Auth::id().'
+                            and follow_tag_id is not null
+                            group by post_id
+                        ) as follows_tags'), 'follows_tags.post_id', '=', 'posts.id');
+                    $select[] = 'follow_tags';
                     break;
 
                 // All or nothing;
@@ -421,7 +438,8 @@ class PostController extends Controller
             }
         }
 
-        $posts = $posts->get();
+        $posts = $posts->select($select)
+            ->get();
 
         $posts_count = Post::where([
             'status' => 'published'
@@ -432,6 +450,19 @@ class PostController extends Controller
                 $post->user_liked = false;
             }   else{
                 $post->user_liked = $post->userLiked();
+            }
+
+            if(isset($post->follow_tags)){
+                $tags = explode(',', $post->follow_tags);
+                $follow_tags = [];
+                foreach($tags as $tag){
+                    $follow_tags[] = Tag::where('tags.id', $tag)
+                        ->leftJoin('tags_categories', 'tags_categories.id', '=', 'tags.category_id')
+                        ->select('tags.*', 'tags_categories.name as category_name')
+                        ->first();
+                }
+
+                $post->follow_tags = $follow_tags;
             }
         }
 
@@ -455,6 +486,32 @@ class PostController extends Controller
             abort(204);
         }
 
-        return view('components.posts.lists.infinite-posts.item', $data)->render();
+        return view('components.posts.lists.infinite-posts.items', $data)->render();
+    }
+
+    public function mostCommented(){
+        $posts = Post::whereNotNull('post_id')
+            ->leftJoin(DB::raw('(select post_id, count(*) as comments_count from comments group by post_id) as comments'), 'comments.post_id', '=', 'posts.id')
+            ->orderBy('comments_count', 'desc')
+            ->select('posts.*')
+            ->paginate(20);
+
+        return view('theme.posts.most-commented', [
+            'posts' => $posts,
+            'search' => ''
+        ]);
+    }
+
+    public function mostViewed(Request $request){
+        $posts = Post::whereNotNull('post_id')
+            ->leftJoin(DB::raw('(select post_id, count(*) as views_count from posts_views group by post_id) as views'), 'views.post_id', '=', 'posts.id')
+            ->orderBy('views_count', 'desc')
+            ->select('posts.*')
+            ->paginate(20);
+
+        return view('theme.posts.most-viewed', [
+            'posts' => $posts,
+            'search' => ''
+        ]);
     }
 }

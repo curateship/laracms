@@ -46,8 +46,9 @@ route::post('/notifications/markAsRead', [NotificationController::class, 'markAs
 route::post('/notifications/markAllAsRead', [NotificationController::class, 'markAllAsRead'])->name('notifications.markAll')->middleware(['auth']);
 route::post('/notifications/clear', [NotificationController::class, 'clear'])->name('notifications.clear')->middleware(['auth']);
 
-// Follow
-Route::post('/users/follow', [FollowController::class, 'follow'])->name('users.follow')->middleware(['auth']);
+// Follow Users
+Route::post('/users/follow', [FollowController::class, 'followUser'])->name('users.follow')->middleware(['auth']);
+Route::post('/tags/follow', [FollowController::class, 'followTag'])->name('tags.follow')->middleware(['auth']);
 
 // Likes
 Route::post('/like/post', [LikeController::class, 'like'])->name('post.like');
@@ -93,6 +94,8 @@ Route::get('/search/{search_request}', [PostController::class, 'postSearch'])->n
 
 // Most liked;
 Route::get('/most-liked', [PostController::class, 'mostLiked'])->name('posts.most-liked');
+Route::get('/most-commented', [PostController::class, 'mostCommented'])->name('posts.most-commented');
+Route::get('/most-viewed', [PostController::class, 'mostViewed'])->name('posts.most-viewed');
 
 /*
 |--------------------------------------------------------------------------

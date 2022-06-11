@@ -60,6 +60,5 @@
                 </div>
             </li>
         @endforelse
-
     </ul>
 </section>
