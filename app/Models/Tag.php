@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -105,5 +106,33 @@ class Tag extends Model
         }   else{
             return html_entity_decode($content);
         }
+    }
+
+    public static function getRecommendedTags(){
+        $tags = Tag::limit(10)
+            ->leftJoin('tags_categories', 'tags_categories.id', '=', 'tags.category_id')
+            ->leftJoin(DB::raw("(
+                select tag_id, count(*) as posts_count
+                from post_tag
+                left join (
+                    select posts.id as post_id
+                    from posts
+                    where status = 'published'
+                    and user_id != ".Auth::id()."
+                ) as posts on posts.post_id = post_tag.post_id
+                group by tag_id
+            ) as posts"), 'posts.tag_id', '=', 'tags.id')
+            ->leftJoin(DB::raw("(
+                select follow_tag_id
+                from follows
+                where user_id = ".Auth::id()."
+                and follow_tag_id is not null
+            ) as follows"), 'follows.follow_tag_id', '=', 'tags.id')
+            ->orderBy('posts_count', 'DESC')
+            ->where('posts_count', '>', 0)
+            ->select('tags.*', 'follow_tag_id', 'posts_count', 'tags_categories.name as cat_name')
+            ->get();
+
+        return $tags;
     }
 }
