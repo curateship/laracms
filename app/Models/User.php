@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 Use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -210,5 +211,28 @@ class User extends Authenticatable implements MustVerifyEmail
                 Notification::send($follower->id, Auth::id(), $title, $content, $url, $post_id);
             }
         }
+    }
+
+    public static function getRecommendedUsers(){
+        $users = static::limit(10)
+            ->leftJoin(DB::raw("(
+                select user_id, count(*) as posts_count
+                        from posts
+                        where status = 'published'
+                        and user_id != ".Auth::id()."
+                        group by user_id
+            ) as posts"), 'posts.user_id', '=', 'users.id')
+            ->leftJoin(DB::raw("(
+                select follow_user_id
+                from follows
+                where user_id = ".Auth::id()."
+                and follow_user_id is not null
+            ) as follows"), 'follows.follow_user_id', '=', 'users.id')
+            ->orderBy('posts_count', 'DESC')
+            ->where('posts_count', '>', 0)
+            ->select('users.*', 'follow_user_id', 'posts_count')
+            ->get();
+
+        return $users;
     }
 }
