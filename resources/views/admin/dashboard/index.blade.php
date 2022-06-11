@@ -11,8 +11,7 @@
 
     <!-- Col 8 -->
     <div class="col-8@md">
-      <!--@//include('components.posts.lists.infinite-posts.list')-->
-        @include('components.posts.lists.infinite-posts.following-tags-posts')
+        @include('components.posts.lists.infinite-posts.list')
     </div>
 
     <!-- Col 3 -->
