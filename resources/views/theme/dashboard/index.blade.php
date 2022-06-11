@@ -11,8 +11,7 @@
 
     <!-- Col 8 -->
     <div class="col-8@md">
-        <!--@//include('components.posts.lists.infinite-posts.following-posts')-->
-        @include('theme.dashboard.suggestions')
+        @include('components.posts.lists.infinite-posts.following-posts')
     </div>
 
     <!-- Col 3 -->

@@ -427,7 +427,12 @@ class PostController extends Controller
                             where user_id = '.Auth::id().'
                             and follow_tag_id is not null
                             group by post_id
-                        ) as follows_tags'), 'follows_tags.post_id', '=', 'posts.id');
+                        ) as follows_tags'), 'follows_tags.post_id', '=', 'posts.id')
+                        ->where(function($query){
+                            $query->whereNotNull('follows_tags.follow_tags')
+                                ->orWhereNotNull('follows_user.post_id');
+                        });
+
                     $select[] = 'follow_tags';
                     break;
 
