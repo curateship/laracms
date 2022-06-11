@@ -60,6 +60,9 @@ Route::get('/post/{post:slug}', [PostController::class, 'show'])->name('post.sho
 Route::get('/masonry/posts/page/{id}', [PostController::class, 'ajaxShowPosts']);//->middleware('cache');
 Route::get('/infinite/posts/page/{id}', [PostController::class, 'ajaxInfiniteShowPosts']);//->middleware('cache');
 
+// Suggestions;
+Route::get('/suggestions/get', [PostController::class, 'getSuggestions'])->name('suggestions.get')->middleware(['auth', 'verified']);
+
 // Posts
 Route::resource('/posts', PostController::class)->middleware(['auth']);
 Route::post('/posts/move', [PostController::class, 'move'])->name('post.move')->middleware(['auth', 'verified']);
