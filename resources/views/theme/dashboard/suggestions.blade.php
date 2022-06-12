@@ -1,7 +1,3 @@
-@push('custom-scripts')
-    @include('theme.dashboard.suggestions-scripts-js')
-@endpush
-
 <div class="margin-bottom-sm">
     <h4>Recommended Users</h4>
 </div>
