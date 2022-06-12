@@ -2,8 +2,11 @@
     <div class="flex justify-between mb-3">
         <div class="inline-flex items-baseline articles-v3__author padding-sm">
             <a href="/tags/{{$post->follow_tags[0]->category_name}}/{{$post->follow_tags[0]->slug}}" class="articles-v3__author-img ">
-                <img src="{{url('/storage'.config('images.tags_storage_path').$post->follow_tags[0]->thumbnail)}}" alt="tag-image">
-
+                @if($post->follow_tags[0]->thumbnail != null)
+                    <img src="{{url('/storage'.config('images.tags_storage_path').$post->follow_tags[0]->thumbnail)}}" alt="tag-image">
+                @else
+                    <div style="height: 45px;width: 45px;background: var(--color-bg, white);"></div>
+                @endif
             </a>
 
             <div class="text-component text-sm line-height-xs text-space-y-xxs">
