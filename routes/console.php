@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Scraper;
 use App\Models\ScraperLog;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,9 +33,25 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 Artisan::command('test', function () {
-    //dump('Nothing to test now');
-    //dd(hash_file('md5', 'https://thehentaiworld.com/wp-content/uploads/2022/04/Widowmaker-Cpt-Flapjack-Overwatch-Animated-Hentai-3D-CGI-Video.mp4'));
+    dump('Nothing to test now');
 })->purpose('Method for tests');
+
+Artisan::command('tags:slug', function () {
+    $tags = Tag::whereNull('slug')
+        ->get();
+
+    foreach($tags as $tag){
+        $slug = Str::slug($tag->name, '-');
+        $exist = Tag::where('slug', 'like', $slug . '%')
+            ->get();
+
+        if (count($exist) > 0) {
+            $slug = Post::getNewSlug($slug, $exist);
+        }
+        $tag->slug = $slug;
+        $tag->save();
+    }
+})->purpose('Add slugs to tags');
 
 Artisan::command('storage:hash', function(){
     $posts = Post::whereNull('file_hash')

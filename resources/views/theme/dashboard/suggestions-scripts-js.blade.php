@@ -27,7 +27,7 @@
 
                 if(parseInt(response.status) === 1){
                     $('.follow-label[data-' + key + '="' + itemId + '"]').html('Unfollow')
-                    $('.follow-button-input-tag[data-' + key + '="' + itemId + '"]').prop('checked', true)
+                    $('.follow-button-input-tag[data-' + key + '="' + itemId + '"]').prop('checked', true).parents('label').addClass('choice-tag--checked')
                 }   else{
                     $('.follow-label[data-' + key + '="' + itemId + '"]').html('Follow')
                     $('.follow-button-input-tag[data-' + key + '="' + itemId + '"]').prop('checked', false)
@@ -64,7 +64,7 @@
 
                 if(parseInt(response.status) === 1){
                     $('.follow-label[data-' + key + '="' + itemId + '"]').html('Unfollow')
-                    $('.follow-button-input-user[data-' + key + '="' + itemId + '"]').prop('checked', true)
+                    $('.follow-button-input-user[data-' + key + '="' + itemId + '"]').prop('checked', true).parents('label').addClass('choice-tag--checked')
                 }   else{
                     $('.follow-label[data-' + key + '="' + itemId + '"]').html('Follow')
                     $('.follow-button-input-user[data-' + key + '="' + itemId + '"]').prop('checked', false)

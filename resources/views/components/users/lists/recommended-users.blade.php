@@ -2,12 +2,12 @@
     <div class="user-cell margin-bottom-xs">
         <!-- Avatar and Name -->
         <div class="flex items-start">
-            <a href="/user/{{$user->name}}" class="comments__author-img">
+            <a href="/user/{{$user->username}}" class="comments__author-img">
                 {!! $user->getAvatar(false, ['width' => 45, 'height' => 45], ['block', 'width-100%', 'height-100%', 'object-cover'])->content !!}
             </a>
 
             <div class="margin-x-xs user-menu__meta">
-                <a class="link-subtle" href="/user/{{$user->name}}">
+                <a class="link-subtle" href="/user/{{$user->username}}">
                     <p class="text-sm">{{$user->name}}</p>
                 </a>
                 <p class="text-xs color-contrast-medium line-height-1 padding-top-xxxxs">{{$user->posts_count}} Posts</p>

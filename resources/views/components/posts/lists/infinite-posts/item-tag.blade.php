@@ -1,15 +1,18 @@
 <div class="card margin-bottom-md post-card" data-post-id="{{$post->id}}">
     <div class="flex justify-between mb-3">
         <div class="inline-flex items-baseline articles-v3__author padding-sm">
-            <a href="/tags/{{$post->follow_tags[0]->category_name}}/{{$post->follow_tags[0]->name}}" class="articles-v3__author-img ">
-                <img src="{{url('/storage'.config('images.tags_storage_path').$post->follow_tags[0]->thumbnail)}}" alt="tag-image">
-
+            <a href="/tags/{{$post->follow_tags[0]->category_name}}/{{$post->follow_tags[0]->slug}}" class="articles-v3__author-img ">
+                @if($post->follow_tags[0]->thumbnail != null)
+                    <img src="{{url('/storage'.config('images.tags_storage_path').$post->follow_tags[0]->thumbnail)}}" alt="tag-image">
+                @else
+                    <div style="height: 45px;width: 45px;background: var(--color-bg, white);"></div>
+                @endif
             </a>
 
             <div class="text-component text-sm line-height-xs text-space-y-xxs">
                 <p>
                     @foreach($post->follow_tags as $tag)
-                        <a href="/tags/{{$tag->category_name}}/{{$tag->name}}" class="articles-v3__author-name" rel="author">{{$tag->name}}</a>
+                        <a href="/tags/{{$tag->category_name}}/{{$tag->slug}}" class="articles-v3__author-name" rel="author">{{$tag->name}}</a>
                     @endforeach
                 </p>
                 <p>
