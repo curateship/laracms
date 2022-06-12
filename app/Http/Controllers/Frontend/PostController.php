@@ -488,7 +488,7 @@ class PostController extends Controller
         $data['nextpage'] = ($posts_count - $offset - $perpage) > 0 ? ($page_num + 1) : 0;
 
         if(count($posts) == 0){
-            abort(204);
+            //abort(204);
         }
 
         return view('components.posts.lists.infinite-posts.items', $data)->render();
@@ -518,5 +518,9 @@ class PostController extends Controller
             'posts' => $posts,
             'search' => ''
         ]);
+    }
+
+    public function getSuggestions(){
+        return view('theme.dashboard.suggestions');
     }
 }

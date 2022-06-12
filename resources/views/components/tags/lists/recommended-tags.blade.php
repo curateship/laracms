@@ -2,11 +2,15 @@
     <div class="user-cell margin-bottom-xs">
         <!-- Image and Tag -->
         <div class="flex items-start">
-            <a href="/tags/{{$tag->cat_name}}/{{$tag->name}}" class="comments__author-img">
-                <img class="chip__img" src="{{url('/storage'.config('images.tags_storage_path').$tag->thumbnail)}}" alt="tag-icon">
+            <a href="/tags/{{$tag->cat_name}}/{{$tag->slug}}" class="comments__author-img">
+                @if($tag->thumbnail != null)
+                    <img class="chip__img" src="{{url('/storage'.config('images.tags_storage_path').$tag->thumbnail)}}" alt="tag-icon">
+                @else
+                    <div style="height: 45px;width: 45px;background: var(--color-bg, white);"></div>
+                @endif
             </a>
             <div class="margin-x-xs user-menu__meta">
-                <a class="link-subtle" href="/tags/{{$tag->cat_name}}/{{$tag->name}}">
+                <a class="link-subtle" href="/tags/{{$tag->cat_name}}/{{$tag->slug}}">
                     <p class="text-sm">{{$tag->name}}</p>
                 </a>
                 <p class="text-xs color-contrast-medium line-height-1 padding-top-xxxxs">{{$tag->posts_count}} Posts</p>

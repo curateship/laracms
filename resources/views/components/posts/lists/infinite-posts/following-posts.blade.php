@@ -3,6 +3,7 @@
     @include('components.posts.likes.scripts-js')
     @include('components.posts.lists.infinite-posts.script-infinite-scroll')
     @include('components.posts.lists.infinite-posts.scripts')
+    @include('theme.dashboard.suggestions-scripts-js')
 @endpush
 
 <!-- Delete Confirmation -->
