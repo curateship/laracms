@@ -15,7 +15,10 @@
 
     @if(!\Illuminate\Support\Facades\Auth::guest())
         infScroll.on( 'append', function( body, path, items ) {
-            if(items.length === 0){
+            let tempPath = path.split('?')[0].split('/')
+            let page = parseInt(tempPath[tempPath.length - 1])
+
+            if(page === 1 && items.length === 0){
                 $.ajax({
                     url: '{{route('suggestions.get')}}',
                     type: 'GET',
