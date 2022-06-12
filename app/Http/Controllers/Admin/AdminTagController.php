@@ -248,6 +248,16 @@ class AdminTagController extends Controller
         $tag->thumbnail = $thumbnail;
         $tag->medium = $medium;
         $tag->body = $request->input('description') != '' ? $request->input('description') : '{}';
+
+        $slug = Str::slug($tag->name, '-');
+        $exist = Tag::where('slug', 'like', $slug . '%')
+            ->get();
+
+        if (count($exist) > 0) {
+            $slug = Post::getNewSlug($slug, $exist);
+        }
+        $tag->slug = $slug;
+
         $tag->save();
 
         return redirect(route('admin.tags.index'));

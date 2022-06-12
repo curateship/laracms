@@ -1,7 +1,7 @@
 <div class="card margin-bottom-md post-card" data-post-id="{{$post->id}}">
     <div class="flex justify-between mb-3">
         <div class="inline-flex items-baseline articles-v3__author padding-sm">
-            <a href="/tags/{{$post->follow_tags[0]->category_name}}/{{$post->follow_tags[0]->name}}" class="articles-v3__author-img ">
+            <a href="/tags/{{$post->follow_tags[0]->category_name}}/{{$post->follow_tags[0]->slug}}" class="articles-v3__author-img ">
                 <img src="{{url('/storage'.config('images.tags_storage_path').$post->follow_tags[0]->thumbnail)}}" alt="tag-image">
 
             </a>
@@ -9,7 +9,7 @@
             <div class="text-component text-sm line-height-xs text-space-y-xxs">
                 <p>
                     @foreach($post->follow_tags as $tag)
-                        <a href="/tags/{{$tag->category_name}}/{{$tag->name}}" class="articles-v3__author-name" rel="author">{{$tag->name}}</a>
+                        <a href="/tags/{{$tag->category_name}}/{{$tag->slug}}" class="articles-v3__author-name" rel="author">{{$tag->name}}</a>
                     @endforeach
                 </p>
                 <p>
