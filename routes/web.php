@@ -95,10 +95,19 @@ Route::post('/user/edit/{user_id}', [UserController::class, 'profileUpdate'])->m
 // Search
 Route::get('/search/{search_request}', [PostController::class, 'postSearch'])->name('posts.search');
 
-// Most liked;
+// Filtered Posts;
 Route::get('/most-liked', [PostController::class, 'mostLiked'])->name('posts.most-liked');
 Route::get('/most-commented', [PostController::class, 'mostCommented'])->name('posts.most-commented');
 Route::get('/most-viewed', [PostController::class, 'mostViewed'])->name('posts.most-viewed');
+
+// Lists;
+Route::get('lists/',function() {
+  return view('theme.lists.index');
+});
+
+Route::get('lists/show',function() {
+  return view('theme.lists.show');
+});
 
 /*
 |--------------------------------------------------------------------------

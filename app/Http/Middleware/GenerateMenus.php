@@ -15,6 +15,7 @@ class GenerateMenus
 
             // Link1
             $menu->add('Users', ['url'  => url('/').'/users']);
+            $menu->add('Lists', ['url'  => url('/').'/lists']);
 
             // Tags Dropdown Links
             $menu->add('Tags', ['route'  => 'index'])->id('Tags');
