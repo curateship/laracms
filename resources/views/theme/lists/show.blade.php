@@ -5,7 +5,7 @@
 <div class="container max-width-adaptive-lg padding-top-sm">
 
 <div class="text-component padding-bottom-md">
-    <h1 class="text-xl">Lists 1</h1>
+    <h1 class="text-xl">{{$fav_name}}</h1>
 </div>
 
 <!-- List Component -->
