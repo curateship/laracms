@@ -3,14 +3,14 @@
 
     @foreach($posts as $post)
           <li class="card">
-              <a href="">
+              <a href="/post/{{$post->slug}}">
                   <figure class="aspect-ratio-4:3 margin-bottom-xs">
                       <img class="block width-100%" loading="lazy" src="{{'/storage'.config('images.posts_storage_path').$post->medium}}" alt="Image description">
                   </figure>
               </a>
 
               <div class="card__content recent-post-card line-height-1 margin-xxs">
-                  <a href="" class="link-subtle text-sm">{{$post->name}}</a>
+                  <a href="/post/{{$post->slug}}" class="link-subtle text-sm">{{$post->name}}</a>
                   <p class="text-xs color-contrast-low padding-top-xs">{{$post->created_at->diffForHumans()}}</p>
               </div>
           </li>
