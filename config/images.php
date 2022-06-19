@@ -5,6 +5,7 @@ return [
     'users_storage_path' => '/users',
     'tags_storage_path' => '/tags',
     'videos_storage_path' => '/videos',
+    'lists_storage_path' => '/lists',
     'player_size_thumbnail' => [
         'width' => 640,
         'height' => 264

@@ -148,7 +148,10 @@ class PostController extends Controller
             'post_tags' => $post_tags_by_cats,
             'recent_posts' => $post->getRecentList(['title', 'tags']),
             'likes_count' => $post->likes()->count(),
-            'user_liked' => $post->userLiked()
+            'user_liked' => $post->userLiked(),
+
+            'user_listed' => $post->userListed(),
+            'lists_count' => $post->listsCount()
         ]);
     }
 

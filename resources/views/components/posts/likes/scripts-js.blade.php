@@ -1,6 +1,6 @@
 <script>
     (function() {
-    $(document).on('click', '.js-comments__vote-btn', function(e){
+    $(document).on('click', '.js-comments__vote-btn-like', function(e){
         e.preventDefault()
 
         const postId = $(this).attr('data-post-id')

@@ -24,6 +24,7 @@ use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\Frontend\LikeController;
 use App\Http\Controllers\Frontend\FollowController;
 use App\Http\Controllers\Frontend\NotificationController;
+use App\Http\Controllers\Frontend\FavoriteController;
 
 
 /*
@@ -100,14 +101,16 @@ Route::get('/most-liked', [PostController::class, 'mostLiked'])->name('posts.mos
 Route::get('/most-commented', [PostController::class, 'mostCommented'])->name('posts.most-commented');
 Route::get('/most-viewed', [PostController::class, 'mostViewed'])->name('posts.most-viewed');
 
-// Lists;
-Route::get('lists/',function() {
-  return view('theme.lists.index');
-});
+// Favorite lists;
+Route::get('/favorite/getListCreateForm', [FavoriteController::class, 'getListCreateForm'])->middleware(['auth'])->name('favorite.get-create-form');
+Route::get('/favorite/getList', [FavoriteController::class, 'getList'])->middleware(['auth'])->name('favorite.get-list');
+Route::get('/favorite/getModal', [FavoriteController::class, 'getModal'])->middleware(['auth'])->name('favorite.get-modal');
+Route::post('/favorite/upload/{type}', [FavoriteController::class, 'upload'])->name('favorite.upload')->middleware(['auth', 'verified']);
+Route::post('/favorite/create', [FavoriteController::class, 'createNew'])->name('favorite.create')->middleware(['auth', 'verified']);
+Route::post('/favorite/addItem', [FavoriteController::class, 'addItem'])->name('favorite.add-item')->middleware(['auth', 'verified']);
+Route::get('/lists', [FavoriteController::class, 'showUserLists'])->middleware(['auth', 'verified']);
 
-Route::get('lists/show',function() {
-  return view('theme.lists.show');
-});
+Route::get('/lists/show/{slug}', [FavoriteController::class, 'showListPosts'])->middleware(['auth', 'verified']);
 
 /*
 |--------------------------------------------------------------------------

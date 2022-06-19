@@ -621,4 +621,24 @@ class Post extends Model
         // And then - remove the post;
         static::destroy($this->id);
     }
+
+    public function listsCount(){
+        $lists = DB::table('favorites_items')
+            ->where('post_id', $this->id)
+            ->groupBy('post_id')
+            ->select('post_id')
+            ->get();
+
+        return count($lists);
+    }
+
+    public function userListed(){
+        $list_item = DB::table('favorites_items')
+            ->leftJoin('favorites', 'favorites.id', '=', 'favorites_items.favorite_id')
+            ->where('post_id', $this->id)
+            ->where('user_id', Auth::id())
+            ->first();
+
+        return $list_item != null;
+    }
 }
