@@ -46,3 +46,19 @@
         <svg class="icon icon--sm" viewBox="0 0 24 24"><title>Close modal window</title><g fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="3" x2="21" y2="21"/><line x1="21" y1="3" x2="3" y2="21"/></g></svg>
     </button>
 </div>
+
+<!-- Confirm Modal -->
+<div id="delete-list-dialog" class="dialog dialog--sticky js-dialog" data-animation="on">
+    <div class="dialog__content max-width-xxs" role="alertdialog" aria-labelledby="dialog-sticky-title" aria-describedby="dialog-sticky-description">
+        <div class="text-component">
+            <h4 id="dialog-sticky-title">Are you sure what you want to delete selected list?</h4>
+        </div>
+        <footer class="margin-top-md">
+            <div class="flex justify-end gap-xs flex-wrap">
+                <button class="btn btn--subtle js-dialog__close">Cancel</button>
+                <button id="accept-delete-list" class="btn btn--accent">Delete</button>
+            </div>
+        </footer>
+        <input type="hidden" id="delete-list-id">
+    </div>
+</div>
