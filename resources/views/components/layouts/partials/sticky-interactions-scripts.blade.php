@@ -76,24 +76,29 @@
             getFavList()
         })
 
-        $(document).on('click', '.remove-fav-list', function(){
-            if(confirm("Did you really want to remove selected list?")){
-                const listItemId = $(this).attr('data-list-id')
+        $(document).on('click', '#accept-delete-list', function(){
+            $.ajax({
+                url : '/favorite/removeList',
+                type : 'POST',
+                data : {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    listId: $('#delete-list-id').val()
+                },
+                success : function(data) {
+                    if(parseInt(data.status) === 200){
+                        const event = new Event('closeDialog');
+                        document.getElementById('delete-list-dialog').dispatchEvent(event);
 
-                $.ajax({
-                    url : '/favorite/removeList',
-                    type : 'POST',
-                    data : {
-                        _token: $('meta[name="csrf-token"]').attr('content'),
-                        listId: listItemId
-                    },
-                    success : function(data) {
-                        if(parseInt(data.status) === 200){
-                            getFavList()
-                        }
+                        getFavList()
                     }
-                });
-            }
+                }
+            });
+        })
+
+        $(document).on('click', '.remove-fav-list', function(){
+            const event = new Event('openDialog');
+            document.getElementById('delete-list-dialog').dispatchEvent(event);
+            $('#delete-list-id').val($(this).attr('data-list-id'))
         })
 
         $(document).on('click', '#create-new-list', function(){
