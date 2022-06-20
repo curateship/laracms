@@ -14,19 +14,20 @@
         </li>
 
         @foreach($list as $item)
-            <li class="js-autocomplete__item js-explorer__command select-template-for-add {{$item->in_list ? ' list-item-inlist' : ''}}" data-list-id="{{$item->id}}" data-autocomplete-template="button" tabindex="-1">
-                <button class="reset explorer__result">
+            <li class="js-autocomplete__item js-explorer__command {{$item->in_list ? ' list-item-inlist' : ''}}" data-autocomplete-template="button" tabindex="-1" style="display: flex;align-items: center;">
+                <button class="reset explorer__result select-template-for-add" data-list-id="{{$item->id}}">
                     <!-- icon -->
                     <span class="explorer__icon margin-right-xxs" aria-hidden="true" data-autocomplete-icon="" data-autocomplete-html="">
-                <img class="user-cell__img margin-right-xs" style="max-height: 35px; max-width: 35px; border-radius: 50%;" alt="list-logo" src="{{$item->thumbnail}}">
-            </span>
+                        <img class="user-cell__img margin-right-xs" style="max-height: 35px; max-width: 35px; border-radius: 50%;" alt="list-logo" src="{{$item->thumbnail}}">
+                    </span>
 
                     <!-- label -->
                     <i class="text-truncate padding-right-xs" data-autocomplete-label="">{{$item->name}}</i>
 
                     <!-- shortcut -->
-                    <span class="flex-shrink-0 margin-left-auto" data-autocomplete-shortcut="" data-autocomplete-html=""><i class="explorer__shortcut">{{$item->posts_count}}</i></span>
+                    <span class="flex-shrink-0" data-autocomplete-shortcut="" data-autocomplete-html=""><i class="explorer__shortcut">{{$item->posts_count}}</i></span>
                 </button>
+                <span class="flex-shrink-0 margin-left-auto remove-fav-list btn btn--sm btn--accent margin-right-sm" data-list-id="{{$item->id}}">Delete</span>
             </li>
         @endforeach
     </ul>

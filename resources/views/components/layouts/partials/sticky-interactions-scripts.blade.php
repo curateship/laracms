@@ -76,6 +76,26 @@
             getFavList()
         })
 
+        $(document).on('click', '.remove-fav-list', function(){
+            if(confirm("Did you really want to remove selected list?")){
+                const listItemId = $(this).attr('data-list-id')
+
+                $.ajax({
+                    url : '/favorite/removeList',
+                    type : 'POST',
+                    data : {
+                        _token: $('meta[name="csrf-token"]').attr('content'),
+                        listId: listItemId
+                    },
+                    success : function(data) {
+                        if(parseInt(data.status) === 200){
+                            getFavList()
+                        }
+                    }
+                });
+            }
+        })
+
         $(document).on('click', '#create-new-list', function(){
             const title = $('#new-favorite-name').val()
             const images = {
