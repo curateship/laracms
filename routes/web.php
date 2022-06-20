@@ -108,6 +108,7 @@ Route::get('/favorite/getModal', [FavoriteController::class, 'getModal'])->middl
 Route::post('/favorite/upload/{type}', [FavoriteController::class, 'upload'])->name('favorite.upload')->middleware(['auth', 'verified']);
 Route::post('/favorite/create', [FavoriteController::class, 'createNew'])->name('favorite.create')->middleware(['auth', 'verified']);
 Route::post('/favorite/addItem', [FavoriteController::class, 'addItem'])->name('favorite.add-item')->middleware(['auth', 'verified']);
+Route::post('/favorite/removeList', [FavoriteController::class, 'removeList'])->name('favorite.remove')->middleware(['auth', 'verified']);
 Route::get('/lists', [FavoriteController::class, 'showUserLists'])->middleware(['auth', 'verified']);
 
 Route::get('/lists/show/{slug}', [FavoriteController::class, 'showListPosts'])->middleware(['auth', 'verified']);

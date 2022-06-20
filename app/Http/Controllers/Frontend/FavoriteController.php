@@ -17,6 +17,26 @@ use Intervention\Image\Facades\Image;
 class FavoriteController extends Controller
 {
     //
+    public function removeList(Request $request){
+        $list = Favorite::where('user_id', Auth::id())
+            ->where('id', $request->input('listId'))
+            ->first();
+
+        if($list != null){
+            DB::table('favorites_items')
+                ->where('favorite_id', $list->id)
+                ->delete();
+
+            Favorite::where('user_id', Auth::id())
+                ->where('id', $request->input('listId'))
+                ->delete();
+        }
+
+        return [
+            'status' => 200
+        ];
+    }
+
     public function getListCreateForm(){
         return [
             'status' => 200,
