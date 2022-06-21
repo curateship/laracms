@@ -10,6 +10,19 @@
 
               <div class="card__content recent-post-card line-height-1 margin-xxs">
                   <a href="/lists/show/{{$favorite->slug}}" class="link-subtle text-sm">{{$favorite->name}}</a>
+
+                  @if($favorite->user_id != Auth::id())
+                      <div class="margin-top-xs" style="font-size: 14px;">
+                          <a href="{{$favorite->author->username}}" class="color-inherit link-subtle" rel="author" target="_blank">
+                              {{$favorite->author->username}}
+                          </a>
+                      </div>
+                  @else
+                      <div class="margin-top-xs" style="font-size: 12px;">
+                          {{$favorite->public == 1 ? 'Public' : 'Private'}}
+                      </div>
+                  @endif
+
                   <p class="text-xs color-contrast-low padding-top-sm">{{$favorite->posts_count ?? 0 }} Items</p>
                   <p class="text-xs color-contrast-low padding-top-xs">{{$favorite->created_at->diffForHumans()}}</p>
               </div>

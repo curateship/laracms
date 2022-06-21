@@ -125,7 +125,8 @@
                 data : {
                     _token: $('meta[name="csrf-token"]').attr('content'),
                     title: title,
-                    images: images
+                    images: images,
+                    public: $('input[name="direction"]:checked').val()
                 },
                 success : function(data) {
                     if(parseInt(data.status) === 200){
