@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Favorite;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
@@ -48,11 +49,18 @@ class FavoriteController extends Controller
         $favorite = Favorite::where('slug', $slug)
             ->first();
 
+        if($favorite == null){
+            return abort(404);
+        }
+
+        if($favorite->public == 0 && Auth::guest()){
+            return abort(404);
+        }
+
         $posts = Post::where('status', 'published')
             ->leftJoin('favorites_items', 'favorites_items.post_id', '=', 'posts.id')
             ->leftJoin('favorites', 'favorites.id', '=', 'favorites_items.favorite_id')
             ->where('favorites.slug', $slug)
-            ->where('favorites.user_id', Auth::id())
             ->select('posts.*')
             ->paginate(10);
 
@@ -63,14 +71,24 @@ class FavoriteController extends Controller
     }
 
     public function showUserLists(){
-        $favorites = Favorite::where('user_id', Auth::id())
-            ->leftJoin(DB::raw('(
+        $favorites = Favorite::leftJoin(DB::raw('(
                 select favorite_id , GROUP_CONCAT(post_id) as post_list, count(*) as posts_count from favorites_items group by favorite_id
             ) as lists'), 'lists.favorite_id', '=', 'favorites.id')
             ->orderBy('favorites.id', 'DESC')
             ->select('favorites.*', 'posts_count')
-            ->where('post_list', '>', 0)
-            ->paginate(10);
+            ->where('post_list', '>', 0);
+
+        if(!Auth::guest()){
+            $favorites = $favorites->where('user_id', Auth::id());
+        }  else{
+            $favorites = $favorites->where('public', 1);
+        }
+
+        $favorites = $favorites->paginate(10);
+
+        foreach($favorites as $favorite){
+            $favorite->author = User::find($favorite->user_id);
+        }
 
         return view('theme.lists.index', [
             'favorites' => $favorites
@@ -245,6 +263,7 @@ class FavoriteController extends Controller
         $list->thumbnail = $thumbnail;
         $list->medium = $medium;
         $list->slug = $slug;
+        $list->public = $request->input('public');
         $list->save();
 
         return [

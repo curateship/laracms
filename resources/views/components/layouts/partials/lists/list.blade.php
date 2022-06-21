@@ -16,7 +16,7 @@
         @foreach($list as $item)
             <li class="js-autocomplete__item js-explorer__command {{$item->in_list ? ' list-item-inlist' : ''}}" data-autocomplete-template="button" tabindex="-1">
                 <button class="reset explorer__result">
-                    <div class="select-template-for-add" data-list-id="{{$item->id}}" style="display: flex;align-items: center;">
+                    <div class="select-template-for-add" data-list-id="{{$item->id}}" style="display: flex;align-items: center;flex: 1;">
                         <!-- icon -->
                         <span class="explorer__icon margin-right-xxs" aria-hidden="true" data-autocomplete-icon="" data-autocomplete-html="">
                         <img class="user-cell__img margin-right-xs" style="max-height: 35px; max-width: 35px; border-radius: 50%;" alt="list-logo" src="{{$item->thumbnail}}">

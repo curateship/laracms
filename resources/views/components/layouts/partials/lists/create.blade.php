@@ -3,6 +3,14 @@
         <input class="form-control" id="new-favorite-name" placeholder="New list name" style="width: 100%;margin-bottom: 10px;">
     </div>
 
+    <div class="form-group margin-bottom-xs" style="display: flex;gap: 20px;align-items: center;">
+        <input class="radio" type="radio" name="direction" value="1" id="fav-public" checked>
+        <label for="fav-public">Public</label>
+
+        <input class="radio" type="radio" name="direction" value="0" id="fav-private">
+        <label for="fav-private">Private</label>
+    </div>
+
     <div>
         <!-- Image Upload -->
         <div class="file-upload inline-block margin-bottom-sm">
@@ -23,7 +31,7 @@
                     <div class="progress-bar__fill " style="width: 0%;"></div>
                 </div>
             </div>
-            <img id="upload-thumbnail" class="margin-top-md" alt="list-logo" style="display: none;max-height: 90px;max-width: 90px;">
+            <img id="upload-thumbnail" src="" class="margin-top-md" alt="list-logo" style="display: none;max-height: 90px;max-width: 90px;">
         </div>
     </div>
 

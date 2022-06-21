@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed $name
  * @property int|mixed|string|null $user_id
  * @property mixed|string $slug
+ * @property mixed $public
  */
 class Favorite extends Model
 {
