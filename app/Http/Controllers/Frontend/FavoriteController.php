@@ -69,6 +69,7 @@ class FavoriteController extends Controller
             ) as lists'), 'lists.favorite_id', '=', 'favorites.id')
             ->orderBy('favorites.id', 'DESC')
             ->select('favorites.*', 'posts_count')
+            ->where('post_list', '>', 0)
             ->paginate(10);
 
         return view('theme.lists.index', [
