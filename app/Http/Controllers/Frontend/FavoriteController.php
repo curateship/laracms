@@ -23,6 +23,12 @@ class FavoriteController extends Controller
             ->where('id', $request->input('listId'))
             ->first();
 
+        // Delete fav list image;
+        $path = '/public'.config('images.lists_storage_path');
+        Storage::delete($path.$list->original);
+        Storage::delete($path.$list->medium);
+        Storage::delete($path.$list->thumbnail);
+
         if($list != null){
             DB::table('favorites_items')
                 ->where('favorite_id', $list->id)
