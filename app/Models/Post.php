@@ -625,7 +625,6 @@ class Post extends Model
     public function listsCount(){
         $lists = DB::table('favorites_items')
             ->where('post_id', $this->id)
-            ->groupBy('post_id')
             ->select('post_id')
             ->get();
 
