@@ -14,7 +14,7 @@
 
     <!-- List -->
     <li class="padding-x-xs margin-top-sm">
-        <button class="reset comments__vote-btn js-comments__vote-btn-favorite js-tab-focus {{$user_listed ? 'comments__vote-btn--pressed' : ''}}" aria-controls="modal-explorer">
+        <button class="reset comments__vote-btn js-comments__vote-btn-favorite js-tab-focus {{$user_listed ? 'comments__vote-btn--pressed' : ''}}">
             <div class="comments__vote-icon-wrapper">
                 <svg class="icon block" viewBox="0 0 12 12" aria-hidden="true"><path d="M4.94 9.12a3.79 3.79 0 0 1 5.74-3.26l1.16-1.14a0.4 0.4 0 0 0-0.22-0.68l-3.65-0.53-1.63-3.31a0.42 0.42 0 0 0-0.72 0l-1.63 3.31-3.65 0.53a0.4 0.4 0 0 0-0.22 0.68l2.64 2.58-0.62 3.63a0.4 0.4 0 0 0 0.58 0.42l2.36-1.24a3.78 3.78 0 0 1-0.14-0.99z"></path><path d="M8.74 6.08a3.04 3.04 0 1 0 3.04 3.04 3.04 3.04 0 0 0-3.04-3.04z m1.52 4.18h-3.04v-0.76h3.04z m0-1.52h-3.04v-0.76h3.04z"></path></svg>
             </div>

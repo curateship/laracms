@@ -73,6 +73,9 @@
         })
 
         $(document).on('click', '.js-comments__vote-btn-favorite', function(){
+            let event = new Event('openModal');
+            document.getElementById('modal-explorer').dispatchEvent(event);
+
             getFavList()
         })
 
@@ -166,5 +169,11 @@
         $(document).on('change', '#upload-file', uploadMedia);
 
         getFavList()
+    </script>
+@else
+    <script>
+        $(document).on('click', '.js-comments__vote-btn-favorite', function(){
+            location.href = '/login'
+        })
     </script>
 @endauth
