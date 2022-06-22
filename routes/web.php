@@ -161,3 +161,11 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
     Route::resource('/comments', AdminCommentController::class); // Comment Route
     Route::resource('/videos', AdminVideoController::class); // Video Route
 });
+
+Route::get('/admin/favorites', function () {
+  return view('admin.favorites.index');
+});
+
+Route::get('/admin/favorites/edit', function () {
+  return view('admin.favorites.edit');
+});
