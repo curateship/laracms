@@ -176,7 +176,7 @@ class FavoriteController extends Controller
         ];
     }
 
-    public function upload($upload_type, Request $request){
+    public function upload(Request $request){
         $path = '/public'.config('images.lists_storage_path');
         $mime_type = $request->file('image')->getMimeType();
         $media_path = storage_path() . "/app";
@@ -231,18 +231,7 @@ class FavoriteController extends Controller
 
         $media['original']['path'] = url('/').Storage::url($original);
 
-        if($upload_type == 'main'){
-            return $media;
-        }
-
-        if($upload_type == 'editor'){
-            return [
-                'success' => 1,
-                'file' => [
-                    'url' => $media['medium']['path']
-                ]
-            ];
-        }
+        return $media;
     }
 
     public function createNew(Request $request){

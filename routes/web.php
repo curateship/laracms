@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminTagController;
 use App\Http\Controllers\Admin\AdminCommentController;
 use App\Http\Controllers\Admin\AdminScraperController;
+use App\Http\Controllers\Admin\AdminFavoriteController;
 
 // Front-End Controllers
 use App\Http\Controllers\Frontend\IndexController;
@@ -105,7 +106,7 @@ Route::get('/most-viewed', [PostController::class, 'mostViewed'])->name('posts.m
 Route::get('/favorite/getListCreateForm', [FavoriteController::class, 'getListCreateForm'])->middleware(['auth'])->name('favorite.get-create-form');
 Route::get('/favorite/getList', [FavoriteController::class, 'getList'])->middleware(['auth'])->name('favorite.get-list');
 Route::get('/favorite/getModal', [FavoriteController::class, 'getModal'])->middleware(['auth'])->name('favorite.get-modal');
-Route::post('/favorite/upload/{type}', [FavoriteController::class, 'upload'])->name('favorite.upload')->middleware(['auth', 'verified']);
+Route::post('/favorite/upload', [FavoriteController::class, 'upload'])->name('favorite.upload')->middleware(['auth', 'verified']);
 Route::post('/favorite/create', [FavoriteController::class, 'createNew'])->name('favorite.create')->middleware(['auth', 'verified']);
 Route::post('/favorite/addItem', [FavoriteController::class, 'addItem'])->name('favorite.add-item')->middleware(['auth', 'verified']);
 Route::post('/favorite/removeList', [FavoriteController::class, 'removeList'])->name('favorite.remove')->middleware(['auth', 'verified']);
@@ -160,12 +161,5 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
     Route::resource('/tags', AdminTagController::class); // Category Route
     Route::resource('/comments', AdminCommentController::class); // Comment Route
     Route::resource('/videos', AdminVideoController::class); // Video Route
-});
-
-Route::get('/admin/favorites', function () {
-  return view('admin.favorites.index');
-});
-
-Route::get('/admin/favorites/edit', function () {
-  return view('admin.favorites.edit');
+    Route::resource('/favorites', AdminFavoriteController::class); // Favorites Route
 });
