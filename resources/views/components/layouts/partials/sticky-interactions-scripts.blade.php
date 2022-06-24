@@ -150,7 +150,7 @@
             formData.append('_token', $('meta[name="csrf-token"]').attr('content'))
 
             $.ajax({
-                url : '/favorite/upload/main',
+                url : '/favorite/upload',
                 type : 'POST',
                 data : formData,
                 processData: false,  // tell jQuery not to process the data
