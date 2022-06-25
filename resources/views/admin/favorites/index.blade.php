@@ -277,7 +277,7 @@
                             </figure>
                             <div class="line-height-xs padding-top-xxxs">
                                 <div class="">
-                                    <a href="{{ route ('admin.favorites.edit', $favorite->id) }}" class="link-subtle">{{$favorite->name}}</a>
+                                    <a href="/favorite/edit/{{ $favorite->id }}" class="link-subtle">{{$favorite->name}}</a>
                                 </div>
                                 <p class="color-contrast-medium"><a href="/user/{{$favorite->user->username}}" class="text-sm link-subtle">{{$favorite->user->name}}</a></p>
                             </div>

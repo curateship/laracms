@@ -13,7 +13,7 @@
 
                   @if($favorite->user_id != Auth::id())
                       <div class="margin-top-xs" style="font-size: 14px;">
-                          <a href="{{$favorite->author->username}}" class="color-inherit link-subtle" rel="author" target="_blank">
+                          <a href="/user/{{$favorite->author->username}}" class="color-inherit link-subtle" rel="author" target="_blank">
                               {{$favorite->author->username}}
                           </a>
                       </div>

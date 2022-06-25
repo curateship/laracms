@@ -103,6 +103,9 @@ Route::get('/most-commented', [PostController::class, 'mostCommented'])->name('p
 Route::get('/most-viewed', [PostController::class, 'mostViewed'])->name('posts.most-viewed');
 
 // Favorite lists;
+Route::resource('/favorites', FavoriteController::class)->middleware(['auth']);
+Route::post('/favorite/store', [AdminFavoriteController::class, 'store'])->name('favorite.store')->middleware(['auth', 'verified']);
+Route::get('/favorite/edit/{favorite_id}', [AdminFavoriteController::class, 'edit'])->name('favorite.edit')->middleware(['auth', 'verified']);
 Route::get('/favorite/getListCreateForm', [FavoriteController::class, 'getListCreateForm'])->middleware(['auth'])->name('favorite.get-create-form');
 Route::get('/favorite/getList', [FavoriteController::class, 'getList'])->middleware(['auth'])->name('favorite.get-list');
 Route::get('/favorite/getModal', [FavoriteController::class, 'getModal'])->middleware(['auth'])->name('favorite.get-modal');

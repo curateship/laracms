@@ -68,7 +68,7 @@
                     _token: $('meta[name="csrf-token"]').attr('content'),
                     _method: 'DELETE',
                 },
-                url: '/admin/favorites/' + selectedFavorite.join(','),
+                url: '{{\Illuminate\Support\Facades\Gate::allows('is-admin') ? '/admin' : ''}}/favorites/' + selectedFavorite.join(','),
                 type: 'POST',
                 success:function(){
                     location.reload()

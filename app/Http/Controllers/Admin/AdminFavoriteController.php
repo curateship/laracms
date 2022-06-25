@@ -89,7 +89,7 @@ class AdminFavoriteController extends Controller
         $favorite = Favorite::find($favorite_id);
 
         // Only author or author can preview posts in draft;
-        if(!Gate::allows('is-admin') && (!Auth::guest())){
+        if(!Gate::allows('is-admin') && (!Auth::guest() && Auth::id() != $favorite->user_id)){
             return abort(404);
         }
 
@@ -133,17 +133,12 @@ class AdminFavoriteController extends Controller
         }
     }
 
-    // Upload Images
-    public function upload($upload_type, Request $request){
-
-    }
-
     // Store or update;
     public function store(Request $request){
         if($request->has('status') && $request->input('status') == 'delete'){
             $list = Favorite::find($request->input('favoriteId'));
 
-            if(Gate::allows('is-admin')){
+            if(Auth::id() == $list->user_id || Gate::allows('is-admin')){
                 // Delete fav list image;
                 $path = '/public'.config('images.lists_storage_path');
 
@@ -159,7 +154,7 @@ class AdminFavoriteController extends Controller
                     $list->delete();
                 }
 
-                return redirect('/admin/favorites');
+                return redirect('/favorites');
             }
 
             return abort(404);
@@ -209,6 +204,6 @@ class AdminFavoriteController extends Controller
 
         $favorite->save();
 
-        return redirect('/admin/favorites/'.$favorite->id.'/edit');
+        return redirect('/favorite/edit/'.$favorite->id.'');
     }
 }
