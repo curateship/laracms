@@ -12,6 +12,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
@@ -48,8 +49,12 @@ class FavoriteController extends Controller
         ) as lists'), 'lists.favorite_id', '=', 'favorites.id')
             ->select('favorites.*', 'posts_count');
 
-        $favorites = $favorites->where('user_id', Auth::id())
-            ->paginate(10);
+        if(!Gate::allows('is-admin')){
+            $favorites = $favorites->where('user_id', Auth::id());
+        }
+
+
+        $favorites = $favorites->paginate(10);
 
         foreach($favorites as $favorite){
             $favorite->user = User::find($favorite->user_id);
