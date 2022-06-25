@@ -85,7 +85,10 @@ class FavoriteController extends Controller
             ->where('post_list', '>', 0);
 
         if(!Auth::guest()){
-            $favorites = $favorites->where('user_id', Auth::id());
+            $favorites = $favorites->where(function($query){
+                $query->whereOr('user_id', Auth::id())
+                    ->whereOr('public', 1);
+            });
         }  else{
             $favorites = $favorites->where('public', 1);
         }
