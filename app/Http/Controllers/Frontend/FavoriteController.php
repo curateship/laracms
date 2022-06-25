@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Favorite;
 use App\Models\Post;
 use App\Models\User;
+use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +19,48 @@ use Intervention\Image\Facades\Image;
 class FavoriteController extends Controller
 {
     //
+    public function index(Request $request)
+    {
+
+        SEOMeta::setTitle(config('seotools.static_titles.'.get_called_class().'.'.__FUNCTION__));
+        if($request->has('sortBy') && $request->input('sortBy') !== 'role'){
+            $favorites = Favorite::orderBy($request->input('sortBy'), $request->input('sortDesc'));
+        }   else{
+            $favorites = Favorite::orderBy('created_at', 'DESC')->whereNotNull('user_id');
+        }
+
+        $public = 'All';
+        if($request->has('public') && $request->input('public') != 'All'){
+            $favorites = $favorites->where('public', strtolower($request->input('public')));
+            $public = ucfirst($request->input('public'));
+        }
+
+        if($request->has('search') && $request->input('search') != ''){
+            $search_input = $request->input('search');
+            $favorites = $favorites->where(function($query) use ($search_input){
+                $query->where('name', 'like', '%'.$search_input.'%')
+                    ->whereOr('name', 'like', '%'.$search_input.'%');
+            });
+        }
+
+        $favorites = $favorites->leftJoin(DB::raw('(
+            select favorite_id , count(*) as posts_count from favorites_items group by favorite_id
+        ) as lists'), 'lists.favorite_id', '=', 'favorites.id')
+            ->select('favorites.*', 'posts_count');
+
+        $favorites = $favorites->where('user_id', Auth::id())
+            ->paginate(10);
+
+        foreach($favorites as $favorite){
+            $favorite->user = User::find($favorite->user_id);
+        }
+
+        return view('admin.favorites.index', [
+            'favorites' => $favorites,
+            'public' => $public
+        ]);
+    }
+
     public function removeList(Request $request){
         $list = Favorite::where('user_id', Auth::id())
             ->where('id', $request->input('listId'))
