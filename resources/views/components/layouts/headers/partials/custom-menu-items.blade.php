@@ -1,6 +1,6 @@
 @foreach($items as $item)
   <li class="header-v2__nav-item @if(!isset($child_mode)) header-v2__nav-item--main @endif @if($item->hasChildren()) header-v2__nav-item--has-children @endif" >
-    <a class="header-v2__nav-link" href="{!! $item->url() !!}">
+    <a class="header-v2__nav-link" href="{!! $item->url() !!}" {{isset($item->attributes['target']) ? 'target="'.$item->attributes['target'].'"' : ''}}>
       <span>
         @if(!isset($child_mode))
           {!! $item->title !!}
