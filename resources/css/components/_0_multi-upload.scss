@@ -1,0 +1,59 @@
+.dm-uploader {
+    cursor: default;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none
+}
+
+.dm-uploader .btn {
+    position: relative;
+    overflow: hidden
+}
+
+.dm-uploader .btn input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    border: solid transparent;
+    width: 100%;
+    opacity: 0;
+    cursor: pointer
+}
+
+.files-box{
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.upload-progress{
+    width: 100%;
+    border-radius: 6px;
+    text-align: center;
+    margin-bottom: 10px;
+    color: black;
+    padding: 2px;
+}
+
+#drag-and-drop-zone{
+    text-align: center;
+
+    & > h3{
+        margin-bottom: 10px;
+    }
+}
+
+#preview-box{
+    display: flex;
+    flex-flow: wrap;
+}
+
+.upload-preview{
+    height: 200px;
+    border-radius: 10px;
+    margin: 5px;
+}
