@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\GalleryController;
 use Illuminate\Support\Facades\Route;
 
 // Admin Controllers
@@ -13,6 +14,7 @@ use App\Http\Controllers\Admin\AdminTagController;
 use App\Http\Controllers\Admin\AdminCommentController;
 use App\Http\Controllers\Admin\AdminScraperController;
 use App\Http\Controllers\Admin\AdminFavoriteController;
+use App\Http\Controllers\Admin\AdminGalleryController;
 
 // Front-End Controllers
 use App\Http\Controllers\Frontend\IndexController;
@@ -150,6 +152,14 @@ Route::post('/post/upload/video/{type}', [AdminVideoController::class, 'upload']
 Route::post('/post/store', [AdminPostController::class, 'store'])->name('post.store')->middleware(['auth', 'verified']);
 Route::get('/post/edit/{post:slug}', [AdminPostController::class, 'edit'])->name('post.edit')->middleware(['auth', 'verified']);
 
+// Galleries;
+Route::resource('/galleries', GalleryController::class)->middleware(['auth']);
+Route::post('/gallery/store', [AdminGalleryController::class, 'store'])->name('gallery.store')->middleware(['auth', 'verified']);
+Route::post('/gallery/multiUpload', [AdminGalleryController::class, 'multiUpload'])->name('gallery.multiUpload')->middleware(['auth', 'verified']);
+Route::post('/galleries/upload', [AdminGalleryController::class, 'upload'])->name('gallery.upload')->middleware(['auth', 'verified']);
+Route::get('/gallery/{gallery:slug}', [GalleryController::class, 'show'])->name('gallery.show');
+Route::get('/gallery/edit/{gallery:slug}', [AdminGalleryController::class, 'edit'])->name('gallery.edit')->middleware(['auth', 'verified']);
+
 // Users Admin
 Route::post('/user/upload', [AdminUserController::class, 'upload'])->name('user.upload');
 Route::post('/user/store', [AdminUserController::class, 'store'])->name('user.store');
@@ -165,4 +175,5 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
     Route::resource('/comments', AdminCommentController::class); // Comment Route
     Route::resource('/videos', AdminVideoController::class); // Video Route
     Route::resource('/favorites', AdminFavoriteController::class); // Favorites Route
+    Route::resource('/galleries', AdminGalleryController::class); // Galleries Route
 });
