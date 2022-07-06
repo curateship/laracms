@@ -148,6 +148,10 @@
                   <input class="radio uploading-form-type" type="radio" name="type" id="video-uploading" value="video">
                   <label for="video-uploading">Video</label>
                 </li>
+                  <li>
+                      <input class="radio uploading-form-type" type="radio" name="type" id="gallery-uploading" value="gallery">
+                      <label for="gallery-uploading">Gallery</label>
+                  </li>
               </ul>
             </div>
 

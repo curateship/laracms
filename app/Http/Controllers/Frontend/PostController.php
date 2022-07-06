@@ -39,7 +39,8 @@ class PostController extends Controller
             $status = ucfirst($request->input('status'));
         }
 
-        $posts = $posts->where('user_id', Auth::id());
+        $posts = $posts->where('user_id', Auth::id())
+            ->where('type', '!=', 'gallery');
 
         return view('admin.posts.index', [
             'posts' => $posts->paginate(10),
@@ -125,7 +126,7 @@ class PostController extends Controller
             $post_tags_by_cats[$post_tag->category_id][] = $post_tag;
         }
 
-        $content = $post->prepareContent('radius-lg image-zoom__preview js-image-zoom__preview');
+        $content = $post->prepareContent('radius-lg image-zoom__preview js-image-zoom__preview margin-bottom-sm');
 
         $post->addViewHistory($request->ip(), $request->userAgent());
 

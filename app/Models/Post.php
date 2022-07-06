@@ -149,6 +149,7 @@ class Post extends Model
 
   public function removePostImages($type){
       $path = '/public'.config('images.posts_storage_path');
+      $galleries = '/public'.config('images.galleries_storage_path');
       $video_path = '/public'.config('images.videos_storage_path');
 
         switch($type){
@@ -173,6 +174,24 @@ class Post extends Model
 
                     // Then we need to remove writes in DB;
                     DB::table('posts_videos')
+                        ->where('post_id', $this->id)
+                        ->delete();
+                }
+
+                if($this->type == 'gallery'){
+                    // Get video from paths from table;
+                    $images = DB::table('galleries_posts')
+                        ->where('post_id', $this->id)
+                        ->get();
+
+                    foreach($images as $image){
+                        Storage::delete($galleries.$image->original);
+                        Storage::delete($galleries.$image->medium);
+                        Storage::delete($galleries.$image->thumbnail);
+                    }
+
+                    // Then we need to remove writes in DB;
+                    DB::table('galleries_posts')
                         ->where('post_id', $this->id)
                         ->delete();
                 }
@@ -559,9 +578,25 @@ class Post extends Model
     }
 
     public function prepareContent($image_classes = ''){
+        $content = null;
+
         if($this->type == 'image'){
-            $content = '<img class="'.$image_classes.'" alt="thumbnail" src="'.'/storage'.config('images.posts_storage_path').$this->medium.'">';
-        }   else{
+            $content = '<div class="image-zoom js-image-zoom"><img class="'.$image_classes.'" alt="thumbnail" src="'.'/storage'.config('images.posts_storage_path').$this->medium.'"></div>';
+        }
+
+        if($this->type == 'gallery'){
+            $images = DB::table('galleries_posts')
+                ->where('post_id', $this->id)
+                ->get();
+
+            $content = [];
+            foreach($images as $image){
+                $content[] = '<div class="image-zoom js-image-zoom"><img class="'.$image_classes.'" alt="thumbnail" src="'.'/storage'.config('images.galleries_storage_path').$image->medium.'"></div>';
+            }
+            $content = implode('', $content);
+        }
+
+        if($this->type == 'video'){
             $video = DB::table('posts_videos')
                 ->where('post_id', $this->id)
                 ->first();
@@ -614,9 +649,17 @@ class Post extends Model
         $this->removePostImages('body');
 
         // Remove all video links;
-        DB::table('posts_videos')
-            ->where('post_id', $this->id)
-            ->delete();
+        if($this->type == 'video'){
+            DB::table('posts_videos')
+                ->where('post_id', $this->id)
+                ->delete();
+        }
+
+        if($this->type == 'gallery'){
+            DB::table('galleries_posts')
+                ->where('post_id', $this->id)
+                ->delete();
+        }
 
         // And then - remove the post;
         static::destroy($this->id);
@@ -639,5 +682,27 @@ class Post extends Model
             ->first();
 
         return $list_item != null;
+    }
+
+    public function parseGallery($images){
+        foreach($images as $image){
+            $exist_gallery_item = DB::table('galleries_posts')
+                ->where('thumbnail', 'like', '/thumbnail/'.$image)
+                ->first();
+
+            if($exist_gallery_item != null){
+                continue;
+            }
+
+            DB::table('galleries_posts')
+                ->insert([
+                    'post_id' => $this->id,
+                    'thumbnail' => '/thumbnail'.str_replace(url('/storage'.config('images.galleries_storage_path').'/thumbnail'), '', $image),
+                    'original' => '/original'.str_replace(url('/storage'.config('images.galleries_storage_path').'/thumbnail'), '', $image),
+                    'medium' => '/medium'.str_replace(url('/storage'.config('images.galleries_storage_path').'/thumbnail'), '', $image),
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]);
+        }
     }
 }
