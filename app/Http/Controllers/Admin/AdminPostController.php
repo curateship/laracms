@@ -109,7 +109,7 @@ class AdminPostController extends Controller
 
         if($post->type == 'gallery'){
             // Render simple image box;
-            $images = DB::table('galleries_posts')
+            $images = DB::table('posts_galleries')
                 ->where('post_id', $post->id)
                 ->get();
 
@@ -119,7 +119,7 @@ class AdminPostController extends Controller
             }
             $content = implode('', $content);
 
-            $images = DB::table('galleries_posts')
+            $images = DB::table('posts_galleries')
                 ->where('post_id', $post->id)
                 ->get();
 

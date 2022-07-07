@@ -180,7 +180,7 @@ class Post extends Model
 
                 if($this->type == 'gallery'){
                     // Get video from paths from table;
-                    $images = DB::table('galleries_posts')
+                    $images = DB::table('posts_galleries')
                         ->where('post_id', $this->id)
                         ->get();
 
@@ -191,7 +191,7 @@ class Post extends Model
                     }
 
                     // Then we need to remove writes in DB;
-                    DB::table('galleries_posts')
+                    DB::table('posts_galleries')
                         ->where('post_id', $this->id)
                         ->delete();
                 }
@@ -585,7 +585,7 @@ class Post extends Model
         }
 
         if($this->type == 'gallery'){
-            $images = DB::table('galleries_posts')
+            $images = DB::table('posts_galleries')
                 ->where('post_id', $this->id)
                 ->get();
 
@@ -656,7 +656,7 @@ class Post extends Model
         }
 
         if($this->type == 'gallery'){
-            DB::table('galleries_posts')
+            DB::table('posts_galleries')
                 ->where('post_id', $this->id)
                 ->delete();
         }
@@ -686,7 +686,7 @@ class Post extends Model
 
     public function parseGallery($images){
         foreach($images as $image){
-            $exist_gallery_item = DB::table('galleries_posts')
+            $exist_gallery_item = DB::table('posts_galleries')
                 ->where('thumbnail', 'like', '/thumbnail/'.$image)
                 ->first();
 
@@ -694,7 +694,7 @@ class Post extends Model
                 continue;
             }
 
-            DB::table('galleries_posts')
+            DB::table('posts_galleries')
                 ->insert([
                     'post_id' => $this->id,
                     'thumbnail' => '/thumbnail'.str_replace(url('/storage'.config('images.galleries_storage_path').'/thumbnail'), '', $image),
