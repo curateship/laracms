@@ -149,16 +149,12 @@ Route::post('/admin/posts/move', [AdminPostController::class, 'move'])->name('po
 Route::get('/post/upload/getUploadForm/{type}', [AdminPostController::class, 'getUploadForm'])->name('post.getUploadForm')->middleware(['auth', 'verified']);
 Route::post('/post/upload/image/{type}', [AdminPostController::class, 'upload'])->name('post.upload.image')->middleware(['auth', 'verified']);
 Route::post('/post/upload/video/{type}', [AdminVideoController::class, 'upload'])->name('post.upload.video')->middleware(['auth', 'verified']);
+Route::post('/post/upload/gallery', [AdminGalleryController::class, 'upload'])->name('post.upload.gallery')->middleware(['auth', 'verified']);
 Route::post('/post/store', [AdminPostController::class, 'store'])->name('post.store')->middleware(['auth', 'verified']);
 Route::get('/post/edit/{post:slug}', [AdminPostController::class, 'edit'])->name('post.edit')->middleware(['auth', 'verified']);
 
 // Galleries;
 Route::resource('/galleries', GalleryController::class)->middleware(['auth']);
-Route::post('/gallery/store', [AdminGalleryController::class, 'store'])->name('gallery.store')->middleware(['auth', 'verified']);
-Route::post('/gallery/multiUpload', [AdminGalleryController::class, 'multiUpload'])->name('gallery.multiUpload')->middleware(['auth', 'verified']);
-Route::post('/galleries/upload', [AdminGalleryController::class, 'upload'])->name('gallery.upload')->middleware(['auth', 'verified']);
-Route::get('/gallery/{gallery:slug}', [GalleryController::class, 'show'])->name('gallery.show');
-Route::get('/gallery/edit/{gallery:slug}', [AdminGalleryController::class, 'edit'])->name('gallery.edit')->middleware(['auth', 'verified']);
 
 // Users Admin
 Route::post('/user/upload', [AdminUserController::class, 'upload'])->name('user.upload');

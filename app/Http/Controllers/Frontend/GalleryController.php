@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Gallery;
 use App\Models\Post;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Http\Request;
@@ -19,9 +18,9 @@ class GalleryController extends Controller
 
         SEOMeta::setTitle(config('seotools.static_titles.'.get_called_class().'.'.__FUNCTION__));
         if($request->has('sortBy') && $request->input('sortBy') !== 'role'){
-            $galleries = Gallery::orderBy($request->input('sortBy'), $request->input('sortDesc'));
+            $galleries = Post::orderBy($request->input('sortBy'), $request->input('sortDesc'));
         }   else{
-            $galleries = Gallery::orderBy('created_at', 'DESC')->whereNotNull('user_id');
+            $galleries = Post::orderBy('created_at', 'DESC')->whereNotNull('user_id');
         }
 
         $status = 'All';
@@ -38,42 +37,12 @@ class GalleryController extends Controller
             });
         }
 
-        $galleries = $galleries->where('user_id', Auth::id());
+        $galleries = $galleries->where('user_id', Auth::id())
+            ->where('type', 'gallery');
 
-        return view('admin.galleries.index', [
-            'galleries' => $galleries->paginate(10),
+        return view('admin.posts.index', [
+            'posts' => $galleries->paginate(10),
             'status' => $status
         ]);
-    }
-
-    public function show(Request $request, Gallery $gallery){
-        // Only author or author can preview posts in draft;
-        if($gallery->status == 'draft'){
-            if(!Gate::allows('is-admin') && (!Auth::guest() && Auth::id() != $gallery->user_id)){
-                return abort(404);
-            }
-        }
-
-        // SEO Title
-        SEOMeta::setTitle($gallery->title);
-
-        $gallery->author = $gallery->author();
-
-        $posts = DB::table('galleries_posts')
-            ->leftJoin('posts', 'posts.id', '=', 'galleries_posts.post_id')
-            ->where('gallery_id', $gallery->id)
-            ->select('posts.*')
-            ->get();
-
-        return view('/theme.galleries.gallery', [
-            'gallery' => $gallery,
-            'posts' => $posts
-        ]);
-    }
-
-    // Create
-    public function create()
-    {
-        return view('admin.galleries.create');
     }
 }

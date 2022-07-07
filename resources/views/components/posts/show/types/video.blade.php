@@ -4,7 +4,7 @@
 </div>
 
 <!-- Post Image -->
-<figure class="text-center padding-bottom-sm image-zoom js-image-zoom">
+<figure class="text-center padding-bottom-sm">
     {!! $content !!}
 </figure>
 
