@@ -288,7 +288,7 @@
                     <!-- Image -->
                     <a href="{{ route('post.show', $post) }}" target="_blank">
                       <figure class="width-xl height-lg radius-lg flex-shrink-0 overflow-hidden margin-right-xs">
-                        <img class="block width-100% height-100% object-cover" src="{{ url('/storage').($post->type == 'gallery' ? config('images.galleries_storage_path') : config('images.posts_storage_path')).$post->medium  }}" alt="Post Picture">
+                        <img class="block width-100% height-100% object-cover" src="{{ url('/storage').$post->getPreviewImage()  }}" alt="Post Picture">
                       </figure>
                     </a>
 
