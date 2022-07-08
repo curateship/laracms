@@ -179,21 +179,7 @@ class Post extends Model
                 }
 
                 if($this->type == 'gallery'){
-                    // Get video from paths from table;
-                    $images = DB::table('posts_galleries')
-                        ->where('post_id', $this->id)
-                        ->get();
-
-                    foreach($images as $image){
-                        Storage::delete($galleries.$image->original);
-                        Storage::delete($galleries.$image->medium);
-                        Storage::delete($galleries.$image->thumbnail);
-                    }
-
-                    // Then we need to remove writes in DB;
-                    DB::table('posts_galleries')
-                        ->where('post_id', $this->id)
-                        ->delete();
+                    Storage::deleteDirectory('/public'.config('images.galleries_storage_path').'/'.$this->slug);
                 }
                 break;
 
@@ -585,17 +571,17 @@ class Post extends Model
         }
 
         if($this->type == 'gallery'){
-            $images = DB::table('posts_galleries')
-                ->where('post_id', $this->id)
-                ->get();
+            $images = Storage::allFiles('/public/'.config('images.galleries_storage_path').'/'.$this->slug.'/medium/');
 
             $content = '';
             $lines = [];
             foreach($images as $key => $image){
+                $image = str_replace('public/', '/', $image);
+
                 if($key == 0){
-                    $content = '<div class="image-zoom js-image-zoom"><img class="'.$image_classes.'" alt="thumbnail" src="'.'/storage'.config('images.posts_storage_path').$this->medium.'"></div>';
+                    $content = '<div class="image-zoom js-image-zoom"><img class="'.$image_classes.'" alt="thumbnail" src="/storage/'.$image.'"></div>';
                 }   else{
-                    $lines[] = '<div class="image-zoom js-image-zoom"><img class="'.$image_classes.'" alt="thumbnail" src="'.'/storage'.config('images.galleries_storage_path').$image->medium.'"></div>';
+                    $lines[] = '<div class="image-zoom js-image-zoom"><img class="'.$image_classes.'" alt="thumbnail" src="/storage/'.$image.'"></div>';
                 }
             }
             $content = $content.'<div style="display: flex;align-items: center;gap: 26px;">'.implode('', $lines).'</div>';
@@ -660,12 +646,6 @@ class Post extends Model
                 ->delete();
         }
 
-        if($this->type == 'gallery'){
-            DB::table('posts_galleries')
-                ->where('post_id', $this->id)
-                ->delete();
-        }
-
         // And then - remove the post;
         static::destroy($this->id);
     }
@@ -691,23 +671,29 @@ class Post extends Model
 
     public function parseGallery($images){
         foreach($images as $image){
-            $exist_gallery_item = DB::table('posts_galleries')
-                ->where('thumbnail', 'like', '/thumbnail/'.$image)
-                ->first();
+            $galleries_path = '/public'.config('images.galleries_storage_path');
+            $image = str_replace(url('/storage'.config('images.galleries_storage_path')).'/_temp/thumbnail/', '', $image);
 
-            if($exist_gallery_item != null){
-                continue;
+            if(!Storage::exists($galleries_path.'/'.$this->slug.'/thumbnail/'.$image)){
+                Storage::move($galleries_path.'/_temp/thumbnail/'.$image, $galleries_path.'/'.$this->slug.'/thumbnail/'.$image);
+                Storage::move($galleries_path.'/_temp/original/'.$image, $galleries_path.'/'.$this->slug.'/original/'.$image);
+                Storage::move($galleries_path.'/_temp/medium/'.$image, $galleries_path.'/'.$this->slug.'/medium/'.$image);
             }
-
-            DB::table('posts_galleries')
-                ->insert([
-                    'post_id' => $this->id,
-                    'thumbnail' => '/thumbnail'.str_replace(url('/storage'.config('images.galleries_storage_path').'/thumbnail'), '', $image),
-                    'original' => '/original'.str_replace(url('/storage'.config('images.galleries_storage_path').'/thumbnail'), '', $image),
-                    'medium' => '/medium'.str_replace(url('/storage'.config('images.galleries_storage_path').'/thumbnail'), '', $image),
-                    'created_at' => now(),
-                    'updated_at' => now()
-                ]);
         }
+    }
+
+    public function moveGallery($new_slug){
+        $galleries_path = '/public'.config('images.galleries_storage_path');
+        $medias = ['original', 'thumbnail', 'medium'];
+
+        foreach($medias as $media){
+            $images = Storage::allFiles('/public/'.config('images.galleries_storage_path').'/'.$this->slug.'/'.$media.'/');
+
+            foreach($images as $image){
+                Storage::move($image, $galleries_path.'/'.$new_slug.'/'.$media.'/'.basename($image));
+            }
+        }
+
+        Storage::deleteDirectory($galleries_path.'/'.$this->slug);
     }
 }
