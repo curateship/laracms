@@ -3,7 +3,7 @@
     @if($post->thumbnail != '')
     <figure class="card__img img-blend" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light" data-blend-height="45%">
       <a class="" href="{{ route('post.show', $post) }}">
-        <img class="radius-md radius-bottom-right-0 radius-bottom-left-0" src="{{ url('/storage').config('images.posts_storage_path').$post->thumbnail }}" alt="Image of {{ $post->title }}">
+        <img class="radius-md radius-bottom-right-0 radius-bottom-left-0" src="{{ url('/storage').$post->getPreviewImage() }}" alt="Image of {{ $post->title }}">
       </a>
     </figure>
     @else

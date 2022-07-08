@@ -46,15 +46,6 @@ class AdminGalleryController extends Controller
 
         $galleries = $galleries->where('type', 'gallery');
         $galleries = $galleries->paginate(10);
-        foreach($galleries as $gallery){
-            $images = Storage::allFiles('/public/'.config('images.galleries_storage_path').'/'.$gallery->slug.'/medium/');
-
-            if(count($images) == 0){
-                continue;
-            }
-            $image = str_replace('public/galleries/', '/', $images[0]);
-            $gallery->medium = $image;
-        }
 
         return view('admin.posts.index', [
             'posts' => $galleries,

@@ -696,4 +696,20 @@ class Post extends Model
 
         Storage::deleteDirectory($galleries_path.'/'.$this->slug);
     }
+
+    public function getPreviewImage($target = 'medium'){
+        if($this->type == 'gallery'){
+            $images = Storage::allFiles('/public/'.config('images.galleries_storage_path').'/'.$this->slug.'/'.$target.'/');
+
+            if(count($images) > 0){
+                $image = str_replace('public/galleries/', '/', $images[0]);
+
+                return config('images.galleries_storage_path').'/'.$image;
+            }
+
+            return '';
+        }   else{
+            return config('images.posts_storage_path').$this->$target;
+        }
+    }
 }

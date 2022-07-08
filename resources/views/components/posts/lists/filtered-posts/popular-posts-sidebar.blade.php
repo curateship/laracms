@@ -4,7 +4,7 @@
  <div class="">
   <a href="{{ route('post.show', $post) }}">
     <figure class="aspect-ratio-4:3 margin-bottom-xs">
-     <img class="block width-100%" loading="lazy" src="{{ url('/storage').config('images.posts_storage_path').$post->thumbnail  }}" alt="Image description">
+     <img class="block width-100%" loading="lazy" src="{{ url('/storage').$post->getPreviewImage()  }}" alt="Image description">
     </figure>
   </a>
     <div class="card__content recent-post-card line-height-1 margin-xxs">

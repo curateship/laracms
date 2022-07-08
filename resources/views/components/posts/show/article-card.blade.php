@@ -1,6 +1,6 @@
 <!-- Post Image With Gradiant -->
 <figure class="card__img img-blend opacity-20%" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light" data-blend-height="100%">
-    <img class="radius-md post-image" src="{{ url('/storage').config('images.posts_storage_path').$post->medium  }}" alt="Card preview img">
+    <img class="radius-md post-image" src="{{ url('/storage').$post->getPreviewImage()  }}" alt="Card preview img">
 </figure>
 
 <!-- Post Body -->
