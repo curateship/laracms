@@ -589,11 +589,16 @@ class Post extends Model
                 ->where('post_id', $this->id)
                 ->get();
 
-            $content = [];
-            foreach($images as $image){
-                $content[] = '<div class="image-zoom js-image-zoom"><img class="'.$image_classes.'" alt="thumbnail" src="'.'/storage'.config('images.galleries_storage_path').$image->medium.'"></div>';
+            $content = '';
+            $lines = [];
+            foreach($images as $key => $image){
+                if($key == 0){
+                    $content = '<div class="image-zoom js-image-zoom"><img class="'.$image_classes.'" alt="thumbnail" src="'.'/storage'.config('images.posts_storage_path').$this->medium.'"></div>';
+                }   else{
+                    $lines[] = '<div class="image-zoom js-image-zoom"><img class="'.$image_classes.'" alt="thumbnail" src="'.'/storage'.config('images.galleries_storage_path').$image->medium.'"></div>';
+                }
             }
-            $content = implode('', $content);
+            $content = $content.'<div style="display: flex;align-items: center;gap: 26px;">'.implode('', $lines).'</div>';
         }
 
         if($this->type == 'video'){
