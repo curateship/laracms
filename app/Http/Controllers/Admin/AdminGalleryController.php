@@ -45,9 +45,10 @@ class AdminGalleryController extends Controller
         }
 
         $galleries = $galleries->where('type', 'gallery');
+        $galleries = $galleries->paginate(10);
 
         return view('admin.posts.index', [
-            'posts' => $galleries->paginate(10),
+            'posts' => $galleries,
             'status' => $status
         ]);
     }
@@ -74,7 +75,7 @@ class AdminGalleryController extends Controller
                 throw new RuntimeException('Unknown errors.');
         }
 
-        $path = '/public'.config('images.galleries_storage_path');
+        $path = '/public'.config('images.galleries_storage_path').'/_temp';
         $original = request()->file('file')->getClientOriginalName();
         $thumbnail_medium_name = Str::random(27) . '.' . Arr::last(explode('.', $original));
 

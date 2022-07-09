@@ -108,25 +108,22 @@ class AdminPostController extends Controller
         }
 
         if($post->type == 'gallery'){
-            // Render simple image box;
-            $images = DB::table('galleries_posts')
-                ->where('post_id', $post->id)
-                ->get();
+            $images = Storage::allFiles('/public/'.config('images.galleries_storage_path').'/'.$post->slug.'/thumbnail/');
+
+            foreach($images as $image){
+                $image = str_replace('public/galleries/', '/', $image);
+
+                $posts_files[] = str_replace('/'.$post->slug.'/thumbnail/', '', $image);
+                $posts_urls[] = url('/storage'.config('images.galleries_storage_path').$image);
+            }
 
             $content = [];
             foreach($images as $image){
-                $content[] = '<img alt="thumbnail" src="'.'/storage'.config('images.galleries_storage_path').$image->thumbnail.'">';
+                $image = str_replace('public/', '/', $image);
+
+                $content[] = '<img alt="thumbnail" src="'.'/storage'.$image.'">';
             }
             $content = implode('', $content);
-
-            $images = DB::table('galleries_posts')
-                ->where('post_id', $post->id)
-                ->get();
-
-            foreach($images as $image){
-                $posts_files[] = str_replace('/thumbnail/', '', $image->thumbnail);
-                $posts_urls[] = url('/storage'.config('images.galleries_storage_path').$image->thumbnail);
-            }
         }
 
         if($post->type == 'video'){
@@ -291,7 +288,7 @@ class AdminPostController extends Controller
         $posts_with_same_slug = Post::where('slug', 'like', $slug . '%');
 
         if($request->has('postId')){
-            $posts_with_same_slug = $posts_with_same_slug->where('id', '!=', $request->has('postId'));
+            $posts_with_same_slug = $posts_with_same_slug->where('id', '!=', $request->input('postId'));
         }
 
         $posts_with_same_slug = $posts_with_same_slug->get();
@@ -313,27 +310,9 @@ class AdminPostController extends Controller
         $medium = str_replace(url('/storage'.config('images.posts_storage_path')), '', $medium);
 
         if($request->input('type') == 'gallery'){
-            $galleries_path = '/public/'.config('images.galleries_storage_path');
-            $posts_path = '/public/'.config('images.posts_storage_path');
-
-            $original = ( $request->has('original') && !empty($request->input('original')) ) ? $request->input('original') : NULL;
-            $original = str_replace(url('/storage'.config('images.galleries_storage_path')), '', $original);
-            if(!Storage::exists($posts_path.$original)){
-                Storage::copy($galleries_path.$original, $posts_path.$original);
-            }
-
-            $thumbnail = ( $request->has('thumbnail') && !empty($request->input('thumbnail')) ) ? $request->input('thumbnail') : NULL;
-            $thumbnail = str_replace(url('/storage'.config('images.galleries_storage_path')), '', $thumbnail);
-            if(!Storage::exists($posts_path.$thumbnail)){
-                Storage::copy($galleries_path.$thumbnail, $posts_path.$thumbnail);
-            }
-
-
-            $medium = ( $request->has('medium') && !empty($request->input('medium')) )  ? $request->input('medium') : NULL;
-            $medium = str_replace(url('/storage'.config('images.galleries_storage_path')), '', $medium);
-            if(!Storage::exists($posts_path.$medium)){
-                Storage::copy($galleries_path.$medium, $posts_path.$medium);
-            }
+            $original = '-';
+            $thumbnail = '-';
+            $medium = '-';
         }
 
         if($request->input('type') == 'video'){
@@ -396,6 +375,10 @@ class AdminPostController extends Controller
 
         $old_title = $post->title;
         $old_body = $post->id == null ? json_encode(['blocks' => []]) : $post->body;
+
+        if($request->has('postId') && $post->slug != $slug && $post->type == 'gallery'){
+            $post->moveGallery($slug);
+        }
 
         $post->title = $title;
         $post->excerpt = '';
