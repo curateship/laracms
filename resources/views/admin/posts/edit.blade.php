@@ -10,6 +10,7 @@
     @include('admin.posts.script-editor-js-list')
     @include('admin.posts.script-js')
     @include('admin.posts.script-multi-upload')
+    @include('admin.posts.jquery-ui')
 @endpush
 
 @section('content')

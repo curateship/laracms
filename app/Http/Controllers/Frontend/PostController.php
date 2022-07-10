@@ -39,8 +39,7 @@ class PostController extends Controller
             $status = ucfirst($request->input('status'));
         }
 
-        $posts = $posts->where('user_id', Auth::id())
-            ->where('type', '!=', 'gallery');
+        $posts = $posts->where('user_id', Auth::id());
 
         return view('admin.posts.index', [
             'posts' => $posts->paginate(10),
