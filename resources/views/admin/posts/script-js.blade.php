@@ -26,6 +26,11 @@
 
         $('#uploading-progress-bar').show()
 
+        let type = $('.uploading-form-type:checked').val()
+        if(type === undefined){
+            type = $('input[name="type"]').val()
+        }
+
         $.ajax({
             xhr: function() {
                 var xhr = new window.XMLHttpRequest();
@@ -47,7 +52,7 @@
                 }, false);
                 return xhr;
             },
-            url : '/post/upload/' + $('.uploading-form-type:checked').val() + '/main',
+            url : '/post/upload/' + type + '/main',
             type : 'POST',
             data : formData,
             processData: false,  // tell jQuery not to process the data
@@ -61,7 +66,7 @@
                     $('input[name="original"]').val(data.original.path);
                     $('input[name="thumbnail"]').val(data.thumbnail.path);
                     $('input[name="medium"]').val(data.medium.path);
-                    $('input[name="type"]').val(data.type);
+                    $('input[name="type"]').val(type);
 
                     if(data.type === 'video'){
                         $('input[name="video_original"]').val(data.video_original.path);

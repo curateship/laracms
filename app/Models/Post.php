@@ -153,6 +153,13 @@ class Post extends Model
       $video_path = '/public'.config('images.videos_storage_path');
 
         switch($type){
+            // Gallery;
+            case 'gallery':
+                if($this->type == 'gallery'){
+                    Storage::deleteDirectory($galleries.'/'.$this->slug);
+                }
+                break;
+
             // Main;
             case 'main':
                 Storage::delete($path.$this->original['original']);
@@ -176,10 +183,6 @@ class Post extends Model
                     DB::table('posts_videos')
                         ->where('post_id', $this->id)
                         ->delete();
-                }
-
-                if($this->type == 'gallery'){
-                    Storage::deleteDirectory('/public'.config('images.galleries_storage_path').'/'.$this->slug);
                 }
                 break;
 
@@ -573,18 +576,14 @@ class Post extends Model
         if($this->type == 'gallery'){
             $images = Storage::allFiles('/public/'.config('images.galleries_storage_path').'/'.$this->slug.'/medium/');
 
-            $content = '';
+            $content = '<div class="image-zoom js-image-zoom"><img class="'.$image_classes.'" alt="thumbnail" src="/storage'.config('images.posts_storage_path').$this->medium.'"></div>';
             $lines = [];
-            foreach($images as $key => $image){
+            foreach($images as $image){
                 $image = str_replace('public/', '/', $image);
 
-                if($key == 0){
-                    $content = '<div class="image-zoom js-image-zoom"><img class="'.$image_classes.'" alt="thumbnail" src="/storage/'.$image.'"></div>';
-                }   else{
-                    $lines[] = '<div class="image-zoom js-image-zoom"><img class="'.$image_classes.'" alt="thumbnail" src="/storage/'.$image.'"></div>';
-                }
+                $lines[] = '<div class="image-zoom js-image-zoom"><img class="'.$image_classes.'" alt="thumbnail" src="/storage/'.$image.'"></div>';
             }
-            $content = $content.'<div style="display: flex;align-items: center;gap: 26px;">'.implode('', $lines).'</div>';
+            $content .= '<div style="display: flex;align-items: center;gap: 26px;">'.implode('', $lines).'</div>';
         }
 
         if($this->type == 'video'){
@@ -635,7 +634,13 @@ class Post extends Model
         Notification::where('post_id', $this->id)
             ->delete();
 
+        // Favorites;
+        DB::table('favorites_items')
+            ->where('post_id', $this->id)
+            ->delete();
+
         // Remove post images;
+        $this->removePostImages('gallery');
         $this->removePostImages('main');
         $this->removePostImages('body');
 
@@ -724,6 +729,8 @@ class Post extends Model
     }
 
     public function getPreviewImage($target = 'medium'){
+        return config('images.posts_storage_path').$this->$target;
+        /*
         if($this->type == 'gallery'){
             $images = Storage::allFiles('/public/'.config('images.galleries_storage_path').'/'.$this->slug.'/'.$target.'/');
 
@@ -737,5 +744,6 @@ class Post extends Model
         }   else{
             return config('images.posts_storage_path').$this->$target;
         }
+        */
     }
 }
