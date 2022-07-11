@@ -309,12 +309,6 @@ class AdminPostController extends Controller
         $medium = ( $request->has('medium') && !empty($request->input('medium')) )  ? $request->input('medium') : NULL;
         $medium = str_replace(url('/storage'.config('images.posts_storage_path')), '', $medium);
 
-        if($request->input('type') == 'gallery'){
-            $original = '-';
-            $thumbnail = '-';
-            $medium = '-';
-        }
-
         if($request->input('type') == 'video'){
             $video_original = ( $request->has('video_original') && !empty($request->input('video_original')) ) ? $request->input('video_original') : NULL;
             $video_original = str_replace(url('/storage'.config('images.videos_storage_path')), '', $video_original);
@@ -500,8 +494,6 @@ class AdminPostController extends Controller
         }   else{
             return redirect('/post/'.$post->slug);
         }
-
-        dd($request->all());
     }
 
     public function move(Request $request){

@@ -149,6 +149,7 @@ Route::post('/admin/posts/move', [AdminPostController::class, 'move'])->name('po
 Route::get('/post/upload/getUploadForm/{type}', [AdminPostController::class, 'getUploadForm'])->name('post.getUploadForm')->middleware(['auth', 'verified']);
 Route::post('/post/upload/image/{type}', [AdminPostController::class, 'upload'])->name('post.upload.image')->middleware(['auth', 'verified']);
 Route::post('/post/upload/video/{type}', [AdminVideoController::class, 'upload'])->name('post.upload.video')->middleware(['auth', 'verified']);
+Route::post('/post/upload/gallery/{type}', [AdminPostController::class, 'upload'])->name('post.uploadMain.gallery')->middleware(['auth', 'verified']);
 Route::post('/post/upload/gallery', [AdminGalleryController::class, 'upload'])->name('post.upload.gallery')->middleware(['auth', 'verified']);
 Route::post('/post/store', [AdminPostController::class, 'store'])->name('post.store')->middleware(['auth', 'verified']);
 Route::get('/post/edit/{post:slug}', [AdminPostController::class, 'edit'])->name('post.edit')->middleware(['auth', 'verified']);
