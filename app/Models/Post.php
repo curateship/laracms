@@ -670,14 +670,40 @@ class Post extends Model
     }
 
     public function parseGallery($images){
+        $galleries_path = '/public'.config('images.galleries_storage_path');
+
         foreach($images as $image){
-            $galleries_path = '/public'.config('images.galleries_storage_path');
             $image = str_replace(url('/storage'.config('images.galleries_storage_path')).'/_temp/thumbnail/', '', $image);
 
             if(!Storage::exists($galleries_path.'/'.$this->slug.'/thumbnail/'.$image)){
                 Storage::move($galleries_path.'/_temp/thumbnail/'.$image, $galleries_path.'/'.$this->slug.'/thumbnail/'.$image);
                 Storage::move($galleries_path.'/_temp/original/'.$image, $galleries_path.'/'.$this->slug.'/original/'.$image);
                 Storage::move($galleries_path.'/_temp/medium/'.$image, $galleries_path.'/'.$this->slug.'/medium/'.$image);
+            }
+        }
+
+        // Reset images names;
+        $medias = ['original', 'thumbnail', 'medium'];
+
+        foreach($medias as $media){
+            $images_files = Storage::allFiles($galleries_path.'/'.$this->slug.'/'.$media.'/');
+
+            foreach($images_files as $image){
+                $temp = explode('_', basename($image));
+                $new_image = $temp[count($temp) - 1];
+
+                if(!Storage::exists($galleries_path.'/'.$this->slug.'/'.$media.'/'.basename($new_image))){
+                    Storage::move($image, $galleries_path.'/'.$this->slug.'/'.$media.'/'.basename($new_image));
+                }
+            }
+        }
+
+        foreach($medias as $media){
+            foreach($images as $key => $image){
+                $temp = explode('_', basename($image));
+                $new_image = $key.'_'.$temp[count($temp) - 1];
+
+                Storage::move($galleries_path.'/'.$this->slug.'/'.$media.'/'.$temp[count($temp) - 1], $galleries_path.'/'.$this->slug.'/'.$media.'/'.$new_image);
             }
         }
     }

@@ -57,7 +57,7 @@ class AdminPostController extends Controller
             });
         }
 
-        $posts = $posts->where('type', '!=', 'gallery');
+        //$posts = $posts->where('type', '!=', 'gallery');
 
         return view('admin.posts.index', [
             'posts' => $posts->paginate(10),

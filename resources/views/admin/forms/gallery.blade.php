@@ -20,10 +20,10 @@
             @endif
         </div>
 
-        <div id="preview-box">
+        <div id="preview-box" style="position: relative;">
             @if(isset($post))
                 @foreach($posts_urls as $url)
-                    <img class="upload-preview" alt="upload-preview" src="{{$url}}">
+                    <img class="upload-preview" alt="upload-preview" data-filename="{{basename($url)}}" src="{{$url}}">
                 @endforeach
             @endif
         </div>
