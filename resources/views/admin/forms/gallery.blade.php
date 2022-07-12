@@ -14,7 +14,7 @@
     <input type="hidden" name="thumbnail" value="{{isset($post) ? $post->thumbnail : ''}}"/>
     <input type="hidden" name="medium" value="{{isset($post) ? $post->medium : ''}}"/>
     <input type="hidden" name="type" value="gallery"/>
-    <input type="file" class="file-upload__input" name="image" id="upload-file" accept="image/jpeg, image/jpg, image/png, image/gif, image/gif">
+    <input type="file" class="file-upload__input" name="image" id="upload-file" accept="image/jpeg, image/jpg, image/png, image/gif, image/gif" {{!isset($post) ? 'required' : ''}}>
     <br>
     <div id="uploading-progress-bar" class="progress-bar progress-bar--color-update flex flex-column items-center js-progress-bar margin-top-md" style="display: none;">
         <div class="progress-bar__bg " aria-hidden="true">
