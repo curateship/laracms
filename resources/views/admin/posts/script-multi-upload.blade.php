@@ -58,12 +58,6 @@
         onUploadSuccess: function(id, data){
             const uploadResult = JSON.parse(data)
 
-            if($('input[name="original"]').val() === ''){
-                $('input[name="original"]').val(uploadResult.media.original.path)
-                $('input[name="thumbnail"]').val(uploadResult.media.thumbnail.path)
-                $('input[name="medium"]').val(uploadResult.media.medium.path)
-            }
-
             $('#preview-box').append('<img class="upload-preview" alt="upload-preview" src="' + uploadResult.path + '">')
             $('#uploads-box').append('<input type="hidden" name="uploaded-images[]" value="' + uploadResult.media.thumbnail.path + '">')
 
