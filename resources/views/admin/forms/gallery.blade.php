@@ -30,7 +30,7 @@
 </div>
 
 <!-- Gallery Upload -->
-<div class="file-upload-m inline-block margin-bottom-sm" style="width: 100%;">
+<div class="card padding-sm file-upload-m inline-block margin-bottom-sm" style="width: 100%;">
     <div class="row">
         <div id="uploads-box">
             @if(isset($post))
@@ -52,7 +52,7 @@
 
             <!-- Our markup, the important part here! -->
             <div id="drag-and-drop-zone" class="dm-uploader p-5">
-                <h3 class="mb-5 mt-5 text-muted">Drag &amp; drop files for gallery here</h3>
+                <h3 class="mb-5 mt-5 text-muted padding-sm">Drag &amp; drop files for gallery here</h3>
 
                 <div class="btn btn-primary btn-block mb-5">
                     <span>Open the file Browser</span>
@@ -62,7 +62,7 @@
 
         </div>
         <div class="col-md-6 col-sm-12">
-            <div class="class card h-100 files-box">
+            <div class="class h-100 files-box">
                 <ul class="list-unstyled p-2 d-flex flex-column col" id="files">
                     <li class="text-muted text-center empty">No files uploaded.</li>
                 </ul>
