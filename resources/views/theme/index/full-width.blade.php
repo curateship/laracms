@@ -3,6 +3,11 @@
 
 <div class="container max-width-adaptive-lg">
 
+    <!-- Popular Tags -->
+    <div class="padding-y-sm">
+      @include('components.tags.lists.popular-tags')
+    </div>
+
     <!-- Recent Posts -->
     <div class="margin-bottom-lg">
       @include('components.posts.lists.recent-posts.recent-posts-grid')
@@ -11,11 +16,6 @@
     <!-- Pagination -->
     <div class="padding-bottom-md">
         @include('components.layouts.partials.pagination', ['items' => $recent_posts])
-    </div>
-
-    <!-- Popular Tags -->
-    <div class="padding-bottom-md">
-        @include('components.tags.lists.popular-tags')
     </div>
 
     <!-- Site Discription -->
