@@ -12,6 +12,9 @@ class GenerateMenus
     {
         // Header Menu
         \Menu::make('header', function ($menu) {
+            // Link1
+            $menu->add('Users', ['url'  => url('/').'/users', 'target' => 'blank']);
+            $menu->add('Lists', ['url'  => url('/').'/lists']);
 
             // Tags Dropdown Links
             $menu->add('Tags', ['url'  => '#'])->id('Tags');
