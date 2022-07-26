@@ -13,5 +13,15 @@
         @include('components.layouts.partials.pagination', ['items' => $recent_posts])
     </div>
 
+    <!-- Popular Tags -->
+    <div class="padding-bottom-md">
+        @include('components.tags.lists.popular-tags')
+    </div>
+
+    <!-- Site Discription -->
+    <div class="padding-bottom-md">
+        @include('components.layouts.partials.homepage-site-description')
+    </div>
+
 </div>
 @endsection

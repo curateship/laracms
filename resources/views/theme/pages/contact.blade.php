@@ -5,9 +5,10 @@
 <div class="container max-width-adaptive-lg padding-top-sm">
 
 <!-- Contact Info -->
-<div class="padding-bottom-md">
-    <h1>Contact<h1/>
-</div>
+<article class="article text-component">
+  <h1 class="padding-bottom-sm">Contact</h1>
+  <p>For all inquiries please email nicksampson.inbox @ g m a i l .com</p>
+</article>
 
 </div>
 @endsection

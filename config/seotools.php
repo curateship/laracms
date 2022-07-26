@@ -9,7 +9,7 @@ return [
             'index' => 'Admin'
         ],
         'App\Http\Controllers\Frontend\IndexController' => [
-            'index' => 'Hentai Anime Videos - HentaiVice - HentaiVice'
+            'index' => 'Hentai Anime Videos'
         ],
         'App\Http\Controllers\Admin\AdminUserController' => [
             'index' => 'Admin Users'
