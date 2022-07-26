@@ -1,3 +1,8 @@
+@push('custom-scripts')
+    @include('components.posts.show.types.gallery.scripts-pagination')
+    @include('components.posts.show.types.gallery.scripts')
+@endpush
+
 <!-- Post Title -->
 <div class="text-component padding-bottom-md">
   <h1 class="text-xl">{{ $post->title }}</h1>
@@ -32,9 +37,3 @@
     @endforeach
   </div>
 </div>
-
-@push('custom-scripts')
-    <script>
-        initImagesZoom()
-    </script>
-@endpush

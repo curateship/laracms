@@ -353,6 +353,7 @@ class PostController extends Controller
         Post::whereIn('id', $posts_array)
             ->where('user_id', Auth::id())
             ->update([
+                'created_at' => now(),
                 'updated_at' => now(),
                 'status' => $request->input('direction')
             ]);

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
@@ -44,5 +45,25 @@ class GalleryController extends Controller
             'posts' => $galleries->paginate(10),
             'status' => $status
         ]);
+    }
+
+    public function mangeAjax(Request $request){
+        $post = Post::find($request->input('post_id'));
+
+        $images = Storage::allFiles('/public/'.config('images.galleries_storage_path').'/'.$post->slug.'/medium/');
+        $result = '';
+        foreach($images as $key => $image){
+            $image = str_replace('public/', '/', $image);
+            if($key + 1 == $request->input('current')){
+                $result = '<img src="/storage'.$image.'" />';
+            }
+        }
+
+        return [
+            'total' => count($images),
+            'length' => 1,
+            'size' => 5,
+            'data' => $result
+        ];
     }
 }
