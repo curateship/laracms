@@ -583,11 +583,13 @@ class Post extends Model
                 $image = str_replace('public/', '/', $image);
                 if($key == 0){
                     $main = '/storage'.$image;
+                    continue;
                 }
-                $images_result[] = '<img src="/storage'.$image.'" />';
+                $images_result[] = '<img class="gallery-preview-image" data-item-key="'.($key + 1).'" src="/storage'.$image.'" aria-controls="manga-modal">';
             }
 
             $content = view('components.posts.show.types.gallery.manga', [
+                'post' => $this,
                 'main' => $main,
                 'image_classes' => $image_classes,
                 'images' => $images_result
@@ -753,5 +755,11 @@ class Post extends Model
             return config('images.posts_storage_path').$this->$target;
         }
         */
+    }
+
+    public function getGalleryLength(){
+        $images = Storage::allFiles('/public/'.config('images.galleries_storage_path').'/'.$this->slug.'/medium/');
+
+        return count($images);
     }
 }
