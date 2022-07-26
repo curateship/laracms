@@ -149,9 +149,17 @@ class Post extends Model
 
   public function removePostImages($type){
       $path = '/public'.config('images.posts_storage_path');
+      $galleries = '/public'.config('images.galleries_storage_path');
       $video_path = '/public'.config('images.videos_storage_path');
 
         switch($type){
+            // Gallery;
+            case 'gallery':
+                if($this->type == 'gallery'){
+                    Storage::deleteDirectory($galleries.'/'.$this->slug);
+                }
+                break;
+
             // Main;
             case 'main':
                 Storage::delete($path.$this->original['original']);
@@ -559,9 +567,26 @@ class Post extends Model
     }
 
     public function prepareContent($image_classes = ''){
+        $content = null;
+
         if($this->type == 'image'){
-            $content = '<img class="'.$image_classes.'" alt="thumbnail" src="'.'/storage'.config('images.posts_storage_path').$this->medium.'">';
-        }   else{
+            $content = '<div class="image-zoom js-image-zoom"><img class="'.$image_classes.'" alt="thumbnail" src="'.'/storage'.config('images.posts_storage_path').$this->medium.'"></div>';
+        }
+
+        if($this->type == 'gallery'){
+            $images = Storage::allFiles('/public/'.config('images.galleries_storage_path').'/'.$this->slug.'/medium/');
+
+            $content = '<div class="image-zoom js-image-zoom"><img class="'.$image_classes.'" alt="thumbnail" src="/storage'.config('images.posts_storage_path').$this->medium.'"></div>';
+            $lines = [];
+            foreach($images as $image){
+                $image = str_replace('public/', '/', $image);
+
+                $lines[] = '<div class="image-zoom js-image-zoom"><img class="'.$image_classes.'" alt="thumbnail" src="/storage/'.$image.'"></div>';
+            }
+            $content .= '<div style="display: flex;align-items: center;gap: 26px;">'.implode('', $lines).'</div>';
+        }
+
+        if($this->type == 'video'){
             $video = DB::table('posts_videos')
                 ->where('post_id', $this->id)
                 ->first();
@@ -609,16 +634,116 @@ class Post extends Model
         Notification::where('post_id', $this->id)
             ->delete();
 
+        // Favorites;
+        DB::table('favorites_items')
+            ->where('post_id', $this->id)
+            ->delete();
+
         // Remove post images;
+        $this->removePostImages('gallery');
         $this->removePostImages('main');
         $this->removePostImages('body');
 
         // Remove all video links;
-        DB::table('posts_videos')
-            ->where('post_id', $this->id)
-            ->delete();
+        if($this->type == 'video'){
+            DB::table('posts_videos')
+                ->where('post_id', $this->id)
+                ->delete();
+        }
 
         // And then - remove the post;
         static::destroy($this->id);
+    }
+
+    public function listsCount(){
+        $lists = DB::table('favorites_items')
+            ->where('post_id', $this->id)
+            ->select('post_id')
+            ->get();
+
+        return count($lists);
+    }
+
+    public function userListed(){
+        $list_item = DB::table('favorites_items')
+            ->leftJoin('favorites', 'favorites.id', '=', 'favorites_items.favorite_id')
+            ->where('post_id', $this->id)
+            ->where('user_id', Auth::id())
+            ->first();
+
+        return $list_item != null;
+    }
+
+    public function parseGallery($images){
+        $galleries_path = '/public'.config('images.galleries_storage_path');
+
+        foreach($images as $image){
+            $image = str_replace(url('/storage'.config('images.galleries_storage_path')).'/_temp/thumbnail/', '', $image);
+
+            if(!Storage::exists($galleries_path.'/'.$this->slug.'/thumbnail/'.$image)){
+                Storage::move($galleries_path.'/_temp/thumbnail/'.$image, $galleries_path.'/'.$this->slug.'/thumbnail/'.$image);
+                Storage::move($galleries_path.'/_temp/original/'.$image, $galleries_path.'/'.$this->slug.'/original/'.$image);
+                Storage::move($galleries_path.'/_temp/medium/'.$image, $galleries_path.'/'.$this->slug.'/medium/'.$image);
+            }
+        }
+
+        // Reset images names;
+        $medias = ['original', 'thumbnail', 'medium'];
+
+        foreach($medias as $media){
+            $images_files = Storage::allFiles($galleries_path.'/'.$this->slug.'/'.$media.'/');
+
+            foreach($images_files as $image){
+                $temp = explode('_', basename($image));
+                $new_image = $temp[count($temp) - 1];
+
+                if(!Storage::exists($galleries_path.'/'.$this->slug.'/'.$media.'/'.basename($new_image))){
+                    Storage::move($image, $galleries_path.'/'.$this->slug.'/'.$media.'/'.basename($new_image));
+                }
+            }
+        }
+
+        foreach($medias as $media){
+            foreach($images as $key => $image){
+                $temp = explode('_', basename($image));
+                $new_image = $key.'_'.$temp[count($temp) - 1];
+
+                Storage::move($galleries_path.'/'.$this->slug.'/'.$media.'/'.$temp[count($temp) - 1], $galleries_path.'/'.$this->slug.'/'.$media.'/'.$new_image);
+            }
+        }
+    }
+
+    public function moveGallery($new_slug){
+        $galleries_path = '/public'.config('images.galleries_storage_path');
+        $medias = ['original', 'thumbnail', 'medium'];
+
+        foreach($medias as $media){
+            $images = Storage::allFiles('/public/'.config('images.galleries_storage_path').'/'.$this->slug.'/'.$media.'/');
+
+            foreach($images as $image){
+                Storage::move($image, $galleries_path.'/'.$new_slug.'/'.$media.'/'.basename($image));
+            }
+        }
+
+        Storage::deleteDirectory($galleries_path.'/'.$this->slug);
+    }
+
+    public function getPreviewImage($target = 'medium'){
+        return config('images.posts_storage_path').$this->$target;
+        /*
+        if($this->type == 'gallery'){
+            $images = Storage::allFiles('/public/'.config('images.galleries_storage_path').'/'.$this->slug.'/'.$target.'/');
+
+            if(count($images) > 0){
+                $image = str_replace('public/galleries/', '/', $images[0]);
+
+                return config('images.galleries_storage_path').'/'.$image;
+            }
+
+            return '';
+        }   else{
+            return config('images.posts_storage_path').$this->$target;
+        }
+        */
     }
 }

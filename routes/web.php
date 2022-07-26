@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\GalleryController;
 use Illuminate\Support\Facades\Route;
 
 // Admin Controllers
@@ -12,6 +13,8 @@ use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminTagController;
 use App\Http\Controllers\Admin\AdminCommentController;
 use App\Http\Controllers\Admin\AdminScraperController;
+use App\Http\Controllers\Admin\AdminFavoriteController;
+use App\Http\Controllers\Admin\AdminGalleryController;
 
 // Front-End Controllers
 use App\Http\Controllers\Frontend\IndexController;
@@ -24,6 +27,7 @@ use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\Frontend\LikeController;
 use App\Http\Controllers\Frontend\FollowController;
 use App\Http\Controllers\Frontend\NotificationController;
+use App\Http\Controllers\Frontend\FavoriteController;
 
 
 /*
@@ -36,6 +40,10 @@ use App\Http\Controllers\Frontend\NotificationController;
 route::get('/', [IndexController::class, 'index'])->name('index');
 route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(['auth', 'verified']);
 route::get('/dashboard/getListBadges', [HomeController::class, 'getListBadges'])->middleware(['auth', 'verified']);
+
+// Static Pages
+Route::get('/page/contact', function () {return view('theme.pages.contact');});
+Route::get('/page/term', function () {return view('theme.pages.term');});
 
 // Users
 route::get('/users', [UserController::class, 'index'])->name('index');
@@ -95,10 +103,24 @@ Route::post('/user/edit/{user_id}', [UserController::class, 'profileUpdate'])->m
 // Search
 Route::get('/search/{search_request}', [PostController::class, 'postSearch'])->name('posts.search');
 
-// Most liked;
+// Filtered Posts;
 Route::get('/most-liked', [PostController::class, 'mostLiked'])->name('posts.most-liked');
 Route::get('/most-commented', [PostController::class, 'mostCommented'])->name('posts.most-commented');
 Route::get('/most-viewed', [PostController::class, 'mostViewed'])->name('posts.most-viewed');
+
+// Favorite lists;
+Route::resource('/favorites', FavoriteController::class)->middleware(['auth']);
+Route::post('/favorite/store', [AdminFavoriteController::class, 'store'])->name('favorite.store')->middleware(['auth', 'verified']);
+Route::get('/favorite/edit/{favorite_id}', [AdminFavoriteController::class, 'edit'])->name('favorite.edit')->middleware(['auth', 'verified']);
+Route::get('/favorite/getListCreateForm', [FavoriteController::class, 'getListCreateForm'])->middleware(['auth'])->name('favorite.get-create-form');
+Route::get('/favorite/getList', [FavoriteController::class, 'getList'])->middleware(['auth'])->name('favorite.get-list');
+Route::get('/favorite/getModal', [FavoriteController::class, 'getModal'])->middleware(['auth'])->name('favorite.get-modal');
+Route::post('/favorite/upload', [FavoriteController::class, 'upload'])->name('favorite.upload')->middleware(['auth', 'verified']);
+Route::post('/favorite/create', [FavoriteController::class, 'createNew'])->name('favorite.create')->middleware(['auth', 'verified']);
+Route::post('/favorite/addItem', [FavoriteController::class, 'addItem'])->name('favorite.add-item')->middleware(['auth', 'verified']);
+Route::post('/favorite/removeList', [FavoriteController::class, 'removeList'])->name('favorite.remove')->middleware(['auth', 'verified']);
+Route::get('/lists', [FavoriteController::class, 'showUserLists']);
+Route::get('/lists/show/{slug}', [FavoriteController::class, 'showListPosts']);
 
 /*
 |--------------------------------------------------------------------------
@@ -131,8 +153,13 @@ Route::post('/admin/posts/move', [AdminPostController::class, 'move'])->name('po
 Route::get('/post/upload/getUploadForm/{type}', [AdminPostController::class, 'getUploadForm'])->name('post.getUploadForm')->middleware(['auth', 'verified']);
 Route::post('/post/upload/image/{type}', [AdminPostController::class, 'upload'])->name('post.upload.image')->middleware(['auth', 'verified']);
 Route::post('/post/upload/video/{type}', [AdminVideoController::class, 'upload'])->name('post.upload.video')->middleware(['auth', 'verified']);
+Route::post('/post/upload/gallery/{type}', [AdminPostController::class, 'upload'])->name('post.uploadMain.gallery')->middleware(['auth', 'verified']);
+Route::post('/post/upload/gallery', [AdminGalleryController::class, 'upload'])->name('post.upload.gallery')->middleware(['auth', 'verified']);
 Route::post('/post/store', [AdminPostController::class, 'store'])->name('post.store')->middleware(['auth', 'verified']);
 Route::get('/post/edit/{post:slug}', [AdminPostController::class, 'edit'])->name('post.edit')->middleware(['auth', 'verified']);
+
+// Galleries;
+Route::resource('/galleries', GalleryController::class)->middleware(['auth']);
 
 // Users Admin
 Route::post('/user/upload', [AdminUserController::class, 'upload'])->name('user.upload');
@@ -148,4 +175,6 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
     Route::resource('/tags', AdminTagController::class); // Category Route
     Route::resource('/comments', AdminCommentController::class); // Comment Route
     Route::resource('/videos', AdminVideoController::class); // Video Route
+    Route::resource('/favorites', AdminFavoriteController::class); // Favorites Route
+    Route::resource('/galleries', AdminGalleryController::class); // Galleries Route
 });

@@ -1,9 +1,9 @@
 var gulp = require('gulp');
-var sass = require('gulp-sass');
+const sass = require('gulp-sass')(require('sass'));
 sass.compiler = require('sass-embedded');
 var sassGlob = require('gulp-sass-glob');
 var browserSync = require('browser-sync').create();
-var postcss      = require('gulp-postcss');
+var postcss = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');

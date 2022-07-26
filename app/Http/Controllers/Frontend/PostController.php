@@ -125,7 +125,7 @@ class PostController extends Controller
             $post_tags_by_cats[$post_tag->category_id][] = $post_tag;
         }
 
-        $content = $post->prepareContent('radius-lg image-zoom__preview js-image-zoom__preview');
+        $content = $post->prepareContent('radius-lg image-zoom__preview js-image-zoom__preview margin-bottom-sm');
 
         $post->addViewHistory($request->ip(), $request->userAgent());
 
@@ -148,7 +148,10 @@ class PostController extends Controller
             'post_tags' => $post_tags_by_cats,
             'recent_posts' => $post->getRecentList(['title', 'tags']),
             'likes_count' => $post->likes()->count(),
-            'user_liked' => $post->userLiked()
+            'user_liked' => $post->userLiked(),
+
+            'user_listed' => $post->userListed(),
+            'lists_count' => $post->listsCount()
         ]);
     }
 
@@ -344,20 +347,6 @@ class PostController extends Controller
         ]);
     }
 
-    // Most liked posts;
-    public function mostLiked(){
-        $posts = Post::whereNotNull('post_id')
-            ->leftJoin(DB::raw('(select post_id, count(*) as likes_count from likes group by post_id) as likes'), 'likes.post_id', '=', 'posts.id')
-            ->orderBy('likes_count', 'desc')
-            ->select('posts.*')
-            ->paginate(20);
-
-        return view('theme.posts.most-liked', [
-            'posts' => $posts,
-            'search' => ''
-        ]);
-    }
-
     public function move(Request $request){
         $posts_array = explode(',', $request->input('list'));
 
@@ -494,12 +483,71 @@ class PostController extends Controller
         return view('components.posts.lists.infinite-posts.items', $data)->render();
     }
 
-    public function mostCommented(){
+
+    /* Most posts */
+    // Liked;
+    public function mostLiked(Request $request){
         $posts = Post::whereNotNull('post_id')
-            ->leftJoin(DB::raw('(select post_id, count(*) as comments_count from comments group by post_id) as comments'), 'comments.post_id', '=', 'posts.id')
-            ->orderBy('comments_count', 'desc')
+            ->orderBy('likes_count', 'desc')
             ->select('posts.*')
-            ->paginate(20);
+            ->where('posts.status', 'published');
+
+        if($request->has('filter')){
+            $filter = $request->input('filter');
+
+            switch($filter){
+                case 'today':
+                    $posts = $posts->leftJoin(DB::raw("(select post_id, count(*) as likes_count from likes where date(created_at) = date(now()) group by post_id) as likes"), 'likes.post_id', '=', 'posts.id');
+                    break;
+                case 'week':
+                    $posts = $posts->leftJoin(DB::raw("(select post_id, count(*) as likes_count from likes where date(created_at) between '".date('Y-m-d', strtotime(date('Y-m-d').' -1 week'))."' and date(now()) group by post_id) as likes"), 'likes.post_id', '=', 'posts.id');
+                    break;
+                case 'month':
+                    $posts = $posts->leftJoin(DB::raw("(select post_id, count(*) as likes_count from likes where date(created_at) between '".date('Y-m-d', strtotime(date('Y-m-d').' -1 month'))."' and date(now()) group by post_id) as likes"), 'likes.post_id', '=', 'posts.id');
+                    break;
+                default:
+                    $posts = $posts->leftJoin(DB::raw("(select post_id, count(*) as likes_count from likes group by post_id) as likes"), 'likes.post_id', '=', 'posts.id');
+            }
+        }   else{
+            $posts = $posts->leftJoin(DB::raw("(select post_id, count(*) as likes_count from likes group by post_id) as likes"), 'likes.post_id', '=', 'posts.id');
+        }
+
+        $posts = $posts->paginate(20);
+
+        return view('theme.posts.most-liked', [
+            'posts' => $posts,
+            'search' => ''
+        ]);
+    }
+
+    // Commented;
+    public function mostCommented(Request $request){
+        $posts = Post::whereNotNull('post_id')
+            ->orderBy('comments_count', 'desc')
+            ->where('posts.status', 'published')
+            ->select('posts.*');
+
+        if($request->has('filter')){
+            $filter = $request->input('filter');
+
+            switch($filter){
+                case 'today':
+                    $posts = $posts->leftJoin(DB::raw("(select post_id, count(*) as comments_count from comments where date(created_at) = date(now()) group by post_id) as comments"), 'comments.post_id', '=', 'posts.id');
+                    break;
+                case 'week':
+                    $posts = $posts->leftJoin(DB::raw("(select post_id, count(*) as comments_count from comments where date(created_at) between '".date('Y-m-d', strtotime(date('Y-m-d').' -1 week'))."' and date(now()) group by post_id) as comments"), 'comments.post_id', '=', 'posts.id');
+                    break;
+                case 'month':
+                    $posts = $posts->leftJoin(DB::raw("(select post_id, count(*) as comments_count from comments where date(created_at) between '".date('Y-m-d', strtotime(date('Y-m-d').' -1 month'))."' and date(now()) group by post_id) as comments"), 'comments.post_id', '=', 'posts.id');
+                    break;
+                default:
+                    $posts = $posts->leftJoin(DB::raw("(select post_id, count(*) as comments_count from comments group by post_id) as comments"), 'comments.post_id', '=', 'posts.id');
+            }
+        }   else{
+            $posts = $posts->leftJoin(DB::raw("(select post_id, count(*) as comments_count from comments group by post_id) as comments"), 'comments.post_id', '=', 'posts.id');
+        }
+
+        $posts = $posts->paginate(20);
 
         return view('theme.posts.most-commented', [
             'posts' => $posts,
@@ -507,12 +555,34 @@ class PostController extends Controller
         ]);
     }
 
+    // Viewed;
     public function mostViewed(Request $request){
         $posts = Post::whereNotNull('post_id')
-            ->leftJoin(DB::raw('(select post_id, count(*) as views_count from posts_views group by post_id) as views'), 'views.post_id', '=', 'posts.id')
             ->orderBy('views_count', 'desc')
-            ->select('posts.*')
-            ->paginate(20);
+            ->where('posts.status', 'published')
+            ->select('posts.*');
+
+        if($request->has('filter')){
+            $filter = $request->input('filter');
+
+            switch($filter){
+                case 'today':
+                    $posts = $posts->leftJoin(DB::raw("(select post_id, count(*) as views_count from posts_views where date(created_at) = date(now()) group by post_id) as views"), 'views.post_id', '=', 'posts.id');
+                    break;
+                case 'week':
+                    $posts = $posts->leftJoin(DB::raw("(select post_id, count(*) as views_count from posts_views where date(created_at) between '".date('Y-m-d', strtotime(date('Y-m-d').' -1 week'))."' and date(now()) group by post_id) as views"), 'views.post_id', '=', 'posts.id');
+                    break;
+                case 'month':
+                    $posts = $posts->leftJoin(DB::raw("(select post_id, count(*) as views_count from posts_views where date(created_at) between '".date('Y-m-d', strtotime(date('Y-m-d').' -1 month'))."' and date(now()) group by post_id) as views"), 'views.post_id', '=', 'posts.id');
+                    break;
+                default:
+                    $posts = $posts->leftJoin(DB::raw("(select post_id, count(*) as views_count from posts_views group by post_id) as views"), 'views.post_id', '=', 'posts.id');
+            }
+        }   else{
+            $posts = $posts->leftJoin(DB::raw("(select post_id, count(*) as views_count from posts_views group by post_id) as views"), 'views.post_id', '=', 'posts.id');
+        }
+
+        $posts = $posts->paginate(20);
 
         return view('theme.posts.most-viewed', [
             'posts' => $posts,

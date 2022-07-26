@@ -56,7 +56,30 @@
 
                 </ul>
               </li>
+
+              <li class="sidenav__item">
+                  <a href="#" class="sidenav__link">
+                      <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16">
+                          <g >
+                              <path d="M2.64 2.31h10.56v-0.99a0.33 0.33 0 0 0-0.33-0.33h-9.9a0.33 0.33 0 0 0-0.33 0.33z"></path><path d="M14.52 2.97h-13.2a0.66 0.66 0 0 0-0.66 0.66v10.56a0.66 0.66 0 0 0 0.66 0.66h13.2a0.66 0.66 0 0 0 0.66-0.66v-10.56a0.66 0.66 0 0 0-0.66-0.66z m-9.24 2.31a0.99 0.99 0 1 1-0.99 0.99 0.99 0.99 0 0 1 0.99-0.99z m7.88 6.77a0.33 0.33 0 0 1-0.29 0.16h-9.57a0.33 0.33 0 0 1-0.26-0.53l1.98-2.64a0.33 0.33 0 0 1 0.24-0.13 0.32 0.32 0 0 1 0.25 0.1l1.71 1.71 2.75-3.66a0.33 0.33 0 0 1 0.55 0.03l2.64 4.63a0.33 0.33 0 0 1 0 0.33z"></path>
+                          </g>
+                      </svg>
+                      <span class="sidenav__text text-sm@md">Galleries</span>
+                  </a>
+                  <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
+                      <svg class="icon" viewBox="0 0 12 12"><polygon points="4 3 8 6 4 9 4 3"/></svg>
+                  </button>
+                  <ul class="sidenav__list">
+                      <li class="sidenav__item">
+                          <a href="/galleries/create" class="sidenav__link">
+                              <span class="sidenav__text text-sm@md">Add New</span>
+                          </a>
+                      </li>
+                  </ul>
+              </li>
             </ul>
+
+
 
             <ul class="sidenav__list">
               <!-- My Comments -->
@@ -68,6 +91,17 @@
                     </g>
                   </svg>
                     <span class="sidenav__text text-sm@md">My Comments</span>
+                  </a>
+              </li>
+
+              <!-- Favorites -->
+              <li class="sidenav__item">
+              <a href="/favorites/" class="sidenav__link" {{ strpos(url()->full(), '/favorites') !== false ? 'aria-current=page' : '' }}>
+                  <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16">
+                    <g ><path d="M6.62 12.22a5.08 5.08 0 0 1 7.69-4.37l1.56-1.53a0.54 0.54 0 0 0-0.3-0.91l-4.89-0.71-2.18-4.43a0.56 0.56 0 0 0-0.97 0l-2.18 4.43-4.89 0.71a0.54 0.54 0 0 0-0.3 0.91l3.54 3.46-0.83 4.87a0.54 0.54 0 0 0 0.77 0.56l3.17-1.66a5.07 5.07 0 0 1-0.19-1.33z"></path><path d="M11.71 8.15a4.07 4.07 0 1 0 4.08 4.07 4.07 4.07 0 0 0-4.08-4.07z m2.04 5.6h-4.08v-1.02h4.08z m0-2.04h-4.08v-1.02h4.08z"></path>
+                    </g>
+                  </svg>
+                      <span class="sidenav__text text-sm@md">Favorites</span>
                   </a>
               </li>
 

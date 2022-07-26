@@ -57,6 +57,8 @@ class AdminPostController extends Controller
             });
         }
 
+        //$posts = $posts->where('type', '!=', 'gallery');
+
         return view('admin.posts.index', [
             'posts' => $posts->paginate(10),
             'status' => $status
@@ -96,10 +98,35 @@ class AdminPostController extends Controller
             return abort(404);
         }
 
+        $content = null;
+        $posts_files = [];
+        $posts_urls = [];
+
         if($post->type == 'image'){
             // Render simple image box;
             $content = '<img alt="thumbnail" src="'.'/storage'.config('images.posts_storage_path').$post->thumbnail.'">';
-        }   else{
+        }
+
+        if($post->type == 'gallery'){
+            $images = Storage::allFiles('/public/'.config('images.galleries_storage_path').'/'.$post->slug.'/thumbnail/');
+
+            foreach($images as $image){
+                $image = str_replace('public/galleries/', '/', $image);
+
+                $posts_files[] = str_replace('/'.$post->slug.'/thumbnail/', '', $image);
+                $posts_urls[] = url('/storage'.config('images.galleries_storage_path').$image);
+            }
+
+            $content = [];
+            foreach($images as $image){
+                $image = str_replace('public/', '/', $image);
+
+                $content[] = '<img alt="thumbnail" src="'.'/storage'.$image.'">';
+            }
+            $content = implode('', $content);
+        }
+
+        if($post->type == 'video'){
             // Render video player;
             $content = view('admin.posts.script-video-js-player', [
                 'poster' => '/storage'.config('images.posts_storage_path').$post->thumbnail,
@@ -113,7 +140,9 @@ class AdminPostController extends Controller
         return view('admin.posts.edit', [
             'post' => $post,
             'content' => $content,
-            'categories' => Category::pluck('name', 'id')
+            'categories' => Category::pluck('name', 'id'),
+            'posts_files' => $posts_files,
+            'posts_urls' => $posts_urls
         ]);
     }
 
@@ -259,7 +288,7 @@ class AdminPostController extends Controller
         $posts_with_same_slug = Post::where('slug', 'like', $slug . '%');
 
         if($request->has('postId')){
-            $posts_with_same_slug = $posts_with_same_slug->where('id', '!=', $request->has('postId'));
+            $posts_with_same_slug = $posts_with_same_slug->where('id', '!=', $request->input('postId'));
         }
 
         $posts_with_same_slug = $posts_with_same_slug->get();
@@ -341,6 +370,10 @@ class AdminPostController extends Controller
         $old_title = $post->title;
         $old_body = $post->id == null ? json_encode(['blocks' => []]) : $post->body;
 
+        if($request->has('postId') && $post->slug != $slug && $post->type == 'gallery'){
+            $post->moveGallery($slug);
+        }
+
         $post->title = $title;
         $post->excerpt = '';
         $post->slug = $slug;
@@ -364,6 +397,11 @@ class AdminPostController extends Controller
         // Now we can save excerpt;
         $post->excerpt = strip_tags($post->body('short', 200));
         $post->save();
+
+        // Gallery;
+        if($request->input('type') == 'gallery'){
+            $post->parseGallery($request->input('uploaded-images'));
+        }
 
         // If we have "video" type for this post - save video info;
         if($request->input('type') == 'video'){
@@ -474,6 +512,8 @@ class AdminPostController extends Controller
                 return view('admin.forms.image')->render();
             case 'video':
                 return view('admin.forms.video')->render();
+            case 'gallery':
+                return view('admin.forms.gallery')->render();
         }
 
         return false;

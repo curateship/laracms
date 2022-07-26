@@ -1,0 +1,149 @@
+@use '../base' as *;
+@use '_1_modal-window.scss' as *;
+@use '_1_circle-loader.scss' as *;
+@use '_2_autocomplete.scss' as *;
+
+/* -------------------------------- 
+
+File#: _3_explorer
+Title: Explorer
+Descr: Modal window with autocomplete search
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+:root {
+  // input
+  --explorer-input-height: 3em;
+  --explorer-input-padding-x: var(--space-md);
+  --explorer-input-padding-y: 0;
+
+  // result items
+  --explorer-dropdown-max-items: 6; // max number of visible results
+  --explorer-result-item-height: 3em;
+  --explorer-result-item-padding-x: var(--space-md);
+  --explorer-result-item-padding-y: 0;
+}
+
+.explorer {}
+
+.explorer__input-wrapper {
+  position: relative;
+  border-bottom: 1px solid var(--color-contrast-lower);
+
+  &::before { // focus marker
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 20%;
+    height: 60%;
+    width: 3px;
+    background-color: var(--color-primary);
+    pointer-events: none;
+    opacity: 0;
+    transition: .2s;
+  }
+
+  &:focus-within::before {
+    opacity: 1;
+  }
+}
+
+.explorer__input {
+  height: var(--explorer-input-height);
+  padding-top: var(--explorer-input-padding-y);
+  padding-bottom: var(--explorer-input-padding-y);
+  padding-left: var(--explorer-input-padding-x);
+  padding-right: var(--explorer-input-padding-x);
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.explorer__loader { // loader visible while searching
+  // CSS variables inherited from Circle-Loader component
+  --circle-loader-v1-size: 1em; 
+  --circle-loader-v1-stroke-width: 2px;
+}
+
+.explorer:not(.explorer--searching) .explorer__loader {
+  // .explorer--searching is used to show the loader element - added in JS
+  display: none;
+} 
+
+.explorer__results {
+  max-height: calc(var(--explorer-dropdown-max-items) * var(--explorer-result-item-height));
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.explorer__result {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: var(--explorer-result-item-height);
+  color: var(--color-contrast-high);
+  text-decoration: none;
+  text-align: left;
+  padding-top: var(--explorer-result-item-padding-y);
+  padding-bottom: var(--explorer-result-item-padding-y);
+  padding-left: var(--explorer-result-item-padding-x);
+  padding-right: var(--explorer-result-item-padding-x);
+  transition: .3s;
+
+  &:hover {
+    cursor: pointer;
+    color: var(--color-contrast-higher);
+    background-color: alpha(var(--color-contrast-higher), 0.075);
+  }
+
+  &:focus {
+    outline: none;
+    background-color: alpha(var(--color-primary), 0.15);
+  }
+
+  &:hover .explorer__icon,
+  &:focus .explorer__icon {
+    color: var(--color-contrast-higher);
+  }
+}
+
+.explorer__result--none {
+  pointer-events: none;
+}
+
+.explorer__icon {
+  display: flex;
+  align-items: center;
+  color: var(--color-contrast-medium); // icon color
+  transition: .3s;
+}
+
+.explorer__shortcut {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.5em;
+  height: 1.5em;
+  background-color: alpha(var(--color-contrast-higher), 0.1);
+  color: alpha(var(--color-contrast-higher), 0.5);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+}
+
+.explorer__label {
+  --space-unit: 1em;
+  display: inline-flex;
+  background-color: var(--color-primary);
+  padding: var(--space-xxxs) var(--space-xxs);
+  border-radius: var(--radius-md);
+
+  color: var(--color-white);
+  font-size: 0.5em;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  margin-top: var(--space-xxxxs);
+  @include fontSmooth;
+}

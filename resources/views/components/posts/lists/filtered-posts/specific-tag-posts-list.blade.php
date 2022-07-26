@@ -8,7 +8,7 @@
 
           <!-- Image -->
           <figure class="aspect-ratio-4:3">
-            <img class="block width-100%" loading="lazy" src="{{ url('/storage').config('images.posts_storage_path').$post->thumbnail  }}" alt="Image description">
+            <img class="block width-100%" loading="lazy" src="{{ url('/storage').$post->getPreviewImage()  }}" alt="Image description">
           </figure>
         </a>
 

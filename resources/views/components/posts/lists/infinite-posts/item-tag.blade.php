@@ -105,7 +105,7 @@
     <footer class="card-v10__footer">
         <ul class="card-v10__social-list">
             <li class="card-v10__social-item">
-                <button class="reset card-v10__social-btn js-tab-focus js-comments__vote-btn {{$post->user_liked ? 'comments__vote-btn--pressed' : ''}}" data-post-id="{{$post->id}}" aria-label="Like this content along with 120 other people">
+                <button class="reset card-v10__social-btn js-tab-focus js-comments__vote-btn-like {{$post->user_liked ? 'comments__vote-btn--pressed' : ''}}" data-post-id="{{$post->id}}" aria-label="Like this content along with 120 other people">
                     <svg class="icon" viewBox="0 0 12 12">
                         <g>
                             <path d="M11.045,2.011a3.345,3.345,0,0,0-4.792,0c-.075.075-.15.225-.225.3-.075-.074-.15-.224-.225-.3a3.345,3.345,0,0,0-4.792,0,3.345,3.345,0,0,0,0,4.792l5.017,4.718L11.045,6.8A3.484,3.484,0,0,0,11.045,2.011Z"></path>
