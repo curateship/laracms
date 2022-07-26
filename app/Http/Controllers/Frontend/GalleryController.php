@@ -55,7 +55,7 @@ class GalleryController extends Controller
         foreach($images as $key => $image){
             $image = str_replace('public/', '/', $image);
             if($key + 1 == $request->input('current')){
-                $result = '<img src="/storage'.$image.'" />';
+                $result = '<img class="manga-image" src="/storage'.$image.'" />';
             }
         }
 

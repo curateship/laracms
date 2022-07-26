@@ -22,4 +22,8 @@
             });
         }
     });
+
+    $(document).on('click', '.manga-image', function(){
+        $('#easyPaginate li.active').next().children('a').trigger('click')
+    })
 </script>
