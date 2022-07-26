@@ -574,16 +574,24 @@ class Post extends Model
         }
 
         if($this->type == 'gallery'){
+            $image_classes = str_replace(['image-zoom__preview', 'js-image-zoom__preview'], '', $image_classes);
+
             $images = Storage::allFiles('/public/'.config('images.galleries_storage_path').'/'.$this->slug.'/medium/');
-
-            $content = '<div class="image-zoom js-image-zoom"><img class="'.$image_classes.'" alt="thumbnail" src="/storage'.config('images.posts_storage_path').$this->medium.'"></div>';
-            $lines = [];
-            foreach($images as $image){
+            $images_result = [];
+            $main = [];
+            foreach($images as $key => $image){
                 $image = str_replace('public/', '/', $image);
-
-                $lines[] = '<div class="image-zoom js-image-zoom"><img class="'.$image_classes.'" alt="thumbnail" src="/storage/'.$image.'"></div>';
+                if($key == 0){
+                    $main = '/storage'.$image;
+                }
+                $images_result[] = '<img src="/storage'.$image.'" />';
             }
-            $content .= '<div style="display: flex;align-items: center;gap: 26px;">'.implode('', $lines).'</div>';
+
+            $content = view('components.posts.show.types.gallery.manga', [
+                'main' => $main,
+                'image_classes' => $image_classes,
+                'images' => $images_result
+            ])->render();
         }
 
         if($this->type == 'video'){

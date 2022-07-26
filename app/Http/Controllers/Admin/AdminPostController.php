@@ -501,6 +501,7 @@ class AdminPostController extends Controller
 
         Post::whereIn('id', $posts_array)
             ->update([
+                'created_at' => now(),
                 'updated_at' => now(),
                 'status' => $request->input('direction')
             ]);
