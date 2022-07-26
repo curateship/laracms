@@ -1,5 +1,5 @@
     <div class="margin-bottom-md">
-      <ul class="flex flex-column gap-xxs">
+      <ul class="flex flex-wrap gap-xxs">
 
           @foreach($popular_tags as $tag)
               @if($tag->post_count == '')
