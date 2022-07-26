@@ -41,6 +41,10 @@ route::get('/', [IndexController::class, 'index'])->name('index');
 route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(['auth', 'verified']);
 route::get('/dashboard/getListBadges', [HomeController::class, 'getListBadges'])->middleware(['auth', 'verified']);
 
+// Static Pages
+Route::get('/page/contact', function () {return view('theme.pages.contact');});
+Route::get('/page/term', function () {return view('theme.pages.term');});
+
 // Users
 route::get('/users', [UserController::class, 'index'])->name('index');
 
