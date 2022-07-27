@@ -50,7 +50,7 @@ class GalleryController extends Controller
     public function mangeAjax(Request $request){
         $post = Post::find($request->input('post_id'));
 
-        $images = Storage::allFiles('/public/'.config('images.galleries_storage_path').'/'.$post->slug.'/medium/');
+        $images = Storage::allFiles('/public/'.config('images.galleries_storage_path').'/'.$post->slug.'/original/');
         $result = '';
         foreach($images as $key => $image){
             $image = str_replace('public/', '/', $image);
