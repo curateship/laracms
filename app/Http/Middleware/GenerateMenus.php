@@ -35,6 +35,7 @@ class GenerateMenus
             $menu->add('Friends', ['url'  => '#'])->id('friend');
             // Adding sub items;
             $menu->add('Hentai Stream', ['parent' => 'friend', 'url' => 'https://hentaistream.com']);
+            $menu->add('Hentai Games', ['parent' => 'friend', 'url' => 'https://hentaiporn.com']);
         });
 
         // Links Sidebar
