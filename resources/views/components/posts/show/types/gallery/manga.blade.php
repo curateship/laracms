@@ -1,17 +1,3 @@
-<style>
-    .gallery-preview-box{
-        display: flex;
-        flex-flow: wrap;
-        gap: 17px;
-        justify-content: center;
-    }
-
-    .gallery-preview-image{
-        height: 150px;
-        border-radius: 10px;
-    }
-</style>
-
 <div>
     <img class="{{$image_classes}}" alt="thumbnail" src="{{$main}}" data-item-key="1" aria-controls="manga-modal">
     <div class="gallery-preview-box">

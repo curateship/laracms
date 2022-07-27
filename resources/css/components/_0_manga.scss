@@ -89,3 +89,15 @@
         padding: 0 !important;
     }
 }
+
+.gallery-preview-box{
+    display: flex;
+    flex-flow: wrap;
+    gap: 17px;
+    justify-content: flex-start;
+}
+
+.gallery-preview-image{
+    height: 150px;
+    border-radius: 10px;
+}
