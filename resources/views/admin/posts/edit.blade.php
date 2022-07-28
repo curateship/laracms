@@ -99,15 +99,15 @@
 
     <!-- Date Picker -->
     <div class="date-input js-date-input margin-y-sm">
-    
+
     <div class="date-input__wrapper">
-      <input type="text" class="form-control width-100% date-input__text js-date-input__text" placeholder="dd/mm/yyyy" autocomplete="off" id="date-input-1">
-      
+      <input type="text" class="form-control width-100% date-input__text js-date-input__text" placeholder="dd/mm/yyyy" autocomplete="off" id="date-input-1" name="post_date" value="{{$post->post_date != '' ? date('d/m/Y', strtotime($post->post_date)) : ''}}">
+
       <button class="reset date-input__trigger js-date-input__trigger js-tab-focus" aria-label="Select date using calendar widget" type="button">
         <svg class="icon" aria-hidden="true" viewBox="0 0 20 20"><g fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2"><rect x="1" y="4" width="18" height="14" rx="1"/><line x1="5" y1="1" x2="5" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="1" y1="9" x2="19" y2="9"/></g></svg>
       </button>
     </div>
-    
+
     <div class="date-picker js-date-picker" role="dialog" aria-labelledby="calendar-label-1">
       <header class="date-picker__header">
         <div class="date-picker__month">
@@ -282,7 +282,7 @@
             <button class="btn btn--primary">Save changes</button>
         </div>
 
-        @if($post->status == 'published')
+        @if($post->status == 'published' || $post->status == 'pre-published')
             <div class="flex justify-end gap-xs">
                 <button class="btn btn--primary postSaveAs" data-status="draft">Move to drafts</button>
             </div>

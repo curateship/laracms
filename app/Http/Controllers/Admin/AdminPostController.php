@@ -388,6 +388,27 @@ class AdminPostController extends Controller
             $post->status = $request->input('status');
         }
 
+        $post_date = date('Y-m-d', strtotime(str_replace('/', '.', $request->input('post_date'))));
+        if($request->input('status') == 'published' || $request->input('status') == ''){
+            // If post date less than current date;
+            if(strtotime($post_date) < time()){
+                $post->post_date = $post_date;
+                $post->created_at = $post_date;
+                $post->status = 'published';
+            }
+
+            // If post date more than current date;
+            if(strtotime($post_date) > time()){
+                $post->post_date = $post_date;
+                $post->status = 'pre-published';
+            }
+
+            // If we do not have post_date;
+            if(!$request->has('post_date')){
+                $post->post_date = null;
+            }
+        }
+
         $post->save();
 
         if($request->input('status') == 'published'){
@@ -479,9 +500,13 @@ class AdminPostController extends Controller
                     // Remove old notifications;
                     Notification::removeNotificationForPost($post->id);
 
-                    $user->followersBroadcast(Auth::user()->name, 'Updated a post: '.$post->title, '/post/'.$post->slug, $post->id);
+                    if($post->status != 'pre-published'){
+                        $user->followersBroadcast(Auth::user()->name, 'Updated a post: '.$post->title, '/post/'.$post->slug, $post->id);
+                    }
                 }   else{
-                    $user->followersBroadcast(Auth::user()->name, 'Added a new post: '.$post->title, '/post/'.$post->slug, $post->id);
+                    if($post->status != 'pre-published'){
+                        $user->followersBroadcast(Auth::user()->name, 'Added a new post: '.$post->title, '/post/'.$post->slug, $post->id);
+                    }
                 }
             }
         }   else{

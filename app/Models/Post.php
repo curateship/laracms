@@ -24,6 +24,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed $status
  * @property mixed $excerpt
  * @property false|mixed|string $file_hash
+ * @property mixed|null $post_date
+ * @property mixed|null $created_at
  */
 class Post extends Model
 {
