@@ -1,58 +1,29 @@
-<header class="header-v2 js-header-v2 hide-nav hide-nav--fixed js-hide-nav js-hide-nav--main">
-  <div class="header-v2__wrapper">
-    <div class="header-v2__container container max-width-lg">
-
-      <!-- LOGO -->
-      <div class="header-v2__logo">
-        <a href ="/">
-          @include('theme.layouts.svg.logo')
-        </a>
-      </div>
-
-      <!--- Mobile -->
-      <div class="flex header-menu-box gap-md">
-
-        @include('components.layouts.headers.partials.mobile-user-dropdown')
-        @include('components.layouts.headers.partials.mobile-search')
-
-        <button class="header-v2__nav-control reset anim-menu-btn js-anim-menu-btn" aria-label="Toggle menu" menu-target="main-menu">
-          <i class="anim-menu-btn__icon anim-menu-btn__icon--close" aria-hidden="true"></i>
-        </button><!-- Mobile Hamburger Menu -->
-
-        @can('is-admin')<!-- admin link -->
-        <div class="padding-top-xxxs padding-x-xs">
-          <a href="/admin">
-          <svg class="icon color-contrast-high" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor"><title>gear</title><g ><path d="M18.92 8.48a2.5 2.5 0 0 1-1.54-3.71c0.4-0.67 0.28-1.25-0.12-1.65l-0.38-0.38c-0.4-0.4-0.98-0.52-1.65-0.12a2.5 2.5 0 0 1-3.71-1.54c-0.19-0.76-0.68-1.08-1.25-1.08h-0.54c-0.56 0-1.06 0.32-1.25 1.08a2.5 2.5 0 0 1-3.71 1.54c-0.67-0.4-1.25-0.28-1.65 0.12l-0.39 0.38c-0.4 0.4-0.52 0.98-0.11 1.65a2.5 2.5 0 0 1-1.54 3.71c-0.76 0.19-1.08 0.68-1.08 1.25v0.54c0 0.56 0.32 1.06 1.08 1.25a2.5 2.5 0 0 1 1.54 3.71c-0.4 0.67-0.28 1.25 0.12 1.65l0.38 0.38c0.4 0.4 0.98 0.52 1.65 0.12a2.5 2.5 0 0 1 3.71 1.54c0.19 0.76 0.68 1.08 1.25 1.08h0.54c0.56 0 1.06-0.32 1.25-1.08a2.5 2.5 0 0 1 3.71-1.54c0.67 0.4 1.25 0.28 1.65-0.12l0.38-0.38c0.4-0.4 0.52-0.98 0.12-1.65a2.5 2.5 0 0 1 1.54-3.71c0.76-0.19 1.08-0.68 1.08-1.25v-0.54c0-0.56-0.33-1.06-1.08-1.25z m-8.92 5.27a3.75 3.75 0 1 1 0-7.5 3.75 3.75 0 0 1 0 7.5z"></path></g></svg>
-          @endcan
-          </a>
-        </div>
-      </div>
-
-      <!-- Navigation -->
-      <nav id="main-menu" class="header-v2__nav" role="navigation">
-        <ul class="header-v2__nav-list header-v2__nav-list--main padding-left-xl@md">
-          @include('components.layouts.headers.partials.custom-menu-items', ['items' => Menu::get('header')->roots()])<!-- Custom Menu -->
-        </ul>
-      </nav>
-
-      <!--desktop -->
-      <div class="header-v2__nav header__icon-btns header-v2__nav-align-right header__icon-btns--desktop">
-        @include('components.layouts.headers.partials.desktop-search')
-        @include('components.layouts.headers.partials.desktop-user-dropdown')
-
-        @auth
-        <div class="padding-x-xxxs">
-          @include('components.layouts.headers.partials.desktop-notifications')
-        </div>
-
-        <div class="f-header__item"><a href="/home" class="f-header__btn btn btn--subtle radius-full">Dashboard</a></div>
-        @can('is-admin')<!-- is-admin Middleware for Admin Button -->
-          <div class="f-header__item"><a href="/admin" class="f-header__btn btn btn--dark radius-full">Admin</a></div>
-        @endcan
-        @endif
-
-      </div>
-
+<header class="header position-relative js-header ">
+  <div class="header__container container max-width-lg">
+    <div class="header__logo">
+      <a href="#0">
+        <svg width="104" height="30" viewBox="0 0 104 30"><title>Go to homepage</title><path d="M37.54 24.08V3.72h4.92v16.37h8.47v4zM60.47 24.37a7.82 7.82 0 01-5.73-2.25 8.36 8.36 0 01-2-5.62 8.32 8.32 0 012.08-5.71 8 8 0 015.64-2.18 8.07 8.07 0 015.68 2.2 8.49 8.49 0 012 5.69 8.63 8.63 0 01-1.78 5.38 7.6 7.6 0 01-5.89 2.49zm0-3.67c2.42 0 2.73-3 2.73-4.23s-.31-4.26-2.73-4.26-2.79 3-2.79 4.26.32 4.23 2.82 4.23zM95.49 24.37a7.82 7.82 0 01-5.73-2.25 8.36 8.36 0 01-2-5.62 8.32 8.32 0 012.08-5.71 8.4 8.4 0 0111.31 0 8.43 8.43 0 012 5.69 8.6 8.6 0 01-1.77 5.38 7.6 7.6 0 01-5.89 2.51zm0-3.67c2.42 0 2.73-3 2.73-4.23s-.31-4.26-2.73-4.26-2.8 3-2.8 4.26.31 4.23 2.83 4.23zM77.66 30c-5.74 0-7-3.25-7.23-4.52l4.6-.26c.41.91 1.17 1.41 2.76 1.41a2.45 2.45 0 002.82-2.53v-2.68a7 7 0 01-1.7 1.75 6.12 6.12 0 01-5.85-.08c-2.41-1.37-3-4.25-3-6.66 0-.89.12-3.67 1.45-5.42a5.67 5.67 0 014.64-2.4c1.2 0 3 .25 4.46 2.82V8.81h4.85v15.33a5.2 5.2 0 01-2.12 4.32A9.92 9.92 0 0177.66 30zm.15-9.66c2.53 0 2.81-2.69 2.81-3.91s-.31-4-2.81-4-2.81 2.8-2.81 4 .27 3.91 2.81 3.91zM55.56 3.72h9.81v2.41h-9.81z" fill="var(--color-contrast-higher)"/><circle cx="15" cy="15" r="15" fill="var(--color-primary)"/></svg>
+      </a>
     </div>
+
+    <button class="btn btn--subtle header__trigger js-header__trigger" aria-label="Toggle menu" aria-expanded="false" aria-controls="header-nav">
+      <i class="header__trigger-icon" aria-hidden="true"></i>
+      <span>Menu</span>
+    </button>
+
+    <nav class="header__nav js-header__nav" id="header-nav" role="navigation" aria-label="Main">
+      <div class="header__nav-inner">
+        <div class="header__label">Main menu</div>
+        <ul class="header__list">
+          <li class="header__item"><a href="#0" class="header__link">About</a></li>
+          <li class="header__item"><a href="#0" class="header__link">Solutions</a></li>
+          <li class="header__item"><a href="#0" class="header__link" aria-current="page">Resources</a></li>
+          <li class="header__item"><a href="#0" class="header__link">Pricing</a></li>
+          <li class="header__item"><a href="#0" class="header__link">Contact</a></li>
+          <li class="header__item header__item--divider" aria-hidden="true"></li>
+          <li class="header__item"><a href="#0" class="header__nav-btn btn btn--primary">Download</a></li>
+        </ul>
+      </div>
+    </nav>
   </div>
 </header>

@@ -1,0 +1,211 @@
+@use '../base' as *;
+
+/* -------------------------------- 
+
+File#: _1_main-header
+Title: Main Header
+Descr: Accessible website navigation
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+:root {
+  --header-height: 50px;
+
+  @include breakpoint(md) {
+    --header-height: 70px;
+  }
+}
+
+.header {
+  height: var(--header-height);
+  width: 100%;
+  background-color: var(--color-bg);
+  z-index: var(--z-index-header, 3); 
+}
+
+.header--expanded {
+  // class added when navigation is visible - small devices only
+}
+
+.header__container {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// logo
+.header__logo {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+
+  a, svg, img {
+    display: block;
+  }
+}
+
+// nav
+.header__nav {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-height: 100vh;
+  background-color: var(--color-bg);
+  box-shadow: var(--shadow-md);
+  overflow: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+
+  display: none;
+
+  &::before { // top header bg + border
+    content: '';
+    display: block;
+    position: sticky;
+    top: 0;
+    height: var(--header-height);
+    background: inherit;
+    border-bottom: 1px solid var(--color-contrast-lower);
+  }
+}
+
+.header__nav--is-visible {
+  display: block;
+}
+
+.header__nav-inner {
+  padding: var(--space-md);
+}
+
+.header__label { // menu label
+  font-size: var(--text-sm);
+  color: var(--color-contrast-medium);
+  margin-bottom: var(--space-sm);
+}
+
+.header__item { // nav list item
+  margin-bottom: var(--space-sm);
+}
+
+.header__link { // link within list item
+  font-size: var(--text-lg);
+  color: var(--color-contrast-higher);
+  text-decoration: none;
+
+  &:hover, &[aria-current] { // style of :hover + selected link
+    color: var(--color-primary);
+  }
+}
+
+.header__nav-btn {
+  font-size: var(--text-lg);
+  width: 100%;
+}
+
+.header__item--divider { // element used to separate nav items
+  height: 1px;
+  width: 100%;
+  background-color: var(--color-contrast-lower);
+}
+
+// menu trigger
+.header__trigger { // menu button
+  position: relative;
+  z-index: 2;
+}
+
+// menu icon
+.header__trigger-icon {
+  position: relative;
+  display: block;
+  height: 2px;
+  width: 1em;
+  background-color: currentColor;
+  margin-right: var(--space-xxs);
+  transition: 0.2s;
+
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: inherit;
+    height: inherit;
+    background-color: currentColor;
+    transition: 0.2s;
+  }
+
+  &::before {
+    transform: translateY(-5px);
+  }
+
+  &::after {
+    transform: translateY(5px);
+  }
+}
+
+.header__trigger[aria-expanded="true"] .header__trigger-icon {
+  background-color: transparent;
+
+  &::before {
+    transform: rotate(45deg);
+  }
+
+  &::after {
+    transform: rotate(-45deg);
+  }
+}
+
+@include breakpoint(md) {
+  .header__nav {
+    // reset
+    position: static;
+    background-color: transparent;
+    width: auto;
+    max-height: none;
+    box-shadow: none;
+    overflow: visible;
+    overscroll-behavior: auto;
+    display: block;
+
+    &::before {
+      display: none;
+    }
+  }
+
+  .header__nav-inner {
+    padding: 0; // reset
+  }
+
+  .header__label { // hide label
+    @include srHide;
+  }
+
+  .header__list {
+    display: flex;
+    align-items: center;
+  }
+
+  .header__item {
+    display: inline-block; // flex fallback
+    margin-bottom: 0;
+    margin-left: var(--space-md);
+  }
+
+  .header__link, .header__nav-btn {
+    font-size: 1.125rem;
+  }
+
+  .header__item--divider {
+    height: 1em;
+    width: 1px;
+  }
+
+  .header__trigger {
+    display: none;
+  }
+}
