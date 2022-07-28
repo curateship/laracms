@@ -110,7 +110,11 @@ class PostController extends Controller
 
     public function show(Request $request, Post $post) {
         // Only author or author can preview posts in draft;
-        if($post->status == 'draft'){
+        if($post->status != 'published'){
+            if(Auth::guest()){
+                return abort(404);
+            }
+
             if(!Gate::allows('is-admin') && (!Auth::guest() && Auth::id() != $post->user_id)){
                 return abort(404);
             }
