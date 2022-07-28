@@ -2,11 +2,11 @@
 @section('content')
 
 <!-- Container -->
-<div class="container max-width-adaptive-lg padding-top-sm">
+<div class="padding-md padding-lg@md">
 
 <!-- Search Results -->
 <div class="padding-bottom-md">
-    @include('components.posts.lists.filtered-posts.search-results')
+    @include('components.posts.lists.filtered-posts.search-results-hr')
 </div>
        
 <!-- Pagination -->
@@ -15,4 +15,6 @@
 </div>
 
 </div>
+
+
 @endsection

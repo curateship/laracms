@@ -10,10 +10,10 @@ Usage: codyhouse.co/license
 -------------------------------- */
 
 :root {
-  --header-height: 50px;
+  --header-height: 70px;
 
   @include breakpoint(md) {
-    --header-height: 70px;
+    --header-height: 100px;
   }
 }
 

@@ -2,7 +2,7 @@
 @section('content')
 
 <!-- Container -->
-<div class="container max-width-adaptive-lg padding-top-sm">
+<div class="padding-lg">
 
 <!-- Term -->
 <div class="padding-bottom-md">
