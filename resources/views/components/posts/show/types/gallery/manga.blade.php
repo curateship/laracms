@@ -1,5 +1,5 @@
 <div>
-    <img class="{{$image_classes}}" alt="thumbnail" src="{{$main}}" data-item-key="1" aria-controls="manga-modal">
+    <img class="{{$image_classes}}" alt="thumbnail" src="/storage{{config('images.posts_storage_path').$post->medium}}" data-item-key="1" aria-controls="manga-modal">
     <div class="gallery-preview-box">
         @foreach($images as $image)
             {!! $image !!}

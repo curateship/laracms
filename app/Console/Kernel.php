@@ -2,7 +2,9 @@
 
 namespace App\Console;
 
+use App\Models\Post;
 use App\Models\Scraper;
+use App\Models\User;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -30,6 +32,20 @@ class Kernel extends ConsoleKernel
         } else {
             $out->writeln('No scrapers waiting for run. (' . date('Y-m-d H:i:s') . ')' );
         }
+
+        $schedule->call(function () {
+            $posts = Post::where('status', 'pre-published')
+                ->where('post_date', '=', date('Y-m-d', time()))
+                ->get();
+
+            foreach($posts as $post){
+                $post->status = 'published';
+                $post->created_at = now();
+
+                $user = User::find($post->user_id);
+                $user->followersBroadcast($user->name, 'Added a new post: '.$post->title, '/post/'.$post->slug, $post->id);
+            }
+        })->daily();
     }
 
     /**

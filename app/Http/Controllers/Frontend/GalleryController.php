@@ -49,18 +49,22 @@ class GalleryController extends Controller
 
     public function mangeAjax(Request $request){
         $post = Post::find($request->input('post_id'));
-
         $images = Storage::allFiles('/public/'.config('images.galleries_storage_path').'/'.$post->slug.'/original/');
-        $result = '';
-        foreach($images as $key => $image){
-            $image = str_replace('public/', '/', $image);
-            if($key + 1 == $request->input('current')){
-                $result = '<img class="manga-image" src="/storage'.$image.'" />';
+
+        if($request->input('current') == 1){
+            $result = '<img class="manga-image" src="/storage'.config('images.posts_storage_path').$post->original.'" />';
+        }   else{
+            $result = '';
+            foreach($images as $key => $image){
+                $image = str_replace('public/', '/', $image);
+                if($key == $request->input('current') - 2){
+                    $result = '<img class="manga-image" src="/storage'.$image.'" />';
+                }
             }
         }
 
         return [
-            'total' => count($images),
+            'total' => count($images) + 1,
             'length' => 1,
             'size' => 5,
             'data' => $result
