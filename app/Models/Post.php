@@ -578,26 +578,19 @@ class Post extends Model
 
             $images = Storage::allFiles('/public/'.config('images.galleries_storage_path').'/'.$this->slug.'/medium/');
             $images_result = [];
-            $main = [];
             foreach($images as $key => $image){
                 $image = str_replace('public/', '/', $image);
-                if($key == 0){
-                    $main = '/storage'.$image;
-                    continue;
-                }
-                $images_result[] = '<img class="gallery-preview-image" data-item-key="'.($key + 1).'" src="/storage'.$image.'" aria-controls="manga-modal">';
+                $images_result[] = '<img class="gallery-preview-image" data-item-key="'.($key + 2).'" src="/storage'.$image.'" aria-controls="manga-modal">';
             }
 
             $content = view('components.posts.show.types.gallery.manga', [
                 'post' => $this,
-                'main' => $main,
                 'image_classes' => $image_classes,
                 'images' => $images_result
             ])->render();
 
             if($target == 'gallery'){
-                $image = str_replace('public/', '/', $images[0]);
-                $content = '<div><a href="'.route('post.show', $this).'"><img class="'.$image_classes.'" alt="thumbnail" src="'.'/storage'.config('images.gallery_storage_path').$image.'"></a></div>';
+                $content = '<div><a href="'.route('post.show', $this).'"><img class="'.$image_classes.'" alt="thumbnail" src="'.'/storage'.config('images.posts_storage_path').$this->medium.'"></a></div>';
             }
         }
 
@@ -765,6 +758,6 @@ class Post extends Model
     public function getGalleryLength(){
         $images = Storage::allFiles('/public/'.config('images.galleries_storage_path').'/'.$this->slug.'/medium/');
 
-        return count($images);
+        return count($images) + 1;
     }
 }
