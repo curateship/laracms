@@ -566,7 +566,7 @@ class Post extends Model
         return $user_liked;
     }
 
-    public function prepareContent($image_classes = ''){
+    public function prepareContent($image_classes = '', $target = 'post'){
         $content = null;
 
         if($this->type == 'image'){
@@ -594,6 +594,11 @@ class Post extends Model
                 'image_classes' => $image_classes,
                 'images' => $images_result
             ])->render();
+
+            if($target == 'gallery'){
+                $image = str_replace('public/', '/', $images[0]);
+                $content = '<div><a href="'.route('post.show', $this).'"><img class="'.$image_classes.'" alt="thumbnail" src="'.'/storage'.config('images.gallery_storage_path').$image.'"></a></div>';
+            }
         }
 
         if($this->type == 'video'){
