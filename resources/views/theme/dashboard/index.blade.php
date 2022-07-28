@@ -11,6 +11,7 @@
 
     <!-- Col 8 -->
     <div class="col-8@md">
+        @include('components.status.editor')
         @include('components.posts.lists.infinite-posts.following-posts')
     </div>
 
