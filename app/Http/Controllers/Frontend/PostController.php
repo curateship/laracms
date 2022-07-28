@@ -469,7 +469,7 @@ class PostController extends Controller
             }
 
             $post->tags = $post_tags_by_cats;
-            $post->content = $post->prepareContent('block width-100% height-100% object-cover image-zoom__preview js-image-zoom__preview');
+            $post->content = $post->prepareContent('block width-100% height-100% object-cover image-zoom__preview js-image-zoom__preview', 'gallery');
         }
 
         $data['total'] = $posts_count;

@@ -58,7 +58,7 @@
         <a class="text-decoration-none color-inherit" href="{{route('post.show', $post)}}">{{$post->title}}</a>
     </h4>
 
-    <figure class="{{$post->type == 'image' ? 'image-zoom js-image-zoom' : ''}}">
+    <figure>
         {!! $post->content !!}
     </figure>
 
