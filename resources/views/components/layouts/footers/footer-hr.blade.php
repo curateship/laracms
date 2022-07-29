@@ -57,12 +57,11 @@
       </div>
 
       <div class="footer-v2__print">
-        <p>&copy; myWebsite</p>
+        <p>&copy; HentaiRing</p>
 
         <p class="flex gap-xs justify-center">
-          <a href="#0">Terms</a>
-          <a href="#0">Privacy</a>
-          <a href="#0">Cookies</a>
+          <a href="/page/term">Terms</a>
+          <a href="/page/contact">Contact</a>
         </p>
       </div>
     </div>

@@ -16,16 +16,32 @@
     </button>
 
     <nav class="header__nav js-header__nav" id="header-nav" role="navigation" aria-label="Main">
+    <div class="padding-md padding-bottom-xs hide@md">
+          @include('components.layouts.headers.partials.desktop-search')
+          </div>
       <div class="header__nav-inner">
-        <div class="header__label">Main menu</div>
         <ul class="header__list">
-          <li class="header__item"><a href="/category/origins" class="header__link">Origins</a></li>
-          <li class="header__item"><a href="/category/characters" class="header__link">Characters</a></li>
-          <li class="header__item"><a href="/category/artists" class="header__link" aria-current="page">Artists</a></li>
-          <li class="header__item"><a href="/category/misc" class="header__link">Misc</a></li>
-          <li class="header__item"><a href="/category/media" class="header__link">Media</a></li>
+          <li class="header__item">
+            <a href="/category/origins" class="header__link" {{ str_replace(url('/'), '', url()->full()) === '/category/origins' ? 'aria-current=page' : '' }}>Origins</a>
+          </li>
+
+          <li class="header__item">
+            <a href="/category/characters" class="header__link" {{ str_replace(url('/'), '', url()->full()) === '/category/characters' ? 'aria-current=page' : '' }}>Characters</a>
+          </li>
+
+          <li class="header__item">
+            <a href="/category/artists" class="header__link" {{ str_replace(url('/'), '', url()->full()) === '/category/artists' ? 'aria-current=page' : '' }}>Artists</a>
+          </li>
+
+          <li class="header__item">
+            <a href="/category/misc" class="header__link" {{ str_replace(url('/'), '', url()->full()) === '/category/misc' ? 'aria-current=page' : '' }}>Misc</a>
+          </li>
+
+          <li class="header__item">
+            <a href="/category/media" class="header__link" {{ str_replace(url('/'), '', url()->full()) === '/category/media' ? 'aria-current=page' : '' }}>Media</a>
+          </li>
           @can('is-admin')<!-- is-admin Middleware for Admin Button -->
-          <div class="f-header__item padding-left-md"><a href="/admin" class="f-header__btn btn btn--dark radius-full">Admin</a></div>
+          <div class="padding-left-md"><a href="/admin" class="f-header__btn btn btn--dark radius-full">Admin</a></div>
         @endcan
         </ul>
       </div>
