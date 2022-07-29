@@ -1,6 +1,6 @@
 @use '../base' as *;
 
-/* -------------------------------- 
+/* --------------------------------
 
 File#: _2_carousel
 Title: Carousel
@@ -28,7 +28,7 @@ Usage: codyhouse.co/license
 
 .carousel__item {
   flex-shrink: 0;
-  width: var(--carousel-item-auto-size); 
+  width: var(--carousel-item-auto-size);
   margin-right: 30px;
   margin-bottom: var(--carousel-grid-gap);
 }
@@ -50,7 +50,7 @@ Usage: codyhouse.co/license
   }
 
   .carousel:not(.carousel--is-dragging) .carousel__list:not(.carousel__list--animating) .carousel__item[tabindex="-1"] > * {
-    visibility: hidden; // hide content of off-canvas items so that they are not focusable 
+    visibility: hidden; // hide content of off-canvas items so that they are not focusable
   }
 
   .carousel[data-drag="on"] .carousel__item { // if drag = enabled
@@ -95,7 +95,7 @@ Usage: codyhouse.co/license
     margin: auto;
   }
 }
- 
+
 // carousel dots navigation
 .carousel__navigation { // created in JS
   width: 100%;
@@ -141,10 +141,10 @@ Usage: codyhouse.co/license
       transform: scale(0);
       transition: 3s;
     }
-    
+
     &:focus {
       outline: none;
-      
+
       &::before {
         opacity: 1;
         transform: scale(1);
