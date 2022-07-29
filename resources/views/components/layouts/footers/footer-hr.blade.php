@@ -61,6 +61,7 @@
 
         <p class="flex gap-xs justify-center">
           <a href="/page/term">Terms</a>
+          <a href="/page/jobs">Job Opening</a>
           <a href="/page/contact">Contact</a>
         </p>
       </div>
