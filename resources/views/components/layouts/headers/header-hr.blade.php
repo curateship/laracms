@@ -2,11 +2,11 @@
   <div class="header__container border-bottom border-contrast-lowest padding-md padding-lg@md">
     <div class="header__logo">
       <a href="/">
-        <h1 class="">HentaiRing</h1>
+        <h1 class="">HentaiSchool</h1>
       </a>
     </div>
 
-    <div class="width-40% display@md">
+    <div class="width-30% display@md">
       @include('components.layouts.headers.partials.desktop-search')
     </div>
 
