@@ -15,8 +15,12 @@
 
     <div class="container max-width-md text-component margin-top-lg">
       <h2 class="padding-bottom-sm color-contrast-medium">HentaiRing for all your Hentai needs!</h2>
-      <p class="color-contrast-low">In this variation, the extra content is wrapped in the .js-read-more__content element. You can decide the exact point where the text is truncated.</p>
-      <p class="color-contrast-low read-more js-read-more" data-btn-class="read-more__btn js-tab-focus" data-ellipsis="off">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio corporis facilis, debitis a qui eum dolor repudiandae harum, impedit, fugit cumque. Tenetur, a quas labore eveniet accusantium, vero reiciendis quaerat inventore vel consequatur iusto fugiat perferendis rerum nihil qui deleniti earum eum numquam velit quod explicabo, fuga saepe ad temporibus! <span class="js-read-more__content">Facere et voluptas sint similique, sequi corporis consectetur id suscipit est placeat ut expedita temporibus quisquam at illo dolores, laudantium assumenda! Ut tempora qui repellat quibusdam odit beatae commodi unde iure sunt provident voluptate ipsam veniam culpa harum ducimus assumenda voluptas omnis, consequuntur quam id in quos rem, excepturi iusto!</span>
+      <p class="color-contrast-low">Look no further. HentaiRing has all your Hentai Fetish needs. From videos, gif and much more hentai content.</p>
+      <p class="color-contrast-low read-more js-read-more" data-btn-class="read-more__btn js-tab-focus" data-ellipsis="off">Hentairing! is the BEST website where you can watch free hentai anime porn and view
+        Hentai images without without limit. We have 1080P Hentai videos. Here are some of the Hentai Fetish on our site: Incest Hentai, Shota Hentai, Big Boobs Hentai, Uncensored Hentai, Shota Hentai, Pregnant Hentai, Subbed Hentai, Dubbed Hentai, Hardcore Hentai,
+         Mother Hentai, Father Hentai, Sister Hentai, Teacher Hentai, Schoolgirl Hentai, Full HD Hentai, 4K Hentai, HD hentai porn, Creampie Hentai,
+           Cum in pussy, e-hentai, e hentai, 4chan hentai, myanimelist hentai, kissanime hentai, hentai foundry, hentai manga, hentai school, school hentai, hentai stream, hentai download,
+            hentai sex, cartoon porn, cartoon sex, wet pussy, sex games, hentai.tv hentai, hentai gifs, hentai masturbation, fap hentai, 
       </p>
     </div>
 
