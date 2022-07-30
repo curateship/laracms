@@ -2,7 +2,7 @@
   <div class="header__container border-bottom border-contrast-lowest padding-md padding-lg@md">
     <div class="header__logo">
       <a href="/">
-        <h1 class="">HentaiSchool</h1>
+        <h1 class="">HentaiRing</h1>
       </a>
     </div>
 
