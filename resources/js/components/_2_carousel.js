@@ -12,7 +12,7 @@
       this.visibItemsNb = 1; // tot number of visible items
       this.itemsWidth = 1; // this will be updated with the right width of items
       this.itemOriginalWidth = false; // store the initial width to use it on resize
-      this.selectedItem = 0; // index of first visible item 
+      this.selectedItem = 0; // index of first visible item
       this.translateContainer = 0; // this will be the amount the container has to be translated each time a new group has to be shown (negative)
       this.containerWidth = 0; // this will be used to store the total width of the carousel (including the overflowing part)
       this.ariaLive = false;
@@ -38,7 +38,7 @@
       this.counter = this.element.getElementsByClassName('js-carousel__counter');
       this.counterTor = this.element.getElementsByClassName('js-carousel__counter-tot');
       initCarouselLayout(this); // get number visible items + width items
-      setItemsWidth(this, true); 
+      setItemsWidth(this, true);
       insertBefore(this, this.visibItemsNb); // insert clones before visible elements
       updateCarouselClones(this); // insert clones after visible elements
       resetItemsTabIndex(this); // make sure not visible items are not focusable
@@ -47,24 +47,24 @@
       initCarouselCounter(this);
       Util.addClass(this.element, 'carousel--loaded');
     };
-    
+
     //public carousel functions
     Carousel.prototype.showNext = function() {
       showNextItems(this);
     };
-  
+
     Carousel.prototype.showPrev = function() {
       showPrevItems(this);
     };
-  
+
     Carousel.prototype.startAutoplay = function() {
       startAutoplay(this);
     };
-  
+
     Carousel.prototype.pauseAutoplay = function() {
       pauseAutoplay(this);
     };
-    
+
     //private carousel functions
     function initCarouselLayout(carousel) {
       // evaluate size of single elements + number of visible elements
@@ -74,20 +74,20 @@
         itemMargin = parseFloat(itemStyle.getPropertyValue('margin-right')),
         containerPadding = parseFloat(containerStyle.getPropertyValue('padding-left')),
         containerWidth = parseFloat(containerStyle.getPropertyValue('width'));
-  
+
       if(!carousel.itemAutoSize) {
         carousel.itemAutoSize = itemWidth;
       }
-  
+
       // if carousel.listWrapper is hidden -> make sure to retrieve the proper width
       containerWidth = getCarouselWidth(carousel, containerWidth);
-  
-      if( !carousel.itemOriginalWidth) { // on resize -> use initial width of items to recalculate 
+
+      if( !carousel.itemOriginalWidth) { // on resize -> use initial width of items to recalculate
         carousel.itemOriginalWidth = itemWidth;
       } else {
         itemWidth = carousel.itemOriginalWidth;
       }
-  
+
       if(carousel.itemAutoSize) {
         carousel.itemOriginalWidth = parseInt(carousel.itemAutoSize);
         itemWidth = carousel.itemOriginalWidth;
@@ -104,23 +104,23 @@
       carousel.translateContainer = 0 - ((carousel.itemsWidth+itemMargin)* carousel.visibItemsNb);
       // flexbox fallback
       if(!flexSupported) carousel.list.style.width = (carousel.itemsWidth + itemMargin)*carousel.visibItemsNb*3+'px';
-      
+
       // this is used when loop == off
       carousel.totTranslate = 0 - carousel.selectedItem*(carousel.itemsWidth+itemMargin);
       if(carousel.items.length <= carousel.visibItemsNb) carousel.totTranslate = 0;
-  
+
       centerItems(carousel); // center items if carousel.items.length < visibItemsNb
       alignControls(carousel); // check if controls need to be aligned to a different element
     };
-  
+
     function setItemsWidth(carousel, bool) {
       for(var i = 0; i < carousel.items.length; i++) {
         carousel.items[i].style.width = carousel.itemsWidth+"px";
         if(bool) carousel.initItems.push(carousel.items[i]);
       }
     };
-  
-    function updateCarouselClones(carousel) { 
+
+    function updateCarouselClones(carousel) {
       if(!carousel.options.loop) return;
       // take care of clones after visible items (needs to run after the update of clones before visible items)
       if(carousel.items.length < carousel.visibItemsNb*3) {
@@ -131,7 +131,7 @@
       // set proper translate value for the container
       setTranslate(carousel, 'translateX('+carousel.translateContainer+'px)');
     };
-  
+
     function initCarouselEvents(carousel) {
       // listen for click on previous/next arrow
       // dots navigation
@@ -139,7 +139,7 @@
         carouselCreateNavigation(carousel);
         carouselInitNavigationEvents(carousel);
       }
-  
+
       if(carousel.controls.length > 0) {
         carousel.controls[0].addEventListener('click', function(event){
           event.preventDefault();
@@ -151,7 +151,7 @@
           showNextItems(carousel);
           updateAriaLive(carousel);
         });
-  
+
         // update arrow visility -> loop == off only
         resetCarouselControls(carousel);
         // emit custom event - items visible
@@ -176,7 +176,7 @@
             pauseAutoplay(carousel);
             carousel.autoplayPaused = true;
           });
-        
+
           carousel.element.addEventListener('focusout', function(event){
             carousel.autoplayPaused = false;
             startAutoplay(carousel);
@@ -201,7 +201,7 @@
           if(carousel.animating || Math.abs(event.detail.x - carousel.dragStart) < 10) return;
           var translate = event.detail.x - carousel.dragStart + carousel.translateContainer;
           if(!carousel.options.loop) {
-            translate = event.detail.x - carousel.dragStart + carousel.totTranslate; 
+            translate = event.detail.x - carousel.dragStart + carousel.totTranslate;
           }
           setTranslate(carousel, 'translateX('+translate+'px)');
         });
@@ -232,21 +232,21 @@
         }
       });
     };
-  
+
     function showPrevItems(carousel) {
       if(carousel.animating) return;
       carousel.animating = true;
       carousel.selectedItem = getIndex(carousel, carousel.selectedItem - carousel.visibItemsNb);
       animateList(carousel, '0', 'prev');
     };
-  
+
     function showNextItems(carousel) {
       if(carousel.animating) return;
       carousel.animating = true;
       carousel.selectedItem = getIndex(carousel, carousel.selectedItem + carousel.visibItemsNb);
       animateList(carousel, carousel.translateContainer*2+'px', 'next');
     };
-  
+
     function animateDragEnd(carousel) { // end-of-dragging animation
       carousel.element.addEventListener('dragEnd', function cb(event){
         carousel.element.removeEventListener('dragEnd', cb);
@@ -266,7 +266,7 @@
         carousel.dragStart = false;
       });
     };
-  
+
     function animateList(carousel, translate, direction) { // takes care of changing visible items
       pauseAutoplay(carousel);
       Util.addClass(carousel.list, 'carousel__list--animating');
@@ -294,7 +294,7 @@
       // emit custom event - items visible
       emitCarouselActiveItemsEvent(carousel)
     };
-  
+
     function noLoopTranslateValue(carousel, direction) {
       var translate = carousel.totTranslate;
       if(direction == 'next') {
@@ -316,7 +316,7 @@
       carousel.totTranslate = translate;
       return translate + 'px';
     };
-  
+
     function animateListCb(carousel, direction) { // reset actions after carousel has been updated
       if(direction) updateClones(carousel, direction);
       carousel.animating = false;
@@ -325,19 +325,19 @@
       // reset tab index
       resetItemsTabIndex(carousel);
     };
-  
+
     function updateClones(carousel, direction) {
       if(!carousel.options.loop) return;
       // at the end of each animation, we need to update the clones before and after the visible items
       var index = (direction == 'next') ? 0 : carousel.items.length - carousel.visibItemsNb;
       // remove clones you do not need anymore
       removeClones(carousel, index, false);
-      // add new clones 
+      // add new clones
       (direction == 'next') ? insertAfter(carousel, carousel.visibItemsNb, 0) : insertBefore(carousel, carousel.visibItemsNb);
       //reset transform
       setTranslate(carousel, 'translateX('+carousel.translateContainer+'px)');
     };
-  
+
     function insertBefore(carousel, nb, delta) {
       if(!carousel.options.loop) return;
       var clones = document.createDocumentFragment();
@@ -352,7 +352,7 @@
       carousel.list.insertBefore(clones, carousel.list.firstChild);
       emitCarouselUpdateEvent(carousel);
     };
-  
+
     function insertAfter(carousel, nb, init) {
       if(!carousel.options.loop) return;
       var clones = document.createDocumentFragment();
@@ -365,7 +365,7 @@
       carousel.list.appendChild(clones);
       emitCarouselUpdateEvent(carousel);
     };
-  
+
     function removeClones(carousel, index, bool) {
       if(!carousel.options.loop) return;
       if( !bool) {
@@ -375,12 +375,12 @@
         if(carousel.items[index]) carousel.list.removeChild(carousel.items[index]);
       }
     };
-  
+
     function resetCarouselResize(carousel) { // reset carousel on resize
       var visibleItems = carousel.visibItemsNb;
       // get new items min-width value
       resetItemAutoSize(carousel);
-      initCarouselLayout(carousel); 
+      initCarouselLayout(carousel);
       setItemsWidth(carousel, false);
       resetItemsWidth(carousel); // update the array of original items -> array used to create clones
       if(carousel.options.loop) {
@@ -397,21 +397,21 @@
       }
       resetItemsTabIndex(carousel); // reset focusable elements
     };
-  
+
     function resetItemAutoSize(carousel) {
       if(!cssPropertiesSupported) return;
       // remove inline style
       carousel.items[0].removeAttribute('style');
-      // get original item width 
+      // get original item width
       carousel.itemAutoSize = getComputedStyle(carousel.items[0]).getPropertyValue('width');
     };
-  
+
     function resetItemsWidth(carousel) {
       for(var i = 0; i < carousel.initItems.length; i++) {
         carousel.initItems[i].style.width = carousel.itemsWidth+"px";
       }
     };
-  
+
     function resetItemsTabIndex(carousel) {
       var carouselActive = carousel.items.length > carousel.visibItemsNb;
       var j = carousel.items.length;
@@ -434,7 +434,7 @@
       }
       resetVisibilityOverflowItems(carousel, j);
     };
-  
+
     function startAutoplay(carousel) {
       if(carousel.options.autoplay && !carousel.autoplayId && !carousel.autoplayPaused) {
         carousel.autoplayId = setInterval(function(){
@@ -442,14 +442,14 @@
         }, carousel.options.autoplayInterval);
       }
     };
-  
+
     function pauseAutoplay(carousel) {
       if(carousel.options.autoplay) {
         clearInterval(carousel.autoplayId);
         carousel.autoplayId = false;
       }
     };
-  
+
     function initAriaLive(carousel) { // create an aria-live region for SR
       if(!carousel.options.ariaLive) return;
       // create an element that will be used to announce the new visible slide to SR
@@ -458,29 +458,29 @@
       carousel.element.appendChild(srLiveArea);
       carousel.ariaLive = srLiveArea;
     };
-  
+
     function updateAriaLive(carousel) { // announce to SR which items are now visible
       if(!carousel.options.ariaLive) return;
       carousel.ariaLive.innerHTML = 'Item '+(carousel.selectedItem + 1)+' selected. '+carousel.visibItemsNb+' items of '+carousel.initItems.length+' visible';
     };
-  
+
     function getIndex(carousel, index) {
       if(index < 0) index = getPositiveValue(index, carousel.itemsNb);
       if(index >= carousel.itemsNb) index = index % carousel.itemsNb;
       return index;
     };
-  
+
     function getPositiveValue(value, add) {
       value = value + add;
       if(value > 0) return value;
       else return getPositiveValue(value, add);
     };
-  
+
     function setTranslate(carousel, translate) {
       carousel.list.style.transform = translate;
       carousel.list.style.msTransform = translate;
     };
-  
+
     function getCarouselWidth(carousel, computedWidth) { // retrieve carousel width if carousel is initially hidden
       var closestHidden = carousel.listWrapper.closest('.sr-only');
       if(closestHidden) { // carousel is inside an .sr-only (visually hidden) element
@@ -492,7 +492,7 @@
       }
       return computedWidth;
     };
-  
+
     function getHiddenParentWidth(element, carousel) {
       var parent = element.parentElement;
       if(parent.tagName.toLowerCase() == 'html') return 0;
@@ -507,35 +507,35 @@
         return getHiddenParentWidth(parent, carousel);
       }
     };
-  
+
     function resetCarouselControls(carousel) {
       if(carousel.options.loop) return;
       // update arrows status
       if(carousel.controls.length > 0) {
-        (carousel.totTranslate == 0) 
-          ? carousel.controls[0].setAttribute('disabled', true) 
+        (carousel.totTranslate == 0)
+          ? carousel.controls[0].setAttribute('disabled', true)
           : carousel.controls[0].removeAttribute('disabled');
-        (carousel.totTranslate == (- carousel.translateContainer - carousel.containerWidth) || carousel.items.length <= carousel.visibItemsNb) 
-          ? carousel.controls[1].setAttribute('disabled', true) 
+        (carousel.totTranslate == (- carousel.translateContainer - carousel.containerWidth) || carousel.items.length <= carousel.visibItemsNb)
+          ? carousel.controls[1].setAttribute('disabled', true)
           : carousel.controls[1].removeAttribute('disabled');
       }
       // update carousel dots
       if(carousel.options.nav) {
         var selectedDot = carousel.navigation.getElementsByClassName(carousel.options.navigationItemClass+'--selected');
         if(selectedDot.length > 0) Util.removeClass(selectedDot[0], carousel.options.navigationItemClass+'--selected');
-  
+
         var newSelectedIndex = getSelectedDot(carousel);
         if(carousel.totTranslate == (- carousel.translateContainer - carousel.containerWidth)) {
           newSelectedIndex = carousel.navDots.length - 1;
         }
         Util.addClass(carousel.navDots[newSelectedIndex], carousel.options.navigationItemClass+'--selected');
       }
-  
+
       (carousel.totTranslate == 0 && (carousel.totTranslate == (- carousel.translateContainer - carousel.containerWidth) || carousel.items.length <= carousel.visibItemsNb))
           ? Util.addClass(carousel.element, 'carousel--hide-controls')
           : Util.removeClass(carousel.element, 'carousel--hide-controls');
     };
-  
+
     function emitCarouselUpdateEvent(carousel) {
       carousel.cloneList = [];
       var clones = carousel.element.querySelectorAll('.js-clone');
@@ -545,19 +545,19 @@
       }
       emitCarouselEvents(carousel, 'carousel-updated', carousel.cloneList);
     };
-  
+
     function carouselCreateNavigation(carousel) {
       if(carousel.element.getElementsByClassName('js-carousel__navigation').length > 0) return;
-    
+
       var navigation = document.createElement('ol'),
         navChildren = '';
-  
+
       var navClasses = carousel.options.navigationClass+' js-carousel__navigation';
       if(carousel.items.length <= carousel.visibItemsNb) {
         navClasses = navClasses + ' is-hidden';
       }
       navigation.setAttribute('class', navClasses);
-  
+
       var dotsNr = Math.ceil(carousel.items.length/carousel.visibItemsNb),
         selectedDot = getSelectedDot(carousel),
         indexClass = carousel.options.navigationPagination ? '' : 'sr-only'
@@ -568,26 +568,26 @@
       navigation.innerHTML = navChildren;
       carousel.element.appendChild(navigation);
     };
-  
+
     function carouselInitNavigationEvents(carousel) {
       carousel.navigation = carousel.element.getElementsByClassName('js-carousel__navigation')[0];
       carousel.navDots = carousel.element.getElementsByClassName('js-carousel__nav-item');
       carousel.navIdEvent = carouselNavigationClick.bind(carousel);
       carousel.navigation.addEventListener('click', carousel.navIdEvent);
     };
-  
+
     function carouselRemoveNavigation(carousel) {
       if(carousel.navigation) carousel.element.removeChild(carousel.navigation);
       if(carousel.navIdEvent) carousel.navigation.removeEventListener('click', carousel.navIdEvent);
     };
-  
+
     function resetDotsNavigation(carousel) {
       if(!carousel.options.nav) return;
       carouselRemoveNavigation(carousel);
       carouselCreateNavigation(carousel);
       carouselInitNavigationEvents(carousel);
     };
-  
+
     function carouselNavigationClick(event) {
       var dot = event.target.closest('.js-carousel__nav-item');
       if(!dot) return;
@@ -598,28 +598,28 @@
       this.selectedItem = index*this.visibItemsNb;
       animateList(this, false, 'click');
     };
-  
+
     function getSelectedDot(carousel) {
       return Math.ceil(carousel.selectedItem/carousel.visibItemsNb);
     };
-  
+
     function initCarouselCounter(carousel) {
       if(carousel.counterTor.length > 0) carousel.counterTor[0].textContent = carousel.itemsNb;
       setCounterItem(carousel);
     };
-  
+
     function setCounterItem(carousel) {
       if(carousel.counter.length == 0) return;
       var totalItems = carousel.selectedItem + carousel.visibItemsNb;
       if(totalItems > carousel.items.length) totalItems = carousel.items.length;
       carousel.counter[0].textContent = totalItems;
     };
-  
+
     function centerItems(carousel) {
       if(!carousel.options.justifyContent) return;
       Util.toggleClass(carousel.list, 'justify-center', carousel.items.length < carousel.visibItemsNb);
     };
-  
+
     function alignControls(carousel) {
       if(carousel.controls.length < 1 || !carousel.options.alignControls) return;
       if(!carousel.controlsAlignEl) {
@@ -631,22 +631,22 @@
         carousel.controls[i].style.marginBottom = translate + 'px';
       }
     };
-  
+
     function emitCarouselActiveItemsEvent(carousel) {
       emitCarouselEvents(carousel, 'carousel-active-items', {firstSelectedItem: carousel.selectedItem, visibleItemsNb: carousel.visibItemsNb});
     };
-  
+
     function emitCarouselEvents(carousel, eventName, eventDetail) {
       var event = new CustomEvent(eventName, {detail: eventDetail});
       carousel.element.dispatchEvent(event);
     };
-  
+
     function resetVisibilityOverflowItems(carousel, j) {
       if(!carousel.options.overflowItems) return;
       var itemWidth = carousel.containerWidth/carousel.items.length,
         delta = (window.innerWidth - itemWidth*carousel.visibItemsNb)/2,
         overflowItems = Math.ceil(delta/itemWidth);
-  
+
       for(var i = 0; i < overflowItems; i++) {
         var indexPrev = j - 1 - i; // prev element
         if(indexPrev >= 0 ) carousel.items[indexPrev].removeAttribute('tabindex');
@@ -654,7 +654,7 @@
         if(indexNext < carousel.items.length) carousel.items[indexNext].removeAttribute('tabindex');
       }
     };
-  
+
     Carousel.defaults = {
       element : '',
       autoplay : false,
@@ -671,15 +671,15 @@
       alignControls: false,
       overflowItems: false
     };
-  
+
     window.Carousel = Carousel;
-  
+
     //initialize the Carousel objects
     var carousels = document.getElementsByClassName('js-carousel'),
       flexSupported = Util.cssSupports('align-items', 'stretch'),
       transitionSupported = Util.cssSupports('transition'),
       cssPropertiesSupported = ('CSS' in window && CSS.supports('color', 'var(--color-var)'));
-  
+
     if( carousels.length > 0) {
       for( var i = 0; i < carousels.length; i++) {
         (function(i){

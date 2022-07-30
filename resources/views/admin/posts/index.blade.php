@@ -44,6 +44,7 @@
                           <select name="selectThis" id="statusFilter">
                               <option value="" {{request()->get('status') == '' ? 'selected' : ''}}>All Posts</option>
                               <option value="published" {{request()->get('status') == 'published' ? 'selected' : ''}}>Published</option>
+                              <option value="pre-published" {{request()->get('status') == 'pre-published' ? 'selected' : ''}}>Pre-Published</option>
                               <option value="draft" {{request()->get('status') == 'draft' ? 'selected' : ''}}>Drafts</option>
                           </select>
 

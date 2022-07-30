@@ -390,21 +390,20 @@ class AdminPostController extends Controller
 
         $post_date = date('Y-m-d', strtotime(str_replace('/', '.', $request->input('post_date'))));
         if($request->input('status') == 'published' || $request->input('status') == ''){
-            // If post date less than current date;
-            if(strtotime($post_date) < time()){
-                $post->post_date = $post_date;
-                $post->created_at = $post_date;
-                $post->status = 'published';
-            }
+            if($request->input('post_date') != '' ){
+                // If post date less than current date;
+                if(strtotime($post_date) < time()){
+                    $post->post_date = $post_date;
+                    $post->created_at = $post_date;
+                    $post->status = 'published';
+                }
 
-            // If post date more than current date;
-            if(strtotime($post_date) > time()){
-                $post->post_date = $post_date;
-                $post->status = 'pre-published';
-            }
-
-            // If we do not have post_date;
-            if(!$request->has('post_date')){
+                // If post date more than current date;
+                if(strtotime($post_date) > time()){
+                    $post->post_date = $post_date;
+                    $post->status = 'pre-published';
+                }
+            }   else{
                 $post->post_date = null;
             }
         }
