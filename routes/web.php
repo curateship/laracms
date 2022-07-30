@@ -44,6 +44,7 @@ route::get('/dashboard/getListBadges', [HomeController::class, 'getListBadges'])
 // Static Pages
 Route::get('/page/contact', function () {return view('theme.pages.contact');});
 Route::get('/page/term', function () {return view('theme.pages.term');});
+Route::get('/page/jobs', function () {return view('theme.pages.jobs');});
 
 // Users
 route::get('/users', [UserController::class, 'index'])->name('index');
