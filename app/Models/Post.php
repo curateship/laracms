@@ -24,6 +24,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed $status
  * @property mixed $excerpt
  * @property false|mixed|string $file_hash
+ * @property mixed|null $post_date
+ * @property mixed|null $created_at
  */
 class Post extends Model
 {
@@ -566,7 +568,7 @@ class Post extends Model
         return $user_liked;
     }
 
-    public function prepareContent($image_classes = ''){
+    public function prepareContent($image_classes = '', $target = 'post'){
         $content = null;
 
         if($this->type == 'image'){
@@ -574,16 +576,24 @@ class Post extends Model
         }
 
         if($this->type == 'gallery'){
+            $image_classes = str_replace(['image-zoom__preview', 'js-image-zoom__preview'], '', $image_classes);
+
             $images = Storage::allFiles('/public/'.config('images.galleries_storage_path').'/'.$this->slug.'/medium/');
-
-            $content = '<div class="image-zoom js-image-zoom"><img class="'.$image_classes.'" alt="thumbnail" src="/storage'.config('images.posts_storage_path').$this->medium.'"></div>';
-            $lines = [];
-            foreach($images as $image){
+            $images_result = [];
+            foreach($images as $key => $image){
                 $image = str_replace('public/', '/', $image);
-
-                $lines[] = '<div class="image-zoom js-image-zoom"><img class="'.$image_classes.'" alt="thumbnail" src="/storage/'.$image.'"></div>';
+                $images_result[] = '<img class="gallery-preview-image" data-item-key="'.($key + 2).'" src="/storage'.$image.'" aria-controls="manga-modal">';
             }
-            $content .= '<div style="display: flex;align-items: center;gap: 26px;">'.implode('', $lines).'</div>';
+
+            $content = view('components.posts.show.types.gallery.manga', [
+                'post' => $this,
+                'image_classes' => $image_classes,
+                'images' => $images_result
+            ])->render();
+
+            if($target == 'gallery'){
+                $content = '<div><a href="'.route('post.show', $this).'"><img class="'.$image_classes.'" alt="thumbnail" src="'.'/storage'.config('images.posts_storage_path').$this->medium.'"></a></div>';
+            }
         }
 
         if($this->type == 'video'){
@@ -745,5 +755,11 @@ class Post extends Model
             return config('images.posts_storage_path').$this->$target;
         }
         */
+    }
+
+    public function getGalleryLength(){
+        $images = Storage::allFiles('/public/'.config('images.galleries_storage_path').'/'.$this->slug.'/medium/');
+
+        return count($images) + 1;
     }
 }

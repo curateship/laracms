@@ -160,6 +160,7 @@ Route::get('/post/edit/{post:slug}', [AdminPostController::class, 'edit'])->name
 
 // Galleries;
 Route::resource('/galleries', GalleryController::class)->middleware(['auth']);
+Route::get('/gallery/getManga', [GalleryController::class, 'mangeAjax']);
 
 // Users Admin
 Route::post('/user/upload', [AdminUserController::class, 'upload'])->name('user.upload');

@@ -110,7 +110,11 @@ class PostController extends Controller
 
     public function show(Request $request, Post $post) {
         // Only author or author can preview posts in draft;
-        if($post->status == 'draft'){
+        if($post->status != 'published'){
+            if(Auth::guest()){
+                return abort(404);
+            }
+
             if(!Gate::allows('is-admin') && (!Auth::guest() && Auth::id() != $post->user_id)){
                 return abort(404);
             }
@@ -353,6 +357,7 @@ class PostController extends Controller
         Post::whereIn('id', $posts_array)
             ->where('user_id', Auth::id())
             ->update([
+                'created_at' => now(),
                 'updated_at' => now(),
                 'status' => $request->input('direction')
             ]);
@@ -468,7 +473,7 @@ class PostController extends Controller
             }
 
             $post->tags = $post_tags_by_cats;
-            $post->content = $post->prepareContent('block width-100% height-100% object-cover image-zoom__preview js-image-zoom__preview');
+            $post->content = $post->prepareContent('block width-100% height-100% object-cover image-zoom__preview js-image-zoom__preview', 'gallery');
         }
 
         $data['total'] = $posts_count;

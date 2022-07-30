@@ -23,7 +23,7 @@ class IndexController extends Controller
     {
         SEOMeta::setTitle(config('seotools.static_titles.'.get_called_class().'.'.__FUNCTION__));
         $posts = Post::where('status', 'published')->latest()->withCount('comments')->whereNotNull('user_id')->paginate(12);
-        
+
         return view('/theme.index.full-width', [
             'recent_posts' => $posts,
             'popular_posts' => Post::getPostsListByView('month'),

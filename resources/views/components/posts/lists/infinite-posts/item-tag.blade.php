@@ -64,7 +64,7 @@
     <!-- Post Image and Title -->
     <div class="margin-top-auto border-top border-contrast-lower opacity-40%"></div><!-- Divider -->
 
-    <figure class="{{$post->type == 'image' ? 'image-zoom js-image-zoom' : ''}}">
+    <figure>
         {!! $post->content !!}
     </figure>
 
