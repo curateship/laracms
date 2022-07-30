@@ -21,7 +21,7 @@ class TagController extends Controller
     public function show($tags_categories_name, $tag_slug)
     {
         $recent_posts = Post::latest()->take(5)->get();
-        $categories = Tag::take(10)->get();
+        $categories = Tag::take(30)->get();
         $tags = Tag::latest()->take(50)->get();
 
         $category = TagsCategories::where('name', $tags_categories_name)

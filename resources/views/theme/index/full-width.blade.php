@@ -9,8 +9,19 @@
     </div>
 
     <!-- Pagination -->
-    <div class="padding-bottom-md">
+    <div class="padding-bottom-xl">
         @include('components.layouts.partials.pagination', ['items' => $recent_posts])
+    </div>
+
+    <!-- Popular Tags -->
+    <h1 class="padding-bottom-sm">Popular Tags</h1>
+    <div class="padding-y-md">
+      @include('components.tags.lists.popular-tags')
+    </div>
+
+    <!-- Site Discription -->
+    <div class="padding-y-md">
+        @include('components.layouts.partials.homepage-site-description')
     </div>
 
 </div>

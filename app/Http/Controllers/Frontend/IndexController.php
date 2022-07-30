@@ -28,8 +28,8 @@ class IndexController extends Controller
             'recent_posts' => $posts,
             'popular_posts' => Post::getPostsListByView('month'),
             'specific_tag_posts' => Post::getListByTagName('Featured', ['by' => 'created_at', 'order' => 'desc'], 10),
-            'popular_tags_category_name' => 'Origins',
-            'popular_tags' => TagsCategories::popularTags('Origins')->take(5),
+            'popular_tags_category_name' => 'origins',
+            'popular_tags' => TagsCategories::popularTags('origins')->take(30),
         ]);
     }
 }
