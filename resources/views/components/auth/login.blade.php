@@ -2,11 +2,6 @@
   @csrf
     <div class="text-component text-center margin-bottom-sm">
       <h1>Log in</h1>
-
-      <div class="text-center">
-        <p>Don't have an account? <a href="/register">Get started</a></p>
-      </div>
-
       </div>
 
       <div class="margin-bottom-sm">

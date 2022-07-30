@@ -22,6 +22,6 @@ Usage: codyhouse.co/license
 .read-more__btn {
   @include reset;
   cursor: pointer;
-  color: var(--color-primary);
+  color: var(--color-primary-lighter);
   text-decoration: underline;
 }

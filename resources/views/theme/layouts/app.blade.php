@@ -16,15 +16,15 @@
 <body data-theme="@guest(){{config('app.default_theme')}}@else{{auth()->user()->theme()}}@endguest">
 
 <!-- Header -->
-@include('components.layouts.headers.header')
+@include('components.layouts.headers.header-hr')
 
-<div class="padding-top-xl">
+<div class="">
   @yield('content')
 </div>
 
 <!-- Footer -->
 <div class="padding-top-sm">
-  @include('components.layouts.footers.footer')
+  @include('components.layouts.footers.footer-hr')
 </div>
 
 <!-- Tracker -->
