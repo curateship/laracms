@@ -12,6 +12,5 @@
     <div class="padding-bottom-xl">
         @include('components.layouts.partials.pagination', ['items' => $recent_posts])
     </div>
-
 </div>
 @endsection

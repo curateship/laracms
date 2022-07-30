@@ -1,5 +1,5 @@
 <header class="header position-relative js-header">
-  <div class="header__container border-bottom border-contrast-lowest padding-md padding-lg@md">
+  <div class="header__container padding-md padding-lg@md">
     <div class="header__logo">
       <a href="/">
         <h1 class="">HentaiSchool</h1>
@@ -10,7 +10,7 @@
       @include('components.layouts.headers.partials.desktop-search')
     </div>
 
-    <button class="btn btn--subtle header__trigger js-header__trigger" aria-label="Toggle menu" aria-expanded="false" aria-controls="header-nav">
+    <button class="btn btn--primary header__trigger js-header__trigger" aria-label="Toggle menu" aria-expanded="false" aria-controls="header-nav">
       <i class="header__trigger-icon" aria-hidden="true"></i>
       <span>Menu</span>
     </button>
