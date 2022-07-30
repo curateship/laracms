@@ -19,7 +19,7 @@ class TagsCategories extends Model
             ->get();
     }
 
-    public static function popularTags($category_name, $limit = 10){
+    public static function popularTags($category_name, $limit = 30){
         return Tag::where('tags_categories.name', $category_name)
             ->leftJoin('tags_categories', 'tags_categories.id', '=', 'tags.category_id')
             ->leftJoin(DB::raw('(

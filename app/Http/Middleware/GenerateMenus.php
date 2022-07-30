@@ -13,11 +13,10 @@ class GenerateMenus
         // Header Menu
         \Menu::make('header', function ($menu) {
             // Link1
-            $menu->add('Users', ['url'  => url('/').'/users', 'target' => 'blank']);
             $menu->add('Lists', ['url'  => url('/').'/lists']);
 
             // Tags Dropdown Links
-            $menu->add('Tags', ['route'  => 'index'])->id('Tags');
+            $menu->add('Tags', ['url'  => '#'])->id('Tags');
             // Adding sub items;
             $menu->add('Origins', ['parent' => 'Tags', 'url' => url('/').'/category/origins']);
             $menu->add('Characters', ['parent' => 'Tags', 'url' => url('/').'/category/characters']);
@@ -26,11 +25,17 @@ class GenerateMenus
             $menu->add('Media', ['parent' => 'Tags', 'url' => url('/').'/category/media']);
 
             // Filter Dropdown Links
-            $menu->add('Filter', ['route'  => 'index'])->id('filter');
+            $menu->add('Filter', ['url'  => '#'])->id('filter');
             // Adding sub items;
             $menu->add('Most Liked', ['parent' => 'filter', 'url' => url('/').'/most-liked']);
             $menu->add('Most Commented', ['parent' => 'filter', 'url' => url('/').'/most-commented']);
             $menu->add('Most Viewed', ['parent' => 'filter', 'url' => url('/').'/most-viewed']);
+
+            // Friends Dropdown Links
+            $menu->add('Friends', ['url'  => '#'])->id('friend');
+            // Adding sub items;
+            $menu->add('Erotic Hentai', ['parent' => 'friend', 'url' => 'https://erotic-hentai.com']);
+            $menu->add('Hentai Games', ['parent' => 'friend', 'url' => 'https://hentaiporn.com']);
         });
 
         // Links Sidebar

@@ -9,7 +9,7 @@
     </div>
 
     <!-- Pagination -->
-    <div class="padding-bottom-md">
+    <div class="padding-bottom-xl">
         @include('components.layouts.partials.pagination', ['items' => $recent_posts])
     </div>
 
