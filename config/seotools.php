@@ -10,7 +10,6 @@ return [
         ],
         'App\Http\Controllers\Frontend\IndexController' => [
             'index' => 'Hentai Anime Videos'
-            'index' => 'Hentai Pictures, Gif and Flash'
         ],
         'App\Http\Controllers\Admin\AdminUserController' => [
             'index' => 'Admin Users'
