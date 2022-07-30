@@ -1,13 +1,13 @@
 @extends('theme.layouts.app')
 @section('content')
-<div class="padding-md padding-lg@md">
+<div class="container max-width-adaptive-lg">
 
     <!-- Tag Informations -->
-    <h1 class="text-xl padding-bottom-lg">{{ $tag->name }}</h1>
+    @include('components.tags.show.tag-informations')
 
     <!-- Post list -->
     <div class="margin-bottom-lg">
-      @include('components.tags.lists.show-posts-simple-hr')
+      @include('components.tags.lists.show-posts-simple')
     </div>
 
     <!-- Pagination -->
