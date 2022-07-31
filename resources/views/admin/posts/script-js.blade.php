@@ -303,6 +303,10 @@
         deletePostsArray($('#delete-posts-list').val().split(','), 'trash')
     })
 
+    $(document).on('click', '#clean-trash', function(){
+        deletePostsArray($('#delete-posts-list').val().split(','), 'clean-trash')
+    })
+
     // Move accepting from dialog;
     $(document).on('click', '#accept-move-posts', function(){
         movePostsArray($('#move-posts-list').val().split(','))
