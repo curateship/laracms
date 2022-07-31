@@ -1,7 +1,7 @@
 @extends('theme.layouts.app')
 @section('content')
 
-<div class="padding-md">
+<div class="container max-width-adaptive-lg">
 
     <!-- Recent Posts -->
     <div class="margin-bottom-lg">
