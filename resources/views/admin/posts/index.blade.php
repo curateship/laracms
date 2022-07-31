@@ -38,6 +38,15 @@
           <div class="flex flex-wrap items-center justify-between margin-right-sm">
             <div class="flex flex-wrap">
               <menu class="menu-bar js-int-table-actions__no-items-selected js-menu-bar">
+                  @if(request()->get('status') == 'trash')
+                      <li id="clean-trash" class="menu-bar__item" role="menuitem">
+                          <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 16 16">
+                              <g><path d="M2,6v8c0,1.1,0.9,2,2,2h8c1.1,0,2-0.9,2-2V6H2z"></path><path d="M12,3V1c0-0.6-0.4-1-1-1H5C4.4,0,4,0.4,4,1v2H0v2h16V3H12z M10,3H6V2h4V3z"></path></g>
+                          </svg>
+                          <span class="menu-bar__label">Clean trash</span>
+                      </li>
+                  @endif
+
                   <div class="inline-flex items-baseline padding-x-sm">
                       <label class="text-sm color-contrast-medium margin-right-xs" for="statusFilter"></label>
                       <div class="select inline-block js-select" data-trigger-class="reset text-sm color-contrast-high text-underline inline-flex items-center cursor-pointer js-tab-focus">
@@ -134,13 +143,15 @@
           <div id="delete-post-dialog" class="dialog dialog--sticky js-dialog" data-animation="on">
             <div class="dialog__content max-width-xxs" role="alertdialog" aria-labelledby="dialog-sticky-title" aria-describedby="dialog-sticky-description">
               <div class="text-component">
-                <h4 id="dialog-sticky-title">Are you sure what you want to delete / move to trash selected post(-s)?</h4>
+                <h4 id="dialog-sticky-title">Are you sure what you want to delete {{request()->get('status') != 'trash' ? ' or move to trash ' : ''}}selected post(-s)?</h4>
               </div>
                 <footer class="margin-top-md">
                     <div class="flex justify-end gap-xs flex-wrap">
                         <button class="btn btn--subtle js-dialog__close">Cancel</button>
                         <button id="accept-delete-posts" class="btn btn--accent">Delete</button>
-                        <button id="accept-trash-posts" class="btn btn--primary">To Trash</button>
+                        @if(request()->get('status') != 'trash')
+                            <button id="accept-trash-posts" class="btn btn--primary">To Trash</button>
+                        @endif
                     </div>
                 </footer>
               <input type="hidden" id="delete-posts-list">

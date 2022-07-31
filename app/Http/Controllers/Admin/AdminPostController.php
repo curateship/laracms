@@ -149,6 +149,18 @@ class AdminPostController extends Controller
     // Destroy
     public function destroy(string $ids, Request $request)
     {
+        if($request->input('type') == 'clean-trash'){
+            $posts = Post::where('status', 'trash')
+                ->get();
+
+            foreach($posts as $post){
+                $post->dropWithContent();
+            }
+
+            $request->session()->flash('success', 'Trash successfully cleaned');
+            return;
+        }
+
         $ids = explode(',', $ids);
         $action_message = '';
 
