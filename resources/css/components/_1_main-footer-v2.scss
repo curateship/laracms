@@ -1,0 +1,97 @@
+@use '../base' as *;
+
+/* -------------------------------- 
+
+File#: _1_main-footer-v2
+Title: Main Footer v2
+Descr: Footer navigation template
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+.footer-v2 {
+  position: relative;
+  z-index: 1;
+}
+
+.footer-v2__list { // ul
+  display: grid;
+  grid-template-columns: 1fr; // 1 column
+  gap: var(--space-lg);
+
+  @include breakpoint(xs) {
+    grid-template-columns: repeat(2, 1fr); // 2 columns
+  }
+
+  @include breakpoint(md) {
+    grid-template-columns: repeat(4, 1fr); // 4 columns
+  }
+}
+
+.footer-v2__item {
+  display: grid;
+  gap: var(--space-sm); // links vertical spacing
+  align-content: start;
+
+  @include breakpoint(md) {
+    gap: var(--space-xs);
+  }
+}
+
+.footer-v2__item a { // nav link
+  color: var(--color-contrast-medium);
+
+  &:hover {
+    color: var(--color-contrast-high);
+  }
+
+  @include breakpoint(md) {
+    font-size: var(--text-sm);
+  }
+}
+
+.footer-v2__socials {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--space-sm);
+
+  a {
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 var(--space-xxxs);
+    color: var(--color-contrast-medium); // icons color
+
+    &:hover {
+      color: var(--color-contrast-high);
+    }
+
+    svg {
+      display: block;
+      width: 1em;
+      height: 1em;
+      color: inherit;
+    }
+  }
+}
+
+.footer-v2__print {
+  font-size: var(--text-sm);
+  color: var(--color-contrast-medium);
+  text-align: center;
+
+  p {
+    margin-bottom: var(--space-sm);
+  }
+
+  a {
+    color: inherit;
+
+    &:hover {
+      color: var(--color-contrast-high);
+    }
+  }
+
+  @include breakpoint(md) {
+    font-size: var(--text-xs);
+  }
+}

@@ -38,6 +38,15 @@
           <div class="flex flex-wrap items-center justify-between margin-right-sm">
             <div class="flex flex-wrap">
               <menu class="menu-bar js-int-table-actions__no-items-selected js-menu-bar">
+                  @if(request()->get('status') == 'trash')
+                      <li id="clean-trash" class="menu-bar__item" role="menuitem">
+                          <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 16 16">
+                              <g><path d="M2,6v8c0,1.1,0.9,2,2,2h8c1.1,0,2-0.9,2-2V6H2z"></path><path d="M12,3V1c0-0.6-0.4-1-1-1H5C4.4,0,4,0.4,4,1v2H0v2h16V3H12z M10,3H6V2h4V3z"></path></g>
+                          </svg>
+                          <span class="menu-bar__label">Clean trash</span>
+                      </li>
+                  @endif
+
                   <div class="inline-flex items-baseline padding-x-sm">
                       <label class="text-sm color-contrast-medium margin-right-xs" for="statusFilter"></label>
                       <div class="select inline-block js-select" data-trigger-class="reset text-sm color-contrast-high text-underline inline-flex items-center cursor-pointer js-tab-focus">
@@ -46,6 +55,7 @@
                               <option value="published" {{request()->get('status') == 'published' ? 'selected' : ''}}>Published</option>
                               <option value="pre-published" {{request()->get('status') == 'pre-published' ? 'selected' : ''}}>Pre-Published</option>
                               <option value="draft" {{request()->get('status') == 'draft' ? 'selected' : ''}}>Drafts</option>
+                              <option value="trash" {{request()->get('status') == 'trash' ? 'selected' : ''}}>Trash</option>
                           </select>
 
                           <svg class="icon icon--xxxs margin-left-xxs" viewBox="0 0 8 8"><path d="M7.934,1.251A.5.5,0,0,0,7.5,1H.5a.5.5,0,0,0-.432.752l3.5,6a.5.5,0,0,0,.864,0l3.5-6A.5.5,0,0,0,7.934,1.251Z"/></svg>
@@ -97,7 +107,6 @@
                   </button>
                 </div>
               </menu>
-
                 @if(request()->get('status') === 'draft')
                     <menu class="menu-bar is-hidden js-int-table-actions__items-selected js-menu-bar move-selected-posts" data-direction="published">
                         <li class="menu-bar__item" role="menuitem">
@@ -108,7 +117,7 @@
                     </menu>
                 @endif
 
-                @if(request()->get('status') === 'published')
+                @if(request()->get('status') === 'published' || request()->get('status') === 'pre-published')
                     <menu class="menu-bar is-hidden js-int-table-actions__items-selected js-menu-bar move-selected-posts" data-direction="draft">
                         <li class="menu-bar__item" role="menuitem">
                             <svg class="icon menu-bar__icon" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 115.4 122.88"><title>down-arrow</title><path d="M24.94,55A14.66,14.66,0,0,0,4.38,75.91l43.45,42.76a14.66,14.66,0,0,0,20.56,0L111,76.73A14.66,14.66,0,0,0,90.46,55.82l-18,17.69-.29-59.17c-.1-19.28-29.42-19-29.33.24l.29,58.34L24.94,55Z"/></svg>
@@ -130,16 +139,19 @@
             </div>
           </div>
 
-          <!-- Delete Confirmation -->
+          <!-- Move to trash or Delete Confirmation -->
           <div id="delete-post-dialog" class="dialog dialog--sticky js-dialog" data-animation="on">
             <div class="dialog__content max-width-xxs" role="alertdialog" aria-labelledby="dialog-sticky-title" aria-describedby="dialog-sticky-description">
               <div class="text-component">
-                <h4 id="dialog-sticky-title">Are you sure what you want to delete selected post(-s)?</h4>
+                <h4 id="dialog-sticky-title">Are you sure what you want to delete {{request()->get('status') != 'trash' ? ' or move to trash ' : ''}}selected post(-s)?</h4>
               </div>
                 <footer class="margin-top-md">
                     <div class="flex justify-end gap-xs flex-wrap">
                         <button class="btn btn--subtle js-dialog__close">Cancel</button>
                         <button id="accept-delete-posts" class="btn btn--accent">Delete</button>
+                        @if(request()->get('status') != 'trash')
+                            <button id="accept-trash-posts" class="btn btn--primary">To Trash</button>
+                        @endif
                     </div>
                 </footer>
               <input type="hidden" id="delete-posts-list">

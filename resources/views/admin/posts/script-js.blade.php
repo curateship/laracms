@@ -248,12 +248,13 @@
         }
     }
 
-    function deletePostsArray(selectedPosts){
+    function deletePostsArray(selectedPosts, type){
         if(selectedPosts.length > 0){
             $.ajax({
                 data: {
                     _token: $('meta[name="csrf-token"]').attr('content'),
                     _method: 'DELETE',
+                    type: type
                 },
                 url: '{{\Illuminate\Support\Facades\Gate::allows('is-admin') ? '/admin' : ''}}/posts/' + selectedPosts.join(','),
                 type: 'POST',
@@ -295,7 +296,15 @@
 
     // Delete accepting from dialog;
     $(document).on('click', '#accept-delete-posts', function(){
-        deletePostsArray($('#delete-posts-list').val().split(','))
+        deletePostsArray($('#delete-posts-list').val().split(','), 'delete')
+    })
+
+    $(document).on('click', '#accept-trash-posts', function(){
+        deletePostsArray($('#delete-posts-list').val().split(','), 'trash')
+    })
+
+    $(document).on('click', '#clean-trash', function(){
+        deletePostsArray($('#delete-posts-list').val().split(','), 'clean-trash')
     })
 
     // Move accepting from dialog;

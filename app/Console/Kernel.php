@@ -41,6 +41,7 @@ class Kernel extends ConsoleKernel
             foreach($posts as $post){
                 $post->status = 'published';
                 $post->created_at = now();
+                $post->save();
 
                 $user = User::find($post->user_id);
                 $user->followersBroadcast($user->name, 'Added a new post: '.$post->title, '/post/'.$post->slug, $post->id);

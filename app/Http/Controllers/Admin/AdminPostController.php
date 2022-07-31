@@ -149,18 +149,41 @@ class AdminPostController extends Controller
     // Destroy
     public function destroy(string $ids, Request $request)
     {
+        if($request->input('type') == 'clean-trash'){
+            $posts = Post::where('status', 'trash')
+                ->get();
+
+            foreach($posts as $post){
+                $post->dropWithContent();
+            }
+
+            $request->session()->flash('success', 'Trash successfully cleaned');
+            return;
+        }
 
         $ids = explode(',', $ids);
+        $action_message = '';
 
         foreach($ids as $id){
             $post = Post::find($id);
-            $post->dropWithContent();
+
+            switch($request->input('type')){
+                case 'delete':
+                    $post->dropWithContent();
+                    $action_message = 'deleted';
+                    break;
+                case 'trash':
+                    $post->status = 'trash';
+                    $post->save();
+                    $action_message = 'moved to trash';
+                    break;
+            }
         }
 
         if(count($ids) > 1){
-            $request->session()->flash('success', 'You have deleted all selected posts');
+            $request->session()->flash('success', 'You have '.$action_message.' all selected posts');
         }   else{
-            $request->session()->flash('success', 'You have deleted the post');
+            $request->session()->flash('success', 'You have '.$action_message.' the post');
         }
     }
 
