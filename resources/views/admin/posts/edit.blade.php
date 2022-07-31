@@ -282,7 +282,7 @@
             <button class="btn btn--primary">Save changes</button>
         </div>
 
-        @if($post->status == 'published' || $post->status == 'pre-published')
+        @if($post->status == 'published' || $post->status == 'pre-published' || $post->status == 'trash')
             <div class="flex justify-end gap-xs">
                 <button class="btn btn--primary postSaveAs" data-status="draft">Move to drafts</button>
             </div>
