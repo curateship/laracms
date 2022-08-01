@@ -566,4 +566,31 @@ class AdminPostController extends Controller
 
         return false;
     }
+
+    public function changeOwnerMultiple(Request $request){
+        if(!Gate::allows('is-admin')){
+            return back();
+        }
+
+        $selectedIDs = $request->input('selectedIDs');
+
+        // if nothing is selected just return
+        if ($selectedIDs == null) {
+            return back();
+        }
+
+        foreach(explode(',', $selectedIDs) as $id){
+            $post = Post::find($id);
+            if (!$post) {
+                continue;
+            }
+
+            $post->user_id = $request->input('newOwnerId');
+            $post->save();
+        }
+
+        $request->session()->flash('success', 'Posts owner successfully changed.');
+
+        return back();
+    }
 }

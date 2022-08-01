@@ -107,6 +107,33 @@
                   </button>
                 </div>
               </menu>
+
+                <menu class="menu-bar is-hidden js-int-table-actions__items-selected js-menu-bar own-selected-posts">
+                    <div class="menu-bar__item owner-change-box" role="menuitem">
+                        <div class="select inline-block js-select" data-trigger-class="reset text-sm color-contrast-high h1 inline-flex items-center cursor-pointer js-tab-focus">
+                            <h1 class="text-md color-contrast-high padding-y-xxxxs is-hidden margin-x-xs" for="ownerChangeMultipleSelect"></h1>
+                            <select name="changeOwner" id="ownerChangeMultipleSelect">
+                                <optgroup label="Default">
+                                    <option value="" selected>Assign Owner</option>
+                                </optgroup>
+
+                                <optgroup label="Admin">
+                                    @foreach(\App\Models\User::getList('admin') as $user)
+                                        <option value="{{$user->id}}" >{{$user->name}}</option>
+                                    @endforeach
+                                </optgroup>
+
+                                <optgroup label="Editors">
+                                    @foreach(\App\Models\User::getList('other') as $user)
+                                        <option value="{{$user->id}}" >{{$user->name}}</option>
+                                    @endforeach
+                                </optgroup>
+                            </select>
+                            <svg class="icon icon--xxs margin-left-xxs" aria-hidden="true" viewBox="0 0 12 12"><path d="M10.947,3.276A.5.5,0,0,0,10.5,3h-9a.5.5,0,0,0-.4.8l4.5,6a.5.5,0,0,0,.8,0l4.5-6A.5.5,0,0,0,10.947,3.276Z"/></svg>
+                        </div>
+                    </div>
+                </menu>
+
                 @if(request()->get('status') === 'draft')
                     <menu class="menu-bar is-hidden js-int-table-actions__items-selected js-menu-bar move-selected-posts" data-direction="published">
                         <li class="menu-bar__item" role="menuitem">
@@ -138,6 +165,21 @@
               </menu>
             </div>
           </div>
+
+          <!-- Owner change -->
+            <div id="change-owner-dialog" class="dialog dialog--sticky js-dialog" data-animation="on">
+                <div class="dialog__content max-width-xxs" role="alertdialog" aria-labelledby="dialog-sticky-title" aria-describedby="dialog-sticky-description">
+                    <div class="text-component">
+                        <h4 id="dialog-sticky-title">Are you sure what you want to change owner for selected post(-s)?</h4>
+                    </div>
+                    <footer class="margin-top-md">
+                        <div class="flex justify-end gap-xs flex-wrap">
+                            <button class="btn btn--subtle js-dialog__close">Cancel</button>
+                            <button id="accept-change-owner-posts" class="btn btn--accent">Change</button>
+                        </div>
+                    </footer>
+                </div>
+            </div>
 
           <!-- Move to trash or Delete Confirmation -->
           <div id="delete-post-dialog" class="dialog dialog--sticky js-dialog" data-animation="on">
@@ -174,6 +216,12 @@
                 </div>
             </div>
         </div>
+
+          <form action="{{route('posts.chaneOwner.multiple')}}"
+                method="POST" id="form-bulk-change-owner"> @csrf
+              <input type="hidden" name="selectedIDs">
+              <input type="hidden" name="newOwnerId">
+          </form>
 
         <!-- Table-->
         <div class="margin-top-auto border-top border-contrast-lower border-opacity-30%"></div><!-- Divider -->

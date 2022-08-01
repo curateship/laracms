@@ -225,9 +225,11 @@
 
             $('.move-selected-posts').removeClass('is-hidden')
             $('.delete-selected-posts').removeClass('is-hidden')
+            $('.own-selected-posts').removeClass('is-hidden')
         }   else{
             $('.move-selected-posts').addClass('is-hidden')
             $('.delete-selected-posts').addClass('is-hidden')
+            $('.own-selected-posts').addClass('is-hidden')
         }
     }
 
@@ -315,6 +317,18 @@
     $(document).on('click', '#accept-move-posts', function(){
         movePostsArray($('#move-posts-list').val().split(','))
     })
+
+    $(document).on('click', '#accept-change-owner-posts', function(){
+        $('#form-bulk-change-owner').submit();
+    })
+
+    $(document).on('change', '#ownerChangeMultipleSelect', function(){
+        $('input[name="newOwnerId"]').val($(this).val())
+        $('input[name="selectedIDs"]').val(getSelectedList().join(','))
+
+        const event = new Event('openDialog');
+        document.getElementById('change-owner-dialog').dispatchEvent(event);
+    });
 
     /* Tags */
 

@@ -75,6 +75,8 @@ Route::get('/suggestions/get', [PostController::class, 'getSuggestions'])->name(
 // Posts
 Route::resource('/posts', PostController::class)->middleware(['auth']);
 Route::post('/posts/move', [PostController::class, 'move'])->name('post.move')->middleware(['auth', 'verified']);
+Route::post('/posts/changeOwner/multiple', [AdminPostController::class, 'changeOwnerMultiple'])->name('posts.chaneOwner.multiple')->middleware(['auth', 'auth.isAdmin']);
+
 
 // Contact
 Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
