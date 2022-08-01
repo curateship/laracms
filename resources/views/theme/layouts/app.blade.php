@@ -16,7 +16,7 @@
 <body data-theme="@guest(){{config('app.default_theme')}}@else{{auth()->user()->theme()}}@endguest">
 
 <!-- Header -->
-@include('components.layouts.headers.header')
+@include(env('HEADER'))
 
 <div class="padding-top-xl">
   @yield('content')
@@ -24,12 +24,12 @@
 
 <!-- Footer -->
 <div class="padding-top-sm">
-  @include('components.layouts.footers.footer')
+  @include(env('FOOTER'))
 </div>
 
 <!-- Tracker -->
 <div class="padding-top-sm">
-  @include('components.layouts.partials.tracker')
+  @include(env('TRACKER'))
 </div>
 
 <!-- Scripts -->
