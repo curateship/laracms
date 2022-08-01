@@ -19,6 +19,12 @@
         @include('components.tags.lists.popular-tags')
     </div>
 
+    <!-- Popular Tags -->
+    <div class="padding-bottom-xl">
+      <h1 class="padding-bottom-sm">Popular {{$popular_tags_category_name}}</h1>
+        @include('components.tags.lists.popular-tags-slider')
+    </div>
+
     <!-- Popular Posts -->
     <div class="padding-bottom-xl">
     <h1 class="padding-bottom-md">Popular Posts</h1>

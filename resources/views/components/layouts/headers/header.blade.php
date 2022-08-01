@@ -5,7 +5,7 @@
       <!-- LOGO -->
       <div class="header-v2__logo">
         <a href ="/">
-          @include(env('LAYOUT_LOGO'))
+          {!! env('LOGO') !!}
         </a>
       </div>
 

@@ -1,4 +1,4 @@
-<footer class="padding-y-lg">
+<footer class="padding-y-lg align-middle">
   <div class="container max-width-lg">
 
     <!-- Footer Navigation -->
@@ -7,8 +7,8 @@
     </div>
 
     <!-- Logo and Social -->
-    <div class="text-center">
-      @include('theme.layouts.svg.logo-social-footer')
+    <div class="flex justify-center padding-top-md">
+      {!! env('LOGO') !!}
     </div>
 
   </div>
