@@ -268,3 +268,11 @@ svg.avatar{
         border-radius: 50%;
     }
 }
+
+.owner-change-box{
+    width: 200px !important;
+
+    &:hover, &:active, &:focus, {
+        background: none !important;
+    }
+}

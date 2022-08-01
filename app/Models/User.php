@@ -235,4 +235,19 @@ class User extends Authenticatable implements MustVerifyEmail
 
         return $users;
     }
+
+    public static function getList($target){
+        if($target == 'admin'){
+            $users = static::leftJoin('role_user', 'role_user.user_id', '=', 'users.id')
+                ->where('role_id', 1)
+                ->select('users.*')
+                ->get();
+        }   else{
+            $users = static::leftJoin('role_user', 'role_user.user_id', '=', 'users.id')
+                ->whereNull('role_id')
+                ->select('users.*')
+                ->get();
+        }
+        return $users;
+    }
 }
