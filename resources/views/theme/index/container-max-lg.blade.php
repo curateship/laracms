@@ -1,7 +1,7 @@
 @extends(env('MAIN_APP_TEMPLATE'))
 @section('content')
 
-<div class="padding-md">
+<div class="container max-width-adaptive-lg">
 
     <!-- Recent Posts -->
     <div class="margin-bottom-lg">

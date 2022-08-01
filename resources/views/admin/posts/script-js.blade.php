@@ -249,6 +249,10 @@
     }
 
     function deletePostsArray(selectedPosts, type){
+        if(type === 'clean-trash'){
+            selectedPosts = [0];
+        }
+
         if(selectedPosts.length > 0){
             $.ajax({
                 data: {

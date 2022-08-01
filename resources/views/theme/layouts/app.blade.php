@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="icon" type="image/svg+xml" href="{{ !empty($settings_data['favicon']) ? asset($settings_data['favicon']) : asset('assets/img/favicon.svg') }}">
+  <link rel="icon" type="image/svg+xml" href="{{ asset(env('FAV_ICON')) }}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
@@ -16,7 +16,7 @@
 <body data-theme="@guest(){{config('app.default_theme')}}@else{{auth()->user()->theme()}}@endguest">
 
 <!-- Header -->
-@include('components.layouts.headers.header')
+@include(env('HEADER'))
 
 <div class="padding-top-xl">
   @yield('content')
@@ -24,12 +24,12 @@
 
 <!-- Footer -->
 <div class="padding-top-sm">
-  @include('components.layouts.footers.footer')
+  @include(env('FOOTER'))
 </div>
 
 <!-- Tracker -->
 <div class="padding-top-sm">
-  @include('components.layouts.partials.tracker')
+  @include(env('TRACKER'))
 </div>
 
 <!-- Scripts -->
