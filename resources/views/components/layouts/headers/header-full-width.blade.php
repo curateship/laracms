@@ -2,7 +2,7 @@
   <div class="header__container padding-md padding-lg@md">
     <div class="header__logo">
       <a href="/">
-        <h1 class="">HentaiSchool</h1>
+        {!! env('LOGO') !!}
       </a>
     </div>
 
