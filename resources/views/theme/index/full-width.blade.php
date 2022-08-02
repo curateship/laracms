@@ -5,24 +5,12 @@
 
     <!-- Recent Posts -->
     <div class="margin-bottom-lg">
-      @include('components.posts.lists.recent-posts.recent-posts-grid')
+      @include(env('CONTENT_GRID'))
     </div>
 
     <!-- Pagination -->
     <div class="padding-bottom-xl">
         @include('components.layouts.partials.pagination', ['items' => $recent_posts])
-    </div>
-
-    <!-- Popular Tags -->
-    <div class="padding-bottom-xl">
-      <h1 class="padding-bottom-sm">Popular {{$popular_tags_category_name}}</h1>
-        @include('components.tags.lists.popular-tags')
-    </div>
-
-    <!-- Popular Posts -->
-    <div class="padding-bottom-xl">
-    <h1 class="padding-bottom-md">Popular Posts</h1>
-      @include('components.posts.lists.filtered-posts.popular-posts')
     </div>
 
     <!-- Site Discription -->
