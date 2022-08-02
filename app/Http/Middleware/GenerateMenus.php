@@ -69,6 +69,7 @@ class GenerateMenus
             $menu->add('Home',     ['url'  => url('/').'/',  'class' => 'footer-v4__nav-item', 'id' => 'home']);
             $menu->add('Contact',     ['url'  => url('/page/contact').'/',  'class' => 'footer-v4__nav-item', 'id' => 'home']);
             $menu->add('Term',     ['url'  => url('/page/term').'/',  'class' => 'footer-v4__nav-item', 'id' => 'home']);
+            $menu->add('Login',     ['url'  => url('/login').'/',  'class' => 'footer-v4__nav-item', 'id' => 'home']);
         });
 
         return $next($request);
