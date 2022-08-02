@@ -138,7 +138,7 @@ class PostController extends Controller
 
         $post->author = $post->author();
 
-        return view('/theme.posts.types.'.$post->type, [
+        return view(env('POSTS_TYPES').'.'.$post->type, [
             'followed' => $followed,
             'post' => $post,
             'content' => $content,
