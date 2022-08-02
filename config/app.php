@@ -1,11 +1,7 @@
 <?php
 
 return [
-<<<<<<< HEAD
-    'default_theme' => env('DEFAULT_COLOR'),
-=======
     'default_theme' => env('DEFAULT_COLOR', 'dark'),
->>>>>>> bb8d0a645ae3e7e28b04e841835527eebd755c5c
     'name' => env('APP_NAME', 'Laravel'),
     'env' => env('APP_ENV', 'production'),
     'debug' => (bool) env('APP_DEBUG', false),
