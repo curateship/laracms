@@ -18,9 +18,7 @@
 <!-- Header -->
 @include(env('HEADER'))
 
-<div class="padding-top-xl">
   @yield('content')
-</div>
 
 <!-- Footer -->
 <div class="padding-top-sm">
