@@ -12,9 +12,6 @@ class GenerateMenus
     {
         // Header Menu
         \Menu::make('header', function ($menu) {
-            // Link1
-            $menu->add('Lists', ['url'  => url('/').'/lists']);
-
             // Tags Dropdown Links
             $menu->add('Tags', ['url'  => '#'])->id('Tags');
             // Adding sub items;

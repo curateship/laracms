@@ -337,7 +337,7 @@ class PostController extends Controller
 
         // SEO title
         SEOMeta::setTitle($search_request);
-        return view('theme.posts.search-result', [
+        return view(env('SEARCH_THEME'), [
             'search' => $search_request,
             'total' => $count,
             'posts' => $by_title_and_body

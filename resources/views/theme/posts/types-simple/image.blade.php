@@ -5,7 +5,7 @@
   <div class="grid gap-md">
 
     <!-- Content -->
-    <div class="padding-x-lg@md">
+    <div class="">
       @include('components.posts.show.types.image')
 
   </div>

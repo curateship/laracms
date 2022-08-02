@@ -7,7 +7,7 @@
 
 @forelse($posts as $post)
   <li class="">
-  <div class="">
+  <div class="card">
     <a href="{{ route('post.show', $post) }}">
       <figure class="margin-bottom-xs">
       <img class="block width-100%" loading="lazy" src="{{url('/storage'.config('images.posts_storage_path').$post->thumbnail)}}" alt="Image description">

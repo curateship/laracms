@@ -10,7 +10,7 @@
 
     <!-- LOGO -->
     <div class="footer-v4__logo">
-      {!! env('LOGO') !!}
+      {!! env('LOGO_SVG') !!}
     </div>
 
     <p class="footer-v4__print">&copy; Copyright. All rights reserved.</p>
