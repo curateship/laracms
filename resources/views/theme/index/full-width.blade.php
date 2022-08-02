@@ -15,7 +15,7 @@
 
     <!-- Site Discription -->
     <div class="padding-y-md">
-        @include('components.layouts.partials.homepage-site-description')
+        {!! env('SITE_DISCRIPTION') !!}
     </div>
 
 </div>
