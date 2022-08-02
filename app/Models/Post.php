@@ -738,7 +738,7 @@ class Post extends Model
         Storage::deleteDirectory($galleries_path.'/'.$this->slug);
     }
 
-    public function getPreviewImage($target = 'medium'){
+    public function getPreviewImage($target = 'thumbnail'){
         return config('images.posts_storage_path').$this->$target;
         /*
         if($this->type == 'gallery'){
