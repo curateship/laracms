@@ -45,7 +45,10 @@
       <!--desktop -->
       <div class="header-v2__nav header__icon-btns header-v2__nav-align-right header__icon-btns--desktop">
         @include('components.layouts.headers.partials.desktop-search')
-        @include('components.layouts.headers.partials.desktop-user-dropdown')
+
+        <div class="padding-left-xs">
+          @include('components.layouts.headers.partials.desktop-user-dropdown')
+        </div>
 
         @auth
         <div class="padding-x-xxxs">
