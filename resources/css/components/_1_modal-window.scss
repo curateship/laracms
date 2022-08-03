@@ -1,6 +1,6 @@
 @use '../base' as *;
 
-/* -------------------------------- 
+/* --------------------------------
 
 File#: _1_modal-window
 Title: Modal Window
@@ -11,7 +11,7 @@ Usage: codyhouse.co/license
 
 .modal {
   position: fixed;
-  z-index: var(--z-index-overlay, 15); 
+  z-index: var(--z-index-overlay, 15);
   width: 100%;
   height: 100%;
   left: 0;
@@ -49,7 +49,7 @@ Usage: codyhouse.co/license
   position: fixed;
   top: var(--space-sm);
   right: var(--space-sm);
-  z-index: var(--z-index-fixed-element, 10); 
+  z-index: var(--z-index-fixed-element, 10);
   background-color: alpha(var(--color-black), 0.9);
   transition: .2s;
 
