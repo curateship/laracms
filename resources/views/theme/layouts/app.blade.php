@@ -8,7 +8,7 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
   {!! SEOMeta::generate() !!}
-  @include('components.layouts.partials.fonts')
+  {!! env('FONT') !!}
   @include('components.layouts.partials.back-to-top')<!-- Back to Top -->
 </head>
 
