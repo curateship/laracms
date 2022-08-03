@@ -12,20 +12,7 @@
      @else
          <!-- Without With avatar -->
          <button class="reset anim-menu-btn anim-menu-btn--avatar js-anim-menu-btn" aria-label="Toggle icon" menu-target="user-menu">
-             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
-                 <title>face-man</title>
-                 <g class="icon__group" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" transform="translate(0.5 0.5)" fill="currentColor" stroke="currentColor">
-                     <path fill="none" stroke-miterlimit="10"
-                           d="M1.051,10.933 C4.239,6.683,9.875,11.542,16,6c3,4.75,6.955,4.996,6.955,4.996"></path>
-                     <circle data-stroke="none" fill="currentColor" cx="7.5" cy="14.5" r="1.5" stroke-linejoin="miter"
-                             stroke-linecap="square" stroke="none"></circle>
-                     <circle data-stroke="none" fill="currentColor" cx="16.5" cy="14.5" r="1.5" stroke-linejoin="miter"
-                             stroke-linecap="square" stroke="none"></circle>
-                     <circle fill="none" stroke="currentColor" stroke-miterlimit="10" cx="12" cy="12" r="11"></circle>
-                     <path d="M4.222 4.222l15.556 15.556" />
-                     <path d="M19.778 4.222L4.222 19.778" />
-                 </g>
-             </svg>
+         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><title>account</title><g stroke-width="2" fill=“currentColor”><path d="M14.08 4.97c0 2.29-1.85 5.81-4.15 5.8s-4.14-3.52-4.14-5.8a4.14 4.14 0 0 1 8.29 0z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3.69 11.6a9.11 9.11 0 0 0-2.65 4.68 15.7 15.7 0 0 0 17.79 0 9.11 9.11 0 0 0-2.64-4.68" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></g></svg>
          </button>
          <!-- Without With avatar END -->
      @endif
