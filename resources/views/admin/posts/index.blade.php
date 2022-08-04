@@ -55,6 +55,7 @@
                               <option value="published" {{request()->get('status') == 'published' ? 'selected' : ''}}>Published</option>
                               <option value="pre-published" {{request()->get('status') == 'pre-published' ? 'selected' : ''}}>Pre-Published</option>
                               <option value="draft" {{request()->get('status') == 'draft' ? 'selected' : ''}}>Drafts</option>
+                              <option value="pending" {{request()->get('status') == 'pending' ? 'selected' : ''}}>Pending</option>
                               <option value="trash" {{request()->get('status') == 'trash' ? 'selected' : ''}}>Trash</option>
                           </select>
 
@@ -108,6 +109,7 @@
                 </div>
               </menu>
 
+                @if(Gate::allows('is-admin'))
                 <menu class="menu-bar is-hidden js-int-table-actions__items-selected js-menu-bar own-selected-posts">
                     <div class="menu-bar__item owner-change-box" role="menuitem">
                         <div class="select inline-block js-select" data-trigger-class="reset text-sm color-contrast-high h1 inline-flex items-center cursor-pointer js-tab-focus">
@@ -133,8 +135,9 @@
                         </div>
                     </div>
                 </menu>
+                @endif
 
-                @if(request()->get('status') === 'draft')
+                @if(request()->get('status') === 'draft' || request()->get('status') === 'pending')
                     <menu class="menu-bar is-hidden js-int-table-actions__items-selected js-menu-bar move-selected-posts" data-direction="published">
                         <li class="menu-bar__item" role="menuitem">
                             <svg class="icon menu-bar__icon" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 115.4 122.88"><title>up-arrow</title><path d="M24.94,67.88A14.66,14.66,0,0,1,4.38,47L47.83,4.21a14.66,14.66,0,0,1,20.56,0L111,46.15A14.66,14.66,0,0,1,90.46,67.06l-18-17.69-.29,59.17c-.1,19.28-29.42,19-29.33-.25L43.14,50,24.94,67.88Z"/></svg>

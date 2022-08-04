@@ -536,6 +536,11 @@ class AdminPostController extends Controller
             Notification::removeNotificationForPost($post->id);
         }
 
+        if(in_array($post->status, ['published', 'pre-published']) && !Gate::allows('is-admin')){
+            $post->status = 'pending';
+            $post->save();
+        }
+
         if($request->has('postId') || $request->input('status') == 'draft'){
             return redirect('/post/edit/'.$post->slug);
         }   else{
@@ -544,14 +549,29 @@ class AdminPostController extends Controller
     }
 
     public function move(Request $request){
+        $direction = $request->input('direction');
         $posts_array = explode(',', $request->input('list'));
 
-        Post::whereIn('id', $posts_array)
-            ->update([
-                'created_at' => now(),
-                'updated_at' => now(),
-                'status' => $request->input('direction')
-            ]);
+        $posts = Post::whereIn('id', $posts_array)
+            ->get();
+
+        foreach($posts as $post){
+            if($post->status == 'pending' && $direction == 'published'){
+                $publish_timestamp = strtotime($post->post_date);
+                if($publish_timestamp > time()){
+                    $direction = 'pre-published';
+                }
+
+                if($post->post_date == ''){
+                    $post->post_date = now();
+                }
+            }
+
+            $post->status = $direction;
+            $post->created_at = now();
+            $post->updated_at = now();
+            $post->save();
+        }
     }
 
     public function getUploadForm($type){
