@@ -16,10 +16,7 @@
 <body data-theme="@guest(){{config('app.default_theme')}}@else{{auth()->user()->theme()}}@endguest">
 
 <!-- Header -->
-<div class="padding-bottom-sm">
   @include(env('HEADER'))
-</div>
-
   @yield('content')
 
 <!-- Footer -->

@@ -39,6 +39,7 @@
     </nav>
   </div>
 </header>
+@include('components.layouts.partials.hero-random-image')
 
 <!-- Modal -->
 <div class="modal modal--search modal--animate-fade bg bg-opacity-90% flex flex-center padding-md backdrop-blur-10 js-modal" id="modal-search">
