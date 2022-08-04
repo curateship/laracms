@@ -18,7 +18,7 @@
 <!-- Header -->
   @include(env('HEADER'))
 
-<div class="">
+<div class="container max-width-adaptive-lg">
   @yield('content')
 </div>
 

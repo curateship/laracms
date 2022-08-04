@@ -1,8 +1,5 @@
-@extends('theme.layouts.app')
+@extends(env('MAIN_APP_TEMPLATE'))
 @section('content')
-
-<!-- Container -->
-<div class="container max-width-adaptive-lg">
 
 <!-- Search Results -->
 <div class="padding-bottom-md">
@@ -13,8 +10,5 @@
 <div class="padding-bottom-md">
     @include('components.layouts.partials.pagination', ['items' => $posts])
 </div>
-
-</div>
-
 
 @endsection
