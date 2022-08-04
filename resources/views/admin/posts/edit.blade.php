@@ -17,6 +17,22 @@
 <!-- 👇 Content Body Wrapper-->
 @include('admin.partials.modal')
 <div class="grid gap-md justify-between">
+
+  <!-- Bread Crumb Mobile -->
+  <nav class="breadcrumbs text-based hide@md" aria-label="Breadcrumbs">
+    <ol class="flex flex-wrap gap-xxs">
+      <li class="breadcrumbs__item color-contrast-low">
+        <a href="{{\Illuminate\Support\Facades\Gate::allows('is-admin') ? '/admin' : '/'}}" class="color-inherit link-subtle">Home</a>
+        <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
+      </li>
+      <li class="breadcrumbs__item color-contrast-low">
+        <a href="{{\Illuminate\Support\Facades\Gate::allows('is-admin') ? '/admin' : ''}}/posts" class="color-inherit link-subtle">Posts</a>
+        <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
+      </li>
+      <li class="breadcrumbs__item color-contrast-high" aria-current="page">Edit {{ \Str::limit( $post->title, 60) }}</li>
+    </ol>
+  </nav>
+
   <div class="col-12@md">
 
     <!-- Content Table Column -->
@@ -27,7 +43,7 @@
         <div class="inline-flex items-baseline">
 
           <!-- Bread Crumb -->
-          <nav class="breadcrumbs text-based padding-left-sm padding-sm" aria-label="Breadcrumbs">
+          <nav class="breadcrumbs text-based padding-left-sm padding-sm display@md" aria-label="Breadcrumbs">
             <ol class="flex flex-wrap gap-xxs">
               <li class="breadcrumbs__item color-contrast-low">
                 <a href="{{\Illuminate\Support\Facades\Gate::allows('is-admin') ? '/admin' : '/'}}" class="color-inherit link-subtle">Home</a>
