@@ -3,7 +3,7 @@
   <!-- Mobile Navigation -->
   <div class="f-header__mobile-content container max-width-lg">
     <a href="#0" class="">
-      {!! env('LOGO_SVG') !!}
+      {!! env('LOGO') !!}
     </a>
 
     <!-- Mobile Animated Button -->
