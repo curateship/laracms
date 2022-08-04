@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Exception;
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\FFMpeg;
 use FFMpeg\FFProbe;
@@ -24,12 +25,30 @@ class AdminVideoController extends Controller
     public function upload($upload_type, Request $request){
         $path = '/public'.config('images.posts_storage_path');
         $path_video = '/public'.config('images.videos_storage_path');
-
-        $original = request()->file('image')->getClientOriginalName();
-        $thumbnail_medium_name = Str::random(27) . '.' . Arr::last(explode('.', $original));
-
-
         $media_type = 'video';
+
+        if($request->has('url')){
+            ini_set('memory_limit', '-1');
+
+            $url = $request->input('url');
+            $thumbnail_medium_name = Str::random(27) . '.' . Arr::last(explode('.', $url));
+
+            try {
+                Storage::put($path_video."/original/".$thumbnail_medium_name, file_get_contents($url));
+            }catch(Exception $e){
+                return [
+                    'success' => 0,
+                    'message' => 'Failed to upload file from external URL'
+                ];
+            }
+
+
+        }   else{
+            $original = request()->file('image')->getClientOriginalName();
+            $thumbnail_medium_name = Str::random(27) . '.' . Arr::last(explode('.', $original));
+
+            request()->file('image')->storeAs($path_video."/original", $thumbnail_medium_name);
+        }
 
         $media_path = storage_path() . "/app";
         $media = [
@@ -46,8 +65,6 @@ class AdminVideoController extends Controller
 
 
         /* Video files */
-        request()->file('image')->storeAs($path_video."/original", $thumbnail_medium_name);
-
         $ffprobe = FFProbe::create();
         $video_stream = $ffprobe
             ->streams(storage_path() . "/app".$path_video."/original/" . $thumbnail_medium_name)

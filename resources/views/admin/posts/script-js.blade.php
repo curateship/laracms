@@ -15,6 +15,47 @@
         }
     }
 
+    $(document).on('click', '#url-upload', function(){
+        uploadVideoFromURL($('input[name="video-external-url"]').val())
+    })
+
+    function uploadVideoFromURL(url){
+        if(url === ''){
+            return
+        }
+
+        $('#upload-thumbnail').html('Data processing on the server. Please wait...')
+
+        $.ajax({
+            url : '/post/upload/video/main',
+            type : 'POST',
+            data : {
+                _token: $('meta[name="csrf-token"]').attr('content'),
+                url: url
+            },
+            success : function(data) {
+                if(data.status === 1){
+                    if(data.thumbnail !== null){
+                        $('#upload-thumbnail').html(data.content)
+
+                        $('input[name="original"]').val(data.original.path);
+                        $('input[name="thumbnail"]').val(data.thumbnail.path);
+                        $('input[name="medium"]').val(data.medium.path);
+                        $('input[name="type"]').val(type);
+
+                        if(data.type === 'video'){
+                            $('input[name="video_original"]').val(data.video_original.path);
+                            $('input[name="video_thumbnail"]').val(data.video_thumbnail.path);
+                            $('input[name="video_medium"]').val(data.video_medium.path);
+                        }
+                    }
+                }   else{
+                    $('#upload-thumbnail').html(data.message)
+                }
+            }
+        });
+    }
+
     function uploadMedia(e) {
         e.preventDefault()
 
