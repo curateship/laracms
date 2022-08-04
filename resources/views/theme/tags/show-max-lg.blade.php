@@ -3,7 +3,9 @@
 <div class="container max-width-adaptive-lg">
 
     <!-- Tag Informations -->
-    <h1 class="text-xl padding-bottom-lg">{{ $tag->name }}</h1>
+    <div class="margin-bottom-md">
+    @include('components.tags.show.tag-informations')
+    </div>
 
     <!-- Post list -->
     <div class="margin-bottom-lg">
