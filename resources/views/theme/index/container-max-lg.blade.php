@@ -5,7 +5,7 @@
 
     <!-- Recent Posts -->
     <div class="margin-bottom-lg">
-      @include('components.posts.lists.recent-posts.recent-posts-grid')
+      @include(env('CONTENT_GRID'))
     </div>
 
     <!-- Pagination -->

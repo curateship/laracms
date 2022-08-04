@@ -17,7 +17,10 @@
 
 <!-- Header -->
   @include(env('HEADER'))
+
+<div class="">
   @yield('content')
+</div>
 
 <!-- Footer -->
 <div class="padding-top-sm">

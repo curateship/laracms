@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends(env('MAIN_APP_TEMPLATE'))
 
 @push('custom-scripts')
     @include('admin.posts.script-select2-js')

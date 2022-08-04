@@ -1,4 +1,4 @@
-@extends('admin::layouts.master')
+@extends(env('MAIN_APP_TEMPLATE'))
 @section('content')
   <section>
     <div class="container max-width-lg">

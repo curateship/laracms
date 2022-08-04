@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends(env('MAIN_APP_TEMPLATE'))
 @section('content')
 @include('admin.partials.modal')
 <div class="container max-width-adaptive-lg">
