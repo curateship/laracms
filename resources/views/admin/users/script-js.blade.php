@@ -116,6 +116,13 @@
     $(document).on('click', '#accept-delete', function(){
         deleteUsersArray($('#delete-users-list').val().split(','))
     })
+
+    $(document).on('click', '#clean-avatar', function(){
+        $('input[name="avatar-original"]').val('')
+        $('input[name="avatar-thumbnail"]').val('')
+        $('input[name="avatar-medium"]').val('')
+        $('#avatar-upload-thumbnail').attr('src', '').css('display', 'none')
+    })
 }());
 </script>
 @endauth

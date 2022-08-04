@@ -71,6 +71,23 @@
   </div>
 </div>
 
+<!-- Clean avatar -->
+<div>
+    <label class="file-upload__label btn btn--subtle">
+        <span class="flex items-center">
+        <svg class="icon" viewBox="0 0 20 20" aria-hidden="true">
+            <g fill="currentColor">
+              <path d="M18 12v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+              <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 13V2"></path>
+              <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7l5-5 5 5"></path>
+            </g>
+          </svg>
+
+          <span id="clean-avatar" class="margin-left-xxs file-upload__text file-upload__text--has-max-width">Clean Avatar</span>
+        </span>
+    </label>
+</div>
+
 <!-- Edit cover -->
 <div class="file-upload inline-block">
   <label for="cover-upload-file" class="file-upload__label btn btn--subtle">
