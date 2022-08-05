@@ -66,4 +66,3 @@
     </div>
   </div>
 </header>
-@include('components.layouts.partials.hero-random-image')

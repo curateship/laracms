@@ -18,7 +18,13 @@
 <!-- Header -->
   @include(env('HEADER'))
 
-<div class="container max-width-adaptive-lg">
+<!-- Random Image -->
+<div class="z-index-0">
+  @include('components.layouts.partials.hero-random-image')
+</div>
+
+<!-- Content -->
+<div class="container max-width-adaptive-lg negative-margin-30">
   @yield('content')
 </div>
 

@@ -3,7 +3,7 @@
 
 <div class="grid gap-md justify-between">
   <!-- Col 4 -->
-  <div class="col-4@md card">
+  <div class="col-4@md card display@md">
     <p class="padding-sm">Latest Feeds</p>
       @include('components.layouts.partials.notifications')
   </div>
