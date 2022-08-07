@@ -407,7 +407,7 @@ class AdminPostController extends Controller
         $post->medium = $medium;
         $post->type = $request->input('type');
 
-        if($request->has('status') && in_array($request->input('status'), ['draft', 'published'])){
+        if($request->has('status') && in_array($request->input('status'), ['draft', 'published', 'trash'])){
             $post->status = $request->input('status');
         }
 

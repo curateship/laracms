@@ -284,7 +284,7 @@
           <input type="hidden" name="status" value="">
 
           <div class="flex justify-end gap-xs">
-              <button class="btn btn--accent postSaveAs" data-status="delete">Delete post</button>
+              <button type="button" class="btn btn--accent" id="delete-post-from-edit-page">Delete post</button>
           </div>
 
           <div class="flex justify-end gap-xs">

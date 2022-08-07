@@ -1,3 +1,21 @@
+<!-- Delete post from edit page-->
+<div id="delete-trash-post-dialog" class="dialog dialog--sticky js-dialog" data-animation="on">
+    <div class="dialog__content max-width-xxs" role="alertdialog" aria-labelledby="dialog-sticky-title" aria-describedby="dialog-sticky-description">
+        <div class="text-component">
+            <h4 id="dialog-sticky-title">Do you want to delete or move this post to trash?</h4>
+        </div>
+        <footer class="margin-top-md">
+            <div class="flex justify-end gap-xs flex-wrap">
+                <button class="btn btn--primary postSaveAs" data-status="trash">Trash</button>
+                <button class="btn btn--accent postSaveAs" data-status="delete">Delete</button>
+                <button class="btn btn--subtle js-dialog__close">Cancel</button>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<!--UNKNOWN MODALS -->
+
 <!-- Create Modal -->
 <div id="create-modal" class="modal modal--animate-translate-down flex flex-center bg-black bg-opacity-90% padding-md js-modal">
   <div class="modal__content width-100% max-width-sm max-height-100% overflow-auto bg radius-md inner-glow shadow-md flex flex-column" role="alertdialog" aria-labelledby="modal-title-4" aria-describedby="modal-description-4">
@@ -22,7 +40,7 @@
               <div class="margin-bottom-xs">
                 <input class="form-control width-100%" type="name" name="inputname" id="inputname" placeholder="Enter Your Title">
               </div>
-      
+
               <div>
                 <textarea class="form-control width-100% height-550" name="textarea" id="textarea" placeholder="Enter Discription"></textarea>
               </div>
@@ -33,7 +51,7 @@
               </div>
 
             </fieldset>
-          
+
           </form>
         </div>
 
@@ -74,31 +92,31 @@
                 <label class="form-label margin-bottom-xxs" for="inputEmail">Email</label>
                 <input class="form-control width-100%" type="email" name="inputEmail" id="inputEmail" placeholder="email@myemail.com">
               </div>
-      
+
               <div>
                 <label class="form-label margin-bottom-xxs" for="textarea">Textarea</label>
                 <textarea class="form-control width-100%" name="textarea" id="textarea"></textarea>
                 <p class="text-xs color-contrast-medium margin-top-xxs">Use helper text to provide additional information.</p>
               </div>
             </fieldset>
-          
+
             <fieldset class="margin-bottom-md">
               <legend class="form-legend">Checkboxes</legend>
-          
+
               <div class="flex flex-wrap gap-md">
                 <div>
                   <input class="checkbox" type="checkbox" id="checkbox1">
                   <label for="checkbox1">Option 1</label>
                 </div>
-          
+
                 <div>
                   <input class="checkbox" type="checkbox" id="checkbox2">
                   <label for="checkbox2">Option 2</label>
                 </div>
               </div>
-              
+
             </fieldset>
-          
+
           </form>
         </div>
 
