@@ -16,6 +16,7 @@ use FFMpeg\Coordinate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -23,25 +24,25 @@ class AdminVideoController extends Controller
 {
     //
     public function upload($upload_type, Request $request){
+        set_time_limit(0);
+
         $path = '/public'.config('images.posts_storage_path');
         $path_video = '/public'.config('images.videos_storage_path');
         $media_type = 'video';
 
         if($request->has('url')){
-            ini_set('memory_limit', '-1');
-
             $url = $request->input('url');
             $thumbnail_medium_name = Str::random(27) . '.' . Arr::last(explode('.', $url));
 
-            try {
-                Storage::put($path_video."/original/".$thumbnail_medium_name, file_get_contents($url));
+            try{
+                static::chunked_copy($url, storage_path('/app').$path_video."/original/".$thumbnail_medium_name);
             }catch(Exception $e){
+                Log::info($e);
                 return [
                     'success' => 0,
                     'message' => 'Failed to upload file from external URL'
                 ];
             }
-
 
         }   else{
             $original = request()->file('image')->getClientOriginalName();
@@ -198,5 +199,65 @@ class AdminVideoController extends Controller
         }
 
         return null;
+    }
+
+    private static function chunked_copy($source_url, $destination) {
+        /*
+        // Fix URLs with Japanese symbols;
+        $change = true;
+        while($change){
+            preg_match('/[\p{Katakana}\p{Hiragana}\p{Han}]+/u', $source_url, $matches, PREG_OFFSET_CAPTURE);
+
+            if(count($matches) > 0){
+                $match = $matches[0][0];
+
+                $part_1 = substr($source_url, 0, $matches[0][1]);
+                $part_2 = substr($source_url, $matches[0][1] + strlen($match), strlen($source_url));
+                $source_url = $part_1.urlencode($match).$part_2;
+                $jap_symbols = true;
+            }   else{
+                $change = false;
+            }
+        }
+        */
+
+        // Fix Strange URLs and Japanese symbols;
+        $file_name_src = Arr::last(explode('/', $source_url));
+        $file_name = urlencode($file_name_src);
+
+        $source_url = str_replace($file_name_src, $file_name, $source_url);
+
+        // No time limits for loading real big files;
+        set_time_limit(-1);
+
+        // 1 mega byte at a time.
+        $buffer_size = 1048576;
+
+        # 1 GB write-chunks.
+        $write_chunks = 1073741824;
+
+        $ret = 0;
+        $fin = fopen($source_url, "rb");
+        if (!$fin) return false;
+
+        $fout = fopen($destination, "w");
+        if (!$fout) return false;
+
+        $bytes_written = 0;
+        while(!feof($fin)) {
+            $bytes = fwrite($fout, fread($fin, $buffer_size));
+            $ret += $bytes;
+            $bytes_written += $bytes;
+            if ($bytes_written >= $write_chunks) {
+                // (another) chunk of 1GB has been written, close and reopen the stream
+                fclose($fout);
+                $fout = fopen($destination, "a"); // "a" for "append";
+                if (!$fout) return false;
+                $bytes_written = 0; // re-start counting
+            }
+        }
+        fclose($fin);
+        fclose($fout);
+        return $ret; // return number of bytes written
     }
 }

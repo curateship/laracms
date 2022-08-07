@@ -34,7 +34,7 @@
                 url: url
             },
             success : function(data) {
-                if(data.status === 1){
+                if(data.status !== 0){
                     if(data.thumbnail !== null){
                         $('#upload-thumbnail').html(data.content)
 
