@@ -19,7 +19,8 @@
         "lavary/laravel-menu": "^1.8",
         "php-ffmpeg/php-ffmpeg": "^0.19.0",
         "ext-json": "*",
-      "ext-imagick": "*"
+      "ext-imagick": "*",
+      "ext-curl": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

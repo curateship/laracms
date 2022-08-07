@@ -22,9 +22,9 @@
     </div>
     <div id="upload-thumbnail" class="margin-top-md"></div>
 
-    <div class="flex justify-end gap-xs margin-top-md">
-        <label>
-            <input class="form-control width-100%" type="text" name="video-external-url" placeholder="Enter External File URL" value="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4">
+    <div class="flex justify-between gap-xs margin-top-md">
+        <label style="flex: 1;">
+            <input class="form-control width-100%" style="min-width: 350px;width: 100%;" type="text" name="video-external-url" placeholder="Enter External File URL" value="">
         </label>
         <button type="button" id="url-upload" class="btn btn--sm btn--accent">Upload From URL</button>
     </div>
