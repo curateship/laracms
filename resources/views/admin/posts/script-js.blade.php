@@ -41,7 +41,7 @@
                         $('input[name="original"]').val(data.original.path);
                         $('input[name="thumbnail"]').val(data.thumbnail.path);
                         $('input[name="medium"]').val(data.medium.path);
-                        $('input[name="type"]').val(type);
+                        $('input[name="type"]').val('video');
 
                         if(data.type === 'video'){
                             $('input[name="video_original"]').val(data.video_original.path);
