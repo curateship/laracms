@@ -24,7 +24,7 @@
 </div>
 
 <!-- Content -->
-<div class="container max-width-adaptive-lg">
+<div class="container max-width-adaptive-lg negative-margin">
   @yield('content')
 </div>
 
