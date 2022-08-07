@@ -1,43 +1,36 @@
-@extends('admin.layouts.app')
+@extends(env('MAIN_APP_TEMPLATE'))
 
 @push('custom-scripts')
     @include('admin.favorites.script-js')
 @endpush
 
-
 @section('content')
-<!-- 👇 Content Body Wrapper-->
- <div class="container max-width-adaptive-lg">
-    <div class="grid gap-md justify-between">
-      <div class="col-12@md">
 
-        <!-- Content Table Column -->
-        <div class="card" data-table-controls="table-1">
+<div class="grid gap-md justify-between">
+  <div class="col-12@md">
 
-        <!-- Control Bar -->
-        <div class="controlbar--sticky flex justify-between">
-            <div class="inline-flex items-baseline">
+    <!-- Content Table Column -->
+    <div class="card" data-table-controls="table-1">
 
-              <!-- Bread Crumb -->
-              <nav class="breadcrumbs text-based padding-left-sm padding-sm" aria-label="Breadcrumbs">
-                <ol class="flex flex-wrap gap-xxs">
+    <!-- Control Bar -->
+    <div class="controlbar--sticky flex justify-between">
+        <div class="inline-flex items-baseline">
 
-                  <li class="breadcrumbs__item color-contrast-low">
-                    <a href="{{\Illuminate\Support\Facades\Gate::allows('is-admin') ? '/admin' : '/'}}" class="color-inherit link-subtle">Home</a>
-                    <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
-                  </li>
-
-                  <li class="breadcrumbs__item color-contrast-low">
-                    <a href="{{\Illuminate\Support\Facades\Gate::allows('is-admin') ? '/admin' : ''}}/favorites" class="color-inherit link-subtle">Favorites</a>
-                    <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
-                  </li>
-
-                  <li class="breadcrumbs__item color-contrast-high" aria-current="page">Edit List 1</li>
-                </ol>
-              </nav>
-              <!-- Bread Crumb END -->
-        </div>
-        <!-- END Control Bar-->
+          <!-- Bread Crumb -->
+          <nav class="breadcrumbs text-based padding-left-sm padding-sm" aria-label="Breadcrumbs">
+            <ol class="flex flex-wrap gap-xxs">
+              <li class="breadcrumbs__item color-contrast-low">
+                <a href="{{\Illuminate\Support\Facades\Gate::allows('is-admin') ? '/admin' : '/'}}" class="color-inherit link-subtle">Home</a>
+                <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
+              </li>
+              <li class="breadcrumbs__item color-contrast-low">
+                <a href="{{\Illuminate\Support\Facades\Gate::allows('is-admin') ? '/admin' : ''}}/favorites" class="color-inherit link-subtle">Favorites</a>
+                <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
+              </li>
+              <li class="breadcrumbs__item color-contrast-high" aria-current="page">Edit List 1</li>
+            </ol>
+          </nav>
+    </div>
 
     <!-- Menu Bar -->
     <div class="flex flex-wrap items-center justify-between margin-right-sm">
@@ -50,6 +43,7 @@
             </svg>
             <span class="menu-bar__label">Search Lists</span>
           </li>
+
             <!-- Search Modal -->
             <div class="modal modal--search modal--animate-fade bg bg-opacity-90% flex flex-center padding-md backdrop-blur-10 js-modal" id="favorite-search">
                 <div class="modal__content width-100% max-width-sm max-height-100% overflow-auto" role="alertdialog" aria-labelledby="modal-search-title" aria-describedby="">
@@ -78,10 +72,8 @@
                     </svg>
                 </button>
             </div>
-
         </menu>
-
-      </div><!-- END Control Bar -->
+      </div>
     </div>
   </div><!-- END card -->
 <!-- END Control Bar-->
@@ -108,9 +100,8 @@
           <input class="radio" type="radio" name="public" value="0" id="fav-private" {{$favorite->public == 0 ? 'checked' : ''}}>
           <label for="fav-private">Private</label>
       </div>
-
-
       <div class="flex justify-start gap-lg padding-top-sm">
+
           <!-- Edit Avatar -->
           <div class="file-upload inline-block">
               <label for="image-upload-file" class="file-upload__label btn btn--subtle">
@@ -153,10 +144,9 @@
   </fieldset>
 </form>
 </div>
-<!-- END Table-->
 
         </div><!-- END Col-12 Card Wrapper -->
-      </div><!-- Col-12 END -->
+      </div>
 
       <!-- Sidebar -->
       <div class="col-3@md">
@@ -166,8 +156,6 @@
               @include('admin.partials.sidebar')
           @endif
       </div>
-      <!-- Sidebar END -->
 
     </div><!-- Grid END (col-12 and col-3) -->
-  </div><!-- Container Wrapper END -->
 @endsection

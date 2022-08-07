@@ -1,4 +1,4 @@
-@extends('theme.layouts.app')
+@extends(env('MAIN_APP_TEMPLATE'))
 @section('content')
 @include('components.layouts.partials.hero-random-image')
 

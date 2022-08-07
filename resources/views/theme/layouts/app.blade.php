@@ -16,11 +16,17 @@
 <body data-theme="@guest(){{config('app.default_theme')}}@else{{auth()->user()->theme()}}@endguest">
 
 <!-- Header -->
-<div class="padding-bottom-sm">
   @include(env('HEADER'))
+
+<!-- Random Image -->
+<div class="z-index-0">
+  @include('components.layouts.partials.hero-random-image')
 </div>
 
+<!-- Content -->
+<div class="container max-width-adaptive-lg negative-margin-30">
   @yield('content')
+</div>
 
 <!-- Footer -->
 <div class="padding-top-sm">

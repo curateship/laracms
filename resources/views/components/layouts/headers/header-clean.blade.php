@@ -11,7 +11,7 @@
     </div>
 
     <!-- Mobile Search -->
-    <div class="hide@md padding-left-xxl" aria-controls="modal-search">
+    <div class="hide@md padding-left-xxxl" aria-controls="modal-search">
       <svg class="icon" viewBox="0 0 24 24">
         <title>Toggle search</title>
         <g stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" stroke="currentColor" fill="none" stroke-miterlimit="10">

@@ -1,13 +1,10 @@
-@extends('theme.layouts.app')
+@extends(env('MAIN_APP_TEMPLATE'))
 
 @push('custom-scripts')
     @include('theme.posts.most-posts-scripts')
 @endpush
 
 @section('content')
-
-<!-- Container -->
-<div class="container max-width-adaptive-lg padding-top-sm">
 
 <div class="flex flex-column text-component padding-bottom-md gap-xs flex-row@md justify-between@md items-center@md">
     <h1 class="text-xl">Most commented posts</h1>
@@ -39,5 +36,4 @@
     @include('components.layouts.partials.pagination', ['items' => $posts])
 </div>
 
-</div>
 @endsection

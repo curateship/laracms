@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends(env('MAIN_APP_TEMPLATE'))
 
 @push('custom-scripts')
     @include('admin.posts.script-select2-js')
@@ -16,39 +16,49 @@
 @section('content')
 <!-- 👇 Content Body Wrapper-->
 @include('admin.partials.modal')
-  <div class="container max-width-adaptive-lg">
-    <div class="grid gap-md justify-between">
-      <div class="col-12@md">
+<div class="grid gap-md justify-between">
 
-        <!-- Content Table Column -->
-        <div class="card" data-table-controls="table-1">
+  <!-- Bread Crumb Mobile -->
+  <nav class="breadcrumbs text-based hide@md" aria-label="Breadcrumbs">
+    <ol class="flex flex-wrap gap-xxs">
+      <li class="breadcrumbs__item color-contrast-low">
+        <a href="{{\Illuminate\Support\Facades\Gate::allows('is-admin') ? '/admin' : '/'}}" class="color-inherit link-subtle">Home</a>
+        <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
+      </li>
+      <li class="breadcrumbs__item color-contrast-low">
+        <a href="{{\Illuminate\Support\Facades\Gate::allows('is-admin') ? '/admin' : ''}}/posts" class="color-inherit link-subtle">Posts</a>
+        <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
+      </li>
+      <li class="breadcrumbs__item color-contrast-high" aria-current="page">Edit {{ \Str::limit( $post->title, 60) }}</li>
+    </ol>
+  </nav>
 
-        <!-- Control Bar -->
-        <div class="controlbar--sticky flex justify-between">
-            <div class="inline-flex items-baseline">
+  <div class="col-12@md">
 
-              <!-- Bread Crumb -->
-              <nav class="breadcrumbs text-based padding-left-sm padding-sm" aria-label="Breadcrumbs">
-                <ol class="flex flex-wrap gap-xxs">
+    <!-- Content Table Column -->
+    <div class="card" data-table-controls="table-1">
 
-                  <li class="breadcrumbs__item color-contrast-low">
-                    <a href="{{\Illuminate\Support\Facades\Gate::allows('is-admin') ? '/admin' : '/'}}" class="color-inherit link-subtle">Home</a>
-                    <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
-                  </li>
+    <!-- Control Bar -->
+    <div class="controlbar--sticky flex justify-between">
+        <div class="inline-flex items-baseline">
 
-                  <li class="breadcrumbs__item color-contrast-low">
-                    <a href="{{\Illuminate\Support\Facades\Gate::allows('is-admin') ? '/admin' : ''}}/posts" class="color-inherit link-subtle">Posts</a>
-                    <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
-                  </li>
+          <!-- Bread Crumb -->
+          <nav class="breadcrumbs text-based padding-left-sm padding-sm display@md" aria-label="Breadcrumbs">
+            <ol class="flex flex-wrap gap-xxs">
+              <li class="breadcrumbs__item color-contrast-low">
+                <a href="{{\Illuminate\Support\Facades\Gate::allows('is-admin') ? '/admin' : '/'}}" class="color-inherit link-subtle">Home</a>
+                <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
+              </li>
+              <li class="breadcrumbs__item color-contrast-low">
+                <a href="{{\Illuminate\Support\Facades\Gate::allows('is-admin') ? '/admin' : ''}}/posts" class="color-inherit link-subtle">Posts</a>
+                <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
+              </li>
+              <li class="breadcrumbs__item color-contrast-high" aria-current="page">Edit {{ \Str::limit( $post->title, 60) }}</li>
+            </ol>
+          </nav>
+    </div>
 
-                  <li class="breadcrumbs__item color-contrast-high" aria-current="page">Edit {{ \Str::limit( $post->title, 60) }}</li>
-                </ol>
-              </nav>
-              <!-- Bread Crumb END -->
-        </div>
-        <!-- END Control Bar-->
-
-            <!-- Menu Bar -->
+    <!-- Menu Bar -->
     <div class="flex flex-wrap items-center justify-between margin-right-sm">
       <div class="flex flex-wrap">
         <menu class="menu-bar js-int-table-actions__no-items-selected js-menu-bar">
@@ -70,250 +80,247 @@
           </li>
         </menu>
 
-      </div><!-- END Control Bar -->
+      </div>
     </div>
-  </div><!-- END card -->
-<!-- END Control Bar-->
+  </div>
 
-<!-- Table-->
-<div class="margin-top-auto border-top border-contrast-lower"></div><!-- Divider -->
-<div class="padding-md">
-<form id="new-post-form" action="{{ route('post.store') }}" method='POST'>
-  @csrf
-  <input type="hidden" name="postId" value="{{$post->id}}">
+  <!-- Table-->
+  <div class="margin-top-auto border-top border-contrast-lower"></div><!-- Divider -->
+  <div class="padding-md">
+  <form id="new-post-form" action="{{ route('post.store') }}" method='POST'>
+    @csrf
+    <input type="hidden" name="postId" value="{{$post->id}}">
 
-  <fieldset class="margin-bottom-md">
+    <fieldset class="margin-bottom-md">
 
-    <div class="margin-bottom-sm">
-        <input class="form-control width-100%" type="text" name="title" placeholder="Enter Your Title" value="{{$post->title}}" required>
-    </div>
+      <div class="margin-bottom-sm">
+          <input class="form-control width-100%" type="text" name="title" placeholder="Enter Your Title" value="{{$post->title}}" required>
+      </div>
 
-    @error('title')
-    <p>{{ $message }}</p>
-    @enderror
+      @error('title')
+      <p>{{ $message }}</p>
+      @enderror
 
-    <div>
-        <div id="js-editor-description" data-target-input="#description" data-post-body="{{$post->body}}" class="site-editor form-control width-100%"></div>
-        <input type="hidden" name="description" id="description" required/>
-    </div>
+      <div>
+          <div id="js-editor-description" data-target-input="#description" data-post-body="{{$post->body}}" class="site-editor form-control width-100%"></div>
+          <input type="hidden" name="description" id="description" required/>
+      </div>
 
-    <!-- Date Picker -->
-    <div class="date-input js-date-input margin-y-sm">
+      <!-- Date Picker -->
+      <div class="date-input js-date-input margin-y-sm">
 
-    <div class="date-input__wrapper">
-      <input type="text" class="form-control width-100% date-input__text js-date-input__text" placeholder="dd/mm/yyyy" autocomplete="off" id="date-input-1" name="post_date" value="{{$post->post_date != '' ? date('d/m/Y', strtotime($post->post_date)) : ''}}">
+      <div class="date-input__wrapper">
+        <input type="text" class="form-control width-100% date-input__text js-date-input__text" placeholder="dd/mm/yyyy" autocomplete="off" id="date-input-1" name="post_date" value="{{$post->post_date != '' ? date('d/m/Y', strtotime($post->post_date)) : ''}}">
 
-      <button class="reset date-input__trigger js-date-input__trigger js-tab-focus" aria-label="Select date using calendar widget" type="button">
-        <svg class="icon" aria-hidden="true" viewBox="0 0 20 20"><g fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2"><rect x="1" y="4" width="18" height="14" rx="1"/><line x1="5" y1="1" x2="5" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="1" y1="9" x2="19" y2="9"/></g></svg>
-      </button>
-    </div>
+        <button class="reset date-input__trigger js-date-input__trigger js-tab-focus" aria-label="Select date using calendar widget" type="button">
+          <svg class="icon" aria-hidden="true" viewBox="0 0 20 20"><g fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2"><rect x="1" y="4" width="18" height="14" rx="1"/><line x1="5" y1="1" x2="5" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="1" y1="9" x2="19" y2="9"/></g></svg>
+        </button>
+      </div>
 
-    <div class="date-picker js-date-picker" role="dialog" aria-labelledby="calendar-label-1">
-      <header class="date-picker__header">
-        <div class="date-picker__month">
-          <span class="date-picker__month-label js-date-picker__month-label" id="calendar-label-1"></span> <!-- this will contain month label + year -->
+      <div class="date-picker js-date-picker" role="dialog" aria-labelledby="calendar-label-1">
+        <header class="date-picker__header">
+          <div class="date-picker__month">
+            <span class="date-picker__month-label js-date-picker__month-label" id="calendar-label-1"></span> <!-- this will contain month label + year -->
 
-          <nav>
-            <ul class="date-picker__month-nav js-date-picker__month-nav">
-              <li>
-                <button class="reset date-picker__month-nav-btn js-date-picker__month-nav-btn js-date-picker__month-nav-btn--prev js-tab-focus" type="button">
-                  <svg class="icon icon--xs" viewBox="0 0 16 16"><title>Previous month</title><polyline points="10 2 4 8 10 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
-                </button>
-              </li>
+            <nav>
+              <ul class="date-picker__month-nav js-date-picker__month-nav">
+                <li>
+                  <button class="reset date-picker__month-nav-btn js-date-picker__month-nav-btn js-date-picker__month-nav-btn--prev js-tab-focus" type="button">
+                    <svg class="icon icon--xs" viewBox="0 0 16 16"><title>Previous month</title><polyline points="10 2 4 8 10 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+                  </button>
+                </li>
 
-              <li>
-                <button class="reset date-picker__month-nav-btn js-date-picker__month-nav-btn js-date-picker__month-nav-btn--next js-tab-focus" type="button">
-                  <svg class="icon icon--xs" viewBox="0 0 16 16"><title>Next month</title><polyline points="6 2 12 8 6 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
-                </button>
-              </li>
-            </ul>
-          </nav>
-        </div>
+                <li>
+                  <button class="reset date-picker__month-nav-btn js-date-picker__month-nav-btn js-date-picker__month-nav-btn--next js-tab-focus" type="button">
+                    <svg class="icon icon--xs" viewBox="0 0 16 16"><title>Next month</title><polyline points="6 2 12 8 6 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+                  </button>
+                </li>
+              </ul>
+            </nav>
+          </div>
 
-        <ol class="date-picker__week">
-          <li><div class="date-picker__day">M<span class="sr-only">onday</span></div></li>
-          <li><div class="date-picker__day">T<span class="sr-only">uesday</span></div></li>
-          <li><div class="date-picker__day">W<span class="sr-only">ednesday</span></div></li>
-          <li><div class="date-picker__day">T<span class="sr-only">hursday</span></div></li>
-          <li><div class="date-picker__day">F<span class="sr-only">riday</span></div></li>
-          <li><div class="date-picker__day">S<span class="sr-only">aturday</span></div></li>
-          <li><div class="date-picker__day">S<span class="sr-only">unday</span></div></li>
+          <ol class="date-picker__week">
+            <li><div class="date-picker__day">M<span class="sr-only">onday</span></div></li>
+            <li><div class="date-picker__day">T<span class="sr-only">uesday</span></div></li>
+            <li><div class="date-picker__day">W<span class="sr-only">ednesday</span></div></li>
+            <li><div class="date-picker__day">T<span class="sr-only">hursday</span></div></li>
+            <li><div class="date-picker__day">F<span class="sr-only">riday</span></div></li>
+            <li><div class="date-picker__day">S<span class="sr-only">aturday</span></div></li>
+            <li><div class="date-picker__day">S<span class="sr-only">unday</span></div></li>
+          </ol>
+        </header>
+
+        <ol class="date-picker__dates js-date-picker__dates" aria-labelledby="calendar-label-1">
+          <!-- days will be created using js -->
         </ol>
-      </header>
+      </div>
+      </div>
 
-      <ol class="date-picker__dates js-date-picker__dates" aria-labelledby="calendar-label-1">
-        <!-- days will be created using js -->
-      </ol>
-    </div>
-    </div>
+      <!-- Select Category Dropdown Autocomplete -->
+      <div class="autocomplete position-relative select-auto js-select-auto js-autocomplete margin-bottom-sm" data-autocomplete-dropdown-visible-class="autocomplete--results-visible">
 
-    <!-- Select Category Dropdown Autocomplete -->
-    <div class="autocomplete position-relative select-auto js-select-auto js-autocomplete margin-bottom-sm" data-autocomplete-dropdown-visible-class="autocomplete--results-visible">
+        <!-- select -->
+        <select class="js-select-auto__select">
+          <optgroup>
+            @foreach($categories as $key => $category)
+            <option value="{{ $key }}" {{$key == $post->category_id ? 'selected' : ''}}>{{ $category }}</option>
+            @endforeach
+          </optgroup>
+        </select>
 
-      <!-- select -->
-      <select class="js-select-auto__select">
-        <optgroup>
-          @foreach($categories as $key => $category)
-          <option value="{{ $key }}" {{$key == $post->category_id ? 'selected' : ''}}>{{ $category }}</option>
-          @endforeach
-        </optgroup>
-      </select>
+        <!-- input -->
+        <div class="select-auto__input-wrapper">
+          <input class="form-control js-autocomplete__input js-select-auto__input" value="{{\App\Models\Category::find($post->category_id)->name}}" type="text" name="category" placeholder="Select a Category" autocomplete="off" required>
 
-      <!-- input -->
-      <div class="select-auto__input-wrapper">
-        <input class="form-control js-autocomplete__input js-select-auto__input" value="{{\App\Models\Category::find($post->category_id)->name}}" type="text" name="category" placeholder="Select a Category" autocomplete="off" required>
-
-        <div class="select-auto__input-icon-wrapper">
-          <!-- arrow icon -->
-          <svg class="icon" viewBox="0 0 16 16">
-            <title>Open selection</title>
-            <polyline points="1 5 8 12 15 5" fill="none" stroke="gray" opacity="30%" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
-          </svg>
-
-          <!-- close X icon -->
-          <button class="reset select-auto__input-btn js-select-auto__input-btn js-tab-focus">
+          <div class="select-auto__input-icon-wrapper">
+            <!-- arrow icon -->
             <svg class="icon" viewBox="0 0 16 16">
-              <title>Reset selection</title>
-              <path d="M8,0a8,8,0,1,0,8,8A8,8,0,0,0,8,0Zm3.707,10.293a1,1,0,1,1-1.414,1.414L8,9.414,5.707,11.707a1,1,0,0,1-1.414-1.414L6.586,8,4.293,5.707A1,1,0,0,1,5.707,4.293L8,6.586l2.293-2.293a1,1,0,1,1,1.414,1.414L9.414,8Z" />
+              <title>Open selection</title>
+              <polyline points="1 5 8 12 15 5" fill="none" stroke="gray" opacity="30%" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
             </svg>
-          </button>
-        </div>
-      </div>
 
-      <!-- dropdown -->
-      <div class="autocomplete__results select-auto__results js-autocomplete__results">
-        <ul id="autocomplete1" class="autocomplete__list js-autocomplete__list">
-          <li class="select-auto__group-title padding-y-xs padding-x-sm color-contrast-medium is-hidden js-autocomplete__result" data-autocomplete-template="optgroup" role="presentation">
-            <span class="text-truncate text-sm" data-autocomplete-label></span>
-          </li>
-
-          <li class="select-auto__option padding-y-xs padding-x-sm is-hidden js-autocomplete__result" data-autocomplete-template="option">
-            <span class="is-hidden" data-autocomplete-value></span>
-            <div class="text-truncate" data-autocomplete-label></div>
-          </li>
-
-          <li class="select-auto__no-results-msg padding-y-xs padding-x-sm text-truncate is-hidden js-autocomplete__result" data-autocomplete-template="no-results" role="presentation"></li>
-        </ul>
-      </div>
-
-      <p class="sr-only" aria-live="polite" aria-atomic="true"><span class="js-autocomplete__aria-results">0</span> results found.</p>
-    </div>
-    <!-- Select Category Dropdown Autocomplete END -->
-
-      <!-- Tags -->
-      @foreach(\App\Models\TagsCategories::all() as $key=> $tag_category)
-          <div class="grid margin-bottom-sm">
-              <label class="form-label" for="tag_category_{{ $tag_category->id }}">
-              </label>
-              <select name="tag_category_{{ $tag_category->id }}[]" id="tag_category_{{ $tag_category->id }}" class="site-tag-pills" data-category-id="{{ $tag_category->id }}" data-placeholder="Edit {{ $tag_category->name }}" multiple>
-                  @foreach($post->tags($tag_category->id) as $tag)
-                      <option value="{{$tag->id}}" selected>{{$tag->name}}</option>
-                  @endforeach()
-              </select>
+            <!-- close X icon -->
+            <button class="reset select-auto__input-btn js-select-auto__input-btn js-tab-focus">
+              <svg class="icon" viewBox="0 0 16 16">
+                <title>Reset selection</title>
+                <path d="M8,0a8,8,0,1,0,8,8A8,8,0,0,0,8,0Zm3.707,10.293a1,1,0,1,1-1.414,1.414L8,9.414,5.707,11.707a1,1,0,0,1-1.414-1.414L6.586,8,4.293,5.707A1,1,0,0,1,5.707,4.293L8,6.586l2.293-2.293a1,1,0,1,1,1.414,1.414L9.414,8Z" />
+              </svg>
+            </button>
           </div>
-      @endforeach
-      <!--
-      <div class="margin-bottom-sm tags-container">
-          <label>
-              <select name="tags[]" id="tags_pills" class="site-tag-pills form-control" multiple style="display: none" data-placeholder="Select a Tags">
-                  @foreach($post->tags() as $tag)
-                      <option value="{{$tag->id}}" selected>{{$tag->name}}</option>
-                  @endforeach()
-              </select>
-          </label>
+        </div>
+
+        <!-- dropdown -->
+        <div class="autocomplete__results select-auto__results js-autocomplete__results">
+          <ul id="autocomplete1" class="autocomplete__list js-autocomplete__list">
+            <li class="select-auto__group-title padding-y-xs padding-x-sm color-contrast-medium is-hidden js-autocomplete__result" data-autocomplete-template="optgroup" role="presentation">
+              <span class="text-truncate text-sm" data-autocomplete-label></span>
+            </li>
+
+            <li class="select-auto__option padding-y-xs padding-x-sm is-hidden js-autocomplete__result" data-autocomplete-template="option">
+              <span class="is-hidden" data-autocomplete-value></span>
+              <div class="text-truncate" data-autocomplete-label></div>
+            </li>
+
+            <li class="select-auto__no-results-msg padding-y-xs padding-x-sm text-truncate is-hidden js-autocomplete__result" data-autocomplete-template="no-results" role="presentation"></li>
+          </ul>
+        </div>
+
+        <p class="sr-only" aria-live="polite" aria-atomic="true"><span class="js-autocomplete__aria-results">0</span> results found.</p>
       </div>
-      -->
-      <!-- Tags END -->
+      <!-- Select Category Dropdown Autocomplete END -->
 
-      @if($post->type == 'image' || $post->type == 'video')
-          <!-- Image Upload -->
-
-          <div class="file-upload inline-block margin-bottom-sm">
-              <label for="upload-file" class="file-upload__label btn btn--subtle">
-                  <span class="flex items-center">
-                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><path  stroke-linecap="square" stroke-linejoin="miter" d="M2 16v6h20v-6"></path><path stroke-linejoin="miter" stroke-linecap="butt" d="M12 17V2"></path><path stroke-linecap="square" stroke-linejoin="miter" d="M18 8l-6-6-6 6"></path></g></svg>
-
-                    <span class="margin-left-xxs file-upload__text file-upload__text--has-max-width">Edit media</span>
-                  </span>
-              </label>
-
-              <input type="hidden" name="original" value="{{$post->original}}"/>
-              <input type="hidden" name="thumbnail" value="{{$post->thumbnail}}"/>
-              <input type="hidden" name="medium" value="{{$post->medium}}"/>
-
-              <input type="hidden" name="type" value="{{$post->type}}"/>
-
-              <input type="hidden" name="video_original" value="{{$post->video_original}}"/>
-              <input type="hidden" name="video_thumbnail" value="{{$post->video_thumbnail}}"/>
-              <input type="hidden" name="video_medium" value="{{$post->video_medium}}"/>
-
-              <input type="file" class="file-upload__input" name="image" id="upload-file" accept="{{$post->type == 'image' ? 'image/jpeg, image/jpg, image/png, image/gif' : 'video/mp4, video/webm'}}">
-
-              <br>
-
-              <div id="uploading-progress-bar" class="progress-bar progress-bar--color-update flex flex-column items-center js-progress-bar margin-top-md" style="display: none;">
-                  <div class="progress-bar__bg " aria-hidden="true">
-                      <div class="progress-bar__fill " style="width: 0%;"></div>
-                  </div>
-              </div>
-
-              <div id="upload-thumbnail" class="margin-top-md">
-                  {!! $content !!}
-              </div>
-          </div>
-          <!-- Image Upload END -->
-      @endif
-
-      @if($post->type == 'gallery')
-          @include('admin.forms.gallery', ['post' => $post])
-      @endif
-
-
-  </fieldset>
-
-    <div class="flex gap-sm justify-end">
-        <input type="hidden" name="status" value="">
-
-        <div class="flex justify-end gap-xs">
-            <button class="btn btn--accent postSaveAs" data-status="delete">Delete post</button>
-        </div>
-
-        <div class="flex justify-end gap-xs">
-            <button class="btn btn--primary">Save changes</button>
-        </div>
-
-        @if($post->status == 'published' || $post->status == 'pre-published' || $post->status == 'trash')
-            <div class="flex justify-end gap-xs">
-                <button class="btn btn--primary postSaveAs" data-status="draft">Move to drafts</button>
+        <!-- Tags -->
+        @foreach(\App\Models\TagsCategories::all() as $key=> $tag_category)
+            <div class="grid margin-bottom-sm">
+                <label class="form-label" for="tag_category_{{ $tag_category->id }}">
+                </label>
+                <select name="tag_category_{{ $tag_category->id }}[]" id="tag_category_{{ $tag_category->id }}" class="site-tag-pills" data-category-id="{{ $tag_category->id }}" data-placeholder="Edit {{ $tag_category->name }}" multiple>
+                    @foreach($post->tags($tag_category->id) as $tag)
+                        <option value="{{$tag->id}}" selected>{{$tag->name}}</option>
+                    @endforeach()
+                </select>
             </div>
+        @endforeach
+        <!--
+        <div class="margin-bottom-sm tags-container">
+            <label>
+                <select name="tags[]" id="tags_pills" class="site-tag-pills form-control" multiple style="display: none" data-placeholder="Select a Tags">
+                    @foreach($post->tags() as $tag)
+                        <option value="{{$tag->id}}" selected>{{$tag->name}}</option>
+                    @endforeach()
+                </select>
+            </label>
+        </div>
+        -->
+        <!-- Tags END -->
+
+        @if($post->type == 'image' || $post->type == 'video')
+            <!-- Image Upload -->
+
+            <div class="file-upload inline-block margin-bottom-sm">
+                <label for="upload-file" class="file-upload__label btn btn--subtle">
+                    <span class="flex items-center">
+                      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><path  stroke-linecap="square" stroke-linejoin="miter" d="M2 16v6h20v-6"></path><path stroke-linejoin="miter" stroke-linecap="butt" d="M12 17V2"></path><path stroke-linecap="square" stroke-linejoin="miter" d="M18 8l-6-6-6 6"></path></g></svg>
+
+                      <span class="margin-left-xxs file-upload__text file-upload__text--has-max-width">Edit media</span>
+                    </span>
+                </label>
+
+                <input type="hidden" name="original" value="{{$post->original}}"/>
+                <input type="hidden" name="thumbnail" value="{{$post->thumbnail}}"/>
+                <input type="hidden" name="medium" value="{{$post->medium}}"/>
+
+                <input type="hidden" name="type" value="{{$post->type}}"/>
+
+                <input type="hidden" name="video_original" value="{{$post->video_original}}"/>
+                <input type="hidden" name="video_thumbnail" value="{{$post->video_thumbnail}}"/>
+                <input type="hidden" name="video_medium" value="{{$post->video_medium}}"/>
+
+                <input type="file" class="file-upload__input" name="image" id="upload-file" accept="{{$post->type == 'image' ? 'image/jpeg, image/jpg, image/png, image/gif' : 'video/mp4, video/webm'}}">
+
+                <br>
+
+                <div id="uploading-progress-bar" class="progress-bar progress-bar--color-update flex flex-column items-center js-progress-bar margin-top-md" style="display: none;">
+                    <div class="progress-bar__bg " aria-hidden="true">
+                        <div class="progress-bar__fill " style="width: 0%;"></div>
+                    </div>
+                </div>
+
+                <div id="upload-thumbnail" class="margin-top-md">
+                    {!! $content !!}
+                </div>
+            </div>
+            <!-- Image Upload END -->
         @endif
 
-        @if($post->status == 'draft')
-            <div class="flex justify-end gap-xs">
-                <button class="btn btn--primary postSaveAs" data-status="published">Publish</button>
-            </div>
+        @if($post->type == 'gallery')
+            @include('admin.forms.gallery', ['post' => $post])
         @endif
-    </div>
-
-   </form>
-</div>
-<!-- END Table-->
 
 
+    </fieldset>
 
-        </div><!-- END Col-12 Card Wrapper -->
-      </div><!-- Col-12 END -->
+      <div class="flex gap-sm justify-end">
+          <input type="hidden" name="status" value="">
 
-      <!-- Sidebar -->
-      <div class="col-3@md">
-          @if(\Illuminate\Support\Facades\Gate::allows('is-admin'))
-              @include('admin.partials.sidebar-admin')
-          @else
-              @include('admin.partials.sidebar')
+          <div class="flex justify-end gap-xs">
+              <button class="btn btn--accent postSaveAs" data-status="delete">Delete post</button>
+          </div>
+
+          <div class="flex justify-end gap-xs">
+              <button class="btn btn--primary">Save changes</button>
+          </div>
+
+          @if($post->status == 'published' || $post->status == 'pre-published' || $post->status == 'trash')
+              <div class="flex justify-end gap-xs">
+                  <button class="btn btn--primary postSaveAs" data-status="draft">Move to drafts</button>
+              </div>
+          @endif
+
+          @if($post->status == 'draft')
+              <div class="flex justify-end gap-xs">
+                  <button class="btn btn--primary postSaveAs" data-status="published">Publish</button>
+              </div>
           @endif
       </div>
-      <!-- Sidebar END -->
 
-    </div><!-- Grid END (col-12 and col-3) -->
-  </div><!-- Container Wrapper END -->
+    </form>
+  </div>
+
+
+
+  </div>
+</div>
+
+    <!-- Sidebar -->
+    <div class="col-3@md">
+      @if(\Illuminate\Support\Facades\Gate::allows('is-admin'))
+        @include('admin.partials.sidebar-admin')
+          @else
+            @include('admin.partials.sidebar')
+          @endif
+    </div>
+  </div>
+</div>
+
 @endsection

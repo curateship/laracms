@@ -27,10 +27,6 @@ Usage: codyhouse.co/license
   overflow: hidden;
   transition: transform .3s var(--ease-out-back);
 
-  &:hover {
-    transform: scale(1.1);
-  }
-
   img {
     display: block;
     width: inherit;
