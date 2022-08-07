@@ -41,7 +41,7 @@
                         $('input[name="original"]').val(data.original.path);
                         $('input[name="thumbnail"]').val(data.thumbnail.path);
                         $('input[name="medium"]').val(data.medium.path);
-                        $('input[name="type"]').val(type);
+                        $('input[name="type"]').val('video');
 
                         if(data.type === 'video'){
                             $('input[name="video_original"]').val(data.video_original.path);
@@ -371,6 +371,11 @@
         document.getElementById('change-owner-dialog').dispatchEvent(event);
     });
 
+    // Delete from edit post;
+    $(document).on('click', '#delete-post-from-edit-page', function() {
+        const event = new Event('openDialog');
+        document.getElementById('delete-trash-post-dialog').dispatchEvent(event);
+    })
     /* Tags */
 
     $('.site-tag-pills').each(function(){
