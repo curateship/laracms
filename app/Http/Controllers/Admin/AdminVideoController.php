@@ -202,62 +202,14 @@ class AdminVideoController extends Controller
     }
 
     private static function chunked_copy($source_url, $destination) {
-        /*
-        // Fix URLs with Japanese symbols;
-        $change = true;
-        while($change){
-            preg_match('/[\p{Katakana}\p{Hiragana}\p{Han}]+/u', $source_url, $matches, PREG_OFFSET_CAPTURE);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_URL, $source_url);
+        curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        curl_close($ch);
 
-            if(count($matches) > 0){
-                $match = $matches[0][0];
-
-                $part_1 = substr($source_url, 0, $matches[0][1]);
-                $part_2 = substr($source_url, $matches[0][1] + strlen($match), strlen($source_url));
-                $source_url = $part_1.urlencode($match).$part_2;
-                $jap_symbols = true;
-            }   else{
-                $change = false;
-            }
-        }
-        */
-
-        // Fix Strange URLs and Japanese symbols;
-        $file_name_src = Arr::last(explode('/', $source_url));
-        $file_name = urlencode($file_name_src);
-
-        $source_url = str_replace($file_name_src, $file_name, $source_url);
-
-        // No time limits for loading real big files;
-        set_time_limit(-1);
-
-        // 1 mega byte at a time.
-        $buffer_size = 1048576;
-
-        # 1 GB write-chunks.
-        $write_chunks = 1073741824;
-
-        $ret = 0;
-        $fin = fopen($source_url, "rb");
-        if (!$fin) return false;
-
-        $fout = fopen($destination, "w");
-        if (!$fout) return false;
-
-        $bytes_written = 0;
-        while(!feof($fin)) {
-            $bytes = fwrite($fout, fread($fin, $buffer_size));
-            $ret += $bytes;
-            $bytes_written += $bytes;
-            if ($bytes_written >= $write_chunks) {
-                // (another) chunk of 1GB has been written, close and reopen the stream
-                fclose($fout);
-                $fout = fopen($destination, "a"); // "a" for "append";
-                if (!$fout) return false;
-                $bytes_written = 0; // re-start counting
-            }
-        }
-        fclose($fin);
-        fclose($fout);
-        return $ret; // return number of bytes written
+        file_put_contents($destination, $result);
     }
 }
