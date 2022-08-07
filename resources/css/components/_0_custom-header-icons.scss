@@ -93,15 +93,11 @@ Usage: For LaraCMS
         .icon__group {
             transform: rotate(-90deg);
 
-            > *:nth-child(1) {
+            > *:nth-child(1), > *:nth-child(2) {
                 stroke-dashoffset: 48;
             }
 
-            > *:nth-child(2) {
-                stroke-dashoffset: 48;
-            }
-
-            > *:nth-child(3) {
+            > *:nth-child(3), > *:nth-child(4) {
                 stroke-dashoffset: 42;
                 opacity: 0;
             }
@@ -147,10 +143,7 @@ Usage: For LaraCMS
                 opacity: 0;
             }
 
-            > *:nth-child(3) {
-                stroke-dashoffset: 48;
-            }
-            > *:nth-child(4) {
+            > *:nth-child(3), > *:nth-child(4) {
                 stroke-dashoffset: 48;
             }
         }
@@ -169,12 +162,12 @@ Usage: For LaraCMS
             stroke-dashoffset 0.3s, opacity 0.3s;
         }
 
-        > *:nth-child(5) {
+        > *:nth-child(3) {
             stroke-dashoffset: 24;
             stroke-dasharray: 24;
         }
 
-        > *:nth-child(6) {
+        > *:nth-child(4) {
             stroke-dashoffset: 24;
             stroke-dasharray: 24;
         }
@@ -184,14 +177,11 @@ Usage: For LaraCMS
         .icon__group {
             transform: rotate(-90deg);
 
-            > *:nth-child(1), > *:nth-child(2), > *:nth-child(3), > *:nth-child(4) {
+            > *:nth-child(1), > *:nth-child(2){
                 opacity: 0;
             }
 
-            > *:nth-child(5) {
-                stroke-dashoffset: 48;
-            }
-            > *:nth-child(6) {
+            > *:nth-child(3), > *:nth-child(4) {
                 stroke-dashoffset: 48;
             }
         }
