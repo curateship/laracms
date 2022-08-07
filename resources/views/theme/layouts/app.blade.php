@@ -19,12 +19,12 @@
   @include(env('HEADER'))
 
 <!-- Random Image -->
-<div class="z-index-0">
+<div class="margin-bottom-sm">
   @include('components.layouts.partials.hero-random-image')
 </div>
 
 <!-- Content -->
-<div class="container max-width-adaptive-lg negative-margin-30">
+<div class="container max-width-adaptive-lg margin-top-sm">
   @yield('content')
 </div>
 
