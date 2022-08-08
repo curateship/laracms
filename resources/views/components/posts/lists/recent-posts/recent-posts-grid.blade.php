@@ -5,7 +5,7 @@
 <li class="card">
   <a href="{{ route('post.show', $recent_post) }}">
     <figure class="aspect-ratio-4:3 margin-bottom-xs">
-     <img class="block width-100%" loading="lazy" src="{{ url('/storage').$recent_post->getPreviewImage()  }}" alt="Image description">
+     <img class="block width-100% radius-md radius-bottom-right-0 radius-bottom-left-0" loading="lazy" src="{{ url('/storage').$recent_post->getPreviewImage()  }}" alt="Image description">
     </figure>
   </a>
     <div class="card__content recent-post-card line-height-1 margin-xxs">

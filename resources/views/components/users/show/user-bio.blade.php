@@ -6,13 +6,13 @@
     @if($user->cover_medium != '')
         <img class="radius-md" src="{{url('/storage'.config('images.users_storage_path').$user->cover_medium)}}" alt="Card preview img">
     @else
-        <div style="height: 120px;"></div>
+        <div style="height: 140px;"></div>
     @endif
 </figure>
 
 <!-- Avatar -->
 <figure class="flex justify-center reveal-fx reveal-fx--scale z-index-overlay">
-    {!! $user->getAvatar(false, ['width' => 100, 'height' => 100], ['block width-xxl height-xxl radius-50% border border-bg border-2 shadow-sm card-author author__img-wrapper'])->content !!}
+    {!! $user->getAvatar(false, ['width' => 100, 'height' => 100], ['block width-xxl height-xxl border border-bg border-2 shadow-sm card-author author__img-wrapper author--featured'])->content !!}
 </figure>
 
 <!-- User's name -->
