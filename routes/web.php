@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\AdminCommentController;
 use App\Http\Controllers\Admin\AdminScraperController;
 use App\Http\Controllers\Admin\AdminFavoriteController;
 use App\Http\Controllers\Admin\AdminGalleryController;
+use App\Http\Controllers\Admin\AdminPageController;
 
 // Front-End Controllers
 use App\Http\Controllers\Frontend\IndexController;
@@ -170,6 +171,9 @@ Route::post('/user/upload', [AdminUserController::class, 'upload'])->name('user.
 Route::post('/user/store', [AdminUserController::class, 'store'])->name('user.store');
 Route::post('/users/saveTheme', [AdminUserController::class, 'saveTheme'])->middleware(['auth']); // Theme Switcher
 
+// Pages;
+Route::get('/pages/edit/{page:slug}', [AdminPageController::class, 'edit'])->name('page.edit')->middleware(['auth', 'verified']);
+
 // Admin Prefix
 Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->group(function (){
     Route::resource('/', AdminIndexController::class); // Index Route
@@ -181,4 +185,5 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
     Route::resource('/videos', AdminVideoController::class); // Video Route
     Route::resource('/favorites', AdminFavoriteController::class); // Favorites Route
     Route::resource('/galleries', AdminGalleryController::class); // Galleries Route
+    Route::resource('/pages', AdminPageController::class); // Pages Route
 });
