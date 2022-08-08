@@ -20,9 +20,12 @@
 
 <!-- Random Image -->
 <div class="position-relative">
-  @include('components.layouts.partials.hero-random-image')
+    @if(strpos(request()->getPathInfo(), '/user/') === false)
+        @include('components.layouts.partials.hero-random-image')
+    @else
+        <div class="padding-top-xxl"><!-- Add another content --></div>
+    @endif
 </div>
-
 <!-- Content -->
 <div class="container max-width-adaptive-lg negative-margin">
   @yield('content')
