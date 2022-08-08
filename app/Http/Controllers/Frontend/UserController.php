@@ -64,7 +64,7 @@ class UserController extends Controller
             $followed = $exist_follow != null;
         }
 
-        return view('theme.users.profile', [
+        return view(env('PROFILE_THEME'), [
             'user' => $user,
             'followed' => $followed,
             'posts' => $posts,
