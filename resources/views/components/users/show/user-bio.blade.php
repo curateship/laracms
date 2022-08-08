@@ -2,14 +2,6 @@
     @include('components.users.show.scripts-js')
 @endpush
 
-<figure class="card__img img-blend" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg" data-blend-height="50%" style="background-color: var(--color-bg);">
-    @if($user->cover_medium != '')
-        <img class="radius-md" src="{{url('/storage'.config('images.users_storage_path').$user->cover_medium)}}" alt="Card preview img">
-    @else
-        <div style="height: 140px;"></div>
-    @endif
-</figure>
-
 <!-- Avatar -->
 <figure class="flex justify-center reveal-fx reveal-fx--scale z-index-overlay">
     {!! $user->getAvatar(false, ['width' => 100, 'height' => 100], ['block width-xxl height-xxl border border-bg border-2 shadow-sm card-author author__img-wrapper author--featured'])->content !!}
