@@ -20,6 +20,67 @@
     <h4>{{$user->name}}</h4>
 </div>
 
+<!-- User's stats -->
+<ul class="flex flex-wrap gap-md justify-center text-sm padding-top-md">
+  <li class="inline-flex items-center">
+  <a href="#0" class="link-plain" aria-controls="user-followers">
+    <span>Followers ({{count($followers)}})</span>
+  </a>
+  </li>
+
+  <li class="inline-flex items-center">
+  <a href="#0" class="link-plain" aria-controls="user-following">
+    <span>Following ({{count($following)}})</span>
+  </a>
+  </li>
+</ul>
+
+<!-- Users Followers Modal -->
+<div class="modal modal--animate-scale flex flex-center bg-black bg-opacity-90% padding-md js-modal" id="user-followers">
+  <div class="modal__content width-100% max-width-xs max-height-100% overflow-auto padding-md bg radius-md inner-glow shadow-md" role="alertdialog" aria-labelledby="modal-form-title" aria-describedby="modal-form-description">
+    <div class="text-component">
+    </div>
+
+    <div class="text-component">
+    <h1 class="text-base color-contrast-medium padding-bottom-sm">Followers ({{count($followers)}})</h1>
+      @include('components.users.lists.my-followers-with-button', ['follow_list' => $followers])
+    </div>
+  </div>
+
+  <button class="reset modal__close-btn modal__close-btn--outer  js-modal__close js-tab-focus">
+    <svg class="icon icon--sm" viewBox="0 0 24 24">
+      <title>Close modal window</title>
+      <g fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="3" x2="21" y2="21" />
+        <line x1="21" y1="3" x2="3" y2="21" />
+      </g>
+    </svg>
+  </button>
+</div>
+
+<!-- Users Following Modal -->
+<div class="modal modal--animate-scale flex flex-center bg-black bg-opacity-90% padding-md js-modal" id="user-following">
+  <div class="modal__content width-100% max-width-xs max-height-100% overflow-auto padding-md bg radius-md inner-glow shadow-md" role="alertdialog" aria-labelledby="modal-form-title" aria-describedby="modal-form-description">
+    <div class="text-component">
+    </div>
+
+    <div class="text-component">
+    <h1 class="text-base color-contrast-medium">Following ({{count($following)}})</h1>
+      @include('components.users.lists.my-followers-with-button', ['follow_list' => $following])
+    </div>
+  </div>
+
+  <button class="reset modal__close-btn modal__close-btn--outer  js-modal__close js-tab-focus">
+    <svg class="icon icon--sm" viewBox="0 0 24 24">
+      <title>Close modal window</title>
+      <g fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="3" x2="21" y2="21" />
+        <line x1="21" y1="3" x2="3" y2="21" />
+      </g>
+    </svg>
+  </button>
+</div>
+
 <!-- User`s bio -->
 <div class="padding-y-md text-component text-sm">{{$user->bio}}</div>
 
