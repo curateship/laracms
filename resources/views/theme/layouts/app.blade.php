@@ -20,7 +20,7 @@
 
 <!-- Random Image -->
 <div class="position-relative">
-    @if(strpos(request()->getPathInfo(), '/user/') === false)
+    @if(strpos(request()->getPathInfo(), '/user/') === false || request()->getPathInfo() === '/user/edit')
         @include('components.layouts.partials.hero-random-image')
     @else
       <div class="">
