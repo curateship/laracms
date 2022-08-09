@@ -52,7 +52,13 @@ class AdminPageController extends Controller
     }
 
     // Show;
-    public function show(Request $request, Page $page){
+    public function show($any){
+        $page = Page::where('slug', $any)
+            ->first();
+
+        if($page == null){
+            return abort(404);
+        }
 
         return view('admin.pages.show', [
             'page' => $page
@@ -93,6 +99,10 @@ class AdminPageController extends Controller
 
         if (count($posts_with_same_slug) > 0) {
             $slug = Post::getNewSlug($slug, $posts_with_same_slug);
+        }
+
+        if(!Page::checkExitRoute($slug)){
+            $slug .= '-page';
         }
 
         if($request->has('pageId')){
