@@ -237,7 +237,7 @@
                                                         <path d="M15,4H1C0.4,4,0,4.4,0,5v10c0,0.6,0.4,1,1,1h14c0.6,0,1-0.4,1-1V5C16,4.4,15.6,4,15,4z M14,14H2V6h12V14z"></path>
                                                         <rect x="2" width="12" height="2"></rect>
                                                       </svg>
-                                                      <span><a class="text-decoration-none color-inherit" href="{{ route('admin.pages.show', $page) }}" target="_blank">Preview</a></span>
+                                                      <span><a class="text-decoration-none color-inherit" href="/{{$page->slug}}" target="_blank">Preview</a></span>
                                                     </span>
                                                 </li>
 
