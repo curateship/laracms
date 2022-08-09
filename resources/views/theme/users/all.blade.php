@@ -5,7 +5,7 @@
 
 <!-- Popular Posts -->
 <h1>Users</h1>
-    include('components.users.lists.all-users')
+    @include('components.users.lists.all-users')
 
 <!-- Pagination -->
 <div class="padding-top-sm">
