@@ -26,7 +26,7 @@
       <div class="">
         <figure class="card__img img-blend opacity-50%" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg" data-blend-height="30%" style="background-color: var(--color-bg);">
           @if($user->cover_medium != '')
-            <img class="radius-md object-cover profile-image" src="{{url('/storage'.config('images.users_storage_path').$user->cover_medium)}}" alt="Card preview img">
+            <img class="radius-md object-cover height-550 height-md@sm" src="{{url('/storage'.config('images.users_storage_path').$user->cover_medium)}}" alt="Card preview img">
             @else
               <div style="height: 140px;"></div>
           @endif

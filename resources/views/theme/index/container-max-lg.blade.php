@@ -1,6 +1,11 @@
 @extends(env('MAIN_APP_TEMPLATE'))
 @section('content')
 
+    <!-- Advance Search -->
+    <div class="margin-bottom-lg">
+      @include('components.layouts.partials.advance-search')
+    </div>
+
     <!-- Recent Posts -->
     <div class="margin-bottom-lg">
       @include(env('CONTENT_GRID'))

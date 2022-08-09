@@ -43,18 +43,18 @@
   @include defineColorHSL(--color-error-lighter, 342, 89%, 62%);
 
   // background
-  @include defineColorHSL(--color-bg-darker, 0, 0%, 94%);
-  @include defineColorHSL(--color-bg-dark, 0, 0%, 96%);
+  @include defineColorHSL(--color-bg-darker, 0, 0%, 91%);
+  @include defineColorHSL(--color-bg-dark, 0, 0%, 95%);
   @include defineColorHSL(--color-bg, 0, 0%, 100%);
   @include defineColorHSL(--color-bg-light, 0, 0%, 100%);
   @include defineColorHSL(--color-bg-lighter, 0, 0%, 100%);
 
   // color contrasts
-  @include defineColorHSL(--color-contrast-lower, 0, 0%, 91%);
-  @include defineColorHSL(--color-contrast-low, 0, 0%, 82%);
-  @include defineColorHSL(--color-contrast-medium, 0, 0%, 67%);
-  @include defineColorHSL(--color-contrast-high, 0, 0%, 51%);
-  @include defineColorHSL(--color-contrast-higher, 0, 0%, 41%);
+  @include defineColorHSL(--color-contrast-lower, 0, 0%, 86%);
+  @include defineColorHSL(--color-contrast-low, 0, 0%, 69%);
+  @include defineColorHSL(--color-contrast-medium, 0, 0%, 53%);
+  @include defineColorHSL(--color-contrast-high, 0, 0%, 31%);
+  @include defineColorHSL(--color-contrast-higher, 0, 0%, 18%);
 }
 
 [data-theme="dark"] {
