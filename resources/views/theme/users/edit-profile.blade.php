@@ -1,4 +1,4 @@
-@extends(env('MAIN_APP_TEMPLATE'))
+@extends(config('theme.main_app_template'))
 
 @push('custom-scripts')
     @include('admin.users.script-js')

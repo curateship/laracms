@@ -1,11 +1,11 @@
-@extends(env('MAIN_APP_TEMPLATE'))
+@extends(config('theme.main_app_template'))
 @section('content')
 
 <div class="padding-md">
 
     <!-- Recent Posts -->
     <div class="margin-bottom-lg">
-      @include(env('CONTENT_GRID'))
+      @include(config('theme.content_grid'))
     </div>
 
     <!-- Pagination -->

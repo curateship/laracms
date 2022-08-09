@@ -1,4 +1,4 @@
-@extends(env('MAIN_APP_TEMPLATE'))
+@extends(config('theme.main_app_template'))
 @section('content')
 
 <div class="container max-width-xs padding-lg card margin-top-lg">

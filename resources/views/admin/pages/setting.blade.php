@@ -1,4 +1,4 @@
-@extends('apps.master')
+@extends(config('theme.admin_app_template'))
 @section('content')
 
 <!-- Container -->

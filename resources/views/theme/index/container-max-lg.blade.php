@@ -1,4 +1,4 @@
-@extends(env('MAIN_APP_TEMPLATE'))
+@extends(config('theme.main_app_template'))
 @section('content')
 
     <!-- Advance Search -->
@@ -7,13 +7,8 @@
     </div>
 
     <!-- Recent Posts -->
-    <div class="margin-bottom-lg">
-      @include(env('CONTENT_GRID'))
-    </div>
-
-    <!-- Pagination -->
-    <div class="padding-bottom-xl">
-        @include('components.layouts.partials.pagination', ['items' => $recent_posts])
+    <div class="margin-bottom-xl">
+      @include(config('theme.content_grid'))
     </div>
 
     <!-- Popular Tags -->

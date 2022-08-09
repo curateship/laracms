@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends(config('theme.admin_app_template'))
 @section('content')
 
 <!-- 👇 Content Body Wrapper-->

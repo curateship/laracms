@@ -10,11 +10,9 @@
     
         <div class="flex flex-wrap flex-center gap-sm">
           <a class="btn btn--primary" href="https://github.com/CodyHouse/virgo-template">Register</a>
+          <a class="btn btn--subtle" href="https://github.com/CodyHouse/virgo-template">Login</a>
+
         </div>
       </div>
     </div>
   </section>
-
-<div class="max-width-lg flex flex-wrap items-center justify-center padding-y-xs">
-@include('components.tags.lists.popular-tags')
-</div>

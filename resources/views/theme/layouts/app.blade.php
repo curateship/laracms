@@ -16,7 +16,7 @@
 <body data-theme="@guest(){{config('app.default_theme')}}@else{{auth()->user()->theme()}}@endguest">
 
 <!-- Header -->
-  @include(env('HEADER'))
+  @include(config('theme.header'))
 
 <!-- Random Image -->
 <div class="position-relative">
@@ -41,12 +41,12 @@
 
 <!-- Footer -->
 <div class="padding-top-sm">
-  @include(env('FOOTER'))
+  @include(config('theme.footer'))
 </div>
 
 <!-- Tracker -->
 <div class="padding-top-sm">
-  @include(env('TRACKER'))
+  @include(config('theme.tracker'))
 </div>
 
 <!-- Scripts -->

@@ -1,4 +1,4 @@
-@extends(env('MAIN_APP_TEMPLATE'))
+@extends(config('theme.admin_app_template'))
 @section('content')
 <section>
     <div class="grid">
