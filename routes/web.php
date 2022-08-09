@@ -187,3 +187,6 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
     Route::resource('/galleries', AdminGalleryController::class); // Galleries Route
     Route::resource('/pages', AdminPageController::class); // Pages Route
 });
+
+// Universal pages router;
+Route::get('/{any}', [AdminPageController::class, 'show'])->where('any', '.*');
