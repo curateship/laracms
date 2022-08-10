@@ -17,7 +17,7 @@ class Page extends Model
     use HasFactory;
 
     public function getContent(){
-        $content = Post::jsonToHtml($this->body);
+        $content = Post::jsonToHtml($this->body, 'page');
 
         return html_entity_decode($content);
     }

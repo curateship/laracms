@@ -85,7 +85,7 @@ class Tag extends Model
 
         if($type == 'full'){
             // Full content render;
-            $content = Post::jsonToHtml($this->body);
+            $content = Post::jsonToHtml($this->body, 'post');
         }   else{
             // Get only text content from post body;
             $data = json_decode($this->body, true);
