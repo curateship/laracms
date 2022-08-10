@@ -2,7 +2,7 @@
 
 return [
     'main_app_template' => env('MAIN_APP_TEMPLATE', 'dark'),
-    'admin_app_template' => env('ADMIN_APP_TEMPLATE', 'dark'),
+    'admin_app_template' => env('ADMIN_APP_TEMPLATE', 'admin.layouts.app'),
     'header' => env('HEADER', 'components.layouts.headers.header'),
     'footer' => env('FOOTER', 'components.layouts.footers.footer'),
     'tracker' => env('TRACKER', 'components.layouts.partials.tracker'),

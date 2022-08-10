@@ -15,6 +15,12 @@
 
   <!-- Content -->
   <div class="col-11@md padding-x-lg@md">
+      @if($post->user_id == \Illuminate\Support\Facades\Auth::id() && $post->status == 'pending')
+          <div class="margin-sm padding-sm text-center post-pending-message">
+              Your post in pending review
+          </div>
+      @endif
+
     @include('components.posts.show.types.video')
 
   <!-- Author Box -->
@@ -28,7 +34,7 @@
       @include('components.comments.list')
     </section>
   </div>
-  
+
   <!-- Sidebar -->
   <div class="col-3@md">
     <h3 class="padding-bottom-sm color-contrast-high">Related Posts</h3>
