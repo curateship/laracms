@@ -32,8 +32,14 @@ class GenerateMenus
             // Friends Dropdown Links
             $menu->add('Friends', ['url'  => '#'])->id('friend');
             // Adding sub items;
-            $menu->add('Erotic Hentai', ['parent' => 'friend', 'url' => 'https://erotic-hentai.com']);
-            $menu->add('Hentai Games', ['parent' => 'friend', 'url' => 'https://hentaiporn.com']);
+            $menu->add('Link1', ['parent' => 'friend', 'url' => 'https://google.com']);
+            $menu->add('Link2', ['parent' => 'friend', 'url' => 'https://google.com']);
+
+            // Users
+            $menu->add('Users', ['url'  => url('/').'/users']);
+
+            // Lists
+            $menu->add('Lists', ['url'  => url('/').'/lists']);
         });
 
         // Links Sidebar
