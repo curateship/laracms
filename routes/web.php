@@ -111,6 +111,7 @@ Route::get('/search/{search_request}', [PostController::class, 'postSearch'])->n
 Route::get('/most-liked', [PostController::class, 'mostLiked'])->name('posts.most-liked');
 Route::get('/most-commented', [PostController::class, 'mostCommented'])->name('posts.most-commented');
 Route::get('/most-viewed', [PostController::class, 'mostViewed'])->name('posts.most-viewed');
+Route::get('/most-recent', [PostController::class, 'mostRecent'])->name('posts.most-recent');
 
 // Favorite lists;
 Route::resource('/favorites', FavoriteController::class)->middleware(['auth']);

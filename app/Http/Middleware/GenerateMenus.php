@@ -24,6 +24,7 @@ class GenerateMenus
             // Filter Dropdown Links
             $menu->add('Filter', ['url'  => '#'])->id('filter');
             // Adding sub items;
+            $menu->add('Most Recent', ['parent' => 'filter', 'url' => url('/').'/most-recent']);
             $menu->add('Most Liked', ['parent' => 'filter', 'url' => url('/').'/most-liked']);
             $menu->add('Most Commented', ['parent' => 'filter', 'url' => url('/').'/most-commented']);
             $menu->add('Most Viewed', ['parent' => 'filter', 'url' => url('/').'/most-viewed']);
