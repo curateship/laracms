@@ -1,10 +1,12 @@
 @extends(config('theme.main_app_template'))
 @section('content')
 
-    <!-- Advance Search -->
-    <div class="margin-bottom-lg">
-      @include('components.layouts.partials.advance-search')
-    </div>
+    <!-- Diagonal Hero -->
+    @if (Auth::guest())
+      <div class="margin-bottom-xs">
+        @include('components.layouts.partials.diagonal-hero')
+      </div>
+    @endif
 
     <!-- Recent Posts -->
     <div class="margin-bottom-xl">
