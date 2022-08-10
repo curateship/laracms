@@ -483,6 +483,35 @@ class PostController extends Controller
 
 
     /* Most posts */
+    // Recent;
+    public function mostRecent(Request $request){
+        $posts = Post::where('posts.status', 'published')
+            ->orderBy('created_at', 'desc');
+
+        if($request->has('filter')){
+            $filter = $request->input('filter');
+
+            switch($filter){
+                case 'week':
+                    $posts = $posts->whereRaw("date(created_at) between '".date('Y-m-d', strtotime(date('Y-m-d').' -1 week'))."' and date(now())");
+                    break;
+                case 'month':
+                    $posts = $posts->whereRaw("date(created_at) between '".date('Y-m-d', strtotime(date('Y-m-d').' -1 month'))."' and date(now())");
+                    break;
+                case 'today':
+                    $posts = $posts->whereRaw('date(created_at) = date(now())');
+                    break;
+            }
+        }
+
+        $posts = $posts->paginate(20);
+
+        return view('theme.posts.most-recent', [
+            'posts' => $posts,
+            'search' => ''
+        ]);
+    }
+
     // Liked;
     public function mostLiked(Request $request){
         $posts = Post::whereNotNull('post_id')
