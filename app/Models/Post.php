@@ -126,7 +126,7 @@ class Post extends Model
     {
         if($type == 'full'){
             // Full content render;
-            $content = static::jsonToHtml($this->body);
+            $content = static::jsonToHtml($this->body, 'post');
         }   else{
             // Get only text content from post body;
             $data = json_decode($this->body, true);
@@ -296,18 +296,18 @@ class Post extends Model
         return $truncate;
     }
 
-    static function jsonToHtml($jsonStr) {
+    static function jsonToHtml($jsonStr, $type = 'post') {
         $obj = json_decode($jsonStr);
 
         $html = '';
         foreach ($obj->blocks as $block) {
             switch ($block->type) {
                 case 'paragraph':
-                    $html .= '<p>' . $block->data->text . '</p>';
+                    $html .= '<p class="'.$type.'-paragraph">' . $block->data->text . '</p>';
                     break;
 
                 case 'header':
-                    $html .= '<h'. $block->data->level .'>' . $block->data->text . '</h'. $block->data->level .'>';
+                    $html .= '<h'. $block->data->level .' class="'.$type.'-header">' . $block->data->text . '</h'. $block->data->level .'>';
                     break;
 
                 case 'raw':
@@ -328,7 +328,7 @@ class Post extends Model
                     break;
 
                 case 'image':
-                    $html .= '<div class="img_pnl padding-y-md"><img class="radius-lg" src="'. $block->data->file->url .'" /></div>';
+                    $html .= '<div class="img_pnl padding-y-md '.$type.'-image"><img class="radius-lg" src="'. $block->data->file->url .'" /></div>';
                     break;
 
                 case 'embed':
@@ -337,11 +337,11 @@ class Post extends Model
 
                 case 'extUrl':
                     if($block->data->type == 'image'){
-                        $html .= '<div class="img_pnl padding-y-md custom-ext-url-result-on-render"><img class="radius-lg" src="'.$block->data->url.'" alt="ext-url-image"></div>';
+                        $html .= '<div class="img_pnl padding-y-md custom-ext-url-result-on-render '.$type.'-ext-image"><img class="radius-lg" src="'.$block->data->url.'" alt="ext-url-image"></div>';
                     }
 
                     if($block->data->type == 'video'){
-                        $html .= '<div class="img_pnl padding-y-md custom-ext-url-result-on-render"><video controls="controls" preload="metadata"><source src="'.$block->data->url.'" type="video/mp4"></video></div>';
+                        $html .= '<div class="img_pnl padding-y-md custom-ext-url-result-on-render '.$type.'-ext-video"><video controls="controls" preload="metadata"><source src="'.$block->data->url.'" type="video/mp4"></video></div>';
                     }
                     break;
 
