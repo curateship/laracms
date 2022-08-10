@@ -1,0 +1,44 @@
+@use '../base' as *;
+
+/* -------------------------------- 
+
+File#: _1_note
+Title: Note
+Descr: A brief piece of information given to the user
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+.note {
+  background-color: var(--color-bg-light);
+  border-left: 3px solid var(--color-primary);
+  box-shadow: var(--shadow-sm);
+
+  /* 👇 you can ovveride this padding using the padding utility classes */
+  &:not([class^="padding-"]):not([class*=" padding-"]) {
+    padding: var(--space-sm);
+  }
+}
+
+.note--warning {
+  border-left-color: var(--color-warning);
+}
+
+.note--error {
+  border-left-color: var(--color-error);
+}
+
+.note--success {
+  border-left-color: var(--color-success);
+}
+
+.text-component {
+  /* reset in case the component is used inside a .text-component */
+  .note__content > *:last-child {
+    margin-bottom: 0;
+  }
+
+  .note__title {
+    margin-bottom: 0;
+  }
+}
