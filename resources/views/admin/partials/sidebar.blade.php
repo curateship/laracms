@@ -57,26 +57,6 @@
                 </ul>
               </li>
 
-              <li class="sidenav__item">
-                  <a href="#" class="sidenav__link">
-                      <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16">
-                          <g >
-                              <path d="M2.64 2.31h10.56v-0.99a0.33 0.33 0 0 0-0.33-0.33h-9.9a0.33 0.33 0 0 0-0.33 0.33z"></path><path d="M14.52 2.97h-13.2a0.66 0.66 0 0 0-0.66 0.66v10.56a0.66 0.66 0 0 0 0.66 0.66h13.2a0.66 0.66 0 0 0 0.66-0.66v-10.56a0.66 0.66 0 0 0-0.66-0.66z m-9.24 2.31a0.99 0.99 0 1 1-0.99 0.99 0.99 0.99 0 0 1 0.99-0.99z m7.88 6.77a0.33 0.33 0 0 1-0.29 0.16h-9.57a0.33 0.33 0 0 1-0.26-0.53l1.98-2.64a0.33 0.33 0 0 1 0.24-0.13 0.32 0.32 0 0 1 0.25 0.1l1.71 1.71 2.75-3.66a0.33 0.33 0 0 1 0.55 0.03l2.64 4.63a0.33 0.33 0 0 1 0 0.33z"></path>
-                          </g>
-                      </svg>
-                      <span class="sidenav__text text-sm@md">Galleries</span>
-                  </a>
-                  <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
-                      <svg class="icon" viewBox="0 0 12 12"><polygon points="4 3 8 6 4 9 4 3"/></svg>
-                  </button>
-                  <ul class="sidenav__list">
-                      <li class="sidenav__item">
-                          <a href="/galleries/create" class="sidenav__link">
-                              <span class="sidenav__text text-sm@md">Add New</span>
-                          </a>
-                      </li>
-                  </ul>
-              </li>
             </ul>
 
 

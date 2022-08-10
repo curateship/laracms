@@ -4,7 +4,7 @@
     <!-- Diagonal Hero -->
     @if (Auth::guest())
       <div class="margin-bottom-xs">
-        @include('components.layouts.partials.diagonal-hero')
+        {!! env('DIAGONAL_HERO') !!}
       </div>
     @endif
 
