@@ -15,6 +15,12 @@
 
   <!-- Content -->
   <div class="col-11@md padding-x-lg@md">
+      @if($post->user_id == \Illuminate\Support\Facades\Auth::id() && $post->status == 'pending')
+          <div class="margin-sm padding-sm text-center post-pending-message">
+              Your post in pending review
+          </div>
+      @endif
+
     @include('components.posts.show.types.gallery')
 
   <!-- Author Box -->

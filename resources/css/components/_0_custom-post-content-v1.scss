@@ -12,3 +12,8 @@
   .tags-cols{
       grid-template-columns: repeat(auto-fit, minmax(var(--col-min-width), 0.2fr)) !important;
   }
+
+  .post-pending-message{
+      border: 3px solid greenyellow;
+      border-radius: 10px;
+  }
