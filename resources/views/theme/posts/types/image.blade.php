@@ -24,7 +24,7 @@
               <circle cx="15" cy="23.5" r="1.5" fill="var(--color-warning-dark)"></circle>
             </svg>
 
-            <p class="note__title  color-contrast-higher"><strong>Your post in pending review</strong></p>
+            <p class="note__title  color-contrast-higher"><strong>Your post is in pending review</strong></p>
           </div>
 
           <div class="flex margin-top-xxxs">
