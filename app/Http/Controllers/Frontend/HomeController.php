@@ -24,7 +24,7 @@ class HomeController extends Controller
     public function index()
     {
         $posts = Post::latest()->withCount('comments')->paginate(10);
-        $recent_posts = Post::where('status', 'published')->latest()->withCount('comments')->paginate(8);
+        $recent_posts = Post::where('status', 'published')->where('posts.category_id', '!=', 2)->latest()->withCount('comments')->paginate(8);
         $categories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(5)->get();
         $tags = Tag::latest()->take(10)->get();
 

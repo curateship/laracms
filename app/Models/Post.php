@@ -392,6 +392,7 @@ class Post extends Model
 
     public function getRecentList($by_array, $limit = 5){
         $posts = Post::where('status', 'published')
+            ->where('posts.category_id', '!=', 2)
             ->where('posts.id', '!=', $this->id);
 
         foreach($by_array as $by_item){
@@ -468,6 +469,7 @@ class Post extends Model
             ->whereNotNull('user_id')
             ->whereNotNull('views_count')
             ->where('status', 'published')
+            ->where('posts.category_id', '!=', 2)
             ->orderBy('views_count', 'DESC')
             ->limit(10)
             ->get();
@@ -546,6 +548,7 @@ class Post extends Model
                 $join->on('post_tag.post_id', '=', 'posts.id');
             })
             ->where('posts.status', 'published')
+            ->where('posts.category_id', '!=', 2)
             ->orderBy('posts.'.$order['by'], $order['order'])
             ->limit($limit)
             ->get();
