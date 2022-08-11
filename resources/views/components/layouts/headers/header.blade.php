@@ -37,7 +37,7 @@
 
       <!-- Navigation -->
       <nav id="main-menu" class="header-v2__nav" role="navigation">
-        <ul class="header-v2__nav-list header-v2__nav-list--main padding-left-xl@md">
+        <ul class="header-v2__nav-list header-v2__nav-list--main padding-left-lg@md">
           @include('components.layouts.headers.partials.custom-menu-items', ['items' => Menu::get('header')->roots()])<!-- Custom Menu -->
         </ul>
       </nav>
