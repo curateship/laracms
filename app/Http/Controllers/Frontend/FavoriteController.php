@@ -112,6 +112,7 @@ class FavoriteController extends Controller
         }
 
         $posts = Post::where('status', 'published')
+            ->where('posts.category_id', '!=', 2)
             ->leftJoin('favorites_items', 'favorites_items.post_id', '=', 'posts.id')
             ->leftJoin('favorites', 'favorites.id', '=', 'favorites_items.favorite_id')
             ->where('favorites.slug', $slug)
