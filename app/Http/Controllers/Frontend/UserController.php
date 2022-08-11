@@ -43,6 +43,7 @@ class UserController extends Controller
             if($request->input('type') == 'liked'){
                 $posts = Post::leftJoin('likes', 'likes.post_id', '=', 'posts.id')
                     ->where('status', 'published')
+                    ->where('posts.category_id', '!=', 2)
                     ->where('likes.user_id', $user->id)
                     ->orderBy('likes.created_at', 'DESC')
                     ->paginate(10);
@@ -50,6 +51,7 @@ class UserController extends Controller
         }   else{
             $posts = Post::where('user_id', $user->id)
                 ->where('status', 'published')
+                ->where('posts.category_id', '!=', 2)
                 ->orderBy('created_at', 'DESC')
                 ->paginate(10);
         }

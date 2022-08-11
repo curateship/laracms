@@ -322,6 +322,7 @@ class PostController extends Controller
 
         // Search by titles or body and tags (by post id);
         $by_title_and_body = Post::where('status', 'published')
+            ->where('posts.category_id', '!=', 2)
             ->where(function($query) use($search_like, $posts_ids){
                 $query->where('title', 'like', '%'.$search_like.'%')
                     ->orWhere('body', 'like', '%'.$search_like.'%')
@@ -362,13 +363,14 @@ class PostController extends Controller
         $offset = ($page_num - 1) * $perpage;
 
         $posts = Post::where('status', 'published')
+            ->where('posts.category_id', '!=', 2)
             ->offset($offset)
             ->limit($perpage)
             ->get();
 
         $posts_count = Post::where([
             'status' => 'published'
-        ])->count();
+        ])->where('posts.category_id', '!=', 2)->count();
 
         $data['total'] = $posts_count;
         $data['posts'] = $posts;
@@ -388,6 +390,7 @@ class PostController extends Controller
         $offset = ($page_num - 1) * $perpage;
 
         $posts = Post::where('status', 'published')
+            ->where('posts.category_id', '!=', 2)
             ->orderBy('created_at', 'DESC')
             ->offset($offset)
             ->limit($perpage);
@@ -435,7 +438,7 @@ class PostController extends Controller
 
         $posts_count = Post::where([
             'status' => 'published'
-        ])->count();
+        ])->where('posts.category_id', '!=', 2)->count();
 
         foreach($posts as $post){
             if(Auth::guest()){
@@ -486,6 +489,7 @@ class PostController extends Controller
     // Recent;
     public function mostRecent(Request $request){
         $posts = Post::where('posts.status', 'published')
+            ->where('posts.category_id', '!=', 2)
             ->orderBy('created_at', 'desc');
 
         if($request->has('filter')){
@@ -517,7 +521,8 @@ class PostController extends Controller
         $posts = Post::whereNotNull('post_id')
             ->orderBy('likes_count', 'desc')
             ->select('posts.*')
-            ->where('posts.status', 'published');
+            ->where('posts.status', 'published')
+            ->where('posts.category_id', '!=', 2);
 
         if($request->has('filter')){
             $filter = $request->input('filter');
@@ -552,6 +557,7 @@ class PostController extends Controller
         $posts = Post::whereNotNull('post_id')
             ->orderBy('comments_count', 'desc')
             ->where('posts.status', 'published')
+            ->where('posts.category_id', '!=', 2)
             ->select('posts.*');
 
         if($request->has('filter')){
@@ -587,6 +593,7 @@ class PostController extends Controller
         $posts = Post::whereNotNull('post_id')
             ->orderBy('views_count', 'desc')
             ->where('posts.status', 'published')
+            ->where('posts.category_id', '!=', 2)
             ->select('posts.*');
 
         if($request->has('filter')){

@@ -30,6 +30,7 @@ class Tag extends Model
     {
         return Post::leftJoin('post_tag', 'post_tag.post_id', '=', 'posts.id')
             ->where('posts.status', 'published')
+            ->where('posts.category_id', '!=', 2)
             ->where('tag_id', $this->id)
             ->select('posts.*');
     }
