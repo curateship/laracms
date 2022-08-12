@@ -1,10 +1,10 @@
-<ul class="grid-auto-xs grid-auto-sm@sm grid-auto-md@md gap-md">
+<ul class="grid gap-md">
     @foreach($posts as $post)
-        <li class="card">
+        <li class="card col-3@md">
             <div class="">
                 <a href="/post/{{$post->slug}}">
                     <figure class="aspect-ratio-4:3 margin-bottom-xs">
-                        <img class="block width-100%" loading="lazy" src="{{url('/storage').$post->getPreviewImage()}}" alt="Image description">
+                        <img class="block width-100% radius-md radius-bottom-right-0 radius-bottom-left-0" loading="lazy" src="{{url('/storage').$post->getPreviewImage()}}" alt="Image description">
                     </figure>
                 </a>
 

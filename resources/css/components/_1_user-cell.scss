@@ -17,8 +17,7 @@ Usage: codyhouse.co/license
   @include spaceUnit(1rem); // spacing not affected by em units
   font-size: 1rem; // children font size not affected by global change of body font-size
 
-  background: alpha(var(--color-contrast-lower), 0.5);
-  padding: var(--space-xs);
+  background: alpha(var(--color-contrast-lowest), 0.5);
   border-radius: var(--radius-md);
 }
 

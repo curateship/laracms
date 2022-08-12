@@ -57,7 +57,7 @@
     </div>
 
     <div class="text-component">
-    <h1 class="text-base color-contrast-medium">Following ({{count($following)}})</h1>
+    <h1 class="text-base color-contrast-medium padding-bottom-sm">Following ({{count($following)}})</h1>
       @include('components.users.lists.my-followers-with-button', ['follow_list' => $following])
     </div>
   </div>

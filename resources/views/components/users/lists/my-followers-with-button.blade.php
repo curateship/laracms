@@ -13,7 +13,7 @@
 
   <!-- Follow Icon -->
     @if(Auth::guest() || Auth::id() != $user->id)
-        <ul class="choice-tags flex flex-wrap js-choice-tags">
+        <ul class="choice-tags flex flex-wrap js-choice-tags list">
             <li>
                 <label class="choice-tag choice-tag--checkbox text-sm js-choice-tag {{$user->followed ? 'choice-tag--checked' : ''}}" for="checkbox-tag-phone-call-{{$user->id}}" data-user-id="{{$user->id}}">
                     <input class="sr-only follow-button-input" type="checkbox" id="checkbox-tag-phone-call-{{$user->id}}" {{$user->followed ? 'checked' : ''}} data-user-id="{{$user->id}}">

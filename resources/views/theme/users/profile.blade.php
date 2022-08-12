@@ -11,7 +11,7 @@
 
       <!-- Following -->
       <div class="card margin-top-md">
-          <div class="flex justify-between items-baseline padding-sm">
+          <div class="flex justify-between items-baseline padding-sm padding-bottom-sm">
               <h1 class="text-base color-contrast-medium">Following ({{count($following)}})</h1>
               <a class="text-sm link-plain" href="#0">View all</a>
           </div>
@@ -36,7 +36,7 @@
       <div class="justify-between flex items-end justify-between@md">
         <a href="/user/{{$user->username}}" class="btn {{request()->get('type') === null ? 'btn--primary' : 'btn--subtle'}} btn--sm radius-full margin-right-xs" role="text">{{$user->name}}'s Posts</a>
         <a href="/user/{{$user->username}}?type=liked" class="btn {{request()->get('type') === 'liked' ? 'btn--primary' : 'btn--subtle'}} btn--sm radius-full margin-right-xs" role="text">Likes</a>
-        <a href="#" class="btn btn--subtle btn--sm radius-full" role="text">Comments</a>
+        <a href="#" class="btn btn--subtle btn--sm radius-full" role="text">My Lists</a>
       </div>
     </div>
     @include('components.users.lists.user-posts')
