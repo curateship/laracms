@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Favorite;
 use App\Models\Follow;
 use App\Models\Post;
 use App\Models\User;
@@ -46,6 +47,13 @@ class UserController extends Controller
                     ->where('posts.category_id', '!=', 2)
                     ->where('likes.user_id', $user->id)
                     ->orderBy('likes.created_at', 'DESC')
+                    ->paginate(10);
+            }
+
+            if($request->input('type') == 'favorite'){
+                $posts = Favorite::where('user_id', $user->id)
+                    ->where('public', 1)
+                    ->orderBy('created_at', 'DESC')
                     ->paginate(10);
             }
         }   else{
