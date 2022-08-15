@@ -582,6 +582,8 @@ class AdminPostController extends Controller
                 return view('admin.forms.video')->render();
             case 'gallery':
                 return view('admin.forms.gallery')->render();
+            case 'news':
+                return view('admin.forms.news')->render();
         }
 
         return false;

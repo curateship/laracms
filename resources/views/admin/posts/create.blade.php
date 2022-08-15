@@ -183,14 +183,23 @@
     <div class="grid gap-sm items-center@md padding-top-xs">
           <div class="col-8@md">
             <ul class="flex flex-wrap gap-md">
+                @if(Gate::allows('is-admin'))
+                    <li>
+                        <input class="radio uploading-form-type" type="radio" name="type" id="news-uploading" value="news">
+                        <label for="image-uploading">News</label>
+                    </li>
+                @endif
+
               <li>
                 <input class="radio uploading-form-type" type="radio" name="type" id="image-uploading" value="image">
                 <label for="image-uploading">Image</label>
               </li>
+
               <li>
                 <input class="radio uploading-form-type" type="radio" name="type" id="video-uploading" value="video">
                 <label for="video-uploading">Video</label>
               </li>
+
                 <li>
                     <input class="radio uploading-form-type" type="radio" name="type" id="gallery-uploading" value="gallery">
                     <label for="gallery-uploading">Gallery</label>

@@ -120,6 +120,12 @@
     }
     $(document).on('change', '#upload-file', uploadMedia);
 
+    @if(Gate::allows('is-admin'))
+        setTimeout(function(){
+            $('.uploading-form-type[value="news"]').click()
+        }, 1000)
+    @endif
+
     $(document).on('click', '.uploading-form-type', function(){
         const type = $(this).val()
 
