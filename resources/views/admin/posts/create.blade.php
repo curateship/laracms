@@ -186,7 +186,7 @@
                 @if(Gate::allows('is-admin'))
                     <li>
                         <input class="radio uploading-form-type" type="radio" name="type" id="news-uploading" value="news">
-                        <label for="image-uploading">News</label>
+                        <label for="news-uploading">News</label>
                     </li>
                 @endif
 

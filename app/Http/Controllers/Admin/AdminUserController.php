@@ -350,4 +350,16 @@ class AdminUserController extends Controller
         $user->theme = $request->input('theme');
         $user->save();
     }
+
+    public function restoreFromTrash(Request $request){
+        if(Gate::allows('is-admin')){
+            $user = User::find($request->input('userId'));
+            $user->status = 'active';
+            $user->save();
+
+            return [
+                'status' => 200
+            ];
+        }
+    }
 }
