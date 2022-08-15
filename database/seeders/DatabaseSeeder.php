@@ -42,12 +42,12 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(RoleUserSeeder::class);
         $this->call(CategoriesSeeder::class);
+        $this->call(UserSeeder::class);
         Post::factory(20)->create();
         Comment::factory(10)->create();
         $this->call(TagsCategoriesSeeder::class);
         Tag::factory(10)->create();
         $this->call(PostTagsSeeder::class);
-        $this->call(UserSeeder::class);
         $this->call(ScraperSeeder::class);
     }
 }
