@@ -53,7 +53,7 @@ class AdminPostController extends Controller
             $search_input = $request->input('search');
             $posts = $posts->where(function($query) use ($search_input){
                 $query->where('title', 'like', '%'.$search_input.'%')
-                    ->whereOr('body', 'like', '%'.$search_input.'%');
+                    ->orWhere('body', 'like', '%'.$search_input.'%');
             });
         }
 
@@ -582,6 +582,8 @@ class AdminPostController extends Controller
                 return view('admin.forms.video')->render();
             case 'gallery':
                 return view('admin.forms.gallery')->render();
+            case 'news':
+                return view('admin.forms.news')->render();
         }
 
         return false;

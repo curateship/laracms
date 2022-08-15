@@ -24,11 +24,32 @@
               </ol>
             </nav>
           </div>
-          
+
           <!-- Control -->
           <div class="flex flex-wrap items-center justify-between margin-right-sm">
             <div class="flex flex-wrap">
               <menu class="menu-bar js-int-table-actions__no-items-selected js-menu-bar">
+                  <div class="inline-flex items-baseline padding-x-sm">
+                      @if(request()->get('status') == 'trash')
+                          <li id="clean-trash" class="menu-bar__item" role="menuitem">
+                              <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 16 16">
+                                  <g><path d="M2,6v8c0,1.1,0.9,2,2,2h8c1.1,0,2-0.9,2-2V6H2z"></path><path d="M12,3V1c0-0.6-0.4-1-1-1H5C4.4,0,4,0.4,4,1v2H0v2h16V3H12z M10,3H6V2h4V3z"></path></g>
+                              </svg>
+                              <span class="menu-bar__label">Clean trash</span>
+                          </li>
+                      @endif
+
+                      <label class="text-sm color-contrast-medium margin-right-xs" for="statusFilter"></label>
+                      <div class="select inline-block js-select" data-trigger-class="reset text-sm color-contrast-high text-underline inline-flex items-center cursor-pointer js-tab-focus">
+                          <select name="selectThis" id="statusFilter">
+                              <option value="" {{request()->get('status') == '' ? 'selected' : ''}}>All Users</option>
+                              <option value="active" {{request()->get('status') == 'active' ? 'selected' : ''}}>Active</option>
+                              <option value="trash" {{request()->get('status') == 'trash' ? 'selected' : ''}}>Trash</option>
+                          </select>
+                          <svg class="icon icon--xxxs margin-left-xxs" viewBox="0 0 8 8"><path d="M7.934,1.251A.5.5,0,0,0,7.5,1H.5a.5.5,0,0,0-.432.752l3.5,6a.5.5,0,0,0,.864,0l3.5-6A.5.5,0,0,0,7.934,1.251Z"/></svg>
+                      </div>
+                  </div>
+
                 <li class="menu-bar__item"><a href="{{ route('admin.users.create') }}" role="menuitem">
                   <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 20 20">
                       <path d="M18.85 4.39l-3.32-3.32a0.83 0.83 0 0 0-1.18 0l-11.62 11.62a0.84 0.84 0 0 0-0.2 0.33l-1.66 4.98a0.83 0.83 0 0 0 0.79 1.09 0.84 0.84 0 0 0 0.26-0.04l4.98-1.66a0.84 0.84 0 0 0 0.33-0.2l11.62-11.62a0.83 0.83 0 0 0 0-1.18z m-6.54 1.08l1.17-1.18 2.15 2.15-1.18 1.17z"></path>
@@ -87,13 +108,16 @@
           <div id="delete-user-dialog" class="dialog dialog--sticky js-dialog" data-animation="on">
               <div class="dialog__content max-width-xxs" role="alertdialog" aria-labelledby="dialog-sticky-title" aria-describedby="dialog-sticky-description">
                   <div class="text-component">
-                      <h4 id="dialog-sticky-title">Are you sure what you want to delete selected user(-s)?</h4>
+                      <h4 id="dialog-sticky-title">Are you sure what you want to delete{{request()->get('status') != 'trash' ? ' or move to trash ' : ''}}selected user(-s)?</h4>
                       <p id="dialog-sticky-description">This action cannot be undone.</p>
                   </div>
                   <footer class="margin-top-md">
                       <div class="flex justify-end gap-xs flex-wrap">
                           <button class="btn btn--subtle js-dialog__close">Cancel</button>
                           <button id="accept-delete" class="btn btn--accent">Delete</button>
+                          @if(request()->get('status') != 'trash')
+                              <button id="accept-trash" class="btn btn--primary">To Trash</button>
+                          @endif
                       </div>
                   </footer>
                   <input type="hidden" id="delete-users-list">
@@ -270,6 +294,37 @@
                       </li>
                     </ul>
                   </th>
+                    <th class="int-table__cell int-table__cell--th int-table__cell--sort js-int-table__cell--sort
+                      @if(request()->get('sortBy') === 'status')
+                          @if(request()->get('sortDesc') === 'desc')
+                              int-table__cell--desc
+                          @endif
+                          @if(request()->get('sortDesc') === 'asc')
+                              int-table__cell--asc
+                          @endif
+                      @endif
+                      " data-sort-col="status">
+                        <div class="flex items-center">
+                            <span>Status</span>
+                            <svg class="icon icon--xxs margin-left-xxxs int-table__sort-icon" aria-hidden="true" viewBox="0 0 12 12">
+                                <polygon class="arrow-up" points="6 0 10 5 2 5 6 0" />
+                                <polygon class="arrow-down" points="6 12 2 7 10 7 6 12" /></svg>
+                        </div>
+                        <ul class="sr-only js-int-table__sort-list">
+                            <li>
+                                <input type="radio" name="sortingDate" id="sortingDateNone" value="none" checked>
+                                <label for="sortingDateNone">No sorting</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="sortingDate" id="sortingDateAsc" value="asc">
+                                <label for="sortingDateAsc">Sort in ascending order</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="sortingDate" id="sortingDateDes" value="desc">
+                                <label for="sortingDateDes">Sort in descending order</label>
+                            </li>
+                        </ul>
+                    </th>
                   <th class="int-table__cell int-table__cell--th text-right">Action</th>
                 </tr>
               </thead>
@@ -298,7 +353,8 @@
                   <td class="int-table__cell">{{$user->posts_count != '' ? $user->posts_count : 0}}</td>
                   <td class="int-table__cell">{{$user->comments_count != '' ? $user->comments_count : 0}}</td>
                   <td class="int-table__cell">Editor</td>
-                  <td class="int-table__cell">{{ $user->created_at->diffForHumans() }}</td>
+                  <td class="int-table__cell">{{ $user->created_at != null ? $user->created_at->diffForHumans() : ''}}</td>
+                    <td class="int-table__cell">{{ $user->status }}</td>
 
                   <!-- Action Dropdown -->
                   <td class="int-table__cell">

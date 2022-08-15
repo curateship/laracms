@@ -421,7 +421,7 @@ class Post extends Model
                     // Prepare title;
                     $like_title = str_replace(' ', '%', $this->title);
                     if(count($by_array) > 1){
-                        $posts = $posts->whereOr('title', 'like', "%$like_title%");
+                        $posts = $posts->orWhere('title', 'like', "%$like_title%");
                     }   else{
                         $posts = $posts->where('title', 'like', "%$like_title%");
                     }
@@ -574,7 +574,7 @@ class Post extends Model
     public function prepareContent($image_classes = '', $target = 'post'){
         $content = null;
 
-        if($this->type == 'image'){
+        if($this->type == 'image' || $this->type == 'news'){
             $content = '<div class="image-zoom js-image-zoom"><img class="'.$image_classes.'" alt="thumbnail" src="'.'/storage'.config('images.posts_storage_path').$this->medium.'"></div>';
         }
 

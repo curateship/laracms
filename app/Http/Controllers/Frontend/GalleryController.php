@@ -34,7 +34,7 @@ class GalleryController extends Controller
             $search_input = $request->input('search');
             $galleries = $galleries->where(function($query) use ($search_input){
                 $query->where('title', 'like', '%'.$search_input.'%')
-                    ->whereOr('description', 'like', '%'.$search_input.'%');
+                    ->orWhere('description', 'like', '%'.$search_input.'%');
             });
         }
 

@@ -41,7 +41,7 @@
 
       @endif
 
-    @include('components.posts.show.types.image')
+    @include('components.posts.show.types.news')
 
   <!-- Author Box -->
   <div class="padding-y-lg">

@@ -35,7 +35,7 @@ class AdminPageController extends Controller
             $search_input = $request->input('search');
             $pages = $pages->where(function($query) use ($search_input){
                 $query->where('title', 'like', '%'.$search_input.'%')
-                    ->whereOr('body', 'like', '%'.$search_input.'%');
+                    ->orWhere('body', 'like', '%'.$search_input.'%');
             });
         }
 

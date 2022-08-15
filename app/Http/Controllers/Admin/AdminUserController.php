@@ -45,13 +45,22 @@ class AdminUserController extends Controller
         $users = $users->leftJoin(DB::raw("(select user_id, count(*) as posts_count from posts group by user_id) as posts"), 'posts.user_id', '=', 'users.id')
             ->leftJoin(DB::raw("(select user_id, count(*) as comments_count from comments group by user_id) as comments"), 'comments.user_id', '=', 'users.id');
 
+        if($request->has('status') && $request->input('status') != 'All'){
+            $users = $users->where('status', strtolower($request->input('status')));
+            $status = ucfirst($request->input('status'));
+        }
+
+        $status = 'All';
         if($request->has('search') && $request->input('search') != ''){
             $search_input = str_replace(' ', '%', $request->input('search'));
             $users = $users->where('name', 'like', '%'.$search_input.'%');
         }
 
         if(Gate::allows('is-admin')){
-            return view('admin.users.index', ['users' => $users->paginate(10)]);
+            return view('admin.users.index', [
+                'users' => $users->paginate(10),
+                'status' => $status
+            ]);
         }
 
         dd('You need to be Admin');
@@ -212,32 +221,41 @@ class AdminUserController extends Controller
     // Destroy
     public function destroy(string $ids, Request $request)
     {
+        if($request->input('type') == 'clean-trash'){
+            $users = User::where('status', 'trash')
+                ->get();
+
+            foreach($users as $user){
+                $user->dropWithContent();
+            }
+
+            $request->session()->flash('success', 'Trash successfully cleaned');
+            return;
+        }
+
         $ids = explode(',', $ids);
+        $action_message = '';
 
         foreach($ids as $id){
-            // Updating all user posts;
-            Post::where('user_id', $id)
-                ->update([
-                    'user_id' => null
-                ]);
+            $user = User::find($id);
 
-            // Updating all user comments;
-            Comment::where('user_id', $id)
-                ->update([
-                    'user_id' => null
-                ]);
-
-            // Remove user avatar if it not default;
-
-
-            // And then - remove the user;
-            User::destroy($id);
+            switch($request->input('type')){
+                case 'delete':
+                    $user->dropWithContent();
+                    $action_message = 'deleted';
+                    break;
+                case 'trash':
+                    $user->status = 'trash';
+                    $user->save();
+                    $action_message = 'moved to trash';
+                    break;
+            }
         }
 
         if(count($ids) > 1){
-            $request->session()->flash('success', 'You have deleted all selected users');
+            $request->session()->flash('success', 'You have '.$action_message.' all selected users');
         }   else{
-            $request->session()->flash('success', 'You have deleted the user');
+            $request->session()->flash('success', 'You have '.$action_message.' the user');
         }
     }
 
