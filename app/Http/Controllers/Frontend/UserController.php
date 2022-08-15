@@ -16,9 +16,27 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
         $users = User::orderBy('name')
-            ->paginate(20);
+            ->orderBy('created_at', 'DESC');
+
+        if($request->has('filter')){
+            $filter = $request->input('filter');
+
+            switch($filter){
+                case 'week':
+                    $users = $users->whereRaw("date(created_at) between '".date('Y-m-d', strtotime(date('Y-m-d').' -1 week'))."' and date(now())");
+                    break;
+                case 'month':
+                    $users = $users->whereRaw("date(created_at) between '".date('Y-m-d', strtotime(date('Y-m-d').' -1 month'))."' and date(now())");
+                    break;
+                case 'today':
+                    $users = $users->whereRaw('date(created_at) = date(now())');
+                    break;
+            }
+        }
+
+        $users = $users->paginate(20);
 
         return view('theme.users.all', [
             'users' => $users
