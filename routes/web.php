@@ -172,6 +172,7 @@ Route::get('/gallery/getManga', [GalleryController::class, 'mangeAjax']);
 Route::post('/user/upload', [AdminUserController::class, 'upload'])->name('user.upload');
 Route::post('/user/store', [AdminUserController::class, 'store'])->name('user.store');
 Route::post('/users/saveTheme', [AdminUserController::class, 'saveTheme'])->middleware(['auth']); // Theme Switcher
+Route::post('/users/restoreFromTrash', [AdminUserController::class, 'restoreFromTrash'])->middleware(['auth']); // Theme Switcher
 
 // Pages;
 Route::get('/pages/edit/{page:slug}', [AdminPageController::class, 'edit'])->name('page.edit')->middleware(['auth', 'verified']);
