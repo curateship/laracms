@@ -36,14 +36,6 @@
         <div class="flex flex-wrap items-center justify-between margin-right-sm">
           <div class="flex flex-wrap">
             <menu class="menu-bar js-int-table-actions__no-items-selected js-menu-bar">
-                @if(request()->get('status') == 'trash')
-                    <li id="clean-trash" class="menu-bar__item" role="menuitem">
-                        <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 16 16">
-                            <g><path d="M2,6v8c0,1.1,0.9,2,2,2h8c1.1,0,2-0.9,2-2V6H2z"></path><path d="M12,3V1c0-0.6-0.4-1-1-1H5C4.4,0,4,0.4,4,1v2H0v2h16V3H12z M10,3H6V2h4V3z"></path></g>
-                        </svg>
-                        <span class="menu-bar__label">Clean trash</span>
-                    </li>
-                @endif
                 <div class="inline-flex items-baseline padding-x-sm">
                     <label class="text-sm color-contrast-medium margin-right-xs" for="statusFilter"></label>
                     <div class="select inline-block js-select" data-trigger-class="reset text-sm color-contrast-high text-underline inline-flex items-center cursor-pointer js-tab-focus">
@@ -73,6 +65,16 @@
                 </svg>
                 <span class="menu-bar__label">Search Posts</span>
               </li>
+
+              <!-- Clean Trash -->
+              @if(request()->get('status') == 'trash')
+                <li id="clean-trash" class="menu-bar__item" role="menuitem">
+                  <svg class="icon menu-bar__icon" aria-hidden="true" viewBox="0 0 16 16">
+                    <g><path d="M2,6v8c0,1.1,0.9,2,2,2h8c1.1,0,2-0.9,2-2V6H2z"></path><path d="M12,3V1c0-0.6-0.4-1-1-1H5C4.4,0,4,0.4,4,1v2H0v2h16V3H12z M10,3H6V2h4V3z"></path></g>
+                  </svg>
+                  <span class="menu-bar__label">Clean trash</span>
+                </li>
+              @endif
 
               <!-- Search Modal -->
               <div class="modal modal--search modal--animate-fade bg bg-opacity-90% flex flex-center padding-md backdrop-blur-10 js-modal" id="post-search">
