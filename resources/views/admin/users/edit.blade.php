@@ -174,9 +174,12 @@
                 <img alt="thumbnail" id="cover-upload-thumbnail" src="{{url('/storage'.config('images.users_storage_path').$user->cover_thumbnail)}}" style="{{$user->cover_thumbnail == '' ? 'display: none' : ''}}">
             </div>
           </div>
-          <div class="margin-y-sm">
 
-          <button class="btn btn--primary btn--md width-15%">Update</button>
+          <div class="margin-y-sm">
+            <button class="btn btn--primary btn--md width-15%">Update</button>
+              @if(Gate::allows('is-admin') && $user->status == 'trash')
+                  <button type="button" id="restore-user-from-trash" data-user-id="{{$user->id}}" class="btn btn--primary btn--md width-15%">Restore</button>
+              @endif
           </div>
         </form>
       </form>

@@ -152,6 +152,27 @@
         }
 
     })
+
+    @if(Gate::allows('is-admin'))
+        $(document).on('click', '#restore-user-from-trash', function(){
+            const userId = $(this).attr('data-user-id')
+
+            $.ajax({
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    userId: userId
+                },
+                url: '/users/restoreFromTrash',
+                type: 'POST',
+                success:function(data){
+                    if(data.status === 200){
+                        location.reload()
+                    }
+                }
+            });
+        })
+    @endif
+
 }());
 </script>
 @endauth
