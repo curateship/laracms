@@ -40,7 +40,7 @@ class FavoriteController extends Controller
             $search_input = $request->input('search');
             $favorites = $favorites->where(function($query) use ($search_input){
                 $query->where('name', 'like', '%'.$search_input.'%')
-                    ->whereOr('name', 'like', '%'.$search_input.'%');
+                    ->orWhere('name', 'like', '%'.$search_input.'%');
             });
         }
 
@@ -135,8 +135,8 @@ class FavoriteController extends Controller
 
         if(!Auth::guest()){
             $favorites = $favorites->where(function($query){
-                $query->whereOr('user_id', Auth::id())
-                    ->whereOr('public', 1);
+                $query->orWhere('user_id', Auth::id())
+                    ->orWhere('public', 1);
             });
         }  else{
             $favorites = $favorites->where('public', 1);

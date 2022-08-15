@@ -74,12 +74,17 @@
         $('.delete-counter').html(selectedUsers.length + ' <i class="sr-only">Notifications</i>')
     }
 
-    function deleteUsersArray(selectedUsers){
+    function deleteUsersArray(selectedUsers, type){
+        if(type === 'clean-trash'){
+            selectedUsers = [0];
+        }
+
         if(selectedUsers.length > 0){
             $.ajax({
                 data: {
                     _token: $('meta[name="csrf-token"]').attr('content'),
                     _method: 'DELETE',
+                    type: type
                 },
                 url: '/admin/users/' + selectedUsers.join(','),
                 type: 'POST',
@@ -114,7 +119,15 @@
 
     // Delete accepting from dialog;
     $(document).on('click', '#accept-delete', function(){
-        deleteUsersArray($('#delete-users-list').val().split(','))
+        deleteUsersArray($('#delete-users-list').val().split(','), 'delete')
+    })
+
+    $(document).on('click', '#accept-trash', function(){
+        deleteUsersArray($('#delete-users-list').val().split(','), 'trash')
+    })
+
+    $(document).on('click', '#clean-trash', function(){
+        deleteUsersArray($('#delete-users-list').val().split(','), 'clean-trash')
     })
 
     $(document).on('click', '#clean-avatar', function(){
@@ -129,6 +142,15 @@
         $('input[name="cover-thumbnail"]').val('')
         $('input[name="cover-medium"]').val('')
         $('#cover-upload-thumbnail').attr('src', '').css('display', 'none')
+    })
+
+    $(document).on('change', '#statusFilter', function(){
+        if($(this).val() !== ''){
+            location.href = location.pathname + '?status=' + $(this).val()
+        }   else{
+            location.href = location.pathname
+        }
+
     })
 }());
 </script>

@@ -12,9 +12,6 @@ use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 Use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Post;
-use App\Models\Comment;
-use App\Models\Category;
 
 /**
  * @method static find(int|string|null $id)
@@ -31,6 +28,7 @@ use App\Models\Category;
  * @property array|mixed|string|string[]|null $cover_medium
  * @property array|mixed|string|string[]|null $cover_thumbnail
  * @property mixed|string $username
+ * @property mixed $id
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -259,5 +257,43 @@ class User extends Authenticatable implements MustVerifyEmail
                 ->get();
         }
         return $users;
+    }
+
+    public function dropWithContent(){
+        // Updating all user posts;
+        Post::where('user_id', $this->id)
+            ->update([
+                'user_id' => null
+            ]);
+
+        // Updating all user comments;
+        Comment::where('user_id', $this->id)
+            ->delete();
+
+        // Follows;
+        Follow::where('user_id', $this->id)
+            ->orWhere('follow_user_id', $this->id)
+            ->delete();
+
+        // Notifications;
+        Notification::where('user_id', $this->id)
+            ->orWhere('init_user_id', $this->id)
+            ->delete();
+
+        // Favorite;
+        Favorite::where('user_id', $this->id)
+            ->delete();
+
+        // Likes;
+        Like::where('user_id', $this->id)
+            ->delete();
+
+        // Views;
+        DB::table('posts_views')
+            ->where('viewer_id', $this->id)
+            ->delete();
+
+        // And then - remove the user;
+        User::destroy($this->id);
     }
 }

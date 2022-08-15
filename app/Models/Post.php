@@ -421,7 +421,7 @@ class Post extends Model
                     // Prepare title;
                     $like_title = str_replace(' ', '%', $this->title);
                     if(count($by_array) > 1){
-                        $posts = $posts->whereOr('title', 'like', "%$like_title%");
+                        $posts = $posts->orWhere('title', 'like', "%$like_title%");
                     }   else{
                         $posts = $posts->where('title', 'like', "%$like_title%");
                     }
