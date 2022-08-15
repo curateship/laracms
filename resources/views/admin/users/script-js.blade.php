@@ -123,6 +123,13 @@
         $('input[name="avatar-medium"]').val('')
         $('#avatar-upload-thumbnail').attr('src', '').css('display', 'none')
     })
+
+    $(document).on('click', '#clean-cover', function(){
+        $('input[name="cover-original"]').val('')
+        $('input[name="cover-thumbnail"]').val('')
+        $('input[name="cover-medium"]').val('')
+        $('#cover-upload-thumbnail').attr('src', '').css('display', 'none')
+    })
 }());
 </script>
 @endauth
