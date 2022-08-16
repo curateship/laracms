@@ -11,11 +11,11 @@
         <nav class="breadcrumbs text-based padding-left-sm padding-sm" aria-label="Breadcrumbs">
           <ol class="flex flex-wrap gap-xxs">
             <li class="breadcrumbs__item color-contrast-low">
-              <a href="/admin" class="color-inherit link-subtle">Home</a>
+              <a href="{{\Illuminate\Support\Facades\Gate::allows('is-admin') ? '/admin' : '/home'}}" class="color-inherit link-subtle">Home</a>
               <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
             </li>
             <li class="breadcrumbs__item color-contrast-low">
-              <a href="/admin/comments" class="color-inherit link-subtle">Comments</a>
+              <a href="/comments" class="color-inherit link-subtle">Comments</a>
               <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
             </li>
             <li class="breadcrumbs__item color-contrast-high" aria-current="page">Edit </li>
@@ -57,9 +57,9 @@
 
       <div class="margin-top-auto border-top border-contrast-lower border-opacity-30%"></div><!-- Divider -->
         <div class="padding-md">
-          <form action="{{ route('admin.comments.update', $comment) }}" method='post'>
+          <form action="{{ route('comments.update') }}" method='post'>
             @csrf
-            @method('PATCH')
+              <input type="hidden" name="commentId" value="{{$comment->id}}">
           <div>
             <textarea class="margin-bottom-sm form-control width-100%" name="the_comment" id="post_comment" placeholder="Enter a Comment" rows="5">{{ old("the_comment", $comment->the_comment) }}</textarea>
           </div>

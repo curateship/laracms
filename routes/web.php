@@ -78,7 +78,6 @@ Route::resource('/posts', PostController::class)->middleware(['auth']);
 Route::post('/posts/move', [PostController::class, 'move'])->name('post.move')->middleware(['auth', 'verified']);
 Route::post('/posts/changeOwner/multiple', [AdminPostController::class, 'changeOwnerMultiple'])->name('posts.chaneOwner.multiple')->middleware(['auth', 'auth.isAdmin']);
 
-
 // Contact
 Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
@@ -93,6 +92,9 @@ Route::get('/tags/search', [TagController::class, 'search'])->name('tags.search'
 Route::get('/tags/{tags_categories_name}/{tag_slug}', [TagController::class, 'show'])->name('theme.default.archive.tags.show');
 
 // Comments
+Route::resource('/comments', AdminCommentController::class)->middleware(['auth']);
+Route::get('/comments/edit/{id}', [AdminCommentController::class, 'edit'])->name('comments.edit')->middleware(['auth']);
+Route::post('/comments/update', [AdminCommentController::class, 'update'])->name('comments.update')->middleware(['auth', 'verified']);
 Route::get('/post/comment/get/{post_id}/{last_comment_id}', [PostController::class, 'getPostComments'])->name('post-comment-get');
 Route::get('/post/comment/reply', [PostController::class, 'reply'])->name('post-comment-reply')->middleware(['auth', 'verified']);
 Route::post('/post/comment/reply-save', [PostController::class, 'saveReply'])->name('post-comment-reply-save')->middleware(['auth', 'verified']);
