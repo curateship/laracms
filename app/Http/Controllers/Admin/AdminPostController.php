@@ -102,7 +102,7 @@ class AdminPostController extends Controller
         $posts_files = [];
         $posts_urls = [];
 
-        if($post->type == 'image'){
+        if($post->type == 'image' || $post->type == 'news'){
             // Render simple image box;
             $content = '<img alt="thumbnail" src="'.'/storage'.config('images.posts_storage_path').$post->thumbnail.'">';
         }
