@@ -8,7 +8,7 @@
       <nav class="sidenav js-sidenav">
          <div class="sidenav__label margin-bottom-xs">
             </div>
-              <ul class="sidenav__list">
+              <ul class="sidenav__list padding-top-sm">
 
                 <!-- Home -->
                 <li class="sidenav__item">
