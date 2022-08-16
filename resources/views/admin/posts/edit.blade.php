@@ -234,7 +234,7 @@
         -->
         <!-- Tags END -->
 
-        @if($post->type == 'image' || $post->type == 'video')
+        @if(in_array($post->type, ['image', 'video', 'news']))
             <!-- Image Upload -->
 
             <div class="file-upload inline-block margin-bottom-sm">
