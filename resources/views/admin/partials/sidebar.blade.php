@@ -64,7 +64,7 @@
             <ul class="sidenav__list">
               <!-- My Comments -->
               <li class="sidenav__item">
-                  <a href="#" class="sidenav__link">
+                  <a href="/comments" class="sidenav__link" {{ strpos(url()->full(), '/comments') !== false ? 'aria-current=page' : '' }}>
                   <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16">
                     <g ><path d="M14.75 4.25h-1.5v4.75a1.5 1.5 0 0 1-1.5 1.5h-4.47l-2 1.75h4.64l3.43 2.45a0.25 0.25 0 0 0 0.15 0.05 0.25 0.25 0 0 0 0.11-0.03 0.25 0.25 0 0 0 0.14-0.22v-2.25h1a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1z"></path>
                       <path d="M11.75 1h-10.5a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h1.5v3.25a0.25 0.25 0 0 0 0.15 0.23 0.25 0.25 0 0 0 0.1 0.02 0.25 0.25 0 0 0 0.16-0.06l3.93-3.44h4.66a1 1 0 0 0 1-1v-7a1 1 0 0 0-1-1z"></path>
@@ -76,7 +76,7 @@
 
               <!-- Favorites -->
               <li class="sidenav__item">
-              <a href="/favorites/" class="sidenav__link" {{ strpos(url()->full(), '/favorites') !== false ? 'aria-current=page' : '' }}>
+              <a href="/favorites" class="sidenav__link" {{ strpos(url()->full(), '/favorites') !== false ? 'aria-current=page' : '' }}>
                   <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16">
                     <g ><path d="M6.62 12.22a5.08 5.08 0 0 1 7.69-4.37l1.56-1.53a0.54 0.54 0 0 0-0.3-0.91l-4.89-0.71-2.18-4.43a0.56 0.56 0 0 0-0.97 0l-2.18 4.43-4.89 0.71a0.54 0.54 0 0 0-0.3 0.91l3.54 3.46-0.83 4.87a0.54 0.54 0 0 0 0.77 0.56l3.17-1.66a5.07 5.07 0 0 1-0.19-1.33z"></path><path d="M11.71 8.15a4.07 4.07 0 1 0 4.08 4.07 4.07 4.07 0 0 0-4.08-4.07z m2.04 5.6h-4.08v-1.02h4.08z m0-2.04h-4.08v-1.02h4.08z"></path>
                     </g>

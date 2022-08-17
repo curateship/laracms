@@ -62,6 +62,9 @@
 
                             <time class="comments__time" aria-label="1 hour ago">{{$comment->created_at->diffForHumans()}}</time>
                         </div>
+                        @if($comment->created_at != $comment->updated_at)
+                            <div class="edited-comment">Comment was be edited.</div>
+                        @endif
                     </div>
                 </div>
             </div>

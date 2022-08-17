@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Comment;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class AdminCommentController extends Controller
 {
@@ -29,6 +31,10 @@ class AdminCommentController extends Controller
                 ->leftJoin('users', 'users.id', '=', 'comments.user_id');
         }
 
+        if(!Gate::allows('is-admin')){
+            $comments = $comments->where('user_id', Auth::id());
+        }
+
         return view('admin.comments.index', ['comments' => $comments->paginate(10)]);
     }
 
@@ -43,19 +49,40 @@ class AdminCommentController extends Controller
     }
 
     // Edit
-    public function edit(Comment $comment)
+    public function edit($id)
     {
+        $comment = Comment::find($id);
+
+        if($comment == null){
+            return abort(404);
+        }
+
+        if(!Gate::allows('is-admin') && $comment->user_id != Auth::id()){
+            return abort(404);
+        }
+
         return view('admin.comments.edit', [
             'comment' => $comment
         ]);
     }
 
     // Update
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request)
     {
-        $validated = $request->validate($this->rules);
-        $comment->update($validated);
-        return redirect()->route('admin.comments.edit', $comment)->with('success', 'Comment has been updated.');
+        $comment = Comment::find($request->input('commentId'));
+
+        if($comment == null){
+            return abort(404);
+        }
+
+        if(!Gate::allows('is-admin') && $comment->user_id != Auth::id()){
+            return abort(404);
+        }
+
+        $comment->the_comment = $request->input('the_comment');
+        $comment->save();
+
+        return redirect()->route('comments.edit', $comment)->with('success', 'Comment has been updated.');
     }
 
     // Destroy
