@@ -42,6 +42,7 @@ class PostController extends Controller
         $posts = $posts->where('user_id', Auth::id());
 
         return view('admin.posts.index', [
+            'counters' => Post::getCounters(),
             'posts' => $posts->paginate(10),
             'status' => $status
         ]);

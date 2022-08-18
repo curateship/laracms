@@ -58,6 +58,7 @@ class AdminUserController extends Controller
 
         if(Gate::allows('is-admin')){
             return view('admin.users.index', [
+                'counters' => User::getCounters(),
                 'users' => $users->paginate(10),
                 'status' => $status
             ]);

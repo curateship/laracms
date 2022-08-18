@@ -40,7 +40,7 @@ class AdminPostController extends Controller
         if($request->has('sortBy') && $request->input('sortBy') !== 'role'){
             $posts = Post::orderBy($request->input('sortBy'), $request->input('sortDesc'));
         }   else{
-            $posts = Post::orderBy('created_at', 'DESC')->whereNotNull('user_id');
+            $posts = Post::orderBy('created_at', 'DESC');
         }
 
         $status = 'All';
@@ -60,6 +60,7 @@ class AdminPostController extends Controller
         //$posts = $posts->where('type', '!=', 'gallery');
 
         return view('admin.posts.index', [
+            'counters' => Post::getCounters(),
             'posts' => $posts->paginate(10),
             'status' => $status
         ]);
