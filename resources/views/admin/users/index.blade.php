@@ -42,9 +42,9 @@
                       <label class="text-sm color-contrast-medium margin-right-xs" for="statusFilter"></label>
                       <div class="select inline-block js-select" data-trigger-class="reset text-sm color-contrast-high text-underline inline-flex items-center cursor-pointer js-tab-focus">
                           <select name="selectThis" id="statusFilter">
-                              <option value="" {{request()->get('status') == '' ? 'selected' : ''}}>All Users <span class="status-counter">{{$counters['total']}}</span></option>
-                              <option value="active" {{request()->get('status') == 'active' ? 'selected' : ''}}>Active <span class="status-counter">{{$counters['active']}}</span></option>
-                              <option value="trash" {{request()->get('status') == 'trash' ? 'selected' : ''}}>Trash <span class="status-counter">{{$counters['trash']}}</span></option>
+                              <option data-value="123" value="" {{request()->get('status') == '' ? 'selected' : ''}} data-counter="{{$counters['total']}}">All Users</option>
+                              <option value="active" {{request()->get('status') == 'active' ? 'selected' : ''}} data-counter="{{$counters['active']}}">Active</option>
+                              <option value="trash" {{request()->get('status') == 'trash' ? 'selected' : ''}} data-counter="{{$counters['trash']}}">Trash</option>
                           </select>
                           <svg class="icon icon--xxxs margin-left-xxs" viewBox="0 0 8 8"><path d="M7.934,1.251A.5.5,0,0,0,7.5,1H.5a.5.5,0,0,0-.432.752l3.5,6a.5.5,0,0,0,.864,0l3.5-6A.5.5,0,0,0,7.934,1.251Z"/></svg>
                       </div>
