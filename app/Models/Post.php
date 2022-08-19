@@ -765,4 +765,30 @@ class Post extends Model
 
         return count($images) + 1;
     }
+
+    public static function getCounters(){
+        $counters = static::groupBy('status')
+            ->selectRaw('status, count(*) as value')
+            ->get();
+
+        $result = [];
+        $total = 0;
+        foreach($counters as $counter){
+            $result[$counter->status] = $counter->value;
+            $total += $counter->value;
+        }
+
+        $counters_status_list = [
+            'pre-published', 'draft', 'pending', 'published', 'trash', 'total'
+        ];
+
+
+        foreach($counters_status_list as $status){
+            if(!isset($result[$status])){
+                $result[$status] = $status != 'total' ? 0 : $total;
+            }
+        }
+
+        return $result;
+    }
 }

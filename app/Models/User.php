@@ -296,4 +296,30 @@ class User extends Authenticatable implements MustVerifyEmail
         // And then - remove the user;
         User::destroy($this->id);
     }
+
+    public static function getCounters(){
+        $counters = static::groupBy('status')
+            ->selectRaw('status, count(*) as value')
+            ->get();
+
+        $result = [];
+        $total = 0;
+        foreach($counters as $counter){
+            $result[$counter->status] = $counter->value;
+            $total += $counter->value;
+        }
+
+        $counters_status_list = [
+            'active', 'trash', 'total'
+        ];
+
+
+        foreach($counters_status_list as $status){
+            if(!isset($result[$status])){
+                $result[$status] = $status != 'total' ? 0 : $total;
+            }
+        }
+
+        return $result;
+    }
 }

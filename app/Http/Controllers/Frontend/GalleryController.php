@@ -42,6 +42,7 @@ class GalleryController extends Controller
             ->where('type', 'gallery');
 
         return view('admin.posts.index', [
+            'counters' => Post::getCounters(),
             'posts' => $galleries->paginate(10),
             'status' => $status
         ]);
