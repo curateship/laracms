@@ -42,8 +42,9 @@
                       <label class="text-sm color-contrast-medium margin-right-xs" for="statusFilter"></label>
                       <div class="select inline-block js-select" data-trigger-class="reset text-sm color-contrast-high text-underline inline-flex items-center cursor-pointer js-tab-focus">
                           <select name="selectThis" id="statusFilter">
-                              <option data-value="123" value="" {{request()->get('status') == '' ? 'selected' : ''}} data-counter="{{$counters['total']}}">All Users</option>
+                              <option value="" {{request()->get('status') == '' ? 'selected' : ''}} data-counter="{{$counters['total']}}">All Users</option>
                               <option value="active" {{request()->get('status') == 'active' ? 'selected' : ''}} data-counter="{{$counters['active']}}">Active</option>
+                              <option value="suspended" {{request()->get('status') == 'suspended' ? 'selected' : ''}} data-counter="{{$counters['suspended']}}">Suspended</option>
                               <option value="trash" {{request()->get('status') == 'trash' ? 'selected' : ''}} data-counter="{{$counters['trash']}}">Trash</option>
                           </select>
                           <svg class="icon icon--xxxs margin-left-xxs" viewBox="0 0 8 8"><path d="M7.934,1.251A.5.5,0,0,0,7.5,1H.5a.5.5,0,0,0-.432.752l3.5,6a.5.5,0,0,0,.864,0l3.5-6A.5.5,0,0,0,7.934,1.251Z"/></svg>
@@ -130,6 +131,21 @@
                       </div>
                   </footer>
                   <input type="hidden" id="delete-users-list">
+              </div>
+          </div>
+          <div id="suspend-user-dialog" class="dialog dialog--sticky js-dialog" data-animation="on">
+              <div class="dialog__content max-width-xxs" role="alertdialog" aria-labelledby="dialog-sticky-title" aria-describedby="dialog-sticky-description">
+                  <div class="text-component">
+                      <h4 id="dialog-sticky-title">Are you sure what you want to suspend selected user?</h4>
+                      <p id="dialog-sticky-description">This action cannot be undone.</p>
+                  </div>
+                  <footer class="margin-top-md">
+                      <div class="flex justify-end gap-xs flex-wrap">
+                          <button class="btn btn--subtle js-dialog__close">Cancel</button>
+                          <button id="accept-suspend" class="btn btn--accent">Suspend</button>
+                      </div>
+                  </footer>
+                  <input type="hidden" id="suspend-users-list">
               </div>
           </div>
       </div>
@@ -389,7 +405,7 @@
                         <svg class="icon menu__icon" aria-hidden="true" viewBox="0 0 12 12">
                           <path d="M10.121.293a1,1,0,0,0-1.414,0L1,8,0,12l4-1,7.707-7.707a1,1,0,0,0,0-1.414Z"></path>
                         </svg>
-                        <span>Suspend</span>
+                        <span class="suspend-user-context-menu" data-user-id="{{ $user->id }}">Suspend</span>
                       </span>
                     </li>
                     <li role="menuitem">
@@ -398,7 +414,7 @@
                           <path d="M8.354,3.646a.5.5,0,0,0-.708,0L6,5.293,4.354,3.646a.5.5,0,0,0-.708.708L5.293,6,3.646,7.646a.5.5,0,0,0,.708.708L6,6.707,7.646,8.354a.5.5,0,1,0,.708-.708L6.707,6,8.354,4.354A.5.5,0,0,0,8.354,3.646Z"></path>
                           <path d="M6,0a6,6,0,1,0,6,6A6.006,6.006,0,0,0,6,0ZM6,10a4,4,0,1,1,4-4A4,4,0,0,1,6,10Z"></path>
                         </svg>
-                          <span class="delete-user-context-menu" data-user-id="{{ $user->id }}">Delete</span>
+                          <span class="desuspend-user-context-menu" data-user-id="{{ $user->id }}">Delete</span>
                       </span>
                     </li>
                   </menu>

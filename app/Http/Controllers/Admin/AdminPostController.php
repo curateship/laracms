@@ -293,6 +293,10 @@ class AdminPostController extends Controller
 
     // Store or update;
     public function store(Request $request){
+        if(Auth::user()->status == 'suspended'){
+            return abort(404);
+        }
+
         if($request->has('status') && $request->input('status') == 'delete'){
             $post = Post::find($request->input('postId'));
 

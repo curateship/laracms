@@ -250,6 +250,11 @@ class AdminUserController extends Controller
                     $user->save();
                     $action_message = 'moved to trash';
                     break;
+                case 'suspended':
+                    $user->status = 'suspended';
+                    $user->save();
+                    $action_message = 'suspended';
+                    break;
             }
         }
 

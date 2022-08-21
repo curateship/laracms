@@ -117,10 +117,21 @@
         $('#delete-users-list').val($(this).attr('data-user-id'))
     })
 
+    // Delete from user context menu;
+    $(document).on('click', '.suspend-user-context-menu', function(){
+        const event = new Event('openDialog');
+        document.getElementById('suspend-user-dialog').dispatchEvent(event);
+        $('#suspend-users-list').val($(this).attr('data-user-id'))
+    })
+
     // Delete accepting from dialog;
     $(document).on('click', '#accept-delete', function(){
         deleteUsersArray($('#delete-users-list').val().split(','), 'delete')
     })
+    $(document).on('click', '#accept-suspend', function(){
+        deleteUsersArray($('#suspend-users-list').val().split(','), 'suspended')
+    })
+
 
     $(document).on('click', '#accept-trash', function(){
         deleteUsersArray($('#delete-users-list').val().split(','), 'trash')
