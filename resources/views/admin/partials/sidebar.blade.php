@@ -6,7 +6,7 @@
 <div class="card display@md position-fixed position-sticky top-sm@xs">
     <div class="background-bg radius-md padding-bottom-sm">
       <nav class="sidenav js-sidenav">
-         <div class="sidenav__label margin-bottom-xs">
+         <div class="sidenav__label">
             </div>
               <ul class="sidenav__list padding-top-sm">
 
