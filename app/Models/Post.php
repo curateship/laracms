@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Agent\Agent;
 
 /**
  * @property mixed|string $title
@@ -605,11 +606,18 @@ class Post extends Model
                 ->where('post_id', $this->id)
                 ->first();
 
+            $attached_video = $video->medium;
+
+            $agent = new Agent();
+            if($agent->isMobile()){
+                $attached_video = $video->thumnail;
+            }
+
             // Render video player;
             $content = view('admin.posts.script-video-js-player', [
                 'poster' => '/storage'.config('images.posts_storage_path').$this->medium,
-                'video_mp4' => '/storage'.config('images.videos_storage_path').$video->medium,
-                'video_webm' => '/storage'.config('images.videos_storage_path').$video->medium,
+                'video_mp4' => '/storage'.config('images.videos_storage_path').$attached_video,
+                'video_webm' => '/storage'.config('images.videos_storage_path').$attached_video,
                 'player_width' => config('images.player_size_original.width'),
                 'player_height' => config('images.player_size_original.height'),
                 'auto_width' => true
