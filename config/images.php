@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'post_images_title_name' => true,
     'posts_storage_path' => '/posts',
     'users_storage_path' => '/users',
     'tags_storage_path' => '/tags',
