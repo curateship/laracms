@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -768,8 +769,13 @@ class Post extends Model
 
     public static function getCounters(){
         $counters = static::groupBy('status')
-            ->selectRaw('status, count(*) as value')
-            ->get();
+            ->selectRaw('status, count(*) as value');
+
+        if(!Gate::allows('is-admin')){
+            $counters = $counters->where('user_id', Auth::id());
+        }
+
+        $counters = $counters->get();
 
         $result = [];
         $total = 0;
