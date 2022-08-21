@@ -542,6 +542,10 @@ class AdminPostController extends Controller
             $post->save();
         }
 
+        if(config('images.post_images_title_name')){
+            $post->renameAllContentInTitle();
+        }
+
         if($request->has('postId') || $request->input('status') == 'draft'){
             return redirect('/post/edit/'.$post->slug);
         }   else{

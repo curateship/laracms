@@ -797,4 +797,78 @@ class Post extends Model
 
         return $result;
     }
+
+    public function renameAllContentInTitle(){
+        $work_array = ['original', 'medium', 'thumbnail'];
+
+        switch($this->type){
+            case 'image':
+            case 'news':
+                foreach($work_array as $type){
+                    $filename = explode('.', basename($this[$type]));
+                    $filename = $this->slug.'.'.$filename[1];
+                    if(!Storage::exists('public'.config('images.posts_storage_path').'/'.$type.'/'.$filename)){
+                        Storage::move('public'.config('images.posts_storage_path').$this[$type], 'public'.config('images.posts_storage_path').'/'.$type.'/'.$filename);
+                        $this[$type] = '/'.$type.'/'.$filename;
+                        $this->save();
+                    }
+                }
+                break;
+
+            case 'video':
+                foreach($work_array as $type){
+                    // Preview image;
+                    $filename = explode('.', basename($this[$type]));
+                    $filename = $this->slug.'.'.$filename[1];
+                    if(!Storage::exists('public'.config('images.posts_storage_path').'/'.$type.'/'.$filename)){
+                        Storage::move('public'.config('images.posts_storage_path').$this[$type], 'public'.config('images.posts_storage_path').'/'.$type.'/'.$filename);
+                        $this[$type] = '/'.$type.'/'.$filename;
+                        $this->save();
+                    }
+
+                    // Videos;
+                    $videos = DB::table('posts_videos')
+                        ->where('post_id', $this->id)
+                        ->get();
+
+                    foreach($videos as $video){
+                        $filename = explode('.', basename($video->$type));
+                        $filename = $this->slug.'.'.$filename[1];
+                        if(!Storage::exists('public'.config('images.videos_storage_path').'/'.$type.'/'.$filename)){
+                            Storage::move('public'.config('images.videos_storage_path').$video->$type, 'public'.config('images.videos_storage_path').'/'.$type.'/'.$filename);
+
+                            DB::table('posts_videos')
+                                ->where('post_id', $this->id)
+                                ->update([
+                                    $type => '/'.$type.'/'.$filename
+                                ]);
+                        }
+                    }
+                }
+                break;
+
+            case 'gallery':
+                foreach($work_array as $type){
+                    // Main image;
+                    $filename = explode('.', basename($this[$type]));
+                    $filename = $this->slug.'.'.$filename[1];
+                    if(!Storage::exists('public'.config('images.posts_storage_path').'/'.$type.'/'.$filename)){
+                        Storage::move('public'.config('images.posts_storage_path').$this[$type], 'public'.config('images.posts_storage_path').'/'.$type.'/'.$filename);
+                        $this[$type] = '/'.$type.'/'.$filename;
+                        $this->save();
+                    }
+
+                    // Other images;
+                    $images = Storage::allFiles('/public/'.config('images.galleries_storage_path').'/'.$this->slug.'/'.$type.'/');
+                    foreach($images as $key => $image){
+                        $filename = explode('.', basename($image));
+                        $filename = $key.'_'.$this->slug.'.'.$filename[1];
+
+                        Storage::move('public'.config('images.galleries_storage_path').'/'.$this->slug.'/'.$type.'/'.basename($image), 'public'.config('images.galleries_storage_path').'/'.$this->slug.'/'.$type.'/'.$filename);
+                    }
+                }
+
+                break;
+        }
+    }
 }

@@ -37,6 +37,16 @@ Artisan::command('test', function () {
     dump('Nothing to test now');
 })->purpose('Method for tests');
 
+Artisan::command('posts:slug-title', function () {
+    dump('Start renaming storage images for posts...');
+    $posts = Post::all();
+    foreach($posts as $post){
+        $post->renameAllContentInTitle();
+        dump('Post with ID: '.$post->id.' is ready.');
+    }
+    dump('Renaming successfully finished.');
+})->purpose('Rename storage images for posts.');
+
 Artisan::command('tags:slug', function () {
     $tags = Tag::whereNull('slug')
         ->get();
