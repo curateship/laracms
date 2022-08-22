@@ -156,6 +156,10 @@ class PostController extends Controller
     // Comment
     public function addComment(Post $post)
     {
+        if(Auth::user()->status == 'suspended'){
+            return abort(404);
+        }
+
         $attributes = request()->validate([
             'the_comment' => 'required|min:10|max:1000'
         ]);
@@ -174,6 +178,10 @@ class PostController extends Controller
 
     public function saveReply(Request $request)
     {
+        if(Auth::user()->status == 'suspended'){
+            return abort(404);
+        }
+
         $id = $request->input('itemId');
         $replyComments = $request->input('commentNewContent');
 
@@ -235,6 +243,10 @@ class PostController extends Controller
     // Save Comment
     public function saveComment(Request $request)
     {
+        if(Auth::user()->status == 'suspended'){
+            return abort(404);
+        }
+
         $id = $request->input('itemId');
         $comment_text = $request->input('commentNewContent');
         $user_id = Auth::id();

@@ -28,7 +28,7 @@
   <div class="border-top border-contrast-lower opacity-80%"></div><!-- Divider -->
 
 
-  <div class="notification-list"></div>
+  <div class="notification-list custom-scrollbar"></div>
 
   <div class="margin-top-auto border-top border-contrast-lower opacity-80% padding-bottom-xs"></div><!-- Divider -->
   <div class="text-center padding-sm">

@@ -43,6 +43,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Lavary\Menu\ServiceProvider::class,
+        Jenssegers\Agent\AgentServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -114,6 +115,7 @@ return [
         'SEO' => Artesaos\SEOTools\Facades\SEOTools::class,
         // ...
         'Menu' => Lavary\Menu\Facade::class,
+        'Agent' => Jenssegers\Agent\Facades\Agent::class,
     ],
 
 ];
