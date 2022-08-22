@@ -24,7 +24,7 @@
     </div>
   </header>
 
-  <div class="notification-list" style="max-height: 400px; overflow-y: auto;"></div>
+  <div class="notification-list custom-scrollbar" style="max-height: 400px; overflow-y: auto;"></div>
 
   <div class="border-top border-contrast-lower opacity-80%"></div><!-- Divider -->
   <div class="bg-light bg-opacity-90% backdrop-blur-10 shadow-xs position-sticky top-0 z-index-2 padding-xs text-center">
