@@ -5,16 +5,16 @@
 <div class="user-cell">
   <div class="user-cell__body">
     <figure aria-hidden="true">
-        <a href="/user/{{$post->author->username}}" class="color-contrast-high link-plain">{!! $post->author->getAvatar(false, ['width' => 45, 'height' => 45], ['user-cell__img'])->content !!}</a>
+        <a href="{{$post->author != null ? '/user/'.$post->author->username : '#'}}" class="color-contrast-high link-plain">{!! $post->author != null ? $post->author->getAvatar(false, ['width' => 45, 'height' => 45], ['user-cell__img'])->content : '' !!}</a>
     </figure>
 
     <div class="user-cell__content text-component line-height-md text-space-y-xxs">
-      <p><a href="/user/{{$post->author->username}}" class="color-contrast-high link-plain"><strong>{{$post->author->name}}</strong></a></p>
-      <p class="color-contrast-medium">{{$post->author->bio}}</p>
+      <p><a href="{{$post->author != null ? '/user/'.$post->author->username : '#'}}" class="color-contrast-high link-plain"><strong>{{$post->author != null ? $post->author->name : 'Deleted user'}}</strong></a></p>
+      <p class="color-contrast-medium">{{$post->author != null ? $post->author->bio : '...'}}</p>
     </div>
   </div>
 
-    @if($post->author->id != \Illuminate\Support\Facades\Auth::id())
+    @if($post->author != null && $post->author->id != \Illuminate\Support\Facades\Auth::id())
       <fieldset>
           <ul class="choice-tags flex flex-wrap gap-xxs js-choice-tags">
             <li>
