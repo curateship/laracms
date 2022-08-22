@@ -29,6 +29,7 @@ use Illuminate\Support\Facades\Hash;
  * @property array|mixed|string|string[]|null $cover_thumbnail
  * @property mixed|string $username
  * @property mixed $id
+ * @property mixed|string $status
  */
 class User extends Authenticatable implements MustVerifyEmail
 {

@@ -610,7 +610,7 @@ class Post extends Model
 
             $agent = new Agent();
             if($agent->isMobile()){
-                $attached_video = $video->thumnail;
+                $attached_video = $video->thumbnail;
             }
 
             // Render video player;
