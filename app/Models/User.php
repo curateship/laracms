@@ -310,7 +310,7 @@ class User extends Authenticatable implements MustVerifyEmail
         }
 
         $counters_status_list = [
-            'active', 'trash', 'total'
+            'active', 'suspended', 'trash', 'total'
         ];
 
 
