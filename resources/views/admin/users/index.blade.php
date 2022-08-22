@@ -137,7 +137,6 @@
               <div class="dialog__content max-width-xxs" role="alertdialog" aria-labelledby="dialog-sticky-title" aria-describedby="dialog-sticky-description">
                   <div class="text-component">
                       <h4 id="dialog-sticky-title">Are you sure what you want to suspend selected user?</h4>
-                      <p id="dialog-sticky-description">This action cannot be undone.</p>
                   </div>
                   <footer class="margin-top-md">
                       <div class="flex justify-end gap-xs flex-wrap">
@@ -146,6 +145,20 @@
                       </div>
                   </footer>
                   <input type="hidden" id="suspend-users-list">
+              </div>
+          </div>
+          <div id="un-suspend-user-dialog" class="dialog dialog--sticky js-dialog" data-animation="on">
+              <div class="dialog__content max-width-xxs" role="alertdialog" aria-labelledby="dialog-sticky-title" aria-describedby="dialog-sticky-description">
+                  <div class="text-component">
+                      <h4 id="dialog-sticky-title">Are you sure what you want to un-suspend selected user?</h4>
+                  </div>
+                  <footer class="margin-top-md">
+                      <div class="flex justify-end gap-xs flex-wrap">
+                          <button class="btn btn--subtle js-dialog__close">Cancel</button>
+                          <button id="accept-un-suspend" class="btn btn--accent">Un-suspend</button>
+                      </div>
+                  </footer>
+                  <input type="hidden" id="un-suspend-users-list">
               </div>
           </div>
       </div>
@@ -400,6 +413,7 @@
                       </a>
                       </span>
                     </li>
+                    @if($user->status == 'active')
                     <li role="menuitem">
                       <span class="menu__content js-menu__content">
                         <svg class="icon menu__icon" aria-hidden="true" viewBox="0 0 12 12">
@@ -408,6 +422,17 @@
                         <span class="suspend-user-context-menu" data-user-id="{{ $user->id }}">Suspend</span>
                       </span>
                     </li>
+                    @endif
+                    @if($user->status == 'suspended')
+                    <li role="menuitem">
+                      <span class="menu__content js-menu__content">
+                        <svg class="icon menu__icon" aria-hidden="true" viewBox="0 0 12 12">
+                          <path d="M10.121.293a1,1,0,0,0-1.414,0L1,8,0,12l4-1,7.707-7.707a1,1,0,0,0,0-1.414Z"></path>
+                        </svg>
+                        <span class="un-suspend-user-context-menu" data-user-id="{{ $user->id }}">Un-suspend</span>
+                      </span>
+                    </li>
+                    @endif
                     <li role="menuitem">
                       <span class="menu__content js-menu__content">
                         <svg class="icon menu__icon" aria-hidden="true" viewBox="0 0 12 12">

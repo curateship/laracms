@@ -255,6 +255,11 @@ class AdminUserController extends Controller
                     $user->save();
                     $action_message = 'suspended';
                     break;
+                case 'active':
+                    $user->status = 'active';
+                    $user->save();
+                    $action_message = 'activated';
+                    break;
             }
         }
 
