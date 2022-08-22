@@ -28,6 +28,7 @@ class UserSeeder extends Seeder
         $admin->cover_original = null;
         $admin->cover_medium = null;
         $admin->cover_thumbnail = null;
+        $admin->status = 'active';
         $admin->save();
 
         // Role;
