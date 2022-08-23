@@ -13,7 +13,7 @@
 </head>
 
 <!-- Theme config -->
-<body data-theme="@guest(){{config('app.default_theme')}}@else{{auth()->user()->theme()}}@endguest">
+<body>
 
 <!-- Header -->
 <div class="">

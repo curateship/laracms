@@ -16,7 +16,7 @@
 <body data-theme="@guest(){{config('app.default_theme')}}@else{{auth()->user()->theme()}}@endguest">
 
 <!-- Header -->
-  @include(config('theme.header'))
+  @include(config('theme.header-admin'))
 
 <!-- Random Image -->
 <div class="position-relative">
