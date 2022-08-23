@@ -1,7 +1,7 @@
 <header class="dr-nav-header padding-top-md">
   <div class="container position-relative height-100% flex items-center">
     <a class="dr-nav-header__logo" href="/">
-      <img class="radius-full object-cover" src="http://127.0.0.1:8000/assets/img/1.png">
+      {!! env('LOGO') !!}
     </a>
 
       <ul class="radio-switch" id="theme-switch">
