@@ -5,7 +5,7 @@
 
   <!-- Content -->
   <div class="">
-    @include('components.posts.show.types.image')
+    @include('components.posts.show.types.no-image')
   </div>
 
 @endsection
