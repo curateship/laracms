@@ -38,7 +38,7 @@
 
     <!-- User icon if not logged in -->
     @else
-    <button class="header-v2__nav-control reset anim-menu-btn anim-menu-btn--avatar padding-top-xxxxs" aria-controls="modal-login">
+    <button class="header-v2__nav-control reset anim-menu-btn anim-menu-btn--avatar" aria-controls="modal-login">
       <a href="{{ route('login') }}" class="header-v2__nav-link">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><title>account</title><g stroke-width="2" fill="#efefef"><path d="M14.08 4.97c0 2.29-1.85 5.81-4.15 5.8s-4.14-3.52-4.14-5.8a4.14 4.14 0 0 1 8.29 0z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3.69 11.6a9.11 9.11 0 0 0-2.65 4.68 15.7 15.7 0 0 0 17.79 0 9.11 9.11 0 0 0-2.64-4.68" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></g></svg>
       </a>
