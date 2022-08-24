@@ -16,26 +16,11 @@
 <body data-theme="@guest(){{config('app.default_theme')}}@else{{auth()->user()->theme()}}@endguest">
 
 <!-- Header -->
-<div class="">
+<div class="container max-width-adaptive-lg">
   @include(config('theme.header'))
 </div>
 
-<!-- Random Image -->
-<div class="position-relative">
-    @if(strpos(request()->getPathInfo(), '/user/') === false || request()->getPathInfo() === '/user/edit')
-        @include('components.layouts.partials.hero-random-image')
-    @else
-      <div class="">
-        <figure class="card__img img-blend opacity-50%" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg" data-blend-height="30%" style="background-color: var(--color-bg);">
-          @if($user->cover_medium != '')
-            <img class="radius-md object-cover height-550 height-md@sm" src="{{url('/storage'.config('images.users_storage_path').$user->cover_medium)}}" alt="Card preview img">
-            @else
-              <div style="height: 140px;"></div>
-          @endif
-        </figure>
-      </div>
-    @endif
-</div>
+
 <!-- Content -->
 <div class="container max-width-adaptive-lg negative-margin">
   @yield('content')
