@@ -16,7 +16,7 @@
 <body data-theme="@guest(){{config('app.default_theme')}}@else{{auth()->user()->theme()}}@endguest">
 
 <!-- Header -->
-<div class="container max-width-adaptive-lg">
+<div class="container max-width-adaptive-lg padding-bottom-md">
   @include(config('theme.header'))
 </div>
 
