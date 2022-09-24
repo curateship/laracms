@@ -556,6 +556,52 @@ class Post extends Model
             ->get();
     }
 
+    public static function getFilteredListByTagName($filters_tags = [], $only_count = false, $paginate = 0){
+        $tags_id = [];
+        foreach($filters_tags as $cat_name => $tag_slug){
+            $cat = TagsCategories::where('name', $cat_name)
+                ->first();
+
+            if($cat == null){
+                continue;
+            }
+
+            $tag = Tag::where('slug', $tag_slug)
+                ->where('category_id', $cat->id)
+                ->first();
+
+            if($tag == null){
+                continue;
+            }
+
+            $tags_id[] = $tag->id;
+        }
+
+        $posts_links = DB::select(DB::raw('select post_id, GROUP_CONCAT(tag_id) as tags_group, count(tag_id) as tags_count
+                                                    from post_tag
+                                                    where tag_id in ('.implode(',', $tags_id).')
+                                                    group by post_id'));
+
+        $posts_id = [];
+        foreach($posts_links as $link){
+            if($link->tags_count == count($tags_id)){
+                $posts_id[] = $link->post_id;
+            }
+        }
+
+        if($only_count){
+            return count($posts_id);
+        }
+
+        if($paginate > 0){
+            return Post::whereIn('id', $posts_id)
+                ->paginate($paginate);
+        }
+
+        return Post::whereIn('id', $posts_id)
+            ->get();
+    }
+
     public function likes(){
         return Like::where('post_id', $this->id);
     }
