@@ -64,6 +64,17 @@ Artisan::command('tags:slug', function () {
     }
 })->purpose('Add slugs to tags');
 
+Artisan::command('posts:filters', function(){
+    $posts = Post::getFilteredListByTagName(
+        [
+            'origins' => 'tag-1-3',
+            'characters' => 'call-of-duty'
+        ]
+    );
+
+    dd($posts);
+});
+
 Artisan::command('storage:hash', function(){
     $posts = Post::whereNull('file_hash')
         ->get();
@@ -83,7 +94,7 @@ Artisan::command('storage:hash', function(){
                 ->first();
 
             if($video != null){
-                $file = $path.$video->original;
+                $file = $path.$video['original'];
             }   else{
                 dump("ERROR: Cant resolve video file path! Post with ID $post->id was been skipped.");
                 continue;

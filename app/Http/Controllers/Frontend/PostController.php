@@ -640,4 +640,16 @@ class PostController extends Controller
     public function getSuggestions(){
         return view('theme.dashboard.suggestions');
     }
+
+    public function premium(){
+        $posts = Post::where('posts.status', 'published')
+            ->where('posts.category_id', '=', 2)
+            ->orderBy('created_at', 'desc')
+            ->paginate(20);
+
+        return view('theme.posts.premium', [
+            'posts' => $posts,
+            'search' => ''
+        ]);
+    }
 }

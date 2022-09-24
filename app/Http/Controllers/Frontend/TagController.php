@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\DB;
 
 class TagController extends Controller
 {
-    public function show($tags_categories_name, $tag_slug)
+    public function show(Request $request, $tags_categories_name, $tag_slug)
     {
         $recent_posts = Post::latest()->take(5)->get();
         $categories = Tag::take(30)->get();
@@ -49,11 +49,51 @@ class TagController extends Controller
             $followed = false;
         }
 
+        $char_tags_result = [];
+        $result_posts = [];
+
+        if(!$request->has('characters')){
+            $result_posts = $tag->posts()->paginate(10);
+        }
+
+        if($tags_categories_name == 'origins'){
+            // Get all character tags;
+            $char_tags = Tag::where('category_id', 3)
+                ->get();
+
+            foreach($char_tags as $char_tag){
+                if($request->has('characters') && $request->input('characters') == $char_tag->slug){
+                    $result_posts = Post::getFilteredListByTagName(
+                        [
+                            'origins' => $tag_slug,
+                            'characters' => $char_tag->slug
+                        ], false, 10
+                    );
+                }
+
+                $posts = Post::getFilteredListByTagName(
+                    [
+                        'origins' => $tag_slug,
+                        'characters' => $char_tag->slug
+                    ], true
+                );
+
+                if($posts > 0){
+                    $char_tags_result[] = [
+                        'name' => $char_tag->name,
+                        'slug' => $char_tag->slug
+                    ];
+                }
+            }
+        }
+
         // SEO Title
         SEOMeta::setTitle($tag->name);
-        return view(env('TAG_THEME'), [
+        return view(config('theme.tag_theme'), [
+            'char_tags_result' => $char_tags_result,
+            'category' => $category,
             'tag' => $tag,
-            'posts' => $tag->posts()->paginate(10),
+            'posts' => $result_posts,
             'recent_posts' => $recent_posts,
             'categories' => $categories,
             'tags' => $tags,
