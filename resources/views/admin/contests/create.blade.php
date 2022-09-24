@@ -7,7 +7,7 @@
     @include('admin.posts.script-editor-js-header')
     @include('admin.posts.script-editor-js-embed')
     @include('admin.posts.script-editor-js-list')
-    @include('admin.pages.script-js')
+    @include('admin.contests.script-js')
 @endpush
 
 @section('content')
@@ -29,7 +29,7 @@
                                     <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
                                 </li>
                                 <li class="breadcrumbs__item color-contrast-low">
-                                    <a href="/admin/pages" class="color-inherit link-subtle">Pages</a>
+                                    <a href="/admin/contests" class="color-inherit link-subtle">Contests</a>
                                     <svg class="icon margin-left-xxxs color-contrast-low" aria-hidden="true" viewBox="0 0 16 16"><polyline fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.5,3.5 11,8 6.5,12.5 "></polyline></svg>
                                 </li>
                                 <li class="breadcrumbs__item color-contrast-high" aria-current="page">Create</li>
@@ -41,7 +41,7 @@
                 <!-- Table-->
                 <div class="margin-top-auto border-top border-contrast-lower opacity-40%"></div><!-- Divider -->
                 <div class="padding-md">
-                    <form method="POST" action="{{ route('admin.pages.store') }}" id="new-post-form">
+                    <form method="POST" action="{{ route('admin.contests.store') }}" id="new-post-form">
                         @csrf
                         <fieldset class="margin-bottom-md">
                             <div class="margin-bottom-sm">
@@ -54,6 +54,22 @@
                                 <!--<textarea class="margin-bottom-sm form-control width-100%" name="description" id="" placeholder="Enter Description" rows="12"></textarea>-->
                                 <div id="js-editor-description" data-target-input="#description" class="site-editor margin-bottom-sm form-control width-100%"></div>
                                 <input type="hidden" name="description" id="description" required/>
+                            </div>
+
+                            <!-- Image Upload -->
+                            <div class="file-upload inline-block margin-bottom-sm">
+                                <label for="upload-file" class="file-upload__label btn btn--subtle">
+                                  <span class="flex items-center">
+                                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><path  stroke-linecap="square" stroke-linejoin="miter" d="M2 16v6h20v-6"></path><path stroke-linejoin="miter" stroke-linecap="butt" d="M12 17V2"></path><path stroke-linecap="square" stroke-linejoin="miter" d="M18 8l-6-6-6 6"></path></g></svg>
+                                    <span class="margin-left-xxs file-upload__text file-upload__text--has-max-width">Upload Image</span>
+                                  </span>
+                                </label>
+                                <input type="hidden" name="original" value=""/>
+                                <input type="hidden" name="thumbnail" value=""/>
+                                <input type="hidden" name="medium" value=""/>
+                                <input type="file" class="file-upload__input" name="image" id="upload-file" accept="image/jpeg, image/jpg, image/png, image/gif" required>
+                                <br>
+                                <img alt="thumbnail" id="upload-thumbnail" class="margin-top-md" src="" style="display: none;">
                             </div>
                         </fieldset>
 

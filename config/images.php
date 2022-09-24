@@ -8,6 +8,7 @@ return [
     'videos_storage_path' => '/videos',
     'lists_storage_path' => '/lists',
     'galleries_storage_path' => '/galleries',
+    'contests_storage_path' => '/contests',
     'player_size_thumbnail' => [
         'width' => 640,
         'height' => 264

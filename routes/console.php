@@ -64,15 +64,15 @@ Artisan::command('tags:slug', function () {
     }
 })->purpose('Add slugs to tags');
 
-Artisan::command('posts:filters', function(){
+Artisan::command('posts:filters {origins_slug} {characters_slug}', function(){
     $posts = Post::getFilteredListByTagName(
         [
-            'origins' => 'tag-1-3',
-            'characters' => 'call-of-duty'
-        ]
+            'origins' => $this->argument('origins_slug'),
+            'characters' => $this->argument('characters_slug')
+        ], true
     );
 
-    dd($posts);
+    dd('Posts count: '.$posts);
 });
 
 Artisan::command('storage:hash', function(){
