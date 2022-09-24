@@ -15,6 +15,7 @@ use App\Models\Category;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class TagController extends Controller
 {
@@ -61,6 +62,8 @@ class TagController extends Controller
             $char_tags = Tag::where('category_id', 3)
                 ->get();
 
+            Log::info(print_r($char_tags, true));
+
             foreach($char_tags as $char_tag){
                 if($request->has('characters') && $request->input('characters') == $char_tag->slug){
                     $result_posts = Post::getFilteredListByTagName(
@@ -77,6 +80,10 @@ class TagController extends Controller
                         'characters' => $char_tag->slug
                     ], true
                 );
+
+                Log::info('origins slug: '.$tag_slug);
+                Log::info('characters slug: '.$char_tag->slug);
+                Log::info('count: '.$posts);
 
                 if($posts > 0){
                     $char_tags_result[] = [
