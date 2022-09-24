@@ -114,6 +114,7 @@ Route::get('/most-liked', [PostController::class, 'mostLiked'])->name('posts.mos
 Route::get('/most-commented', [PostController::class, 'mostCommented'])->name('posts.most-commented');
 Route::get('/most-viewed', [PostController::class, 'mostViewed'])->name('posts.most-viewed');
 Route::get('/most-recent', [PostController::class, 'mostRecent'])->name('posts.most-recent');
+Route::get('/premium', [PostController::class, 'premium'])->name('posts.premium');
 
 // Favorite lists;
 Route::resource('/favorites', FavoriteController::class)->middleware(['auth']);
