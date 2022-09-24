@@ -44,7 +44,7 @@
 
 <!-- Footer -->
 <div class="padding-top-sm">
-  @include(env('FOOTER'))
+  @include(config('theme.footer'))
 </div>
 
 <!-- Tracker -->
