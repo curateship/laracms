@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\AdminScraperController;
 use App\Http\Controllers\Admin\AdminFavoriteController;
 use App\Http\Controllers\Admin\AdminGalleryController;
 use App\Http\Controllers\Admin\AdminPageController;
+use App\Http\Controllers\Admin\AdminContestController;
 
 // Front-End Controllers
 use App\Http\Controllers\Frontend\IndexController;
@@ -179,6 +180,9 @@ Route::post('/users/restoreFromTrash', [AdminUserController::class, 'restoreFrom
 
 // Pages;
 Route::get('/pages/edit/{page:slug}', [AdminPageController::class, 'edit'])->name('page.edit')->middleware(['auth', 'verified']);
+// Contests;
+Route::get('/contests/edit/{contest:slug}', [AdminContestController::class, 'edit'])->name('contest.edit')->middleware(['auth', 'verified']);
+Route::post('/contests/upload/{type}', [AdminContestController::class, 'upload'])->name('admin.contests.upload')->middleware(['auth', 'verified']);
 
 // Admin Prefix
 Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->group(function (){
@@ -192,7 +196,9 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
     Route::resource('/favorites', AdminFavoriteController::class); // Favorites Route
     Route::resource('/galleries', AdminGalleryController::class); // Galleries Route
     Route::resource('/pages', AdminPageController::class); // Pages Route
+    Route::resource('/contests', AdminContestController::class); // Contest Route
 });
 
 // Universal pages router;
+Route::get('/contests/{any}', [AdminContestController::class, 'show'])->where('any', '.*');
 Route::get('/{any}', [AdminPageController::class, 'show'])->where('any', '.*');
