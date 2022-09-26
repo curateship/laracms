@@ -200,5 +200,5 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
 });
 
 // Universal pages router;
-Route::get('/contests/{any}', [AdminContestController::class, 'show'])->where('any', '.*');
+Route::get('/contest/{any}', [AdminContestController::class, 'show'])->where('any', '.*');
 Route::get('/{any}', [AdminPageController::class, 'show'])->where('any', '.*');
