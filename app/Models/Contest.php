@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Storage;
  * @property mixed $medium
  * @property mixed $thumbnail
  * @property mixed $body
+ * @property mixed $user_id
  */
 class Contest extends Model
 {
@@ -92,5 +93,14 @@ class Contest extends Model
         }
 
         return $result;
+    }
+
+    public function author()
+    {
+        if($this->user_id == null){
+            return null;
+        }   else{
+            return User::find($this->user_id);
+        }
     }
 }

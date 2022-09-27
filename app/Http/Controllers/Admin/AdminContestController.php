@@ -8,6 +8,7 @@ use App\Models\Post;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
@@ -65,8 +66,13 @@ class AdminContestController extends Controller
             return abort(404);
         }
 
+        $author = $contest->author();
+        $author_avatar = $author->getAvatar(false, ['width' => 32, 'height' => 32], ['block', 'width-100%', 'height-100%', 'object-cover'])->content;
+
         return view('admin.contests.show', [
-            'contest' => $contest
+            'contest' => $contest,
+            'author' => $author,
+            'author_avatar' => $author_avatar
         ]);
     }
 
@@ -176,6 +182,7 @@ class AdminContestController extends Controller
         $contest->body = $request->input('description');
         $contest->slug = $slug;
         $contest->status = $request->input('status');
+        $contest->user_id = Auth::id();
         $contest->save();
 
         return redirect('/admin/contests');
