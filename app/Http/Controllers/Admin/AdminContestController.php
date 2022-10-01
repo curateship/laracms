@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contest;
+use App\Models\Follow;
 use App\Models\Post;
+use App\Models\User;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
@@ -69,11 +72,40 @@ class AdminContestController extends Controller
         $author = $contest->author();
         $author_avatar = $author->getAvatar(false, ['width' => 32, 'height' => 32], ['block', 'width-100%', 'height-100%', 'object-cover'])->content;
 
-        return view('admin.contests.show', [
+        $followed = false;
+        if(!Auth::guest()){
+            $follow_status = Follow::where('follow_contest_id', $contest->id)
+                ->where('user_id', Auth::id())
+                ->first();
+
+            if($follow_status != null){
+                $followed = true;
+            }
+        }
+
+        return view('components.contests.show', [
             'contest' => $contest,
             'author' => $author,
-            'author_avatar' => $author_avatar
+            'author_avatar' => $author_avatar,
+            'followed' => $followed
         ]);
+    }
+
+    public function getContestFollower($contest_id){
+        $followers = User::leftJoin('follows', 'follows.user_id', '=', 'users.id')
+            ->where('follows.follow_contest_id', $contest_id)
+            ->select('users.*')
+            ->orderBy('follows.created_at', 'DESC')
+            ->get();
+
+        $data = view('components.contests.layouts.followers', [
+            'followers' => $followers
+        ])->render();
+
+        return [
+            'status' => 200,
+            'result' => $data
+        ];
     }
 
     // Edit
