@@ -63,4 +63,31 @@ class FollowController extends Controller
             ];
         }
     }
+
+    public function followContest(Request $request){
+        $follow_contest_id = $request->input('contestId');
+        $follow_contest = Follow::where('follow_contest_id', $follow_contest_id)
+            ->where('user_id', Auth::id())
+            ->first();
+
+        // If following exist - unfollow;
+        if($follow_contest != null){
+            Follow::where('follow_contest_id', $follow_contest_id)
+                ->where('user_id', Auth::id())
+                ->delete();
+
+            return [
+                'status' => 0
+            ];
+        }   else{
+            $follow = new Follow();
+            $follow->follow_contest_id = $follow_contest_id;
+            $follow->user_id = Auth::id();
+            $follow->save();
+
+            return [
+                'status' => 1
+            ];
+        }
+    }
 }

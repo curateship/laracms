@@ -1,0 +1,19 @@
+.followers-container{
+    .avatar-group{
+        .avatar{
+            figure{
+                svg{
+                    margin-left: 4px;
+                    margin-top: 4px;
+                }
+                img{
+                    min-height: 40px;
+                }
+            }
+        }
+    }
+}
+
+.contest-hide-all-followers{
+    display: none;
+}

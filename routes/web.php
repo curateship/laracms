@@ -57,9 +57,10 @@ route::post('/notifications/markAsRead', [NotificationController::class, 'markAs
 route::post('/notifications/markAllAsRead', [NotificationController::class, 'markAllAsRead'])->name('notifications.markAll')->middleware(['auth']);
 route::post('/notifications/clear', [NotificationController::class, 'clear'])->name('notifications.clear')->middleware(['auth']);
 
-// Follow Users
+// Follows
 Route::post('/users/follow', [FollowController::class, 'followUser'])->name('users.follow')->middleware(['auth']);
 Route::post('/tags/follow', [FollowController::class, 'followTag'])->name('tags.follow')->middleware(['auth']);
+Route::post('/contests/follow', [FollowController::class, 'followContest'])->name('contest.follow')->middleware(['auth']);
 
 // Likes
 Route::post('/like/post', [LikeController::class, 'like'])->name('post.like');
@@ -182,6 +183,7 @@ Route::post('/users/restoreFromTrash', [AdminUserController::class, 'restoreFrom
 Route::get('/pages/edit/{page:slug}', [AdminPageController::class, 'edit'])->name('page.edit')->middleware(['auth', 'verified']);
 // Contests;
 Route::get('/contests/edit/{contest:slug}', [AdminContestController::class, 'edit'])->name('contest.edit')->middleware(['auth', 'verified']);
+Route::get('/contests/getFollows/{contest_id}', [AdminContestController::class, 'getContestFollower']);
 Route::post('/contests/upload/{type}', [AdminContestController::class, 'upload'])->name('admin.contests.upload')->middleware(['auth', 'verified']);
 
 // Admin Prefix
