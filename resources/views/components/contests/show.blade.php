@@ -1,7 +1,7 @@
 @extends(config('theme.admin_app_template'))
 
 @push('custom-scripts')
-    @include('admin.contests.script-js')
+    @include('components.contests.script-js')
 @endpush
 
 @section('content')
