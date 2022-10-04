@@ -47,6 +47,14 @@ class AdminContestController extends Controller
             });
         }
 
+        $contests->leftJoin(DB::raw('(
+                select follow_contest_id, count(*) as joined
+                from follows
+                where follow_contest_id is not null
+                group by follow_contest_id
+            ) as follows'), 'follows.follow_contest_id', '=', 'contests.id')
+            ->selectRaw('contests.*, follows.joined');
+
         return view('admin.contests.index', [
             'counters' => Contest::getCounters(),
             'contests' => $contests->paginate(10),
@@ -305,5 +313,30 @@ class AdminContestController extends Controller
                 ]
             ];
         }
+    }
+
+    public function getFollows(){
+        $follows = User::leftJoin('follows', 'follows.user_id', '=', 'users.id')
+            ->whereNotNull('follow_contest_id')
+            ->selectRaw('users.*, follows.id as follow_id')
+            ->get();
+
+
+        return [
+            'status' => 200,
+            'count' => count($follows),
+            'result' => view('admin.contests.layout.follows', [
+                'follows' => $follows
+            ])->render()
+        ];
+    }
+
+    public function removeFollow(Request $request){
+        Follow::where('id', $request->input('id'))
+            ->delete();
+
+        return [
+            'status' => 200
+        ];
     }
 }

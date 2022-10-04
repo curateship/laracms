@@ -66,6 +66,37 @@
                                     <span class="menu-bar__label">Search Contests</span>
                                 </div>
 
+                                <!-- Follow Modal -->
+                                <div id="follow-modal" class="modal modal--animate-translate-down flex flex-center bg-black bg-opacity-90% padding-md js-modal">
+                                    <div class="modal__content width-100% max-width-sm max-height-100% overflow-auto bg radius-md inner-glow shadow-md flex flex-column" role="alertdialog" aria-labelledby="modal-title-4" aria-describedby="modal-description-4">
+                                        <header class="bg-contrast-lower bg-opacity-50% padding-y-sm padding-x-md flex items-center justify-between flex-shrink-0">
+                                            <h1 id="modal-title-4" class="text-truncate text-md">Following (<span id="modal-follows-count"></span>)</h1>
+
+                                            <button class="reset modal__close-btn modal__close-btn--inner js-modal__close js-tab-focus">
+                                                <svg class="icon icon--xs" viewBox="0 0 16 16">
+                                                    <title>Close modal window</title>
+                                                    <g stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10">
+                                                        <line x1="13.5" y1="2.5" x2="2.5" y2="13.5"></line>
+                                                        <line x1="2.5" y1="2.5" x2="13.5" y2="13.5"></line>
+                                                    </g>
+                                                </svg>
+                                            </button>
+                                        </header>
+
+                                        <div class="padding-md col-15@md" id="follow-list-content">
+
+                                        </div>
+
+                                        <footer class="padding-y-sm padding-x-md bg inner-glow-top shadow-md flex-shrink-0">
+                                            <div class="flex justify-end gap-xs">
+                                                <button class="btn btn--subtle js-modal__close">Close</button>
+                                            </div>
+                                        </footer>
+                                    </div>
+
+                                </div>
+                                <!-- Follow Modal END -->
+
                                 <!-- Search Modal -->
                                 <div class="modal modal--search modal--animate-fade bg bg-opacity-90% flex flex-center padding-md backdrop-blur-10 js-modal" id="post-search">
                                     <div class="modal__content width-100% max-width-sm max-height-100% overflow-auto" role="alertdialog" aria-labelledby="modal-search-title" aria-describedby="">
@@ -140,6 +171,37 @@
                                             <li>
                                                 <input type="radio" name="sortingName" id="sortingNameDes" value="desc">
                                                 <label for="sortingNameDes">Sort in descending order</label>
+                                            </li>
+                                        </ul>
+                                    </th>
+                                    <th class="int-table__cell int-table__cell--th int-table__cell--sort js-int-table__cell--sort
+                                      @if(request()->get('sortBy') === 'joined')
+                                      @if(request()->get('sortDesc') === 'desc')
+                                          int-table__cell--desc
+                                        @endif
+                                      @if(request()->get('sortDesc') === 'asc')
+                                          int-table__cell--asc
+                                        @endif
+                                      @endif
+                                          " data-sort-col="joined">
+                                        <div class="flex items-center">
+                                            <span>Joined</span>
+                                            <svg class="icon icon--xxs margin-left-xxxs int-table__sort-icon" aria-hidden="true" viewBox="0 0 12 12">
+                                                <polygon class="arrow-up" points="6 0 10 5 2 5 6 0" />
+                                                <polygon class="arrow-down" points="6 12 2 7 10 7 6 12" /></svg>
+                                        </div>
+                                        <ul class="sr-only js-int-table__sort-list">
+                                            <li>
+                                                <input type="radio" name="sortingEmail" id="sortingEmailNone" value="none" checked>
+                                                <label for="sortingEmailNone">No sorting</label>
+                                            </li>
+                                            <li>
+                                                <input type="radio" name="sortingEmail" id="sortingEmailAsc" value="asc">
+                                                <label for="sortingEmailAsc">Sort in ascending order</label>
+                                            </li>
+                                            <li>
+                                                <input type="radio" name="sortingEmail" id="sortingEmailDes" value="desc">
+                                                <label for="sortingEmailDes">Sort in descending order</label>
                                             </li>
                                         </ul>
                                     </th>
@@ -235,7 +297,9 @@
                                             </div>
                                         </td>
 
-                                        <!-- Publish and Date -->
+                                        <td class="int-table__cell">
+                                            <div class="font-bold show-follow-modal cursor-pointer">{{ $contest->joined }}</div>
+                                        </td>
                                         <td class="int-table__cell">{{ $contest->status }}</td>
                                         <td class="int-table__cell">{{ $contest->created_at->diffForHumans() }}</td>
 
