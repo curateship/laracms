@@ -65,9 +65,11 @@
 
               <!-- Contests -->
               <li class="sidenav__item">
-                  <a href="{{ route('admin.contests.index') }}" class="sidenav__link">
-                      <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16"><g>
-                              <path fill="currentColor" d="M14,0H2C1.4,0,1,0.4,1,1v14c0,0.6,0.4,1,1,1h12c0.6,0,1-0.4,1-1V1C15,0.4,14.6,0,14,0z M8,13H4v-2h4V13z M12,9H4V7h8V9z M12,5H4V3h8V5z"></path></rect></g></svg>
+                  <a href="{{ route('admin.contests.index') }}" class="sidenav__link" {{ strpos(url()->full(), '/admin/contests') !== false ? 'aria-current=page' : '' }}>
+                  <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16">
+                    <g >
+                    <path d="M14.61 0h-13.28a0.66 0.66 0 0 0-0.67 0.66v3.32a2.66 2.66 0 0 0 2.66 2.66h0.06a4.65 4.65 0 0 0 3.92 3.93v2.05h1.33v-2.05a4.65 4.65 0 0 0 3.93-3.93h0.06a2.66 2.66 0 0 0 2.65-2.66v-3.32a0.66 0.66 0 0 0-0.66-0.66z m-12.62 3.98v-2.65h1.33v3.98a1.33 1.33 0 0 1-1.33-1.33z m11.95 0a1.33 1.33 0 0 1-1.32 1.33v-3.98h1.32z"></path><path d="M9.3 13.28h-2.66c-3.32 0-3.32 2.66-3.32 2.66h9.3s0-2.66-3.32-2.66z"></path>
+                  </svg>
                       <span class="sidenav__text text-sm@md">Contests</span>
                   </a>
               </li>
@@ -138,16 +140,6 @@
                 </a>
               </li>
 
-              <!-- Contest -->
-              <li class="sidenav__item">
-                <a href="#0" class="sidenav__link">
-                  <svg class="icon sidenav__icon" aria-hidden="true" viewBox="0 0 16 16">
-                    <g >
-                    <path d="M14.61 0h-13.28a0.66 0.66 0 0 0-0.67 0.66v3.32a2.66 2.66 0 0 0 2.66 2.66h0.06a4.65 4.65 0 0 0 3.92 3.93v2.05h1.33v-2.05a4.65 4.65 0 0 0 3.93-3.93h0.06a2.66 2.66 0 0 0 2.65-2.66v-3.32a0.66 0.66 0 0 0-0.66-0.66z m-12.62 3.98v-2.65h1.33v3.98a1.33 1.33 0 0 1-1.33-1.33z m11.95 0a1.33 1.33 0 0 1-1.32 1.33v-3.98h1.32z"></path><path d="M9.3 13.28h-2.66c-3.32 0-3.32 2.66-3.32 2.66h9.3s0-2.66-3.32-2.66z"></path>
-                  </svg>
-                  <span class="sidenav__text text-sm@md">Contest</span>
-                </a>
-              </li>
             </ul>
 
             <div class="sidenav__divider margin-y-xs" role="presentation"></div><!-- Divider -->
