@@ -1,5 +1,7 @@
 @auth
     <script>
+
+
         (function() {
             /* Post media uploading */
             let editor
@@ -128,6 +130,44 @@
                 }
 
             })
+
+            $(document).on('click', '.show-follow-modal', function(){
+                const contestId = $(this).attr('data-contest-id')
+                getFollowsModal(true, contestId)
+            })
+
+            $(document).on('click', '.follow-button-input', function(){
+                const followId = $(this).attr('data-follow-id')
+                const contestId = $(this).attr('data-contest-id')
+
+                $.ajax({
+                    url : '/admin/contests/removeFollow',
+                    type : 'POST',
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content'),
+                        id: followId
+                    },
+                    success : function(data) {
+                        getFollowsModal(false, contestId)
+                    }
+                });
+            })
+
+            function getFollowsModal(showModal, contestId){
+                $.ajax({
+                    url : `/admin/contests/getFollows/${contestId}`,
+                    type : 'GET',
+                    success : function(data) {
+                        if(showModal){
+                            let event = new Event('openModal');
+                            document.getElementById('follow-modal').dispatchEvent(event);
+                        }
+                        $('#modal-follows-count').html(data.count)
+                        $('#follow-list-content').html(data.result)
+                        $('.contest-joined-cell[data-contest-id="' + contestId + '"]').html(data.count)
+                    }
+                });
+            }
 
             function deleteContestsArray(selectedPosts, type){
                 if(type === 'clean-trash'){
