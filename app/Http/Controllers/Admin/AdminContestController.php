@@ -315,10 +315,11 @@ class AdminContestController extends Controller
         }
     }
 
-    public function getFollows(){
+    public function getFollows($contest_id){
         $follows = User::leftJoin('follows', 'follows.user_id', '=', 'users.id')
+            ->where('follow_contest_id', $contest_id)
             ->whereNotNull('follow_contest_id')
-            ->selectRaw('users.*, follows.id as follow_id')
+            ->selectRaw('users.*, follows.id as follow_id, follows.follow_contest_id')
             ->get();
 
 

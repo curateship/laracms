@@ -188,7 +188,7 @@ Route::post('/contests/upload/{type}', [AdminContestController::class, 'upload']
 
 // Admin Prefix
 Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->group(function (){
-    Route::get('/contests/getFollows', [AdminContestController::class, 'getFollows']);
+    Route::get('/contests/getFollows/{contest_id}', [AdminContestController::class, 'getFollows']);
     Route::post('/contests/removeFollow', [AdminContestController::class, 'removeFollow']);
 
 

@@ -132,11 +132,13 @@
             })
 
             $(document).on('click', '.show-follow-modal', function(){
-                getFollowsModal(true)
+                const contestId = $(this).attr('data-contest-id')
+                getFollowsModal(true, contestId)
             })
 
             $(document).on('click', '.follow-button-input', function(){
                 const followId = $(this).attr('data-follow-id')
+                const contestId = $(this).attr('data-contest-id')
 
                 $.ajax({
                     url : '/admin/contests/removeFollow',
@@ -146,14 +148,14 @@
                         id: followId
                     },
                     success : function(data) {
-                        getFollowsModal(false)
+                        getFollowsModal(false, contestId)
                     }
                 });
             })
 
-            function getFollowsModal(showModal){
+            function getFollowsModal(showModal, contestId){
                 $.ajax({
-                    url : '/admin/contests/getFollows',
+                    url : `/admin/contests/getFollows/${contestId}`,
                     type : 'GET',
                     success : function(data) {
                         if(showModal){
@@ -162,6 +164,7 @@
                         }
                         $('#modal-follows-count').html(data.count)
                         $('#follow-list-content').html(data.result)
+                        $('.contest-joined-cell[data-contest-id="' + contestId + '"]').html(data.count)
                     }
                 });
             }

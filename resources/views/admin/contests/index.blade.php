@@ -298,7 +298,7 @@
                                         </td>
 
                                         <td class="int-table__cell">
-                                            <div class="font-bold show-follow-modal cursor-pointer">{{ $contest->joined }}</div>
+                                            <div class="font-bold show-follow-modal cursor-pointer contest-joined-cell" data-contest-id="{{$contest->id}}">{{ $contest->joined }}</div>
                                         </td>
                                         <td class="int-table__cell">{{ $contest->status }}</td>
                                         <td class="int-table__cell">{{ $contest->created_at->diffForHumans() }}</td>
