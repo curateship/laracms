@@ -411,6 +411,7 @@ class AdminPostController extends Controller
         $post->thumbnail = $thumbnail;
         $post->medium = $medium;
         $post->type = $request->input('type');
+        $post->contest_id = $request->input('selected-contest');
 
         if($request->has('status') && in_array($request->input('status'), ['draft', 'published', 'trash'])){
             $post->status = $request->input('status');

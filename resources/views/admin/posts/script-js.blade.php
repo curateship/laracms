@@ -197,6 +197,10 @@
     $(document).on('click', '.postSaveAs', function(){
         $('input[name="status"]').val($(this).attr('data-status'))
 
+        if($('#contests-list-input').val() !== ''){
+            $('#selected-contest').val($('#contests-list').val())
+        }
+
         const uploadButton = $('label[for="upload-file"]')
         if($('input[name="original"]').val() === '' || $('input[name="original"]').val() === undefined){
             uploadButton.removeClass('btn--subtle').addClass('btn--primary')
