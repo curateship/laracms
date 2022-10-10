@@ -91,7 +91,10 @@ class AdminContestController extends Controller
             }
         }
 
+        $posts = Post::where('status', 'published')->where('posts.category_id', '!=', 2)->latest()->withCount('comments')->whereNotNull('user_id')->where('contest_id', $contest->id)->paginate(16);
+
         return view('components.contests.show', [
+            'recent_posts' => $posts,
             'contest' => $contest,
             'author' => $author,
             'author_avatar' => $author_avatar,

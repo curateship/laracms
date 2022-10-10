@@ -5,9 +5,9 @@
 @endpush
 
 @section('content')
-<div class="position-relative height-100vh">
+<div class="main-contests-container">
     <!-- Post Body -->
-    <div class="post-content padding-md position-absolute margin-auto left-0 right-0 top-0 z-index-1">
+    <div class="post-content padding-md position-relative">
       <div class="flex justify-between items-center">
         <h1>{{ $contest->title }}</h1>
           <h4 class="flex gap-sm"><span>Hosted by:</span> <span class="flex items-center gap-xs desktop-user-avatar radius-50%">{!! $author_avatar !!} {{$author->name}}</span></h4>
@@ -33,16 +33,35 @@
         <div class="post-content">
             <div class="margin-top-md">{!! $contest->getContent() !!}</div>
         </div>
+
+        <div>
+            @include(config('theme.content_grid'))
+        </div>
     </div>
 
     <!-- Fade background -->
+    <!--
     <div class="flex justify-center position-absolute margin-auto left-0 right-0 top-0">
-        <!-- Post Image With Gradiant -->
         <figure class="width-100% card__img img-blend opacity-20%" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light" data-blend-height="100%">
             <img class="radius-md post-image" src="{{url('/storage').config('images.contests_storage_path').$contest->medium}}" alt="contest-background">
         </figure>
     </div>
+    -->
 </div>
+
+    <style>
+        .main-contests-container::before {
+            content: "";
+            background-image: url('{{url('/storage').config('images.contests_storage_path').$contest->medium}}');
+            background-size: cover;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            opacity: 0.15;
+        }
+    </style>
 @endsection
 
 
