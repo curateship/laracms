@@ -182,6 +182,7 @@ Route::post('/users/restoreFromTrash', [AdminUserController::class, 'restoreFrom
 // Pages;
 Route::get('/pages/edit/{page:slug}', [AdminPageController::class, 'edit'])->name('page.edit')->middleware(['auth', 'verified']);
 // Contests;
+Route::get('/contests', [AdminContestController::class, 'showList'])->name('contest.list');
 Route::get('/contests/edit/{contest:slug}', [AdminContestController::class, 'edit'])->name('contest.edit')->middleware(['auth', 'verified']);
 Route::get('/contests/getFollows/{contest_id}', [AdminContestController::class, 'getContestFollower']);
 Route::post('/contests/upload/{type}', [AdminContestController::class, 'upload'])->name('admin.contests.upload')->middleware(['auth', 'verified']);
@@ -189,7 +190,10 @@ Route::post('/contests/upload/{type}', [AdminContestController::class, 'upload']
 // Admin Prefix
 Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->group(function (){
     Route::get('/contests/getFollows/{contest_id}', [AdminContestController::class, 'getFollows']);
+    Route::get('/contests/getPosts/{contest_id}', [AdminContestController::class, 'getPosts']);
     Route::post('/contests/removeFollow', [AdminContestController::class, 'removeFollow']);
+    Route::post('/contests/removePostFromContest', [AdminContestController::class, 'removePostFromContest']);
+
 
 
     Route::resource('/', AdminIndexController::class); // Index Route
