@@ -136,6 +136,11 @@
                 getFollowsModal(true, contestId)
             })
 
+            $(document).on('click', '.show-posts-modal', function(){
+                const contestId = $(this).attr('data-contest-id')
+                getPostsModal(true, contestId)
+            })
+
             $(document).on('click', '.follow-button-input', function(){
                 const followId = $(this).attr('data-follow-id')
                 const contestId = $(this).attr('data-contest-id')
@@ -153,6 +158,24 @@
                 });
             })
 
+            $(document).on('click', '.post-button-input', function(){
+                const postId = $(this).attr('data-post-id')
+                const contestId = $(this).attr('data-contest-id')
+
+                $.ajax({
+                    url : '/admin/contests/removePostFromContest',
+                    type : 'POST',
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content'),
+                        id: postId,
+                        contest_id: contestId
+                    },
+                    success : function(data) {
+                        getPostsModal(false, contestId)
+                    }
+                });
+            })
+
             function getFollowsModal(showModal, contestId){
                 $.ajax({
                     url : `/admin/contests/getFollows/${contestId}`,
@@ -165,6 +188,22 @@
                         $('#modal-follows-count').html(data.count)
                         $('#follow-list-content').html(data.result)
                         $('.contest-joined-cell[data-contest-id="' + contestId + '"]').html(data.count)
+                    }
+                });
+            }
+
+            function getPostsModal(showModal, contestId){
+                $.ajax({
+                    url : `/admin/contests/getPosts/${contestId}`,
+                    type : 'GET',
+                    success : function(data) {
+                        if(showModal){
+                            let event = new Event('openModal');
+                            document.getElementById('posts-modal').dispatchEvent(event);
+                        }
+                        $('#modal-posts-count').html(data.count)
+                        $('#posts-list-content').html(data.result)
+                        $('.contest-posts-cell[data-contest-id="' + contestId + '"]').html(data.count)
                     }
                 });
             }

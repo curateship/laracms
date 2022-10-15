@@ -53,7 +53,13 @@ class AdminContestController extends Controller
                 where follow_contest_id is not null
                 group by follow_contest_id
             ) as follows'), 'follows.follow_contest_id', '=', 'contests.id')
-            ->selectRaw('contests.*, follows.joined');
+            ->leftJoin(DB::raw('(
+                select contest_id, count(*) as posts_count
+                from posts
+                where contest_id is not null
+                group by contest_id
+            ) as posts'), 'posts.contest_id', '=', 'contests.id')
+            ->selectRaw('contests.*, follows.joined, posts.posts_count');
 
         return view('admin.contests.index', [
             'counters' => Contest::getCounters(),
@@ -98,7 +104,7 @@ class AdminContestController extends Controller
             'contest' => $contest,
             'author' => $author,
             'author_avatar' => $author_avatar,
-            'followed' => $followed
+            'followed' => $followed,
         ]);
     }
 
@@ -242,6 +248,14 @@ class AdminContestController extends Controller
             $contest->removeTagImages('main');
             $contest->removeTagImages('body');
 
+            Post::query()->where('contest_id', $id)
+                ->update([
+                    'contest_id' => null
+                ]);
+
+            Follow::query()->where('follow_contest_id', $id)
+                ->delete();
+
             $contest->delete();
         }
 
@@ -318,6 +332,20 @@ class AdminContestController extends Controller
         }
     }
 
+    public function getPosts($contest_id){
+        $posts = Post::query()->where('contest_id', $contest_id)
+            ->get();
+
+
+        return [
+            'status' => 200,
+            'count' => count($posts),
+            'result' => view('admin.contests.layout.posts', [
+                'posts' => $posts
+            ])->render()
+        ];
+    }
+
     public function getFollows($contest_id){
         $follows = User::leftJoin('follows', 'follows.user_id', '=', 'users.id')
             ->where('follow_contest_id', $contest_id)
@@ -342,5 +370,24 @@ class AdminContestController extends Controller
         return [
             'status' => 200
         ];
+    }
+
+    public function removePostFromContest(Request $request){
+        Post::query()->where('id', $request->input('id'))
+            ->where('contest_id', $request->input('contest_id'))
+            ->update([
+                'contest_id' => null
+            ]);
+
+        return [
+            'status' => 200
+        ];
+    }
+
+    public function showList(){
+        $contests = Contest::all();
+        return view('components.contests.list', [
+            'contests' => $contests
+        ]);
     }
 }
