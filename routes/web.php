@@ -30,6 +30,7 @@ use App\Http\Controllers\Frontend\LikeController;
 use App\Http\Controllers\Frontend\FollowController;
 use App\Http\Controllers\Frontend\NotificationController;
 use App\Http\Controllers\Frontend\FavoriteController;
+use App\Http\Controllers\Frontend\ContestController;
 
 
 /*
@@ -182,7 +183,7 @@ Route::post('/users/restoreFromTrash', [AdminUserController::class, 'restoreFrom
 // Pages;
 Route::get('/pages/edit/{page:slug}', [AdminPageController::class, 'edit'])->name('page.edit')->middleware(['auth', 'verified']);
 // Contests;
-Route::get('/contests', [AdminContestController::class, 'showList'])->name('contest.list');
+Route::get('/contests', [ContestController::class, 'showList'])->name('contest.list');
 Route::get('/contests/edit/{contest:slug}', [AdminContestController::class, 'edit'])->name('contest.edit')->middleware(['auth', 'verified']);
 Route::get('/contests/getFollows/{contest_id}', [AdminContestController::class, 'getContestFollower']);
 Route::post('/contests/upload/{type}', [AdminContestController::class, 'upload'])->name('admin.contests.upload')->middleware(['auth', 'verified']);
@@ -193,8 +194,6 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
     Route::get('/contests/getPosts/{contest_id}', [AdminContestController::class, 'getPosts']);
     Route::post('/contests/removeFollow', [AdminContestController::class, 'removeFollow']);
     Route::post('/contests/removePostFromContest', [AdminContestController::class, 'removePostFromContest']);
-
-
 
     Route::resource('/', AdminIndexController::class); // Index Route
     Route::resource('/users', AdminUserController::class); // User Route
@@ -210,5 +209,5 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
 });
 
 // Universal pages router;
-Route::get('/contest/{any}', [AdminContestController::class, 'show'])->where('any', '.*');
+Route::get('/contest/{any}', [ContestController::class, 'show'])->where('any', '.*');
 Route::get('/{any}', [AdminPageController::class, 'show'])->where('any', '.*');
