@@ -24,3 +24,30 @@
         width: 40px;
     }
 }
+
+.contest-status-container{
+    .contest-status-label{
+        font-size: 18px;
+    }
+
+    .contest-status{
+        font-size: 17px;
+        text-transform: capitalize;
+    }
+
+    .contest-status-close{
+        color: red;
+    }
+
+    .contest-status-open{
+        color: greenyellow;
+    }
+
+    .contest-status-draft{
+        color: yellow;
+    }
+
+    .contest-status-published{
+        color: yellow;
+    }
+}

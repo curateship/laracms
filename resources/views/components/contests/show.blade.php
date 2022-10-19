@@ -10,7 +10,10 @@
     <div class="post-content padding-md position-relative">
       <div class="flex justify-between items-center">
         <h1>{{ $contest->title }}</h1>
-          <h4 class="flex gap-sm"><span>Hosted by:</span> <span class="flex items-center gap-xs desktop-user-avatar radius-50%">{!! $author_avatar !!} {{$author->name}}</span></h4>
+          <div>
+              <h4 class="flex gap-sm"><span>Hosted by:</span> <span class="flex items-center gap-xs desktop-user-avatar radius-50%">{!! $author_avatar !!} {{$author->name}}</span></h4>
+              <h4 class="flex gap-sm contest-status-container"><span class="contest-status-label">Status:</span> <span class="contest-status contest-status-{{$contest->status}}">{{$contest->status}}</span></h4>
+          </div>
       </div>
 
         <div class="flex gap-sm">

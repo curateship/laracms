@@ -141,7 +141,7 @@ class AdminContestController extends Controller
         $medium = str_replace(url('/storage'.config('images.contests_storage_path')), '', $medium);
 
         if($request->has('contestId')){
-            $contest = Contest::find($request->has('contestId'));
+            $contest = Contest::find($request->input('contestId'));
 
 
             // Remove tag image if it was updated;

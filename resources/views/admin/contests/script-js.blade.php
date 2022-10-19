@@ -88,8 +88,10 @@
                 });
             }
 
-            $(document).on('click', '.postSaveAs', function(){
-                $('input[name="status"]').val($(this).attr('data-status'))
+            $(document).on('change', '#contests-list', function(){
+                $('input[name="status"]').val($('.postSaveAs').val())
+
+                console.log($(this).val())
 
                 $('#new-post-form').submit()
             })

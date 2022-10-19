@@ -45,6 +45,8 @@
                                             <option value="" {{request()->get('status') == '' ? 'selected' : ''}} data-counter="{{$counters['total']}}">All Contests</option>
                                             <option value="published" {{request()->get('status') == 'published' ? 'selected' : ''}} data-counter="{{$counters['published']}}">Published</option>
                                             <option value="draft" {{request()->get('status') == 'draft' ? 'selected' : ''}} data-counter="{{$counters['draft']}}">Drafts</option>
+                                            <option value="open" {{request()->get('status') == 'open' ? 'selected' : ''}} data-counter="{{$counters['open']}}">Open</option>
+                                            <option value="close" {{request()->get('status') == 'close' ? 'selected' : ''}} data-counter="{{$counters['open']}}">Close</option>
                                         </select>
                                         <svg class="icon icon--xxxs margin-left-xxs" viewBox="0 0 8 8"><path d="M7.934,1.251A.5.5,0,0,0,7.5,1H.5a.5.5,0,0,0-.432.752l3.5,6a.5.5,0,0,0,.864,0l3.5-6A.5.5,0,0,0,7.934,1.251Z"/></svg>
                                     </div>
