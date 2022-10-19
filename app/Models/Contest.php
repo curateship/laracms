@@ -82,7 +82,7 @@ class Contest extends Model
         }
 
         $counters_status_list = [
-            'draft', 'published', 'total'
+            'draft', 'published', 'open', 'close', 'total'
         ];
 
 
