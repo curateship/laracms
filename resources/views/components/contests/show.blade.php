@@ -41,15 +41,6 @@
             @include(config('theme.content_grid'))
         </div>
     </div>
-
-    <!-- Fade background -->
-    <!--
-    <div class="flex justify-center position-absolute margin-auto left-0 right-0 top-0">
-        <figure class="width-100% card__img img-blend opacity-20%" data-blend-pattern="0,0,1,0" data-blend-color="--color-bg-light" data-blend-height="100%">
-            <img class="radius-md post-image" src="{{url('/storage').config('images.contests_storage_path').$contest->medium}}" alt="contest-background">
-        </figure>
-    </div>
-    -->
 </div>
 
     <style>

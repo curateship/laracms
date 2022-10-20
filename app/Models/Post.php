@@ -28,6 +28,7 @@ use Jenssegers\Agent\Agent;
  * @property false|mixed|string $file_hash
  * @property mixed|null $post_date
  * @property mixed|null $created_at
+ * @property mixed $contest_id
  */
 class Post extends Model
 {

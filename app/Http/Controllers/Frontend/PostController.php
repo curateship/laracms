@@ -139,7 +139,9 @@ class PostController extends Controller
 
         $post->author = $post->author();
 
-        return view(env('POSTS_TYPES').'.'.$post->type, [
+        $view_prefix = $post->contest_id != null ? '.contests' : '';
+
+        return view(env('POSTS_TYPES').$view_prefix.'.'.$post->type, [
             'followed' => $followed,
             'post' => $post,
             'content' => $content,
