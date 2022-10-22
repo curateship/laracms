@@ -623,7 +623,7 @@ class Post extends Model
     public function prepareContent($image_classes = '', $target = 'post'){
         $content = null;
 
-        if($this->type == 'image' || $this->type == 'news'){
+        if($this->type == 'image' || $this->type == 'news' || $this->type == 'review'){
             $content = '<div class="image-zoom js-image-zoom"><img class="'.$image_classes.'" alt="thumbnail" src="'.'/storage'.config('images.posts_storage_path').$this->medium.'"></div>';
         }
 
@@ -859,6 +859,7 @@ class Post extends Model
         switch($this->type){
             case 'image':
             case 'news':
+            case 'review':
                 foreach($work_array as $type){
                     $filename = explode('.', basename($this[$type]));
                     $filename = $this->slug.'.'.$filename[1];

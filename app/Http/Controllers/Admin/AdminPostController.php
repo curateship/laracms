@@ -103,7 +103,7 @@ class AdminPostController extends Controller
         $posts_files = [];
         $posts_urls = [];
 
-        if($post->type == 'image' || $post->type == 'news'){
+        if($post->type == 'image' || $post->type == 'news' || $post->type == 'review'){
             // Render simple image box;
             $content = '<img alt="thumbnail" src="'.'/storage'.config('images.posts_storage_path').$post->thumbnail.'">';
         }
@@ -594,6 +594,8 @@ class AdminPostController extends Controller
                 return view('admin.forms.gallery')->render();
             case 'news':
                 return view('admin.forms.news')->render();
+            case 'review':
+                return view('admin.forms.review')->render();
         }
 
         return false;
