@@ -231,7 +231,7 @@
 
         <!-- Content Type Selection -->
         <div class="grid gap-sm items-center@md padding-top-xs">
-              <div class="col-8@md">
+              <div class="col-10@md">
                 <ul class="flex flex-wrap gap-md">
                     @if(Gate::allows('is-admin'))
                         <li>
@@ -254,6 +254,11 @@
                         <input class="radio uploading-form-type" type="radio" name="type" id="gallery-uploading" value="gallery">
                         <label for="gallery-uploading">Gallery</label>
                     </li>
+
+                        <li>
+                            <input class="radio uploading-form-type" type="radio" name="type" id="review-uploading" value="review">
+                            <label for="review-uploading">Review</label>
+                        </li>
                 </ul>
               </div>
 

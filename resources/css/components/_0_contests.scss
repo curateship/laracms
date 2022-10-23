@@ -32,22 +32,25 @@
 
     .contest-status{
         font-size: 17px;
-        text-transform: capitalize;
     }
+}
 
-    .contest-status-close{
-        color: red;
-    }
+.contest-status{
+    text-transform: capitalize;
+}
 
-    .contest-status-open{
-        color: greenyellow;
-    }
+.contest-status-close{
+    color: red;
+}
 
-    .contest-status-draft{
-        color: yellow;
-    }
+.contest-status-open{
+    color: greenyellow;
+}
 
-    .contest-status-published{
-        color: yellow;
-    }
+.contest-status-draft{
+    color: yellow;
+}
+
+.contest-status-published{
+    color: yellow;
 }

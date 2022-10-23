@@ -48,9 +48,20 @@ class ContestController extends Controller
     }
 
     public function showList(){
-        $contests = Contest::all();
+        $contests = Contest::whereNotIn('status', ['draft'])
+            ->get();
+
+        $result = [
+            'open' => [],
+            'published' => [],
+            'close' => []
+        ];
+        foreach($contests as $contest){
+            $result[$contest->status][] = $contest;
+        }
+
         return view('components.contests.list', [
-            'contests' => $contests
+            'contests_list' => $result
         ]);
     }
 }
