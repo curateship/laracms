@@ -46,6 +46,13 @@
                         location.href = '/login'
                     }
 
+                    if(parseInt(response.status) === -1){
+                        const event = new Event('openDialog');
+                        document.getElementById('follow-error-dialog').dispatchEvent(event);
+
+                        return
+                    }
+
                     getFollowers()
 
                     if(parseInt(response.status) === 1){

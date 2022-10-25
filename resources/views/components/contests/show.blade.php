@@ -40,6 +40,20 @@
         <div>
             @include(config('theme.content_grid'))
         </div>
+
+        <!-- Follow error -->
+        <div id="follow-error-dialog" class="dialog dialog--sticky js-dialog" data-animation="on">
+            <div class="dialog__content max-width-xxs" role="alertdialog" aria-labelledby="dialog-sticky-title" aria-describedby="dialog-sticky-description">
+                <div class="text-component">
+                    <h4 id="dialog-sticky-title">You can't join or out a closed contest</h4>
+                </div>
+                <footer class="margin-top-md">
+                    <div class="flex justify-end gap-xs flex-wrap">
+                        <button class="btn btn--subtle js-dialog__close">Close</button>
+                    </div>
+                </footer>
+            </div>
+        </div>
     </div>
 </div>
 
