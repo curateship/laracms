@@ -314,9 +314,13 @@ class AdminContestController extends Controller
 
     public function getFollows($contest_id){
         $follows = User::leftJoin('follows', 'follows.user_id', '=', 'users.id')
+            ->leftJoin('posts', function($join) use ($contest_id){
+                $join->on('posts.user_id', '=', 'users.id');
+                $join->on('posts.contest_id', '=', 'follow_contest_id');
+            })
             ->where('follow_contest_id', $contest_id)
             ->whereNotNull('follow_contest_id')
-            ->selectRaw('users.*, follows.id as follow_id, follows.follow_contest_id')
+            ->selectRaw('users.*, posts.id as post_id, follows.contest_place, follows.id as follow_id, follows.follow_contest_id')
             ->get();
 
 
@@ -324,6 +328,7 @@ class AdminContestController extends Controller
             'status' => 200,
             'count' => count($follows),
             'result' => view('admin.contests.layout.follows', [
+                'contest' => Contest::find($contest_id),
                 'follows' => $follows
             ])->render()
         ];
@@ -344,6 +349,29 @@ class AdminContestController extends Controller
             ->update([
                 'contest_id' => null
             ]);
+
+        return [
+            'status' => 200
+        ];
+    }
+
+    public function setPlace(Request $request){
+        $place = $request->input('place');
+        $follow_id = $request->input('follow_id');
+
+        $follow = Follow::find($follow_id);
+
+        DB::table('follows')
+            ->where('follow_contest_id', $follow->follow_contest_id)
+            ->where('contest_place', $place)
+            ->update([
+                'contest_place' => null
+            ]);
+
+        if($request->input('exist_place') == 'false'){
+            $follow->contest_place = $place;
+            $follow->save();
+        }
 
         return [
             'status' => 200
