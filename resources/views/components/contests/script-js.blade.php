@@ -49,7 +49,7 @@
                     if(parseInt(response.status) === -1){
                         const event = new Event('openDialog');
                         document.getElementById('follow-error-dialog').dispatchEvent(event);
-
+                        $('.follow-contest-message').html(response.message)
                         return
                     }
 

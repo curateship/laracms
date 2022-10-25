@@ -70,10 +70,24 @@ class FollowController extends Controller
 
         // Check contest status;
         $contest = Contest::find($follow_contest_id);
-        if(in_array($contest->status, ['close', 'draft'])){
-            return [
-                'status' => -1
-            ];
+        switch($contest->status){
+            case 'open':
+                return [
+                    'status' => -1,
+                    'message' => 'Contest is already in progress'
+                ];
+
+            case 'close':
+                return [
+                    'status' => -1,
+                    'message' => 'You can`t join or out a closed contest'
+                ];
+
+            case 'draft':
+                return [
+                    'status' => -1,
+                    'message' => 'This is a contest in Draft status'
+                ];
         }
 
         $follow_contest = Follow::where('follow_contest_id', $follow_contest_id)
