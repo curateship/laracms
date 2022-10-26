@@ -328,7 +328,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return Follow::where('follows.user_id', Auth::id())
             ->whereNotNull('follow_contest_id')
             ->leftJoin('contests', 'contests.id', '=', 'follow_contest_id')
-            ->where('contests.status', 'open')
+            ->whereIn('contests.status', ['open', 'published'])
             ->select('contests.*')
             ->get();
     }
