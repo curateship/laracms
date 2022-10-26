@@ -36,24 +36,20 @@ class ContestController extends Controller
             }
         }
 
-        $contest_top = Follow::where('follow_contest_id', $contest->id)
+        $contest_top = Post::where('contest_id', $contest->id)
             ->whereNotNull('contest_place')
             ->orderBy('contest_place', 'ASC')
             ->get();
 
         $top = [];
         $top_ids = [];
-        foreach($contest_top as $key => $follow){
+        foreach($contest_top as $key => $post){
             if($key == 3){
                 break;
             }
 
-            $follow_post = Post::where('user_id', $follow->user_id)
-                ->where('contest_id', $follow->follow_contest_id)
-                ->first();
-
-            $top[$follow->contest_place][] = $follow_post;
-            $top_ids[] = $follow_post->id;
+            $top[$post->contest_place][] = $post;
+            $top_ids[] = $post->id;
         }
 
         $posts = Post::whereNotIn('id', $top_ids)->where('status', 'published')->where('posts.category_id', '!=', 2)->latest()->withCount('comments')->whereNotNull('user_id')->where('contest_id', $contest->id)->paginate(16);

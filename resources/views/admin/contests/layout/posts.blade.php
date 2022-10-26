@@ -15,7 +15,13 @@
                 </div>
             </div>
         </div>
-        <fieldset style="display: {{\Illuminate\Support\Facades\Auth::guest() ? 'none' : 'block'}}">
+        <fieldset class="contest-places-box" style="display: {{\Illuminate\Support\Facades\Auth::guest() ? 'none' : 'flex'}}">
+            <ul class="flex gap-xxs">
+                <li class="place-button place-{{$post->contest_place == 1 ? 1 : 'none'}}" data-post-id="{{$post->id}}" data-place="1">1</li>
+                <li class="place-button place-{{$post->contest_place == 2 ? 2 : 'none'}}" data-post-id="{{$post->id}}" data-place="2">2</li>
+                <li class="place-button place-{{$post->contest_place == 3 ? 3 : 'none'}}" data-post-id="{{$post->id}}" data-place="3">3</li>
+            </ul>
+
             <ul class="choice-tags flex flex-wrap gap-xxs js-choice-tags">
                 <li>
                     <label class="choice-tag choice-tag--checkbox text-sm js-choice-tag choice-tag--checked" for="follow-button-input-{{$post->id}}" data-post-id="{{$post->id}}">
@@ -28,3 +34,42 @@
         </fieldset>
     </div>
 @endforeach
+
+<script>
+    (function() {
+        $(document).on('click', '.place-button', function(){
+            const $this = $(this)
+            const post_id = $this.attr('data-post-id')
+            const place = $this.attr('data-place')
+            let exist_place = $this.hasClass(`place-${place}`)
+
+            $('.place-button').each(function(){
+                $(this).removeClass(`place-${place}`)
+            })
+
+            $('.place-button[data-post-id="' + post_id + '"]').attr('class', 'place-button place-none')
+
+            $.ajax({
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    place: place,
+                    post_id: post_id,
+                    exist_place: exist_place
+                },
+                url: '/admin/contests/setPlace',
+                type: 'POST',
+                success:function(data){
+                    if(parseInt(data.status) === 200){
+                        if(exist_place){
+                            $this.removeClass(`place-${place}`)
+                            $this.addClass('place-none')
+                        }   else{
+                            $this.addClass(`place-${place}`)
+                        }
+
+                    }
+                }
+            });
+        })
+    }())
+</script>
