@@ -38,7 +38,51 @@
         </div>
 
         <div>
-            @include(config('theme.content_grid'))
+            @if(count($top) > 0)
+                <div class="flex gap-sm margin-bottom-md margin-top-sm">
+                    @foreach($top as $place => $top_item )
+                        <div>
+                            @if($place == 1)
+                                <h4 class="place-1-title">First place</h4>
+                            @endif
+                            @if($place == 2)
+                                <h4 class="place-2-title">Second place</h4>
+                            @endif
+                            @if($place == 3)
+                                <h4 class="place-3-title">Third place</h4>
+                            @endif
+
+                            @include(config('theme.content_grid'), [
+                                'recent_posts' => $top_item
+                            ])
+                        </div>
+
+                        @if($place == count($top))
+                            @break
+                        @endif
+                    @endforeach
+                </div>
+
+                <h3>Submissions</h3>
+            @endif
+
+            @include(config('theme.content_grid'), [
+                'recent_posts' => $recent_posts
+            ])
+        </div>
+
+        <!-- Follow error -->
+        <div id="follow-error-dialog" class="dialog dialog--sticky js-dialog" data-animation="on">
+            <div class="dialog__content max-width-xxs" role="alertdialog" aria-labelledby="dialog-sticky-title" aria-describedby="dialog-sticky-description">
+                <div class="text-component">
+                    <h4 id="dialog-sticky-title" class="follow-contest-message"></h4>
+                </div>
+                <footer class="margin-top-md">
+                    <div class="flex justify-end gap-xs flex-wrap">
+                        <button class="btn btn--subtle js-dialog__close">Close</button>
+                    </div>
+                </footer>
+            </div>
         </div>
     </div>
 </div>

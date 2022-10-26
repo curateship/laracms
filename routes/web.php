@@ -195,6 +195,7 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
     Route::get('/contests/getPosts/{contest_id}', [AdminContestController::class, 'getPosts']);
     Route::post('/contests/removeFollow', [AdminContestController::class, 'removeFollow']);
     Route::post('/contests/removePostFromContest', [AdminContestController::class, 'removePostFromContest']);
+    Route::post('/contests/setPlace', [AdminContestController::class, 'setPlace']);
 
     Route::resource('/', AdminIndexController::class); // Index Route
     Route::resource('/users', AdminUserController::class); // User Route

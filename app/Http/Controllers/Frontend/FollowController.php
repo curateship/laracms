@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Contest;
 use App\Models\Follow;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -66,6 +67,29 @@ class FollowController extends Controller
 
     public function followContest(Request $request){
         $follow_contest_id = $request->input('contestId');
+
+        // Check contest status;
+        $contest = Contest::find($follow_contest_id);
+        switch($contest->status){
+            case 'open':
+                return [
+                    'status' => -1,
+                    'message' => 'Contest is already in progress'
+                ];
+
+            case 'close':
+                return [
+                    'status' => -1,
+                    'message' => 'You can`t join or out a closed contest'
+                ];
+
+            case 'draft':
+                return [
+                    'status' => -1,
+                    'message' => 'This is a contest in Draft status'
+                ];
+        }
+
         $follow_contest = Follow::where('follow_contest_id', $follow_contest_id)
             ->where('user_id', Auth::id())
             ->first();

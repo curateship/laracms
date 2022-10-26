@@ -390,7 +390,9 @@ class AdminPostController extends Controller
                     }
                 }
             }
+            $new_post = false;
         }   else{
+            $new_post = true;
             $post = new Post();
             $post->user_id = Auth::id();
         }
@@ -400,6 +402,16 @@ class AdminPostController extends Controller
 
         if($request->has('postId') && $post->slug != $slug && $post->type == 'gallery'){
             $post->moveGallery($slug);
+        }
+
+        if($request->input('selected-contest') !== null && $new_post){
+            $exist_post_in_contest = Post::where('contest_id', $request->input('selected-contest'))
+                ->where('user_id', $post->user_id)
+                ->first();
+
+            if($exist_post_in_contest != null){
+                return back();
+            }
         }
 
         $post->title = $title;
