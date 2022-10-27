@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 // Others
 use App\Http\Controllers\Controller;
+use App\Models\Contest;
 use App\Models\Like;
 use App\Models\Notification;
 use Illuminate\Http\Request;
@@ -405,11 +406,9 @@ class AdminPostController extends Controller
         }
 
         if($request->input('selected-contest') !== null && $new_post){
-            $exist_post_in_contest = Post::where('contest_id', $request->input('selected-contest'))
-                ->where('user_id', $post->user_id)
-                ->first();
+            $exist_contest = Contest::find($request->input('selected-contest'));
 
-            if($exist_post_in_contest != null){
+            if(!in_array($exist_contest->status, ['open', 'published'])){
                 return back();
             }
         }
